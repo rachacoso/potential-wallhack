@@ -1,0 +1,39 @@
+
+<% content_for :javascript_head do %>
+	<%= javascript_tag do %>
+		var bgColor = "#D1E0ff";
+	<% end %>
+<% end %>
+
+<div class="row">
+	<div class="small-6 columns">
+		<h2>New<br><strong>User</strong></h2>
+
+
+		<div class="row">
+			<div class="small-9 columns">
+				<% if flash[:notice] %>
+					<div data-alert class="alert-box alert round">
+						<%= flash[:notice] %>
+					  <a href="#" class="close">&times;</a>
+					</div>
+				<% end %>
+
+				<%= form_for @newuser, url: users_path do |f| %>
+				<%= f.text_field :email %>
+				<%= f.password_field :password %>
+				<%= f.password_field :password_confirmation %>
+				<%= f.submit 'Submit', class: "tiny radius success button" %> <%= link_to 'Cancel', root_path, class: "tiny radius info button"  %>
+				<% end %>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<% content_for :admin_footer do %>
+ 
+
+
+<% end %>

@@ -1,0 +1,90 @@
+<div class="row">
+	<div class="small-4 columns">
+		<h2>Edit<br><strong>User - <%=@user.email%></strong></h2>
+		<% if flash[:notice] %>
+				<div data-alert class="alert-box alert round">
+			  	<%= flash[:notice] %>
+				  <a href="#" class="close">&times;</a>
+				</div>
+		<% end %>
+	</div>
+</div>
+
+<div class="row">
+	
+		<div class="small-5 columns">
+			<h4>Change<br><strong>email</strong></h4>
+			<div class="backpanel">
+				<%= form_for @user, url: user_path(@user) do |f| %>
+					<%= hidden_field_tag 'update_type', 'email' %>
+					<%= f.text_field :email %>
+					<%= f.submit 'Change email', class: "tiny radius success button" %> <%= link_to 'Cancel', users_path, class: "tiny radius info button"  %>
+				<% end %>
+			</div>
+		</div>
+		
+</div>
+
+<div class="row">
+	
+		<div class="small-5 columns">
+			<h4>Change<br><strong>password</strong></h4>
+			<div class="backpanel">
+				<%= form_for @user, url: user_path(@user) do |f| %>
+					<%= hidden_field_tag 'update_type', 'password' %>
+					<%= f.password_field :new_password %>
+					<%= f.password_field :new_password_confirmation %>
+					<%= f.submit 'Change password', class: "tiny radius success button" %> <%= link_to 'Cancel', users_path, class: "tiny radius info button"  %>
+				<% end %>			
+			</div>
+		</div>
+
+</div>
+
+
+<% content_for :admin_footer do %>
+
+<!-- BEGIN SECTION SPACER -->
+<div class="RASectionSpacer">
+
+</div>
+<!-- END SECTION SPACER -->
+<div id="adminfooter">
+  <div class="wrap">
+    <div class="row">
+  
+		  <div class="small-4 columns leftadminmenu">
+		    <div class="small-12 columns">
+		      <%# dummy div for adminmenu formatting css quirk %>
+		    </div>
+		    <div class="small-4 columns text-right">
+		      <%= link_to users_url do %>
+		        All<br><strong>Users</strong> 
+		      <% end %>
+		    </div>
+		    <div class="small-8 columns text-left">
+		      <strong><%=@user.email%></strong>
+		    </div>
+		  </div>
+		  
+		  <div class="small-2 columns rightadminmenu">
+		    <div class="small-12 columns text-left end admin-nav-active">
+		      Edit<br><strong>User</strong>
+		    </div>
+		  </div>
+
+		  <div class="small-3 columns">
+			  &nbsp;
+		  </div>
+
+      <div class="small-3 columns text-right rightadminmenu">
+        Los Angeles Controller <strong>Audits</strong><br>
+        Welcome, <strong><%= @current_user.email %></strong><br>
+        <%= link_to 'Logout', logout_url %>
+      </div>
+
+    </div>
+  </div>
+</div>		  
+
+<% end %>

@@ -1,0 +1,38 @@
+<% content_for :title do %>
+  Login
+<% end %>
+
+
+
+<div class="row">
+	<div class="small-6 columns">
+		<h2>Landing<br><strong>Log In</strong></h2>
+
+		<div class="row">
+			<div class="small-9 columns">
+				<% if flash[:notice] %>
+						<div data-alert class="alert-box success">
+					  	<%= flash[:notice] %>
+						  <a href="#" class="close">&times;</a>
+						</div>
+				<% end %>
+
+				<% if flash[:error] %>
+						<div data-alert class="alert-box warning">
+					  	<%= flash[:error] %>
+						  <a href="#" class="close">&times;</a>
+						</div>
+				<% end %>
+
+				<%= form_tag url: '/login', method: 'post' do %>
+					<%= label_tag(:email, "Email") %>
+					<%= email_field_tag :email, '', placeholder: 'email'%>
+					<%= label_tag(:Password, "Password") %>
+					<%= password_field_tag :password, '', placeholder: 'password' %>
+					<%= submit_tag 'login', class: "tiny radius success button" %>
+				<% end %>
+			</div>
+		</div>
+
+	</div>
+</div>

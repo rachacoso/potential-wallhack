@@ -17,6 +17,7 @@
 //= require foundation/foundation
 //= require foundation/foundation.alert
 //= require foundation/foundation.reveal
+//= require foundation/foundation.tab
 
 // EXTRA 3rd PARTY JS
 //= require jquery.backstretch

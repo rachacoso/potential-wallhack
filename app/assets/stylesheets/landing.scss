@@ -1,0 +1,31 @@
+// Transparent backgrounds
+
+@mixin transparent($color, $alpha) {
+  $rgba: rgba($color, $alpha);
+  // $rgb: rgb($color);
+  $ie-hex-str: ie-hex-str($rgba);
+  /* Fallback for web browsers that doesn't support RGBa */
+  // background: $rgb;
+  background: $color;
+  /* RGBa with opacity */
+  background: $rgba;
+  /* For IE 5.5 - 7*/
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+  /* For IE 8*/
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str}, endColorstr=#{$ie-hex-str})";
+}
+
+
+
+.ldpanel {
+	// border: 1px dotted black;
+	padding: 1em 1em;
+	margin: 1em 0em 0em 0em;
+	@include transparent (white, 0.7);
+	&.profile {
+		height: 20em;
+	}
+	&.products {
+		height: 20em;
+	}	
+}

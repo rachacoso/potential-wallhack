@@ -1,29 +1,26 @@
+<% content_for :javascript_head do %>
+	<%= javascript_tag do %>
+		var bgColor = "#223344";
+	<% end %>
+<% end %>
 
-
-<% content_for :user_head do %>
 <div class="row">
 	<div class="small-12 columns text-right">
 		<div class="ldpanel">
-			<% if @current_user %>
 			Hello, <%= @current_user.user_profile.firstname %> | <%= link_to 'logout', logout_url %>
-			<% else %>
-			<%= link_to 'Login', login_url %> or <%= link_to 'Register', new_user_url %> 
-			<% end %>
 		</div>
 	</div>
 </div>
-<% end %>
-
 
 <div class="row">
 	<div class="small-4 columns">
 		<div class="ldpanel profile">
-			marketing
+			stuff
 		</div>
 	</div>
 	<div class="small-8 columns">
 		<div class="ldpanel products">
-			blurbs
+			products
 		</div>
 	</div>
 

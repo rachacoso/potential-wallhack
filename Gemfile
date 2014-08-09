@@ -50,3 +50,5 @@ gem 'foundation_rails_helper'
 
 gem 'foundation-icons-sass-rails'
 
+gem 'country_select', github: 'stefanpenner/country_select'
+

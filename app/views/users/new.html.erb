@@ -6,28 +6,38 @@
 <% end %>
 
 <div class="row">
-	<div class="small-6 columns">
-		<h2>New<br><strong>User</strong></h2>
+	<div class="medium-5 columns">
+		<div class="ldpanel">
+			<h2><strong>Register</strong></h2>
+			<div class="row">
+				<div class="small-12 columns text-right">
+					<% if flash[:notice] %>
+						<div data-alert class="alert-box alert">
+							<%= flash[:notice] %>
+						  <a href="#" class="close">&times;</a>
+						</div>
+					<% end %>
 
+					<%= form_for @newuser, url: users_path do |f| %>
+					<small>I am a:</small> <%= radio_button_tag(:user_type, "brand", selected: true) %>
+					<%= label_tag(:user_type_brand, "Brand") %>
+					<%= radio_button_tag(:user_type, "distributor") %>
+					<%= label_tag(:user_type_distributor, "Distributor") %>
+					<br>
 
-		<div class="row">
-			<div class="small-9 columns">
-				<% if flash[:notice] %>
-					<div data-alert class="alert-box alert round">
-						<%= flash[:notice] %>
-					  <a href="#" class="close">&times;</a>
-					</div>
-				<% end %>
-
-				<%= form_for @newuser, url: users_path do |f| %>
-				<%= f.text_field :email %>
-				<%= f.password_field :password %>
-				<%= f.password_field :password_confirmation %>
-				<%= f.submit 'Submit', class: "tiny radius success button" %> <%= link_to 'Cancel', root_path, class: "tiny radius info button"  %>
-				<% end %>
+					<%= f.fields_for :user_profile do |ff| %>
+						<%= ff.text_field :firstname, :placeholder => 'First Name', :label => false  %>
+						<%= ff.text_field :lastname, :placeholder => 'Last Name', :label => false  %>
+					<% end %>
+					<br>
+					<%= f.text_field :email, :placeholder => 'Email (will be used as your login)', :label => false %>
+					<%= f.password_field :password, :placeholder => 'enter password', :label => false %>
+					<%= f.password_field :password_confirmation, :placeholder => 'enter password again', :label => false %>
+					<%= link_to 'Cancel', root_path, class: "tiny radius info button"  %> <%= f.submit 'Next', class: "tiny radius success button" %>
+					<% end %>
+				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
 

@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 	private
   def get_current_user
   	if session[:user_id]
-      if !session[:expires_at]
+      if !session[:expires_at] #reset if no expire set
        session.destroy
        @current_user = nil
        flash[:error] = "Your session has timed out.  Please log in again to continue."

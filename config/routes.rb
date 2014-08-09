@@ -2,11 +2,27 @@ Rails.application.routes.draw do
 
   root 'home#front'
 
-  get '/login' => 'session#new', as: 'login'
-  post '/login' => 'session#create'
-  get '/logout' => 'session#destroy', as: 'logout'
+  get   '/login' => 'session#new', as: 'login'
+  post  '/login' => 'session#create'
+  get   '/logout' => 'session#destroy', as: 'logout'
+
+  get   '/dashboard' => 'home#dashboard', as: 'dashboard'
+
+  get   '/admin' => 'admin#home', as: 'admin'
+
+  resources :sectors, only: [:create, :update, :destroy]
+  resources :channels, only: [:create, :update, :destroy]
+  resources :countries, only: [:create, :update, :destroy]
+
 
   resources :users, only: [:new, :create, :edit, :update, :destroy, :index]
+  
+  get    '/distributors' => 'distributors#edit', as: 'distributor'
+  patch  '/distributors' => 'distributors#update'
+  
+
+  get   '/profiles/new' => 'profiles#new', as: 'new_profile'
+  patch '/profiles/new' => 'profiles#update'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

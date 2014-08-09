@@ -11,4 +11,11 @@ class User
 	validate :email, presence: true, uniqueness: true
 
 	has_secure_password
+
+	has_one :user_profile, dependent: :destroy
+	has_one :brand, dependent: :destroy
+	has_one :distributor, dependent: :destroy
+
+	accepts_nested_attributes_for :user_profile
+
 end

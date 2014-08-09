@@ -1,17 +1,6 @@
-class Brand
-  include Mongoid::Document
-
- 	belongs_to :user
-
-  has_many :products, dependent: :destroy
-
- 	#####################
-	### Profile
-	#####################
- 	# General Info
- 	field :name, type: String
- 	field :address, type: String
- 	field :phone, type: String
+class BrandProfile
+	include Mongoid::Document
+	# General Info
 	field :counry_of_origin, type: String
 	field :sector, type: String # Personal Care, Baby/Kids, Fashion
 	field :channels, type: String # Department Stores, Home Shopping, Beauty Retailers, Supermarkets, Online Malls, Professional Channels
@@ -65,4 +54,7 @@ class Brand
 	field :number_of_online_malls, type: Integer
 	field :number_of_social_commerce_sites, type: Integer
 
+	belongs_to :distributor
+
 end
+

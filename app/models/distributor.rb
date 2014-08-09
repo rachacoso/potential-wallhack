@@ -1,20 +1,19 @@
-class Brand
+class Distributor
   include Mongoid::Document
 
- 	belongs_to :user
-
-  has_many :products, dependent: :destroy
+  belongs_to :user
+  
+ 	has_one :contact_info, as: :distributor_contact_info, dependent: :destroy
 
  	#####################
 	### Profile
 	#####################
  	# General Info
  	field :name, type: String
- 	field :address, type: String
- 	field :phone, type: String
-	field :counry_of_origin, type: String
-	field :sector, type: String # Personal Care, Baby/Kids, Fashion
-	field :channels, type: String # Department Stores, Home Shopping, Beauty Retailers, Supermarkets, Online Malls, Professional Channels
+	has_one :country_of_origin, class_name: 'Country'
+  
+	has_many :sectors # Initially: Personal Care, Baby/Kids, Fashion
+	has_many :channels # Initially: Department Stores, Home Shopping, Beauty Retailers, Supermarkets, Online Malls, Professional Channels
 	field :year_established, type: Date
 
 	# Current Portfolio
@@ -63,6 +62,8 @@ class Brand
 	field :number_of_beauty_retailers, type: Integer
 	field :number_of_home_shopping_networks, type: Integer
 	field :number_of_online_malls, type: Integer
-	field :number_of_social_commerce_sites, type: Integer
+	field :number_of_social_commerce_sites, type: Integer 	
+
+	
 
 end

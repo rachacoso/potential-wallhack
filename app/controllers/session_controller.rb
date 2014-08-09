@@ -11,7 +11,7 @@ class SessionController < ApplicationController
 		if user && user.authenticate(params[:password])
 			session[:user_id] = user.id.to_s
 			session[:expires_at] = Time.current + 24.hours
-			redirect_to '/audits'
+			redirect_to '/dashboard'
 		else
 			flash[:notice] = "Invalid email or password"
 			redirect_to '/login'
@@ -21,7 +21,7 @@ class SessionController < ApplicationController
 	def destroy
 		# session[:user_id] = nil
 		session.destroy
-		redirect_to '/login'
+		redirect_to '/'
 	end
 
 end

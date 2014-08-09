@@ -2,6 +2,7 @@
 <html>
 <head>
   <title><%= content_for?(:title) ? yield(:title) : "Landing" %></title>
+  <link rel="shortcut icon" href="/favicon.ico?v=2" />
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "vendor/modernizr" %>
 
@@ -9,6 +10,9 @@
   <%= content_for?(:javascript_head) ? yield(:javascript_head) : "" %>
 </head>
 <body>
+
+<%= content_for?(:user_head) ? yield(:user_head) : "" %>
+
 <div class="row">
 	<div class="large-12 columns">
 		<%= yield %>

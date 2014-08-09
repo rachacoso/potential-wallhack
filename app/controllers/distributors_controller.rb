@@ -10,14 +10,19 @@ class DistributorsController < ApplicationController
 
 		distributor = @current_user.distributor
 		distributor.update(distributor_parameters)
-		puts "777777777777777"
-		puts params[:sectors]
-		puts "777777777777777"
-		assigned_sectors = Sector.find(params[:sectors]) rescue []
+		
+		assigned_sectors = Sector.find(params[:sectors].values) rescue []
+		distributor.sectors = [] # clear current ones before update
 		assigned_sectors.each do |s|
 			distributor.sectors << s
 		end
 
+		assigned_channels = Channel.find(params[:channels].values) rescue []
+		distributor.channels = [] # clear current ones before update
+		assigned_channels.each do |s|
+			distributor.channels << s
+		end
+		
 		redirect_to distributors_url
 
 	end

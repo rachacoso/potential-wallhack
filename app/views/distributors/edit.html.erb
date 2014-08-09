@@ -16,12 +16,9 @@
 				<%= f.select :country_of_origin, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :shortcode, :name, 'us'), :prompt => 'Select Country' %>
 				
 					<h3>Sectors</h3>
-					<% @distributor.sectors.each do |s| %>
-						<%= s.name %>
-					<% end %>
 					<% Sector.each do |sc| %>
 				    <div>
-				      <%= check_box_tag :sectors, sc.shortcode %>
+				      <%= check_box_tag "sectors[#{sc.shortcode}]", sc.id, @distributor.sectors.find(sc.id) ? true : false %>
 				      <%= label_tag(:sectors, sc.name) %>
 				    </div>
 				  <% end %>
@@ -30,7 +27,7 @@
 					<h3>Channels</h3>
 					<% Channel.each do |ch| %>
 				    <div>
-				      <%= check_box_tag :channels, ch.shortcode %>
+				    	<%= check_box_tag "channels[#{ch.shortcode}]", ch.id, @distributor.channels.find(ch.id) ? true : false  %>
 				      <%= label_tag(:channels, ch.name) %>
 				    </div>
 				  <% end %>

@@ -12,8 +12,8 @@ class Distributor
  	field :name, type: String
 	has_one :country_of_origin, class_name: 'Country'
   
-	has_many :sectors # Initially: Personal Care, Baby/Kids, Fashion
-	has_many :channels # Initially: Department Stores, Home Shopping, Beauty Retailers, Supermarkets, Online Malls, Professional Channels
+  has_and_belongs_to_many :sectors, inverse_of: nil
+  has_and_belongs_to_many :channels, inverse_of: nil
 	field :year_established, type: Date
 
 	# Current Portfolio

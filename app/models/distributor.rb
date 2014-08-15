@@ -3,14 +3,17 @@ class Distributor
 
   belongs_to :user
   
+  after_create :init_contact_info
+
  	has_one :contact_info, as: :distributor_contact_info, dependent: :destroy
+	accepts_nested_attributes_for :contact_info
 
  	#####################
 	### Profile
 	#####################
  	# General Info
  	field :name, type: String
-	has_one :country_of_origin, class_name: 'Country'
+	field :country_of_origin, type: String
   
   has_and_belongs_to_many :sectors, inverse_of: nil
   has_and_belongs_to_many :channels, inverse_of: nil
@@ -24,7 +27,9 @@ class Distributor
 	field :outside_sales, type: Boolean
 	field :outside_sales_size, type: Integer
 	field :inside_sales, type: Boolean
-	field :outside_sales_size, type: Integer
+	field :inside_sales_size, type: Integer
+	field :sales_manager_name, type: String
+	field :sales_manager_email, type: String
 	field :education_manager_name, type: String
 	field :education_manager_email, type: String
 	field :education_provided_to, type: String
@@ -52,7 +57,7 @@ class Distributor
 	field :freight_forwarder, type: Boolean
 
 	# Regulatory
-	field :regulatory_guidlines, type: String
+	field :regulatory_guidelines, type: String
 	field :contract_or_documentation_authentication, type: Boolean
 
 	# Channel Capacity
@@ -64,6 +69,11 @@ class Distributor
 	field :number_of_online_malls, type: Integer
 	field :number_of_social_commerce_sites, type: Integer 	
 
+	private 
+
+	def init_contact_info
+		self.create_contact_info
+	end
 	
 
 end

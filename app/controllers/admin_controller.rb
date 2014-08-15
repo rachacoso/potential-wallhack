@@ -9,6 +9,14 @@ class AdminController < ApplicationController
   	@new_channel = Channel.new
   	@new_country = Country.new
 
+		if Display.all.first.blank?
+
+
+	  else
+			display_info = Display.all.first
+			@background_photo = display_info.method_defined? :background_photo ? display_info.background_photo : nil
+		end
+
   end
 
 

@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="small-12 columns text-right">
 		<div class="ldpanel">
-			Hello, <%= @current_user.user_profile.firstname %> | <%= link_to 'logout', logout_url %>
+			Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %> | <%= link_to 'logout', logout_url %>
 		</div>
 	</div>
 </div>
@@ -13,13 +13,48 @@
 			<%= form_for @distributor, url: distributor_url do |f| %>
 				<%= f.text_field :name %>
 
-				<%= f.select :country_of_origin, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :shortcode, :name, 'us'), :prompt => 'Select Country' %>
+				<h3>Contact Info</h3>
+				<%= f.fields_for :contact_info do |ff| %>
+					<div class="row">
+						<div class="medium-6 columns">
+							<%= ff.text_field :email %>
+						</div>
+						<div class="medium-6 columns">
+							<%= ff.text_field :phone %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-12 columns">
+							<%= ff.text_field :address1, label: "Address" %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-12 columns">
+							<%= ff.text_field :address2, label: "Address (cont'd)" %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-4 columns">
+							<%= ff.text_field :city %>
+						</div>
+						<div class="medium-4 columns">
+							<%= ff.text_field :state %>
+						</div>
+						<div class="medium-4 columns">
+							<%= ff.text_field :postcode %>
+						</div>
+					</div>
+					<%= ff.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :shortcode, :name, @distributor.contact_info.country.empty? ? 'us' : @distributor.contact_info.country ), :prompt => 'Select Country' %>
+				<% end %>
+
+				<h3>General Info</h3>
+				<%= f.select :country_of_origin, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :shortcode, :name, @distributor.country_of_origin.empty? ? 'us' : @distributor.country_of_origin ), :prompt => 'Select Country' %>
 				
 					<h3>Sectors</h3>
 					<% Sector.each do |sc| %>
 				    <div>
 				      <%= check_box_tag "sectors[#{sc.shortcode}]", sc.id, @distributor.sectors.find(sc.id) ? true : false %>
-				      <%= label_tag(:sectors, sc.name) %>
+				      <%= label_tag("sectors[#{sc.shortcode}]", sc.name) %>
 				    </div>
 				  <% end %>
 					
@@ -28,13 +63,13 @@
 					<% Channel.each do |ch| %>
 				    <div>
 				    	<%= check_box_tag "channels[#{ch.shortcode}]", ch.id, @distributor.channels.find(ch.id) ? true : false  %>
-				      <%= label_tag(:channels, ch.name) %>
+				      <%= label_tag("channels[#{ch.shortcode}]", ch.name) %>
 				    </div>
 				  <% end %>
 
 			
-				
-				<%= f.select :year_established, 1970..Time.now.year %>
+				<%= label_tag(:year_established, "Year established:") %>
+				<%= select_tag :year_established, options_for_select(1970..Time.now.year, @distributor.year_established ? @distributor.year_established.strftime("%Y") : '') %>
 
 				<h3>Current Portfolio</h3>
 				<%= f.text_area :current_lines %>
@@ -42,7 +77,130 @@
 				<%= f.text_area :major_competitors %>
 
 
+				<h3>Sales/Education Capabilities</h3>
 
+				<div class="row">
+					<div class="medium-5 columns">
+						<%= f.check_box :outside_sales, { label: " Yes, we have an outside sales team." }, "true", "false" %>
+					</div>
+					<div class="medium-7 columns end">
+						<%= f.number_field :outside_sales_size %>
+					</div>
+				</div>
+				
+
+				<div class="row">
+					<div class="medium-5 columns">
+						<%= f.check_box :inside_sales, { label: " Yes, we have an inside sales team." }, "true", "false" %>
+					</div>
+					<div class="medium-7 columns end">
+						<%= f.number_field :inside_sales_size %>
+					</div>
+				</div>				
+
+				<div class="row">
+					<div class="medium-5 columns">
+						<%= f.text_field :sales_manager_name %>
+					</div>
+					<div class="medium-7 columns end">
+						<%= f.email_field :sales_manager_email %>
+					</div>
+				</div>	
+
+				<div class="row">
+					<div class="medium-5 columns">
+						<%= f.text_field :education_manager_name %>
+					</div>
+					<div class="medium-7 columns end">
+						<%= f.email_field :education_manager_email %>
+					</div>
+				</div>	
+
+				<div class="row">
+					<div class="medium-5 columns">
+						<%= f.text_area :education_provided_to %>
+					</div>
+					<div class="medium-7 columns end">
+						<%= f.text_area :shows_participated_in %>
+					</div>
+				</div>	
+
+				<div class="row">
+					<div class="medium-4 columns">
+						<%= f.check_box :sell_via_website, { label: " We sell via Website" }, "true", "false" %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.check_box :sell_via_online_mall, { label: " We sell via Online Mall" }, "true", "false" %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.check_box :sell_via_social, { label: " We sell via Social" }, "true", "false" %>
+					</div>
+				</div>	
+
+
+<h3> Marketing/PR Capabilities</h3>
+				<div class="row">
+					<div class="medium-5 columns">
+						<%= f.check_box :internal_marketing, { label: " Yes, we have an internal marketing team" }, "true", "false" %>
+					</div>
+					<div class="medium-7 columns end">
+						<%= f.number_field :internal_marketing_size %>
+					</div>
+				</div>		
+
+				<div class="row">
+					<div class="small-12 columns">
+						Where have you marketed/advertised your products?
+					</div>
+			 </div>
+
+				<div class="row">
+					<div class="medium-2 columns">
+						<%= f.check_box :marketing_via_print, { label: " Print" }, "true", "false" %>
+					</div>
+					<div class="medium-2 columns">
+						<%= f.check_box :marketing_via_online, { label: " Online" }, "true", "false" %>
+					</div>
+					<div class="medium-2 columns">
+						<%= f.check_box :marketing_via_email, { label: " Email" }, "true", "false" %>
+					</div>
+					<div class="medium-2 columns">
+						<%= f.check_box :marketing_via_outdoor, { label: " Outdoor" }, "true", "false" %>
+					</div>
+					<div class="medium-2 columns end">
+						<%= f.check_box :marketing_via_events, { label: " Events" }, "true", "false" %>
+					</div>
+				</div>	
+
+				<div class="row">
+					<div class="small-12 columns">
+						<h3>Operational Capabilities</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-4 columns">
+						<%= f.check_box :distributor_warehouse, { label: " Distributor Warehouse" }, "true", "false" %>
+					</div>
+					<div class="medium-4 columns end">
+						<%= f.check_box :freight_forwarder, { label: " Freight Forwarder" }, "true", "false" %>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="small-12 columns">
+						<h3>Regulatory</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<%= f.text_area :regulatory_guidelines %>
+					</div>
+					<div class="medium-6 columns end">
+						<%= f.check_box :contract_or_documentation_authentication, { label: " Contract or Documentation authentication required?" }, "true", "false" %>
+					</div>
+				</div>
+
+				<br>
 				<%= f.submit %>
 
 

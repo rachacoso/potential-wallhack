@@ -7,7 +7,7 @@
 <div class="row">
 	<div class="small-12 columns text-right">
 		<div class="ldpanel">
-			Hello, <%= @current_user.user_profile.firstname %> | <%= link_to 'logout', logout_url %>
+			Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %> | <%= link_to 'logout', logout_url %>
 		</div>
 	</div>
 </div>

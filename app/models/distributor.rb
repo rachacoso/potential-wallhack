@@ -15,8 +15,10 @@ class Distributor
  	field :name, type: String
 	field :country_of_origin, type: String
   
-  has_and_belongs_to_many :sectors, inverse_of: nil
-  has_and_belongs_to_many :channels, inverse_of: nil
+  # has_and_belongs_to_many :sectors, inverse_of: nil
+  # has_and_belongs_to_many :channels, inverse_of: nil
+  field :sectors, type: Array
+  field :channels, type: Array
 	field :year_established, type: Date
 
 	# Current Portfolio

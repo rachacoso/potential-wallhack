@@ -24,16 +24,16 @@ class DistributorsController < ApplicationController
 		assigned_sectors = Sector.find(params[:sectors].values) rescue []
 		distributor.sectors = [] # clear current ones before update
 		assigned_sectors.each do |s|
-			distributor.sectors << s
+			distributor.sectors << s.shortcode
 		end
 
 		# set channels
 		assigned_channels = Channel.find(params[:channels].values) rescue []
 		distributor.channels = [] # clear current ones before update
 		assigned_channels.each do |s|
-			distributor.channels << s
+			distributor.channels << s.shortcode
 		end
-	
+		distributor.save!
 		redirect_to distributors_url
 
 	end

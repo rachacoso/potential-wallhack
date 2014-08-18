@@ -1,7 +1,7 @@
 class Sector
   include Mongoid::Document
 
-  belongs_to :distributor
+  belongs_to :distributor, :dependent => :destroy
 
   field :name, type: String
 	field :shortcode, type: String

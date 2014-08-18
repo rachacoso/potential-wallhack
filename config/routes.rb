@@ -8,18 +8,20 @@ Rails.application.routes.draw do
 
   get   '/dashboard' => 'home#dashboard', as: 'dashboard'
 
-  get   '/admin' => 'admin#home', as: 'admin'
+  get   '/admin' => 'admin#index', as: 'admin'
 
   resources :sectors, only: [:create, :update, :destroy]
   resources :channels, only: [:create, :update, :destroy]
   resources :countries, only: [:create, :update, :destroy]
-
+  resources :displays, only: [:create, :update, :destroy]
 
   resources :users, only: [:new, :create, :edit, :update, :destroy, :index]
   
   get    '/distributors' => 'distributors#edit', as: 'distributor'
   patch  '/distributors' => 'distributors#update'
   
+  get    '/brands' => 'brands#edit', as: 'brand'
+  patch  '/brands' => 'brands#update'
 
   get   '/profiles/new' => 'profiles#new', as: 'new_profile'
   patch '/profiles/new' => 'profiles#update'

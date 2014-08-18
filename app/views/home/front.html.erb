@@ -5,7 +5,14 @@
 	<div class="small-12 columns text-right">
 		<div class="ldpanel">
 			<% if @current_user %>
-			Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %> | <%= link_to 'logout', logout_url %>
+				Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %> |
+				<% if @current_user.brand %>
+					<%= link_to 'Brand Profile', brand_url %> | 
+				<% end %>
+				<% if @current_user.distributor %>
+					<%= link_to 'Distributor Profile', distributor_url %> | 
+				<% end %>
+				<%= link_to 'logout', logout_url %>
 			<% else %>
 			<%= link_to 'Login', login_url %> or <%= link_to 'Register', new_user_url %> 
 			<% end %>

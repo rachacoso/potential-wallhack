@@ -8,6 +8,14 @@
 
   <%= csrf_meta_tags %>
   <%= content_for?(:javascript_head) ? yield(:javascript_head) : "" %>
+
+	<% if @display %>
+		<%= javascript_tag do %>
+			var bgImage = <%= "\"#{@display.background_photo.url(:large)}\"".html_safe %>
+			var bgColor = "#223344";
+		<% end %>
+	<% end %>
+
 </head>
 <body>
 

@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="small-12 columns text-right">
 		<div class="ldpanel">
-			Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %> | <%= link_to 'logout', logout_url %>
+			Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %> | <%= link_to 'Dashboard', dashboard_url %> | <%= link_to 'logout', logout_url %>
 		</div>
 	</div>
 </div>
@@ -9,7 +9,7 @@
 <div class="ldpanel">
 	<div class="row">
 		<div class="large-8 columns">
-			<h4>New Distributor Profile</h4>
+			<h4>Edit Distributor Profile</h4>
 			<%= form_for @distributor, url: distributor_url do |f| %>
 				<%= f.text_field :name %>
 
@@ -53,7 +53,7 @@
 					<h3>Sectors</h3>
 					<% Sector.each do |sc| %>
 				    <div>
-				      <%= check_box_tag "sectors[#{sc.shortcode}]", sc.id, @distributor.sectors.find(sc.id) ? true : false %>
+				      <%= check_box_tag "sectors[#{sc.shortcode}]", sc.id, (@distributor.sectors.include? sc.shortcode rescue false) ? true : false %>
 				      <%= label_tag("sectors[#{sc.shortcode}]", sc.name) %>
 				    </div>
 				  <% end %>
@@ -62,7 +62,7 @@
 					<h3>Channels</h3>
 					<% Channel.each do |ch| %>
 				    <div>
-				    	<%= check_box_tag "channels[#{ch.shortcode}]", ch.id, @distributor.channels.find(ch.id) ? true : false  %>
+				    	<%= check_box_tag "channels[#{ch.shortcode}]", ch.id, (@distributor.channels.include? ch.shortcode rescue false) ? true : false  %>
 				      <%= label_tag("channels[#{ch.shortcode}]", ch.name) %>
 				    </div>
 				  <% end %>

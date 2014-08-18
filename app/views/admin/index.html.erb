@@ -1,0 +1,41 @@
+
+<%= render partial: "section", locals: {profile_section: @sector, new_profile_section: @new_sector, profile_section_name: 'Sectors'} %>
+
+<%= render partial: "section", locals: {profile_section: @channel, new_profile_section: @new_channel, profile_section_name: 'Channels'} %>
+
+<%= render partial: "section", locals: {profile_section: @country, new_profile_section: @new_country, profile_section_name: 'Countries'} %>
+
+
+<div class="row">
+	<div class="large-9 columns">
+		<div class="ldpanel">
+			<h3>Display</h3>
+
+			<% if flash[:"displays_error"] %>
+				<tr><td colspan="3"><div data-alert class="alert-box alert">
+					<% flash[:"#displays_error"].each do |k,v| %>
+						<%= k %> <%= v %> <br>
+					<% end %>
+					<a href="#" class="close">&times;</a>
+				</td></tr>
+				</div>
+			<% end %>
+
+			<%= form_for @display_info do |f| %>
+				
+				<%= f.label :background_photo %>
+				<% if @background_photo %>
+					<%= image_tag @background_photo.url(:small) %>
+				<% end %>
+				<%= f.file_field :background_photo, label: "&nbsp;".html_safe, accept: 'image/png,image/gif,image/jpeg' %> 
+
+				<%= f.text_field :background_color %>
+
+				<%= f.submit %>
+
+			<% end %>
+
+
+		</div>
+	</div>
+</div>

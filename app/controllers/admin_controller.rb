@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
   
-  def home
+  def index
   	@sector = Sector.all
   	@channel = Channel.all
   	@country = Country.all
@@ -10,11 +10,10 @@ class AdminController < ApplicationController
   	@new_country = Country.new
 
 		if Display.all.first.blank?
-
-
+			@display_info = Display.new
 	  else
-			display_info = Display.all.first
-			@background_photo = display_info.method_defined? :background_photo ? display_info.background_photo : nil
+			@display_info = Display.all.first
+			@background_photo = @display_info.background_photo
 		end
 
   end

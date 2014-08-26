@@ -33,8 +33,16 @@ class DistributorsController < ApplicationController
 		assigned_channels.each do |s|
 			distributor.channels << s.shortcode
 		end
+
+		# set planned channels EVENTUALLY MOVING TO NEGOTIATION/CONTRACT MODEL
+		planned_channels = Channel.find(params[:planned_channels].values) rescue []
+		distributor.planned_channels = [] # clear current ones before update
+		planned_channels.each do |s|
+			distributor.planned_channels << s.shortcode
+		end
+
 		distributor.save!
-		redirect_to distributors_url
+		redirect_to dashboard_url
 
 	end
 
@@ -48,7 +56,9 @@ class DistributorsController < ApplicationController
 			:outside_sales,
 			:outside_sales_size,
 			:inside_sales,
-			:outside_sales_size,
+			:inside_sales_size,
+			:sales_manager_name,
+			:sales_manager_email,
 			:education_manager_name,
 			:education_manager_email,
 			:education_provided_to,
@@ -78,7 +88,11 @@ class DistributorsController < ApplicationController
 			:number_of_home_shopping_networks,
 			:number_of_online_malls,
 			:number_of_social_commerce_sites,
+			:marketing_spend,
+			:minimums,
+			:key_competitors,
 			contact_info_attributes: [ 
+				:contact_name,
 				:email,
 				:phone,
  				:address1,

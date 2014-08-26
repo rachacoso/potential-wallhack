@@ -10,7 +10,7 @@ class ChannelsController < ApplicationController
 			newchannel.save!
 			redirect_to admin_url
 		else
-			redirect_to admin_url, :flash => { :channels_error => newchannel.errors.messages }
+			redirect_to admin_url, :flash => { :channel_error => newchannel.errors.messages } # error name is the downcase of model class name
 		end
 
 	end

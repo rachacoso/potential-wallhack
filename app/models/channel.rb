@@ -1,7 +1,7 @@
 class Channel
   include Mongoid::Document
 
-  belongs_to :distributor
+
 
   field :name, type: String
   field :shortcode, type: String

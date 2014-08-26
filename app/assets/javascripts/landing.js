@@ -8,7 +8,7 @@ $( document ).ready(function() {
 		$.backstretch( bgImage, {fade: 500});	
 	} else {
 		var bg = (typeof bgColor != 'undefined') ? bgColor : bgDefaultColor
-		$( 'body' ).css( "background-color", bg );
+		$( 'body' ).css( "background", bg );
 	};
 
 });

@@ -11,8 +11,10 @@
 
 	<% if @display %>
 		<%= javascript_tag do %>
-			var bgImage = <%= "\"#{@display.background_photo.url(:large)}\"".html_safe %>
-			var bgColor = "#223344";
+			<% if @display.background_photo_file_name %>
+			var bgImage = <%= "\"#{@display.background_photo.url(:large)}\"".html_safe %>;
+			<% end %>
+			var bgColor = <%= "\"\##{@display.background_color}\"".html_safe %>;
 		<% end %>
 	<% end %>
 

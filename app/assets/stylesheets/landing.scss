@@ -3,6 +3,21 @@ body {
 
 }
 
+/////////////
+// DEV STYLES
+/////////////
+
+// div {
+//   border: 1px solid red; 
+// }
+
+.tbd {
+  color: red;
+   margin: 1em 0em;
+ }
+
+
+
 // Transparent backgrounds
 
 @mixin transparent($color, $alpha) {
@@ -24,13 +39,32 @@ body {
 
 .ldpanel {
 	// border: 1px dotted black;
-	padding: 1em 1em;
-	margin: 1em 0em 0em 0em;
+	padding: 2em 2em;
+	margin: 0.5em 0em 0.5em 0em;
 	@include transparent (white, 0.7);
-	&.profile {
-		height: 20em;
-	}
 	&.products {
 		height: 20em;
+	}
+	&.profile {
+		height: 25em;
+    .inner {
+      h4 {
+        color: #267A78;
+      }
+      margin-top: 1em;
+      height: 90%;
+      overflow-y: auto;
+    }
 	}	
 }
+
+// Distributor/Brand Profile CSS
+#profile-name {
+  font-size:2em;
+  font-weight:bold;
+}
+
+textarea {
+  resize: vertical;
+}
+

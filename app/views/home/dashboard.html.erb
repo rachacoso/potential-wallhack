@@ -3,12 +3,7 @@
 	<div class="small-12 columns text-right">
 		<div class="ldpanel">
 			Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %> | 
-			<% if @current_user.brand %>
-				<%= link_to 'Brand Profile', brand_url %> | 
-			<% end %>
-			<% if @current_user.distributor %>
-				<%= link_to 'Distributor Profile', distributor_url %> | 
-			<% end %>
+			<%= link_to 'Front', root_url %> |
 			<%= link_to 'logout', logout_url %>
 		</div>
 	</div>
@@ -16,13 +11,122 @@
 
 <div class="row">
 	<div class="small-4 columns">
-		<div class="ldpanel profile">
+		<div class="ldpanel products">
 			stuff
 		</div>
 	</div>
 	<div class="small-8 columns">
-		<div class="ldpanel products">
-			products
+		<div class="ldpanel profile">
+
+			<div class="row">
+				<div class="small-7 columns">
+					<span id="profile-name">
+							<%= @profile.name %> 
+					</span>
+				</div>
+				<div class="small-5 columns">
+					<%= @profile.year_established.strftime("est. %Y") %> <%= Country.where(shortcode: @profile.country_of_origin).first.name %> 
+					<small><br>
+					<% if @current_user.brand %>
+						<%= link_to 'Edit Brand Profile', brand_url %>
+					<% end %>
+					<% if @current_user.distributor %>
+						<%= link_to 'Edit Distributor Profile', distributor_url %>
+					<% end %>
+					</small>
+				</div>
+			</div>
+
+			<div class="inner">
+
+				
+
+				<h4>Sectors</h4>
+				<% @profile.sectors.each do |s| %>
+					<%= Sector.where(shortcode: s).first.name %><br>
+				<% end %>
+
+				<h4>Channels</h4>
+				<% @profile.channels.each do |c| %>
+					<%= Channel.where(shortcode: c).first.name %><br>
+				<% end %>
+
+				<h4>Current Lines</h4>
+				<%= simple_format(@profile.current_lines, {}, wrapper_tag: "div") %>
+
+				<h4>Outside Sales</h4>
+				<% if @profile.outside_sales %>
+					Yes, 
+					<%= SalesSize.where(shortcode: @profile.outside_sales_size).first.name %>
+				<% else %>
+					No
+				<% end %>
+
+				<h4>Inside Sales</h4>
+				<% if @profile.inside_sales %>
+					Yes, 
+					<%= SalesSize.where(shortcode: @profile.inside_sales_size).first.name %>
+				<% else %>
+					No
+				<% end %>
+
+				<h4>Sales Manager</h4>
+				<%= @profile.sales_manager_name %>
+				<%= @profile.sales_manager_email %>
+
+				<h4>Education Manager</h4>
+				<%= @profile.education_manager_name %>
+				<%= @profile.education_manager_email %>
+	
+				<h4>Education Provided To:</h4>
+				<%= @profile.education_provided_to %>
+
+				<h4>Shows Participated In:</h4>
+				<%= @profile.shows_participated_in %>
+					
+
+				<h4>Internal Marketing</h4>
+				<% if @profile.internal_marketing %>
+					Yes, 
+					<%= SalesSize.where(shortcode: @profile.internal_marketing_size).first.name %>
+				<% else %>
+					No
+				<% end %>
+
+				<h4>Marketing Profile</h4>
+				
+				<strong>Employ PR Agency?</strong><br>
+				<%= @profile.employ_pr_agency ? "Yes" : "No" %>
+				<br/>
+				<br/>
+
+				<strong>Marketing via:</strong><br>
+				<%= @profile.marketing_via_print ? "Print <br/>".html_safe : "" %>
+				<%= @profile.marketing_via_online ? "Online <br/>".html_safe : "" %>
+				<%= @profile.marketing_via_email ? "Email <br/>".html_safe : "" %>
+				<%= @profile.marketing_via_outdoor ? "Outdoor <br/>".html_safe : "" %>
+				<%= @profile.marketing_via_events ? "Events <br/>".html_safe : "" %>
+				<%= @profile.marketing_via_direct_mail ? "Direct Mail <br/>".html_safe : "" %>
+				<br/>
+
+				<strong>Customer Database?</strong><br>
+				<%= @profile.maintain_customer_database ? "Yes" : "No" %>
+				<br/>
+				<br/>
+
+				<h4>Operational Capabilities</h4>
+				<%= @profile.distributor_warehouse ? "Distributor Warehouse <br/>".html_safe : "" %>
+				<%= @profile.freight_forwarder ? "Freight Forwarder <br/>".html_safe : "" %>
+
+				<h4>Regulatory Guidelines</h4>
+				<%= simple_format(@profile.regulatory_guidelines, {}, wrapper_tag: "div") %>
+				<strong>Require Contract or Documentation Authentication?</strong><br>
+				<%= @profile.contract_or_documentation_authentication ? "Yes" : "No" %>
+				<br/>
+				<br/>
+
+			</div>
+
 		</div>
 	</div>
 

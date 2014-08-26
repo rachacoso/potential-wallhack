@@ -24,6 +24,7 @@
 //= require waypoints.min
 //= require jquery.photoset-grid
 //= require jquery.colorbox
+//= require jscolor
 
 //= require_tree .
 

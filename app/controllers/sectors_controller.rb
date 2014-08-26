@@ -1,22 +1,22 @@
 class SectorsController < ApplicationController
   
 	def create
-		newsector = Sector.new
-		newsector.name = params[:sector][:name]
-		newsector.shortcode = params[:sector][:shortcode]
+		c = Sector.new
+		c.name = params[:sector][:name]
+		c.shortcode = params[:sector][:shortcode]
 
-		if newsector.valid?
-			newsector.save!
+		if c.valid?
+			c.save!
 			redirect_to admin_url
 		else
-			redirect_to admin_url, :flash => { :sectors_error => newsector.errors.messages }
+			redirect_to admin_url, :flash => { :sector_error => c.errors.messages }  # error name is the downcase of model class name
 		end
 
 	end
 
 	def destroy
-		sector = Sector.find(params[:id])
-		sector.destroy
+		d = Sector.find(params[:id])
+		d.destroy
 		redirect_to admin_url
 		
 	end

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :sectors, only: [:create, :update, :destroy]
   resources :channels, only: [:create, :update, :destroy]
   resources :countries, only: [:create, :update, :destroy]
+  resources :sales_sizes, only: [:create, :update, :destroy]
+  resources :marketing_spends, only: [:create, :update, :destroy]
   resources :displays, only: [:create, :update, :destroy]
 
   resources :users, only: [:new, :create, :edit, :update, :destroy, :index]

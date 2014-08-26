@@ -5,15 +5,18 @@
 
 <%= render partial: "section", locals: {profile_section: @country, new_profile_section: @new_country, profile_section_name: 'Countries'} %>
 
+<%= render partial: "section", locals: {profile_section: @sales_size, new_profile_section: @new_sales_size, profile_section_name: '(Inside/Outside) Sales Sizes'} %>
+
+<%= render partial: "section", locals: {profile_section: @marketing_spend, new_profile_section: @new_marketing_spend, profile_section_name: 'Marketing Spend Sizes'} %>
 
 <div class="row">
-	<div class="large-9 columns">
+	<div class="medium-9 columns">
 		<div class="ldpanel">
 			<h3>Display</h3>
 
 			<% if flash[:"displays_error"] %>
 				<tr><td colspan="3"><div data-alert class="alert-box alert">
-					<% flash[:"#displays_error"].each do |k,v| %>
+					<% flash[:"displays_error"].each do |k,v| %>
 						<%= k %> <%= v %> <br>
 					<% end %>
 					<a href="#" class="close">&times;</a>
@@ -22,14 +25,28 @@
 			<% end %>
 
 			<%= form_for @display_info do |f| %>
-				
-				<%= f.label :background_photo %>
-				<% if @background_photo %>
-					<%= image_tag @background_photo.url(:small) %>
-				<% end %>
-				<%= f.file_field :background_photo, label: "&nbsp;".html_safe, accept: 'image/png,image/gif,image/jpeg' %> 
+			<div class="row">
+				<div class="medium-3 columns">
+					<%= f.label :background_photo do %>
+					Background Photo<br>
+					<% if @display_info.background_photo_file_name %>
+						<%= image_tag @background_photo.url(:small) %>
+					<% else %>
+						<strong>No Background Photo</strong>
+					<% end %>
+					<% end %>
+				</div>
+				<div class="medium-4 columns end">
+				<%= f.file_field :background_photo, label: "&nbsp;".html_safe, accept: 'image/png,image/gif,image/jpeg' %>
+				<%= @display_info.background_photo_file_name ? (link_to "Delete This Photo", display_url(@display_info), :method => 'put', data: { :confirm => 'Are you sure you want to remove the background photo?'}) : ""  %>
+				</div>				
+			</div>
 
-				<%= f.text_field :background_color %>
+			<div class="row">
+				<div class="medium-7 columns">
+				<%= f.text_field :background_color, class: "color" %>
+				</div>
+			</div>
 
 				<%= f.submit %>
 

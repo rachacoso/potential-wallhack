@@ -24,10 +24,19 @@ class DisplaysController < ApplicationController
 	def update
 		display = Display.find(params[:id])
 
-		display.background_color = params[:display][:background_color]
-		unless params[:display][:background_photo].blank?
-			display.background_photo = params[:display][:background_photo]
+		if !params[:display]
+
+			display.background_photo = nil
+
+		else		
+
+			display.background_color = params[:display][:background_color]
+			unless params[:display][:background_photo].blank?
+				display.background_photo = params[:display][:background_photo]
+			end
+
 		end
+
 
 		if display.valid?
 			display.save!

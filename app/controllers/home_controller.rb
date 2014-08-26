@@ -11,6 +11,7 @@ class HomeController < ApplicationController
 	def dashboard
 
 		@display = Display.all.first
+		@profile = @current_user.brand || @current_user.distributor
 		
 	end
 

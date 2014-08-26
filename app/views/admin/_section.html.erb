@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="large-9 columns">
+	<div class="medium-9 columns">
 		<div class="ldpanel">
 
 		<h4><%= profile_section_name %></h4>
@@ -14,11 +14,9 @@
 			</tr>
 		<% end %>
 		
-
-
-		<% if flash[:"#{profile_section_name.downcase}_error"] %>
+		<% if flash[:"#{profile_section.name.downcase}_error"] %>
 			<tr><td colspan="3"><div data-alert class="alert-box alert">
-				<% flash[:"#{profile_section_name.downcase}_error"].each do |k,v| %>
+				<% flash[:"#{profile_section.name.downcase}_error"].each do |k,v| %>
 					<%= k %> <%= v %> <br>
 				<% end %>
 			  <a href="#" class="close">&times;</a>

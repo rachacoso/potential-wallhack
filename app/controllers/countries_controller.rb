@@ -9,7 +9,7 @@ class CountriesController < ApplicationController
 			newcountry.save!
 			redirect_to admin_url
 		else
-			redirect_to admin_url, :flash => { :countries_error => newcountry.errors.messages }
+			redirect_to admin_url, :flash => { :country_error => newcountry.errors.messages } # error name is the downcase of model class name
 		end
 
 	end

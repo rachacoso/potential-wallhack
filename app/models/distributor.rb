@@ -34,24 +34,12 @@ class Distributor
 	field :capacity_social_commerce_sites, type: Integer
 
 	# Sales/Education Capabilities
-	field :outside_sales, type: Boolean
-	field :outside_sales_size, type: String
-	field :inside_sales, type: Boolean
-	field :inside_sales_size, type: String
-
-	has_many :shows_participated_in
-	
-	# (THE FOLLOWING ARE RESTRICTED TO SIGNED BRANDS)
-	field :sales_manager_name, type: String
-	field :sales_manager_email, type: String
-	field :education_manager_name, type: String
-	field :education_manager_email, type: String
-	field :education_provided_to, type: String
+	field :outside_sales_size, type: Integer
+	field :inside_sales_size, type: Integer
 
 
 	# Marketing/PR Capabilities
-	field :internal_marketing, type: Boolean
-	field :internal_marketing_size, type: String
+	field :internal_marketing_size, type: Integer
 	field :employ_pr_agency, type: Boolean
 	field :marketing_via_print, type: Boolean
 	field :marketing_via_online, type: Boolean
@@ -59,7 +47,8 @@ class Distributor
 	field :marketing_via_outdoor, type: Boolean
 	field :marketing_via_events, type: Boolean
 	field :marketing_via_direct_mail, type: Boolean
-	field :maintain_customer_database, type: Boolean
+	field :marketing_via_classes, type: Boolean
+	field :customer_database_size, type: Integer
 
 	# Operational Capabilities
 	field :distributor_warehouse, type: Boolean

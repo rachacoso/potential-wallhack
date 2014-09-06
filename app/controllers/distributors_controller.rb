@@ -7,15 +7,6 @@ class DistributorsController < ApplicationController
 		@past_brands = @distributor.distributor_brands.where(current: false) rescue nil
 		@new_brand = DistributorBrand.new
 
-		# set channel capacities to zero if not set (allows user to leave field blank to set to zero)
-		@distributor.capacity_directly_operated_sites ||= 0
-		@distributor.capacity_department_stores ||= 0
-		@distributor.capacity_salons ||= 0
-		@distributor.capacity_specialty_retailers ||= 0
-		@distributor.capacity_home_shopping_networks ||= 0
-		@distributor.capacity_online_malls ||= 0
-		@distributor.capacity_social_commerce_sites ||= 0
-
 	end
 
 	def update
@@ -26,6 +17,20 @@ class DistributorsController < ApplicationController
 		distributor.update(distributor_parameters)
 
 		# set other fields
+
+		# set numeric fields to zero if left unset
+		distributor.capacity_directly_operated_sites ||= 0
+		distributor.capacity_department_stores ||= 0
+		distributor.capacity_salons ||= 0
+		distributor.capacity_specialty_retailers ||= 0
+		distributor.capacity_home_shopping_networks ||= 0
+		distributor.capacity_online_malls ||= 0
+		distributor.capacity_social_commerce_sites ||= 0
+		distributor.outside_sales_size ||= 0
+		distributor.inside_sales_size ||= 0
+		distributor.internal_marketing_size ||= 0
+		distributor.customer_database_size ||= 0
+
 		# set year established
 		if params[:year_established]
 			distributor.update(year_established: Date.new(params[:year_established].to_i))
@@ -78,9 +83,7 @@ class DistributorsController < ApplicationController
 			:capacity_home_shopping_networks,
 			:capacity_online_malls,
 			:capacity_social_commerce_sites,
-			:outside_sales,
 			:outside_sales_size,
-			:inside_sales,
 			:inside_sales_size,
 			:sales_manager_name,
 			:sales_manager_email,
@@ -100,21 +103,8 @@ class DistributorsController < ApplicationController
 			:marketing_via_events,
 			:marketing_via_direct_mail,
 			:marketing_via_email,
-			:maintain_customer_database,
-			:distributor_warehouse,
-			:freight_forwarder,
-			:regulatory_guidlines,
-			:contract_or_documentation_authentication,
-			:number_of_stores,
-			:number_of_department_stores,
-			:number_of_salons,
-			:number_of_beauty_retailers,
-			:number_of_home_shopping_networks,
-			:number_of_online_malls,
-			:number_of_social_commerce_sites,
-			:marketing_spend,
-			:minimums,
-			:key_competitors,
+			:marketing_via_classes,
+			:customer_database_size,
 			contact_info_attributes: [ 
 				:contact_name,
 				:contact_title,

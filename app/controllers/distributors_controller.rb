@@ -7,7 +7,7 @@ class DistributorsController < ApplicationController
 		@past_brands = @distributor.distributor_brands.where(current: false) rescue nil
 		@new_brand = DistributorBrand.new
 
-		# set channel capacities to zero if not set (allows for user to leave field blank to set to zero)
+		# set channel capacities to zero if not set (allows user to leave field blank to set to zero)
 		@distributor.capacity_directly_operated_sites ||= 0
 		@distributor.capacity_department_stores ||= 0
 		@distributor.capacity_salons ||= 0
@@ -87,7 +87,6 @@ class DistributorsController < ApplicationController
 			:education_manager_name,
 			:education_manager_email,
 			:education_provided_to,
-			:shows_participated_in,
 			:sell_via_website,
 			:sell_via_online_mall,
 			:sell_via_social,

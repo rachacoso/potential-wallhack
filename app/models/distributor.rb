@@ -38,7 +38,9 @@ class Distributor
 	field :outside_sales_size, type: String
 	field :inside_sales, type: Boolean
 	field :inside_sales_size, type: String
-	field :shows_participated_in, type: String
+
+	has_many :shows_participated_in
+	
 	# (THE FOLLOWING ARE RESTRICTED TO SIGNED BRANDS)
 	field :sales_manager_name, type: String
 	field :sales_manager_email, type: String

@@ -21,7 +21,7 @@ class SectorsController < ApplicationController
 		
 	end
 
-	def update
+	def show
 
 	end
 

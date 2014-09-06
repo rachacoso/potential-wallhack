@@ -2,6 +2,7 @@ class ContactInfo
   include Mongoid::Document
 
   field :contact_name, type: String
+  field :contact_title, type: String
 	field :email, type: String
 	field :phone, type: String
  	field :address1, type: String

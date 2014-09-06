@@ -16,21 +16,20 @@
 </div>
 
 
-<%= form_for @distributor, url: distributor_url do |f| %>
-<div class="row">
-	<div class="medium-8 columns">
-		<div class="ldpanel">
-		<%= f.text_area :name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Distributor Name" %>
-		</div>
-	</div>
-</div>
 
-<div class="row">
-	<div class="medium-8 columns">
-		<div class="ldpanel">
+<%= render partial: "paneltop" %>
+		<%= form_for @distributor, url: distributor_url do |f| %>
+		<%= f.text_area :name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Distributor Name" %>
+		<%= f.submit 'Update' %>
+		<% end %>
+<%= render partial: "panelbottom" %>
+
+
+<%= render partial: "paneltop" %>
 		
 
 				<h3>Company Info</h3>
+				<%= form_for @distributor, url: distributor_url do |f| %>
 				<div class="row">
 					<div class="medium-6 columns">
 						<%= f.select :country_of_origin, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :shortcode, :name, @distributor.country_of_origin.empty? ? 'us' : @distributor.country_of_origin ), :prompt => 'Select Country' %>
@@ -50,7 +49,12 @@
 						<div class="medium-12 columns">
 							<%= ff.text_field :contact_name %>
 						</div>
-					</div>				
+					</div>
+					<div class="row">
+						<div class="medium-12 columns">
+							<%= ff.text_field :contact_title %>
+						</div>
+					</div>
 					<div class="row">
 						<div class="medium-6 columns">
 							<%= ff.text_field :email %>
@@ -87,16 +91,20 @@
 					</div>
 				<% end %>
 
-		</div>
-	</div>
-</div>
+				<%= f.submit 'Update' %>
 
-<div class="row">
-	<div class="medium-8 columns">
-		<div class="ldpanel">
+				<% end %>
+
+<%= render partial: "panelbottom" %>
+
+
+
+<%= render partial: "paneltop" %>
 
 				<div class="row">
-					<div class="medium-6 columns">				
+					<%= form_for @distributor, url: distributor_url do |f| %>
+					<div class="medium-6 columns">
+					<%= f.hidden_field :name %>		
 					<h3>Sectors</h3>
 						<% Sector.each do |sc| %>
 					    <div>
@@ -115,45 +123,117 @@
 					  <% end %>
 					</div>
 				</div>
+				<%= f.submit 'Update' %>
+				<% end %>
 			
+<%= render partial: "panelbottom" %>
 
 
-		</div>
-	</div>
-</div>
-
-<div class="row">
-	<div class="medium-8 columns">
-		<div class="ldpanel">
+<%= render partial: "paneltop" %>
 
 				<h3>Current Portfolio</h3>
-				<%= f.text_area :current_lines %>
+				<table>
+				<thead><tr><th>Brand</th><th>Category</th><th>Website</th><th>Country of Manufacture</th><th colspan="2">&nbsp;</th></tr></thead>
+				<tbody>
+				<% if !@current_brands.empty? %>
+					<% @current_brands.each do |cb| %>
+					<tr>
+						<%= form_for cb do |f| %>
+						<td><%= f.text_field :brand, label: false %></td>
+						<td><%= f.text_field :category, label: false %></td>
+						<td><%= f.text_field :website, label: false %></td>
+						<td><%= f.text_field :country_of_manufacture, label: false %></td>
+						<td>
+						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+						</td>
+						<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.brand}?"}%></td>
+						<% end %>
+					</tr>	
+					<% end %>
+				<% else %>
+					<tr><td colspan="4">No Current Brands</td></tr>
+				<% end %>
 
 
-		</div>
-	</div>
-</div>
+				<%= form_for @new_brand, :html => { :id => "new_current_brand" } do |f| %>
+				<%= f.hidden_field :current, value: true %>
 
-<div class="row">
-	<div class="medium-8 columns">
-		<div class="ldpanel">
+						<tr>
+						<td><%= f.text_field :brand, label: false, placeholder: 'Brand' %></td>
+						<td><%= f.text_field :category, label: false, placeholder: 'Category'  %></td>
+						<td><%= f.text_field :website, label: false, placeholder: 'Website'  %></td>
+						<td><%= f.text_field :country_of_manufacture, label: false, placeholder: 'Country of Manufacture'  %></td>
+						<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_current_brand').submit()".html_safe %></td>
+						</tr>
+
+				<% end %>
+				</tbody>
+				</table>
+
+				<h3>Past Portfolio</h3>
+				<table>
+				<thead><tr><th>Brand</th><th>Category</th><th>Website</th><th>Country of Manufacture</th><th colspan="2">&nbsp;</th></tr></thead>
+				<tbody>
+				<% if !@past_brands.empty? %>
+					<% @past_brands.each do |cb| %>
+					<tr>
+						<%= form_for cb do |f| %>
+						<td><%= f.text_field :brand, label: false %></td>
+						<td><%= f.text_field :category, label: false %></td>
+						<td><%= f.text_field :website, label: false %></td>
+						<td><%= f.text_field :country_of_manufacture, label: false %></td>
+						<td>
+								<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+						</td>
+						<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.brand}?"}%></td>
+						<% end %>
+					</tr>	
+					<% end %>
+				<% else %>
+					<tr><td colspan="4">No Past Brands</td></tr>
+				<% end %>
+
+				<%= form_for @new_brand, :html => { :id => "new_past_brand" } do |f| %>
+				<%= f.hidden_field :current, value: false %>
+
+						<tr>
+						<td><%= f.text_field :brand, label: false, placeholder: 'Brand' %></td>
+						<td><%= f.text_field :category, label: false, placeholder: 'Category' %></td>
+						<td><%= f.text_field :website, label: false, placeholder: 'Website' %></td>
+						<td><%= f.text_field :country_of_manufacture, label: false, placeholder: 'Country of Manufacture' %></td>
+						<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_past_brand').submit()".html_safe %></td>
+						</tr>
+
+				<% end %>
+				</tbody>
+				</table>
+
+<%= render partial: "panelbottom" %>
+
+
+<%= render partial: "paneltop" %>
 
 				<h3>Channel Capacity</h3>
 
-TBD
+				<%= form_for @distributor, url: distributor_url do |f| %>
+				<%= render partial: "channel_capacity", locals: {f: f, field: :capacity_directly_operated_sites, fieldlabel: 'Directly Operated Sites or Stores' } %>
+				<%= render partial: "channel_capacity", locals: {f: f, field: :capacity_department_stores, fieldlabel: 'Department Stores' } %>
+				<%= render partial: "channel_capacity", locals: {f: f, field: :capacity_salons, fieldlabel: 'Salons' } %>
+				<%= render partial: "channel_capacity", locals: {f: f, field: :capacity_specialty_retailers, fieldlabel: 'Specialty Retailers' } %>
+				<%= render partial: "channel_capacity", locals: {f: f, field: :capacity_home_shopping_networks, fieldlabel: 'Home Shopping Networks' } %>
+				<%= render partial: "channel_capacity", locals: {f: f, field: :capacity_online_malls, fieldlabel: 'Online Malls' } %>
+				<%= render partial: "channel_capacity", locals: {f: f, field: :capacity_social_commerce_sites, fieldlabel: 'Social Commerce Sites' } %>
+
+				<%= f.submit 'Update' %>
+				<% end %>
+
+<%= render partial: "panelbottom" %>
 
 
-		</div>
-	</div>
-</div>
-
-
-<div class="row">
-	<div class="medium-8 columns">
-		<div class="ldpanel">
+<%= render partial: "paneltop" %>
 
 				<h3>Sales/Education Capabilities</h3>
-
+				<%= form_for @distributor, url: distributor_url do |f| %>
 				<div class="row">
 					<div class="medium-5 columns">
 						<%= f.check_box :outside_sales, { label: " Yes, we have an outside sales team." }, "true", "false" %>
@@ -204,18 +284,16 @@ TBD
 					<div class="medium-12 columns">
 						<%= f.text_area :education_provided_to %>
 					</div>
-				</div>	
+				</div>
+				<%= f.submit 'Update' %>
+				<% end %>	
 
-		</div>
-	</div>
-</div>
+<%= render partial: "panelbottom" %>
 
-<div class="row">
-	<div class="medium-8 columns">
-		<div class="ldpanel">
+<%= render partial: "paneltop" %>
 
 			<h3> Marketing/PR Capabilities</h3>
-
+				<%= form_for @distributor, url: distributor_url do |f| %>
 				<div class="row">
 					<div class="medium-12 columns">
 						Internal Marketing Team?<br>
@@ -268,16 +346,19 @@ TBD
 						Customer Database?<br>
 						<%= f.check_box :maintain_customer_database, { label: " Yes, we maintain a customer database" }, "true", "false" %>
 					</div>
-			 </div>
+				</div>
 
-		</div>
-	</div>
-</div>
+					 <%= f.submit 'Update' %>
 
-<div class="row">
-	<div class="medium-8 columns">
-		<div class="ldpanel">
+			 <% end %>
+
+<%= render partial: "panelbottom" %>
+
+
+<%= render partial: "paneltop" %>
+
 			<h3>Operational Capabilities</h3>
+			<%= form_for @distributor, url: distributor_url do |f| %>
 				<div class="row">
 					<div class="medium-4 columns">
 						<%= f.check_box :distributor_warehouse, { label: " Distributor Warehouse" }, "true", "false" %>
@@ -286,14 +367,14 @@ TBD
 						<%= f.check_box :freight_forwarder, { label: " Freight Forwarder" }, "true", "false" %>
 					</div>
 				</div>
+				<%= f.submit 'Update' %>
+			<% end %>
 
-		</div>
-	</div>
-</div>
+<%= render partial: "panelbottom" %>
 
-<div class="row">
-	<div class="medium-8 columns">
-		<div class="ldpanel">
+
+
+<%= render partial: "paneltop" %>
 
 		<h3>Confidential / Negotiation Items</h3>
 		<div class="tbd"> TBD: Restrict to CONFIDENTIAL/NEGOTIATION (and eventually move to contract/negotiation model from distributor model)</div>
@@ -301,6 +382,7 @@ TBD
 				
 				
 				<div class="row">
+					<%= form_for @distributor, url: distributor_url do |f| %>
 					<div class="medium-12 columns">
 						Regulatory Guidelines
 						<%= f.text_area :regulatory_guidelines, label: "Describe the regulatory guidelines for this product in your country:" %>
@@ -333,21 +415,10 @@ TBD
 					    </div>
 					  <% end %>
 					</div>
-
+				<%= f.submit 'Update' %>
+					
+				<% end %>
 				</div>
+			
+<%= render partial: "panelbottom" %>
 
-				<br>
-				
-
-		</div>
-	</div>
-</div>
-
-
-<div class="row">
-	<div class="medium-8 columns">
-			<%= f.submit %>
-	</div>
-</div>
-
-<% end %>

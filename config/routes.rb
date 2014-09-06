@@ -16,17 +16,16 @@ Rails.application.routes.draw do
   resources :sales_sizes, only: [:create, :update, :destroy]
   resources :marketing_spends, only: [:create, :update, :destroy]
   resources :displays, only: [:create, :update, :destroy]
+  resources :distributor_brands, only: [:create, :update, :destroy]
 
   resources :users, only: [:new, :create, :edit, :update, :destroy, :index]
   
   get    '/distributors' => 'distributors#edit', as: 'distributor'
   patch  '/distributors' => 'distributors#update'
+  patch  '/distributor_brands' => 'distributor_brands#update'
   
   get    '/brands' => 'brands#edit', as: 'brand'
   patch  '/brands' => 'brands#update'
-
-  get   '/profiles/new' => 'profiles#new', as: 'new_profile'
-  patch '/profiles/new' => 'profiles#update'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

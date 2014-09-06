@@ -3,6 +3,18 @@ class DistributorsController < ApplicationController
 	def edit
 
 		@distributor = @current_user.distributor
+		@current_brands = @distributor.distributor_brands.where(current: true) rescue nil
+		@past_brands = @distributor.distributor_brands.where(current: false) rescue nil
+		@new_brand = DistributorBrand.new
+
+		# set channel capacities to zero if not set (allows for user to leave field blank to set to zero)
+		@distributor.capacity_directly_operated_sites ||= 0
+		@distributor.capacity_department_stores ||= 0
+		@distributor.capacity_salons ||= 0
+		@distributor.capacity_specialty_retailers ||= 0
+		@distributor.capacity_home_shopping_networks ||= 0
+		@distributor.capacity_online_malls ||= 0
+		@distributor.capacity_social_commerce_sites ||= 0
 
 	end
 
@@ -10,26 +22,29 @@ class DistributorsController < ApplicationController
 
 		distributor = @current_user.distributor
 
-		# reset all booleans before update
-		# boolean_reset(distributor)
-
 		# set general fields
 		distributor.update(distributor_parameters)
 
 		# set other fields
 		# set year established
-		distributor.update(year_established: Date.new(params[:year_established].to_i))
+		if params[:year_established]
+			distributor.update(year_established: Date.new(params[:year_established].to_i))
+		end
 
 		# set sectors
 		assigned_sectors = Sector.find(params[:sectors].values) rescue []
-		distributor.sectors = [] # clear current ones before update
+		unless assigned_sectors.blank?
+			distributor.sectors = [] # clear current ones before update
+		end
 		assigned_sectors.each do |s|
 			distributor.sectors << s.shortcode
 		end
 
 		# set channels
 		assigned_channels = Channel.find(params[:channels].values) rescue []
-		distributor.channels = [] # clear current ones before update
+		unless assigned_channels.blank? 
+			distributor.channels = [] # clear current ones before update
+		end
 		assigned_channels.each do |s|
 			distributor.channels << s.shortcode
 		end
@@ -41,8 +56,10 @@ class DistributorsController < ApplicationController
 			distributor.planned_channels << s.shortcode
 		end
 
+
+
 		distributor.save!
-		redirect_to dashboard_url
+		redirect_to distributor_url
 
 	end
 
@@ -51,8 +68,16 @@ class DistributorsController < ApplicationController
     params.require(:distributor).permit(
 			:name,
 			:country_of_origin,
+			:website,
 			:current_lines,
 			:major_competitors,
+			:capacity_directly_operated_sites,
+			:capacity_department_stores,
+			:capacity_salons,
+			:capacity_specialty_retailers,
+			:capacity_home_shopping_networks,
+			:capacity_online_malls,
+			:capacity_social_commerce_sites,
 			:outside_sales,
 			:outside_sales_size,
 			:inside_sales,
@@ -93,6 +118,7 @@ class DistributorsController < ApplicationController
 			:key_competitors,
 			contact_info_attributes: [ 
 				:contact_name,
+				:contact_title,
 				:email,
 				:phone,
  				:address1,

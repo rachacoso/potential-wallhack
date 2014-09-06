@@ -9,7 +9,7 @@
 		<% profile_section.each do |s| %>
 			<tr>
 			<td><%= s.name %></td>
-			<td><%= s.shortcode %></td> 
+			<td><%= s.shortcode %></td>
 			<td><%= link_to 'delete', s, :method => :delete, data: { :confirm => "Are you sure you want to delete #{s.name}?"}%></td>
 			</tr>
 		<% end %>

@@ -15,6 +15,8 @@
 			stuff
 		</div>
 	</div>
+
+	<% if @current_user.distributor %>
 	<div class="small-8 columns">
 		<div class="ldpanel profile">
 
@@ -27,20 +29,16 @@
 				<div class="small-5 columns">
 					<%= @profile.year_established.strftime("est. %Y") %> <%= Country.where(shortcode: @profile.country_of_origin).first.name %> 
 					<small><br>
-					<% if @current_user.brand %>
-						<%= link_to 'Edit Brand Profile', brand_url %>
-					<% end %>
-					<% if @current_user.distributor %>
+
 						<%= link_to 'Edit Distributor Profile', distributor_url %>
-					<% end %>
+
 					</small>
 				</div>
 			</div>
 
 			<div class="inner">
 
-				
-
+						
 				<h4>Sectors</h4>
 				<% @profile.sectors.each do |s| %>
 					<%= Sector.where(shortcode: s).first.name %><br>
@@ -52,7 +50,7 @@
 				<% end %>
 
 				<h4>Current Lines</h4>
-				<%= simple_format(@profile.current_lines, {}, wrapper_tag: "div") %>
+				
 
 				<h4>Outside Sales</h4>
 				<% if @profile.outside_sales %>
@@ -129,5 +127,16 @@
 
 		</div>
 	</div>
+	<% end %>
+
+	<% if @current_user.brand %>
+	<div class="small-8 columns">
+		<div class="ldpanel profile">
+		Brand Profile Goes Here
+		</div>
+	</div>
+	<% end %>
+
+
 
 </div>

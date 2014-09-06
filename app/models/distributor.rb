@@ -6,7 +6,6 @@ class Distributor
   after_create :init_contact_info
 
 
-
  	#####################
 	### Profile
 	#####################
@@ -22,8 +21,17 @@ class Distributor
   field :channels, type: Array
 	
 
-	# Current Portfolio
-	field :current_lines, type: String
+	# Current/Past Portfolio
+	has_many :distributor_brands, dependent: :destroy
+
+	# Channel Capacity
+	field :capacity_directly_operated_sites, type: Integer
+	field :capacity_department_stores, type: Integer
+	field :capacity_salons, type: Integer
+	field :capacity_specialty_retailers, type: Integer
+	field :capacity_home_shopping_networks, type: Integer
+	field :capacity_online_malls, type: Integer
+	field :capacity_social_commerce_sites, type: Integer
 
 	# Sales/Education Capabilities
 	field :outside_sales, type: Boolean
@@ -81,6 +89,6 @@ class Distributor
 	def init_contact_info
 		self.create_contact_info
 	end
-	
+
 
 end

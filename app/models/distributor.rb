@@ -17,9 +17,9 @@ class Distributor
  	has_one :contact_info, as: :distributor_contact_info, dependent: :destroy
 	accepts_nested_attributes_for :contact_info
 
-  field :sectors, type: Array
-  field :channels, type: Array
-	
+  has_and_belongs_to_many :sectors, inverse_of: nil 
+	has_and_belongs_to_many :channels, inverse_of: nil 
+  
 
 	# Current/Past Portfolio
 	has_many :distributor_brands, dependent: :destroy

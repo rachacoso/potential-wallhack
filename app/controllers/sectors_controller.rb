@@ -3,7 +3,6 @@ class SectorsController < ApplicationController
 	def create
 		c = Sector.new
 		c.name = params[:sector][:name]
-		c.shortcode = params[:sector][:shortcode]
 
 		if c.valid?
 			c.save!

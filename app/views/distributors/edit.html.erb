@@ -108,8 +108,8 @@
 					<h3>Sectors</h3>
 						<% Sector.each do |sc| %>
 					    <div>
-					      <%= check_box_tag "sectors[#{sc.shortcode}]", sc.id, (@distributor.sectors.include? sc.shortcode rescue false) ? true : false %>
-					      <%= label_tag("sectors[#{sc.shortcode}]", sc.name) %>
+					      <%= check_box_tag "sectors[#{sc.id}]", sc.id, (@distributor.sectors.find(sc) rescue false) ? true : false %>
+					      <%= label_tag("sectors[#{sc.id}]", sc.name) %>
 					    </div>
 					  <% end %>
 					</div>
@@ -117,8 +117,8 @@
 						<h3>Channels</h3>
 						<% Channel.each do |ch| %>
 					    <div>
-					    	<%= check_box_tag "channels[#{ch.shortcode}]", ch.id, (@distributor.channels.include? ch.shortcode rescue false) ? true : false  %>
-					      <%= label_tag("channels[#{ch.shortcode}]", ch.name) %>
+					    	<%= check_box_tag "channels[#{ch.id}]", ch.id, (@distributor.channels.find(ch) rescue false) ? true : false  %>
+					      <%= label_tag("channels[#{ch.id}]", ch.name) %>
 					    </div>
 					  <% end %>
 					</div>

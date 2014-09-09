@@ -4,7 +4,6 @@ class ChannelsController < ApplicationController
 
 		newchannel = Channel.new
 		newchannel.name = params[:channel][:name]
-		newchannel.shortcode = params[:channel][:shortcode]
 
 		if newchannel.valid?
 			newchannel.save!

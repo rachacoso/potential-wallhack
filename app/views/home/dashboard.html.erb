@@ -41,12 +41,12 @@
 						
 				<h4>Sectors</h4>
 				<% @profile.sectors.each do |s| %>
-					<%= Sector.where(shortcode: s).first.name %><br>
+					<%= Sector.find(s).name %><br>
 				<% end %>
 
 				<h4>Channels</h4>
 				<% @profile.channels.each do |c| %>
-					<%= Channel.where(shortcode: c).first.name %><br>
+					<%= Channel.find(c).name %><br>
 				<% end %>
 
 				<h4>Current Lines</h4>

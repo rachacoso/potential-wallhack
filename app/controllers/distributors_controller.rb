@@ -44,7 +44,7 @@ class DistributorsController < ApplicationController
 			distributor.sectors = [] # clear current ones before update
 		end
 		assigned_sectors.each do |s|
-			distributor.sectors << s.shortcode
+			distributor.sectors << s
 		end
 
 		# set channels
@@ -53,7 +53,7 @@ class DistributorsController < ApplicationController
 			distributor.channels = [] # clear current ones before update
 		end
 		assigned_channels.each do |s|
-			distributor.channels << s.shortcode
+			distributor.channels << s
 		end
 
 

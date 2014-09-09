@@ -25,6 +25,7 @@
 //= require jquery.photoset-grid
 //= require jquery.colorbox
 //= require jscolor
+//= require foundation-datepicker
 
 //= require_tree .
 

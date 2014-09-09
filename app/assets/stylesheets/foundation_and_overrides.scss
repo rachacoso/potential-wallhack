@@ -536,6 +536,7 @@ $form-label-font-size: rem-calc(12);
 // $input-font-family: inherit;
 // $input-font-color: rgba(0,0,0,0.75);
 // $input-font-size: rem-calc(14);
+$input-font-size: rem-calc(12);
 // $input-bg-color: #fff;
 // $input-focus-bg-color: scale-color(#fff, $lightness: -2%);
 // $input-border-color: scale-color(#fff, $lightness: -20%);
@@ -545,7 +546,9 @@ $form-label-font-size: rem-calc(12);
 // $input-border-radius: $global-radius;
 // $input-disabled-bg: #ddd;
 // $input-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+$input-box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
 // $input-include-glowing-effect: true;
+$input-include-glowing-effect: false;
 
 // We use these to style the fieldset border and spacing.
 // $fieldset-border-style: solid;
@@ -1100,18 +1103,16 @@ $panel-padding: rem-calc(25);
 
 // These control the background color for the table and even rows
 // $table-bg: #fff;
-$table-bg: #F8E0B0;
 
 // $table-even-row-bg: #f9f9f9  ;
-$table-even-row-bg: darken(#F8E0B0, 5%);
 // These control the table cell border style
-// $table-border-style: solid;
+$table-border-style: none;
 // $table-border-size: 1px;
 // $table-border-color: #ddd;
 
 // These control the table head styles
 // $table-head-bg: #f5f5f5  ;
-$table-head-bg: darken(#F8E0B0, 20%);
+$table-head-bg: #fff  ;
 // $table-head-font-size: rem-calc(14);
 // $table-head-font-color: #222;
 // $table-head-font-weight: $font-weight-bold;

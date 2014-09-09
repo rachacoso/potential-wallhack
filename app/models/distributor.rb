@@ -50,30 +50,7 @@ class Distributor
 	field :marketing_via_classes, type: Boolean
 	field :customer_database_size, type: Integer
 
-	# Operational Capabilities
-	field :distributor_warehouse, type: Boolean
-	field :freight_forwarder, type: Boolean
-
-
-	## CONFIDENTIAL / NEGOTIATION ITEMS
-	# THIS SHOULD PROBABLY MOVE TO A MODEL FOR THE CONTRACT/NEGOTIATION ITEMS (IF THESE CHANGE PER NEGOTIATION)
-	field :regulatory_guidelines, type: String
-	field :contract_or_documentation_authentication, type: Boolean
-	field :contract_or_documentation_authentication_description, type: String
-	field :minimums, type: String
-	field :marketing_spend, type: String
-	field :key_competitors, type: String
-	field :planned_channels, type: Array 
-
-
-	# Channel Capacity
-	field :number_of_stores, type: Integer
-	field :number_of_department_stores, type: Integer
-	field :number_of_salons, type: Integer
-	field :number_of_beauty_retailers, type: Integer
-	field :number_of_home_shopping_networks, type: Integer
-	field :number_of_online_malls, type: Integer
-	field :number_of_social_commerce_sites, type: Integer 	
+	has_many :trade_shows
 
 	private 
 

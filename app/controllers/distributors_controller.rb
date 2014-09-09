@@ -5,7 +5,9 @@ class DistributorsController < ApplicationController
 		@distributor = @current_user.distributor
 		@current_brands = @distributor.distributor_brands.where(current: true) rescue nil
 		@past_brands = @distributor.distributor_brands.where(current: false) rescue nil
+		@trade_shows = @distributor.trade_shows rescue nil
 		@new_brand = DistributorBrand.new
+		@new_trade_show = TradeShow.new
 
 	end
 
@@ -53,14 +55,6 @@ class DistributorsController < ApplicationController
 		assigned_channels.each do |s|
 			distributor.channels << s.shortcode
 		end
-
-		# set planned channels EVENTUALLY MOVING TO NEGOTIATION/CONTRACT MODEL
-		planned_channels = Channel.find(params[:planned_channels].values) rescue []
-		distributor.planned_channels = [] # clear current ones before update
-		planned_channels.each do |s|
-			distributor.planned_channels << s.shortcode
-		end
-
 
 
 		distributor.save!

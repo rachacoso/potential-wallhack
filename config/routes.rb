@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :marketing_spends, only: [:create, :update, :destroy]
   resources :displays, only: [:create, :update, :destroy]
   resources :distributor_brands, only: [:create, :update, :destroy]
+  resources :trade_shows, only: [:create, :update, :destroy]
 
   resources :users, only: [:new, :create, :edit, :update, :destroy, :index]
   

@@ -238,17 +238,51 @@
 				<%= render partial: "numeric_field", locals: {f: f, field: :outside_sales_size, fieldlabel: 'Outside Sales Size' } %>
 				<%= render partial: "numeric_field", locals: {f: f, field: :inside_sales_size, fieldlabel: 'Inside Sales Size' } %>	
 
+				<%= f.submit 'Update' %>
+				<% end %>	
+
 				<div class="row">
 					<div class="medium-12 columns">
 						
-						shows participated in
-						<div class="tbd"> (TBD: Name and location of shows)</div>
+						<h3>Shows Participated In</h3>
+						<table>
+						<thead><tr><th>Show Name</th><th>Date</th><th>Country</th><th>Years Participated</th><th>Website</th><th colspan="2">&nbsp;</th></tr></thead>
+						<tbody>
+						<% if !@trade_shows.empty? %>
+							<% @trade_shows.each do |cb| %>
+							<tr>
+								<%= form_for cb do |f| %>
+								<td><%= f.text_field :name, label: false %></td>
+								<td><%= f.text_field :date, label: false, class: "datepick", :value => cb.date ? cb.date.strftime("%m/%Y") : '' %></td>
+								<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :shortcode, :name, cb.country ? cb.country : 'us' ), :prompt => 'Select Country', label: false %></td>
+								<td><%= f.text_field :years_participated, label: false %></td>
+								<td><%= f.text_field :website, label: false %></td>
+								<td>
+										<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+								</td>
+								<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.name}?"}%></td>
+								<% end %>
+							</tr>	
+							<% end %>
+						<% else %>
+							<tr><td colspan="4">No Trade Shows</td></tr>
+						<% end %>
+
+						<%= form_for @new_trade_show, :html => { :id => "new_trade_show" } do |f| %>
+								<tr>
+								<td><%= f.text_field :name, label: false, placeholder: 'Trade Show Name' %></td>
+								<td><%= f.text_field :date, label: false, placeholder: 'Date' , class: "datepick" %></td>
+								<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :id, :name ), :prompt => 'Select Country', label: false %></td>
+								<td><%= f.text_field :years_participated, label: false, placeholder: 'Years participated' %></td>
+								<td><%= f.text_field :website, label: false, placeholder: 'Website' %></td>
+								<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_trade_show').submit()".html_safe %></td>
+								</tr>
+						<% end %>
+						</tbody>
+						</table>
+						
 					</div>
-				</div>
-
-
-				<%= f.submit 'Update' %>
-				<% end %>	
+				</div>				
 
 <%= render partial: "panelbottom" %>
 

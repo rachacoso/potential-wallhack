@@ -23,6 +23,11 @@ class ChannelsController < ApplicationController
 
 	def update
 
+		c = Channel.find(params[:id])
+		c.name = params[:channel][:name]
+		c.save
+		redirect_to admin_url
+
 	end
 
 

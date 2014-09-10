@@ -20,7 +20,11 @@ class SectorsController < ApplicationController
 		
 	end
 
-	def show
+	def update
+		c = Sector.find(params[:id])
+		c.name = params[:sector][:name]
+		c.save
+		redirect_to admin_url
 
 	end
 

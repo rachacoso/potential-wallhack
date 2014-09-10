@@ -14,6 +14,6 @@ class ContactInfo
 
  	belongs_to :user_contact_info, polymorphic: true
  	belongs_to :distributor_contact_info, polymorphic: true
- 	
+ 	belongs_to :brand_contact_info, polymorphic: true
 
 end

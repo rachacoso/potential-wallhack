@@ -21,6 +21,12 @@ $( document ).ready(function() {
 		minViewMode: 2
 	});
 
+	$('.datepick_full').fdatepicker({
+		format: "dd/mm/yyyy",
+		startView: 2,
+		minViewMode: 2
+	});
+
 	// $('.datepick').fdatepicker({
 	// 	changeMonth: true,
 	// 	changeYear: true,

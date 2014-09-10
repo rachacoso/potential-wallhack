@@ -68,7 +68,7 @@ class UsersController < ApplicationController
 			
 			session[:user_id] = user.id.to_s
 			session[:expires_at] = Time.current + 24.hours
-			redirect_to new_profile_url
+			redirect_to dashboard_url
 
 		end
 

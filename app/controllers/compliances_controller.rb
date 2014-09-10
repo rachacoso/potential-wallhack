@@ -1,8 +1,8 @@
-class TradeShowsController < ApplicationController
+class CompliancesController < ApplicationController
 
 	def create
 		u = @current_user.distributor || @current_user.brand
-		u.trade_shows.create!(trade_show_parameters)
+		u.compliances.create!(compliance_parameters)
 		if @current_user.distributor
 			redirect_to distributor_url
 		else
@@ -13,18 +13,18 @@ class TradeShowsController < ApplicationController
 
 	def update
 		u = @current_user.distributor || @current_user.brand
-		u.trade_shows.find(params[:id]).update!(trade_show_parameters)
+		u.compliances.find(params[:id]).update!(compliance_parameters)
 		if @current_user.distributor
 			redirect_to distributor_url
 		else
 			redirect_to brand_url
-		end		
+		end
 
 	end
 
 	def destroy
 
-		d = TradeShow.find(params[:id])
+		d = Compliance.find(params[:id])
 		d.destroy
 		if @current_user.distributor
 			redirect_to distributor_url
@@ -32,18 +32,16 @@ class TradeShowsController < ApplicationController
 			redirect_to brand_url
 		end
 
-
 	end
 
 
   private
-  def trade_show_parameters
-    params.require(:trade_show).permit(
-			:name,
-			:date,
-			:country,
-			:years_participated,
-			:website
+  def compliance_parameters
+    params.require(:compliance).permit(
+			:product_or_category,
+			:compliance_description,
+			:country
 		)
 	end		
+
 end

@@ -110,7 +110,40 @@
 	<% if @current_user.brand %>
 	<div class="small-8 columns">
 		<div class="ldpanel profile">
-		Brand Profile Goes Here
+
+			<div class="row">
+				<div class="small-7 columns">
+					<span id="profile-name">
+							<%= @profile.company_name %> 
+					</span>
+				</div>
+				<div class="small-5 columns">
+					<%= @profile.year_established.strftime("est. %Y") rescue nil %> <%= Country.where(shortcode: @profile.country_of_origin).first.name rescue nil %> 
+					<small><br>
+
+						<%= link_to 'Edit Brand Profile', brand_url %>
+
+					</small>
+				</div>
+			</div>
+
+			<div class="inner">
+
+						
+				<h4>Sectors</h4>
+				<% @profile.sectors.each do |s| %>
+					<%= Sector.find(s).name %><br>
+				<% end %>
+
+				<h4>Channels</h4>
+				<% @profile.channels.each do |c| %>
+					<%= Channel.find(c).name %><br>
+				<% end %>
+
+				
+
+			</div>
+
 		</div>
 	</div>
 	<% end %>

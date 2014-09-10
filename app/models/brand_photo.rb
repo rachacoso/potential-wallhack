@@ -1,4 +1,4 @@
-class InlinePhoto
+class BrandPhoto
   include Mongoid::Document
 	include Mongoid::Paperclip
 
@@ -11,5 +11,6 @@ class InlinePhoto
 	  }
 	validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 
+	belongs_to :product
 
 end

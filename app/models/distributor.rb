@@ -2,7 +2,6 @@ class Distributor
   include Mongoid::Document
 
   belongs_to :user
-  
   after_create :init_contact_info
 
 
@@ -50,7 +49,8 @@ class Distributor
 	field :marketing_via_classes, type: Boolean
 	field :customer_database_size, type: Integer
 
-	has_many :trade_shows
+	has_many :trade_shows, dependent: :destroy
+	
 
 	private 
 

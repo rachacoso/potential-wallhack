@@ -3,9 +3,10 @@ class Product
 
  	field :name, type: String
  	field :description, type: String
- 	field :retail_price, type: String
- 	field :channels, type: String
- 	field :interntional_markets, type: String
+ 	field :msrp, type: String
+ 	field :key_benefits, type: String
+ 	field :country_of_manufacture, type: String
+ 	field :current, type: Boolean
 
  	belongs_to :brand
 

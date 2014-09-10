@@ -18,6 +18,11 @@ Rails.application.routes.draw do
   resources :displays, only: [:create, :update, :destroy]
   resources :distributor_brands, only: [:create, :update, :destroy]
   resources :trade_shows, only: [:create, :update, :destroy]
+  resources :press_hits, only: [:create, :update, :destroy]
+  resources :products, only: [:create, :update, :destroy]
+  resources :patents, only: [:create, :update, :destroy]
+  resources :trademarks, only: [:create, :update, :destroy]
+  resources :compliances, only: [:create, :update, :destroy]
 
   resources :users, only: [:new, :create, :edit, :update, :destroy, :index]
   

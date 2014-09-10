@@ -114,30 +114,5 @@ class DistributorsController < ApplicationController
   	)
   end
 
-  # def boolean_reset(distributor)
-  # 	reset_list = [
-  # 		:outside_sales,
-  # 		:inside_sales,
-  # 		:sell_via_website,
-  # 		:sell_via_online_mall,
-  # 		:sell_via_social,
-  # 		:internal_marketing,
-  # 		:employ_pr_agency,
-  # 		:marketing_via_print,
-  # 		:marketing_via_online,
-  # 		:marketing_via_email,
-  # 		:marketing_via_outdoor,
-  # 		:marketing_via_events,
-  # 		:marketing_via_direct_mail,
-  # 		:marketing_via_email,
-  # 		:maintain_customer_database,
-  # 		:distributor_warehouse,
-  # 		:freight_forwarder,
-  # 		:contract_or_documentation_authentication
-  # 	]
-  # 	reset_list.each do |i|
-		# 	distributor.send("#{i}=" , false)
-		# end
-  # end
 
 end

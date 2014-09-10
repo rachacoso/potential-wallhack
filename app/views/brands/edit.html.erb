@@ -1,0 +1,411 @@
+<div class="row">
+	<div class="small-12 columns">
+		<div class="ldpanel">
+		
+			<div class="row">
+				<div class="small-6 columns">
+					<h5>Edit Brand Profile</h5>
+				</div>
+				<div class="small-6 columns text-right">
+						Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %> | <%= link_to 'Dashboard', dashboard_url %> | <%= link_to 'logout', logout_url %>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+<%= render partial: "shared/paneltop" %>
+		<%= form_for @brand, url: brand_url do |f| %>
+		<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Brand Name" %>
+		<%= f.submit 'Update' %>
+		<% end %>
+<%= render partial: "shared/panelbottom" %>
+
+
+<%= render partial: "shared/paneltop" %>
+		
+
+				<h3>Company Info</h3>
+				<%= form_for @brand, url: brand_url do |f| %>
+				<div class="row">
+					<div class="medium-6 columns">
+						<%= f.select :country_of_origin, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :shortcode, :name, @brand.country_of_origin ? @brand.country_of_origin : ''), :prompt => 'Select Country' %>
+					</div>
+					<div class="medium-6 columns">				
+						<%= label_tag(:year_established, "Year established:") %>
+						<%= select_tag :year_established, options_for_select(1970..Time.now.year, @brand.year_established ? @brand.year_established.strftime("%Y") : '') %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<%= f.text_field :website %>
+					</div>
+				</div>
+				<%= f.fields_for :contact_info do |ff| %>
+					<div class="row">
+						<div class="medium-12 columns">
+							<%= ff.text_field :contact_name %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-12 columns">
+							<%= ff.text_field :contact_title %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-6 columns">
+							<%= ff.text_field :email %>
+						</div>
+						<div class="medium-6 columns">
+							<%= ff.text_field :phone %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-12 columns">
+							<%= ff.text_field :address1, label: "Address" %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-12 columns">
+							<%= ff.text_field :address2, label: "Address (cont'd)" %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-4 columns">
+							<%= ff.text_field :city %>
+						</div>
+						<div class="medium-4 columns">
+							<%= ff.text_field :state %>
+						</div>
+						<div class="medium-4 columns">
+							<%= ff.text_field :postcode %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-6 columns">
+							<%= ff.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :shortcode, :name, @brand.contact_info.country ? 'us' : @brand.contact_info.country ), :prompt => 'Select Country' %>
+						</div>
+					</div>
+				<% end %>
+
+				<%= f.submit 'Update' %>
+
+				<% end %>
+
+<%= render partial: "shared/panelbottom" %>
+
+
+
+<%= render partial: "shared/paneltop" %>
+
+				<div class="row">
+					<%= form_for @brand, url: brand_url do |f| %>
+					<div class="medium-6 columns">
+					<%= f.hidden_field :company_name %>		
+					<h3>Sectors</h3>
+						<% Sector.each do |sc| %>
+					    <div>
+					      <%= check_box_tag "sectors[#{sc.id}]", sc.id, (@brand.sectors.find(sc) rescue false) ? true : false %>
+					      <%= label_tag("sectors[#{sc.id}]", sc.name) %>
+					    </div>
+					  <% end %>
+					</div>
+					<div class="medium-6 columns">						
+						<h3>Channels</h3>
+						<% Channel.each do |ch| %>
+					    <div>
+					    	<%= check_box_tag "channels[#{ch.id}]", ch.id, (@brand.channels.find(ch) rescue false) ? true : false  %>
+					      <%= label_tag("channels[#{ch.id}]", ch.name) %>
+					    </div>
+					  <% end %>
+					</div>
+				</div>
+				<%= f.submit 'Update' %>
+				<% end %>
+			
+<%= render partial: "shared/panelbottom" %>
+
+
+
+<%= render partial: "shared/paneltop" %>
+
+	<h3>Current SKU List</h3>
+	<table>
+	<thead><tr><th>Product</th><th>Description</th><th>MSRP</th><th>Key Benefits</th><th>Country of Manufacture</th><th colspan="2">&nbsp;</th></tr></thead>
+	<tbody>
+	<% unless @current_products.nil? || @current_products.empty?   %>
+		<% @current_products.each do |cb| %>
+		<tr>
+			<%= form_for cb do |f| %>
+			<td><%= f.text_field :name, label: false, placeholder: 'Name' %></td>
+			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
+			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
+			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
+			<td><%= f.text_field :country_of_manufacture, label: false, placeholder: 'Country of Manufacture'  %></td>
+			<td>
+			<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+			</td>
+			<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.name}?"}%></td>
+			<% end %>
+		</tr>	
+		<% end %>
+	<% else %>
+		<tr><td colspan="7">No Current Products</td></tr>
+	<% end %>
+
+
+	<%= form_for @new_product, :html => { :id => "new_current_product" } do |f| %>
+	<%= f.hidden_field :current, value: true %>
+
+			<tr>
+			<td><%= f.text_field :name, label: false, placeholder: 'Name' %></td>
+			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
+			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
+			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
+			<td><%= f.text_field :country_of_manufacture, label: false, placeholder: 'Country of Manufacture'  %></td>
+			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_current_product').submit()".html_safe %></td>
+			</tr>
+
+	<% end %>
+	</tbody>
+	</table>
+
+	<h3>Upcoming SKU List</h3>
+	<table>
+	<thead><tr><th>Product</th><th>Description</th><th>MSRP</th><th>Key Benefits</th><th>Country of Manufacture</th><th colspan="2">&nbsp;</th></tr></thead>
+	<tbody>
+	<% unless @upcoming_products.nil? || @upcoming_products.empty?  %>
+		<% @upcoming_products.each do |cb| %>
+		<tr>
+			<%= form_for cb do |f| %>
+			<td><%= f.text_field :name, label: false, placeholder: 'Name' %></td>
+			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
+			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
+			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
+			<td><%= f.text_field :country_of_manufacture, label: false, placeholder: 'Country of Manufacture'  %></td>
+			<td>
+			<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+			</td>
+			<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.name}?"}%></td>
+			<% end %>
+		</tr>	
+		<% end %>
+	<% else %>
+		<tr><td colspan="7">No Upcoming Products</td></tr>
+	<% end %>
+
+
+	<%= form_for @new_product, :html => { :id => "new_future_product" } do |f| %>
+	<%= f.hidden_field :current, value: false %>
+
+			<tr>
+			<td><%= f.text_field :name, label: false, placeholder: 'Name' %></td>
+			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
+			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
+			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
+			<td><%= f.text_field :country_of_manufacture, label: false, placeholder: 'Country of Manufacture'  %></td>
+			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_future_product').submit()".html_safe %></td>
+			</tr>
+
+	<% end %>
+	</tbody>
+	</table>	
+
+<%= render partial: "shared/panelbottom" %>
+
+
+<%= render partial: "shared/paneltop" %>
+
+	<h3>Marketing Activities</h3>
+
+	<%= form_for @brand, url: brand_url do |f| %>
+	<%= f.text_area :brand_positioning, label: false, placeholder: 'Brand Positioning' %>
+	<%= f.submit 'Update' %>
+	<% end %>
+
+
+	<h3>Notable Press Hits</h3>
+	<table>
+	<thead><tr><th>Source</th><th>Date</th><th>Quotes</th><th>Link</th><th>Image</th><th colspan="2">&nbsp;</th></tr></thead>
+	<tbody>
+	<% unless @press_hits.nil? || @press_hits.empty?  %>
+		<% @press_hits.each do |cb| %>
+		<tr>
+			<%= form_for cb do |f| %>
+			<td><%= f.text_field :source, label: false, placeholder: 'Source' %></td>
+			<td><%= f.text_field :date, label: false, placeholder: 'Date' , class: "datepick_full" %></td>
+			<td><%= f.text_area :quotes, label: false, placeholder: 'Quotes' %></td>
+			<td><%= f.text_field :link, label: false, placeholder: 'Link' %></td>
+			<td> upload here </td>
+			<td>
+					<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+			</td>
+			<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.source}?"}%></td>
+			<% end %>
+		</tr>	
+		<% end %>
+	<% else %>
+		<tr><td colspan="4">No Press Hits</td></tr>
+	<% end %>
+
+	<%= form_for @new_press_hit, :html => { :id => "new_press_hit" } do |f| %>
+			<tr>
+			<td><%= f.text_field :source, label: false, placeholder: 'Source' %></td>
+			<td><%= f.text_field :date, label: false, placeholder: 'Date' , class: "datepick_full" %></td>
+			<td><%= f.text_area :quotes, label: false, placeholder: 'Quotes' %></td>
+			<td><%= f.text_field :link, label: false, placeholder: 'Link' %></td>
+			<td> upload here </td>
+			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_press_hit').submit()".html_safe %></td>
+			</tr>
+	<% end %>
+	</tbody>
+	</table>
+						
+	<h3>Shows Participated In</h3>
+	<table>
+	<thead><tr><th>Show Name</th><th>Date</th><th>Country</th><th>Years Participated</th><th>Website</th><th colspan="2">&nbsp;</th></tr></thead>
+	<tbody>
+	<% unless @trade_shows.nil? || @trade_shows.empty?  %>
+		<% @trade_shows.each do |cb| %>
+		<tr>
+			<%= form_for cb do |f| %>
+			<td><%= f.text_field :name, label: false %></td>
+			<td><%= f.text_field :date, label: false, class: "datepick", :value => cb.date ? cb.date.strftime("%m/%Y") : '' %></td>
+			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :shortcode, :name, cb.country ), :prompt => 'Select Country', label: false %></td>
+			<td><%= f.text_field :years_participated, label: false %></td>
+			<td><%= f.text_field :website, label: false %></td>
+			<td>
+					<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+			</td>
+			<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.name}?"}%></td>
+			<% end %>
+		</tr>	
+		<% end %>
+	<% else %>
+		<tr><td colspan="4">No Trade Shows</td></tr>
+	<% end %>
+
+	<%= form_for @new_trade_show, :html => { :id => "new_trade_show" } do |f| %>
+			<tr>
+			<td><%= f.text_field :name, label: false, placeholder: 'Trade Show Name' %></td>
+			<td><%= f.text_field :date, label: false, placeholder: 'Date' , class: "datepick" %></td>
+			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :id, :name ), :prompt => 'Select Country', label: false %></td>
+			<td><%= f.text_field :years_participated, label: false, placeholder: 'Years participated' %></td>
+			<td><%= f.text_field :website, label: false, placeholder: 'Website' %></td>
+			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_trade_show').submit()".html_safe %></td>
+			</tr>
+	<% end %>
+	</tbody>
+	</table>
+
+
+<%= render partial: "shared/panelbottom" %>
+
+
+<%= render partial: "shared/paneltop" %>
+
+	<h3>Patents</h3>
+	<table>
+	<thead><tr><th>Product</th><th>Patent Description</th><th>Country</th><th colspan="2">&nbsp;</th></tr></thead>
+	<tbody>
+	<% unless @patents.nil? || @patents.empty?  %>
+		<% @patents.each do |cb| %>
+		<tr>
+			<%= form_for cb do |f| %>
+			<td><%= f.text_field :product, label: false, placeholder: 'Product' %></td>
+			<td><%= f.text_area :patent_description, label: false, placeholder: 'Patent Description'%></td>
+			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :id, :name, cb.country ), :prompt => 'Select Country', label: false %></td>
+			<td>
+					<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+			</td>
+			<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.product}?"}%></td>
+			<% end %>
+		</tr>	
+		<% end %>
+	<% else %>
+		<tr><td colspan="4">No Patents</td></tr>
+	<% end %>
+
+	<%= form_for @new_patent, :html => { :id => "new_patent" } do |f| %>
+			<tr>
+			<td><%= f.text_field :product, label: false, placeholder: 'Product' %></td>
+			<td><%= f.text_area :patent_description, label: false, placeholder: 'Trademark Description'%></td>
+			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :id, :name ), :prompt => 'Select Country', label: false %></td>
+			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_patent').submit()".html_safe %></td>
+			</tr>
+	<% end %>
+	</tbody>
+	</table>
+
+	<h3>Trademarks</h3>
+	<table>
+	<thead><tr><th>Product</th><th>Trademark Description</th><th>Country</th><th colspan="2">&nbsp;</th></tr></thead>
+	<tbody>
+	<% unless @trademarks.nil? || @trademarks.empty? %>
+		<% @trademarks.each do |cb| %>
+		<tr>
+			<%= form_for cb do |f| %>
+			<td><%= f.text_field :product, label: false, placeholder: 'Product' %></td>
+			<td><%= f.text_area :trademark_description, label: false, placeholder: 'Trademark Description'%></td>
+			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :id, :name, cb.country ), :prompt => 'Select Country', label: false %></td>
+			<td>
+					<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+			</td>
+			<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.product}?"}%></td>
+			<% end %>
+		</tr>	
+		<% end %>
+	<% else %>
+		<tr><td colspan="4">No Trademarks</td></tr>
+	<% end %>
+
+	<%= form_for @new_trademark, :html => { :id => "new_trademark" } do |f| %>
+			<tr>
+			<td><%= f.text_field :product, label: false, placeholder: 'Product' %></td>
+			<td><%= f.text_area :trademark_description, label: false, placeholder: 'Trademark Description'%></td>
+			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :id, :name ), :prompt => 'Select Country', label: false %></td>
+			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_trademark').submit()".html_safe %></td>
+			</tr>
+	<% end %>
+	</tbody>
+	</table>
+
+	<h3>Certifications / Regulatory Compliance </h3>
+	<table>
+	<thead><tr><th>Product or Category</th><th>Certification/Compliance Description</th><th>Country</th><th colspan="2">&nbsp;</th></tr></thead>
+	<tbody>
+	<% unless @compliances.nil? || @compliances.empty?  %>
+		<% @compliances.each do |cb| %>
+		<tr>
+			<%= form_for cb do |f| %>
+			<td><%= f.text_field :product_or_category, label: false, placeholder: 'Product / Category' %></td>
+			<td><%= f.text_area :compliance_description, label: false, placeholder: 'Certification/Compliance Description'%></td>
+			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :id, :name, cb.country ), :prompt => 'Select Country', label: false %></td>
+			<td>
+					<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+			</td>
+			<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.product_or_category}?"}%></td>
+			<% end %>
+		</tr>	
+		<% end %>
+	<% else %>
+		<tr><td colspan="4">No Compliance</td></tr>
+	<% end %>
+
+	<%= form_for @new_compliance, :html => { :id => "new_compliance" } do |f| %>
+			<tr>
+			<td><%= f.text_field :product_or_category, label: false, placeholder: 'Product / Category' %></td>
+			<td><%= f.text_area :compliance_description, label: false, placeholder: 'Certification/Compliance Description'%></td>
+			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :id, :name ), :prompt => 'Select Country', label: false %></td>
+			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_compliance').submit()".html_safe %></td>
+			</tr>
+	<% end %>
+	</tbody>
+	</table>
+
+<%= render partial: "shared/panelbottom" %>
+
+

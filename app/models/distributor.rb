@@ -24,6 +24,9 @@ class Distributor
 	has_many :distributor_brands, dependent: :destroy
 
 	# Channel Capacity
+	
+	has_many :channel_capacities, dependent: :destroy
+
 	field :capacity_directly_operated_sites, type: Integer
 	field :capacity_department_stores, type: Integer
 	field :capacity_salons, type: Integer

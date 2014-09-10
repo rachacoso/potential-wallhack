@@ -221,7 +221,42 @@
 
 <%= render partial: "shared/paneltop" %>
 
-				<h3>Channel Capacity</h3>
+				<h3>Channel Capacity NEW</h3>
+
+					<table>
+					<thead><tr><th>Channel</th><th>Capacity</th><th colspan="2">&nbsp;</th></tr></thead>
+					<tbody>
+					<% unless @channel_capacities.nil? || @channel_capacities.empty?  %>
+						<% @channel_capacities.each do |cb| %>
+						<% channel_name = Channel.find(cb.channel_id).name %>
+						<tr>
+							<%= form_for cb do |f| %>
+							<td><%= channel_name %></td>
+							<td><%= f.text_field :capacity, label: false, placeholder: 'Capacity' %></td>
+							<td>
+									<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+							</td>
+							<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{channel_name}?"}%></td>
+							<% end %>
+						</tr>	
+						<% end %>
+					<% else %>
+						<tr><td colspan="4">No Channels</td></tr>
+					<% end %>
+
+					<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" } do |f| %>
+							<tr>
+							<td><%#= f.select :channel_id, options_from_collection_for_select(Channel.all.sort_by {|m| m.name.downcase}, :id, :name ), :prompt => 'Select Channel', label: false %>
+								<%= f.select :channel_id, options_from_collection_for_select(Channel.find(@distributor.channels.pluck(:id)).sort_by {|m| m.name.downcase}, :id, :name ), :prompt => 'Select Channel', label: false %></td>
+							<td><%= f.text_field :capacity, label: false, placeholder: 'Capacity' %></td>
+							<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe %></td>
+							</tr>
+					<% end %>
+					</tbody>
+					</table>
+
+
+				<h3>Channel Capacity OLD</h3>
 
 				<%= form_for @distributor, url: distributor_url do |f| %>
 				<%= render partial: "shared/numeric_field", locals: {f: f, field: :capacity_directly_operated_sites, fieldlabel: 'Directly Operated Sites or Stores' } %>

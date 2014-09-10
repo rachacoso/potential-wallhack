@@ -9,6 +9,9 @@ class DistributorsController < ApplicationController
 		@new_brand = DistributorBrand.new
 		@new_trade_show = TradeShow.new
 
+		@channel_capacities = @distributor.channel_capacities
+		@new_channel_capacity = ChannelCapacity.new
+
 	end
 
 	def update

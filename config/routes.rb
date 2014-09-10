@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :countries, only: [:create, :update, :destroy]
   resources :sales_sizes, only: [:create, :update, :destroy]
   resources :marketing_spends, only: [:create, :update, :destroy]
+  resources :channel_capacities, only: [:create, :update, :destroy]
   resources :displays, only: [:create, :update, :destroy]
   resources :distributor_brands, only: [:create, :update, :destroy]
   resources :trade_shows, only: [:create, :update, :destroy]

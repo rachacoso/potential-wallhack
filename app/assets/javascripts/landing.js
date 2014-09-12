@@ -4,6 +4,8 @@ var bgDefaultColor = "#D1E0ff";
 
 $( document ).ready(function() {
 
+// for autocomplete
+var countriesArray = $.map(countries, function (value, key) { return { value: value, data: key }; });
 
 // Background Img
 	if (hasBG) {
@@ -27,15 +29,41 @@ $( document ).ready(function() {
 		minViewMode: 2
 	});
 
-	// $('.datepick').fdatepicker({
-	// 	changeMonth: true,
-	// 	changeYear: true,
-	// 	showButtonPanel: true,
-	// 	dateFormat: 'MM yy',
-	// 	onClose: function(dateText, inst) { 
-	// 		var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-	// 		var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-	// 		$(this).datepicker('setDate', new Date(year, month, 1));
-	// 	}
-	// });
+
+	// Autocomplete 
+
+	$('.country-autocomplete').focus(function() {
+	   $(this).val('');
+	});
+
+	$('.country-autocomplete').devbridgeAutocomplete({
+		lookup: countriesArray,
+		minChars: 0,
+		// delimiter: ',',
+		// onSelect: function (suggestion) {
+		//     // $('#selection').html('You selected: ' + suggestion.value + ', ' + suggestion.data);
+		//     $('#<%=id_name%>_selected').val(suggestion.data);
+		// },
+		showNoSuggestionNotice: true,
+		noSuggestionNotice: 'Sorry, no matching results',
+		tabDisabled: true
+	});
+
+	$('.country-autocomplete-multi').devbridgeAutocomplete({
+		lookup: countriesArray,
+		minChars: 0,
+		delimiter: ', ',
+		// onSelect: function (suggestion) {
+		//     // $('#selection').html('You selected: ' + suggestion.value + ', ' + suggestion.data);
+		//     $('#<%=id_name%>_selected').val(suggestion.data);
+		// },
+		showNoSuggestionNotice: true,
+		noSuggestionNotice: 'Sorry, no matching results',
+		tabDisabled: true
+	});
+
 });
+
+
+
+

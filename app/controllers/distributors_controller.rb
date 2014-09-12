@@ -23,19 +23,6 @@ class DistributorsController < ApplicationController
 
 		# set other fields
 
-		# set numeric fields to zero if left unset
-		distributor.capacity_directly_operated_sites ||= 0
-		distributor.capacity_department_stores ||= 0
-		distributor.capacity_salons ||= 0
-		distributor.capacity_specialty_retailers ||= 0
-		distributor.capacity_home_shopping_networks ||= 0
-		distributor.capacity_online_malls ||= 0
-		distributor.capacity_social_commerce_sites ||= 0
-		distributor.outside_sales_size ||= 0
-		distributor.inside_sales_size ||= 0
-		distributor.internal_marketing_size ||= 0
-		distributor.customer_database_size ||= 0
-
 		# set year established
 		if params[:year_established]
 			distributor.update(year_established: Date.new(params[:year_established].to_i))

@@ -27,7 +27,7 @@
 					</span>
 				</div>
 				<div class="small-5 columns">
-					<%= @profile.year_established.strftime("est. %Y") %> <%= Country.where(shortcode: @profile.country_of_origin).first.name %> 
+					<%= @profile.year_established.strftime("est. %Y") %> <%= @profile.country_of_origin %> 
 					<small><br>
 
 						<%= link_to 'Edit Distributor Profile', distributor_url %>

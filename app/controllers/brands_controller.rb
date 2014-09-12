@@ -22,6 +22,12 @@ class BrandsController < ApplicationController
 		@compliances = @brand.compliances rescue nil
 		@new_compliance = Compliance.new
 
+		@channel_capacities = @brand.channel_capacities
+		@new_channel_capacity = ChannelCapacity.new
+
+		@export_countries = @brand.export_countries
+		@new_export_country = ExportCountry.new				
+
 	end
 
 
@@ -33,19 +39,6 @@ class BrandsController < ApplicationController
 		brand.update(brand_parameters)
 
 		# set other fields
-
-		# set numeric fields to zero if left unset
-		# brand.capacity_directly_operated_sites ||= 0
-		# brand.capacity_department_stores ||= 0
-		# brand.capacity_salons ||= 0
-		# brand.capacity_specialty_retailers ||= 0
-		# brand.capacity_home_shopping_networks ||= 0
-		# brand.capacity_online_malls ||= 0
-		# brand.capacity_social_commerce_sites ||= 0
-		# brand.outside_sales_size ||= 0
-		# brand.inside_sales_size ||= 0
-		# brand.internal_marketing_size ||= 0
-		# brand.customer_database_size ||= 0
 
 		# set year established
 		if params[:year_established]
@@ -79,40 +72,12 @@ class BrandsController < ApplicationController
   private
   def brand_parameters
     params.require(:brand).permit(
-			:name,
+			:company_name,
+			:brand_names,
 			:country_of_origin,
+			:year_established,
 			:website,
-			:current_lines,
-			:major_competitors,
-			:capacity_directly_operated_sites,
-			:capacity_department_stores,
-			:capacity_salons,
-			:capacity_specialty_retailers,
-			:capacity_home_shopping_networks,
-			:capacity_online_malls,
-			:capacity_social_commerce_sites,
-			:outside_sales_size,
-			:inside_sales_size,
-			:sales_manager_name,
-			:sales_manager_email,
-			:education_manager_name,
-			:education_manager_email,
-			:education_provided_to,
-			:sell_via_website,
-			:sell_via_online_mall,
-			:sell_via_social,
-			:internal_marketing,
-			:internal_marketing_size,
-			:employ_pr_agency,
-			:marketing_via_print,
-			:marketing_via_online,
-			:marketing_via_email,
-			:marketing_via_outdoor,
-			:marketing_via_events,
-			:marketing_via_direct_mail,
-			:marketing_via_email,
-			:marketing_via_classes,
-			:customer_database_size,
+			:countries_where_exported,
 			contact_info_attributes: [ 
 				:contact_name,
 				:contact_title,

@@ -4,7 +4,6 @@ class Brand
  	belongs_to :user
 	after_create :init_contact_info
 
-
   #####################
 	### Profile
 	#####################
@@ -27,12 +26,20 @@ class Brand
 
 	# Marketing Acivities
 	field :brand_positioning, type: String
-
 	has_many :press_hits, dependent: :destroy
 	has_many :trade_shows, dependent: :destroy
 
+	# Channel Capacity
+	has_many :channel_capacities, dependent: :destroy
+
 	has_many :patents, dependent: :destroy
+	has_many :trademarks, dependent: :destroy
 	has_many :compliances, dependent: :destroy
+
+	# Countries Where Exported
+	# field :countries_where_exported, type: String
+	has_many :export_countries
+
 
 	private 
 

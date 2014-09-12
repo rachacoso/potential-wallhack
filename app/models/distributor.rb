@@ -27,13 +27,6 @@ class Distributor
 	
 	has_many :channel_capacities, dependent: :destroy
 
-	field :capacity_directly_operated_sites, type: Integer
-	field :capacity_department_stores, type: Integer
-	field :capacity_salons, type: Integer
-	field :capacity_specialty_retailers, type: Integer
-	field :capacity_home_shopping_networks, type: Integer
-	field :capacity_online_malls, type: Integer
-	field :capacity_social_commerce_sites, type: Integer
 
 	# Sales/Education Capabilities
 	field :outside_sales_size, type: Integer

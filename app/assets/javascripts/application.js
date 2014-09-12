@@ -26,6 +26,8 @@
 //= require jquery.colorbox
 //= require jscolor
 //= require foundation-datepicker
+//= require jquery.autocomplete
+//= require countries
 
 //= require_tree .
 

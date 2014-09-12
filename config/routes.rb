@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :patents, only: [:create, :update, :destroy]
   resources :trademarks, only: [:create, :update, :destroy]
   resources :compliances, only: [:create, :update, :destroy]
+  resources :export_countries, only: [:create, :update, :destroy]
 
   resources :users, only: [:new, :create, :edit, :update, :destroy, :index]
   

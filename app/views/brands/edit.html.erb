@@ -20,6 +20,7 @@
 <%= render partial: "shared/paneltop" %>
 		<%= form_for @brand, url: brand_url do |f| %>
 		<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Brand Name" %>
+
 		<%= f.submit 'Update' %>
 		<% end %>
 <%= render partial: "shared/panelbottom" %>
@@ -32,7 +33,7 @@
 				<%= form_for @brand, url: brand_url do |f| %>
 				<div class="row">
 					<div class="medium-6 columns">
-						<%= f.select :country_of_origin, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :shortcode, :name, @brand.country_of_origin ? @brand.country_of_origin : ''), :prompt => 'Select Country' %>
+					<%= f.text_field :country_of_origin, class: "country-autocomplete", placeholder: "Country" %>
 					</div>
 					<div class="medium-6 columns">				
 						<%= label_tag(:year_established, "Year established:") %>
@@ -86,7 +87,7 @@
 					</div>
 					<div class="row">
 						<div class="medium-6 columns">
-							<%= ff.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :shortcode, :name, @brand.contact_info.country ? 'us' : @brand.contact_info.country ), :prompt => 'Select Country' %>
+							<%= ff.text_field :country, class: "country-autocomplete", placeholder: "Country" %>
 						</div>
 					</div>
 				<% end %>
@@ -144,7 +145,7 @@
 			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
 			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
 			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
-			<td><%= f.text_field :country_of_manufacture, label: false, placeholder: 'Country of Manufacture'  %></td>
+			<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: false, placeholder: 'Country of Manufacture'  %></td>
 			<td>
 			<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
 			</td>
@@ -165,7 +166,7 @@
 			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
 			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
 			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
-			<td><%= f.text_field :country_of_manufacture, label: false, placeholder: 'Country of Manufacture'  %></td>
+			<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: false, placeholder: 'Country of Manufacture'  %></td>
 			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_current_product').submit()".html_safe %></td>
 			</tr>
 
@@ -185,7 +186,7 @@
 			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
 			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
 			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
-			<td><%= f.text_field :country_of_manufacture, label: false, placeholder: 'Country of Manufacture'  %></td>
+			<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: false, placeholder: 'Country of Manufacture'  %></td>
 			<td>
 			<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
 			</td>
@@ -206,7 +207,7 @@
 			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
 			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
 			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
-			<td><%= f.text_field :country_of_manufacture, label: false, placeholder: 'Country of Manufacture'  %></td>
+			<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: false, placeholder: 'Country of Manufacture'  %></td>
 			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_future_product').submit()".html_safe %></td>
 			</tr>
 
@@ -272,11 +273,11 @@
 		<% @trade_shows.each do |cb| %>
 		<tr>
 			<%= form_for cb do |f| %>
-			<td><%= f.text_field :name, label: false %></td>
-			<td><%= f.text_field :date, label: false, class: "datepick", :value => cb.date ? cb.date.strftime("%m/%Y") : '' %></td>
-			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :shortcode, :name, cb.country ), :prompt => 'Select Country', label: false %></td>
-			<td><%= f.text_field :years_participated, label: false %></td>
-			<td><%= f.text_field :website, label: false %></td>
+			<td><%= f.text_field :name, label: false, placeholder: 'Trade Show Name'  %></td>
+			<td><%= f.text_field :date, label: false, class: "datepick", :value => cb.date ? cb.date.strftime("%m/%Y") : '', placeholder: 'Date' %></td>
+			<td><%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %></td>
+			<td><%= f.text_field :years_participated, label: false, placeholder: 'Number of years participated'  %></td>
+			<td><%= f.text_field :website, label: false, placeholder: 'Website'  %></td>
 			<td>
 					<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
 			</td>
@@ -292,7 +293,7 @@
 			<tr>
 			<td><%= f.text_field :name, label: false, placeholder: 'Trade Show Name' %></td>
 			<td><%= f.text_field :date, label: false, placeholder: 'Date' , class: "datepick" %></td>
-			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :id, :name ), :prompt => 'Select Country', label: false %></td>
+			<td><%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %></td>
 			<td><%= f.text_field :years_participated, label: false, placeholder: 'Years participated' %></td>
 			<td><%= f.text_field :website, label: false, placeholder: 'Website' %></td>
 			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_trade_show').submit()".html_safe %></td>
@@ -304,6 +305,83 @@
 
 <%= render partial: "shared/panelbottom" %>
 
+<%= render partial: "shared/paneltop" %>
+
+				<h3>Channels Sold</h3>
+
+					<table>
+					<thead><tr><th>Channel</th><th>Capacity</th><th colspan="2">&nbsp;</th></tr></thead>
+					<tbody>
+					<% unless @channel_capacities.nil? || @channel_capacities.empty?  %>
+						<% @channel_capacities.each do |cb| %>
+						<% channel_name = Channel.find(cb.channel_id).name %>
+						<tr>
+							<%= form_for cb do |f| %>
+							<td><%= channel_name %></td>
+							<td><%= f.text_field :capacity, label: false, placeholder: 'Capacity' %></td>
+							<td>
+									<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+							</td>
+							<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{channel_name}?"}%></td>
+							<% end %>
+						</tr>	
+						<% end %>
+					<% else %>
+						<tr><td colspan="4">No Channels</td></tr>
+					<% end %>
+
+					<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" } do |f| %>
+					<% channels = @brand.channels.pluck(:id) %>
+					<% capacities = @brand.channel_capacities.pluck(:channel_id).map {|b| BSON::ObjectId.from_string(b)} %>
+					<% channel_set = channels - capacities %>
+						<% unless channel_set.empty? %>					
+							<tr>
+							<td>
+								<%= f.select :channel_id, options_from_collection_for_select(Channel.find(channel_set).sort_by {|m| m.name.downcase}, :id, :name ), label: false %>
+							</td>
+							<td>
+								<%= f.text_field :capacity, label: false, placeholder: 'Capacity' %>
+							</td>
+							<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe %></td>
+							</tr>
+						<% end %>
+					<% end %>
+					</tbody>
+					</table>
+
+
+				<h3>Countries where exported</h3>
+
+					<table>
+					<thead><tr><th>Country</th><th>&nbsp;</th></tr></thead>
+					<tbody>
+					<% unless @export_countries.nil? || @export_countries.empty?  %>
+						<% @export_countries.each do |cb| %>
+						<tr>
+							<%= form_for cb do |f| %>
+							<td><%= cb.country %></td>
+							<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.country}?"}%></td>
+							<% end %>
+						</tr>	
+						<% end %>
+					<% else %>
+						<tr><td colspan="4">No Countries</td></tr>
+					<% end %>
+
+					<%= form_for @new_export_country, :html => { :id => "new_export_country" } do |f| %>
+			
+							<tr>
+							<td>
+								<%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %>
+							</td>
+							<td><%= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %></td>
+							</tr>
+
+					<% end %>
+					</tbody>
+					</table>
+
+<%= render partial: "shared/panelbottom" %>
 
 <%= render partial: "shared/paneltop" %>
 
@@ -317,7 +395,9 @@
 			<%= form_for cb do |f| %>
 			<td><%= f.text_field :product, label: false, placeholder: 'Product' %></td>
 			<td><%= f.text_area :patent_description, label: false, placeholder: 'Patent Description'%></td>
-			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :id, :name, cb.country ), :prompt => 'Select Country', label: false %></td>
+			<td>
+				<%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %>
+			</td>
 			<td>
 					<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
 			</td>
@@ -333,7 +413,7 @@
 			<tr>
 			<td><%= f.text_field :product, label: false, placeholder: 'Product' %></td>
 			<td><%= f.text_area :patent_description, label: false, placeholder: 'Trademark Description'%></td>
-			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :id, :name ), :prompt => 'Select Country', label: false %></td>
+			<td><%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %></td>
 			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_patent').submit()".html_safe %></td>
 			</tr>
 	<% end %>
@@ -350,7 +430,7 @@
 			<%= form_for cb do |f| %>
 			<td><%= f.text_field :product, label: false, placeholder: 'Product' %></td>
 			<td><%= f.text_area :trademark_description, label: false, placeholder: 'Trademark Description'%></td>
-			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :id, :name, cb.country ), :prompt => 'Select Country', label: false %></td>
+			<td><%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %></td>
 			<td>
 					<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
 			</td>
@@ -366,7 +446,7 @@
 			<tr>
 			<td><%= f.text_field :product, label: false, placeholder: 'Product' %></td>
 			<td><%= f.text_area :trademark_description, label: false, placeholder: 'Trademark Description'%></td>
-			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :id, :name ), :prompt => 'Select Country', label: false %></td>
+			<td><%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %></td>
 			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_trademark').submit()".html_safe %></td>
 			</tr>
 	<% end %>
@@ -383,7 +463,7 @@
 			<%= form_for cb do |f| %>
 			<td><%= f.text_field :product_or_category, label: false, placeholder: 'Product / Category' %></td>
 			<td><%= f.text_area :compliance_description, label: false, placeholder: 'Certification/Compliance Description'%></td>
-			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :id, :name, cb.country ), :prompt => 'Select Country', label: false %></td>
+			<td><%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %></td>
 			<td>
 					<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
 			</td>
@@ -399,7 +479,7 @@
 			<tr>
 			<td><%= f.text_field :product_or_category, label: false, placeholder: 'Product / Category' %></td>
 			<td><%= f.text_area :compliance_description, label: false, placeholder: 'Certification/Compliance Description'%></td>
-			<td><%= f.select :country, options_from_collection_for_select(Country.all.sort_by {|m| m.name.downcase}, :id, :name ), :prompt => 'Select Country', label: false %></td>
+			<td><%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %></td>
 			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_compliance').submit()".html_safe %></td>
 			</tr>
 	<% end %>

@@ -3,14 +3,22 @@ class DistributorBrandsController < ApplicationController
 	def create
 		distributor = @current_user.distributor
 		distributor.distributor_brands.create!(distributor_brand_parameters)
-		redirect_to distributor_url
+		if params[:ob] 
+			redirect_to onboard_distributor_five_url
+		else
+			redirect_to distributor_url
+		end
 
 	end
 
 	def update
 		distributor = @current_user.distributor
 		distributor.distributor_brands.find(params[:id]).update!(distributor_brand_parameters)
-		redirect_to distributor_url
+		if params[:ob] 
+			redirect_to onboard_distributor_five_url
+		else
+			redirect_to distributor_url
+		end
 
 	end
 
@@ -18,7 +26,11 @@ class DistributorBrandsController < ApplicationController
 
 		db = DistributorBrand.find(params[:id])
 		db.destroy
-		redirect_to distributor_url
+		if params[:ob] 
+			redirect_to onboard_distributor_five_url
+		else
+			redirect_to distributor_url
+		end
 
 	end
 

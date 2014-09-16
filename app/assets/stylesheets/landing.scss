@@ -89,11 +89,15 @@ input[type="text"].focus {
 // AUTOCOMPLETE STYLES
 
 .autocomplete-suggestions { 
+  font-weight: 200;
+  font-size: small;
   border: 1px solid #999; 
   background: #FFF; 
   overflow: auto; 
 }
 .autocomplete-suggestion { 
+  font-weight: 200;
+  font-size: small;
   padding: 2px 5px; 
   white-space: nowrap; 
   overflow: hidden; 
@@ -102,7 +106,8 @@ input[type="text"].focus {
   background: #F0F0F0; 
 }
 .autocomplete-suggestions strong { 
-  font-weight: normal; 
+  font-weight: 400; 
+  font-size: small;
   color: #3399FF; 
 }
 

@@ -3,10 +3,12 @@ class DistributorsController < ApplicationController
 	def edit
 
 		@distributor = @current_user.distributor
+
 		@current_brands = @distributor.distributor_brands.where(current: true) rescue nil
 		@past_brands = @distributor.distributor_brands.where(current: false) rescue nil
-		@trade_shows = @distributor.trade_shows rescue nil
 		@new_brand = DistributorBrand.new
+
+		@trade_shows = @distributor.trade_shows rescue nil
 		@new_trade_show = TradeShow.new
 
 		@channel_capacities = @distributor.channel_capacities
@@ -28,27 +30,86 @@ class DistributorsController < ApplicationController
 			distributor.update(year_established: Date.new(params[:year_established].to_i))
 		end
 
-		# set sectors
-		assigned_sectors = Sector.find(params[:sectors].values) rescue []
-		unless assigned_sectors.blank?
-			distributor.sectors = [] # clear current ones before update
-		end
-		assigned_sectors.each do |s|
-			distributor.sectors << s
-		end
-
-		# set channels
-		assigned_channels = Channel.find(params[:channels].values) rescue []
-		unless assigned_channels.blank? 
-			distributor.channels = [] # clear current ones before update
-		end
-		assigned_channels.each do |s|
-			distributor.channels << s
+		if params[:sectors]
+			# set sectors
+			assigned_sectors = Sector.find(params[:sectors].values) rescue []
+			unless assigned_sectors.blank?
+				distributor.sectors = [] # clear current ones before update
+			end
+			assigned_sectors.each do |s|
+				distributor.sectors << s
+			end
 		end
 
+		if params[:channels]
+			# set channels
+			assigned_channels = Channel.find(params[:channels].values) rescue []
 
-		distributor.save!
-		redirect_to distributor_url
+			# delete channel capacities for disabled channels
+			distributor.channel_capacities.each do |cc|
+				if !params[:channels].values.include?(cc.channel_id)
+					cc.delete
+				end
+			end
+			# initiate channel capacities for any new added
+			assigned_channels.each do |ac|
+				distributor.channel_capacities.find_or_create_by(channel_id: ac.id)
+			end
+
+			unless assigned_channels.blank? 
+				distributor.channels = [] # clear current ones before update
+			end
+			assigned_channels.each do |s|
+				distributor.channels << s
+			end
+		end
+
+
+		if distributor.save
+			# successful
+
+			# allow redirect via passed parameter only if in this array else redirect to the first onboard screen
+			allowable_redirect = [
+				'two',
+				'three',
+				'four',
+				'seven',
+			]
+
+			if params[:redirect]
+				if allowable_redirect.include? params[:redirect]
+					redir = "onboard_distributor_#{params[:redirect]}_url"
+					redirect_to send(redir)
+				else
+					redirect_to onboard_distributor_one_url
+					# allow redirect via passed parameter only if in this array else redirect to the first onboard screen
+				end
+			else
+				redirect_to distributor_url
+			end
+
+		else
+			# not successful  STILL INCOMPLETE NEED TO FINISH
+			flash[:error] = "Sorry, there were errors"
+
+			case params[:redirect] 
+			when 'one'
+				redirect_to onboard_distributor_one_url, :flash => {
+					:name_error => distributor.errors[:name].first
+				}
+			when 'two'
+				redirect_to onboard_distributor_two_url, :flash => {
+					:name_error => distributor.errors[:name].first
+				}			
+			else
+				# redirect to the Edit Distributor Page - need all errors here
+				redirect_to distributor_url, :flash => {
+					:name_error => distributor.errors[:name].first
+				}
+			end
+
+		end
+
 
 	end
 

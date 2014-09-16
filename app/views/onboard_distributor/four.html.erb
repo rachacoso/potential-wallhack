@@ -1,0 +1,70 @@
+<%= render partial: "shared/paneltop" %>
+
+
+<div class="row">
+	<div class="medium-12 columns">
+		<h3>Channel Capacity</h3>
+	</div>
+</div>
+
+<div class="row">
+	<div class="medium-6 columns">
+
+		<table>
+		<thead><tr><th>Channel</th><th>Capacity</th><th colspan="2">&nbsp;</th></tr></thead>
+		<tbody>
+				<%= form_tag(channel_capacity_bulkupdate_url, method: "post") do  %>
+					<%= hidden_field_tag :ob, 'true' %>
+					<% @distributor.channels.each do |chan| %>
+						<tr>
+						<td><%= chan.name %></td>
+						<td colspan="2"><%= number_field_tag("channel_capacity[bulk_ids][#{chan.id}]", @distributor.channel_capacities.where(channel_id: chan.id).first.capacity) %></td>
+						</tr>
+					<% end %>
+
+					<% if @distributor.channel_capacities.where(channel_id: 0).first %>
+						<tr>
+							<th colspan="3">Custom Channels </th>
+						</tr>
+					<% end %>
+					<% @distributor.channel_capacities.where(channel_id: 0).each do |cc| %>
+						<tr>
+						<td><%= cc.custom_channel_name %></td>
+						<td colspan="2"><%= number_field_tag("channel_capacity[bulk_ids][#{cc.id}]", cc.capacity) %>
+						<%= link_to 'Delete', channel_capacity_url(cc, :ob => 'true'), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cc.custom_channel_name}?"}%>
+						</td>
+						</tr>
+					<% end %>
+
+						<tr><td colspan="3" class="text-right"><%= submit_tag('Update and Continue', class: "small radius success button") %></td></tr>
+				<% end %>					
+
+		</tbody>
+		</table>
+	</div>
+	<div class="medium-6 columns">
+		<table>
+			<tbody>
+				<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" } do |f| %>
+				<%= hidden_field_tag :ob, 'true' %>
+					<tr>
+						<th colspan="3">Add Custom Channels </th>
+					</tr>								
+					<tr>
+						<td>
+							<%= f.text_field :custom_channel_name, label: false, placeholder: 'Custom Channel Name' %>
+						</td>
+						<td>
+							<%= f.number_field :capacity, label: false, placeholder: 'Capacity' %>
+						</td>
+						<td><%= link_to 'Add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe %></td>
+					</tr>
+				<% end %>	
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+<%= render partial: "shared/panelbottom" %>
+

@@ -13,9 +13,10 @@ Rails.application.routes.draw do
   resources :sectors, only: [:create, :update, :destroy]
   resources :channels, only: [:create, :update, :destroy]
   resources :countries, only: [:create, :update, :destroy]
-  resources :sales_sizes, only: [:create, :update, :destroy]
-  resources :marketing_spends, only: [:create, :update, :destroy]
   resources :channel_capacities, only: [:create, :update, :destroy]
+
+  post '/bulkupdate' => 'channel_capacities#bulkupdate', as: 'channel_capacity_bulkupdate'
+
   resources :displays, only: [:create, :update, :destroy]
   resources :distributor_brands, only: [:create, :update, :destroy]
   resources :trade_shows, only: [:create, :update, :destroy]
@@ -26,6 +27,11 @@ Rails.application.routes.draw do
   resources :compliances, only: [:create, :update, :destroy]
   resources :export_countries, only: [:create, :update, :destroy]
 
+  # Deprecated
+  # resources :sales_sizes, only: [:create, :update, :destroy]
+  # resources :marketing_spends, only: [:create, :update, :destroy]
+  
+
   resources :users, only: [:new, :create, :edit, :update, :destroy, :index]
   
   get    '/distributors' => 'distributors#edit', as: 'distributor'
@@ -34,6 +40,17 @@ Rails.application.routes.draw do
   
   get    '/brands' => 'brands#edit', as: 'brand'
   patch  '/brands' => 'brands#update'
+
+  get '/onboard/distributor/one' => 'onboard_distributor#one', as: 'onboard_distributor_one'
+  get '/onboard/distributor/two' => 'onboard_distributor#two', as: 'onboard_distributor_two'
+  get '/onboard/distributor/three' => 'onboard_distributor#three', as: 'onboard_distributor_three'
+  get '/onboard/distributor/four' => 'onboard_distributor#four', as: 'onboard_distributor_four'
+  get '/onboard/distributor/five' => 'onboard_distributor#five', as: 'onboard_distributor_five'
+  get '/onboard/distributor/six' => 'onboard_distributor#six', as: 'onboard_distributor_six'
+  get '/onboard/distributor/seven' => 'onboard_distributor#seven', as: 'onboard_distributor_seven'
+  get '/onboard/distributor/eight' => 'onboard_distributor#eight', as: 'onboard_distributor_eight'
+  get '/onboard/distributor/nine' => 'onboard_distributor#nine', as: 'onboard_distributor_nine'
+  get '/onboard/distributor/ten' => 'onboard_distributor#ten', as: 'onboard_distributor_ten'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -5,6 +5,7 @@ class ChannelCapacity
   belongs_to :distributor
 
   field :channel_id, type: String
+  field :custom_channel_name, type: String
   field :capacity, type: Integer
 
   validates :channel_id, presence: true

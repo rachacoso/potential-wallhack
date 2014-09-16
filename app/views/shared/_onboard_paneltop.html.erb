@@ -1,3 +1,7 @@
 <div class="row">
 	<div class="medium-12 columns">
 		<div class="ldpanel">
+
+		<% if flash[:error] %>
+			<%= flash[:error] %> <br>
+		<% end %>

@@ -1,0 +1,96 @@
+
+
+
+<%= render partial: "shared/paneltop" %>
+
+				<h3>Current Portfolio</h3>
+				<table>
+				<thead><tr><th>Brand</th><th>Category</th><th>Website</th><th>Country of Manufacture</th><th colspan="2">&nbsp;</th></tr></thead>
+				<tbody>
+				<% if !@current_brands.empty? %>
+					<% @current_brands.each do |cb| %>
+					<tr>
+						<%= form_for cb do |f| %>
+						<%= hidden_field_tag :ob, 'true' %>
+						<td><%= f.text_field :brand, label: false %></td>
+						<td>
+							<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, cb.category), :prompt => 'Select Category', label: false %>
+						</td>
+						<td><%= f.text_field :website, label: false %></td>
+						<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: false, placeholder: 'Country' %></td>
+						<td>
+						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+						</td>
+						<td><%= link_to 'Delete', distributor_brand_url(cb, :ob => 'true'), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.brand}?"}%></td>
+						<% end %>
+					</tr>	
+					<% end %>
+				<% else %>
+					<tr><td colspan="4">No Current Brands</td></tr>
+				<% end %>
+
+
+				<%= form_for @new_brand, :html => { :id => "new_current_brand" } do |f| %>
+				<%= f.hidden_field :current, value: true %>
+				<%= hidden_field_tag :ob, 'true' %>
+
+						<tr>
+						<td><%= f.text_field :brand, label: false, placeholder: 'Brand' %></td>
+						<td>
+						<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, :prompt => 'Select Category'), :prompt => 'Select Category', label: false %>
+						</td>
+						<td><%= f.text_field :website, label: false, placeholder: 'Website'  %></td>
+						<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: false, placeholder: 'Country' %></td>
+						<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_current_brand').submit()".html_safe %></td>
+						</tr>
+
+				<% end %>
+				</tbody>
+				</table>
+
+				<h3>Past Portfolio</h3>
+				<table>
+				<thead><tr><th>Brand</th><th>Category</th><th>Website</th><th>Country of Manufacture</th><th colspan="2">&nbsp;</th></tr></thead>
+				<tbody>
+				<% if !@past_brands.empty? %>
+					<% @past_brands.each do |cb| %>
+					<tr>
+						<%= form_for cb do |f| %>
+						<%= hidden_field_tag :ob, 'true' %>
+						<td><%= f.text_field :brand, label: false %></td>
+						<td>
+								<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, cb.category), :prompt => 'Select Category', label: false %>
+						</td>
+						<td><%= f.text_field :website, label: false %></td>
+						<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: false, placeholder: 'Country' %></td>
+						<td>
+								<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+						</td>
+						<td><%= link_to 'Delete', distributor_brand_url(cb, :ob => 'true'), data: { :confirm => "Are you sure you want to delete #{cb.brand}?"}, :foo => "bars", :method => :delete %></td>
+						<% end %>
+					</tr>	
+					<% end %>
+				<% else %>
+					<tr><td colspan="4">No Past Brands</td></tr>
+				<% end %>
+
+				<%= form_for @new_brand, :html => { :id => "new_past_brand" } do |f| %>
+				<%= f.hidden_field :current, value: false %>
+				<%= hidden_field_tag :ob, 'true' %>
+
+						<tr>
+						<td><%= f.text_field :brand, label: false, placeholder: 'Brand' %></td>
+						<td>
+								<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, :prompt => 'Select Category'), :prompt => 'Select Category', label: false %>
+						</td>
+						<td><%= f.text_field :website, label: false, placeholder: 'Website' %></td>
+						<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: false, placeholder: 'Country' %></td>
+						<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_past_brand').submit()".html_safe %></td>
+						</tr>
+
+				<% end %>
+				</tbody>
+				</table>
+				<%= button_to "Next", onboard_distributor_six_url, method: :get, class: "radius success button" %> 
+
+<%= render partial: "shared/panelbottom" %>

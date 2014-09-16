@@ -312,42 +312,36 @@
 					<table>
 					<thead><tr><th>Channel</th><th>Capacity</th><th colspan="2">&nbsp;</th></tr></thead>
 					<tbody>
-					<% unless @channel_capacities.nil? || @channel_capacities.empty?  %>
-						<% @channel_capacities.each do |cb| %>
-						<% channel_name = Channel.find(cb.channel_id).name %>
 						<tr>
-							<%= form_for cb do |f| %>
-							<td><%= channel_name %></td>
-							<td><%= f.text_field :capacity, label: false, placeholder: 'Capacity' %></td>
-							<td>
-									<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-							</td>
-							<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{channel_name}?"}%></td>
+							<%= form_tag(channel_capacity_bulkupdate_url, method: "post") do  %>
+								
+								<% @brand.channels.each do |chan| %>
+									<tr>
+									<td><%= chan.name %></td>
+									<td colspan="2"><%= number_field_tag("channel_capacity[bulk_ids][#{chan.id}]", @brand.channel_capacities.where(channel_id: chan.id).first.capacity) %></td>
+									</tr>
+								<% end %>
+									<tr><td colspan="3" class="text-right"><%= submit_tag('Update', class: "small radius success button") %></td></tr>
 							<% end %>
-						</tr>	
-						<% end %>
-					<% else %>
-						<tr><td colspan="4">No Channels</td></tr>
-					<% end %>
 
-					<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" } do |f| %>
-					<% channels = @brand.channels.pluck(:id) %>
-					<% capacities = @brand.channel_capacities.pluck(:channel_id).map {|b| BSON::ObjectId.from_string(b)} %>
-					<% channel_set = channels - capacities %>
-						<% unless channel_set.empty? %>					
-							<tr>
-							<td>
-								<%= f.select :channel_id, options_from_collection_for_select(Channel.find(channel_set).sort_by {|m| m.name.downcase}, :id, :name ), label: false %>
-							</td>
-							<td>
-								<%= f.text_field :capacity, label: false, placeholder: 'Capacity' %>
-							</td>
-							<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe %></td>
-							</tr>
-						<% end %>
-					<% end %>
+							<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" } do |f| %>
+								<tr>
+								<td>
+									<%= f.text_field :custom_channel_name, label: false, placeholder: 'Custom Channel Name' %>
+								</td>
+								<td>
+									<%= f.text_field :capacity, label: false, placeholder: 'Capacity' %>
+								</td>
+								<td><%= link_to 'Add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe %></td>
+								</tr>
+							<% end %>						
+
+
 					</tbody>
 					</table>
+
+
+
 
 
 				<h3>Countries where exported</h3>

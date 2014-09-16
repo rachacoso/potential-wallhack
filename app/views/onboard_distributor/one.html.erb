@@ -1,0 +1,13 @@
+<%= render partial: "shared/paneltop" %>
+<h3> What is your Company's name?</h3>
+
+		<%= form_for @distributor, url: distributor_url do |f| %>
+		<%= hidden_field_tag :redirect, 'two' %>
+		<%= f.text_area :name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Distributor Name" %>
+		<% if flash[:name_error] %>
+			Sorry, the Distributor Name <%= flash[:name_error] %>
+		<% end %>
+		<br>
+		<%= f.submit 'Next' %>
+		<% end %>
+<%= render partial: "shared/panelbottom" %>

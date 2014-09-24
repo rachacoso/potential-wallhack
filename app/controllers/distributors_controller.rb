@@ -74,12 +74,18 @@ class DistributorsController < ApplicationController
 				'three',
 				'four',
 				'seven',
+				'complete'
 			]
 
 			if params[:redirect]
 				if allowable_redirect.include? params[:redirect]
-					redir = "onboard_distributor_#{params[:redirect]}_url"
-					redirect_to send(redir)
+					if params[:redirect] == 'complete'
+						redirect_to distributor_url
+					else
+						redir = "onboard_distributor_#{params[:redirect]}_url"
+						redirect_to send(redir)
+					end
+					
 				else
 					redirect_to onboard_distributor_one_url
 					# allow redirect via passed parameter only if in this array else redirect to the first onboard screen
@@ -89,24 +95,13 @@ class DistributorsController < ApplicationController
 			end
 
 		else
-			# not successful  STILL INCOMPLETE NEED TO FINISH
+			# not successful  
+			# STILL INCOMPLETE NEED TO ADD VALIDATIONS
 			flash[:error] = "Sorry, there were errors"
 
-			case params[:redirect] 
-			when 'one'
-				redirect_to onboard_distributor_one_url, :flash => {
-					:name_error => distributor.errors[:name].first
-				}
-			when 'two'
-				redirect_to onboard_distributor_two_url, :flash => {
-					:name_error => distributor.errors[:name].first
-				}			
-			else
-				# redirect to the Edit Distributor Page - need all errors here
-				redirect_to distributor_url, :flash => {
-					:name_error => distributor.errors[:name].first
-				}
-			end
+			redirect_to distributor_url, :flash => {
+				:name_error => distributor.errors[:name].first
+			}
 
 		end
 

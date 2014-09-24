@@ -1,5 +1,6 @@
 class OnboardDistributorController < ApplicationController
   
+
   def one
 
     @distributor = @current_user.distributor
@@ -50,7 +51,13 @@ class OnboardDistributorController < ApplicationController
 
     @trade_shows = @distributor.trade_shows rescue nil
     @new_trade_show = TradeShow.new
-    
+
+  end
+
+  def eight
+
+    @distributor = @current_user.distributor
+
   end
 
 

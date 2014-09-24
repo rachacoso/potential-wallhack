@@ -1,0 +1,11 @@
+<%= render partial: "shared/paneltop" %>
+
+	<h3>Marketing Activities</h3>
+
+	<%= form_for @brand, url: brand_url do |f| %>
+	<%= hidden_field_tag :redirect, 'seven' %>
+	<%= f.text_area :brand_positioning, label: false, placeholder: 'Brand Positioning' %>
+	<%= f.submit 'Next' %>
+	<% end %>
+
+<%= render partial: "shared/panelbottom" %>

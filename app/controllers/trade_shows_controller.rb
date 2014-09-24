@@ -4,9 +4,17 @@ class TradeShowsController < ApplicationController
 		u = @current_user.distributor || @current_user.brand
 		u.trade_shows.create!(trade_show_parameters)
 		if @current_user.distributor
-			redirect_to distributor_url
+			if params[:ob] 
+				redirect_to onboard_distributor_seven_url
+			else
+				redirect_to distributor_url
+			end
 		else
-			redirect_to brand_url
+			if params[:ob] 
+				redirect_to onboard_brand_eight_url
+			else
+				redirect_to brand_url
+			end
 		end
 
 	end
@@ -15,9 +23,17 @@ class TradeShowsController < ApplicationController
 		u = @current_user.distributor || @current_user.brand
 		u.trade_shows.find(params[:id]).update!(trade_show_parameters)
 		if @current_user.distributor
-			redirect_to distributor_url
+			if params[:ob] 
+				redirect_to onboard_distributor_seven_url
+			else
+				redirect_to distributor_url
+			end
 		else
-			redirect_to brand_url
+			if params[:ob] 
+				redirect_to onboard_brand_eight_url
+			else
+				redirect_to brand_url
+			end
 		end		
 
 	end
@@ -27,9 +43,17 @@ class TradeShowsController < ApplicationController
 		d = TradeShow.find(params[:id])
 		d.destroy
 		if @current_user.distributor
-			redirect_to distributor_url
+			if params[:ob] 
+				redirect_to onboard_distributor_seven_url
+			else
+				redirect_to distributor_url
+			end
 		else
-			redirect_to brand_url
+			if params[:ob] 
+				redirect_to onboard_brand_eight_url
+			else
+				redirect_to brand_url
+			end
 		end
 
 

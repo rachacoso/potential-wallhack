@@ -18,10 +18,21 @@
 
 
 <%= render partial: "shared/paneltop" %>
+	<h3>Company Name</h3>
 		<%= form_for @brand, url: brand_url do |f| %>
-		<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Brand Name" %>
+		<div class="row">
 
-		<%= f.submit 'Update' %>
+			<div class="medium-12 columns">
+				<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", label: false, placeholder: "Brand Name" %>
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="medium-12 columns right">
+				<%= f.submit 'Update', class: "small radius success button right" %>
+			</div>
+		</div>
+		
 		<% end %>
 <%= render partial: "shared/panelbottom" %>
 
@@ -29,8 +40,13 @@
 <%= render partial: "shared/paneltop" %>
 		
 
-				<h3>Company Info</h3>
+				
 				<%= form_for @brand, url: brand_url do |f| %>
+				<div class="row">
+					<div class="medium-6 columns">
+						<h3>Company Info</h3>
+					</div>
+				</div>
 				<div class="row">
 					<div class="medium-6 columns">
 					<%= f.text_field :country_of_origin, class: "country-autocomplete", placeholder: "Country" %>
@@ -47,12 +63,15 @@
 				</div>
 				<%= f.fields_for :contact_info do |ff| %>
 					<div class="row">
-						<div class="medium-12 columns">
+						<div class="medium-6 columns">
+							<h3>Company Contact Info</h3>
+						</div>
+					</div>				
+					<div class="row">
+						<div class="medium-6 columns">
 							<%= ff.text_field :contact_name %>
 						</div>
-					</div>
-					<div class="row">
-						<div class="medium-12 columns">
+						<div class="medium-6 columns">
 							<%= ff.text_field :contact_title %>
 						</div>
 					</div>
@@ -64,6 +83,11 @@
 							<%= ff.text_field :phone %>
 						</div>
 					</div>
+					<div class="row">
+						<div class="medium-6 columns">
+							<h3>Company Address</h3>
+						</div>
+					</div>					
 					<div class="row">
 						<div class="medium-12 columns">
 							<%= ff.text_field :address1, label: "Address" %>
@@ -129,7 +153,74 @@
 			
 <%= render partial: "shared/panelbottom" %>
 
+<%= render partial: "shared/paneltop" %>
 
+<div class="row">
+	<div class="medium-12 columns">
+		<h3>Channel Capacity</h3>
+	</div>
+</div>
+
+<div class="row">
+	<div class="medium-6 columns">
+
+		<table>
+		<thead><tr><th>Channel</th><th>Capacity</th></tr></thead>
+		<tbody>
+				<%= form_tag(channel_capacity_bulkupdate_url, method: "post") do  %>
+					
+					<% @brand.channels.each do |chan| %>
+						<tr>
+						<td><%= chan.name %></td>
+						<td><%= number_field_tag("channel_capacity[bulk_ids][#{chan.id}]", @brand.channel_capacities.where(channel_id: chan.id).first.capacity) %></td>
+						</tr>
+					<% end %>
+
+					<% if @brand.channel_capacities.where(channel_id: 0).first %>
+						<tr>
+							<th colspan="2">Custom Channels </th>
+						</tr>
+					<% end %>
+					<% @brand.channel_capacities.where(channel_id: 0).each do |cc| %>
+						<tr>
+						<td><%= cc.custom_channel_name %></td>
+						<td><%= number_field_tag("channel_capacity[bulk_ids][#{cc.id}]", cc.capacity) %>
+						<%= link_to 'Delete', cc, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cc.custom_channel_name}?"}%>
+						</td>
+						</tr>
+					<% end %>
+
+						<tr><td colspan="2" class="text-right"><%= submit_tag('Update', class: "small radius success button") %></td></tr>
+				<% end %>					
+
+		</tbody>
+		</table>
+	</div>
+	<div class="medium-6 columns">
+		<table>
+			<tbody>
+				<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" } do |f| %>
+					<tr>
+						<th colspan="3">Add Custom Channels </th>
+					</tr>								
+					<tr>
+						<td>
+							<%= f.text_field :custom_channel_name, label: false, placeholder: 'Custom Channel Name' %>
+						</td>
+						<td>
+							<%= f.number_field :capacity, label: false, placeholder: 'Capacity' %>
+						</td>
+						<td><%= link_to 'Add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe %></td>
+					</tr>
+				<% end %>	
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+
+<%= render partial: "shared/panelbottom" %>
 
 <%= render partial: "shared/paneltop" %>
 
@@ -227,6 +318,9 @@
 	<%= f.submit 'Update' %>
 	<% end %>
 
+<%= render partial: "shared/panelbottom" %>
+
+<%= render partial: "shared/paneltop" %>
 
 	<h3>Notable Press Hits</h3>
 	<table>
@@ -264,6 +358,10 @@
 	<% end %>
 	</tbody>
 	</table>
+
+<%= render partial: "shared/panelbottom" %>
+
+<%= render partial: "shared/paneltop" %>
 						
 	<h3>Shows Participated In</h3>
 	<table>
@@ -305,44 +403,8 @@
 
 <%= render partial: "shared/panelbottom" %>
 
+
 <%= render partial: "shared/paneltop" %>
-
-				<h3>Channels Sold</h3>
-
-					<table>
-					<thead><tr><th>Channel</th><th>Capacity</th><th colspan="2">&nbsp;</th></tr></thead>
-					<tbody>
-						<tr>
-							<%= form_tag(channel_capacity_bulkupdate_url, method: "post") do  %>
-								
-								<% @brand.channels.each do |chan| %>
-									<tr>
-									<td><%= chan.name %></td>
-									<td colspan="2"><%= number_field_tag("channel_capacity[bulk_ids][#{chan.id}]", @brand.channel_capacities.where(channel_id: chan.id).first.capacity) %></td>
-									</tr>
-								<% end %>
-									<tr><td colspan="3" class="text-right"><%= submit_tag('Update', class: "small radius success button") %></td></tr>
-							<% end %>
-
-							<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" } do |f| %>
-								<tr>
-								<td>
-									<%= f.text_field :custom_channel_name, label: false, placeholder: 'Custom Channel Name' %>
-								</td>
-								<td>
-									<%= f.text_field :capacity, label: false, placeholder: 'Capacity' %>
-								</td>
-								<td><%= link_to 'Add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe %></td>
-								</tr>
-							<% end %>						
-
-
-					</tbody>
-					</table>
-
-
-
-
 
 				<h3>Countries where exported</h3>
 
@@ -414,6 +476,10 @@
 	</tbody>
 	</table>
 
+<%= render partial: "shared/panelbottom" %>
+
+<%= render partial: "shared/paneltop" %>
+
 	<h3>Trademarks</h3>
 	<table>
 	<thead><tr><th>Product</th><th>Trademark Description</th><th>Country</th><th colspan="2">&nbsp;</th></tr></thead>
@@ -447,6 +513,10 @@
 	</tbody>
 	</table>
 
+<%= render partial: "shared/panelbottom" %>
+
+<%= render partial: "shared/paneltop" %>
+
 	<h3>Certifications / Regulatory Compliance </h3>
 	<table>
 	<thead><tr><th>Product or Category</th><th>Certification/Compliance Description</th><th>Country</th><th colspan="2">&nbsp;</th></tr></thead>
@@ -470,7 +540,7 @@
 	<% end %>
 
 	<%= form_for @new_compliance, :html => { :id => "new_compliance" } do |f| %>
-			<tr>
+			<tr class="newitemrow">
 			<td><%= f.text_field :product_or_category, label: false, placeholder: 'Product / Category' %></td>
 			<td><%= f.text_area :compliance_description, label: false, placeholder: 'Certification/Compliance Description'%></td>
 			<td><%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %></td>

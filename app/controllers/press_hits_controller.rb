@@ -6,7 +6,11 @@ class PressHitsController < ApplicationController
 		if @current_user.distributor
 			redirect_to distributor_url
 		else
-			redirect_to brand_url
+			if params[:ob] 
+				redirect_to onboard_brand_seven_url
+			else
+				redirect_to brand_url
+			end		
 		end
 
 	end
@@ -17,7 +21,11 @@ class PressHitsController < ApplicationController
 		if @current_user.distributor
 			redirect_to distributor_url
 		else
-			redirect_to brand_url
+			if params[:ob] 
+				redirect_to onboard_brand_seven_url
+			else
+				redirect_to brand_url
+			end	
 		end
 
 	end
@@ -29,7 +37,11 @@ class PressHitsController < ApplicationController
 		if @current_user.distributor
 			redirect_to distributor_url
 		else
-			redirect_to brand_url
+			if params[:ob] 
+				redirect_to onboard_brand_seven_url
+			else
+				redirect_to brand_url
+			end	
 		end
 
 	end

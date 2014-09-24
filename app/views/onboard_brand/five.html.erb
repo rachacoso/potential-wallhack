@@ -1,0 +1,91 @@
+<%= render partial: "shared/paneltop" %>
+
+	<h3>Current SKU List</h3>
+	<table>
+	<thead><tr><th>Product</th><th>Description</th><th>MSRP</th><th>Key Benefits</th><th>Country of Manufacture</th><th colspan="2">&nbsp;</th></tr></thead>
+	<tbody>
+	<% unless @current_products.nil? || @current_products.empty?   %>
+		<% @current_products.each do |cb| %>
+		<tr>
+			<%= form_for cb do |f| %>
+			<%= hidden_field_tag :ob, 'true' %>
+			<td><%= f.text_field :name, label: false, placeholder: 'Name' %></td>
+			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
+			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
+			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
+			<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: false, placeholder: 'Country of Manufacture'  %></td>
+			<td>
+			<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+			</td>
+			<td><%= link_to 'Delete', product_url(cb, :ob => 'true'), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.name}?"}%></td>
+			<% end %>
+		</tr>	
+		<% end %>
+	<% else %>
+		<tr><td colspan="7">No Current Products</td></tr>
+	<% end %>
+
+
+	<%= form_for @new_product, :html => { :id => "new_current_product" } do |f| %>
+	<%= f.hidden_field :current, value: true %>
+	<%= hidden_field_tag :ob, 'true' %>
+
+			<tr>
+			<td><%= f.text_field :name, label: false, placeholder: 'Name' %></td>
+			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
+			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
+			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
+			<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: false, placeholder: 'Country of Manufacture'  %></td>
+			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_current_product').submit()".html_safe %></td>
+			</tr>
+
+	<% end %>
+	</tbody>
+	</table>
+
+	<h3>Upcoming SKU List</h3>
+	<table>
+	<thead><tr><th>Product</th><th>Description</th><th>MSRP</th><th>Key Benefits</th><th>Country of Manufacture</th><th colspan="2">&nbsp;</th></tr></thead>
+	<tbody>
+	<% unless @upcoming_products.nil? || @upcoming_products.empty?  %>
+		<% @upcoming_products.each do |cb| %>
+		<tr>
+			<%= form_for cb do |f| %>
+			<%= hidden_field_tag :ob, 'true' %>
+			<td><%= f.text_field :name, label: false, placeholder: 'Name' %></td>
+			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
+			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
+			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
+			<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: false, placeholder: 'Country of Manufacture'  %></td>
+			<td>
+			<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+			</td>
+			<td><%= link_to 'Delete', product_url(cb, :ob => 'true'), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.name}?"}%></td>
+			<% end %>
+		</tr>	
+		<% end %>
+	<% else %>
+		<tr><td colspan="7">No Upcoming Products</td></tr>
+	<% end %>
+
+
+	<%= form_for @new_product, :html => { :id => "new_future_product" } do |f| %>
+	<%= f.hidden_field :current, value: false %>
+	<%= hidden_field_tag :ob, 'true' %>
+
+			<tr>
+			<td><%= f.text_field :name, label: false, placeholder: 'Name' %></td>
+			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
+			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
+			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
+			<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: false, placeholder: 'Country of Manufacture'  %></td>
+			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_future_product').submit()".html_safe %></td>
+			</tr>
+
+	<% end %>
+	</tbody>
+	</table>	
+
+<%= button_to "Next", onboard_brand_six_url, method: :get, class: "radius success button" %>
+
+<%= render partial: "shared/panelbottom" %>

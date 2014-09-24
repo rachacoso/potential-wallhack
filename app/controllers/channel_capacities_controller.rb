@@ -20,7 +20,11 @@ class ChannelCapacitiesController < ApplicationController
 				redirect_to distributor_url
 			end
 		else
-			redirect_to brand_url
+			if params[:ob]
+				redirect_to onboard_brand_four_url
+			else
+				redirect_to brand_url
+			end
 		end
 
 
@@ -38,7 +42,11 @@ class ChannelCapacitiesController < ApplicationController
 				redirect_to distributor_url
 			end			
 		else
-			redirect_to brand_url
+			if params[:ob]
+				redirect_to onboard_brand_four_url
+			else
+				redirect_to brand_url
+			end
 		end		
 
 	end
@@ -55,12 +63,16 @@ class ChannelCapacitiesController < ApplicationController
 
 		if @current_user.distributor
 			if params[:ob]
-				redirect_to onboard_distributor_five_url
+				redirect_to onboard_distributor_four_url
 			else
 				redirect_to distributor_url
 			end			
 		else
-			redirect_to brand_url
+			if params[:ob]
+				redirect_to onboard_brand_five_url
+			else
+				redirect_to brand_url
+			end
 		end		
 
 	end
@@ -76,7 +88,11 @@ class ChannelCapacitiesController < ApplicationController
 				redirect_to distributor_url
 			end			
 		else
-			redirect_to brand_url
+			if params[:ob]
+				redirect_to onboard_brand_four_url
+			else
+				redirect_to brand_url
+			end
 		end
 
 

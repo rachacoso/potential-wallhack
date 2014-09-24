@@ -80,8 +80,48 @@ class BrandsController < ApplicationController
 			end
 		end
 
-		brand.save!
-		redirect_to brand_url
+
+		if brand.save
+			# successful
+
+			# allow redirect via passed parameter only if in this array else redirect to the first onboard screen
+			allowable_redirect = [
+				'two',
+				'three',
+				'four',
+				'six',
+				'seven',
+				'complete'
+			]
+
+			if params[:redirect]
+				if allowable_redirect.include? params[:redirect]
+					if params[:redirect] == 'complete'
+						redirect_to brand_url
+					else
+						redir = "onboard_brand_#{params[:redirect]}_url"
+						redirect_to send(redir)
+					end
+					
+				else
+					redirect_to onboard_brand_one_url
+					# allow redirect via passed parameter only if in this array else redirect to the first onboard screen
+				end
+			else
+				redirect_to brand_url
+			end
+
+		else
+			# not successful  
+			# STILL INCOMPLETE NEED TO ADD VALIDATIONS
+			flash[:error] = "Sorry, there were errors"
+
+			redirect_to brand_url, :flash => {
+				:name_error => brand.errors[:company_name].first
+			}
+
+		end
+
 
 	end	
 
@@ -94,6 +134,7 @@ class BrandsController < ApplicationController
 			:year_established,
 			:website,
 			:countries_where_exported,
+			:brand_positioning,
 			contact_info_attributes: [ 
 				:contact_name,
 				:contact_title,

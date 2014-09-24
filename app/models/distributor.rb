@@ -48,9 +48,6 @@ class Distributor
 	has_many :trade_shows, dependent: :destroy
 	
 
-	#validations
-
-	validates :name, presence: true
 
 	private 
 

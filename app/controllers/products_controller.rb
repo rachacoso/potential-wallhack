@@ -4,7 +4,12 @@ class ProductsController < ApplicationController
 
 		brand = @current_user.brand
 		brand.products.create!(product_parameters)
-		redirect_to brand_url
+
+		if params[:ob] 
+			redirect_to onboard_brand_five_url
+		else
+			redirect_to brand_url
+		end		
 
 	end
 
@@ -12,7 +17,12 @@ class ProductsController < ApplicationController
 
 		brand = @current_user.brand
 		brand.products.find(params[:id]).update!(product_parameters)
-		redirect_to brand_url
+
+		if params[:ob] 
+			redirect_to onboard_brand_five_url
+		else
+			redirect_to brand_url
+		end		
 
 	end
 
@@ -20,7 +30,12 @@ class ProductsController < ApplicationController
 
 		db = Product.find(params[:id])
 		db.destroy
-		redirect_to brand_url
+
+		if params[:ob] 
+			redirect_to onboard_brand_five_url
+		else
+			redirect_to brand_url
+		end		
 
 	end
 

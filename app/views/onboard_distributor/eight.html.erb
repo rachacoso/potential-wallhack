@@ -1,0 +1,56 @@
+<%= render partial: "shared/paneltop" %>
+
+			<h3> Marketing/PR Capabilities</h3>
+				<%= form_for @distributor, url: distributor_url do |f| %>
+				<%= hidden_field_tag :redirect, 'complete' %>
+
+				<div class="row">
+					<div class="medium-12 columns">
+						<h5>Internal Marketing/PR</h5>
+						<%= render partial: "shared/numeric_field", locals: {f: f, field: :internal_marketing_size, fieldlabel: 'Internal Marketing/Design Team Size' } %>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="medium-12 columns">
+						<h5>External Marketing/PR</h5>
+						<%= radio_button_tag("distributor[employ_pr_agency]", false,  (@distributor.employ_pr_agency rescue false) ? false : true ) %>
+						<%= label_tag("distributor[employ_pr_agency]_false", "No, we do not employ an outside PR Agency") %>
+						<%= radio_button_tag("distributor[employ_pr_agency]", true, (@distributor.employ_pr_agency rescue false) ? true : false ) %>
+						<%= label_tag("distributor[employ_pr_agency]_true", "Yes, we employ an outside PR Agency") %>
+
+					</div>
+				</div>				
+
+				<div class="row">
+					<div class="medium-12 columns">
+						<h5>Where have you marketed/advertised your products?</h5>
+					</div>
+			 </div>
+
+				<div class="row">
+					<div class="medium-3 columns">
+						<%= render partial: "shared/checkbox", locals: {field: "marketing_via_print", label: 'Print' } %>
+						<%= render partial: "shared/checkbox", locals: {field: "marketing_via_online", label: 'Online' } %>
+						<%= render partial: "shared/checkbox", locals: {field: "marketing_via_email", label: 'Email' } %>
+						<%= render partial: "shared/checkbox", locals: {field: "marketing_via_outdoor", label: 'Outdoor' } %>
+					</div>
+					<div class="medium-3 columns end">
+						<%= render partial: "shared/checkbox", locals: {field: "marketing_via_events", label: 'Events' } %>
+						<%= render partial: "shared/checkbox", locals: {field: "marketing_via_direct_mail", label: 'Direct Mail' } %>
+						<%= render partial: "shared/checkbox", locals: {field: "marketing_via_classes", label: 'Classes' } %>
+					</div>
+				</div>	
+
+				<div class="row">
+					<div class="small-12 columns">
+						<h5>Customer Database</h5>
+						<%= render partial: "shared/numeric_field", locals: {f: f, field: :customer_database_size, fieldlabel: 'Customer Database Size' } %>	
+					</div>
+				</div>
+
+					 <%= f.submit 'Update' %>
+
+			 <% end %>
+
+<%= render partial: "shared/panelbottom" %>

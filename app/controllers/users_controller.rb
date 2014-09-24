@@ -10,7 +10,6 @@ class UsersController < ApplicationController
 	def new
 		@newuser = User.new
 		@newuser.build_user_profile
-
 	end
 
 	def create
@@ -68,7 +67,14 @@ class UsersController < ApplicationController
 			
 			session[:user_id] = user.id.to_s
 			session[:expires_at] = Time.current + 24.hours
-			redirect_to dashboard_url
+
+			if params[:user_type] == 'distributor'
+				redirect_to onboard_distributor_one_url
+			elsif params[:user_type] == 'brand'
+				redirect_to dashboard_url
+			else
+				redirect_to dashboard_url
+			end
 
 		end
 

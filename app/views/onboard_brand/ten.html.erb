@@ -1,0 +1,42 @@
+<%= render partial: "shared/paneltop" %>
+
+	<h3>Patents</h3>
+	<table>
+	<thead><tr><th>Product</th><th>Patent Description</th><th>Country</th><th colspan="2">&nbsp;</th></tr></thead>
+	<tbody>
+	<% unless @patents.nil? || @patents.empty?  %>
+		<% @patents.each do |cb| %>
+		<tr>
+			<%= form_for cb do |f| %>
+			<%= hidden_field_tag :ob, 'true' %>
+			<td><%= f.text_field :product, label: false, placeholder: 'Product' %></td>
+			<td><%= f.text_area :patent_description, label: false, placeholder: 'Patent Description'%></td>
+			<td>
+				<%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %>
+			</td>
+			<td>
+					<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+			</td>
+			<td><%= link_to 'Delete', patent_url(cb, :ob => true), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.product}?"}%></td>
+			<% end %>
+		</tr>	
+		<% end %>
+	<% else %>
+		<tr><td colspan="4">No Patents</td></tr>
+	<% end %>
+
+	<%= form_for @new_patent, :html => { :id => "new_patent" } do |f| %>
+	<%= hidden_field_tag :ob, 'true' %>
+			<tr>
+			<td><%= f.text_field :product, label: false, placeholder: 'Product' %></td>
+			<td><%= f.text_area :patent_description, label: false, placeholder: 'Trademark Description'%></td>
+			<td><%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %></td>
+			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_patent').submit()".html_safe %></td>
+			</tr>
+	<% end %>
+	</tbody>
+	</table>
+	<%= button_to "Next", onboard_brand_eleven_url, method: :get, class: "small radius success button" %>
+
+<%= render partial: "shared/panelbottom" %>
+

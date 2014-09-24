@@ -1,0 +1,14 @@
+<%= render partial: "shared/paneltop" %>
+<h3> What is your Company's name?</h3>
+
+		<%= form_for @brand, url: brand_url do |f| %>
+		<%= hidden_field_tag :redirect, 'two' %>
+		<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", label: false, placeholder: "Enter Company Name" %>
+		<% if flash[:name_error] %>
+			Sorry, the Brand Name <%= flash[:name_error] %>
+		<% end %>
+		<br>
+		<%= f.submit 'Next' %>
+		<% end %>
+
+<%= render partial: "shared/panelbottom" %>

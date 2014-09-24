@@ -46,9 +46,10 @@
 // $font-weight-bold: bold !default
 
 // We use these to control various global styles
-$body-bg: #eee;
-$body-font-color: #222;
+$body-bg: #D6E8FF;
+$body-font-color: #547DB2;
 // $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$body-font-family: "jaf-facitweb",sans-serif;
 // $body-font-weight: $font-weight-normal;
 // $body-font-style: normal;
 
@@ -62,11 +63,16 @@ $body-font-color: #222;
 
 // We use these as default colors throughout
 // $primary-color: #008CBA;
+$primary-color: #B29C72;
 // $secondary-color: #e7e7e7;
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
+$success-color: #455E7F;
 // $warning-color: #f08a24;
 // $info-color: #a0d3e8;
+$link-color: #547DB2;
+
+
 
 // We use these to make sure border radius matches unless we want it different.
 $global-radius: 2px;
@@ -128,7 +134,7 @@ $global-radius: 2px;
 // $header-font-family: $body-font-family;
 // $header-font-weight: $font-weight-normal;
 // $header-font-style: normal;
-// $header-font-color: #222;
+$header-font-color: #547DB2;
 // $header-line-height: 1.4;
 // $header-top-margin: .2rem;
 // $header-bottom-margin: .5rem;
@@ -187,7 +193,9 @@ $h4-font-size: rem-calc(22) !default;
 // $anchor-text-decoration: none;
 // $anchor-text-decoration-hover: none;
 // $anchor-font-color: $primary-color;
+$anchor-font-color: $link-color;
 // $anchor-font-color-hover: scale-color($primary-color, $lightness: -14%);
+$anchor-font-color-hover: scale-color($link-color, $lightness: -14%);
 
 // We use these to style the <hr> element
 // $hr-border-width: 1px;
@@ -527,10 +535,11 @@ $h4-font-size: rem-calc(22) !default;
 
 // We use these to style the labels in different ways
 // $form-label-pointer: pointer;
-$form-label-font-size: rem-calc(12);
+$form-label-font-size: rem-calc(14);
 // $form-label-font-weight: $font-weight-normal;
 // $form-label-line-height: 1.5;
 // $form-label-font-color: scale-color(#000, $lightness: 30%);
+$form-label-font-color: scale-color(#222, $lightness: 30%);
 // $form-label-small-transform: capitalize;
 // $form-label-bottom-margin: 0;
 // $input-font-family: inherit;
@@ -1103,25 +1112,33 @@ $panel-padding: rem-calc(25);
 
 // These control the background color for the table and even rows
 // $table-bg: #fff;
+$table-bg: none;
 
 // $table-even-row-bg: #f9f9f9  ;
+$table-even-row-bg: none ;
 // These control the table cell border style
-$table-border-style: none;
+$table-border-style: dotted;
 // $table-border-size: 1px;
 // $table-border-color: #ddd;
 
+
+
+
 // These control the table head styles
 // $table-head-bg: #f5f5f5  ;
-$table-head-bg: #fff  ;
+$table-head-bg: scale-color(#2C3838, $lightness: 10%);
 // $table-head-font-size: rem-calc(14);
 // $table-head-font-color: #222;
+$table-head-font-color: $body-font-color;
 // $table-head-font-weight: $font-weight-bold;
-// $table-head-padding: rem-calc(8 10 10);
+$table-head-padding: rem-calc(8 10 10);
+// $table-head-padding: rem-calc(1 1 1);
 
 // These control the row padding and font styles
 // $table-row-padding: rem-calc(9 10);
 // $table-row-font-size: rem-calc(14);
 // $table-row-font-color: #222;
+$table-row-font-color: $body-font-color;
 // $table-line-height: rem-calc(18);
 
 // These are for controlling the display and margin of tables

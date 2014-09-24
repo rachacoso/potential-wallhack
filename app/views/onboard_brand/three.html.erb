@@ -1,0 +1,29 @@
+<%= render partial: "shared/paneltop" %>
+
+				<div class="row">
+					<%= form_for @brand, url: brand_url do |f| %>
+					<%= hidden_field_tag :redirect, 'four' %>
+					<div class="medium-6 columns">
+					<%= f.hidden_field :company_name %>		
+					<h3>Sectors</h3>
+						<% Sector.each do |sc| %>
+					    <div>
+					      <%= check_box_tag "sectors[#{sc.id}]", sc.id, (@brand.sectors.find(sc) rescue false) ? true : false %>
+					      <%= label_tag("sectors[#{sc.id}]", sc.name) %>
+					    </div>
+					  <% end %>
+					</div>
+					<div class="medium-6 columns">						
+						<h3>Channels</h3>
+						<% Channel.each do |ch| %>
+					    <div>
+					    	<%= check_box_tag "channels[#{ch.id}]", ch.id, (@brand.channels.find(ch) rescue false) ? true : false  %>
+					      <%= label_tag("channels[#{ch.id}]", ch.name) %>
+					    </div>
+					  <% end %>
+					</div>
+				</div>
+				<%= f.submit 'Next' %>
+				<% end %>
+			
+<%= render partial: "shared/panelbottom" %>

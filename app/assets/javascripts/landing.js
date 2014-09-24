@@ -32,9 +32,20 @@ var countriesArray = $.map(countries, function (value, key) { return { value: va
 
 	// Autocomplete 
 
-	$('.country-autocomplete').focus(function() {
-	   $(this).val('');
-	});
+	// Select all on focus (note: makes it so that one can't select a part of an input, 
+	// but can only ever select all... shouldn't be a problem, hopefully??)
+	$('.country-autocomplete, .country-autocomplete-multi').on('focus',
+		function (e) {
+			$(this).on('mouseup',
+				function() {
+					$(this).select();
+					return false;
+				})
+			.select();
+		});
+
+
+
 
 	$('.country-autocomplete').devbridgeAutocomplete({
 		lookup: countriesArray,
@@ -62,7 +73,15 @@ var countriesArray = $.map(countries, function (value, key) { return { value: va
 		tabDisabled: true
 	});
 
+
+	$('#login').on('click', Foundation.utils.debounce(function(e){
+	  $("#loginform").fadeToggle();
+	}, 300, true));
+
+
 });
+
+
 
 
 

@@ -1,0 +1,38 @@
+<%= render partial: "shared/paneltop" %>
+
+	<h3>Countries where exported</h3>
+
+		<table>
+		<thead><tr><th>Country</th><th>&nbsp;</th></tr></thead>
+		<tbody>
+		<% unless @export_countries.nil? || @export_countries.empty?  %>
+			<% @export_countries.each do |cb| %>
+			<tr>
+				<%= form_for cb do |f| %>
+				<%= hidden_field_tag :ob, 'true' %>
+				<td><%= cb.country %></td>
+				<td><%= link_to 'Delete', export_country_url(cb, :ob => true), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.country}?"}%></td>
+				<% end %>
+			</tr>	
+			<% end %>
+		<% else %>
+			<tr><td colspan="4">No Countries</td></tr>
+		<% end %>
+
+		<%= form_for @new_export_country, :html => { :id => "new_export_country" } do |f| %>
+		<%= hidden_field_tag :ob, 'true' %>
+
+				<tr>
+				<td>
+					<%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %>
+				</td>
+				<td><%= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %></td>
+				</tr>
+
+		<% end %>
+		</tbody>
+		</table>
+
+		<%= button_to "Next", onboard_brand_ten_url, method: :get, class: "small radius success button" %>
+
+<%= render partial: "shared/panelbottom" %>

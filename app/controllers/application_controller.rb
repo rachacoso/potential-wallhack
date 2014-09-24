@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :get_current_user
   before_action :require_login
+  before_action :get_display
  
 
 	private
@@ -34,5 +35,10 @@ class ApplicationController < ActionController::Base
       redirect_to login_url # halts request cycle
     end
   end
+
+  def get_display
+    @display = Display.all.first
+  end
+ 
 
 end

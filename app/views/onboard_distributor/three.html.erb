@@ -1,30 +1,40 @@
-<%= render partial: "shared/paneltop" %>
-<h3> Which Sectors and Channels?</h3>
 
-				<div class="row">
-					<%= form_for @distributor, url: distributor_url do |f| %>
-					<%= hidden_field_tag :redirect, 'four' %>
-					<div class="medium-6 columns">
-					<%= f.hidden_field :name %>		
-					<h3>Sectors</h3>
-						<% Sector.each do |sc| %>
-					    <div>
-					      <%= check_box_tag "sectors[#{sc.id}]", sc.id, (@distributor.sectors.find(sc) rescue false) ? true : false %>
-					      <%= label_tag("sectors[#{sc.id}]", sc.name) %>
-					    </div>
-					  <% end %>
-					</div>
-					<div class="medium-6 columns">						
-						<h3>Channels</h3>
-						<% Channel.each do |ch| %>
-					    <div>
-					    	<%= check_box_tag "channels[#{ch.id}]", ch.id, (@distributor.channels.find(ch) rescue false) ? true : false  %>
-					      <%= label_tag("channels[#{ch.id}]", ch.name) %>
-					    </div>
-					  <% end %>
-					</div>
-				</div>
-				<%= f.submit 'Next' %>
-				<% end %>
+<%= render partial: "shared/paneltop" %>
+	<div class="row">
+		<div class="medium-12 columns">
+			<h1>Sector and Channel Profile</h1>
+			<hr>
+		</div>
+	</div>
+	<div class="row">
+		<%= form_for @distributor, url: distributor_url do |f| %>
+		<%= hidden_field_tag :redirect, 'four' %>
+		<div class="medium-6 columns">
+		<%= f.hidden_field :name %>		
+		<h3>Sectors</h3>
+			<% Sector.each do |sc| %>
+		    <div>
+		      <%= check_box_tag "sectors[#{sc.id}]", sc.id, (@distributor.sectors.find(sc) rescue false) ? true : false %>
+		      <%= label_tag("sectors[#{sc.id}]", sc.name) %>
+		    </div>
+		  <% end %>
+		</div>
+		<div class="medium-6 columns">						
+			<h3>Channels</h3>
+			<% Channel.each do |ch| %>
+		    <div>
+		    	<%= check_box_tag "channels[#{ch.id}]", ch.id, (@distributor.channels.find(ch) rescue false) ? true : false  %>
+		      <%= label_tag("channels[#{ch.id}]", ch.name) %>
+		    </div>
+		  <% end %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-12 columns">
+			<hr>
+			<%= f.submit 'Update and Continue', class: "tiny radius success button right" %>
+		</div>
+	</div>
+	<% end %>
 			
 <%= render partial: "shared/panelbottom" %>

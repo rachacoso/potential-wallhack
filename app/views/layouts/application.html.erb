@@ -25,14 +25,18 @@
 
 </head>
 <body>
-
+<div class="wrapper">
 <%= content_for?(:user_head) ? yield(:user_head) : "" %>
 
-<div class="row">
-	<div class="large-12 columns">
+
 		<%= yield %>
-	</div>
+
+</div> <!-- /.wrapper -->
+
+<div class="ldpanel footer">
+	&nbsp;
 </div>
+
 
 <%= javascript_include_tag "application" %>
 <%= content_for?(:javascript_foot) ? yield(:javascript_foot) : "" %>

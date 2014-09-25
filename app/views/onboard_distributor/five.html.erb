@@ -3,94 +3,258 @@
 
 <%= render partial: "shared/paneltop" %>
 
-				<h3>Current Portfolio</h3>
-				<table>
-				<thead><tr><th>Brand</th><th>Category</th><th>Website</th><th>Country of Manufacture</th><th colspan="2">&nbsp;</th></tr></thead>
-				<tbody>
-				<% if !@current_brands.empty? %>
-					<% @current_brands.each do |cb| %>
-					<tr>
-						<%= form_for cb do |f| %>
-						<%= hidden_field_tag :ob, 'true' %>
-						<td><%= f.text_field :brand, label: false %></td>
-						<td>
-							<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, cb.category), :prompt => 'Select Category', label: false %>
-						</td>
-						<td><%= f.text_field :website, label: false %></td>
-						<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: false, placeholder: 'Country' %></td>
-						<td>
+	<div class="row">
+		<div class="medium-12 columns">
+			<h1>Brand Portfolio</h1>
+			<hr>
+		</div>
+	</div>
+
+	<div class="groupwrapper">
+	<div class="row">
+		<div class="medium-12 columns">
+			<h3>Current Portfolio</h3>
+			<hr>
+		</div>
+	</div>
+
+	<% if !@current_brands.empty? %>
+		<% @current_brands.each do |cb| %>
+		<div class="rowitem">
+		<div class="row">
+			<div class="medium-12 columns">
+				<%= form_for cb do |f| %>
+				<%= hidden_field_tag :ob, 'true' %>
+				<div class="rowheadback">
+					<div class="row">
+						<div class="medium-8 columns">
+							<%= cb.brand %> &nbsp;
+						</div>
+						<div class="medium-4 columns">
+							&nbsp;
+						</div>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>
+					<div class="medium-7 columns">
+						<%= f.text_field :brand, label: "Brand Name" %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, cb.category), :prompt => 'Select Category', label: "Category" %>
+					</div>					
+				</div>
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>						
+					<div class="medium-7 columns">
+						<%= f.text_field :website, label: "Website" %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: "Country of Manufacture", placeholder: 'Country' %>
+					</div>				
+				</div>
+				<div class="row">
+					<div class="medium-8 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns text-right">
+
 						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-						</td>
-						<td><%= link_to 'Delete', distributor_brand_url(cb, :ob => 'true'), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.brand}?"}%></td>
-						<% end %>
-					</tr>	
-					<% end %>
-				<% else %>
-					<tr><td colspan="4">No Current Brands</td></tr>
+						<%= link_to 'Delete', distributor_brand_url(cb, :ob => 'true'), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.brand}?"}%>
+					</div>
+				</div>				
 				<% end %>
+			</div>
+		</div>
+		</div>
+		<% end %>
+	<% else %>
+		<h5>( No Current Brands )</h5>
+	<% end %>
 
 
+
+
+		<div class="rowitem">
+		<div class="row">
+			<div class="medium-12 columns">
+				<hr>
 				<%= form_for @new_brand, :html => { :id => "new_current_brand" } do |f| %>
+				<%= hidden_field_tag :ob, 'true' %>
 				<%= f.hidden_field :current, value: true %>
+				<div class="rowheadback addnew">
+					<div class="row">
+						<div class="medium-8 columns">
+							Add a Current Brand
+						</div>
+						<div class="medium-4 columns">
+							&nbsp;
+						</div>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>
+					<div class="medium-7 columns">
+						<%= f.text_field :brand, label: "Brand Name", placeholder: 'Brand Name' %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, :prompt => 'Select Category'), :prompt => 'Select Category', label: "Category" %>
+					</div>					
+				</div>
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>						
+					<div class="medium-7 columns">
+						<%= f.text_field :website, label: "Website", placeholder: "Website" %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: "Country of Manufacture", placeholder: "Country" %>
+					</div>				
+				</div>
+				<div class="row">
+					<div class="medium-8 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns text-right">
+						<%= link_to 'Add', "#", :onclick => "$('#new_current_brand').submit()".html_safe %>
+					</div>
+				</div>				
+				<% end %>
+			</div>
+		</div>
+		</div>
+
+	</div> <!-- /.groupwrapper -->
+
+	<div class="groupwrapper">
+	<div class="row">
+		<div class="medium-12 columns">
+			<h3>Past Portfolio</h3>
+			<hr>
+		</div>
+	</div>
+
+	<% if !@past_brands.empty? %>
+		<% @past_brands.each do |cb| %>
+		<div class="rowitem">
+		<div class="row">
+			<div class="medium-12 columns">
+				<%= form_for cb do |f| %>
 				<%= hidden_field_tag :ob, 'true' %>
-
-						<tr>
-						<td><%= f.text_field :brand, label: false, placeholder: 'Brand' %></td>
-						<td>
-						<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, :prompt => 'Select Category'), :prompt => 'Select Category', label: false %>
-						</td>
-						<td><%= f.text_field :website, label: false, placeholder: 'Website'  %></td>
-						<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: false, placeholder: 'Country' %></td>
-						<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_current_brand').submit()".html_safe %></td>
-						</tr>
-
+				<div class="rowheadback">
+					<div class="row">
+						<div class="medium-8 columns">
+							<%= cb.brand %> &nbsp;
+						</div>
+						<div class="medium-4 columns">
+							&nbsp;
+						</div>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>
+					<div class="medium-7 columns">
+						<%= f.text_field :brand, label: "Brand Name" %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, cb.category), :prompt => 'Select Category', label: "Category" %>
+					</div>					
+				</div>
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>						
+					<div class="medium-7 columns">
+						<%= f.text_field :website, label: "Website" %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: "Country of Manufacture", placeholder: 'Country' %>
+					</div>				
+				</div>
+				<div class="row">
+					<div class="medium-8 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns text-right">
+						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+						<%= link_to 'Delete', distributor_brand_url(cb, :ob => 'true'), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.brand}?"}%>
+					</div>
+				</div>				
 				<% end %>
-				</tbody>
-				</table>
+			</div>
+		</div>
+		</div>
+		<% end %>
+	<% else %>
+		<h5>( No Past Brands )</h5>
+	<% end %>
 
-				<h3>Past Portfolio</h3>
-				<table>
-				<thead><tr><th>Brand</th><th>Category</th><th>Website</th><th>Country of Manufacture</th><th colspan="2">&nbsp;</th></tr></thead>
-				<tbody>
-				<% if !@past_brands.empty? %>
-					<% @past_brands.each do |cb| %>
-					<tr>
-						<%= form_for cb do |f| %>
-						<%= hidden_field_tag :ob, 'true' %>
-						<td><%= f.text_field :brand, label: false %></td>
-						<td>
-								<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, cb.category), :prompt => 'Select Category', label: false %>
-						</td>
-						<td><%= f.text_field :website, label: false %></td>
-						<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: false, placeholder: 'Country' %></td>
-						<td>
-								<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-						</td>
-						<td><%= link_to 'Delete', distributor_brand_url(cb, :ob => 'true'), data: { :confirm => "Are you sure you want to delete #{cb.brand}?"}, :foo => "bars", :method => :delete %></td>
-						<% end %>
-					</tr>	
-					<% end %>
-				<% else %>
-					<tr><td colspan="4">No Past Brands</td></tr>
-				<% end %>
 
+
+
+		<div class="rowitem">
+		<div class="row">
+			<div class="medium-12 columns">
+				<hr>
 				<%= form_for @new_brand, :html => { :id => "new_past_brand" } do |f| %>
-				<%= f.hidden_field :current, value: false %>
 				<%= hidden_field_tag :ob, 'true' %>
-
-						<tr>
-						<td><%= f.text_field :brand, label: false, placeholder: 'Brand' %></td>
-						<td>
-								<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, :prompt => 'Select Category'), :prompt => 'Select Category', label: false %>
-						</td>
-						<td><%= f.text_field :website, label: false, placeholder: 'Website' %></td>
-						<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: false, placeholder: 'Country' %></td>
-						<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_past_brand').submit()".html_safe %></td>
-						</tr>
-
+				<%= f.hidden_field :current, value: false %>
+				<div class="rowheadback addnew">
+					<div class="row">
+						<div class="medium-8 columns">
+							Add a Past Brand
+						</div>
+						<div class="medium-4 columns">
+							&nbsp;
+						</div>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>
+					<div class="medium-7 columns">
+						<%= f.text_field :brand, label: "Brand Name", placeholder: 'Brand Name' %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, :prompt => 'Select Category'), :prompt => 'Select Category', label: "Category" %>
+					</div>					
+				</div>
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>						
+					<div class="medium-7 columns">
+						<%= f.text_field :website, label: "Website", placeholder: "Website" %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: "Country of Manufacture", placeholder: "Country" %>
+					</div>				
+				</div>
+				<div class="row">
+					<div class="medium-8 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns text-right">
+						<%= link_to 'Add', "#", :onclick => "$('#new_past_brand').submit()".html_safe %>
+					</div>
+				</div>				
 				<% end %>
-				</tbody>
-				</table>
-				<%= button_to "Next", onboard_distributor_six_url, method: :get, class: "radius success button" %> 
+			</div>
+		</div>
+		</div>
+		
+	</div> <!-- /.groupwrapper -->
+
+<%= button_to "Continue", onboard_distributor_six_url, method: :get, class: "tiny radius success button right" %>
 
 <%= render partial: "shared/panelbottom" %>

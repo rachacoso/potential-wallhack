@@ -16,38 +16,38 @@ class UsersController < ApplicationController
 
 		if User.where(email: params[:user][:email]).exists?
 
-			flash.now[:notice] = "Someone else is already using that email address"
+			flash[:error] = "Someone else is already using that email address"
 			@newuser = User.new
 			@newuser.build_user_profile
-			render :new
+			redirect_to root_url
 
 		elsif params[:user][:email].blank?
 
-			flash.now[:notice] = "Email field cannot be blank"
+			flash[:error] = "Email field cannot be blank"
 			@newuser = User.new
 			@newuser.build_user_profile
-			render :new
+			redirect_to root_url
 
 		elsif params[:user][:user_profile_attributes][:firstname].blank? || params[:user][:user_profile_attributes][:lastname].blank?
 
-			flash.now[:notice] = "Please enter a first and last name"
+			flash[:error] = "Please enter a first and last name"
 			@newuser = User.new
 			@newuser.build_user_profile
-			render :new
+			redirect_to root_url
 
 		elsif params[:user][:password].blank? || params[:user][:password_confirmation].blank?
 
-			flash.now[:notice] = "Password fields cannot be blank"
+			flash[:error] = "Password fields cannot be blank"
 			@newuser = User.new
 			@newuser.build_user_profile
-			render :new
+			redirect_to root_url
 
 		elsif params[:user][:password] != params[:user][:password_confirmation]
 
-			flash.now[:notice] = "Passwords did not match"
+			flash[:error] = "Passwords did not match"
 			@newuser = User.new
 			@newuser.build_user_profile
-			render :new
+			redirect_to root_url
 
 		else
 

@@ -14,7 +14,7 @@ class SessionController < ApplicationController
 			redirect_to '/dashboard'
 		else
 			flash[:notice] = "Invalid email or password"
-			redirect_to '/login'
+			redirect_to '/'
 		end
 	end
 

@@ -1,70 +1,125 @@
 
 
 <% content_for :user_head do %>
-<div class="ldpanel">
+<div class="ldpanel topbar">
+	
 	<div class="row">
-		<div class="medium-6 columns">
+		<div class="medium-3 columns">
 			<h2>[Name TBD]</h2>
 		</div>
 		<div class="medium-6 columns text-right">
-				<% if @current_user %>
-					Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %> |
-					<%= link_to 'Dashboard', dashboard_url %> |
-					<%= link_to 'logout', logout_url %>
-				<% else %>
-				<%= link_to 'Login', "#", id: "login" %> or <%= link_to 'Register', new_user_url %> 
-				<% end %>
+			<% if @current_user %>
+				<div class="usernav">
+				Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %> |
+				<%= link_to 'Dashboard', dashboard_url %> |
+				<%= link_to 'Logout', logout_url %>
+				</div>
+			<% else %>
+
+				<div class="row">
+					<div class="loginwidget">
+
+						<div class="medium-5 columns">
+							<%= form_tag '/login', method: 'post' do %>
+								<%= email_field_tag :email, '', placeholder: 'email'%> 
+						</div>
+
+						<div class="medium-5 columns">
+							<%= password_field_tag :password, '', placeholder: 'password' %>
+						</div>
+
+						<div class="medium-2 columns">
+								<%= submit_tag 'login', class: "tiny radius success button" %>
+							<% end %>
+						</div>
+
+						
+						<% if flash[:notice] %>
+							<div class="medium-12 columns errornotice"><%= flash[:notice] %></div>
+						<% end %>
+
+
+					</div>
+				</div>
+			<% end %>
 		</div>
 	</div>
-	<div class="row hide" id="loginform">
-	<div class="medium-9 columns">
-		<div class="row">
-			<div class="medium-12 columns">
-				<% if flash[:notice] %>
-						<div data-alert class="alert-box success">
-					  	<%= flash[:notice] %>
-						  <a href="#" class="close">&times;</a>
-						</div>
-				<% end %>
-
-				<% if flash[:error] %>
-						<div data-alert class="alert-box warning">
-					  	<%= flash[:error] %>
-						  <a href="#" class="close">&times;</a>
-						</div>
-				<% end %>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="medium-5 columns">
-				<%= form_tag url: '/login', method: 'post' do %>
-					<%= email_field_tag :email, '', placeholder: 'email'%> 
-			</div>
-			<div class="medium-1 columns" style="padding: 1.2em;">
-				/
-			</div>
-			<div class="medium-5 columns">
-				<%= password_field_tag :password, '', placeholder: 'password' %>
-			</div>
-			<div class="medium-1 columns">
-					<%= submit_tag 'login', class: "tiny radius success button" %>
-				<% end %>
-			</div>
-		</div>
-
-	</div>
-</div>
 
 </div>
 <% end %>
 
-<div class="ldpanel">
+
 <div class="row">
-	<div class="small-12 columns">
-		
-			blah blah blah
+
+	<div class="medium-7 columns">
+		<div class="ldpanel">
+
+			<p>Developing solve frontline; worldwide, public sector measures emergency response efficient future inspire social change. Raise awareness; resourceful political save lives scalable. </p>
+
+			<p>Nelson Mandela; combat HIV/AIDS rights-based approach transform the world long-term, agenda, Martin Luther King Jr. storytelling save the world Bill and Melinda Gates civic engagement reduce carbon emissions plumpy'nut justice. </p>
+
+			<p>Global; enable strengthen democracy development international development immunize, participatory monitoring Cesar Chavez shifting landscape. Local life-saving underprivileged, human being, sanitation; legitimize; Gandhi Rockefeller. </p>
+
 		</div>
 	</div>
 
-</div>
+	<% if !@current_user %>
+	<div class="medium-5 columns">
+		<div class="ldpanel">
+			<h2><strong>Sign Up...</strong></h2>
+			<div class="row">
+				<div class="medium-12 columns text-right">
+					<% if flash[:error] %>
+						<div data-alert class="alert-box alert">
+							<%= flash[:error] %>
+						  <a href="#" class="close">&times;</a>
+						</div>
+					<% end %>
+
+					<%= form_for @newuser, url: users_path do |f| %>
+					<div class="row" style="margin-bottom: 1em;">
+						<div class="medium-12 columns">
+							<%= radio_button_tag(:user_type, "brand", selected: true) %>
+							<%= label_tag(:user_type_brand, "as a Brand") %>
+							<%= radio_button_tag(:user_type, "distributor") %>
+							<%= label_tag(:user_type_distributor, "as a Distributor") %>
+						</div>
+					</div>
+
+					<div class="row">
+						<%= f.fields_for :user_profile do |ff| %>
+						<div class="medium-6 columns">
+							<%= ff.text_field :firstname, :placeholder => 'First Name', :label => false  %>
+						</div>
+						<div class="medium-6 columns">
+							<%= ff.text_field :lastname, :placeholder => 'Last Name', :label => false  %>
+						</div>
+						<% end %>
+					
+						<div class="medium-12 columns">
+						<%= f.text_field :email, :placeholder => 'Email (will be used as your login)', :label => false %>
+						</div>
+						<div class="medium-12 columns">
+						<%= f.password_field :password, :placeholder => 'Password', :label => false %>
+						</div>
+						<div class="medium-12 columns">
+						<%= f.password_field :password_confirmation, :placeholder => 'Password (repeat)', :label => false %>
+						</div>
+						<div class="medium-12 columns">
+						<%= f.submit 'Sign Up', class: "tiny radius success button" %>
+						</div>
+					</div>
+					<% end %>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<% end %>
+
+</div> <!-- /.row -->
+
+
+
+

@@ -4,6 +4,9 @@ class HomeController < ApplicationController
 
 	def front
 
+		@newuser = User.new
+		@newuser.build_user_profile
+		
 	end
 
 

@@ -1,44 +1,15 @@
+
+
+<%= render partial: "shared/topbar" %>
+
 <div class="row">
-
-	<div class="medium-3 medium-push-9 columns">
-		<div class="ldpanel clearfix">
-			
-			<div class="row">
-				<div class="medium-12 columns">
-					<h5>Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %></h5>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="medium-12 columns">
-					<%= link_to 'Dashboard', dashboard_url %>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="medium-12 columns">
-					<%= link_to 'Logout', logout_url %>
-				</div>
-			</div>
-
-		</div>
-	</div>
-
-	<div class="medium-9 medium-pull-3 columns">
-		
-		
-
-
-
-<% if flash[:error] %>
-	<%= flash[:error] %> <br>
-<% end %>
+	<div class="medium-10 medium-centered columns">
 
 <%= render partial: "shared/headpaneltop" %>
 
 	<div class="row">
 		<div class="medium-12 columns">
-			<h1>Edit <strong>Distributor Profile</strong></h1>
+			<h4>Edit <strong>Distributor Profile</strong></h4>
 		</div>
 	</div>
 <%= render partial: "shared/headpanelbottom" %>
@@ -47,6 +18,7 @@
 	<div class="row">
 		<div class="medium-12 columns">
 			<h1>Company Name</h1>
+			<hr>
 		</div>
 	</div>
 	<div class="row">
@@ -55,7 +27,8 @@
 			<%= f.text_area :name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Distributor Name" %>
 		</div>
 		<div class="medium-12 columns">
-			<%= f.submit 'Update', class: "small radius success button right" %>
+			<hr>
+			<%= f.submit 'Update', class: "tiny radius success button right" %>
 		</div>
 		<% end %>
 	</div>
@@ -66,6 +39,7 @@
 	<div class="row">
 		<div class="medium-12 columns">
 			<h1>General Information</h1>
+			<hr>
 		</div>
 	</div>
 	<%= form_for @distributor, url: distributor_url do |f| %>
@@ -88,6 +62,9 @@
 			<%= f.text_field :website %>
 		</div>
 	</div>
+
+<hr>
+
 	<%= f.fields_for :contact_info do |ff| %>
 	<div class="row">
 		<div class="medium-6 columns">
@@ -110,6 +87,9 @@
 			<%= ff.text_field :phone %>
 		</div>
 	</div>
+
+<hr>
+
 	<div class="row">
 		<div class="medium-6 columns">
 			<h3>Company Address</h3>
@@ -142,8 +122,8 @@
 		</div>
 	</div>
 	<% end %>
-
-	<%= f.submit 'Update', class: "small radius success button right"  %>
+	<hr>
+	<%= f.submit 'Update', class: "tiny radius success button right"  %>
 
 	<% end %>
 
@@ -155,6 +135,7 @@
 	<div class="row">
 		<div class="medium-12 columns">
 			<h1>Sector and Channel Profile</h1>
+			<hr>
 		</div>
 	</div>
 	<div class="row">
@@ -181,8 +162,8 @@
 	</div>
 	<div class="row">
 		<div class="medium-12 columns">
-			<br>
-			<%= f.submit 'Update', class: "small radius success button right" %>
+			<hr>
+			<%= f.submit 'Update', class: "tiny radius success button right" %>
 		</div>
 	</div>
 	<% end %>
@@ -193,63 +174,107 @@
 
 <div class="row">
 	<div class="medium-12 columns">
-		<h1>Channel Capacity</h1>
+		<h1>Channel Capacities</h1>
+		<hr>
 	</div>
 </div>
 
 <div class="row">
-	<div class="medium-6 columns">
+	<div class="medium-8 medium-centered columns">
+	<div class="groupwrapper">
 
-		<table>
-		<thead><tr><th>Channel</th><th>Capacity</th></tr></thead>
-		<tbody>
+
+<div class="row">
+	<div class="medium-5 columns text-right">
+		<h4 class="columnheader">Channel</h4>
+	</div>
+	<div class="medium-7 columns">
+		<h4 class="columnheader">Capacity</h4>
+	</div>
+</div>	
+
+
 				<%= form_tag(channel_capacity_bulkupdate_url, method: "post") do  %>
 					
 					<% @distributor.channels.each do |chan| %>
-						<tr>
-						<td><%= label_tag "channel_capacity[bulk_ids][#{chan.id}]", chan.name, class: "inline right" %></td>
-						<td><%= number_field_tag("channel_capacity[bulk_ids][#{chan.id}]", @distributor.channel_capacities.where(channel_id: chan.id).first.capacity) %></td>
-						</tr>
+
+						<div class="row">
+							<div class="medium-5 columns">
+								<%= label_tag "channel_capacity[bulk_ids][#{chan.id}]", chan.name, class: "inline right" %>
+							</div>
+							<div class="medium-4 columns end">
+								<%= number_field_tag("channel_capacity[bulk_ids][#{chan.id}]", @distributor.channel_capacities.where(channel_id: chan.id).first.capacity) %>
+							</div>
+						</div>
+		
 					<% end %>
 
 					<% if @distributor.channel_capacities.where(channel_id: 0).first %>
-						<tr>
-							<th colspan="2">Custom Channels </th>
-						</tr>
+						<div class="row">
+							<div class="medium-11 columns text-center">
+								<h6>(Custom Channels)</h6>
+							</div>
+						</div>
 					<% end %>
 					<% @distributor.channel_capacities.where(channel_id: 0).each do |cc| %>
-						<tr>
-						<td><%= cc.custom_channel_name %></td>
-						<td><%= number_field_tag("channel_capacity[bulk_ids][#{cc.id}]", cc.capacity) %>
-						<%= link_to 'Delete', cc, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cc.custom_channel_name}?"}%>
-						</td>
-						</tr>
+						<div class="row">
+							<div class="medium-5 columns">
+								<%= label_tag "channel_capacity[bulk_ids][#{cc.id}]", cc.custom_channel_name, class: "inline right" %>
+							</div>
+							<div class="medium-4 columns">
+								<%= number_field_tag("channel_capacity[bulk_ids][#{cc.id}]", cc.capacity) %>
+							</div>
+							<div class="medium-3 columns text-right" style="padding: 0.7em 1em;">
+								<%= link_to 'Delete', cc, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cc.custom_channel_name}?"}%>
+							</div>
+						</div>
+
 					<% end %>
 
-						<tr><td colspan="3" class="text-right"><%= submit_tag('Update', class: "small radius success button") %></td></tr>
+						<div class="row">
+							<div class="medium-12 columns">
+								<hr>
+								<%= submit_tag('Update', class: "tiny radius success button right") %>
+							</div>
+						</div>
+
 				<% end %>					
 
-		</tbody>
-		</table>
-	</div>
-	<div class="medium-6 columns">
-		<table>
-			<tbody>
-				<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" } do |f| %>
-					<tr>
-						<th colspan="2">Add Custom Channels </th>
-					</tr>								
-					<tr>
-						<td>
-							<%= f.text_field :custom_channel_name, label: false, placeholder: 'Custom Channel Name' %>
-						</td>
-						<td><%= link_to 'Add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe %></td>
-					</tr>
-				<% end %>	
-			</tbody>
-		</table>
+
+
+		</div>
 	</div>
 </div>
+
+<div class="row">
+	<div class="medium-8 medium-centered columns">
+		<div class="groupwrapper">
+
+
+				<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" } do |f| %>
+					<div class="row">
+						<div class="medium-12 columns">
+							<h6>Add Custom Channels</h6>
+							<hr>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="medium-9 columns">
+							<%= f.text_field :custom_channel_name, label: false, placeholder: 'Custom Channel Name' %>
+						</div>
+						<div class="medium-3 columns text-right" style="padding: 0.7em 1em;">
+							<%= link_to 'add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe %>
+						</div>
+					</div>
+
+				<% end %>	
+
+
+		</div>
+	</div>
+</div>
+
 
 <%= render partial: "shared/panelbottom" %>
 
@@ -259,11 +284,15 @@
 	<div class="row">
 		<div class="medium-12 columns">
 			<h1>Brand Portfolio</h1>
+			<hr>
 		</div>
 	</div>
+
+	<div class="groupwrapper">
 	<div class="row">
 		<div class="medium-12 columns">
 			<h3>Current Portfolio</h3>
+			<hr>
 		</div>
 	</div>
 
@@ -309,10 +338,9 @@
 					<div class="medium-8 columns">
 						&nbsp;
 					</div>
-					<div class="medium-2 columns">
+					<div class="medium-4 columns text-right">
+
 						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-					</div>
-					<div class="medium-2 columns">
 						<%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.brand}?"}%>
 					</div>
 				</div>				
@@ -322,63 +350,184 @@
 		</div>
 		<% end %>
 	<% else %>
-		No Current Brands
+		<h5>( No Current Brands )</h5>
 	<% end %>
 
 
-	<%= form_for @new_brand, :html => { :id => "new_current_brand" } do |f| %>
-	<%= f.hidden_field :current, value: true %>
-
-			<%= f.text_field :brand, label: false, placeholder: 'Brand' %>
-			<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, :prompt => 'Select Category'), :prompt => 'Select Category', label: false %>
-			<%= f.text_field :website, label: false, placeholder: 'Website'  %>
-			<%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: false, placeholder: 'Country' %>
-			<%= link_to 'Add', "#", :onclick => "$('#new_current_brand').submit()".html_safe %>
-
-	<% end %>
 
 
-	<h3>Past Portfolio</h3>
-	<table>
-	<thead><tr><th>Brand</th><th>Category</th><th>Website</th><th>Country of Manufacture</th><th colspan="2">&nbsp;</th></tr></thead>
-	<tbody>
+		<div class="rowitem">
+		<div class="row">
+			<div class="medium-12 columns">
+				<hr>
+				<%= form_for @new_brand, :html => { :id => "new_current_brand" } do |f| %>
+				<%= f.hidden_field :current, value: true %>
+				<div class="rowheadback addnew">
+					<div class="row">
+						<div class="medium-8 columns">
+							Add a Current Brand
+						</div>
+						<div class="medium-4 columns">
+							&nbsp;
+						</div>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>
+					<div class="medium-7 columns">
+						<%= f.text_field :brand, label: "Brand Name", placeholder: 'Brand Name' %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, :prompt => 'Select Category'), :prompt => 'Select Category', label: "Category" %>
+					</div>					
+				</div>
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>						
+					<div class="medium-7 columns">
+						<%= f.text_field :website, label: "Website", placeholder: "Website" %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: "Country of Manufacture", placeholder: "Country" %>
+					</div>				
+				</div>
+				<div class="row">
+					<div class="medium-8 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns text-right">
+						<%= link_to 'Add', "#", :onclick => "$('#new_current_brand').submit()".html_safe %>
+					</div>
+				</div>				
+				<% end %>
+			</div>
+		</div>
+		</div>
+
+	</div> <!-- /.groupwrapper -->
+
+	<div class="groupwrapper">
+	<div class="row">
+		<div class="medium-12 columns">
+			<h3>Past Portfolio</h3>
+			<hr>
+		</div>
+	</div>
+
 	<% if !@past_brands.empty? %>
 		<% @past_brands.each do |cb| %>
-		<tr>
-			<%= form_for cb do |f| %>
-			<td><%= f.text_field :brand, label: false %></td>
-			<td>
-					<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, cb.category), :prompt => 'Select Category', label: false %>
-			</td>
-			<td><%= f.text_field :website, label: false %></td>
-			<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: false, placeholder: 'Country' %></td>
-			<td>
-					<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-			</td>
-			<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.brand}?"}%></td>
-			<% end %>
-		</tr>	
+		<div class="rowitem">
+		<div class="row">
+			<div class="medium-12 columns">
+				<%= form_for cb do |f| %>
+				<div class="rowheadback">
+					<div class="row">
+						<div class="medium-8 columns">
+							<%= cb.brand %> &nbsp;
+						</div>
+						<div class="medium-4 columns">
+							&nbsp;
+						</div>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>
+					<div class="medium-7 columns">
+						<%= f.text_field :brand, label: "Brand Name" %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, cb.category), :prompt => 'Select Category', label: "Category" %>
+					</div>					
+				</div>
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>						
+					<div class="medium-7 columns">
+						<%= f.text_field :website, label: "Website" %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: "Country of Manufacture", placeholder: 'Country' %>
+					</div>				
+				</div>
+				<div class="row">
+					<div class="medium-8 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns text-right">
+						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+						<%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.brand}?"}%>
+					</div>
+				</div>				
+				<% end %>
+			</div>
+		</div>
+		</div>
 		<% end %>
 	<% else %>
-		<tr><td colspan="4">No Past Brands</td></tr>
+		<h5>( No Past Brands )</h5>
 	<% end %>
 
-	<%= form_for @new_brand, :html => { :id => "new_past_brand" } do |f| %>
-	<%= f.hidden_field :current, value: false %>
 
-			<tr>
-			<td><%= f.text_field :brand, label: false, placeholder: 'Brand' %></td>
-			<td>
-					<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, :prompt => 'Select Category'), :prompt => 'Select Category', label: false %>
-			</td>
-			<td><%= f.text_field :website, label: false, placeholder: 'Website' %></td>
-			<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: false, placeholder: 'Country' %></td>
-			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_past_brand').submit()".html_safe %></td>
-			</tr>
 
-	<% end %>
-	</tbody>
-	</table>
+
+		<div class="rowitem">
+		<div class="row">
+			<div class="medium-12 columns">
+				<hr>
+				<%= form_for @new_brand, :html => { :id => "new_past_brand" } do |f| %>
+				<%= f.hidden_field :current, value: false %>
+				<div class="rowheadback addnew">
+					<div class="row">
+						<div class="medium-8 columns">
+							Add a Past Brand
+						</div>
+						<div class="medium-4 columns">
+							&nbsp;
+						</div>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>
+					<div class="medium-7 columns">
+						<%= f.text_field :brand, label: "Brand Name", placeholder: 'Brand Name' %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, :prompt => 'Select Category'), :prompt => 'Select Category', label: "Category" %>
+					</div>					
+				</div>
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>						
+					<div class="medium-7 columns">
+						<%= f.text_field :website, label: "Website", placeholder: "Website" %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: "Country of Manufacture", placeholder: "Country" %>
+					</div>				
+				</div>
+				<div class="row">
+					<div class="medium-8 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns text-right">
+						<%= link_to 'Add', "#", :onclick => "$('#new_past_brand').submit()".html_safe %>
+					</div>
+				</div>				
+				<% end %>
+			</div>
+		</div>
+		</div>
+		
+	</div> <!-- /.groupwrapper -->
 
 <%= render partial: "shared/panelbottom" %>
 
@@ -387,6 +536,7 @@
 	<div class="row">
 		<div class="medium-12 columns">
 			<h1>Sales / Education Capabilities</h1>
+			<hr>
 		</div>
 	</div>
 				
@@ -404,7 +554,8 @@
 	</div>
 	<div class="row">
 		<div class="medium-12 columns">
-			<%= f.submit 'Update', class: "small radius success button right" %>
+			<hr>
+			<%= f.submit 'Update', class: "tiny radius success button right" %>
 		</div>
 	</div>
 	<% end %>	
@@ -415,51 +566,134 @@
 	<div class="row">
 		<div class="medium-12 columns">
 			<h1>Trade Shows</h1>
+			<hr>
 		</div>
 	</div>
 
-			<div class="row">
-				<div class="medium-12 columns">
-					
-					<h3>Shows Participated In</h3>
-					<table>
-					<thead><tr><th>Show Name</th><th>Date</th><th>Country</th><th>Years Participated</th><th>Website</th><th colspan="2">&nbsp;</th></tr></thead>
-					<tbody>
-					<% if !@trade_shows.empty? %>
-						<% @trade_shows.each do |cb| %>
-						<tr>
-							<%= form_for cb do |f| %>
-							<td><%= f.text_field :name, label: false %></td>
-							<td><%= f.text_field :date, label: false, class: "datepick", :value => cb.date ? cb.date.strftime("%m/%Y") : '' %></td>
-							<td><%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %></td>
-							<td><%= f.text_field :years_participated, label: false %></td>
-							<td><%= f.text_field :website, label: false %></td>
-							<td>
-									<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-							</td>
-							<td><%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.name}?"}%></td>
-							<% end %>
-						</tr>	
-						<% end %>
-					<% else %>
-						<tr><td colspan="4">No Trade Shows</td></tr>
-					<% end %>
+<div class="groupwrapper">
+	<div class="row">
+		<div class="medium-12 columns">
+			<h3>Shows Participated In</h3>
+			<hr>
+		</div>
+	</div>
 
-					<%= form_for @new_trade_show, :html => { :id => "new_trade_show" } do |f| %>
-							<tr>
-							<td><%= f.text_field :name, label: false, placeholder: 'Trade Show Name' %></td>
-							<td><%= f.text_field :date, label: false, placeholder: 'Date' , class: "datepick" %></td>
-							<td><%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %></td>
-							<td><%= f.text_field :years_participated, label: false, placeholder: 'Years participated' %></td>
-							<td><%= f.text_field :website, label: false, placeholder: 'Website' %></td>
-							<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_trade_show').submit()".html_safe %></td>
-							</tr>
-					<% end %>
-					</tbody>
-					</table>
-					
+	<% if !@trade_shows.empty? %>
+		<% @trade_shows.each do |cb| %>
+		<div class="rowitem">
+		<div class="row">
+			<div class="medium-12 columns">
+				<%= form_for cb do |f| %>
+				<div class="rowheadback">
+					<div class="row">
+						<div class="medium-8 columns">
+							<%= cb.name %> &nbsp;
+						</div>
+						<div class="medium-4 columns">
+							&nbsp;
+						</div>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>
+					<div class="medium-5 columns">
+						<%= f.text_field :name, label: "Trade Show Name", placeholder: 'Trade Show Name' %>
+					</div>
+					<div class="medium-3 columns">
+						<%= f.text_field :date, label: "Date", placeholder: 'Date' , class: "datepick" %>
+					</div>
+					<div class="medium-3 columns">
+						<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
+					</div>
 				</div>
-			</div>				
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns">
+						<%= f.text_field :years_participated, label: "Years Participated", placeholder: 'Years participated' %>
+					</div>
+					<div class="medium-7 columns">
+						<%= f.text_field :website, label: "Website", placeholder: 'Website' %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-8 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns text-right">
+						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+						<%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.brand}?"}%>
+					</div>
+				</div>				
+				<% end %>
+			</div>
+		</div>
+		</div>
+		<% end %>
+	<% else %>
+		<h5>No Trade Shows</h5>
+	<% end %>
+
+
+
+
+		<div class="rowitem">
+		<div class="row">
+			<div class="medium-12 columns">
+				<hr>
+				<%= form_for @new_trade_show, :html => { :id => "new_trade_show" } do |f| %>
+				<div class="rowheadback addnew">
+					<div class="row">
+						<div class="medium-8 columns">
+							Add a Trade Show
+						</div>
+						<div class="medium-4 columns">
+							&nbsp;
+						</div>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>
+					<div class="medium-5 columns">
+						<%= f.text_field :name, label: "Trade Show Name", placeholder: 'Trade Show Name' %>
+					</div>
+					<div class="medium-3 columns">
+						<%= f.text_field :date, label: "Date", placeholder: 'Date' , class: "datepick" %>
+					</div>
+					<div class="medium-3 columns">
+						<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns">
+						<%= f.text_field :years_participated, label: "Years Participated", placeholder: 'Years participated' %>
+					</div>
+					<div class="medium-7 columns">
+						<%= f.text_field :website, label: "Website", placeholder: 'Website' %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-8 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns text-right">
+						<%= link_to 'Add', "#", :onclick => "$('#new_trade_show').submit()".html_safe %>
+					</div>
+				</div>				
+				<% end %>
+			</div>
+		</div>
+		</div>
+
+	</div> <!-- /.groupwrapper -->
 
 <%= render partial: "shared/panelbottom" %>
 
@@ -468,6 +702,7 @@
 	<div class="row">
 		<div class="medium-12 columns">
 			<h1>Marketing/PR Capabilities</h1>
+			<hr>
 		</div>
 	</div>
 	<%= form_for @distributor, url: distributor_url do |f| %>
@@ -484,6 +719,8 @@
 		</div>
 	</div>
 
+<hr>
+
 	<div class="row">
 		<div class="medium-12 columns">
 			<h3>External Marketing/PR</h3>
@@ -499,6 +736,8 @@
 
 		</div>
 	</div>				
+
+<hr>
 
 	<div class="row">
 		<div class="medium-12 columns">
@@ -519,6 +758,8 @@
 		</div>
 	</div>	
 
+<hr>
+
 	<div class="row">
 		<div class="medium-12 columns">
 			<h3>Customer Database</h3>
@@ -529,8 +770,8 @@
 			<%= render partial: "shared/numeric_field", locals: {f: f, field: :customer_database_size, fieldlabel: 'Customer Database Size' } %>	
 		</div>
 	</div>
-
-		 <%= f.submit 'Update' %>
+		<hr>
+		 <%= f.submit 'Update', class: "tiny radius success button right"  %>
 
 	<% end %>
 

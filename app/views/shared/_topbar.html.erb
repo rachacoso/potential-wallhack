@@ -1,0 +1,23 @@
+<% content_for :user_head do %>
+
+	
+	<div class="row">
+		<div class="medium-3 columns text-center">
+			<div class="ldpanel topbar">
+			<strong>[Name TBD]</strong>
+			</div>
+		</div>
+		<div class="medium-6 columns text-right">
+			<div class="ldpanel topbar">
+				<% if @current_user %>
+					<div class="usernav">
+					Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %> |
+					<%= link_to 'Front', root_url %> |
+					<%= link_to 'Logout', logout_url %>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+<% end %>

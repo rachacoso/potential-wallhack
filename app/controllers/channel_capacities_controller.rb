@@ -63,7 +63,7 @@ class ChannelCapacitiesController < ApplicationController
 
 		if @current_user.distributor
 			if params[:ob]
-				redirect_to onboard_distributor_four_url
+				redirect_to onboard_distributor_five_url
 			else
 				redirect_to distributor_url
 			end			

@@ -1,0 +1,38 @@
+// Global
+
+// We use these to define default font weights
+// $font-weight-normal: normal !default
+// $font-weight-bold: bold !default
+
+// We use these to control various global styles
+$body-bg: #D6E8FF;
+$body-font-color: #547DB2;
+// $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$body-font-family: "jaf-facitweb",sans-serif;
+// $body-font-weight: $font-weight-normal;
+// $body-font-style: normal;
+
+// We use this to control font-smoothing
+// $font-smoothing: antialiased;
+
+// We use these to control text direction settings
+// $text-direction: ltr;
+// $opposite-direction: right;
+// $default-float: left;
+
+// We use these as default colors throughout
+// $primary-color: #008CBA;
+$primary-color: #FF8B18;
+// $secondary-color: #e7e7e7;
+// $alert-color: #f04124;
+// $success-color: #43AC6A;
+$success-color: #FF8B18;
+// $warning-color: #f08a24;
+// $info-color: #a0d3e8;
+$link-color: #FF8B18;
+
+
+
+// We use these to make sure border radius matches unless we want it different.
+$global-radius: 2px;
+// $global-rounded: 1000px;

@@ -1,25 +1,32 @@
 
+@import "global_variables";
+
 
 body {
-  padding-bottom: 2em;
-  padding-top: 2em;
+  // padding-bottom: 2em;
+  // padding-top: 2em;
 
 }
-
-/////////////
-// DEV STYLES
-/////////////
 
 // div {
 //   border: 1px solid red; 
 // }
+
+/////////////
+// DEV STYLES
+/////////////
 
 .tbd {
   color: red;
   margin: 1em 0em;
  }
 
+// Error/Validation styling
 
+.errornotice {
+  color: red;
+  font-size: 0.60em;
+}
 
 // Transparent backgrounds
 
@@ -38,6 +45,33 @@ body {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str}, endColorstr=#{$ie-hex-str})";
 }
 
+.wrapper {
+  min-height: 100%;
+}
+
+.groupwrapper {
+  @include transparent (#fff, 0.2);
+  padding: 0.5em;
+  margin: 0.5em 0em;
+  border: 2px solid #455E80;
+  a {
+    border: 1px solid $link-color;
+    transition: 0.2s;
+    padding: 0.1em 0.4em;
+    border-radius: 5px;
+    font-size: 0.65em;
+    &:hover {
+      background-color: $link-color;
+      color: white;
+    }
+  }
+}
+
+.columnheader {
+  // border-top: 1px solid black;
+  border-bottom: 2px solid black;
+  padding: 0.1em 0.5em;
+}
 
 
 .ldpanel {
@@ -49,15 +83,18 @@ body {
   /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
   border-radius: 8px; 
 
-	border: 1px dotted black;
+	// border: 1px dotted black;
 	padding: 2em 2em;
 	margin: 0.5em 0em 0.5em 0em;
   // background-color: #D6E8FF;
 	@include transparent (#D6E8FF, 0.9);
 
+  // DEPRECATED??
 	&.products {
 		height: 20em;
 	}
+
+  // DEPRECATED??
 	&.profile {
 		height: 25em;
     .inner {
@@ -69,6 +106,31 @@ body {
       overflow-y: auto;
     }
 	}	
+
+  // Top Bar
+  &.topbar {
+    border-radius: 0px;
+    padding: 0.5em 0em;
+    .usernav,
+    #loginwidget  {
+      padding: 0.5em;
+      margin: 0.55em 0em;
+    }
+    .usernav {
+      // border-bottom: 1px dotted black;
+      margin: 0em 0.5em;
+      padding: 0em;
+    }     
+  }
+  
+  // Footer
+  &.footer {
+    border-radius: 0px;
+    padding: 0;
+    margin: 0;
+
+  }
+
 }
 
 .headpanel {
@@ -103,6 +165,9 @@ body {
   margin: 0em 0em 1em 0em;
   color: white;
   border-bottom: 2px solid scale-color(#ABBACC, $lightness: -30%);
+  &.addnew {
+    background-color: scale-color(#ABBACC, $lightness: -50%);
+  }
 }
 
 
@@ -117,8 +182,9 @@ textarea {
   resize: vertical;
 }
 
-
-// Input styling
+////////////////
+// Forms styling
+////////////////
 
 $input-background-color: scale-color(#D6E8FF, $lightness: 50%);
 $input-text-color: #547DB2;
@@ -164,6 +230,7 @@ select.hover {
   box-shadow: none;
   color: $input-text-color;
 }
+
 
 // placeholder styling
 $placeholder-color: #ABBACC;
@@ -284,20 +351,9 @@ input[type=checkbox]:checked + label {
 }
 
 
-
-
-
-// Table 
-
-.newitemrow td,
-.newitemrow tr {
-  background: scale-color(#2C3838, $lightness: 10%);
-
-}
-
-
-
+////////////////
 // AUTOCOMPLETE STYLES
+////////////////
 
 .autocomplete-suggestions { 
   font-weight: 200;

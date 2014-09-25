@@ -11,7 +11,7 @@
 
 // Allows the use of rem-calc() or lower-bound() in your settings
 @import "foundation/functions";
-
+@import "global_variables";
 
 // $experimental: true;
 
@@ -39,44 +39,7 @@
 // $row-width: rem-calc(1000);
 // $total-columns: 12;
 
-// Global
 
-// We use these to define default font weights
-// $font-weight-normal: normal !default
-// $font-weight-bold: bold !default
-
-// We use these to control various global styles
-$body-bg: #D6E8FF;
-$body-font-color: #547DB2;
-// $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-$body-font-family: "jaf-facitweb",sans-serif;
-// $body-font-weight: $font-weight-normal;
-// $body-font-style: normal;
-
-// We use this to control font-smoothing
-// $font-smoothing: antialiased;
-
-// We use these to control text direction settings
-// $text-direction: ltr;
-// $opposite-direction: right;
-// $default-float: left;
-
-// We use these as default colors throughout
-// $primary-color: #008CBA;
-$primary-color: #B29C72;
-// $secondary-color: #e7e7e7;
-// $alert-color: #f04124;
-// $success-color: #43AC6A;
-$success-color: #455E7F;
-// $warning-color: #f08a24;
-// $info-color: #a0d3e8;
-$link-color: #547DB2;
-
-
-
-// We use these to make sure border radius matches unless we want it different.
-$global-radius: 2px;
-// $global-rounded: 1000px;
 
 // We use these to control inset shadow shiny edges and depressions.
 // $shiny-edge-size: 0 1px 0;
@@ -201,6 +164,7 @@ $anchor-font-color-hover: scale-color($link-color, $lightness: -14%);
 // $hr-border-width: 1px;
 // $hr-border-style: solid;
 // $hr-border-color: #ddd;
+$hr-border-color: scale-color($body-font-color, $lightness: -14%);
 // $hr-margin: rem-calc(20);
 
 // We use these to style lists

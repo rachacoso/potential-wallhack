@@ -7,132 +7,15 @@
 		</div>
 	</div>
 
-<div class="groupwrapper">
-	<div class="row">
-		<div class="medium-12 columns">
-			<h3>Shows Participated In</h3>
-			<hr>
-		</div>
-	</div>
-
-	<% if !@trade_shows.empty? %>
-		<% @trade_shows.each do |cb| %>
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<%= form_for cb do |f| %>
-				<%= hidden_field_tag :ob, 'true' %>
-				<div class="rowheadback">
-					<div class="row">
-						<div class="medium-8 columns">
-							<%= cb.name %> &nbsp;
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-5 columns">
-						<%= f.text_field :name, label: "Trade Show Name", placeholder: 'Trade Show Name' %>
-					</div>
-					<div class="medium-3 columns">
-						<%= f.text_field :date, label: "Date", placeholder: 'Date' , class: "datepick" %>
-					</div>
-					<div class="medium-3 columns">
-						<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
-					</div>
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :years_participated, label: "Years Participated", placeholder: 'Years participated' %>
-					</div>
-					<div class="medium-7 columns">
-						<%= f.text_field :website, label: "Website", placeholder: 'Website' %>
-					</div>
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-						<%= link_to 'Delete', trade_show_url(cb, :ob => 'true'), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.brand}?"}%>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-		<% end %>
-	<% else %>
-		<h5>No Trade Shows</h5>
-	<% end %>
-
-
-
-
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<hr>
-				<%= form_for @new_trade_show, :html => { :id => "new_trade_show" } do |f| %>
-				<%= hidden_field_tag :ob, 'true' %>
-				<div class="rowheadback addnew">
-					<div class="row">
-						<div class="medium-8 columns">
-							Add a Trade Show
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-5 columns">
-						<%= f.text_field :name, label: "Trade Show Name", placeholder: 'Trade Show Name' %>
-					</div>
-					<div class="medium-3 columns">
-						<%= f.text_field :date, label: "Date", placeholder: 'Date' , class: "datepick" %>
-					</div>
-					<div class="medium-3 columns">
-						<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
-					</div>
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :years_participated, label: "Years Participated", placeholder: 'Years participated' %>
-					</div>
-					<div class="medium-7 columns">
-						<%= f.text_field :website, label: "Website", placeholder: 'Website' %>
-					</div>
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-						<%= link_to 'Add', "#", :onclick => "$('#new_trade_show').submit()".html_safe %>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-
-	</div> <!-- /.groupwrapper -->
+	<%= render partial: "shared/editcollblock", locals: { 
+		headertitle: "Shows Participated in",
+		coll: @trade_shows,
+		identifier: "name",
+		no_item_message: "No Trade Shows",
+		coll_new_item: @new_trade_show,
+		coll_new_item_text: "Add a Trade Show",
+		#iscurrent: "true"
+	} %>
 
 	<%= button_to "Continue", onboard_distributor_eight_url, method: :get, class: "tiny radius success button right" %>
 

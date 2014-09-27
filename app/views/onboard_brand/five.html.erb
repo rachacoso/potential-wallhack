@@ -1,91 +1,165 @@
+
 <%= render partial: "shared/paneltop" %>
 
-	<h3>Current SKU List</h3>
-	<table>
-	<thead><tr><th>Product</th><th>Description</th><th>MSRP</th><th>Key Benefits</th><th>Country of Manufacture</th><th colspan="2">&nbsp;</th></tr></thead>
-	<tbody>
-	<% unless @current_products.nil? || @current_products.empty?   %>
-		<% @current_products.each do |cb| %>
-		<tr>
-			<%= form_for cb do |f| %>
-			<%= hidden_field_tag :ob, 'true' %>
-			<td><%= f.text_field :name, label: false, placeholder: 'Name' %></td>
-			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
-			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
-			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
-			<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: false, placeholder: 'Country of Manufacture'  %></td>
-			<td>
-			<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-			</td>
-			<td><%= link_to 'Delete', product_url(cb, :ob => 'true'), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.name}?"}%></td>
-			<% end %>
-		</tr>	
+	<div class="row">
+		<div class="medium-12 columns">
+			<h1>Product Portfolio</h1>
+			<hr>
+		</div>
+	</div>
+
+	
+	<%= render partial: "shared/editcollblock", locals: { 
+		headertitle: "Current SKU List",
+		coll: @current_products,
+		identifier: "name",
+		no_item_message: "No Current Products",
+		coll_new_item: @new_product,
+		coll_new_item_text: "Add a Current Product",
+		iscurrent: true
+	} %>
+	
+	
+	<%= render partial: "shared/editcollblock", locals: { 
+		headertitle: "Upcoming SKU List",
+		coll: @upcoming_products,
+		identifier: "name",
+		no_item_message: "No Upcoming Products",
+		coll_new_item: @new_product,
+		coll_new_item_text: "Add an Upcoming Product",
+		iscurrent: false
+	} %>
+	
+	<div class="groupwrapper">
+	<div class="row">
+		<div class="medium-12 columns">
+			<h3>Upcoming SKU List</h3>
+			<hr>
+		</div>
+	</div>
+
+	<% if !@upcoming_products.empty? %>
+		<% @upcoming_products.each_with_index do |cb, ind| %>
+		
+		<div class="row">
+			<div class="medium-12 columns">
+				<%= form_for cb do |f| %>
+				<%= hidden_field_tag :ob, 'true' %>
+
+				<dl class="accordion" data-accordion>
+				  <dd class="accordion-navigation">
+				    <a href="#prod_<%= ind %>"><%= cb.name.empty? ? "( No Name )" : cb.name  %></a>
+				    <div id="prod_<%= ind %>" class="content">
+
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns">
+						<%= f.text_field :name, label: "Product Name", placeholder: 'Product Name' %>
+					</div>
+					<div class="medium-3 columns">
+						<%= f.text_field :msrp, label: "MSRP", placeholder: 'MSRP'  %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: "Country of Manufacture", placeholder: 'Country of Manufacture'  %>
+					</div>									
+				</div>
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>						
+					<div class="medium-6 columns">
+						<%= f.text_area :description, label: "Description", placeholder: 'Description' %>
+					</div>
+					<div class="medium-5 columns">
+						<%= f.text_area :key_benefits, label: "Key Benefits", placeholder: 'Key Benefits'  %>
+					</div>				
+				</div>
+				<div class="row">
+					<div class="medium-8 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns text-right">
+
+						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+						<%= link_to 'Delete', product_url(cb, :ob => 'true'), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.name}?"}%>
+					</div>
+				</div>	
+			
+				    </div>
+				  </dd>
+				</dl>
+				<% end %>
+			</div>
+		</div>
+		
 		<% end %>
 	<% else %>
-		<tr><td colspan="7">No Current Products</td></tr>
+		<h5>( No Upcoming Products )</h5>
 	<% end %>
 
 
-	<%= form_for @new_product, :html => { :id => "new_current_product" } do |f| %>
-	<%= f.hidden_field :current, value: true %>
-	<%= hidden_field_tag :ob, 'true' %>
-
-			<tr>
-			<td><%= f.text_field :name, label: false, placeholder: 'Name' %></td>
-			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
-			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
-			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
-			<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: false, placeholder: 'Country of Manufacture'  %></td>
-			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_current_product').submit()".html_safe %></td>
-			</tr>
-
-	<% end %>
-	</tbody>
-	</table>
-
-	<h3>Upcoming SKU List</h3>
-	<table>
-	<thead><tr><th>Product</th><th>Description</th><th>MSRP</th><th>Key Benefits</th><th>Country of Manufacture</th><th colspan="2">&nbsp;</th></tr></thead>
-	<tbody>
-	<% unless @upcoming_products.nil? || @upcoming_products.empty?  %>
-		<% @upcoming_products.each do |cb| %>
-		<tr>
-			<%= form_for cb do |f| %>
-			<%= hidden_field_tag :ob, 'true' %>
-			<td><%= f.text_field :name, label: false, placeholder: 'Name' %></td>
-			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
-			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
-			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
-			<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: false, placeholder: 'Country of Manufacture'  %></td>
-			<td>
-			<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-			</td>
-			<td><%= link_to 'Delete', product_url(cb, :ob => 'true'), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.name}?"}%></td>
-			<% end %>
-		</tr>	
-		<% end %>
-	<% else %>
-		<tr><td colspan="7">No Upcoming Products</td></tr>
-	<% end %>
 
 
-	<%= form_for @new_product, :html => { :id => "new_future_product" } do |f| %>
-	<%= f.hidden_field :current, value: false %>
-	<%= hidden_field_tag :ob, 'true' %>
+		<div class="rowitem">
+		<div class="row">
+			<div class="medium-12 columns">
+				<hr>
+				<%= form_for @new_product, :html => { :id => "new_future_product" } do |f| %>
+				<%= hidden_field_tag :ob, 'true' %>
+				<%= f.hidden_field :current, value: false %>
+				<div class="rowheadback addnew">
+					<div class="row">
+						<div class="medium-8 columns">
+							Add an Upcoming Product
+						</div>
+						<div class="medium-4 columns">
+							&nbsp;
+						</div>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns">
+						<%= f.text_field :name, label: "Product Name", placeholder: 'Product Name' %>
+					</div>
+					<div class="medium-3 columns">
+						<%= f.text_field :msrp, label: "MSRP", placeholder: 'MSRP'  %>
+					</div>
+					<div class="medium-4 columns">
+						<%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: "Country of Manufacture", placeholder: 'Country of Manufacture'  %>
+					</div>									
+				</div>
+				<div class="row">
+					<div class="medium-1 columns">
+						&nbsp;
+					</div>						
+					<div class="medium-6 columns">
+						<%= f.text_area :description, label: "Description", placeholder: 'Description' %>
+					</div>
+					<div class="medium-5 columns">
+						<%= f.text_area :key_benefits, label: "Key Benefits", placeholder: 'Key Benefits'  %>
+					</div>				
+				</div>
+				<div class="row">
+					<div class="medium-8 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns text-right">
+						<%= link_to 'Add', "#", :onclick => "$('#new_future_product').submit()".html_safe %>
+					</div>
+				</div>				
+				<% end %>
+			</div>
+		</div>
+		</div>
 
-			<tr>
-			<td><%= f.text_field :name, label: false, placeholder: 'Name' %></td>
-			<td><%= f.text_area :description, label: false, placeholder: 'Description' %></td>
-			<td><%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %></td>
-			<td><%= f.text_area :key_benefits, label: false, placeholder: 'Key Benefits'  %></td>
-			<td><%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: false, placeholder: 'Country of Manufacture'  %></td>
-			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_future_product').submit()".html_safe %></td>
-			</tr>
+	</div> <!-- /.groupwrapper -->
 
-	<% end %>
-	</tbody>
-	</table>	
-
-<%= button_to "Next", onboard_brand_six_url, method: :get, class: "radius success button" %>
+<%= button_to "Next", onboard_brand_six_url, method: :get, class: "tiny radius success button right" %>
 
 <%= render partial: "shared/panelbottom" %>
+

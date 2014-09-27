@@ -1,44 +1,24 @@
+
+
 <%= render partial: "shared/paneltop" %>
 
-	<h3>Notable Press Hits</h3>
-	<table>
-	<thead><tr><th>Source</th><th>Date</th><th>Quotes</th><th>Link</th><th>Image</th><th colspan="2">&nbsp;</th></tr></thead>
-	<tbody>
-	<% unless @press_hits.nil? || @press_hits.empty?  %>
-		<% @press_hits.each do |cb| %>
-		<tr>
-			<%= form_for cb do |f| %>
-			<%= hidden_field_tag :ob, 'true' %>
-			<td><%= f.text_field :source, label: false, placeholder: 'Source' %></td>
-			<td><%= f.text_field :date, label: false, placeholder: 'Date' , class: "datepick_full" %></td>
-			<td><%= f.text_area :quotes, label: false, placeholder: 'Quotes' %></td>
-			<td><%= f.text_field :link, label: false, placeholder: 'Link' %></td>
-			<td> upload here </td>
-			<td>
-					<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-			</td>
-			<td><%= link_to 'Delete', press_hit_url(cb, :ob => true), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.source}?"}%></td>
-			<% end %>
-		</tr>	
-		<% end %>
-	<% else %>
-		<tr><td colspan="4">No Press Hits</td></tr>
-	<% end %>
+	<div class="row">
+		<div class="medium-12 columns">
+			<h1>Press Hits</h1>
+			<hr>
+		</div>
+	</div>
+	
+	<%= render partial: "shared/editcollblock", locals: { 
+		headertitle: "",
+		coll: @press_hits,
+		identifier: "source",
+		no_item_message: "No Press Hits",
+		coll_new_item: @new_press_hit,
+		coll_new_item_text: "Add a Press Hit",
+		# iscurrent: false
+	} %>
 
-	<%= form_for @new_press_hit, :html => { :id => "new_press_hit" } do |f| %>
-			<%= hidden_field_tag :ob, 'true' %>
-			<tr>
-			<td><%= f.text_field :source, label: false, placeholder: 'Source' %></td>
-			<td><%= f.text_field :date, label: false, placeholder: 'Date' , class: "datepick_full" %></td>
-			<td><%= f.text_area :quotes, label: false, placeholder: 'Quotes' %></td>
-			<td><%= f.text_field :link, label: false, placeholder: 'Link' %></td>
-			<td> upload here </td>
-			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_press_hit').submit()".html_safe %></td>
-			</tr>
-	<% end %>
-	</tbody>
-	</table>
-
-	<%= button_to "Next", onboard_brand_eight_url, method: :get, class: "small radius success button" %>
+<%= button_to "Next", onboard_brand_eight_url, method: :get, class: "tiny radius success button right" %>
 
 <%= render partial: "shared/panelbottom" %>

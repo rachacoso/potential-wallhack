@@ -1,40 +1,23 @@
+
 <%= render partial: "shared/paneltop" %>
 
-	<h3>Certifications / Regulatory Compliance </h3>
-	<table>
-	<thead><tr><th>Product or Category</th><th>Certification/Compliance Description</th><th>Country</th><th colspan="2">&nbsp;</th></tr></thead>
-	<tbody>
-	<% unless @compliances.nil? || @compliances.empty?  %>
-		<% @compliances.each do |cb| %>
-		<tr>
-			<%= form_for cb do |f| %>
-			<%= hidden_field_tag :ob, 'true' %>
-			<td><%= f.text_field :product_or_category, label: false, placeholder: 'Product / Category' %></td>
-			<td><%= f.text_area :compliance_description, label: false, placeholder: 'Certification/Compliance Description'%></td>
-			<td><%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %></td>
-			<td>
-					<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-			</td>
-			<td><%= link_to 'Delete', compliance_url(cb, :ob => true), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.product_or_category}?"}%></td>
-			<% end %>
-		</tr>	
-		<% end %>
-	<% else %>
-		<tr><td colspan="4">No Compliance</td></tr>
-	<% end %>
+	<div class="row">
+		<div class="medium-12 columns">
+			<h1>Certifications / Regulatory Compliance</h1>
+			<hr>
+		</div>
+	</div>
 
-	<%= form_for @new_compliance, :html => { :id => "new_compliance" } do |f| %>
-	<%= hidden_field_tag :ob, 'true' %>
-			<tr>
-			<td><%= f.text_field :product_or_category, label: false, placeholder: 'Product / Category' %></td>
-			<td><%= f.text_area :compliance_description, label: false, placeholder: 'Certification/Compliance Description'%></td>
-			<td><%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %></td>
-			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_compliance').submit()".html_safe %></td>
-			</tr>
-	<% end %>
-	</tbody>
-	</table>
+	<%= render partial: "shared/editcollblock", locals: { 
+		headertitle: "",
+		coll: @compliances,
+		identifier: "product_or_category",
+		no_item_message: "No Certifications / Regulatory Compliances",
+		coll_new_item: @new_compliance,
+		coll_new_item_text: "Add a Certification / Regulatory Compliance",
+		# iscurrent: false
+	} %>
 
-	<%= button_to "Next", brand_url, method: :get, class: "small radius success button" %>
+<%= button_to "Finish", brand_url, method: :get, class: "tiny radius success button right" %>
 
 <%= render partial: "shared/panelbottom" %>

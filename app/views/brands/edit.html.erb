@@ -22,7 +22,7 @@
 	<div class="row">
 		<%= form_for @brand, url: brand_url do |f| %>
 		<div class="medium-12 columns">
-			<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Distributor Name" %>
+			<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name" %>
 		</div>
 		<div class="medium-12 columns">
 			<hr>
@@ -193,6 +193,16 @@
 
 				<%= form_tag(channel_capacity_bulkupdate_url, method: "post") do  %>
 					
+
+					<% if @brand.channels.empty? %>
+						<div class="row">
+							<div class="medium-12 columns text-center">
+							<h6 class="information">( Please Select Channels in Sector and Channel Profile )</h6>
+							</div>
+						</div>
+
+					<% end %>
+
 					<% @brand.channels.each do |chan| %>
 
 						<div class="row">
@@ -285,261 +295,26 @@
 		</div>
 	</div>
 
+	<%= render partial: "shared/editcollblock", locals: { 
+		headertitle: "Current SKU List",
+		coll: @current_products,
+		identifier: "name",
+		no_item_message: "No Current Products",
+		coll_new_item: @new_product,
+		coll_new_item_text: "Add a Current Product",
+		iscurrent: true
+	} %>
 	
-	<div class="groupwrapper">
-	<div class="row">
-		<div class="medium-12 columns">
-			<h3>Current SKU List</h3>
-			<hr>
-		</div>
-	</div>
-
-	<% if !@current_products.empty? %>
-		<% @current_products.each do |cb| %>
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<%= form_for cb do |f| %>
-				<div class="rowheadback">
-					<div class="row">
-						<div class="medium-8 columns">
-							<%= cb.name %> &nbsp;
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :name, label: "Product Name", placeholder: 'Product Name' %>
-					</div>
-					<div class="medium-3 columns">
-						<%= f.text_field :msrp, label: "MSRP", placeholder: 'MSRP'  %>
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: "Country of Manufacture", placeholder: 'Country of Manufacture'  %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-6 columns">
-						<%= f.text_area :description, label: "Description", placeholder: 'Description' %>
-					</div>
-					<div class="medium-5 columns">
-						<%= f.text_area :key_benefits, label: "Key Benefits", placeholder: 'Key Benefits'  %>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-
-						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-						<%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.name}?"}%>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-		<% end %>
-	<% else %>
-		<h5>( No Current Products )</h5>
-	<% end %>
-
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<hr>
-				<%= form_for @new_product, :html => { :id => "new_current_product" } do |f| %>
-				<%= f.hidden_field :current, value: true %>
-				<div class="rowheadback addnew">
-					<div class="row">
-						<div class="medium-8 columns">
-							Add a Current Product
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :name, label: "Product Name", placeholder: 'Product Name' %>
-					</div>
-					<div class="medium-3 columns">
-						<%= f.text_field :msrp, label: "MSRP", placeholder: 'MSRP'  %>
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: "Country of Manufacture", placeholder: 'Country of Manufacture'  %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-6 columns">
-						<%= f.text_area :description, label: "Description", placeholder: 'Description' %>
-					</div>
-					<div class="medium-5 columns">
-						<%= f.text_area :key_benefits, label: "Key Benefits", placeholder: 'Key Benefits'  %>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-						<%= link_to 'Add', "#", :onclick => "$('#new_current_product').submit()".html_safe %>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-
-	</div> <!-- /.groupwrapper -->
-
-
-
 	
-	<div class="groupwrapper">
-	<div class="row">
-		<div class="medium-12 columns">
-			<h3>Upcoming SKU List</h3>
-			<hr>
-		</div>
-	</div>
-
-	<% if !@upcoming_products.empty? %>
-		<% @upcoming_products.each do |cb| %>
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<%= form_for cb do |f| %>
-				<div class="rowheadback">
-					<div class="row">
-						<div class="medium-8 columns">
-							<%= cb.name %> &nbsp;
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :name, label: "Product Name", placeholder: 'Product Name' %>
-					</div>
-					<div class="medium-3 columns">
-						<%= f.text_field :msrp, label: "MSRP", placeholder: 'MSRP'  %>
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: "Country of Manufacture", placeholder: 'Country of Manufacture'  %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-6 columns">
-						<%= f.text_area :description, label: "Description", placeholder: 'Description' %>
-					</div>
-					<div class="medium-5 columns">
-						<%= f.text_area :key_benefits, label: "Key Benefits", placeholder: 'Key Benefits'  %>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-
-						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-						<%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.name}?"}%>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-		<% end %>
-	<% else %>
-		<h5>( No Upcoming Products )</h5>
-	<% end %>
-
-
-
-
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<hr>
-				<%= form_for @new_product, :html => { :id => "new_future_product" } do |f| %>
-				<%= f.hidden_field :current, value: false %>
-				<div class="rowheadback addnew">
-					<div class="row">
-						<div class="medium-8 columns">
-							Add an Upcoming Product
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :name, label: "Product Name", placeholder: 'Product Name' %>
-					</div>
-					<div class="medium-3 columns">
-						<%= f.text_field :msrp, label: "MSRP", placeholder: 'MSRP'  %>
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: "Country of Manufacture", placeholder: 'Country of Manufacture'  %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-6 columns">
-						<%= f.text_area :description, label: "Description", placeholder: 'Description' %>
-					</div>
-					<div class="medium-5 columns">
-						<%= f.text_area :key_benefits, label: "Key Benefits", placeholder: 'Key Benefits'  %>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-						<%= link_to 'Add', "#", :onclick => "$('#new_future_product').submit()".html_safe %>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-
-	</div> <!-- /.groupwrapper -->
-
+	<%= render partial: "shared/editcollblock", locals: { 
+		headertitle: "Upcoming SKU List",
+		coll: @upcoming_products,
+		identifier: "name",
+		no_item_message: "No Upcoming Products",
+		coll_new_item: @new_product,
+		coll_new_item_text: "Add an Upcoming Product",
+		iscurrent: false
+	} %>
 
 <%= render partial: "shared/panelbottom" %>
 
@@ -578,126 +353,15 @@
 		</div>
 	</div>
 	
-	<div class="groupwrapper">
-
-	<% if !@press_hits.empty? %>
-		<% @press_hits.each do |cb| %>
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<%= form_for cb do |f| %>
-				<div class="rowheadback">
-					<div class="row">
-						<div class="medium-8 columns">
-							<%= cb.source %> &nbsp;
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :source, label: "Source", placeholder: 'Source' %>
-					</div>
-					<div class="medium-5 columns">
-						<%= f.text_field :link, label: "Link", placeholder: 'Link' %>
-					</div>
-					<div class="medium-2 columns">
-						<%= f.text_field :date, label: "Date", placeholder: 'Date' , class: "datepick_full" %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-3 columns">
-						upload here 
-					</div>
-					<div class="medium-8 columns">
-						<%= f.text_area :quotes, label: "Quotes", placeholder: 'Quotes' %>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-
-						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-						<%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.source}?"}%>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-		<% end %>
-	<% else %>
-		<h5>( No Press Hits )</h5>
-	<% end %>
-
-
-
-
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<hr>
-				<%= form_for @new_press_hit, :html => { :id => "new_press_hit" } do |f| %>
-				
-				<div class="rowheadback addnew">
-					<div class="row">
-						<div class="medium-8 columns">
-							Add a Press Hit
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :source, label: "Source", placeholder: 'Source' %>
-					</div>
-					<div class="medium-5 columns">
-						<%= f.text_field :link, label: "Link", placeholder: 'Link' %>
-					</div>
-					<div class="medium-2 columns">
-						<%= f.text_field :date, label: "Date", placeholder: 'Date' , class: "datepick_full" %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-3 columns">
-						upload here 
-					</div>
-					<div class="medium-8 columns">
-						<%= f.text_area :quotes, label: "Quotes", placeholder: 'Quotes' %>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-						<%= link_to 'Add', "#", :onclick => "$('#new_press_hit').submit()".html_safe %>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-
-	</div> <!-- /.groupwrapper -->
+	<%= render partial: "shared/editcollblock", locals: { 
+		headertitle: "",
+		coll: @press_hits,
+		identifier: "source",
+		no_item_message: "No Press Hits",
+		coll_new_item: @new_press_hit,
+		coll_new_item_text: "Add a Press Hit",
+		# iscurrent: false
+	} %>
 
 
 <%= render partial: "shared/panelbottom" %>
@@ -711,129 +375,17 @@
 		</div>
 	</div>
 						
+
+	<%= render partial: "shared/editcollblock", locals: { 
+		headertitle: "",
+		coll: @trade_shows,
+		identifier: "name",
+		no_item_message: "No Trade Shows",
+		coll_new_item: @new_trade_show,
+		coll_new_item_text: "Add a Trade Show",
+		# iscurrent: false
+	} %>
 	
-	<div class="groupwrapper">
-
-	<% if !@trade_shows.empty? %>
-		<% @trade_shows.each do |cb| %>
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<%= form_for cb do |f| %>
-				<div class="rowheadback">
-					<div class="row">
-						<div class="medium-8 columns">
-							<%= cb.name %> &nbsp;
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :name, label: "Trade Show Name", placeholder: 'Trade Show Name'  %>
-					</div>
-					<div class="medium-3 columns">
-						<%= f.text_field :date, label: "Date", class: "datepick_full", placeholder: 'Date' %>
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-3 columns">
-						<%= f.text_field :years_participated, label: "Years Participated", placeholder: '# years participated'  %> 
-					</div>
-					<div class="medium-8 columns">
-						<%= f.text_field :website, label: "Website", placeholder: 'Website'  %>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-
-						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-						<%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.name}?"}%>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-		<% end %>
-	<% else %>
-		<h5>( No Trade Shows )</h5>
-	<% end %>
-
-
-
-
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<hr>
-				<%= form_for @new_trade_show, :html => { :id => "new_trade_show" } do |f| %>
-				
-				<div class="rowheadback addnew">
-					<div class="row">
-						<div class="medium-8 columns">
-							Add a Trade Show
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :name, label: "Trade Show Name", placeholder: 'Trade Show Name'  %>
-					</div>
-					<div class="medium-3 columns">
-						<%= f.text_field :date, label: "Date", placeholder: 'Date' , class: "datepick_full" %>
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-3 columns">
-						<%= f.text_field :years_participated, label: "Years Participated", placeholder: '# years participated'  %> 
-					</div>
-					<div class="medium-8 columns">
-						<%= f.text_field :website, label: "Website", placeholder: 'Website'  %>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-						<%= link_to 'Add', "#", :onclick => "$('#new_trade_show').submit()".html_safe %>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-
-	</div> <!-- /.groupwrapper -->
-
-
 <%= render partial: "shared/panelbottom" %>
 
 
@@ -858,6 +410,16 @@
 			<% if !@export_countries.empty? %>
 				<% @export_countries.each do |cb| %>
 				<div class="rowitem">
+						<div class="rowheadback">
+							<div class="row">
+								<div class="medium-8 columns">
+									Export Countries
+								</div>
+								<div class="medium-4 columns">
+									&nbsp;
+								</div>
+							</div>
+						</div>						
 				<div class="row">
 					<div class="medium-12 columns">
 						<%= form_for cb do |f| %>
@@ -898,9 +460,9 @@
 						</div>	
 						<div class="row">
 							<div class="medium-8 columns">
-								<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
+								<%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %>
 							</div>
-							<div class="medium-4 columns text-right">
+							<div class="medium-4 columns text-left">
 								<%= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %>
 							</div>
 						</div>				
@@ -926,114 +488,15 @@
 		</div>
 	</div>
 
-	<div class="groupwrapper">
-
-	<% if !@patents.empty? %>
-		<% @patents.each do |cb| %>
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<%= form_for cb do |f| %>
-				<div class="rowheadback">
-					<div class="row">
-						<div class="medium-8 columns">
-							<%= cb.product %> &nbsp;
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-7 columns">
-						<%= f.text_field :product, label: "Product", placeholder: 'Product' %>
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-11 columns">
-						<%= f.text_area :patent_description, label: "Patent Description", placeholder: 'Patent Description'%>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-
-						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-						<%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.product}?"}%>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-		<% end %>
-	<% else %>
-		<h5>( No Patents )</h5>
-	<% end %>
-
-
-
-
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<hr>
-				<%= form_for @new_patent, :html => { :id => "new_patent" } do |f| %>
-				
-				<div class="rowheadback addnew">
-					<div class="row">
-						<div class="medium-8 columns">
-							Add a Patent
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-7 columns">
-						<%= f.text_field :product, label: "Product", placeholder: 'Product' %>
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-11 columns">
-						<%= f.text_area :patent_description, label: "Patent Description", placeholder: 'Patent Description'%>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-						<%= link_to 'Add', "#", :onclick => "$('#new_patent').submit()".html_safe %>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-
-	</div> <!-- /.groupwrapper -->
+	<%= render partial: "shared/editcollblock", locals: { 
+		headertitle: "",
+		coll: @patents,
+		identifier: "product",
+		no_item_message: "No Patents",
+		coll_new_item: @new_patent,
+		coll_new_item_text: "Add a Patent",
+		# iscurrent: false
+	} %>
 
 
 <%= render partial: "shared/panelbottom" %>
@@ -1047,112 +510,15 @@
 		</div>
 	</div>
 
-
-	<div class="groupwrapper">
-
-	<% if !@trademarks.empty? %>
-		<% @trademarks.each do |cb| %>
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<%= form_for cb do |f| %>
-				<div class="rowheadback">
-					<div class="row">
-						<div class="medium-8 columns">
-							<%= cb.product %> &nbsp;
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-7 columns">
-						<%= f.text_field :product, label: "Product", placeholder: 'Product' %>
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-11 columns">
-						<%= f.text_area :trademark_description, label: "Trademark Description", placeholder: 'Trademark Description'%>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-
-						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-						<%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.product}?"}%>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-		<% end %>
-	<% else %>
-		<h5>( No Trademarks )</h5>
-	<% end %>
-
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<hr>
-				<%= form_for @new_trademark, :html => { :id => "new_trademark" } do |f| %>
-				
-				<div class="rowheadback addnew">
-					<div class="row">
-						<div class="medium-8 columns">
-							Add a Trademark
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-7 columns">
-						<%= f.text_field :product, label: "Product", placeholder: 'Product' %>
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-11 columns">
-						<%= f.text_area :trademark_description, label: "Trademark Description", placeholder: 'Trademark Description'%>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-						<%= link_to 'Add', "#", :onclick => "$('#new_trademark').submit()".html_safe %>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-
-	</div> <!-- /.groupwrapper -->
+	<%= render partial: "shared/editcollblock", locals: { 
+		headertitle: "",
+		coll: @trademarks,
+		identifier: "product",
+		no_item_message: "No Trademarks",
+		coll_new_item: @new_trademark,
+		coll_new_item_text: "Add a Trademark",
+		# iscurrent: false
+	} %>
 	
 <%= render partial: "shared/panelbottom" %>
 
@@ -1165,115 +531,16 @@
 		</div>
 	</div>
 
+	<%= render partial: "shared/editcollblock", locals: { 
+		headertitle: "",
+		coll: @compliances,
+		identifier: "product_or_category",
+		no_item_message: "No Certifications / Regulatory Compliances",
+		coll_new_item: @new_compliance,
+		coll_new_item_text: "Add a Certification / Regulatory Compliance",
+		# iscurrent: false
+	} %>
 
-	<div class="groupwrapper">
-
-	<% if !@compliances.empty? %>
-		<% @compliances.each do |cb| %>
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<%= form_for cb do |f| %>
-				<div class="rowheadback">
-					<div class="row">
-						<div class="medium-8 columns">
-							<%= cb.product_or_category %> &nbsp;
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-7 columns">
-						<%= f.text_field :product_or_category, label: "Product or Category", placeholder: 'Product or Category' %>
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-11 columns">
-						<%= f.text_area :compliance_description, label: "Compliance Description", placeholder: 'Compliance Description'%>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-
-						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-						<%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.product_or_category}?"}%>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-		<% end %>
-	<% else %>
-		<h5>( No Certifications / Regulatory Compliance )</h5>
-	<% end %>
-
-
-
-
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<hr>
-				<%= form_for @new_compliance, :html => { :id => "new_compliance" } do |f| %>
-				
-				<div class="rowheadback addnew">
-					<div class="row">
-						<div class="medium-8 columns">
-							Add a Certification / Regulatory Compliance
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-7 columns">
-						<%= f.text_field :product_or_category, label: "Product or Category", placeholder: 'Product or Category' %>
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-11 columns">
-						<%= f.text_area :compliance_description, label: "Compliance Description", placeholder: 'Compliance Description'%>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-						<%= link_to 'Add', "#", :onclick => "$('#new_compliance').submit()".html_safe %>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-
-	</div> <!-- /.groupwrapper -->
 
 <%= render partial: "shared/panelbottom" %>
 

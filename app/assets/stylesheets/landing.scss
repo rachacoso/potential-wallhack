@@ -28,6 +28,12 @@ body {
   font-size: 0.60em;
 }
 
+// Alerts
+
+.information {
+  color: $info-color;
+}
+
 // Transparent backgrounds
 
 @mixin transparent($color, $alpha) {
@@ -54,6 +60,11 @@ body {
   padding: 0.5em;
   margin: 0.5em 0em;
   border: 2px solid #455E80;
+
+  }
+  .rowitem {
+  padding: 0em 0em 1em 0em;
+  margin: 0em 0em 1em 0em;
   a {
     border: 1px solid $link-color;
     transition: 0.2s;
@@ -65,7 +76,20 @@ body {
       color: white;
     }
   }
+
+.rowheadback {
+  background-color: #ABBACC;
+  padding: 0.5em;
+  margin: 0em 0em 1em 0em;
+  color: white;
+  border-bottom: 2px solid scale-color(#ABBACC, $lightness: -30%);
+  &.addnew {
+    background-color: scale-color(#ABBACC, $lightness: -50%);
+  }
+  }
 }
+
+
 
 .columnheader {
   // border-top: 1px solid black;
@@ -153,22 +177,7 @@ body {
 
 }
 
-.rowitem {
-  padding: 0em 0em 1em 0em;
-  margin: 0em 0em 1em 0em;
 
-}
-
-.rowheadback {
-  background-color: #ABBACC;
-  padding: 0.5em;
-  margin: 0em 0em 1em 0em;
-  color: white;
-  border-bottom: 2px solid scale-color(#ABBACC, $lightness: -30%);
-  &.addnew {
-    background-color: scale-color(#ABBACC, $lightness: -50%);
-  }
-}
 
 
 

@@ -1,11 +1,21 @@
+
 <%= render partial: "shared/paneltop" %>
 
-	<h3>Marketing Activities</h3>
+	<div class="row">
+		<div class="medium-12 columns">
+			<h1>Marketing Activities</h1>
+			<hr>
+		</div>
+	</div>
 
+	<div class="row">
 	<%= form_for @brand, url: brand_url do |f| %>
 	<%= hidden_field_tag :redirect, 'seven' %>
-	<%= f.text_area :brand_positioning, label: false, placeholder: 'Brand Positioning' %>
-	<%= f.submit 'Next' %>
+		<div class="medium-12 columns">
+			<%= f.text_area :brand_positioning, label: "Brand Positioning", placeholder: 'Brand Positioning' %>
+			<%= f.submit 'Update and Continue', class: "tiny radius success button right" %>
+		</div>
 	<% end %>
+	</div>
 
 <%= render partial: "shared/panelbottom" %>

@@ -62,9 +62,18 @@ class UsersController < ApplicationController
 			user.save!
 
 			#create profile for the selected user type
-			usertype = "create_" + params[:user_type]
-			user.send(usertype)
-			
+			if params[:user_type] == 'distributor' || 'brand' # restrict to only allowed values
+				createusertype = "create_" + params[:user_type]
+				user.send(createusertype) # create relation
+ 
+				# prepopulate contact info with user info (user can change later)
+				cinfo = user.send(params[:user_type]).contact_info
+				cinfo.contact_name = params[:user][:user_profile_attributes][:firstname] + " " + params[:user][:user_profile_attributes][:lastname]
+				cinfo.email = params[:user][:email]
+				cinfo.save
+
+			end
+
 			session[:user_id] = user.id.to_s
 			session[:expires_at] = Time.current + 24.hours
 

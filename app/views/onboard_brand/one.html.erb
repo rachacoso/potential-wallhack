@@ -1,14 +1,21 @@
-<%= render partial: "shared/paneltop" %>
-<h3> What is your Company's name?</h3>
 
+<%= render partial: "shared/paneltop" %>
+	<div class="row">
+		<div class="medium-12 columns">
+			<h1>What is your Company's name?</h1>
+			<hr>
+		</div>
+	</div>
+	<div class="row">
 		<%= form_for @brand, url: brand_url do |f| %>
 		<%= hidden_field_tag :redirect, 'two' %>
-		<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", label: false, placeholder: "Enter Company Name" %>
-		<% if flash[:name_error] %>
-			Sorry, the Brand Name <%= flash[:name_error] %>
+		<div class="medium-12 columns">
+			<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name" %>
+		</div>
+		<div class="medium-12 columns">
+			<hr>
+			<%= f.submit 'Update and Continue', class: "tiny radius success button right" %>
+		</div>
 		<% end %>
-		<br>
-		<%= f.submit 'Next' %>
-		<% end %>
-
+	</div>
 <%= render partial: "shared/panelbottom" %>

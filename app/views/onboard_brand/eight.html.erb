@@ -1,44 +1,24 @@
+
 <%= render partial: "shared/paneltop" %>
+
+	<div class="row">
+		<div class="medium-12 columns">
+			<h1>Trade Shows</h1>
+			<hr>
+		</div>
+	</div>
 						
-	<h3>Shows Participated In</h3>
-	<table>
-	<thead><tr><th>Show Name</th><th>Date</th><th>Country</th><th>Years Participated</th><th>Website</th><th colspan="2">&nbsp;</th></tr></thead>
-	<tbody>
-	<% unless @trade_shows.nil? || @trade_shows.empty?  %>
-		<% @trade_shows.each do |cb| %>
-		<tr>
-			<%= form_for cb do |f| %>
-			<%= hidden_field_tag :ob, 'true' %>
-			<td><%= f.text_field :name, label: false, placeholder: 'Trade Show Name'  %></td>
-			<td><%= f.text_field :date, label: false, class: "datepick", :value => cb.date ? cb.date.strftime("%m/%Y") : '', placeholder: 'Date' %></td>
-			<td><%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %></td>
-			<td><%= f.text_field :years_participated, label: false, placeholder: 'Number of years participated'  %></td>
-			<td><%= f.text_field :website, label: false, placeholder: 'Website'  %></td>
-			<td>
-					<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-			</td>
-			<td><%= link_to 'Delete', trade_show_url(cb, :ob => true), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.name}?"}%></td>
-			<% end %>
-		</tr>	
-		<% end %>
-	<% else %>
-		<tr><td colspan="4">No Trade Shows</td></tr>
-	<% end %>
+	<%= render partial: "shared/editcollblock", locals: { 
+		headertitle: "",
+		coll: @trade_shows,
+		identifier: "name",
+		no_item_message: "No Trade Shows",
+		coll_new_item: @new_trade_show,
+		coll_new_item_text: "Add a Trade Show",
+		# iscurrent: false
+	} %>	
 
-	<%= form_for @new_trade_show, :html => { :id => "new_trade_show" } do |f| %>
-			<%= hidden_field_tag :ob, 'true' %>
-			<tr>
-			<td><%= f.text_field :name, label: false, placeholder: 'Trade Show Name' %></td>
-			<td><%= f.text_field :date, label: false, placeholder: 'Date' , class: "datepick" %></td>
-			<td><%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %></td>
-			<td><%= f.text_field :years_participated, label: false, placeholder: 'Years participated' %></td>
-			<td><%= f.text_field :website, label: false, placeholder: 'Website' %></td>
-			<td colspan="2"><%= link_to 'Add', "#", :onclick => "$('#new_trade_show').submit()".html_safe %></td>
-			</tr>
-	<% end %>
-	</tbody>
-	</table>
 
-<%= button_to "Next", onboard_brand_nine_url, method: :get, class: "small radius success button" %>
+<%= button_to "Next", onboard_brand_nine_url, method: :get, class: "tiny radius success button right" %>
 
 <%= render partial: "shared/panelbottom" %>

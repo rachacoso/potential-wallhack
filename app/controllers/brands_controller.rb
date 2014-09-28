@@ -1,5 +1,9 @@
 class BrandsController < ApplicationController
-  
+
+	before_action do
+		check_usertype("brand")
+	end
+
 	def edit
 
 		@brand = @current_user.brand
@@ -148,6 +152,11 @@ class BrandsController < ApplicationController
  				:country
 			]
 		)
+	end
+	def check_usertype(type)
+		if @current_user.type? != type
+			redirect_to dashboard_url
+		end
 	end
 
 end

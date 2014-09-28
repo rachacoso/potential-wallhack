@@ -1,5 +1,5 @@
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 
 
 	<div class="row">
@@ -22,5 +22,5 @@
 <%= button_to "Continue", onboard_brand_eleven_url, method: :get, class: "tiny radius success button right" %>
 
 
-<%= render partial: "shared/panelbottom" %>
+<% end %>
 

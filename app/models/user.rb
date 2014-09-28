@@ -18,4 +18,12 @@ class User
 
 	accepts_nested_attributes_for :user_profile
 
+	def type?
+		if self.brand
+			return "brand"
+		else
+			return "distributor"
+		end
+	end
+
 end

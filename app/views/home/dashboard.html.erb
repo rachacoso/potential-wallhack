@@ -4,14 +4,14 @@
 
 <div class="row">
 	<div class="small-4 columns">
-		<div class="ldpanel products">
+		<div class="ldpanel">
 			stuff
 		</div>
 	</div>
 
 	<% if @current_user.distributor %>
 	<div class="small-8 columns">
-		<div class="ldpanel profile">
+		<div class="ldpanel">
 
 			<div class="row">
 				<div class="small-7 columns">
@@ -29,72 +29,6 @@
 				</div>
 			</div>
 
-			<div class="inner">
-
-						
-				<h4>Sectors</h4>
-				<% @profile.sectors.each do |s| %>
-					<%= Sector.find(s).name %><br>
-				<% end %>
-
-				<h4>Channels</h4>
-				<% @profile.channels.each do |c| %>
-					<%= Channel.find(c).name %><br>
-				<% end %>
-
-				<h4>Current Lines</h4>
-				
-
-				<h4>Outside Sales</h4>
-				<% if @profile.outside_sales_size && @profile.outside_sales_size > 0 %>
-					Yes, <%= @profile.outside_sales_size  %>
-				<% else %>
-					No
-				<% end %>
-
-				<h4>Inside Sales</h4>
-				<% if @profile.inside_sales_size && @profile.inside_sales_size > 0 %>
-					Yes, <%= @profile.inside_sales_size  %>
-				<% else %>
-					No
-				<% end %>
-
-
-				<h4>Shows Participated In:</h4>
-
-				<h4>Internal Marketing</h4>
-				<% if @profile.internal_marketing_size && @profile.internal_marketing_size > 0 %>
-					Yes, <%= @profile.internal_marketing_size %>
-				<% else %>
-					No
-				<% end %>
-
-				<h4>Marketing Profile</h4>
-				
-				<strong>Employ PR Agency?</strong><br>
-				<%= @profile.employ_pr_agency ? "Yes" : "No" %>
-				<br/>
-				<br/>
-
-				<strong>Marketing via:</strong><br>
-				<%= @profile.marketing_via_print ? "Print <br/>".html_safe : "" %>
-				<%= @profile.marketing_via_online ? "Online <br/>".html_safe : "" %>
-				<%= @profile.marketing_via_email ? "Email <br/>".html_safe : "" %>
-				<%= @profile.marketing_via_outdoor ? "Outdoor <br/>".html_safe : "" %>
-				<%= @profile.marketing_via_events ? "Events <br/>".html_safe : "" %>
-				<%= @profile.marketing_via_direct_mail ? "Direct Mail <br/>".html_safe : "" %>
-				<br/>
-
-				<strong>Customer Database?</strong><br>
-				<% if @profile.customer_database_size && @profile.customer_database_size > 0 %>
-					Yes, <%= @profile.internal_marketing_size %>
-				<% else %>
-					No
-				<% end %>
-				<br/>
-				<br/>
-
-			</div>
 
 		</div>
 	</div>
@@ -102,7 +36,7 @@
 
 	<% if @current_user.brand %>
 	<div class="small-8 columns">
-		<div class="ldpanel profile">
+		<div class="ldpanel">
 
 			<div class="row">
 				<div class="small-7 columns">
@@ -120,22 +54,6 @@
 				</div>
 			</div>
 
-			<div class="inner">
-
-						
-				<h4>Sectors</h4>
-				<% @profile.sectors.each do |s| %>
-					<%= Sector.find(s).name %><br>
-				<% end %>
-
-				<h4>Channels</h4>
-				<% @profile.channels.each do |c| %>
-					<%= Channel.find(c).name %><br>
-				<% end %>
-
-				
-
-			</div>
 
 		</div>
 	</div>

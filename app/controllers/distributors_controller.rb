@@ -1,5 +1,9 @@
 class DistributorsController < ApplicationController
 
+  before_action do
+    check_usertype("distributor")
+  end  
+
 	def edit
 
 		@distributor = @current_user.distributor
@@ -159,6 +163,10 @@ class DistributorsController < ApplicationController
 			]
   	)
   end
-
+	def check_usertype(type)
+		if @current_user.type? != type
+			redirect_to dashboard_url
+		end
+	end
 
 end

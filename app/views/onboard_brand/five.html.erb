@@ -1,5 +1,5 @@
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 
 	<div class="row">
 		<div class="medium-12 columns">
@@ -30,136 +30,8 @@
 		iscurrent: false
 	} %>
 	
-	<div class="groupwrapper">
-	<div class="row">
-		<div class="medium-12 columns">
-			<h3>Upcoming SKU List</h3>
-			<hr>
-		</div>
-	</div>
-
-	<% if !@upcoming_products.empty? %>
-		<% @upcoming_products.each_with_index do |cb, ind| %>
-		
-		<div class="row">
-			<div class="medium-12 columns">
-				<%= form_for cb do |f| %>
-				<%= hidden_field_tag :ob, 'true' %>
-
-				<dl class="accordion" data-accordion>
-				  <dd class="accordion-navigation">
-				    <a href="#prod_<%= ind %>"><%= cb.name.empty? ? "( No Name )" : cb.name  %></a>
-				    <div id="prod_<%= ind %>" class="content">
-
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :name, label: "Product Name", placeholder: 'Product Name' %>
-					</div>
-					<div class="medium-3 columns">
-						<%= f.text_field :msrp, label: "MSRP", placeholder: 'MSRP'  %>
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: "Country of Manufacture", placeholder: 'Country of Manufacture'  %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-6 columns">
-						<%= f.text_area :description, label: "Description", placeholder: 'Description' %>
-					</div>
-					<div class="medium-5 columns">
-						<%= f.text_area :key_benefits, label: "Key Benefits", placeholder: 'Key Benefits'  %>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-
-						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-						<%= link_to 'Delete', product_url(cb, :ob => 'true'), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.name}?"}%>
-					</div>
-				</div>	
-			
-				    </div>
-				  </dd>
-				</dl>
-				<% end %>
-			</div>
-		</div>
-		
-		<% end %>
-	<% else %>
-		<h5>( No Upcoming Products )</h5>
-	<% end %>
-
-
-
-
-		<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<hr>
-				<%= form_for @new_product, :html => { :id => "new_future_product" } do |f| %>
-				<%= hidden_field_tag :ob, 'true' %>
-				<%= f.hidden_field :current, value: false %>
-				<div class="rowheadback addnew">
-					<div class="row">
-						<div class="medium-8 columns">
-							Add an Upcoming Product
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :name, label: "Product Name", placeholder: 'Product Name' %>
-					</div>
-					<div class="medium-3 columns">
-						<%= f.text_field :msrp, label: "MSRP", placeholder: 'MSRP'  %>
-					</div>
-					<div class="medium-4 columns">
-						<%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: "Country of Manufacture", placeholder: 'Country of Manufacture'  %>
-					</div>									
-				</div>
-				<div class="row">
-					<div class="medium-1 columns">
-						&nbsp;
-					</div>						
-					<div class="medium-6 columns">
-						<%= f.text_area :description, label: "Description", placeholder: 'Description' %>
-					</div>
-					<div class="medium-5 columns">
-						<%= f.text_area :key_benefits, label: "Key Benefits", placeholder: 'Key Benefits'  %>
-					</div>				
-				</div>
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-						<%= link_to 'Add', "#", :onclick => "$('#new_future_product').submit()".html_safe %>
-					</div>
-				</div>				
-				<% end %>
-			</div>
-		</div>
-		</div>
-
-	</div> <!-- /.groupwrapper -->
 
 <%= button_to "Next", onboard_brand_six_url, method: :get, class: "tiny radius success button right" %>
 
-<%= render partial: "shared/panelbottom" %>
+<% end %>
 

@@ -1,5 +1,8 @@
 class OnboardBrandController < ApplicationController
   
+  before_action do
+    check_usertype("brand")
+  end  
 
   def one
     @brand = @current_user.brand
@@ -70,6 +73,13 @@ class OnboardBrandController < ApplicationController
     @compliances = @brand.compliances rescue nil
     @new_compliance = Compliance.new
 
+  end
+
+  private
+  def check_usertype(type)
+    if @current_user.type? != type
+      redirect_to dashboard_url
+    end
   end
 
 

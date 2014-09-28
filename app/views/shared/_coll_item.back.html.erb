@@ -1,0 +1,34 @@
+		<div class="rowitem">
+		<div class="row">
+			<div class="medium-12 columns">
+				<%= form_for cb do |f| %>
+				<%= (controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? (hidden_field_tag :ob, "true") : "" %>
+				<div class="rowheadback">
+					<div class="row">
+						<div class="medium-8 columns">
+							<%= cb.send(identifier) %> &nbsp;
+						</div>
+						<div class="medium-4 columns">
+							&nbsp;
+						</div>
+					</div>
+				</div>
+
+<%= cb_counter %><br>				
+<%= controller_name %><br>	
+<%= urlstring = cb.class.name.tableize.singularize + "_url(cb" + ((controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? ", :ob => 'true'" : "") + ")" %>
+<%= render partial: "shared/collections/#{cb.class.name.tableize}", locals: {f: f, cb: cb} %>
+
+				<div class="row">
+					<div class="medium-8 columns">
+						&nbsp;
+					</div>
+					<div class="medium-4 columns text-right">
+						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+						<%= link_to 'Delete', eval(urlstring), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.send(identifier)}?"}%>
+					</div>
+				</div>				
+				<% end %>
+			</div>
+		</div>
+		</div>

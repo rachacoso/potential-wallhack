@@ -55,16 +55,17 @@ body {
   min-height: 100%;
 }
 
+// Styling for Edit panels
 .groupwrapper {
   @include transparent (#fff, 0.2);
   padding: 0.5em;
   margin: 0.5em 0em;
   border: 2px solid #455E80;
 
-  }
-  .rowitem {
-  padding: 0em 0em 1em 0em;
-  margin: 0em 0em 1em 0em;
+}
+.rowitem {
+  padding: 0em;
+  margin: 0em 0em 0.25em 0em;
   a {
     border: 1px solid $link-color;
     transition: 0.2s;
@@ -77,19 +78,31 @@ body {
     }
   }
 
-.rowheadback {
-  background-color: #ABBACC;
-  padding: 0.5em;
-  margin: 0em 0em 1em 0em;
-  color: white;
-  border-bottom: 2px solid scale-color(#ABBACC, $lightness: -30%);
-  &.addnew {
-    background-color: scale-color(#ABBACC, $lightness: -50%);
+  // styling for the collection accordions
+  .accordion-navigation > a {
+    border: 0px solid $link-color;
+    transition: 0.2s;
+    // padding: 0.1em 0.4em;
+    border-radius: 0px;
+    font-size: 0.75em;
+    border-bottom: 2px solid scale-color(#ABBACC, $lightness: -30%);
+    &:hover {
+      background-color: $link-color;
+      color: white;
+    }
   }
+
+  .rowheadback {
+    background-color: #ABBACC;
+    padding: 0.5em;
+    margin: 0em 0em 1em 0em;
+    color: white;
+    border-bottom: 2px solid scale-color(#ABBACC, $lightness: -30%);
+    &.addnew {
+      background-color: scale-color(#ABBACC, $lightness: -50%);
+    }
   }
 }
-
-
 
 .columnheader {
   // border-top: 1px solid black;
@@ -97,6 +110,29 @@ body {
   padding: 0.1em 0.5em;
 }
 
+// Distributor/Brand Profile CSS
+#profile-name {
+  font-size:2em;
+  font-weight:bold;
+}
+
+  // Top Bar
+.topbar {
+  border-radius: 0px;
+  padding: 0.5em 0em;
+  #loginwidget  {
+    padding: 0em;
+    margin: 0.7em 0em;
+  }
+  .usernav {
+    // border-bottom: 1px dotted black;
+    margin: 1em 0.5em;
+    padding: 0em;
+  }     
+}
+.topbarborder {
+  border-bottom: 1px dotted red;
+}
 
 .ldpanel {
 
@@ -113,39 +149,6 @@ body {
   // background-color: #D6E8FF;
 	@include transparent (#D6E8FF, 0.9);
 
-  // DEPRECATED??
-	&.products {
-		height: 20em;
-	}
-
-  // DEPRECATED??
-	&.profile {
-		height: 25em;
-    .inner {
-      h4 {
-        color: #267A78;
-      }
-      margin-top: 1em;
-      height: 90%;
-      overflow-y: auto;
-    }
-	}	
-
-  // Top Bar
-  &.topbar {
-    border-radius: 0px;
-    padding: 0.5em 0em;
-    .usernav,
-    #loginwidget  {
-      padding: 0.5em;
-      margin: 0.55em 0em;
-    }
-    .usernav {
-      // border-bottom: 1px dotted black;
-      margin: 0em 0.5em;
-      padding: 0em;
-    }     
-  }
   
   // Footer
   &.footer {
@@ -181,11 +184,7 @@ body {
 
 
 
-// Distributor/Brand Profile CSS
-#profile-name {
-  font-size:2em;
-  font-weight:bold;
-}
+
 
 textarea {
   resize: vertical;
@@ -386,5 +385,38 @@ input[type=checkbox]:checked + label {
   font-weight: 400; 
   font-size: small;
   color: #89ADAD; 
+}
+
+//////////////
+// ONBOARD NAV
+//////////////
+
+$onboard-nav-radius: 4px;
+
+.onboard-nav {
+  li {
+    border: 2px solid $body-font-color;
+    height: 2em;
+    // width: 2em;
+    padding: 0em 0.5em;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    list-style-type: none;
+    display:inline-block;
+    /* Safari 3-4, iOS 1-3.2, Android 1.6- */
+    -webkit-border-radius: $onboard-nav-radius; 
+    /* Firefox 1-3.6 */
+    -moz-border-radius: $onboard-nav-radius;
+    /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
+    border-radius: $onboard-nav-radius; 
+    &.active {
+      background-color: black;
+      color: white;
+    }
+  }
+  a {
+      color: $body-font-color;
+  }
 }
 

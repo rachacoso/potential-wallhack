@@ -1,31 +1,29 @@
+<% urlstring = cb.class.name.tableize.singularize + "_url(cb" + ((controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? ", :ob => 'true'" : "") + ")" %>
+
 		<div class="rowitem">
 		<div class="row">
 			<div class="medium-12 columns">
 				<%= form_for cb do |f| %>
-				<%= (controller.controller_name == "onboard_distributor") || (controller.controller_name == "onboard_brand") ? (hidden_field_tag :ob, "true") : "" %>
-				<div class="rowheadback">
-					<div class="row">
-						<div class="medium-8 columns">
-							<%= cb.send(identifier) %> &nbsp;
-						</div>
-						<div class="medium-4 columns">
-							&nbsp;
-						</div>
-					</div>
-				</div>
-				<%= controller.controller_name %>	
-<%= urlstring = cb.class.name.tableize.singularize + "_url(cb" + ((controller.controller_name == "onboard_distributor") || (controller.controller_name == "onboard_brand") ? ", :ob => 'true'" : "") + ")" %>
+				<%= (controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? (hidden_field_tag :ob, "true") : "" %>
+				<dl class="accordion" data-accordion>
+				  <dd class="accordion-navigation">
+				    <a href="#a_<%= cb.id %>"><%= cb.send(identifier).empty? ? "( No Name )" : cb.send(identifier)  %></a>
+				    <div id="a_<%= cb.id %>" class="content">
+
 <%= render partial: "shared/collections/#{cb.class.name.tableize}", locals: {f: f, cb: cb} %>
 
-				<div class="row">
-					<div class="medium-8 columns">
-						&nbsp;
-					</div>
-					<div class="medium-4 columns text-right">
-						<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-						<%= link_to 'Delete', eval(urlstring), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.send(identifier)}?"}%>
-					</div>
-				</div>				
+							<div class="row">
+								<div class="medium-8 columns">
+									&nbsp;
+								</div>
+								<div class="medium-4 columns text-right">
+									<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+									<%= link_to 'Delete', eval(urlstring), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.send(identifier)}?"}%>
+								</div>
+							</div>
+						</div>
+					</dd>
+				</dl>
 				<% end %>
 			</div>
 		</div>

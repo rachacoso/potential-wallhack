@@ -12,7 +12,7 @@
 	</div>
 <%= render partial: "shared/headpanelbottom" %>
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 	<div class="row">
 		<div class="medium-12 columns">
 			<h1>Company Name</h1>
@@ -30,10 +30,10 @@
 		</div>
 		<% end %>
 	</div>
-<%= render partial: "shared/panelbottom" %>
+<% end %>
 
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 	<div class="row">
 		<div class="medium-12 columns">
 			<h1>General Information</h1>
@@ -125,9 +125,9 @@
 
 	<% end %>
 
-<%= render partial: "shared/panelbottom" %>
+<% end %>
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 	<div class="row">
 		<div class="medium-12 columns">
 			<h1>Sector and Channel Profile</h1>
@@ -164,10 +164,10 @@
 	</div>
 	<% end %>
 			
-<%= render partial: "shared/panelbottom" %>
+<% end %>
 
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 
 <div class="row">
 	<div class="medium-12 columns">
@@ -283,10 +283,10 @@
 </div>
 
 
-<%= render partial: "shared/panelbottom" %>
+<% end %>
 
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 
 	<div class="row">
 		<div class="medium-12 columns">
@@ -316,12 +316,12 @@
 		iscurrent: false
 	} %>
 
-<%= render partial: "shared/panelbottom" %>
+<% end %>
 
 
 
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 
 	<div class="row">
 		<div class="medium-12 columns">
@@ -339,12 +339,12 @@
 	<% end %>
 	</div>
 
-<%= render partial: "shared/panelbottom" %>
+<% end %>
 
 
 
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 
 	<div class="row">
 		<div class="medium-12 columns">
@@ -364,9 +364,9 @@
 	} %>
 
 
-<%= render partial: "shared/panelbottom" %>
+<% end %>
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 
 	<div class="row">
 		<div class="medium-12 columns">
@@ -386,10 +386,10 @@
 		# iscurrent: false
 	} %>
 	
-<%= render partial: "shared/panelbottom" %>
+<% end %>
 
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 
 
 
@@ -476,9 +476,9 @@
 		</div>
 	</div>
 
-<%= render partial: "shared/panelbottom" %>
+<% end %>
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 
 
 	<div class="row">
@@ -499,9 +499,9 @@
 	} %>
 
 
-<%= render partial: "shared/panelbottom" %>
+<% end %>
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 
 	<div class="row">
 		<div class="medium-12 columns">
@@ -520,9 +520,9 @@
 		# iscurrent: false
 	} %>
 	
-<%= render partial: "shared/panelbottom" %>
+<% end %>
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 
 	<div class="row">
 		<div class="medium-12 columns">
@@ -542,7 +542,7 @@
 	} %>
 
 
-<%= render partial: "shared/panelbottom" %>
+<% end %>
 
 	</div>
 </div>

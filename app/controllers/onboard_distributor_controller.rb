@@ -1,5 +1,8 @@
 class OnboardDistributorController < ApplicationController
   
+  before_action do
+    check_usertype("distributor")
+  end  
 
   def one
 
@@ -58,6 +61,13 @@ class OnboardDistributorController < ApplicationController
 
     @distributor = @current_user.distributor
 
+  end
+
+  private
+  def check_usertype(type)
+    if @current_user.type? != type
+      redirect_to dashboard_url
+    end
   end
 
 

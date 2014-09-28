@@ -1,5 +1,5 @@
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 	<div class="row">
 		<div class="medium-12 columns">
 			<h1>Trade Shows</h1>
@@ -19,4 +19,4 @@
 
 	<%= button_to "Continue", onboard_distributor_eight_url, method: :get, class: "tiny radius success button right" %>
 
-<%= render partial: "shared/panelbottom" %>
+<% end %>

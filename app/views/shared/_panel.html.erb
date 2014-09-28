@@ -2,6 +2,9 @@
 	<div class="medium-12 columns">
 		<div class="ldpanel clearfix">
 
+<%= (controller_name == "onboard_brand") ? (render partial: "shared/onboardnav_brand") : "" %>
+<%= (controller_name == "onboard_distributor") ? (render partial: "shared/onboardnav_distributor") : "" %>
+
 <%= yield %>
 
 		</div>

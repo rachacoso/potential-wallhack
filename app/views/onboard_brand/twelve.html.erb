@@ -1,5 +1,5 @@
 
-<%= render partial: "shared/paneltop" %>
+<%= render layout: "shared/panel" do %>
 
 	<div class="row">
 		<div class="medium-12 columns">
@@ -20,4 +20,4 @@
 
 <%= button_to "Finish", brand_url, method: :get, class: "tiny radius success button right" %>
 
-<%= render partial: "shared/panelbottom" %>
+<% end %>

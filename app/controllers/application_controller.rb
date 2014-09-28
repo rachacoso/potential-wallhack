@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :get_current_user
   before_action :require_login
   before_action :get_display
- 
+  
 
 	private
   def get_current_user
@@ -14,12 +14,12 @@ class ApplicationController < ActionController::Base
        session.destroy
        @current_user = nil
        flash[:error] = "Your session has timed out.  Please log in again to continue."
-       redirect_to login_url # halts request cycle
+       redirect_to root_url # halts request cycle
       elsif session[:expires_at] < Time.current
        session.destroy
        @current_user = nil
        flash[:error] = "Your session has timed out.  Please log in again to continue."
-       redirect_to login_url # halts request cycle
+       redirect_to root_url # halts request cycle
       elsif User.find(session[:user_id])
     		@current_user = User.find(session[:user_id])
       else
@@ -32,13 +32,12 @@ class ApplicationController < ActionController::Base
   def require_login
     unless @current_user
       flash[:error] = "You must be logged in to access"
-      redirect_to login_url # halts request cycle
+      redirect_to root_url # halts request cycle
     end
   end
 
   def get_display
     @display = Display.all.first
   end
- 
 
 end

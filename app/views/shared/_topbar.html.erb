@@ -2,22 +2,36 @@
 
 	
 	<div class="row">
-		<div class="medium-3 columns text-center">
-			<div class="ldpanel topbar">
-			<strong>[Name TBD]</strong>
+		<div class="topbar">
+			<div class="small-3 columns text-left">
+				<h1 class="tk-aw-conqueror-inline">Landing</h1>
 			</div>
-		</div>
-		<div class="medium-6 columns text-right">
-			<div class="ldpanel topbar">
-				<% if @current_user %>
-					<div class="usernav">
-					Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %> |
-					<%= link_to 'Front', root_url %> |
-					<%= link_to 'Logout', logout_url %>
-					</div>
-				<% end %>
+			<div class="small-6 columns text-right">
+
+					<% if @current_user %>
+						<div class="usernav tk-aw-conqueror-inline">
+						Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %>
+						<%= action_name == "dashboard" ? (link_to 'Front', root_url) : "" %>
+						<%= action_name == "front" ? (link_to 'Dashboard', dashboard_url) : "" %> 
+						<%= controller_name == "brands" ? (link_to 'Dashboard', dashboard_url) : "" %>
+						<%= controller_name == "distributors" ? (link_to 'Dashboard', dashboard_url) : "" %>
+						<%= controller_name == "onboard_brand" ? (link_to 'Dashboard', dashboard_url) : "" %> 
+						<%= controller_name == "onboard_distributor" ? (link_to 'Dashboard', dashboard_url) : "" %> 
+						<%= link_to 'Logout', logout_url %>
+						</div>
+					<% end %>
+					<% if !@current_user %>
+						<%= render partial: "shared/login_widget" %>
+					<% end %>
+
 			</div>
 		</div>
 	</div>
-
+<div class="row">
+	<div class="topbarborder">
+		<div class="small-12 columns">
+		</div>
+	</div>
+</div>
+	
 <% end %>

@@ -1,52 +1,6 @@
 
 
-<% content_for :user_head do %>
-<div class="ldpanel topbar">
-	
-	<div class="row">
-		<div class="medium-3 columns">
-			<h2>[Name TBD]</h2>
-		</div>
-		<div class="medium-6 columns text-right">
-			<% if @current_user %>
-				<div class="usernav">
-				Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %> |
-				<%= link_to 'Dashboard', dashboard_url %> |
-				<%= link_to 'Logout', logout_url %>
-				</div>
-			<% else %>
-
-				<div class="row">
-					<div class="loginwidget">
-
-						<div class="medium-5 columns">
-							<%= form_tag '/login', method: 'post' do %>
-								<%= email_field_tag :email, '', placeholder: 'email'%> 
-						</div>
-
-						<div class="medium-5 columns">
-							<%= password_field_tag :password, '', placeholder: 'password' %>
-						</div>
-
-						<div class="medium-2 columns">
-								<%= submit_tag 'login', class: "tiny radius success button" %>
-							<% end %>
-						</div>
-
-						
-						<% if flash[:notice] %>
-							<div class="medium-12 columns errornotice"><%= flash[:notice] %></div>
-						<% end %>
-
-
-					</div>
-				</div>
-			<% end %>
-		</div>
-	</div>
-
-</div>
-<% end %>
+<%= render partial: "shared/topbar" %>
 
 
 <div class="row">

@@ -56,7 +56,7 @@ class ChannelCapacitiesController < ApplicationController
 		cc = u.channel_capacities
 		params[:channel_capacity][:bulk_ids].each do |k,v|
 			# try to find the id (custom channel) or find under channel_id (preset channel)
-			if bu = cc.find(k)
+			if bu = cc.find(k) rescue false
 				bu.capacity  = v
 				bu.save
 			else

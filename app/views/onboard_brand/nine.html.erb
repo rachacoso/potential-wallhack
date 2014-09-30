@@ -1,91 +1,30 @@
-
+<%= render partial: "shared/topbar" %>
 <%= render layout: "shared/panel" do %>
 
 	<div class="row">
 		<div class="medium-12 columns">
-			<h1>Countries of Export</h1>
+			<h1>Trade Shows</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-12 medium-centered columns text-center">
+			<br>
+			Instructions here...
 			<hr>
 		</div>
 	</div>
-
-
-	<div class="row">
-		<div class="medium-6 medium-centered columns">
-
-			<div class="groupwrapper">
-
-						<div class="rowheadback">
-							<div class="row">
-								<div class="medium-8 columns">
-									Export Countries
-								</div>
-								<div class="medium-4 columns">
-									&nbsp;
-								</div>
-							</div>
-						</div>			
-
-			<% if !@export_countries.empty? %>
-				<% @export_countries.each do |cb| %>
-				<div class="rowitem">			
-				<div class="row">
-					<div class="medium-12 columns">
-						<%= form_for cb do |f| %>
 						
-							<div class="row">
-								<div class="medium-8 columns text-right">
-									<%= cb.country %>
-								</div>
-								<div class="medium-4 columns text-left">
-									<%= link_to 'Delete', export_country_url(cb, :ob => true), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.country}?"}%>
-								</div>
-							</div>
+	<%= render partial: "shared/editcollblock", locals: { 
+		headertitle: "",
+		coll: @trade_shows,
+		identifier: "name",
+		no_item_message: "No Trade Shows",
+		coll_new_item: @new_trade_show,
+		coll_new_item_text: "Add a Trade Show",
+		# iscurrent: false
+	} %>	
 
-						<% end %>
-					</div>
-				</div>
-				</div>
-				<% end %>
-			<% else %>
-				<h5>( No Countries )</h5>
-			<% end %>
-
-				<div class="rowitem">
-				<div class="row">
-					<div class="medium-12 columns">
-						<hr>
-						<%= form_for @new_export_country, :html => { :id => "new_export_country" } do |f| %>
-						<%= hidden_field_tag :ob, 'true' %>
-						<div class="rowheadback addnew">
-							<div class="row">
-								<div class="medium-8 columns">
-									Add a Country
-								</div>
-								<div class="medium-4 columns">
-									&nbsp;
-								</div>
-							</div>
-						</div>	
-						<div class="row">
-							<div class="medium-8 columns">
-								<%= f.text_field :country, class: "country-autocomplete-multi", label: false, placeholder: 'Country' %>
-							</div>
-							<div class="medium-4 columns text-left">
-								<%= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %>
-							</div>
-						</div>				
-						<% end %>
-					</div>
-				</div>
-				</div>
-
-			</div> <!-- /.groupwrapper -->
-
-		</div>
-	</div>
 
 <%= button_to "Next", onboard_brand_ten_url, method: :get, class: "tiny radius success button right" %>
 
 <% end %>
-
-

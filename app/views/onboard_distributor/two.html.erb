@@ -1,4 +1,4 @@
-
+<%= render partial: "shared/topbar" %>
 <%= render layout: "shared/panel" do %>
 	<div class="row">
 		<div class="medium-12 columns">
@@ -23,8 +23,12 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="medium-12 columns">
+		<div class="medium-6 columns">
 			<%= f.text_field :website %>
+		</div>
+		<div class="medium-6 columns">
+			<%= label_tag(:company_size, "Company Size") %>
+			<%= f.collection_select(:company_size, CompanySize.all, :id, :name) %>
 		</div>
 	</div>
 

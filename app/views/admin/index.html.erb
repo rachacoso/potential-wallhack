@@ -1,14 +1,19 @@
+<%= render partial: "shared/topbar" %>
+
+<br>
 
 <%= render partial: "section", locals: {profile_section: @sector, new_profile_section: @new_sector, profile_section_name: 'Sectors'} %>
 
 <%= render partial: "section", locals: {profile_section: @channel, new_profile_section: @new_channel, profile_section_name: 'Channels'} %>
+
+<%= render partial: "section", locals: {profile_section: @company_size, new_profile_section: @new_company_size, profile_section_name: 'Company Size'} %>
 
 <%#= render partial: "section", locals: {profile_section: @country, new_profile_section: @new_country, profile_section_name: 'Countries'} %>
 
 <div class="row">
 	<div class="medium-9 columns">
 		<div class="ldpanel">
-			<h3>Display</h3>
+			<h1>Display</h1>
 
 			<% if flash[:"displays_error"] %>
 				<tr><td colspan="3"><div data-alert class="alert-box alert">
@@ -22,9 +27,9 @@
 
 			<%= form_for @display_info do |f| %>
 			<div class="row">
-				<div class="medium-3 columns">
+				<div class="medium-5 columns">
 					<%= f.label :background_photo do %>
-					Background Photo<br>
+					<h3>Background Photo</h3>
 					<% if @display_info.background_photo_file_name %>
 						<%= image_tag @background_photo.url(:small) %>
 					<% else %>
@@ -37,15 +42,19 @@
 				<%= @display_info.background_photo_file_name ? (link_to "Delete This Photo", display_url(@display_info), :method => 'put', data: { :confirm => 'Are you sure you want to remove the background photo?'}) : ""  %>
 				</div>				
 			</div>
-
+			<hr>
 			<div class="row">
-				<div class="medium-7 columns">
-				<%= f.text_field :background_color, class: "color" %>
+				<div class="medium-9 columns clearfix">
+					<h3>Background Color</h3>
+					<%= f.text_field :background_color, class: "color" %>
 				</div>
 			</div>
-
-				<%= f.submit %>
-
+			<hr>
+			<div class="row">
+				<div class="medium-12 columns clearfix">			
+				<%= f.submit class: "text-submit right"  %>
+				</div>
+			</div>
 			<% end %>
 
 

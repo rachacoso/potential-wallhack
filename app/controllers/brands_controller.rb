@@ -92,9 +92,11 @@ class BrandsController < ApplicationController
 			allowable_redirect = [
 				'two',
 				'three',
+				'three_a',
 				'four',
 				'six',
 				'seven',
+				'eight',
 				'complete'
 			]
 
@@ -133,9 +135,9 @@ class BrandsController < ApplicationController
   def brand_parameters
     params.require(:brand).permit(
 			:company_name,
-			:brand_names,
 			:country_of_origin,
 			:year_established,
+			:company_size,
 			:website,
 			:countries_where_exported,
 			:brand_positioning,

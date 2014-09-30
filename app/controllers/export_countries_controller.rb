@@ -2,12 +2,13 @@ class ExportCountriesController < ApplicationController
 
 	def create
 		u = @current_user.distributor || @current_user.brand
-		u.export_countries.create!(export_country_parameters)
+		u.export_countries.find_or_create_by(country: params[:export_country][:country])
+		# u.export_countries.create(export_country_parameters)
 		if @current_user.distributor
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_nine_url
+				redirect_to onboard_brand_six_url
 			else
 				redirect_to brand_url
 			end		
@@ -22,7 +23,7 @@ class ExportCountriesController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_nine_url
+				redirect_to onboard_brand_six_url
 			else
 				redirect_to brand_url
 			end		
@@ -38,7 +39,7 @@ class ExportCountriesController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_nine_url
+				redirect_to onboard_brand_six_url
 			else
 				redirect_to brand_url
 			end		

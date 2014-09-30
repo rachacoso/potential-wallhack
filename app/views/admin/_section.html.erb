@@ -1,8 +1,8 @@
 <div class="row">
 	<div class="medium-9 columns">
-		<div class="ldpanel">
 
-		<h4><%= profile_section_name %></h4>
+
+		<h1><%= profile_section_name %></h1>
 		
 		<table>
 		<tr><th>Name</th><th></th><th>&nbsp;</th></tr>
@@ -10,8 +10,8 @@
 			<tr>
 			<%= form_for s do |f| %>
 			<td><%= f.text_field :name, label: false %></td>
-			<td><%= link_to 'update', "#", :onclick => "$('#edit_#{dom_id(s)}').submit()".html_safe %></td>
-			<td><%= link_to 'delete', s, :method => :delete, data: { :confirm => "Are you sure you want to delete #{s.name}?"}%></td>
+			<td><%= link_to 'update', "#", :onclick => "$('#edit_#{dom_id(s)}').submit()".html_safe, class: "itemformlink" %></td>
+			<td><%= link_to 'delete', s, :method => :delete, data: { :confirm => "Are you sure you want to delete #{s.name}?"}, class: "itemformlink" %></td>
 			</tr>
 			<% end %>
 		<% end %>
@@ -31,16 +31,16 @@
 				<%= f.text_field :name, :placeholder => "Name", label: false %>
 			</td>
 			<td>
-				
+				<%= f.submit "ADD", class: "text-submit" %>
 			</td>
 			<td>
-				<%= f.submit "Add", class: "tiny radius alert button" %>
+				
 			</td>
 		</tr>
 		<% end %>
 		</table>
 
 
-		</div>
+
 	</div>
 </div>

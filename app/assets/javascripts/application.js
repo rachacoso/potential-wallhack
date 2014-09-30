@@ -19,6 +19,7 @@
 //= require foundation/foundation.reveal
 //= require foundation/foundation.tab
 //= require foundation/foundation.accordion
+//= require foundation/foundation.equalizer
 
 
 // EXTRA 3rd PARTY JS

@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
 		if User.where(email: params[:user][:email]).exists?
 
-			flash[:error] = "Someone else is already using that email address"
+			flash[:error] = "That email address is already in use"
 			@newuser = User.new
 			@newuser.build_user_profile
 			redirect_to root_url
@@ -80,7 +80,7 @@ class UsersController < ApplicationController
 			if params[:user_type] == 'distributor'
 				redirect_to onboard_distributor_one_url
 			elsif params[:user_type] == 'brand'
-				redirect_to dashboard_url
+				redirect_to onboard_brand_one_url
 			else
 				redirect_to dashboard_url
 			end

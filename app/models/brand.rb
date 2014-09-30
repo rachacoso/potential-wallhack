@@ -9,9 +9,9 @@ class Brand
 	#####################
  	# General Info
  	field :company_name, type: String
- 	field :brand_names, type: String
 	field :country_of_origin, type: String
 	field :year_established, type: Date
+	field :company_size, type: String
 	field :website, type: String
  	has_one :contact_info, as: :brand_contact_info, dependent: :destroy
 	accepts_nested_attributes_for :contact_info

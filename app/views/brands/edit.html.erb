@@ -1,548 +1,577 @@
 <%= render partial: "shared/topbar" %>
 
 <div class="row">
-	<div class="medium-10 medium-centered columns">
+	<div class="medium-12 medium-centered columns">
 
-<%= render partial: "shared/headpaneltop" %>
+		<%#= render partial: "shared/headpanel" %>
 
-	<div class="row">
-		<div class="medium-12 columns">
-			<h4>Edit <strong>Brand Profile</strong></h4>
-		</div>
-	</div>
-<%= render partial: "shared/headpanelbottom" %>
+		<div class="row">
+			<div class="medium-12 columns">
 
-<%= render layout: "shared/panel" do %>
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Company Name</h1>
-			<hr>
-		</div>
-	</div>
-	<div class="row">
-		<%= form_for @brand, url: brand_url do |f| %>
-		<div class="medium-12 columns">
-			<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name" %>
-		</div>
-		<div class="medium-12 columns">
-			<hr>
-			<%= f.submit 'Update', class: "tiny radius success button right" %>
-		</div>
-		<% end %>
-	</div>
-<% end %>
-
-
-<%= render layout: "shared/panel" do %>
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>General Information</h1>
-			<hr>
-		</div>
-	</div>
-	<%= form_for @brand, url: brand_url do |f| %>
-	<div class="row">
-		<div class="medium-6 columns">
-			<h3>Company Info</h3>
-		</div>
-	</div>				
-	<div class="row">
-		<div class="medium-6 columns">
-			<%= f.text_field :country_of_origin, class: "country-autocomplete", placeholder: 'Country of origin' %>
-		</div>
-		<div class="medium-6 columns">				
-			<%= label_tag(:year_established, "Year established") %>
-			<%= select_tag :year_established, options_for_select(1970..Time.now.year, @brand.year_established ? @brand.year_established.strftime("%Y") : '') %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-12 columns">
-			<%= f.text_field :website %>
-		</div>
-	</div>
-
-<hr>
-
-	<%= f.fields_for :contact_info do |ff| %>
-	<div class="row">
-		<div class="medium-6 columns">
-			<h3>Company Contact Info</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-6 columns">
-			<%= ff.text_field :contact_name %>
-		</div>
-		<div class="medium-6 columns">
-			<%= ff.text_field :contact_title %>
-		</div>						
-	</div>
-	<div class="row">
-		<div class="medium-6 columns">
-			<%= ff.text_field :email %>
-		</div>
-		<div class="medium-6 columns">
-			<%= ff.text_field :phone %>
-		</div>
-	</div>
-
-<hr>
-
-	<div class="row">
-		<div class="medium-6 columns">
-			<h3>Company Address</h3>
-		</div>
-	</div>						
-	<div class="row">
-		<div class="medium-12 columns">
-			<%= ff.text_field :address1, label: "Address" %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-12 columns">
-			<%= ff.text_field :address2, label: "Address (cont'd)" %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-4 columns">
-			<%= ff.text_field :city %>
-		</div>
-		<div class="medium-4 columns">
-			<%= ff.text_field :state %>
-		</div>
-		<div class="medium-4 columns">
-			<%= ff.text_field :postcode %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-6 columns">
-			<%= ff.text_field :country, class: "country-autocomplete", placeholder: 'Country' %>
-		</div>
-	</div>
-	<% end %>
-	<hr>
-	<%= f.submit 'Update', class: "tiny radius success button right"  %>
-
-	<% end %>
-
-<% end %>
-
-<%= render layout: "shared/panel" do %>
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Sector and Channel Profile</h1>
-			<hr>
-		</div>
-	</div>
-	<div class="row">
-		<%= form_for @brand, url: brand_url do |f| %>
-		<div class="medium-6 columns">
-		<%= f.hidden_field :company_name %>		
-		<h3>Sectors</h3>
-			<% Sector.each do |sc| %>
-		    <div>
-		      <%= check_box_tag "sectors[#{sc.id}]", sc.id, (@brand.sectors.find(sc) rescue false) ? true : false %>
-		      <%= label_tag("sectors[#{sc.id}]", sc.name) %>
-		    </div>
-		  <% end %>
-		</div>
-		<div class="medium-6 columns">						
-			<h3>Channels</h3>
-			<% Channel.each do |ch| %>
-		    <div>
-		    	<%= check_box_tag "channels[#{ch.id}]", ch.id, (@brand.channels.find(ch) rescue false) ? true : false  %>
-		      <%= label_tag("channels[#{ch.id}]", ch.name) %>
-		    </div>
-		  <% end %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-12 columns">
-			<hr>
-			<%= f.submit 'Update', class: "tiny radius success button right" %>
-		</div>
-	</div>
-	<% end %>
-			
-<% end %>
-
-
-<%= render layout: "shared/panel" do %>
-
-<div class="row">
-	<div class="medium-12 columns">
-		<h1>Channel Capacities</h1>
-		<hr>
-	</div>
-</div>
-
-<div class="row">
-	<div class="medium-8 medium-centered columns">
-	<div class="groupwrapper">
-
-
-<div class="row">
-	<div class="medium-5 columns text-right">
-		<h4 class="columnheader">Channel</h4>
-	</div>
-	<div class="medium-7 columns">
-		<h4 class="columnheader">Capacity</h4>
-	</div>
-</div>	
-
-
-				<%= form_tag(channel_capacity_bulkupdate_url, method: "post") do  %>
-					
-
-					<% if @brand.channels.empty? %>
+			<%= render layout: "shared/panel_fulledit" do %>
+				<div class="row">
+					<div class="medium-12 columns">
+						<h1>General Information</h1>
+					</div>
+				</div>
+				<%= form_for @brand, url: brand_url do |f| %>
+				<div class="row">
+					<div class="medium-6 columns">
 						<div class="row">
-							<div class="medium-12 columns text-center">
-							<h6 class="information">( Please Select Channels in Sector and Channel Profile )</h6>
+							<div class="medium-12 columns">
+								<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name" %>
+							</div>
+						</div>
+					</div>
+					<div class="medium-6 columns">
+						<div class="row">
+							<div class="medium-6 columns">
+								<%= f.text_field :country_of_origin, class: "country-autocomplete", placeholder: 'Country of origin' %>
+							</div>
+							<div class="medium-6 columns">				
+								<%= label_tag(:year_established, "Year established") %>
+								<%= select_tag :year_established, options_for_select(1970..Time.now.year, @brand.year_established ? @brand.year_established.strftime("%Y") : '') %>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-6 columns">
+								<%= f.text_field :website %>
+							</div>
+							<div class="medium-6 columns">
+								<%= label_tag(:company_size, "Company Size") %>
+								<%= f.collection_select(:company_size, CompanySize.all, :id, :name) %>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+
+				<%= f.fields_for :contact_info do |ff| %>
+
+				<div class="row">
+					<div class="medium-6 columns">
+
+						<div class="row">
+							<div class="medium-12 columns">
+								<h3>Contact Info</h3>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-6 columns">
+								<%= ff.text_field :contact_name %>
+							</div>
+							<div class="medium-6 columns">
+								<%= ff.text_field :contact_title %>
+							</div>						
+						</div>
+						<div class="row">
+							<div class="medium-6 columns">
+								<%= ff.text_field :email %>
+							</div>
+							<div class="medium-6 columns">
+								<%= ff.text_field :phone %>
 							</div>
 						</div>
 
-					<% end %>
+					</div>
+					<div class="medium-6 columns">
 
-					<% @brand.channels.each do |chan| %>
-
-						<div class="row">
-							<div class="medium-5 columns">
-								<%= label_tag "channel_capacity[bulk_ids][#{chan.id}]", chan.name, class: "inline right" %>
+							<div class="row">
+								<div class="medium-12 columns">
+									<h3>Company Address</h3>
+								</div>
+							</div>						
+							<div class="row">
+								<div class="medium-12 columns">
+									<%= ff.text_field :address1, label: "Address" %>
+								</div>
 							</div>
-							<div class="medium-4 columns end">
-								<%= number_field_tag("channel_capacity[bulk_ids][#{chan.id}]", @brand.channel_capacities.where(channel_id: chan.id).first.capacity) %>
+							<div class="row">
+								<div class="medium-12 columns">
+									<%= ff.text_field :address2, label: "Address (cont'd)" %>
+								</div>
+							</div>
+							<div class="row">
+								<div class="medium-4 columns">
+									<%= ff.text_field :city %>
+								</div>
+								<div class="medium-4 columns">
+									<%= ff.text_field :state %>
+								</div>
+								<div class="medium-4 columns">
+									<%= ff.text_field :postcode %>
+								</div>
+							</div>
+							<div class="row">
+								<div class="medium-6 columns">
+									<%= ff.text_field :country, class: "country-autocomplete", placeholder: 'Country' %>
+								</div>
 							</div>
 						</div>
-		
+					</div>
+
+
+				<% end %>
+				<hr>
+				<%= f.submit 'Update', class: "tiny radius success button right"  %>
+
+				<% end %>
+
+			<% end %>
+
+			</div>
+		</div>
+
+		<div class="row" data-equalizer>
+			<div class="medium-6 columns">
+
+				<%= render layout: "shared/panel_fulledit", locals: {de: 'data-equalizer-watch'} do %>
+					<div class="row">
+						<div class="medium-12 columns">
+							<h1>Sector and Channel Profile</h1>
+						</div>
+					</div>
+
+					<%= form_for @brand, url: brand_url do |f| %>
+					<%= f.hidden_field :company_name %>
+					<div class="row">	
+						<div class="medium-10 medium-centered columns">		
+							<h3>Sectors</h3>
+							<% Sector.each do |sc| %>
+								<%= check_box_tag "sectors[#{sc.id}]", sc.id, (@brand.sectors.find(sc) rescue false) ? true : false %>
+								<%= label_tag("sectors[#{sc.id}]", sc.name) %>
+						  <% end %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-10 medium-centered columns">						
+							<h3>Channels</h3>
+							<% Channel.each do |ch| %>
+								<%= check_box_tag "channels[#{ch.id}]", ch.id, (@brand.channels.find(ch) rescue false) ? true : false  %>
+								<%= label_tag("channels[#{ch.id}]", ch.name) %>
+						  <% end %>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="medium-10 medium-centered columns">
+							<%= f.submit 'Update', class: "tiny radius success button right" %>
+						</div>
+					</div>
 					<% end %>
 
 					<% if @brand.channel_capacities.where(channel_id: 0).first %>
 						<div class="row">
-							<div class="medium-11 columns text-center">
-								<h6>(Custom Channels)</h6>
+							<div class="medium-10 medium-centered columns">
+								<h3>Custom Channels</h3>
 							</div>
 						</div>
 					<% end %>
 					<% @brand.channel_capacities.where(channel_id: 0).each do |cc| %>
 						<div class="row">
-							<div class="medium-5 columns">
-								<%= label_tag "channel_capacity[bulk_ids][#{cc.id}]", cc.custom_channel_name, class: "inline right" %>
-							</div>
-							<div class="medium-4 columns">
-								<%= number_field_tag("channel_capacity[bulk_ids][#{cc.id}]", cc.capacity) %>
-							</div>
-							<div class="medium-3 columns text-right" style="padding: 0.7em 1em;">
-								<%= link_to 'Delete', cc, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cc.custom_channel_name}?"}%>
+							<div class="medium-10 medium-centered columns">
+								<div class="row">
+									<div class="medium-12 columns">
+										<div class="customchanneldisplay">
+											<%= cc.custom_channel_name %> <%= link_to 'Delete', cc, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cc.custom_channel_name}?"}, class: "right itemformlink" %>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-
 					<% end %>
 
-						<div class="row">
-							<div class="medium-12 columns">
-								<hr>
-								<%= submit_tag('Update', class: "tiny radius success button right") %>
-							</div>
+				<div class="row">
+					<div class="medium-10 medium-centered columns">
+						<div class="groupwrapper">
+
+								<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" } do |f| %>
+									<div class="row">
+										<div class="medium-12 columns">
+											<h3>Add Custom Channel</h3>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="medium-9 columns">
+											<%= f.text_field :custom_channel_name, label: false, placeholder: 'Custom Channel Name' %>
+										</div>
+										<div class="medium-3 columns text-right" style="padding: 0.7em 1em;">
+											<%= link_to 'add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe, class: "itemformlink" %>
+										</div>
+									</div>
+
+								<% end %>	
+
 						</div>
+					</div>
+				</div>			
+							
+				<% end %>
 
-				<% end %>					
 
 
+			</div>
+			<div class="medium-6 columns">
 
+
+				<%= render layout: "shared/panel_fulledit", locals: {de: 'data-equalizer-watch'} do %>
+
+				<div class="row">
+					<div class="medium-12 columns">
+						<h1>Channel Capacities <small>(optional)</small></h1>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="medium-12 medium-centered columns">
+						
+
+
+							<div class="row">
+								<div class="medium-6 columns text-right">
+									<h4 class="columnheader">Channel</h4>
+								</div>
+								<div class="medium-6 columns">
+									<h4 class="columnheader">Capacity</h4>
+								</div>
+							</div>	
+
+
+							<%= form_tag(channel_capacity_bulkupdate_url, method: "post") do  %>
+								
+								<% if @brand.channels.empty? %>
+									<div class="row">
+										<div class="medium-12 columns text-center">
+										<h6 class="information">( Please Select Channels in Sector and Channel Profile )</h6>
+										</div>
+									</div>
+
+								<% end %>
+
+								<% @brand.channels.each do |chan| %>
+
+									<div class="row">
+										<div class="medium-6 columns">
+											<%= label_tag "channel_capacity[bulk_ids][#{chan.id}]", chan.name, class: "right" %>
+										</div>
+										<div class="medium-3 columns end">
+											<%= number_field_tag("channel_capacity[bulk_ids][#{chan.id}]", @brand.channel_capacities.where(channel_id: chan.id).first.capacity) %>
+										</div>
+									</div>
+					
+								<% end %>
+
+								<% if @brand.channel_capacities.where(channel_id: 0).first %>
+									<div class="row">
+										<div class="medium-6 columns text-right">
+											<h4 class="columnheader">Custom Channel</h4>
+										</div>
+										<div class="medium-6 columns">
+											<h4 class="columnheader">Capacity</h4>
+										</div>
+									</div>
+								<% end %>
+								<% @brand.channel_capacities.where(channel_id: 0).each do |cc| %>
+									<div class="row">
+										<div class="medium-6 columns">
+											<%= label_tag "channel_capacity[bulk_ids][#{cc.id}]", cc.custom_channel_name, class: "right" %>&nbsp;
+										</div>
+										<div class="medium-3 columns end">
+											<%= number_field_tag("channel_capacity[bulk_ids][#{cc.id}]", cc.capacity) %>
+										</div>
+									</div>
+
+								<% end %>
+
+									<div class="row">
+										<div class="medium-12 columns">
+											<hr>
+											<%= submit_tag('Update', class: "tiny radius success button right") %>
+										</div>
+									</div>
+
+							<% end %>					
+
+						
+					</div>
+				</div>
+
+
+				<% end %>
+
+			</div>
 		</div>
-	</div>
-</div>
 
-<div class="row">
-	<div class="medium-8 medium-centered columns">
-		<div class="groupwrapper">
+		<div class="row" data-equalizer>
+			<div class="medium-6 columns">
+
+				<%= render layout: "shared/panel_fulledit", locals: {de: 'data-equalizer-watch'} do %>
 
 
-				<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" } do |f| %>
+
 					<div class="row">
 						<div class="medium-12 columns">
-							<h6>Add Custom Channels</h6>
-							<hr>
+							<h1>Countries of Export</h1>
 						</div>
 					</div>
+
 
 					<div class="row">
-						<div class="medium-9 columns">
-							<%= f.text_field :custom_channel_name, label: false, placeholder: 'Custom Channel Name' %>
-						</div>
-						<div class="medium-3 columns text-right" style="padding: 0.7em 1em;">
-							<%= link_to 'add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe %>
+						<div class="medium-12 medium-centered columns">
+
+							<div class="groupwrapper">
+
+							<div class="rowitem">				
+								<div class="rowheadback">
+									<div class="row">
+										<div class="medium-8 columns">
+											Export Countries
+										</div>
+										<div class="medium-4 columns">
+											&nbsp;
+										</div>
+									</div>
+								</div>	
+							</div>	
+							<% if !@export_countries.empty? %>
+								<% @export_countries.each do |cb| %>
+								<div class="rowitem">
+								<div class="row">
+									<div class="medium-12 columns">
+										<%= form_for cb do |f| %>
+										
+											<div class="row">
+												<div class="medium-8 columns text-right">
+													<%= cb.country %>
+												</div>
+												<div class="medium-4 columns text-left">
+													<%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.country}?"}%>
+												</div>
+											</div>
+
+										<% end %>
+									</div>
+								</div>
+								</div>
+								<% end %>
+							<% else %>
+								<h5>( No Countries )</h5>
+							<% end %>
+
+								<div class="rowitem">
+								<div class="row">
+									<div class="medium-12 columns">
+										<hr>
+										<%= form_for @new_export_country, :html => { :id => "new_export_country" } do |f| %>
+										
+										<div class="rowheadback addnew">
+											<div class="row">
+												<div class="medium-8 columns">
+													Add a Country
+												</div>
+												<div class="medium-4 columns">
+													&nbsp;
+												</div>
+											</div>
+										</div>	
+										<div class="row">
+											<div class="medium-8 columns">
+												<%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %>
+											</div>
+											<div class="medium-4 columns text-left">
+												<%= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %>
+											</div>
+										</div>				
+										<% end %>
+									</div>
+								</div>
+								</div>
+
+							</div> <!-- /.groupwrapper -->
+
 						</div>
 					</div>
 
-				<% end %>	
-
-
-		</div>
-	</div>
-</div>
-
-
-<% end %>
-
-
-<%= render layout: "shared/panel" do %>
-
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Product Portfolio</h1>
-			<hr>
-		</div>
-	</div>
-
-	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "Current SKU List",
-		coll: @current_products,
-		identifier: "name",
-		no_item_message: "No Current Products",
-		coll_new_item: @new_product,
-		coll_new_item_text: "Add a Current Product",
-		iscurrent: true
-	} %>
-	
-	
-	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "Upcoming SKU List",
-		coll: @upcoming_products,
-		identifier: "name",
-		no_item_message: "No Upcoming Products",
-		coll_new_item: @new_product,
-		coll_new_item_text: "Add an Upcoming Product",
-		iscurrent: false
-	} %>
-
-<% end %>
-
-
-
-
-<%= render layout: "shared/panel" do %>
-
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Marketing Activities</h1>
-			<hr>
-		</div>
-	</div>
-
-	<div class="row">
-	<%= form_for @brand, url: brand_url do |f| %>
-		<div class="medium-12 columns">
-			<%= f.text_area :brand_positioning, label: "Brand Positioning", placeholder: 'Brand Positioning' %>
-			<%= f.submit 'Update', class: "tiny radius success button right" %>
-		</div>
-	<% end %>
-	</div>
-
-<% end %>
-
-
-
-
-<%= render layout: "shared/panel" do %>
-
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Press Hits</h1>
-			<hr>
-		</div>
-	</div>
-	
-	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "",
-		coll: @press_hits,
-		identifier: "source",
-		no_item_message: "No Press Hits",
-		coll_new_item: @new_press_hit,
-		coll_new_item_text: "Add a Press Hit",
-		# iscurrent: false
-	} %>
-
-
-<% end %>
-
-<%= render layout: "shared/panel" do %>
-
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Trade Shows</h1>
-			<hr>
-		</div>
-	</div>
-						
-
-	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "",
-		coll: @trade_shows,
-		identifier: "name",
-		no_item_message: "No Trade Shows",
-		coll_new_item: @new_trade_show,
-		coll_new_item_text: "Add a Trade Show",
-		# iscurrent: false
-	} %>
-	
-<% end %>
-
-
-<%= render layout: "shared/panel" do %>
-
-
-
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Countries of Export</h1>
-			<hr>
-		</div>
-	</div>
-
-
-	<div class="row">
-		<div class="medium-6 medium-centered columns">
-
-			<div class="groupwrapper">
-
-
-			<% if !@export_countries.empty? %>
-				<% @export_countries.each do |cb| %>
-				<div class="rowitem">
-						<div class="rowheadback">
-							<div class="row">
-								<div class="medium-8 columns">
-									Export Countries
-								</div>
-								<div class="medium-4 columns">
-									&nbsp;
-								</div>
-							</div>
-						</div>						
-				<div class="row">
-					<div class="medium-12 columns">
-						<%= form_for cb do |f| %>
-						
-							<div class="row">
-								<div class="medium-8 columns text-right">
-									<%= cb.country %>
-								</div>
-								<div class="medium-4 columns text-left">
-									<%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.country}?"}%>
-								</div>
-							</div>
-
-						<% end %>
-					</div>
-				</div>
-				</div>
 				<% end %>
-			<% else %>
-				<h5>( No Countries )</h5>
-			<% end %>
 
-				<div class="rowitem">
-				<div class="row">
-					<div class="medium-12 columns">
-						<hr>
-						<%= form_for @new_export_country, :html => { :id => "new_export_country" } do |f| %>
-						
-						<div class="rowheadback addnew">
-							<div class="row">
-								<div class="medium-8 columns">
-									Add a Country
-								</div>
-								<div class="medium-4 columns">
-									&nbsp;
-								</div>
-							</div>
-						</div>	
-						<div class="row">
-							<div class="medium-8 columns">
-								<%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %>
-							</div>
-							<div class="medium-4 columns text-left">
-								<%= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %>
-							</div>
-						</div>				
-						<% end %>
+			</div>
+			<div class="medium-6 columns">
+
+				<%= render layout: "shared/panel_fulledit", locals: {de: 'data-equalizer-watch'} do %>
+
+					<div class="row">
+						<div class="medium-12 columns">
+							<h1>Marketing Activities</h1>
+						</div>
 					</div>
-				</div>
-				</div>
 
-			</div> <!-- /.groupwrapper -->
+					<div class="row clearfix">
+					<%= form_for @brand, url: brand_url do |f| %>
+						<div class="medium-12 columns">
+							<%= f.text_area :brand_positioning, rows: 10, label: "Brand Positioning", placeholder: 'Brand Positioning' %>
+							<%= f.submit 'Update', class: "tiny radius success button right" %>
+						</div>
+					<% end %>
+					</div>
 
+				<% end %>
+
+			</div>
 		</div>
-	</div>
-
-<% end %>
-
-<%= render layout: "shared/panel" do %>
 
 
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Patents</h1>
-			<hr>
+		<div class="row">
+			<div class="medium-10 medium-centered columns">
+
+				<%= render layout: "shared/panel_fulledit" do %>
+
+					<div class="row">
+						<div class="medium-12 columns">
+							<h1>Product Portfolio</h1>
+						</div>
+					</div>
+
+					<%= render partial: "shared/editcollblock", locals: { 
+						headertitle: "Current SKU List",
+						coll: @current_products,
+						identifier: "name",
+						no_item_message: "No Current Products",
+						coll_new_item: @new_product,
+						coll_new_item_text: "Add a Current Product",
+						iscurrent: "true"
+					} %>
+					
+						<div class="row">
+							<div class="medium-6 medium-centered columns text-center">
+								<hr>
+							</div>
+						</div>
+					
+					<%= render partial: "shared/editcollblock", locals: { 
+						headertitle: "Upcoming SKU List (optional)",
+						coll: @upcoming_products,
+						identifier: "name",
+						no_item_message: "No Upcoming Products",
+						coll_new_item: @new_product,
+						coll_new_item_text: "Add an Upcoming Product",
+						iscurrent: "false"
+					} %>
+
+				<% end %>
+
+
+
+
+				<%= render layout: "shared/panel_fulledit" do %>
+
+					<div class="row">
+						<div class="medium-12 columns">
+							<h1>Press Hits</h1>
+						</div>
+					</div>
+					
+					<%= render partial: "shared/editcollblock", locals: { 
+						headertitle: "",
+						coll: @press_hits,
+						identifier: "source",
+						no_item_message: "No Press Hits",
+						coll_new_item: @new_press_hit,
+						coll_new_item_text: "Add a Press Hit",
+						# iscurrent: false
+					} %>
+
+
+				<% end %>
+
+				<%= render layout: "shared/panel_fulledit" do %>
+
+					<div class="row">
+						<div class="medium-12 columns">
+							<h1>Trade Shows</h1>
+						</div>
+					</div>
+										
+
+					<%= render partial: "shared/editcollblock", locals: { 
+						headertitle: "",
+						coll: @trade_shows,
+						identifier: "name",
+						no_item_message: "No Trade Shows",
+						coll_new_item: @new_trade_show,
+						coll_new_item_text: "Add a Trade Show",
+						# iscurrent: false
+					} %>
+					
+				<% end %>
+
+
+				<%= render layout: "shared/panel_fulledit" do %>
+
+
+					<div class="row">
+						<div class="medium-12 columns">
+							<h1>Patents</h1>
+						</div>
+					</div>
+
+					<%= render partial: "shared/editcollblock", locals: { 
+						headertitle: "",
+						coll: @patents,
+						identifier: "product",
+						no_item_message: "No Patents",
+						coll_new_item: @new_patent,
+						coll_new_item_text: "Add a Patent",
+						# iscurrent: false
+					} %>
+
+
+				<% end %>
+
+				<%= render layout: "shared/panel_fulledit" do %>
+
+					<div class="row">
+						<div class="medium-12 columns">
+							<h1>Trademarks</h1>
+						</div>
+					</div>
+
+					<%= render partial: "shared/editcollblock", locals: { 
+						headertitle: "",
+						coll: @trademarks,
+						identifier: "product",
+						no_item_message: "No Trademarks",
+						coll_new_item: @new_trademark,
+						coll_new_item_text: "Add a Trademark",
+						# iscurrent: false
+					} %>
+					
+				<% end %>
+
+				<%= render layout: "shared/panel_fulledit" do %>
+
+					<div class="row">
+						<div class="medium-12 columns">
+							<h1>Certifications / Regulatory Compliance</h1>
+						</div>
+					</div>
+
+					<%= render partial: "shared/editcollblock", locals: { 
+						headertitle: "",
+						coll: @compliances,
+						identifier: "product_or_category",
+						no_item_message: "No Certifications / Regulatory Compliances",
+						coll_new_item: @new_compliance,
+						coll_new_item_text: "Add a Certification / Regulatory Compliance",
+						# iscurrent: false
+					} %>
+
+
+				<% end %>
+			</div>
 		</div>
-	</div>
 
-	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "",
-		coll: @patents,
-		identifier: "product",
-		no_item_message: "No Patents",
-		coll_new_item: @new_patent,
-		coll_new_item_text: "Add a Patent",
-		# iscurrent: false
-	} %>
-
-
-<% end %>
-
-<%= render layout: "shared/panel" do %>
-
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Trademarks</h1>
-			<hr>
-		</div>
-	</div>
-
-	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "",
-		coll: @trademarks,
-		identifier: "product",
-		no_item_message: "No Trademarks",
-		coll_new_item: @new_trademark,
-		coll_new_item_text: "Add a Trademark",
-		# iscurrent: false
-	} %>
-	
-<% end %>
-
-<%= render layout: "shared/panel" do %>
-
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Certifications / Regulatory Compliance</h1>
-			<hr>
-		</div>
-	</div>
-
-	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "",
-		coll: @compliances,
-		identifier: "product_or_category",
-		no_item_message: "No Certifications / Regulatory Compliances",
-		coll_new_item: @new_compliance,
-		coll_new_item_text: "Add a Certification / Regulatory Compliance",
-		# iscurrent: false
-	} %>
-
-
-<% end %>
 
 	</div>
 </div>

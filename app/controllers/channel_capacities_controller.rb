@@ -4,10 +4,10 @@ class ChannelCapacitiesController < ApplicationController
 		u = @current_user.distributor || @current_user.brand
 
 		cname = params[:channel_capacity][:custom_channel_name]
-		ccap = params[:channel_capacity][:capacity]
+		# ccap = params[:channel_capacity][:capacity]
 
 		cchannel = u.channel_capacities.find_or_create_by(custom_channel_name: cname, channel_id: 0)
-		cchannel.capacity = ccap
+		# cchannel.capacity = ccap
 		cchannel.save
 
 		# DEPRECATED
@@ -21,7 +21,7 @@ class ChannelCapacitiesController < ApplicationController
 			end
 		else
 			if params[:ob]
-				redirect_to onboard_brand_four_url
+				redirect_to onboard_brand_three_a_url
 			else
 				redirect_to brand_url
 			end

@@ -1,67 +1,47 @@
 <div class="row">
-	<div class="small-12 medium-8 medium-push-4 columns">
+	<div class="small-12 columns text-right">
 		<div class="onboard-nav">
 			<ul>
-			<div class="small-1 columns">
 			<%= link_to onboard_brand_one_url do %>
 				<%= content_tag(:li, "1", class: (action_name == 'one') ? "active" : '') %>
 			<% end %>
-			</div>
-			<div class="small-1 columns">
 			<%= link_to onboard_brand_two_url do %>
 				<%= content_tag(:li, "2", class: (action_name == 'two') ? "active" : '') %>
 			<% end %>
-			</div>
-			<div class="small-1 columns">
 			<%= link_to onboard_brand_three_url do %>
 				<%= content_tag(:li, "3", class: (action_name == 'three') ? "active" : '') %>
 			<% end %>
-			</div>
-			<div class="small-1 columns">
+			<%= link_to onboard_brand_three_a_url do %>
+				<%= content_tag(:li, "3a", class: (action_name == 'three_a') ? "active" : '') %>
+			<% end %>			
 			<%= link_to onboard_brand_four_url do %>
 				<%= content_tag(:li, "4", class: (action_name == 'four') ? "active" : '') %>
 			<% end %>
-			</div>
-			<div class="small-1 columns">
 			<%= link_to onboard_brand_five_url do %>
 				<%= content_tag(:li, "5", class: (action_name == 'five') ? "active" : '') %>
 			<% end %>
-			</div>
-			<div class="small-1 columns">
 			<%= link_to onboard_brand_six_url do %>
 				<%= content_tag(:li, "6", class: (action_name == 'six') ? "active" : '') %>
 			<% end %>
-			</div>
-			<div class="small-1 columns">
 			<%= link_to onboard_brand_seven_url do %>
 				<%= content_tag(:li, "7", class: (action_name == 'seven') ? "active" : '') %>
 			<% end %>
-			</div>
-			<div class="small-1 columns">
 			<%= link_to onboard_brand_eight_url do %>
 				<%= content_tag(:li, "8", class: (action_name == 'eight') ? "active" : '') %>
 			<% end %>
-			</div>
-			<div class="small-1 columns">
 			<%= link_to onboard_brand_nine_url do %>
 				<%= content_tag(:li, "9", class: (action_name == 'nine') ? "active" : '') %>
 			<% end %>
-			</div>
-			<div class="small-1 columns">
 			<%= link_to onboard_brand_ten_url do %>
 				<%= content_tag(:li, "10", class: (action_name == 'ten') ? "active" : '') %>
 			<% end %>
-			</div>
-			<div class="small-1 columns">
 			<%= link_to onboard_brand_eleven_url do %>
 				<%= content_tag(:li, "11", class: (action_name == 'eleven') ? "active" : '') %>
 			<% end %>
-			</div>
-			<div class="small-1 columns">
 			<%= link_to onboard_brand_twelve_url do %>
 				<%= content_tag(:li, "12", class: (action_name == 'twelve') ? "active" : '') %>
 			<% end %>
-			</div>
+			<%= content_tag(:li, "done!") %>
 			</ul>
 		</div>
 	</div>

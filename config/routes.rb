@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :sectors, only: [:create, :update, :destroy]
   resources :channels, only: [:create, :update, :destroy]
+  resources :company_sizes, only: [:create, :update, :destroy]
   resources :countries, only: [:create, :update, :destroy]
   resources :channel_capacities, only: [:create, :update, :destroy]
 
@@ -53,6 +54,7 @@ Rails.application.routes.draw do
   get '/onboard/brand/one' => 'onboard_brand#one', as: 'onboard_brand_one'
   get '/onboard/brand/two' => 'onboard_brand#two', as: 'onboard_brand_two'
   get '/onboard/brand/three' => 'onboard_brand#three', as: 'onboard_brand_three'
+  get '/onboard/brand/three_a' => 'onboard_brand#three_a', as: 'onboard_brand_three_a'
   get '/onboard/brand/four' => 'onboard_brand#four', as: 'onboard_brand_four'
   get '/onboard/brand/five' => 'onboard_brand#five', as: 'onboard_brand_five'
   get '/onboard/brand/six' => 'onboard_brand#six', as: 'onboard_brand_six'

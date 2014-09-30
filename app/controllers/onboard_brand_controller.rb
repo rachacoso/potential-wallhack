@@ -13,7 +13,14 @@ class OnboardBrandController < ApplicationController
   end
 
   def three
+    @brand = @current_user.brand 
+  end
+
+  def three_a
     @brand = @current_user.brand
+    @sectors = @brand.sectors rescue nil
+    @channels = @brand.channels rescue nil
+    @new_channel_capacity = ChannelCapacity.new 
   end
 
   def four
@@ -34,26 +41,31 @@ class OnboardBrandController < ApplicationController
 
   def six
     @brand = @current_user.brand
+    @export_countries = @brand.export_countries rescue nil
+    @new_export_country = ExportCountry.new 
   end
 
   def seven
+    @brand = @current_user.brand
+  end
+
+  def eight
     @brand = @current_user.brand
     @press_hits = @brand.press_hits rescue nil
     @new_press_hit = PressHit.new
   end
 
-  def eight
+  def nine
     @brand = @current_user.brand
-
     @trade_shows = @brand.trade_shows rescue nil
     @new_trade_show = TradeShow.new  
   end
 
-  def nine
-    @brand = @current_user.brand
-    @export_countries = @brand.export_countries rescue nil
-    @new_export_country = ExportCountry.new 
-  end
+  # def nine
+  #   @brand = @current_user.brand
+  #   @export_countries = @brand.export_countries rescue nil
+  #   @new_export_country = ExportCountry.new 
+  # end
 
   def ten
     @brand = @current_user.brand

@@ -1,12 +1,19 @@
-
+<%= render partial: "shared/topbar" %>
 <%= render layout: "shared/panel" do %>
 
 	<div class="row">
 		<div class="medium-12 columns">
 			<h1>General Information</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-12 medium-centered columns text-center">
+			<br>
+			Instructions here...
 			<hr>
 		</div>
 	</div>
+	
 	<%= form_for @brand, url: brand_url do |f| %>
 	<%= hidden_field_tag :redirect, 'three' %>
 	<div class="row">
@@ -24,8 +31,12 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="medium-12 columns">
+		<div class="medium-6 columns">
 			<%= f.text_field :website %>
+		</div>
+		<div class="medium-6 columns">
+			<%= label_tag(:company_size, "Company Size") %>
+			<%= f.collection_select(:company_size, CompanySize.all, :id, :name) %>
 		</div>
 	</div>
 

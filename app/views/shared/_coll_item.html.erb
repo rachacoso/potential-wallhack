@@ -7,7 +7,9 @@
 				<%= (controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? (hidden_field_tag :ob, "true") : "" %>
 				<dl class="accordion" data-accordion>
 				  <dd class="accordion-navigation">
-				    <a href="#a_<%= cb.id %>"><%= cb.send(identifier).empty? ? "( No Name )" : cb.send(identifier)  %></a>
+				    <a href="#a_<%= cb.id %>"><%= cb.send(identifier).empty? ? "( No Name )" : cb.send(identifier)  %>
+						<%= cb.class.name == "PressHit" ? cb.date.strftime("// %B %d %Y") : "" rescue nil %>
+				    </a>
 				    <div id="a_<%= cb.id %>" class="content">
 
 <%= render partial: "shared/collections/#{cb.class.name.tableize}", locals: {f: f, cb: cb} %>

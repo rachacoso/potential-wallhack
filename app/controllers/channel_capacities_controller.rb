@@ -15,7 +15,7 @@ class ChannelCapacitiesController < ApplicationController
 
 		if @current_user.distributor
 			if params[:ob]
-				redirect_to onboard_distributor_four_url
+				redirect_to onboard_distributor_three_a_url
 			else
 				redirect_to distributor_url
 			end
@@ -83,13 +83,13 @@ class ChannelCapacitiesController < ApplicationController
 		d.destroy
 		if @current_user.distributor
 			if params[:ob]
-				redirect_to onboard_distributor_four_url
+				redirect_to onboard_distributor_three_a_url
 			else
 				redirect_to distributor_url
 			end			
 		else
 			if params[:ob]
-				redirect_to onboard_brand_four_url
+				redirect_to onboard_brand_three_a_url
 			else
 				redirect_to brand_url
 			end

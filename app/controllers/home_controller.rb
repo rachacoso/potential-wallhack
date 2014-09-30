@@ -3,10 +3,12 @@ class HomeController < ApplicationController
   skip_before_action :require_login, only: [:front]
 
 	def front
-
-		@newuser = User.new
-		@newuser.build_user_profile
-		
+		if @current_user
+			redirect_to dashboard_url
+		else
+			@newuser = User.new
+			@newuser.build_user_profile
+		end
 	end
 
 

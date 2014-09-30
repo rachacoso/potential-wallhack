@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_display
-    @display = Display.all.first
+    @display = Display.all.first rescue nil
   end
 
 end

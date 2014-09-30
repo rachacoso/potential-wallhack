@@ -62,7 +62,7 @@ class UsersController < ApplicationController
 			user.save!
 
 			#create profile for the selected user type
-			if params[:user_type] == 'distributor' || 'brand' # restrict to only allowed values
+			if params[:user_type] == 'distributor' || params[:user_type] == 'brand' # restrict to only allowed values
 				createusertype = "create_" + params[:user_type]
 				user.send(createusertype) # create relation
  

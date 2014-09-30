@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   get '/onboard/distributor/one' => 'onboard_distributor#one', as: 'onboard_distributor_one'
   get '/onboard/distributor/two' => 'onboard_distributor#two', as: 'onboard_distributor_two'
   get '/onboard/distributor/three' => 'onboard_distributor#three', as: 'onboard_distributor_three'
+  get '/onboard/distributor/three_a' => 'onboard_distributor#three_a', as: 'onboard_distributor_three_a'
   get '/onboard/distributor/four' => 'onboard_distributor#four', as: 'onboard_distributor_four'
   get '/onboard/distributor/five' => 'onboard_distributor#five', as: 'onboard_distributor_five'
   get '/onboard/distributor/six' => 'onboard_distributor#six', as: 'onboard_distributor_six'

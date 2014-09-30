@@ -26,7 +26,6 @@ class OnboardBrandController < ApplicationController
   def four
     @brand = @current_user.brand
     @channel_capacities = @brand.channel_capacities rescue nil
-    @new_channel_capacity = ChannelCapacity.new 
   end
 
   def five

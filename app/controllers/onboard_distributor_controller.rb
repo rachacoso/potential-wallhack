@@ -22,12 +22,19 @@ class OnboardDistributorController < ApplicationController
 
   end
 
+  def three_a
+
+    @distributor = @current_user.distributor
+    @sectors = @distributor.sectors rescue nil
+    @channels = @distributor.channels rescue nil
+    @new_channel_capacity = ChannelCapacity.new
+
+  end
+
   def four
 
     @distributor = @current_user.distributor
-
     @channel_capacities = @distributor.channel_capacities
-    @new_channel_capacity = ChannelCapacity.new
 
   end
 

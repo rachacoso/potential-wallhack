@@ -1,15 +1,24 @@
 <%= render partial: "shared/topbar" %>
+
 <%= render layout: "shared/panel" do %>
+
 	<div class="row">
 		<div class="medium-12 columns">
 			<h1>Sector and Channel Profile</h1>
-			<hr>
+			<div class="row">
+				<div class="medium-10 medium-centered columns text-center">
+					<br>
+					<div class="onboard-instructions">Instructions here...</div>
+					<hr>
+				</div>
+			</div>
 		</div>
 	</div>
+
+	<%= form_for @distributor, url: distributor_url do |f| %>
+	<%= hidden_field_tag :redirect, 'three_a' %>	
 	<div class="row">
-		<%= form_for @distributor, url: distributor_url do |f| %>
-		<%= hidden_field_tag :redirect, 'four' %>
-		<div class="medium-6 columns">
+		<div class="medium-10 medium-centered columns">
 		<%= f.hidden_field :name %>		
 		<h3>Sectors</h3>
 			<% Sector.each do |sc| %>
@@ -19,7 +28,9 @@
 		    </div>
 		  <% end %>
 		</div>
-		<div class="medium-6 columns">						
+	</div>
+	<div class="row">
+		<div class="medium-10 medium-centered columns">						
 			<h3>Channels</h3>
 			<% Channel.each do |ch| %>
 		    <div>
@@ -30,11 +41,10 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="medium-12 columns">
-			<hr>
-			<%= f.submit 'Update and Continue', class: "tiny radius success button right" %>
+		<div class="medium-10 medium-centered columns">
+			<%= f.submit 'Select and Continue', class: "tiny radius success button right" %>
 		</div>
 	</div>
 	<% end %>
-			
+
 <% end %>

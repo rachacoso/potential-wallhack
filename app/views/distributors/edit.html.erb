@@ -7,449 +7,493 @@
 
 <%#= render partial: "shared/headpanel" %>
 
-<%= render layout: "shared/panel_fulledit" do %>
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Company Name</h1>
-			<hr>
-		</div>
-	</div>
-	<div class="row">
-		<%= form_for @distributor, url: distributor_url do |f| %>
-		<div class="medium-12 columns">
-			<%= f.text_area :name, rows: 1, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name" %>
-		</div>
-		<div class="medium-12 columns">
-			<hr>
-			<%= f.submit 'Update', class: "tiny radius success button right" %>
-		</div>
-		<% end %>
-	</div>
-<% end %>
+		<div class="row">
+			<div class="medium-12 columns">
 
-
-<%= render layout: "shared/panel_fulledit" do %>
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>General Information</h1>
-			<hr>
-		</div>
-	</div>
-	<%= form_for @distributor, url: distributor_url do |f| %>
-	<div class="row">
-		<div class="medium-6 columns">
-			<h3>Company Info</h3>
-		</div>
-	</div>				
-	<div class="row">
-		<div class="medium-6 columns">
-			<%= f.text_field :country_of_origin, class: "country-autocomplete", placeholder: 'Country of origin' %>
-		</div>
-		<div class="medium-6 columns">				
-			<%= label_tag(:year_established, "Year established") %>
-			<%= select_tag :year_established, options_for_select(1970..Time.now.year, @distributor.year_established ? @distributor.year_established.strftime("%Y") : '') %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-6 columns">
-			<%= f.text_field :website %>
-		</div>
-		<div class="medium-6 columns">
-			<%= label_tag(:company_size, "Company Size") %>
-			<%= f.collection_select(:company_size, CompanySize.all, :id, :name) %>
-		</div>
-	</div>
-
-<hr>
-
-	<%= f.fields_for :contact_info do |ff| %>
-	<div class="row">
-		<div class="medium-6 columns">
-			<h3>Company Contact Info</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-6 columns">
-			<%= ff.text_field :contact_name %>
-		</div>
-		<div class="medium-6 columns">
-			<%= ff.text_field :contact_title %>
-		</div>						
-	</div>
-	<div class="row">
-		<div class="medium-6 columns">
-			<%= ff.text_field :email %>
-		</div>
-		<div class="medium-6 columns">
-			<%= ff.text_field :phone %>
-		</div>
-	</div>
-
-<hr>
-
-	<div class="row">
-		<div class="medium-6 columns">
-			<h3>Company Address</h3>
-		</div>
-	</div>						
-	<div class="row">
-		<div class="medium-12 columns">
-			<%= ff.text_field :address1, label: "Address" %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-12 columns">
-			<%= ff.text_field :address2, label: "Address (cont'd)" %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-4 columns">
-			<%= ff.text_field :city %>
-		</div>
-		<div class="medium-4 columns">
-			<%= ff.text_field :state %>
-		</div>
-		<div class="medium-4 columns">
-			<%= ff.text_field :postcode %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-6 columns">
-			<%= ff.text_field :country, class: "country-autocomplete", placeholder: 'Country' %>
-		</div>
-	</div>
-	<% end %>
-	<hr>
-	<%= f.submit 'Update', class: "tiny radius success button right"  %>
-
-	<% end %>
-
-<% end %>
-
-
-
-<%= render layout: "shared/panel_fulledit" do %>
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Sector and Channel Profile</h1>
-			<hr>
-		</div>
-	</div>
-	<div class="row">
-		<%= form_for @distributor, url: distributor_url do |f| %>
-		<div class="medium-6 columns">
-		<%= f.hidden_field :name %>		
-		<h3>Sectors</h3>
-			<% Sector.each do |sc| %>
-		    <div>
-		      <%= check_box_tag "sectors[#{sc.id}]", sc.id, (@distributor.sectors.find(sc) rescue false) ? true : false %>
-		      <%= label_tag("sectors[#{sc.id}]", sc.name) %>
-		    </div>
-		  <% end %>
-		</div>
-		<div class="medium-6 columns">						
-			<h3>Channels</h3>
-			<% Channel.each do |ch| %>
-		    <div>
-		    	<%= check_box_tag "channels[#{ch.id}]", ch.id, (@distributor.channels.find(ch) rescue false) ? true : false  %>
-		      <%= label_tag("channels[#{ch.id}]", ch.name) %>
-		    </div>
-		  <% end %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-12 columns">
-			<hr>
-			<%= f.submit 'Update', class: "tiny radius success button right" %>
-		</div>
-	</div>
-	<% end %>
-			
-<% end %>
-
-<%= render layout: "shared/panel_fulledit" do %>
-
-<div class="row">
-	<div class="medium-12 columns">
-		<h1>Channel Capacities</h1>
-		<hr>
-	</div>
-</div>
-
-<div class="row">
-	<div class="medium-11 medium-centered columns">
-	<div class="groupwrapper">
-
-
-<div class="row">
-	<div class="medium-5 columns text-right">
-		<h4 class="columnheader">Channel</h4>
-	</div>
-	<div class="medium-7 columns">
-		<h4 class="columnheader">Capacity</h4>
-	</div>
-</div>	
-
-
-				<%= form_tag(channel_capacity_bulkupdate_url, method: "post") do  %>
-					
-					<% if @distributor.channels.empty? %>
+			<%= render layout: "shared/panel_fulledit" do %>
+				<div class="row">
+					<div class="medium-12 columns">
+						<h1>General Information</h1>
+					</div>
+				</div>
+				<%= form_for @distributor, url: distributor_url do |f| %>
+				<div class="row">
+					<div class="medium-6 columns">
 						<div class="row">
-							<div class="medium-9 columns">
-							( Please Select Channels in Sector and Channel Profile )
+							<div class="medium-12 columns">
+								<%= f.text_area :name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name" %>
+							</div>
+						</div>
+					</div>
+					<div class="medium-6 columns">
+						<div class="row">
+							<div class="medium-6 columns">
+								<%= f.text_field :country_of_origin, class: "country-autocomplete", placeholder: 'Country of origin' %>
+							</div>
+							<div class="medium-6 columns">				
+								<%= label_tag(:year_established, "Year established") %>
+								<%= select_tag :year_established, options_for_select(1970..Time.now.year, @distributor.year_established ? @distributor.year_established.strftime("%Y") : '') %>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-6 columns">
+								<%= f.text_field :website %>
+							</div>
+							<div class="medium-6 columns">
+								<%= label_tag(:company_size, "Company Size") %>
+								<%= f.collection_select(:company_size, CompanySize.all, :id, :name) %>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+
+				<%= f.fields_for :contact_info do |ff| %>
+
+				<div class="row">
+					<div class="medium-6 columns">
+
+						<div class="row">
+							<div class="medium-12 columns">
+								<h3>Contact Info</h3>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-6 columns">
+								<%= ff.text_field :contact_name %>
+							</div>
+							<div class="medium-6 columns">
+								<%= ff.text_field :contact_title %>
+							</div>						
+						</div>
+						<div class="row">
+							<div class="medium-6 columns">
+								<%= ff.text_field :email %>
+							</div>
+							<div class="medium-6 columns">
+								<%= ff.text_field :phone %>
 							</div>
 						</div>
 
-					<% end %>
-					<% @distributor.channels.each do |chan| %>
+					</div>
+					<div class="medium-6 columns">
 
-						<div class="row">
-							<div class="medium-5 columns">
-								<%= label_tag "channel_capacity[bulk_ids][#{chan.id}]", chan.name, class: "inline right" %>
+							<div class="row">
+								<div class="medium-12 columns">
+									<h3>Company Address</h3>
+								</div>
+							</div>						
+							<div class="row">
+								<div class="medium-12 columns">
+									<%= ff.text_field :address1, label: "Address" %>
+								</div>
 							</div>
-							<div class="medium-4 columns end">
-								<%= number_field_tag("channel_capacity[bulk_ids][#{chan.id}]", @distributor.channel_capacities.where(channel_id: chan.id).first.capacity) %>
+							<div class="row">
+								<div class="medium-12 columns">
+									<%= ff.text_field :address2, label: "Address (cont'd)" %>
+								</div>
+							</div>
+							<div class="row">
+								<div class="medium-4 columns">
+									<%= ff.text_field :city %>
+								</div>
+								<div class="medium-4 columns">
+									<%= ff.text_field :state %>
+								</div>
+								<div class="medium-4 columns">
+									<%= ff.text_field :postcode %>
+								</div>
+							</div>
+							<div class="row">
+								<div class="medium-6 columns">
+									<%= ff.text_field :country, class: "country-autocomplete", placeholder: 'Country' %>
+								</div>
 							</div>
 						</div>
-		
+					</div>
+
+
+				<% end %>
+				<hr>
+				<%= f.submit 'Update', class: "tiny radius success button right"  %>
+
+				<% end %>
+
+			<% end %>
+
+			</div>
+		</div>
+
+
+		<div class="row" data-equalizer>
+			<div class="medium-6 columns">
+
+				<%= render layout: "shared/panel_fulledit", locals: {de: 'data-equalizer-watch'} do %>
+					<div class="row">
+						<div class="medium-12 columns">
+							<h1>Sector and Channel Profile</h1>
+						</div>
+					</div>
+
+					<%= form_for @distributor, url: distributor_url do |f| %>
+					<%= f.hidden_field :name %>
+					<div class="row">	
+						<div class="medium-10 medium-centered columns">		
+							<h3>Sectors</h3>
+							<% Sector.each do |sc| %>
+								<%= check_box_tag "sectors[#{sc.id}]", sc.id, (@distributor.sectors.find(sc) rescue false) ? true : false %>
+								<%= label_tag("sectors[#{sc.id}]", sc.name) %>
+						  <% end %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-10 medium-centered columns">						
+							<h3>Channels</h3>
+							<% Channel.each do |ch| %>
+								<%= check_box_tag "channels[#{ch.id}]", ch.id, (@distributor.channels.find(ch) rescue false) ? true : false  %>
+								<%= label_tag("channels[#{ch.id}]", ch.name) %>
+						  <% end %>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="medium-10 medium-centered columns">
+							<%= f.submit 'Update', class: "tiny radius success button right" %>
+						</div>
+					</div>
 					<% end %>
 
 					<% if @distributor.channel_capacities.where(channel_id: 0).first %>
 						<div class="row">
-							<div class="medium-11 columns text-center">
-								<h6>(Custom Channels)</h6>
+							<div class="medium-10 medium-centered columns">
+								<h3>Custom Channels</h3>
 							</div>
 						</div>
 					<% end %>
 					<% @distributor.channel_capacities.where(channel_id: 0).each do |cc| %>
 						<div class="row">
-							<div class="medium-5 columns">
-								<%= label_tag "channel_capacity[bulk_ids][#{cc.id}]", cc.custom_channel_name, class: "inline right" %>
-							</div>
-							<div class="medium-4 columns">
-								<%= number_field_tag("channel_capacity[bulk_ids][#{cc.id}]", cc.capacity) %>
-							</div>
-							<div class="medium-3 columns text-right" style="padding: 0.7em 1em;">
-								<%= link_to 'Delete', cc, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cc.custom_channel_name}?"}%>
+							<div class="medium-10 medium-centered columns">
+								<div class="row">
+									<div class="medium-12 columns">
+										<div class="customchanneldisplay">
+											<%= cc.custom_channel_name %> <%= link_to 'Delete', cc, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cc.custom_channel_name}?"}, class: "right itemformlink" %>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-
 					<% end %>
 
-						<div class="row">
-							<div class="medium-12 columns">
-								<hr>
-								<%= submit_tag('Update', class: "tiny radius success button right") %>
-							</div>
+				<div class="row">
+					<div class="medium-10 medium-centered columns">
+						<div class="groupwrapper">
+
+								<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" } do |f| %>
+									<div class="row">
+										<div class="medium-12 columns">
+											<h3>Add Custom Channel</h3>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="medium-9 columns">
+											<%= f.text_field :custom_channel_name, label: false, placeholder: 'Custom Channel Name' %>
+										</div>
+										<div class="medium-3 columns text-right" style="padding: 0.7em 1em;">
+											<%= link_to 'add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe, class: "itemformlink" %>
+										</div>
+									</div>
+
+								<% end %>	
+
 						</div>
+					</div>
+				</div>			
+							
+				<% end %>
 
-				<% end %>					
 
 
+			</div>
+			<div class="medium-6 columns">
 
+
+				<%= render layout: "shared/panel_fulledit", locals: {de: 'data-equalizer-watch'} do %>
+
+				<div class="row">
+					<div class="medium-12 columns">
+						<h1>Channel Capacities <small>(optional)</small></h1>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="medium-12 medium-centered columns">
+						
+
+
+							<div class="row">
+								<div class="medium-6 columns text-right">
+									<h4 class="columnheader">Channel</h4>
+								</div>
+								<div class="medium-6 columns">
+									<h4 class="columnheader">Capacity</h4>
+								</div>
+							</div>	
+
+
+							<%= form_tag(channel_capacity_bulkupdate_url, method: "post") do  %>
+								
+								<% if @distributor.channels.empty? %>
+									<div class="row">
+										<div class="medium-12 columns text-center">
+										<h6 class="information">( Please Select Channels in Sector and Channel Profile )</h6>
+										</div>
+									</div>
+
+								<% end %>
+
+								<% @distributor.channels.each do |chan| %>
+
+									<div class="row">
+										<div class="medium-6 columns">
+											<%= label_tag "channel_capacity[bulk_ids][#{chan.id}]", chan.name, class: "right" %>
+										</div>
+										<div class="medium-3 columns end">
+											<%= number_field_tag("channel_capacity[bulk_ids][#{chan.id}]", @distributor.channel_capacities.where(channel_id: chan.id).first.capacity) %>
+										</div>
+									</div>
+					
+								<% end %>
+
+								<% if @distributor.channel_capacities.where(channel_id: 0).first %>
+									<div class="row">
+										<div class="medium-6 columns text-right">
+											<h4 class="columnheader">Custom Channel</h4>
+										</div>
+										<div class="medium-6 columns">
+											<h4 class="columnheader">Capacity</h4>
+										</div>
+									</div>
+								<% end %>
+								<% @distributor.channel_capacities.where(channel_id: 0).each do |cc| %>
+									<div class="row">
+										<div class="medium-6 columns">
+											<%= label_tag "channel_capacity[bulk_ids][#{cc.id}]", cc.custom_channel_name, class: "right" %>&nbsp;
+										</div>
+										<div class="medium-3 columns end">
+											<%= number_field_tag("channel_capacity[bulk_ids][#{cc.id}]", cc.capacity) %>
+										</div>
+									</div>
+
+								<% end %>
+
+									<div class="row">
+										<div class="medium-12 columns">
+											<hr>
+											<%= submit_tag('Update', class: "tiny radius success button right") %>
+										</div>
+									</div>
+
+							<% end %>					
+
+						
+					</div>
+				</div>
+
+
+				<% end %>
+
+			</div>
 		</div>
-	</div>
-</div>
-
-<div class="row">
-	<div class="medium-8 medium-centered columns">
-		<div class="groupwrapper">
 
 
-				<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" } do |f| %>
+		<div class="row">
+			<div class="medium-10 medium-centered columns">
+				<%= render layout: "shared/panel_fulledit" do %>
+
 					<div class="row">
 						<div class="medium-12 columns">
-							<h6>Add Custom Channels</h6>
+							<h1>Brand Portfolio</h1>
 							<hr>
 						</div>
 					</div>
 
+					<%= render partial: "shared/editcollblock", locals: { 
+						headertitle: "Current Brands",
+						coll: @current_brands,
+						identifier: "brand",
+						no_item_message: "No Current Brands",
+						coll_new_item: @new_brand,
+						coll_new_item_text: "Add a Current Brand",
+						iscurrent: "true"
+					} %>
+					
 					<div class="row">
-						<div class="medium-9 columns">
-							<%= f.text_field :custom_channel_name, label: false, placeholder: 'Custom Channel Name' %>
-						</div>
-						<div class="medium-3 columns text-right" style="padding: 0.7em 1em;">
-							<%= link_to 'add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe %>
+						<div class="medium-6 medium-centered columns text-center">
+							<hr>
 						</div>
 					</div>
 
-				<% end %>	
+					<%= render partial: "shared/editcollblock", locals: { 
+						headertitle: "Past Brands",
+						coll: @past_brands,
+						identifier: "brand",
+						no_item_message: "No Past Brands",
+						coll_new_item: @new_brand,
+						coll_new_item_text: "Add a Past Brand",
+						iscurrent: "false"
+					} %>
 
-
+				<% end %>
+			</div>
 		</div>
-	</div>
-</div>
+
+		<div class="row" data-equalizer>
+			<div class="medium-6 columns">
+
+				<%= render layout: "shared/panel_fulledit", locals: {de: 'data-equalizer-watch'} do %>
+
+					<div class="row">
+						<div class="medium-12 columns">
+							<h1>Sales / Education Capabilities</h1>
+							<hr>
+						</div>
+					</div>
+								
+					<%= form_for @distributor, url: distributor_url do |f| %>
+					<div class="row">
+
+						<div class="medium-12 columns">
+							<%= render partial: "shared/numeric_field", locals: {f: f, field: :outside_sales_size, fieldlabel: 'Outside Sales Force Size' } %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-12 columns">
+							<%= render partial: "shared/numeric_field", locals: {f: f, field: :inside_sales_size, fieldlabel: 'Inside Sales Force Size' } %>	
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-12 columns">
+							<hr>
+							<%= f.submit 'Update', class: "tiny radius success button right" %>
+						</div>
+					</div>
+					<% end %>	
+
+				<% end %>
+
+			</div>
+			<div class="medium-6 columns">
+
+				<%= render layout: "shared/panel_fulledit", locals: {de: 'data-equalizer-watch'} do %>
+
+					<div class="row">
+						<div class="medium-12 columns">
+							<h1>Marketing/PR Capabilities</h1>
+							<hr>
+						</div>
+					</div>
+					<%= form_for @distributor, url: distributor_url do |f| %>
 
 
-<% end %>
+					<div class="row">
+						<div class="medium-12 columns">
+							<h3>Internal Marketing/PR</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-12 columns">
+							<%= render partial: "shared/numeric_field", locals: {f: f, field: :internal_marketing_size, fieldlabel: 'Internal Marketing/Design Team Size' } %>
+						</div>
+					</div>
+
+				<hr>
+
+					<div class="row">
+						<div class="medium-12 columns">
+							<h3>External Marketing/PR</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-12 columns">
+
+							<%= radio_button_tag("distributor[employ_pr_agency]", false,  (@distributor.employ_pr_agency rescue false) ? false : true ) %>
+							<%= label_tag("distributor[employ_pr_agency]_false", "No, we do not employ an outside PR Agency") %>
+							<%= radio_button_tag("distributor[employ_pr_agency]", true, (@distributor.employ_pr_agency rescue false) ? true : false ) %>
+							<%= label_tag("distributor[employ_pr_agency]_true", "Yes, we employ an outside PR Agency") %>
+
+						</div>
+					</div>				
+
+				<hr>
+
+					<div class="row">
+						<div class="medium-12 columns">
+							<h3>Where have you marketed/advertised your products?</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-4 columns">
+							<%= render partial: "shared/checkbox", locals: {field: "marketing_via_print", label: 'Print' } %>
+							<%= render partial: "shared/checkbox", locals: {field: "marketing_via_online", label: 'Online' } %>
+							<%= render partial: "shared/checkbox", locals: {field: "marketing_via_email", label: 'Email' } %>
+							<%= render partial: "shared/checkbox", locals: {field: "marketing_via_outdoor", label: 'Outdoor' } %>
+						</div>
+						<div class="medium-4 columns end">
+							<%= render partial: "shared/checkbox", locals: {field: "marketing_via_events", label: 'Events' } %>
+							<%= render partial: "shared/checkbox", locals: {field: "marketing_via_direct_mail", label: 'Direct Mail' } %>
+							<%= render partial: "shared/checkbox", locals: {field: "marketing_via_classes", label: 'Classes' } %>
+						</div>
+					</div>	
+
+				<hr>
+
+					<div class="row">
+						<div class="medium-12 columns">
+							<h3>Customer Database</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-12 columns">
+							<%= render partial: "shared/numeric_field", locals: {f: f, field: :customer_database_size, fieldlabel: 'Customer Database Size' } %>	
+						</div>
+					</div>
+						<hr>
+						 <%= f.submit 'Update', class: "tiny radius success button right"  %>
+
+					<% end %>
+
+				<% end %>
 
 
-<%= render layout: "shared/panel_fulledit" do %>
-
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Brand Portfolio</h1>
-			<hr>
+			</div>
 		</div>
-	</div>
-
-	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "Current Brands",
-		coll: @current_brands,
-		identifier: "brand",
-		no_item_message: "No Current Brands",
-		coll_new_item: @new_brand,
-		coll_new_item_text: "Add a Current Brand",
-		iscurrent: true
-	} %>
-
-	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "Past Brands",
-		coll: @past_brands,
-		identifier: "brand",
-		no_item_message: "No Past Brands",
-		coll_new_item: @new_brand,
-		coll_new_item_text: "Add a Past Brand",
-		iscurrent: false
-	} %>
-
-<% end %>
 
 
-<%= render  layout: "shared/panel_fulledit" do %>
+		<div class="row">
+			<div class="medium-10 medium-centered columns">
+				<%= render layout: "shared/panel_fulledit" do %>
+					<div class="row">
+						<div class="medium-12 columns">
+							<h1>Trade Shows</h1>
+							<hr>
+						</div>
+					</div>
 
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Sales / Education Capabilities</h1>
-			<hr>
+					<%= render partial: "shared/editcollblock", locals: { 
+						headertitle: "Shows Participated in",
+						coll: @trade_shows,
+						identifier: "name",
+						no_item_message: "No Trade Shows",
+						coll_new_item: @new_trade_show,
+						coll_new_item_text: "Add a Trade Show",
+						#iscurrent: true
+					} %>
+
+				<% end %>
+			</div>
 		</div>
-	</div>
-				
-	<%= form_for @distributor, url: distributor_url do |f| %>
-	<div class="row">
-
-		<div class="medium-12 columns">
-			<%= render partial: "shared/numeric_field", locals: {f: f, field: :outside_sales_size, fieldlabel: 'Outside Sales Force Size' } %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-12 columns">
-			<%= render partial: "shared/numeric_field", locals: {f: f, field: :inside_sales_size, fieldlabel: 'Inside Sales Force Size' } %>	
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-12 columns">
-			<hr>
-			<%= f.submit 'Update', class: "tiny radius success button right" %>
-		</div>
-	</div>
-	<% end %>	
-
-<% end %>
-
-<%= render layout: "shared/panel_fulledit" do %>
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Trade Shows</h1>
-			<hr>
-		</div>
-	</div>
-
-	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "Shows Participated in",
-		coll: @trade_shows,
-		identifier: "name",
-		no_item_message: "No Trade Shows",
-		coll_new_item: @new_trade_show,
-		coll_new_item_text: "Add a Trade Show",
-		#iscurrent: true
-	} %>
-
-<% end %>
-
-
-
-<%= render layout: "shared/panel_fulledit" do %>
-
-	<div class="row">
-		<div class="medium-12 columns">
-			<h1>Marketing/PR Capabilities</h1>
-			<hr>
-		</div>
-	</div>
-	<%= form_for @distributor, url: distributor_url do |f| %>
-
-
-	<div class="row">
-		<div class="medium-12 columns">
-			<h3>Internal Marketing/PR</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-12 columns">
-			<%= render partial: "shared/numeric_field", locals: {f: f, field: :internal_marketing_size, fieldlabel: 'Internal Marketing/Design Team Size' } %>
-		</div>
-	</div>
-
-<hr>
-
-	<div class="row">
-		<div class="medium-12 columns">
-			<h3>External Marketing/PR</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-12 columns">
-
-			<%= radio_button_tag("distributor[employ_pr_agency]", false,  (@distributor.employ_pr_agency rescue false) ? false : true ) %>
-			<%= label_tag("distributor[employ_pr_agency]_false", "No, we do not employ an outside PR Agency") %>
-			<%= radio_button_tag("distributor[employ_pr_agency]", true, (@distributor.employ_pr_agency rescue false) ? true : false ) %>
-			<%= label_tag("distributor[employ_pr_agency]_true", "Yes, we employ an outside PR Agency") %>
-
-		</div>
-	</div>				
-
-<hr>
-
-	<div class="row">
-		<div class="medium-12 columns">
-			<h3>Where have you marketed/advertised your products?</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-4 columns">
-			<%= render partial: "shared/checkbox", locals: {field: "marketing_via_print", label: 'Print' } %>
-			<%= render partial: "shared/checkbox", locals: {field: "marketing_via_online", label: 'Online' } %>
-			<%= render partial: "shared/checkbox", locals: {field: "marketing_via_email", label: 'Email' } %>
-			<%= render partial: "shared/checkbox", locals: {field: "marketing_via_outdoor", label: 'Outdoor' } %>
-		</div>
-		<div class="medium-4 columns end">
-			<%= render partial: "shared/checkbox", locals: {field: "marketing_via_events", label: 'Events' } %>
-			<%= render partial: "shared/checkbox", locals: {field: "marketing_via_direct_mail", label: 'Direct Mail' } %>
-			<%= render partial: "shared/checkbox", locals: {field: "marketing_via_classes", label: 'Classes' } %>
-		</div>
-	</div>	
-
-<hr>
-
-	<div class="row">
-		<div class="medium-12 columns">
-			<h3>Customer Database</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-12 columns">
-			<%= render partial: "shared/numeric_field", locals: {f: f, field: :customer_database_size, fieldlabel: 'Customer Database Size' } %>	
-		</div>
-	</div>
-		<hr>
-		 <%= f.submit 'Update', class: "tiny radius success button right"  %>
-
-	<% end %>
-
-<% end %>
-
-
 
 	</div>
 </div>

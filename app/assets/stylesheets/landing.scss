@@ -457,3 +457,9 @@ $onboard-nav-radius: 4px;
 
 }
 
+.onboard-instructions {
+  border: 2px solid scale-color($link-color, $lightness: 70%);
+  border-radius: 8px;
+  padding: 1em;
+  color: $body-font-color;
+}

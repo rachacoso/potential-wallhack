@@ -76,6 +76,7 @@ class DistributorsController < ApplicationController
 			allowable_redirect = [
 				'two',
 				'three',
+				'three_a',
 				'four',
 				'seven',
 				'complete'

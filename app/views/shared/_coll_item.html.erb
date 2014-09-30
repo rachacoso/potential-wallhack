@@ -9,7 +9,7 @@
 				  <dd class="accordion-navigation">
 				    <a href="#a_<%= cb.id %>"><%= cb.send(identifier).empty? ? "( No Name )" : cb.send(identifier)  %>
 						<%= cb.class.name == "PressHit" ? cb.date.strftime("// %B %d %Y") : "" rescue nil %>
-				    </a>
+				    <span class="right" style="color: #aaa;">(click to edit)</span></a>
 				    <div id="a_<%= cb.id %>" class="content">
 
 <%= render partial: "shared/collections/#{cb.class.name.tableize}", locals: {f: f, cb: cb} %>

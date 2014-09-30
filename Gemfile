@@ -54,3 +54,7 @@ gem 'country_select', github: 'stefanpenner/country_select'
 
 gem 'rails_12factor', group: :production
 
+group :production do
+  gem 'pg'
+end
+

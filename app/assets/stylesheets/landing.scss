@@ -440,7 +440,14 @@ $onboard-nav-radius: 4px;
   }
 }
 
+// Styling for submit button on Admin Pages
+.text-submit {
+  margin-bottom: 1em;
+  @include formlinkstyle($link-color, 1.5em)
 
+}
+
+// Text Styled Submit Buttons
 .submit-link {
   background-color: transparent;
   text-decoration: none;
@@ -449,16 +456,12 @@ $onboard-nav-radius: 4px;
   cursor: pointer;
   font-family: "aw-conqueror-inline",sans-serif;
   font-size: 1em;
+  margin-top: 0em !important; 
 }
 
-.text-submit {
-  margin-bottom: 1em;
-  @include formlinkstyle($link-color, 1.5em)
-
-}
-
+// Onboarding Info Text
 .onboard-instructions {
-  border: 2px solid scale-color($link-color, $lightness: 70%);
+  border: 1px dotted scale-color($link-color, $lightness: 70%);
   border-radius: 8px;
   padding: 1em;
   color: $body-font-color;

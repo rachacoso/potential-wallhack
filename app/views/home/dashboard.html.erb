@@ -2,59 +2,219 @@
 <%= render partial: "shared/topbar" %>
 
 
-<div class="row">
+
 
 
 	<% if @current_user.distributor %>
-	<div class="small-8 columns">
-		<div class="ldpanel">
+	<div class="row" data-equalizer>
 
-			<div class="row">
-				<div class="small-7 columns">
-					<span id="profile-name">
+		<div class="medium-6 columns">
+			<div class="previewtile" data-equalizer-watch>
+				<div class="row">
+					<div class="small-12 columns text-right">
+						<span id="profile-name">
 							<%= @profile.name %> 
-					</span>
+						</span>
+					</div>
 				</div>
-				<div class="small-5 columns">
-					<%= @profile.year_established.strftime("est. %Y") rescue nil %> <%= @profile.country_of_origin %> 
-					<small><br>
-
-						<%= link_to 'Edit Distributor Profile', distributor_url %>
-
-					</small>
+				<div class="row">
+					<div class="small-12 columns text-right">
+						<span id="year-established">
+							<%= @profile.year_established.strftime("est. %Y") rescue nil %>
+						</span>
+					</div>
 				</div>
 			</div>
+		</div>
+
+		<div class="medium-6 columns">
+			<div class="previewtile" data-equalizer-watch>
+
+				<div class="row">
+					<div class="small-12 columns text-right">
+						<small>
+							<%= link_to 'Edit Distributor Profile', distributor_url %>
+						</small>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/globe" %>
+					</div>
+					<div class="small-10 columns">
+						<div class="preview-data">
+							<span id="profile-country"><%= @profile.country_of_origin %></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/employees" %>
+					</div>
+					<div class="small-10 columns">
+						<div class="preview-data">
+							<%= CompanySize.find(@profile.company_size).name %> 
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/sector" %>
+					</div>
+					<div class="small-10 columns">
+						<div class="preview-data">
+							<% @profile.sectors.each do |s| %>
+								<%= s.name %><br>
+							<% end %>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/channel" %>
+					</div>
+					<div class="small-10 columns">
+						<div class="preview-data">
+							<% @profile.channels.each do |ch| %>
+								<%= ch.name %><br>
+							<% end %>
+						</div>
+					</div>
+				</div>
 
 
+
+			</div>
 		</div>
 	</div>
+
 	<% end %>
 
 	<% if @current_user.brand %>
-	<div class="small-8 columns">
-		<div class="ldpanel">
 
-			<div class="row">
-				<div class="small-7 columns">
-					<span id="profile-name">
+	<div class="row" data-equalizer>
+
+		<div class="medium-6 columns">
+			<div class="previewtile" data-equalizer-watch>
+				<div class="row">
+					<div class="small-12 columns text-right">
+						<span id="profile-name">
 							<%= @profile.company_name %> 
-					</span>
+						</span>
+					</div>
 				</div>
-				<div class="small-5 columns">
-					<%= @profile.year_established.strftime("est. %Y") rescue nil %> <%= @profile.country_of_origin %> 
-					<small><br>
-
-						<%= link_to 'Edit Brand Profile', brand_url %>
-
-					</small>
+				<div class="row">
+					<div class="small-12 columns text-right">
+						<span id="year-established">
+							<%= @profile.year_established.strftime("est. %Y") rescue nil %>
+						</span>
+					</div>
 				</div>
 			</div>
+		</div>
+
+		<div class="medium-6 columns">
+			<div class="previewtile" data-equalizer-watch>
+
+				<div class="row">
+					<div class="small-12 columns text-right">
+						<small>
+							<%= link_to 'Edit Brand Profile', brand_url %>
+						</small>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/globe" %>
+					</div>
+					<div class="small-10 columns">
+						<div class="preview-data">
+							<span id="profile-country"><%= @profile.country_of_origin %></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/factory" %>
+					</div>
+					<div class="small-10 columns">
+						<div class="preview-data">
+							<% @profile.products.distinct(:country_of_manufacture).each do |country| %>
+								<div class="row">
+									<div class="small-4 columns">
+										<%= country %>
+									</div>
+									<div class="small-8 columns">
+									<% @profile.products.where(country_of_manufacture: country).each do |p| %>
+										<%= p.name %><br>
+									<% end %>
+									</div>
+								</div>
+							<% end %>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/employees" %>
+					</div>
+					<div class="small-10 columns">
+						<div class="preview-data">
+							<%= CompanySize.find(@profile.company_size).name %> 
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/shipping" %>
+					</div>
+					<div class="small-10 columns">
+						<div class="preview-data">
+							<% @profile.export_countries.each do |ec| %>
+								<%= ec.country %><br>
+							<% end %>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/sector" %>
+					</div>
+					<div class="small-10 columns">
+						<div class="preview-data">
+							<% @profile.sectors.each do |s| %>
+								<%= s.name %><br>
+							<% end %>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/channel" %>
+					</div>
+					<div class="small-10 columns">
+						<div class="preview-data">
+							<% @profile.channels.each do |ch| %>
+								<%= ch.name %><br>
+							<% end %>
+						</div>
+					</div>
+				</div>
 
 
+
+			</div>
 		</div>
 	</div>
+
 	<% end %>
-
-
-
-</div>

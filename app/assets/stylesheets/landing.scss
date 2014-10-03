@@ -1,5 +1,6 @@
-
+@import "foundation/functions";
 @import "global_variables";
+
 
 
 body {
@@ -133,12 +134,6 @@ a.itemformlink {
   // border-top: 1px solid black;
   border-bottom: 1px solid black;
   padding: 0.1em 0.5em;
-}
-
-// Distributor/Brand Profile CSS
-#profile-name {
-  font-size:2em;
-  font-weight:bold;
 }
 
 // Top Bar
@@ -371,6 +366,7 @@ input[type=checkbox]:checked + label {
 
 .customchanneldisplay {
   padding: 4px 12px;
+  border: 1px dotted scale-color(#D6E8FF, $lightness: -80%);
   color: #000;
   &::before { 
     content: "\25C9\0020";    
@@ -465,4 +461,53 @@ $onboard-nav-radius: 4px;
   border-radius: 8px;
   padding: 1em;
   color: $body-font-color;
+}
+
+
+// Preview Tiles
+// Distributor/Brand Profile CSS
+
+
+.previewtile {
+  margin: 1em 0em;
+  padding: 1em 0.5em;
+  line-height: 1.25em;
+  div {
+    padding: 0.25em 0.5em;
+  }
+  .preview-data {
+    border: 1px solid #547DB2;
+    border-radius: 8px;
+    padding: 0.5em 0.5em;
+  }
+  border: 1px dotted scale-color($link-color, $lightness: 70%);
+
+}
+
+#profile-name {
+  font-size:3em;
+  font-weight:bold;
+  line-height:1em;
+}
+#year-established {
+  font-size:2em;
+}
+#profile-country {
+  font-size: 2em;
+}
+
+.factory,
+.employees,
+.globe,
+.globeinner,
+.shipping,
+.channel,
+.sector {
+  // background-color: red;
+  fill: #547DB2;
+  border: 1px solid #547DB2;
+  border-radius: 8px;
+  &:hover {
+    fill: scale-color(#547DB2, $lightness: 20%);
+  }
 }

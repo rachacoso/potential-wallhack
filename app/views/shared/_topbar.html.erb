@@ -6,9 +6,9 @@
 			<div class="small-6 columns text-left">
 				<h1 class="tk-aw-conqueror-inline">Landing
 				<% if controller_name == "admin" %>
-					<small>for Administrators</small>
+					<br class="show-for-small-only"><small>for Administrators</small>
 				<% elsif @current_user %>
-					<small><%= @current_user.distributor ? "for Distributors" : "for Brands" %></small>
+					<br class="show-for-small-only"><small><%= @current_user.distributor ? "for Distributors" : "for Brands" %></small>
 				<% end %>
 				</h1>
 			</div>

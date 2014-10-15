@@ -25,13 +25,16 @@
 
 </head>
 <body>
-<div class="wrapper">
-<%= content_for?(:user_head) ? yield(:user_head) : "" %>
 
+	<div class="wrapper row">
+		<div class="small-12 columns">
 
-		<%= yield %>
+					<%= content_for?(:user_head) ? yield(:user_head) : "" %>
 
-</div> <!-- /.wrapper -->
+					<%= yield %>
+
+		</div>
+	</div>
 
 
 

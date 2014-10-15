@@ -5,8 +5,10 @@
 // $font-weight-bold: bold !default
 
 // We use these to control various global styles
-$body-bg: #FFFEF7;
-$body-font-color: #547DB2;
+$body-bg: #C6CBCC;
+$content-body-bg: #FFFEF7;
+$body-font-color: #1D4E89;
+$body-font-color-analogue: #7DA1BF;
 // $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 $body-font-family: "jaf-facitweb",sans-serif;
 // $body-font-weight: $font-weight-normal;
@@ -25,12 +27,17 @@ $body-font-family: "jaf-facitweb",sans-serif;
 $primary-color: #FF8B18;
 // $secondary-color: #e7e7e7;
 $alert-color: #f04124;
-$success-color: #FF366B;
+$success-color: #955251;
 // $warning-color: #f08a24;
 // $info-color: #a0d3e8;
 $info-color: #FF6D11;
-$link-color: #FF366B;
+$link-color: #955251;
 
+
+// $input-background-color: scale-color(#7DA1BF, $lightness: 80%);
+$input-background-color: scale-color(#C6CBCC, $lightness: 10%);
+$input-text-color: scale-color(#8a8587, $lightness: -30%);
+$input-top-border: scale-color($input-background-color, $lightness: -50%);
 
 
 // We use these to make sure border radius matches unless we want it different.

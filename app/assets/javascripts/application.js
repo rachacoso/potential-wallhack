@@ -22,6 +22,7 @@
 //= require foundation/foundation.equalizer
 
 
+
 // EXTRA 3rd PARTY JS
 //= require jquery.backstretch
 //= require waypoints.min

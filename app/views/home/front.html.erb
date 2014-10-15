@@ -35,7 +35,7 @@
 							<%= label_tag(:user_type_distributor, "as a Distributor") %>
 						</div>
 					</div>
-<div class="errornotice <%= flash[:error] ? "error-on" : "" %>"><%= flash[:error] ? flash[:error].upcase : "&nbsp;".html_safe %></div>
+<div class="errornotice <%= flash[:error] ? "error-on" : "" %>"><%= flash[:error] ? flash[:error].upcase.html_safe : "&nbsp;".html_safe %></div>
 					<div class="row">
 						<%= f.fields_for :user_profile do |ff| %>
 						<div class="medium-6 columns">

@@ -88,17 +88,16 @@
 	<% if @current_user.brand %>
 
 
-		<div class="medium-8 columns previewtile">
+		<div class="medium-9 columns previewtile">
 
 			<div class="row">
 				<div class="small-12 columns text-right">
 
-					<span id="profile-name"><%= @profile.company_name %></span><br>
-					<span id="year-established"><%= @profile.year_established.strftime("est. %Y") rescue nil %></span>
-
-						<br><small><%= link_to 'View PUBLIC Profile', dashboard_public_profile_url, class: "itemformlink"%></small>
-								<small><%= link_to 'View FULL Profile', dashboard_full_profile_url, class: "itemformlink"%></small>
-								<small><%= link_to 'EDIT Brand Profile', brand_url, class: "itemformlink"%></small>
+					<small><%= link_to 'Viewing PUBLIC Profile', "#", class: "itemformlink active"%></small>
+					<small><%= link_to 'View FULL Profile', dashboard_full_profile_url, class: "itemformlink"%></small>
+					<small><%= link_to 'EDIT Brand Profile', brand_url, class: "itemformlink"%></small><br>
+					<div id="profile-name">Company Name Hidden</div>
+					<div id="profile-year-established"><%= @profile.year_established.strftime("est. %Y") rescue nil %></div>
 
 				</div>
 			</div>
@@ -114,9 +113,9 @@
 					  <dd><a href="#panel6"><%= render partial: "shared/svg/channel" %></a></dd>
 					</dl>
 				</div>
-				<div class="medium-8 columns" data-equalizer>
+				<div class="medium-8 columns">
 					<div class="tabs-content">
-					  <div class="content active" id="panel1" data-equalizer-watch>
+					  <div class="content active" id="panel1">
 
 					  	<div class="preview-data-title">
 								Country of Origin
@@ -126,32 +125,20 @@
 							</div>
 
 					  </div>
-					  <div class="content" id="panel2" data-equalizer-watch>
+					  <div class="content" id="panel2">
 
 
 									  	<div class="preview-data-title">
 												Countries of Manufacture
 											</div>
 											<div class="preview-data">
-												<table>
-													<tr><th>Country</th><th>Products manufactured there</th></tr>
 												<% @profile.products.distinct(:country_of_manufacture).each do |country| %>
-													<tr>
-														<td>
-															<%= country %>
-														</td>
-														<td>
-														<% @profile.products.where(country_of_manufacture: country).each do |p| %>
-															<%= p.name %><br>
-														<% end %>
-														</td>
-													</tr>
+															<%= country %><br>
 												<% end %>
-												</table>
 											</div>    
 
 					  </div>
-					  <div class="content" id="panel3" data-equalizer-watch>
+					  <div class="content" id="panel3">
 
 									  	<div class="preview-data-title">
 												Company Size
@@ -161,7 +148,7 @@
 											</div>    
 
 					  </div>
-					  <div class="content" id="panel4" data-equalizer-watch>
+					  <div class="content" id="panel4">
 
 									  	<div class="preview-data-title">
 												Countries of Export
@@ -173,7 +160,7 @@
 											</div>    
 
 					  </div>
-					  <div class="content" id="panel5" data-equalizer-watch>
+					  <div class="content" id="panel5">
 					    
 									  	<div class="preview-data-title">
 												Sectors
@@ -185,25 +172,25 @@
 											</div>
 
 					  </div>
-					  <div class="content" id="panel6" data-equalizer-watch>
+					  <div class="content" id="panel6">
 					 
 
 	 								  	<div class="preview-data-title">
-												Channels ( Capacity )
+												Channels
 											</div>
 											<div class="preview-data">
 												<% @profile.channels.each do |ch| %>
-													<%= ch.name %> ( <%= @profile.channel_capacities.where(channel_id: ch.id).first.capacity || "TBD" %> )<br>
+													<%= ch.name %> <br>
 												<% end %>
 											</div>
 
 											<% if @profile.channel_capacities.where(channel_id: 0).length > 0 %>
 	 								  	<div class="preview-data-title">
-												Custom Channels ( Capacity )
+												Custom Channels
 											</div>
 											<div class="preview-data">
 												<% @profile.channel_capacities.where(channel_id: 0).each do |cch| %>
-													<%= cch.custom_channel_name %> ( <%= cch.capacity || "TBD" %> )<br>
+													<%= cch.custom_channel_name %> <br>
 												<% end %>
 											</div>											
 											<% end %>

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get   '/logout' => 'session#destroy', as: 'logout'
 
   get   '/dashboard' => 'home#dashboard', as: 'dashboard'
+  get   '/dashboard/full_profile' => 'home#dashboard_full_profile', as: 'dashboard_full_profile'
+  get   '/dashboard/public_profile' => 'home#dashboard_public_profile', as: 'dashboard_public_profile'
 
   get   '/admin' => 'admin#index', as: 'admin'
 

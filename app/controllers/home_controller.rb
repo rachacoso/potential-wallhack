@@ -13,9 +13,18 @@ class HomeController < ApplicationController
 
 
 	def dashboard
-
 		@profile = @current_user.brand || @current_user.distributor
 		
+	end
+
+	def dashboard_full_profile
+		@profile = @current_user.brand || @current_user.distributor
+
+	end
+
+	def dashboard_public_profile
+		@profile = @current_user.brand || @current_user.distributor
+
 	end
 
 

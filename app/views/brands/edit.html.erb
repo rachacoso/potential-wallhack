@@ -35,7 +35,15 @@
 						</div>
 						<div class="row">
 							<div class="medium-6 columns">
-								<%= f.text_field :website %>
+								<div class="row collapse">
+									<%= label_tag(:website, "Website") %>
+									<div class="small-3 columns">
+										<span class="prefix">http://</span>
+									</div>
+									<div class="small-9 columns">
+										<%= f.text_field :website, label: false %>
+									</div>
+								</div>
 							</div>
 							<div class="medium-6 columns">
 								<%= label_tag(:company_size, "Company Size") %>

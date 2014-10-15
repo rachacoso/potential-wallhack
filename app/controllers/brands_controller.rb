@@ -103,7 +103,7 @@ class BrandsController < ApplicationController
 			if params[:redirect]
 				if allowable_redirect.include? params[:redirect]
 					if params[:redirect] == 'complete'
-						redirect_to brand_url
+						redirect_to dashboard_url
 					else
 						redir = "onboard_brand_#{params[:redirect]}_url"
 						redirect_to send(redir)
@@ -114,7 +114,7 @@ class BrandsController < ApplicationController
 					# allow redirect via passed parameter only if in this array else redirect to the first onboard screen
 				end
 			else
-				redirect_to brand_url
+				redirect_to dashboard_url
 			end
 
 		else

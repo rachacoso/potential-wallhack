@@ -1,8 +1,6 @@
 @import "foundation/functions";
 @import "global_variables";
 
-
-
 body {
   // padding-top: 2em;
 }
@@ -11,14 +9,59 @@ body {
 //   border: 1px solid red; 
 // }
 
+
+/////////////
+// MIXINS
+/////////////
+
+// Transparent backgrounds
+
+@mixin transparent($color, $alpha) {
+  $rgba: rgba($color, $alpha);
+  // $rgb: rgb($color);
+  $ie-hex-str: ie-hex-str($rgba);
+  /* Fallback for web browsers that doesn't support RGBa */
+  // background: $rgb;
+  background: $color;
+  /* RGBa with opacity */
+  background: $rgba;
+  /* For IE 5.5 - 7*/
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+  /* For IE 8*/
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str}, endColorstr=#{$ie-hex-str})";
+}
+
+// Button Styled Text Link 
+
+@mixin formlinkstyle($color: $link-color, $font-size: 0.65em) {
+  border: 1px solid $color;
+  transition: 0.2s;
+  padding: 0.1em 0.4em;
+  border-radius: 5px;
+  font-size: $font-size;
+  background-color: white;
+  color: $color;
+  &:hover {
+    background-color: $color;
+    color: white;
+  }
+  &.active {
+    background-color: $color;
+    color: white;
+  }    
+}
+
+
+
+
 /////////////
 // DEV STYLES
 /////////////
 
-.tbd {
-  color: red;
-  margin: 1em 0em;
- }
+/////////////
+// ERRORS/ALERTS STYLES
+/////////////
+
 
 // Error/Validation styling
 
@@ -39,42 +82,17 @@ body {
   color: $info-color;
 }
 
-// Transparent backgrounds
-
-@mixin transparent($color, $alpha) {
-  $rgba: rgba($color, $alpha);
-  // $rgb: rgb($color);
-  $ie-hex-str: ie-hex-str($rgba);
-  /* Fallback for web browsers that doesn't support RGBa */
-  // background: $rgb;
-  background: $color;
-  /* RGBa with opacity */
-  background: $rgba;
-  /* For IE 5.5 - 7*/
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
-  /* For IE 8*/
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str}, endColorstr=#{$ie-hex-str})";
-}
-
-@mixin formlinkstyle($color: $link-color, $font-size: 0.65em) {
-  border: 1px solid $color;
-  transition: 0.2s;
-  padding: 0.1em 0.4em;
-  border-radius: 5px;
-  font-size: $font-size;
-  background-color: white;
-  color: $color;
-  &:hover {
-    background-color: $color;
-    color: white;
-  }  
-}
-
 .wrapper {
   min-height: 100%;
+  background-color: #fff;
 }
 
-// Styling for Edit panels
+
+
+/////////////
+// EDIT PANELS
+/////////////
+
 .groupwrapper {
   background-color: transparent;
   padding: 0.5em;
@@ -83,8 +101,9 @@ body {
   vertical-align: bottom;
 
 }
+
 .addnewform {
-  background-color: #ABBACC;
+  background-color: scale-color($body-font-color-analogue, $lightness: 10%);
   .addnewforminputs {
     padding: 0em 1em;
   }
@@ -94,7 +113,7 @@ body {
 }
 
 a.itemformlink {
-  @include formlinkstyle;
+  @include formlinkstyle($link-color, 120%)
 }
 .rowitem {
   padding: 0em;
@@ -155,7 +174,7 @@ a.itemformlink {
   }     
 }
 .topbarborder {
-  border-bottom: 1px dotted red;
+  border-bottom: 1px dotted $link-color;
   height:1em;
 }
 
@@ -166,12 +185,12 @@ a.itemformlink {
   -moz-border-radius: 3px; 
   /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
   border-radius: 3px; 
-	border: 1px dotted scale-color(#f04270, $lightness: 50%);
+	border: 1px dotted scale-color($link-color, $lightness: 50%);
   padding: 0.5em 1em;
   margin: 0.5em 0em 1.5em 0em;
   h1 {
     padding: 0em 0.4em;
-    background-color: scale-color(#f04270, $lightness: 30%);
+    background-color: scale-color($link-color, $lightness: 30%);
     color: white;
     small {
       color: white;
@@ -196,9 +215,10 @@ textarea {
 // Forms styling
 ////////////////
 
-$input-background-color: scale-color(#169FCC, $lightness: 80%);
-$input-text-color: scale-color(#1D8DB2, $lightness: -30%);
-$input-top-border: scale-color(#222, $lightness: 30%);
+.prefix, .postfix {
+  font-size: 0.70em;
+
+}
 
 input[type="submit"] {
   margin-top: 1em;
@@ -247,7 +267,7 @@ select.hover {
 
 
 // placeholder styling
-$placeholder-color: #ABBACC;
+$placeholder-color: scale-color($input-background-color, $lightness: 70%);
 
 ::-webkit-input-placeholder {
    color: $placeholder-color;
@@ -291,7 +311,7 @@ input[type=radio] + label {
     margin: 0px -2px 0px -2px;
     padding: 4px 12px;
     background-color: scale-color($input-background-color, $lightness: 80%);
-    border: 1px solid #D6E8FF;
+    border: 1px solid scale-color($input-background-color, $lightness: 30%);
     color: #7f7f7f;
 }
 
@@ -304,7 +324,7 @@ input[type=radio] + label {
 input[type=radio]:checked + label { 
   background-image: none;
   background-color: scale-color($input-background-color, $lightness: 30%);
-  border: 1px solid scale-color(#D6E8FF, $lightness: -80%);
+  border: 1px solid scale-color($input-background-color, $lightness: -80%);
   color: #000;
     
 }
@@ -335,7 +355,7 @@ input[type=checkbox] + label {
   margin: 2px;
   padding: 4px 12px;
   background-color: scale-color($input-background-color, $lightness: 80%);
-  border: 1px solid #D6E8FF;  
+  border: 1px solid scale-color($input-background-color, $lightness: 30%);
   // background-color:#969696;
   // border-color: #ddd;
   color: #7f7f7f;
@@ -356,7 +376,7 @@ input[type=checkbox]+ label:active  {
 input[type=checkbox]:checked + label { 
   background-image: none;
   background-color: scale-color($input-background-color, $lightness: 30%);
-  border: 1px solid scale-color(#D6E8FF, $lightness: -80%);
+  border: 1px solid scale-color($input-background-color, $lightness: -80%);
   color: #000;
   // background-color: #e7e7e7;
   &::before { 
@@ -366,7 +386,7 @@ input[type=checkbox]:checked + label {
 
 .customchanneldisplay {
   padding: 4px 12px;
-  border: 1px dotted scale-color(#D6E8FF, $lightness: -80%);
+  border: 1px dotted scale-color($input-background-color, $lightness: -80%);
   color: #000;
   &::before { 
     content: "\25C9\0020";    
@@ -381,7 +401,7 @@ input[type=checkbox]:checked + label {
   font-weight: 200;
   font-size: small;
   border: 1px solid #999; 
-  background: #FFFEF7; 
+  background: $body-bg; 
   overflow: auto; 
 }
 .autocomplete-suggestion { 
@@ -392,13 +412,13 @@ input[type=checkbox]:checked + label {
   overflow: hidden; 
 }
 .autocomplete-selected { 
-  background: #2C3838;
-  color: #FFF;
+  background: scale-color($link-color, $lightness: 80%);
+  // color: $body-bg;
 }
 .autocomplete-suggestions strong { 
   font-weight: 400; 
   font-size: small;
-  color: #F04270; 
+  color: $link-color;
 }
 
 //////////////
@@ -410,6 +430,7 @@ $onboard-nav-radius: 4px;
 .onboard-nav {
   padding-bottom: 0.25em;
   li {
+    font-size: 0.75em;
     border: 2px solid $body-font-color;
     height: 2em;
     // width: 2em;
@@ -427,9 +448,17 @@ $onboard-nav-radius: 4px;
     /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
     border-radius: $onboard-nav-radius; 
     &.active {
-      background-color: scale-color(#f04270, $lightness: 30%);
+      background-color: scale-color($link-color, $lightness: 30%);
       color: white;
     }
+    &:hover:not(.active) {
+      background-color: $link-color;
+      color: white;
+    }
+    &.navdone:hover {
+      background-color: transparent;
+      color: $body-font-color;;
+    }    
   }
   a {
       color: $body-font-color;
@@ -469,31 +498,74 @@ $onboard-nav-radius: 4px;
 
 
 .previewtile {
-  margin: 1em 0em;
-  padding: 1em 0.5em;
+  // margin: 1em 0em;
+  // padding: 1em 0.5em;
   line-height: 1.25em;
+  border: 1px dotted scale-color($link-color, $lightness: 70%);
   div {
     padding: 0.25em 0.5em;
   }
   .preview-data {
-    border: 1px solid #547DB2;
+    // border: 1px solid #547DB2;
     border-radius: 8px;
-    padding: 0.5em 0.5em;
+    // padding: 0.5em 0.5em;
   }
-  border: 1px dotted scale-color($link-color, $lightness: 70%);
-
+  .preview-data-title {
+    background-color: $link-color;
+    color: white;
+  }
 }
 
 #profile-name {
   font-size:3em;
   font-weight:bold;
   line-height:1em;
+  padding-right: 0;
+  border-top: 1px solid $body-font-color;
+  margin-top: 0.5em;
 }
-#year-established {
+#profile-year-established {
   font-size:2em;
+  padding-right: 0;
+}
+#profile-website {
+  font-size:1em;
+  padding-right: 0;
 }
 #profile-country {
   font-size: 2em;
+}
+
+
+// profile-icons
+
+.tabs dd > a:hover {
+  background-color: scale-color($link-color, $lightness: 90%) !important;
+  font-color: red !important;
+
+  .factory,
+  .employees,
+  .globe,
+  .globeinner,
+  .shipping,
+  .channel,
+  .sector,
+  .sku,
+  .press,
+  .tradeshow,
+  .patent,
+  .trademark,
+  .certification {
+
+      fill: scale-color($link-color, $lightness: 20%);
+      #globeoutline,
+      #shippingglobeoutline,
+      #factoryoutline {
+        stroke: scale-color($link-color, $lightness: 20%);
+      }
+
+  }
+
 }
 
 .factory,
@@ -502,12 +574,75 @@ $onboard-nav-radius: 4px;
 .globeinner,
 .shipping,
 .channel,
-.sector {
+.sector,
+.sku,
+.press,
+.tradeshow,
+.patent,
+.trademark,
+.certification {
   // background-color: red;
-  fill: #547DB2;
-  border: 1px solid #547DB2;
-  border-radius: 8px;
+  fill: $body-font-color;
+  #globeoutline,
+  #shippingglobeoutline,
+  #factoryoutline {
+    stroke: $body-font-color;
+  }
+  border: 1px solid $body-font-color;
+  border-radius: 2px;
   &:hover {
-    fill: scale-color(#547DB2, $lightness: 20%);
+    fill: scale-color($body-font-color, $lightness: 20%);
+    #globeoutline,
+    #shippingglobeoutline,
+    #factoryoutline {
+      stroke: scale-color($body-font-color, $lightness: 20%);
+    }
+  }
+  .active & {
+    fill: $link-color;
+    // background-color: grey;
+    #globeoutline,
+    #shippingglobeoutline,
+    #factoryoutline {
+      stroke: $link-color;
+    }    
+    border: 1px solid $link-color;
   }
 }
+// #globeoutline {
+//   stroke: black;
+// }
+
+.profile-icon-label {
+  font-size: 50%;
+  text-align: right;
+  height: 4em;
+  color: $body-font-color;
+  border: 1px solid $body-font-color;
+  .active & {
+    color: $link-color;
+    font-weight: bold;
+    border: 1px solid $link-color;
+  }
+}
+
+
+
+// TABS STYLING
+
+.tabs dd > a, .tabs .tab-title > a {
+  padding: 2px 2px;
+  width: 4.5rem;
+}
+
+dl.tabs {
+  text-align: right;
+  padding: 100;
+}
+
+// override default tab content padding
+.tabs-content > .content {
+  padding: 0em;
+}
+
+

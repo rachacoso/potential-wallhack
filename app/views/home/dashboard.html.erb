@@ -25,13 +25,15 @@
 				<div class="row">
 					<div class="small-12 columns text-right">
 
-						<span id="profile-name"><%= @profile.name %></span>
-						<span id="year-established"><%= @profile.year_established.strftime("est. %Y") rescue nil %></span>
-	
-						<br><small><%= link_to 'Edit Distributor Profile', distributor_url %></small>
+						<small><%= link_to 'Viewing PUBLIC Profile', "#", class: "itemformlink active profilelink"%></small>
+						<small><%= link_to 'View FULL Profile', dashboard_full_profile_url, class: "itemformlink profilelink"%></small>
+						<small><%= link_to 'EDIT Distriubtor Profile', distributor_url, class: "itemformlink profilelink"%></small><br>
+						<div id="profile-name">Company Name Hidden</div>
+						<div id="profile-year-established"><%= @profile.year_established.strftime("est. %Y") rescue nil %></div>
 
 					</div>
 				</div>
+
 
 				<div class="row">
 					<div class="small-12 columns clearfix">

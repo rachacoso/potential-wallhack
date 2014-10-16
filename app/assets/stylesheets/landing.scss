@@ -2,7 +2,7 @@
 @import "global_variables";
 
 body {
-  // padding-top: 2em;
+  min-height: 100%;
 }
 
 // div {
@@ -85,6 +85,7 @@ body {
 .wrapper {
   min-height: 100%;
   background-color: #fff;
+  padding-bottom: 10em;
 }
 
 
@@ -113,6 +114,10 @@ body {
 }
 
 a.itemformlink {
+  @include formlinkstyle
+}
+
+a.itemformlink.profilelink {
   @include formlinkstyle($link-color, 120%)
 }
 .rowitem {
@@ -217,6 +222,7 @@ textarea {
 
 .prefix, .postfix {
   font-size: 0.70em;
+  border-top: solid 2px scale-color($input-top-border, $lightness: 30%) !important;
 
 }
 
@@ -539,9 +545,11 @@ $onboard-nav-radius: 4px;
 
 // profile-icons
 
+.tabs dd > a {
+  border: 1px solid $body-font-color;
+}
+
 .tabs dd > a:hover {
-  background-color: scale-color($link-color, $lightness: 90%) !important;
-  font-color: red !important;
 
   .factory,
   .employees,
@@ -555,15 +563,25 @@ $onboard-nav-radius: 4px;
   .tradeshow,
   .patent,
   .trademark,
-  .certification {
-
-      fill: scale-color($link-color, $lightness: 20%);
+  .certification,
+  .marketing,
+  .sales,
+  .brand-portfolio {
+      transition: 0.2s;
+      // border: 1px solid $link-color;
+      fill: $link-color;
       #globeoutline,
       #shippingglobeoutline,
       #factoryoutline {
         stroke: scale-color($link-color, $lightness: 20%);
       }
 
+  }
+  .profile-icon-label {
+    border: 1px solid $link-color;
+    background-color: $link-color;
+    color: white;
+    font-weight: bold;
   }
 
 }
@@ -580,49 +598,37 @@ $onboard-nav-radius: 4px;
 .tradeshow,
 .patent,
 .trademark,
-.certification {
+.certification,
+.marketing,
+.sales,
+.brand-portfolio {
   // background-color: red;
+  transition: 0.2s;
   fill: $body-font-color;
-  #globeoutline,
-  #shippingglobeoutline,
-  #factoryoutline {
-    stroke: $body-font-color;
-  }
-  border: 1px solid $body-font-color;
+  border: 1px solid transparent;
   border-radius: 2px;
   &:hover {
     fill: scale-color($body-font-color, $lightness: 20%);
-    #globeoutline,
-    #shippingglobeoutline,
-    #factoryoutline {
-      stroke: scale-color($body-font-color, $lightness: 20%);
-    }
   }
   .active & {
     fill: $link-color;
-    // background-color: grey;
-    #globeoutline,
-    #shippingglobeoutline,
-    #factoryoutline {
-      stroke: $link-color;
-    }    
-    border: 1px solid $link-color;
   }
 }
-// #globeoutline {
-//   stroke: black;
-// }
+
 
 .profile-icon-label {
-  font-size: 50%;
+  transition: 0.2s;
+  font-size: 70%;
   text-align: right;
   height: 4em;
   color: $body-font-color;
   border: 1px solid $body-font-color;
   .active & {
-    color: $link-color;
-    font-weight: bold;
+    transition: 0.2s;
     border: 1px solid $link-color;
+    background-color: $link-color;
+    color: white;
+    font-weight: bold;
   }
 }
 
@@ -632,7 +638,7 @@ $onboard-nav-radius: 4px;
 
 .tabs dd > a, .tabs .tab-title > a {
   padding: 2px 2px;
-  width: 4.5rem;
+  width: 4.7rem;
 }
 
 dl.tabs {

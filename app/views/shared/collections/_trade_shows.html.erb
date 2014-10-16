@@ -14,6 +14,16 @@
 		<%= f.text_field :years_participated, label: "Years Participated", placeholder: 'Years participated' %>
 	</div>
 	<div class="medium-8 columns">
-		<%= f.text_field :website, label: "Website", placeholder: 'Website' %>
+
+		<div class="row collapse">
+			<%= label_tag(:website, "Website") %>
+			<div class="small-2 columns">
+				<span class="prefix">http://</span>
+			</div>
+			<div class="small-10 columns">
+				<%= f.text_field :website, label: false %>
+			</div>
+		</div>
+
 	</div>
 </div>

@@ -9,79 +9,101 @@
 
 	<div class="row">
 
-		<div class="medium-4 columns">
+		<div class="medium-3 columns">
 			
 				&nbsp;
 			
 		</div>
 
-
 	<% if @current_user.distributor %>
 
+		<div class="medium-9 columns previewtile">
+		
+			<div class="row">
+				<div class="small-12 columns text-right">
 
-		<div class="medium-8 columns text-right">
-			<div class="previewtile">
+					<small><%= link_to 'Viewing PUBLIC Profile', "#", class: "itemformlink active profilelink"%></small>
+					<small><%= link_to 'View FULL Profile', dashboard_full_profile_url, class: "itemformlink profilelink"%></small>
+					<small><%= link_to 'EDIT Distributor Profile', distributor_url, class: "itemformlink profilelink"%></small><br>
+					<div id="profile-name">Company Name Hidden</div>
+					<div id="profile-year-established"><%= @profile.year_established.strftime("est. %Y") rescue nil %></div>
 
-				<div class="row">
-					<div class="small-12 columns text-right">
-
-						<span id="profile-name"><%= @profile.name %></span>
-						<span id="year-established"><%= @profile.year_established.strftime("est. %Y") rescue nil %></span>
-	
-						<br><small><%= link_to 'Edit Distributor Profile', distributor_url %></small>
-
-					</div>
 				</div>
-
-				<div class="row">
-					<div class="small-12 columns clearfix">
-						<dl class="tabs right" id="myTabs" data-tab>
-						  <dd class="active"><a href="#panel1"><%= render partial: "shared/svg/globe" %></a></dd>
-						  <dd><a href="#panel2"><%= render partial: "shared/svg/employees" %></a></dd>
-						  <dd><a href="#panel3"><%= render partial: "shared/svg/sector" %></a></dd>
-						  <dd><a href="#panel4"><%= render partial: "shared/svg/channel" %></a></dd>
-						</dl>
-					</div>
-				</div>
-
-				<div class="tabs-content">
-				  <div class="content active" id="panel1">
-										
-										<div class="preview-data">
-											<%= @profile.country_of_origin %>
-										</div>
-
-				  </div>
-				  <div class="content" id="panel2">
-
-										<div class="preview-data">
-											<%= CompanySize.find(@profile.company_size).name %> 
-										</div>   
-
-				  </div>
-				  <div class="content" id="panel3">
-
-						<div class="preview-data">
-							<% @profile.sectors.each do |s| %>
-								<%= s.name %><br>
-							<% end %>
-						</div> 
-
-				  </div>
-				  <div class="content" id="panel4">
-
- 						<div class="preview-data">
-							<% @profile.channels.each do |ch| %>
-								<%= ch.name %><br>
-							<% end %>
-						</div>
-
-				  </div>
-				</div>
-
 			</div>
+
+			<div class="row">
+				<div class="medium-4 columns">
+					<dl class="tabs right" id="myTabs" data-tab>
+					  <dd class="active"><a href="#panel1"><%= render partial: "shared/svg/globe" %></a></dd>
+					  <dd><a href="#panel2"><%= render partial: "shared/svg/employees" %></a></dd>
+					  <dd><a href="#panel3"><%= render partial: "shared/svg/sector" %></a></dd>
+					  <dd><a href="#panel4"><%= render partial: "shared/svg/channel" %></a></dd>
+					</dl>
+				</div>
+				<div class="medium-8 columns">
+
+					<div class="tabs-content">
+					  <div class="content active" id="panel1">
+
+					  	<div class="preview-data-title">
+								Country of Origin
+							</div>
+							<div class="preview-data">
+								<h1><%= @profile.country_of_origin %></h1>
+							</div>
+
+					  </div>
+					  <div class="content" id="panel2">
+
+									  	<div class="preview-data-title">
+												Company Size
+											</div>
+											<div class="preview-data">
+												<h1><%= CompanySize.find(@profile.company_size).name %></h1>
+											</div>    
+
+					  </div>
+					  <div class="content" id="panel3">
+
+
+									  	<div class="preview-data-title">
+												Sectors
+											</div>
+											<div class="preview-data">
+												<% @profile.sectors.each do |s| %>
+													<h3><strong><%= s.name %></strong></h3>
+												<% end %>
+											</div>
+
+					  </div>
+					  <div class="content" id="panel4">
+
+	 								  	<div class="preview-data-title">
+												Channels
+											</div>
+											<div class="preview-data">
+												<% @profile.channels.each do |ch| %>
+													<h3><strong><%= ch.name %></strong></h3>
+												<% end %>
+											</div>
+
+											<% if @profile.channel_capacities.where(channel_id: 0).length > 0 %>
+	 								  	<div class="preview-data-title">
+												Custom Channels
+											</div>
+											<div class="preview-data">
+												<% @profile.channel_capacities.where(channel_id: 0).each do |cch| %>
+													<h3><strong><%= cch.custom_channel_name %></strong></h3>
+												<% end %>
+											</div>											
+											<% end %>
+
+					  </div>
+					</div>
+				</div>
+			</div>
+
 		</div>
-	</div>
 
 	<% end %>
 
@@ -93,9 +115,9 @@
 			<div class="row">
 				<div class="small-12 columns text-right">
 
-					<small><%= link_to 'Viewing PUBLIC Profile', "#", class: "itemformlink active"%></small>
-					<small><%= link_to 'View FULL Profile', dashboard_full_profile_url, class: "itemformlink"%></small>
-					<small><%= link_to 'EDIT Brand Profile', brand_url, class: "itemformlink"%></small><br>
+					<small><%= link_to 'Viewing PUBLIC Profile', "#", class: "itemformlink active profilelink"%></small>
+					<small><%= link_to 'View FULL Profile', dashboard_full_profile_url, class: "itemformlink profilelink"%></small>
+					<small><%= link_to 'EDIT Brand Profile', brand_url, class: "itemformlink profilelink"%></small><br>
 					<div id="profile-name">Company Name Hidden</div>
 					<div id="profile-year-established"><%= @profile.year_established.strftime("est. %Y") rescue nil %></div>
 
@@ -107,8 +129,8 @@
 					<dl class="tabs" id="tabs" data-tab>
 					  <dd class="active"><a href="#panel1"><%= render partial: "shared/svg/globe" %></a></dd>
 					  <dd><a href="#panel2"><%= render partial: "shared/svg/factory" %></a></dd>
-					  <dd><a href="#panel3"><%= render partial: "shared/svg/employees" %></a></dd>
 					  <dd><a href="#panel4"><%= render partial: "shared/svg/shipping" %></a></dd>
+					  <dd><a href="#panel3"><%= render partial: "shared/svg/employees" %></a></dd>
 					  <dd><a href="#panel5"><%= render partial: "shared/svg/sector" %></a></dd>
 					  <dd><a href="#panel6"><%= render partial: "shared/svg/channel" %></a></dd>
 					</dl>
@@ -133,7 +155,19 @@
 											</div>
 											<div class="preview-data">
 												<% @profile.products.distinct(:country_of_manufacture).each do |country| %>
-															<%= country %><br>
+															<h3><strong><%= country %></strong></h3>
+												<% end %>
+											</div>    
+
+					  </div>
+					  <div class="content" id="panel4">
+
+									  	<div class="preview-data-title">
+												Countries of Export
+											</div>
+											<div class="preview-data">
+												<% @profile.export_countries.each do |ec| %>
+													<h3><strong><%= ec.country %></strong></h3>
 												<% end %>
 											</div>    
 
@@ -147,19 +181,7 @@
 												<h1><%= CompanySize.find(@profile.company_size).name %></h1>
 											</div>    
 
-					  </div>
-					  <div class="content" id="panel4">
-
-									  	<div class="preview-data-title">
-												Countries of Export
-											</div>
-											<div class="preview-data">
-												<% @profile.export_countries.each do |ec| %>
-													<%= ec.country %><br>
-												<% end %>
-											</div>    
-
-					  </div>
+					  </div>					  
 					  <div class="content" id="panel5">
 					    
 									  	<div class="preview-data-title">
@@ -167,11 +189,11 @@
 											</div>
 											<div class="preview-data">
 												<% @profile.sectors.each do |s| %>
-													<%= s.name %><br>
+													<h3><strong><%= s.name %></strong></h3>
 												<% end %>
 											</div>
 
-					  </div>
+					  </div>				  
 					  <div class="content" id="panel6">
 					 
 
@@ -180,7 +202,7 @@
 											</div>
 											<div class="preview-data">
 												<% @profile.channels.each do |ch| %>
-													<%= ch.name %> <br>
+													<h3><strong><%= ch.name %></strong></h3>
 												<% end %>
 											</div>
 
@@ -190,30 +212,19 @@
 											</div>
 											<div class="preview-data">
 												<% @profile.channel_capacities.where(channel_id: 0).each do |cch| %>
-													<%= cch.custom_channel_name %> <br>
+													<h3><strong><%= cch.custom_channel_name %></strong></h3>
 												<% end %>
 											</div>											
 											<% end %>
 
 					  </div>
 					</div>
-					
 				</div>
-
-</div>
+			</div>
 
 		</div>
-
-
-
-
-
-
-
-
-
-
 		
-	</div>
-
 	<% end %>
+
+	</div><!-- /.row -->
+

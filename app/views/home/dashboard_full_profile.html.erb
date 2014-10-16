@@ -9,93 +9,204 @@
 
 	<div class="row">
 
-		<div class="medium-4 columns">
-			
-				&nbsp;
-			
-		</div>
-
 
 	<% if @current_user.distributor %>
 
 
-		<div class="medium-8 columns text-right">
-			<div class="previewtile">
+		<div class="medium-12 columns previewtile">
 
-				<div class="row">
-					<div class="small-12 columns text-right">
+			<div class="row">
+				<div class="small-12 columns text-right">
 
-						<span id="profile-name"><%= @profile.name %></span>
-						<span id="year-established"><%= @profile.year_established.strftime("est. %Y") rescue nil %></span>
-	
-						<br><small><%= link_to 'Edit Distributor Profile', distributor_url %></small>
+					<small><%= link_to 'View PUBLIC Profile', dashboard_public_profile_url, class: "itemformlink profilelink"%></small>
+					<small><%= link_to 'Viewing FULL Profile', "#", class: "itemformlink active profilelink"%></small>
+					<small><%= link_to 'EDIT Distributor Profile', distributor_url, class: "itemformlink profilelink"%></small><br>
+					<div id="profile-name"><%= @profile.name %></div>
+					<div id="profile-year-established"><%= @profile.year_established.strftime("est. %Y") rescue nil %></div>
+					<div id="profile-website"><%= link_to @profile.website, "//#{@profile.website}" %></div>
 
-					</div>
 				</div>
-
-				<div class="row">
-					<div class="small-12 columns clearfix">
-						<dl class="tabs right" id="myTabs" data-tab>
-						  <dd class="active"><a href="#panel1"><%= render partial: "shared/svg/globe" %></a></dd>
-						  <dd><a href="#panel2"><%= render partial: "shared/svg/employees" %></a></dd>
-						  <dd><a href="#panel3"><%= render partial: "shared/svg/sector" %></a></dd>
-						  <dd><a href="#panel4"><%= render partial: "shared/svg/channel" %></a></dd>
-						</dl>
-					</div>
-				</div>
-
-				<div class="tabs-content">
-				  <div class="content active" id="panel1">
-										
-										<div class="preview-data">
-											<%= @profile.country_of_origin %>
-										</div>
-
-				  </div>
-				  <div class="content" id="panel2">
-
-										<div class="preview-data">
-											<%= CompanySize.find(@profile.company_size).name %> 
-										</div>   
-
-				  </div>
-				  <div class="content" id="panel3">
-
-						<div class="preview-data">
-							<% @profile.sectors.each do |s| %>
-								<%= s.name %><br>
-							<% end %>
-						</div> 
-
-				  </div>
-				  <div class="content" id="panel4">
-
- 						<div class="preview-data">
-							<% @profile.channels.each do |ch| %>
-								<%= ch.name %><br>
-							<% end %>
-						</div>
-
-				  </div>
-				</div>
-
 			</div>
-		</div>
-	</div>
+
+			<div class="row">
+				<div class="medium-4 columns">
+					<dl class="tabs right" id="myTabs" data-tab>
+					  <dd class="active"><a href="#panel1"><%= render partial: "shared/svg/globe" %></a></dd>
+					  <dd><a href="#panel2"><%= render partial: "shared/svg/employees" %></a></dd>
+					  <dd><a href="#panel3"><%= render partial: "shared/svg/sector" %></a></dd>
+					  <dd><a href="#panel4"><%= render partial: "shared/svg/channel" %></a></dd>
+					  <dd><a href="#panel5"><%= render partial: "shared/svg/brandportfolio" %></a></dd>
+					  <dd><a href="#panel6"><%= render partial: "shared/svg/sales" %></a></dd>
+					  <dd><a href="#panel7"><%= render partial: "shared/svg/marketing" %></a></dd>
+					  <dd><a href="#panel8"><%= render partial: "shared/svg/tradeshow" %></a></dd>
+					</dl>
+				</div>
+				<div class="medium-8 columns">
+					<div class="tabs-content">
+
+
+					  <div class="content active" id="panel1">
+
+									  	<div class="preview-data-title">
+												Country of Origin
+											</div>
+											<div class="preview-data">
+												<h1><%= @profile.country_of_origin %></h1>
+											</div>
+
+									  	<div class="preview-data-title">
+												General Contact Information
+											</div>
+											<div class="preview-data">
+												<h4><strong><%= @profile.contact_info.contact_name %></strong>, <%= @profile.contact_info.contact_title %><br>
+														<%= @profile.contact_info.email %>, <%= @profile.contact_info.phone %>
+												</h4>
+												<h4><%= @profile.contact_info.address1 %><br><%= @profile.contact_info.address2 %><br>
+														<%= @profile.contact_info.city %> <%= @profile.contact_info.state %>, <%= @profile.contact_info.postcode %><br>
+														<%= @profile.contact_info.country %>
+												</h4>								
+											</div>
+
+					  </div>
+
+
+					  <div class="content" id="panel2">
+
+									  	<div class="preview-data-title">
+												Company Size
+											</div>
+											<div class="preview-data">
+												<h1><%= CompanySize.find(@profile.company_size).name %></h1>
+											</div>    
+
+					  </div>
+
+
+					  <div class="content" id="panel3">
+
+
+									  	<div class="preview-data-title">
+												Sectors
+											</div>
+											<div class="preview-data">
+												<% @profile.sectors.each do |s| %>
+													<h3><strong><%= s.name %></strong></h3>
+												<% end %>
+											</div>
+
+					  </div>
+
+
+					  <div class="content" id="panel4">
+
+	 								  	<div class="preview-data-title">
+												Channels
+											</div>
+											<div class="preview-data">
+												<% @profile.channels.each do |ch| %>
+													<h3><strong><%= ch.name %></strong></h3>
+												<% end %>
+											</div>
+
+											<% if @profile.channel_capacities.where(channel_id: 0).length > 0 %>
+	 								  	<div class="preview-data-title">
+												Custom Channels
+											</div>
+											<div class="preview-data">
+												<% @profile.channel_capacities.where(channel_id: 0).each do |cch| %>
+													<h3><strong><%= cch.custom_channel_name %></strong></h3>
+												<% end %>
+											</div>											
+											<% end %>
+
+					  </div>
+
+					  <div class="content" id="panel5">
+
+											<div class="preview-data-title">
+												Current Brands
+											</div>
+											<div class="preview-data">
+
+												<% if @profile.distributor_brands.where(current: true).length > 0 %>
+													<% @profile.distributor_brands.where(current: true).each do |p| %>
+														<%= render partial: "shared/collections_view/distributor_brands", locals: {
+															collitem: p
+														} %>
+													<% end %>
+												<% else %>
+												<br>
+													[No Current Brands]
+												<% end %>
+
+											</div>
+
+
+											<div class="preview-data-title">
+												Upcoming Brands
+											</div>
+											<div class="preview-data">
+
+												<% if @profile.distributor_brands.where(current: false).length > 0 %>
+													<% @profile.distributor_brands.where(current: false).each do |p| %>
+														<%= render partial: "shared/collections_view/distributor_brands", locals: {
+															collitem: p
+														} %>
+													<% end %>
+												<% else %>
+												<br>
+													[No Upcoming Brands]
+												<% end %>
+
+											</div>
+
+					  </div>
+
+
+
+					  <div class="content" id="panel8">
+
+											<div class="preview-data-title">
+												Trade Shows
+											</div>
+											<div class="preview-data">
+
+												<% if @profile.trade_shows.length > 0 %>
+													<% @profile.trade_shows.each do |p| %>
+														<%= render partial: "shared/collections_view/trade_shows", locals: {
+															collitem: p
+														} %>
+													<% end %>
+												<% else %>
+												<br>
+													[No Trade Shows]
+												<% end %>
+
+											</div>
+						</div>					  
+
+
+					</div><!-- /.tabs-content -->
+				</div><!-- /.medium-8 .columns -->
+
+			</div><!-- /.row -->
+
+		</div><!-- /.medium-12 .columns .previewtile -->
+	
 
 	<% end %>
 
 	<% if @current_user.brand %>
 
 
-		<div class="medium-9 columns previewtile">
+		<div class="medium-12 columns previewtile">
 
 			<div class="row">
 				<div class="small-12 columns text-right">
 
-					<small><%= link_to 'View PUBLIC Profile', dashboard_public_profile_url, class: "itemformlink"%></small>
-					<small><%= link_to 'Viewing FULL Profile', "#", class: "itemformlink active"%></small>
-					<small><%= link_to 'EDIT Brand Profile', brand_url, class: "itemformlink"%></small><br>
+					<small><%= link_to 'View PUBLIC Profile', dashboard_public_profile_url, class: "itemformlink profilelink"%></small>
+					<small><%= link_to 'Viewing FULL Profile', "#", class: "itemformlink active profilelink"%></small>
+					<small><%= link_to 'EDIT Brand Profile', brand_url, class: "itemformlink profilelink"%></small><br>
 					<div id="profile-name"><%= @profile.company_name %></div>
 					<div id="profile-year-established"><%= @profile.year_established.strftime("est. %Y") rescue nil %></div>
 					<div id="profile-website"><%= link_to @profile.website, "//#{@profile.website}" %></div>
@@ -132,7 +243,7 @@
 							</div>
 
 					  	<div class="preview-data-title">
-								General Information
+								General Contact Information
 							</div>
 							<div class="preview-data">
 								<h4><strong><%= @profile.contact_info.contact_name %></strong>, <%= @profile.contact_info.contact_title %><br>
@@ -150,24 +261,17 @@
 
 
 									  	<div class="preview-data-title">
-												Countries of Manufacture
+												Country of Manufacture ( Products Manufactured )
 											</div>
 											<div class="preview-data">
-												<table>
-													<tr><th>Country</th><th>Products manufactured there</th></tr>
 												<% @profile.products.distinct(:country_of_manufacture).each do |country| %>
-													<tr>
-														<td>
-															<%= country %>
-														</td>
-														<td>
-														<% @profile.products.where(country_of_manufacture: country).each do |p| %>
-															<%= p.name %><br>
+														<strong><%= country %></strong>
+														( 
+														<% @profile.products.where(country_of_manufacture: country).each_with_index do |p, index| %>
+															<%= p.name %> <%= (index + 1 >= @profile.products.where(country_of_manufacture: country).length) ? "" : ","  %>
 														<% end %>
-														</td>
-													</tr>
+														)<br>
 												<% end %>
-												</table>
 											</div>    
 
 					  </div>
@@ -389,6 +493,8 @@
 
 
 		
-	</div>
+
 
 	<% end %>
+
+</div><!-- /.row -->

@@ -162,7 +162,77 @@
 
 					  </div>
 
+					  <div class="content" id="panel6">
 
+									  	<div class="preview-data-title">
+												Sales and Education
+											</div>
+											<div class="preview-data">
+												<div class="row">
+													<div class="small-7 columns text-right"><h1><small>Outside Sales Force Size:</small></h1></div> 
+													<div class="small-5 columns"><h1><%= @profile.inside_sales_size %></h1></div>
+												</div>
+												<div class="row">
+													<div class="small-7 columns text-right"><h1><small>Inside Sales Force Size:</small></h1></div>
+													<div class="small-5 columns"><h1><%= @profile.outside_sales_size %></h1></div>
+												</div>
+											</div>    
+
+					  </div>
+
+					  <div class="content" id="panel7">
+
+									  	<div class="preview-data-title">
+												Internal Marketing/PR Team Size
+											</div>
+											<div class="preview-data">
+												<div class="row">
+													<div class="small-12 small-text-center columns"><h1><%= @profile.internal_marketing_size %></h1></div>
+												</div>
+											</div>
+
+									  	<div class="preview-data-title">
+												External Marketing/PR
+											</div>
+											<div class="preview-data">
+												<div class="row">
+													<div class="small-12 small-text-center columns"><h3><%= @profile.employ_pr_agency ? "This Distributor employs an External Marketing/PR Agency" : "This Distributor DOES NOT employ an External Marketing/PR Agency" %></h3></div>
+												</div>
+											</div>    
+
+									  	<div class="preview-data-title">
+												Product Marketing
+											</div>
+											<div class="preview-data">
+												<div class="row">
+													<div class="medium-10 columns small-centered">
+														<div class="row">
+															<div class="medium-6 columns">
+																<%= render partial: "distributor_marketing_type", locals: {name: "Print" ,p: @profile.marketing_via_print}%>
+																<%= render partial: "distributor_marketing_type", locals: {name: "Online" ,p: @profile.marketing_via_online}%>
+																<%= render partial: "distributor_marketing_type", locals: {name: "Email" ,p: @profile.marketing_via_email}%>
+																<%= render partial: "distributor_marketing_type", locals: {name: "Outdoor" ,p: @profile.marketing_via_outdoor}%>
+															</div>
+															<div class="medium-6 columns">
+																<%= render partial: "distributor_marketing_type", locals: {name: "Events" ,p: @profile.marketing_via_events}%>
+																<%= render partial: "distributor_marketing_type", locals: {name: "Direct Mail" ,p: @profile.marketing_via_direct_mail}%>
+																<%= render partial: "distributor_marketing_type", locals: {name: "Classes" ,p: @profile.marketing_via_classes}%>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div> 
+
+									  	<div class="preview-data-title">
+												Customer Database Size
+											</div>
+											<div class="preview-data">
+												<div class="row">
+													<div class="small-12 small-text-center columns"><h1><%= @profile.customer_database_size %></h1></div>
+												</div>
+											</div>   
+
+					  </div>
 
 					  <div class="content" id="panel8">
 

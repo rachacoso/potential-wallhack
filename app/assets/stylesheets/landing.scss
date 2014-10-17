@@ -399,6 +399,18 @@ input[type=checkbox]:checked + label {
   }
 }
 
+.productmarketingtype {
+  padding: 4px 12px;
+  border: 1px solid scale-color($input-background-color, $lightness: -80%);
+  background-color: scale-color($input-background-color, $lightness: 30%);
+  color: #000;
+  &.off {
+    color: #adadad;
+    border: 1px dotted scale-color($input-background-color, $lightness: -80%);
+    background-color: transparent;
+  }
+}
+
 ////////////////
 // AUTOCOMPLETE STYLES
 ////////////////

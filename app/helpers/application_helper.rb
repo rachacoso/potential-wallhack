@@ -17,6 +17,67 @@ module ApplicationHelper
 
 	end
 
+	def check_brand_public_profile # check "completeness" of public profile
 
+		list = 0
+
+		# fields to check from primary document
+		checklist = [
+			:year_established,
+			:company_size,
+			:country_of_origin,
+			:export_countries,
+			:sectors,
+			:channels
+		]
+		
+		# fields to check from related document (:country_of_manufacture in :products)
+		if @profile.products.distinct(:country_of_manufacture).reject(&:empty?).count > 0
+				list += 1
+		end
+
+		# complete is all from checklist plus the related document(s)
+		complete = checklist.count + 1
+
+		checklist.each do |item|
+			if !@profile.send(item).blank?
+				list += 1
+			end
+		end
+
+		percent_complete = list.to_f/complete.to_f * 100.0
+
+		return percent_complete.round
+
+	end
+
+
+	def check_distributor_public_profile # check "completeness" of public profile
+
+		list = 0
+
+		# fields to check from primary document
+		checklist = [
+			:year_established,
+			:company_size,
+			:country_of_origin,
+			:sectors,
+			:channels
+		]
+
+		# complete is all from checklist
+		complete = checklist.count
+
+		checklist.each do |item|
+			if !@profile.send(item).blank?
+				list += 1
+			end
+		end
+
+		percent_complete = list.to_f/complete.to_f * 100.0
+
+		return percent_complete.round
+
+	end
 
 end

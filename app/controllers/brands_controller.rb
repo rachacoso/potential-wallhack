@@ -121,7 +121,7 @@ class BrandsController < ApplicationController
 					# allow redirect via passed parameter only if in this array else redirect to the first onboard screen
 				end
 			else
-				redirect_to dashboard_url
+				redirect_to brand_full_profile_url
 			end
 
 		else

@@ -21,6 +21,22 @@
 				</div>
 			</div>
 
+
+			<div class="profile-outer-tile">
+				<div class="row">
+					<div class="small-12 columns text-center">
+
+						<% percent = check_distributor_public_profile %>
+
+						<div class="progress small-12 medium-8 <%= percent == 100 ? "success" : "" %>" style="margin: auto;">
+						  <span class="meter" style="width: <%= percent %>%"></span>
+						</div>
+
+						Your Public Profile is <%= percent %>% Complete!
+					</div>
+				</div>
+			</div>
+
 			<%#= render partial: "/shared/profile/public_profile_tabs" %>
 			<%= render partial: "/shared/profile/distributor_public_profile_tiles" %>
 			

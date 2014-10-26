@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><%= content_for?(:title) ? yield(:title) : "Landing" %></title>
   <link rel="shortcut icon" href="/favicon.ico?v=2" />
   <%= stylesheet_link_tag    "application" %>
@@ -26,16 +27,10 @@
 </head>
 <body>
 
-	<div class="wrapper row">
-		<div class="small-12 columns">
+<%= content_for?(:user_head) ? yield(:user_head) : "" %>
 
-					<%= content_for?(:user_head) ? yield(:user_head) : "" %>
 
-					<%= yield %>
-
-		</div>
-	</div>
-
+<%= yield %>
 
 
 <%= javascript_include_tag "application" %>

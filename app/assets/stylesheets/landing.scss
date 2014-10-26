@@ -84,7 +84,7 @@ body {
 
 .wrapper {
   min-height: 100%;
-  background-color: #fff;
+  // background-color: #fff;
   padding-bottom: 10em;
 }
 
@@ -193,6 +193,7 @@ a.itemformlink.profilelink {
 	border: 1px dotted scale-color($link-color, $lightness: 50%);
   padding: 0.5em 1em;
   margin: 0.5em 0em 1.5em 0em;
+  @include transparent(#fff, 0.9);
   h1 {
     padding: 0em 0.4em;
     background-color: scale-color($link-color, $lightness: 30%);
@@ -235,14 +236,21 @@ input[type="number"],
 input[type="email"],
 input[type="password"],
 select {
-  padding: 0px 0px 0px 10px;
-  margin-bottom: 0.2em;
   border: none;
   border-top: solid 2px scale-color($input-top-border, $lightness: 30%);
   transition: border 0.3s;
-  background: $input-background-color;
+  @include transparent($input-background-color, 0.8);
+  // background: @include transparent($input-background-color, 0.9);
+  // background: $input-background-color;
   color: $input-text-color;
   box-shadow: none;
+}
+input[type="text"],
+textarea,
+input[type="number"],
+select {
+  padding: 0px 0px 0px 10px;
+  margin-bottom: 0.2em;
 }
 input[type="text"]:focus,
 input[type="text"].focus,
@@ -400,14 +408,18 @@ input[type=checkbox]:checked + label {
 }
 
 .productmarketingtype {
-  padding: 4px 12px;
-  border: 1px solid scale-color($input-background-color, $lightness: -80%);
-  background-color: scale-color($input-background-color, $lightness: 30%);
-  color: #000;
+  // border: 1px solid scale-color($input-background-color, $lightness: -80%);
+  // background-color: scale-color($input-background-color, $lightness: 30%);
+  &::before { 
+    content: "\2611";    
+  }
   &.off {
     color: #adadad;
-    border: 1px dotted scale-color($input-background-color, $lightness: -80%);
+    // border: 1px dotted scale-color($input-background-color, $lightness: -80%);
     background-color: transparent;
+    &::before { 
+    content: "\2610";    
+    }
   }
 }
 
@@ -514,12 +526,20 @@ $onboard-nav-radius: 4px;
 // Preview Tiles
 // Distributor/Brand Profile CSS
 
+.profile-outer-tile {
+  border: 1px solid scale-color($link-color, $lightness: 70%);
+  @include transparent(#fff, 0.95);
+  margin-bottom: 2em;
+  h1 {
+    font-size: 3em;
+  }
+}
 
 .previewtile {
   // margin: 1em 0em;
-  // padding: 1em 0.5em;
+  padding: 0.5em 0.5em;
   line-height: 1.25em;
-  border: 1px dotted scale-color($link-color, $lightness: 70%);
+  // border: 1px dotted scale-color($link-color, $lightness: 70%);
   div {
     padding: 0.25em 0.5em;
   }
@@ -532,23 +552,27 @@ $onboard-nav-radius: 4px;
     background-color: $link-color;
     color: white;
   }
+  .preview-data-tile-title {
+
+    color: scale-color(black, $lightness: 65%);
+    font-size: 0.75em;
+  }  
 }
 
 #profile-name {
   font-size:3em;
   font-weight:bold;
   line-height:1em;
-  padding-right: 0;
-  border-top: 1px solid $body-font-color;
+  padding-left: 1em;
   margin-top: 0.5em;
 }
 #profile-year-established {
   font-size:2em;
-  padding-right: 0;
+  padding-left: 1em;
 }
 #profile-website {
   font-size:1em;
-  padding-right: 0;
+  padding-left: 1em;
 }
 #profile-country {
   font-size: 2em;
@@ -559,6 +583,7 @@ $onboard-nav-radius: 4px;
 
 .tabs dd > a {
   border: 1px solid $body-font-color;
+  background-color: white;
 }
 
 .tabs dd > a:hover {
@@ -578,7 +603,8 @@ $onboard-nav-radius: 4px;
   .certification,
   .marketing,
   .sales,
-  .brand-portfolio {
+  .brand-portfolio,
+  .calendar {
       transition: 0.2s;
       // border: 1px solid $link-color;
       fill: $link-color;
@@ -587,7 +613,7 @@ $onboard-nav-radius: 4px;
       #factoryoutline {
         stroke: scale-color($link-color, $lightness: 20%);
       }
-
+      background-color: white;
   }
   .profile-icon-label {
     border: 1px solid $link-color;
@@ -613,7 +639,8 @@ $onboard-nav-radius: 4px;
 .certification,
 .marketing,
 .sales,
-.brand-portfolio {
+.brand-portfolio,
+.calendar {
   // background-color: red;
   transition: 0.2s;
   fill: $body-font-color;
@@ -662,5 +689,37 @@ dl.tabs {
 .tabs-content > .content {
   padding: 0em;
 }
+
+
+// Front Page Styling
+
+.front-top-panel {
+  margin-top:2em;
+  min-height: 100%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: initial; 
+}
+
+.front-middle-panel {
+  min-height: 100%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5em;
+  @include transparent(black, 0.3);
+
+  
+}
+
+.front-bottom-panel {
+  min-height: 100%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;  
+  padding-top: 5em;
+}
+
 
 

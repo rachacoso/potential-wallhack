@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   before_action :require_login
   before_action :get_display
   
-
 	private
   def get_current_user
   	if session[:user_id]

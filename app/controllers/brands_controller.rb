@@ -35,6 +35,13 @@ class BrandsController < ApplicationController
 
 	end
 
+	def public_profile
+		@profile = @current_user.brand
+	end
+
+	def full_profile
+		@profile = @current_user.brand
+	end
 
 	def update
 

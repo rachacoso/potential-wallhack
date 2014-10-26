@@ -1,55 +1,82 @@
 <% content_for :user_head do %>
 
-	
-	<div class="row">
-		<div class="topbar">
-			<div class="small-6 columns text-left">
-				<h1 class="tk-aw-conqueror-inline">Landing
-				<% if controller_name == "admin" %>
-					<br class="show-for-small-only"><small>for Administrators</small>
-				<% elsif @current_user %>
-					<br class="show-for-small-only"><small><%= @current_user.distributor ? "for Distributors" : "for Brands" %></small>
-				<% end %>
-				</h1>
-			</div>
-			<div class="small-6 columns text-right">
-				
+<div class="contain-to-grid fixed">
 
-				<% if @current_user %>
-					<div class="usernav tk-aw-conqueror-inline">
-						<div class="row">
-							<div class="small-12 columns text-right">
-								Hello, <%= @current_user.user_profile.firstname rescue @current_user.email %>
-							</div>
-						</div>
-						<div class="row">
-							<div class="small-12 columns text-right">
-								<%#= action_name == "dashboard" ? (link_to 'Front', root_url) : "" %>
+	<nav class="top-bar" data-topbar role="navigation">
+	  <ul class="title-area">
+	    <li class="name">
+				<h1 class="tk-aw-conqueror-inline">&nbsp;Landing
+				<% if controller_name == "admin" %>
+					<small>for Administrators</small>
+				<% elsif @current_user %>
+					<small><%= @current_user.distributor ? "for Distributors" : "for Brands" %></small>
+				<% end %>
+				<% if ( ["distributors","brands"].include? controller_name ) %>
+					<small style="color: #aaa;"> // Your Profile</small>
+				<% end %>
+				<% if ( action_name == "dashboard" ) %>
+					<small style="color: #aaa;"> // Your Dashboard</small>
+				<% end %>				
+				</h1>      
+	    </li>
+	     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+	  </ul>
+
+	  <section class="top-bar-section">
+	
+	    <!-- Right Nav Section -->
+	    <ul class="right">
+	      <% if @current_user %>
+	      <li class="has-dropdown">
+	        <a href="#">
+	        	<% if @current_user.distributor %>
+							<%= @current_user.distributor.company_name rescue @current_user.email %>
+						<% else %>
+							<%= @current_user.brand.company_name rescue @current_user.email %>
+						<% end %>
+	        </a>
+	        <ul class="dropdown">       	
+	          <li class="active">
 								<%= action_name == "front" ? (link_to 'Dashboard', dashboard_url) : "" %> 
 								<%= controller_name == "admin" ? (link_to 'Dashboard', dashboard_url) : "" %>
+								<%= controller_name == "home" ? (link_to 'Dashboard', dashboard_url) : "" %>
 								<%= controller_name == "brands" ? (link_to 'Dashboard', dashboard_url) : "" %>
 								<%= controller_name == "distributors" ? (link_to 'Dashboard', dashboard_url) : "" %>
 								<%= controller_name == "onboard_brand" ? (link_to 'Dashboard', dashboard_url) : "" %> 
 								<%= controller_name == "onboard_distributor" ? (link_to 'Dashboard', dashboard_url) : "" %> 
-								<%= action_name =~ /dashboard*/ ? "" : "//" %>
-								<%= link_to 'Logout', logout_url %>
-							</div>
-						</div>
-					</div>
-				<% end %>
+								<%#= action_name =~ /dashboard*/ ? "" : "//" %>
+	          </li>
+						<li>
+							<%= link_to 'Market Insight', "#" %>
+						</li>	          
+						<li>
+							<%= link_to 'Your Matches', "#" %>
+						</li>
+						<li>
+							<%= link_to 'Your Messages', "#" %>
+						</li>						
+	          <% if @current_user.distributor %>
+	          <li>
+	          	<%= link_to 'Your Profile', distributor_full_profile_url %>
+	          </li>
+	          <% end %>
+	          <% if @current_user.brand %>
+	          <li>
+	          	<%= link_to 'Your Profile', brand_full_profile_url %>
+	          </li>
+	          <% end %>
+	          <li><%= link_to 'Logout', logout_url %></li>
+	        </ul>
+	      </li>
+	      <% end %>
 				<% if !@current_user %>
-					<%= render partial: "shared/login_widget" %>
-				<% end %>
-				
-			</div>
-		</div>
-	</div>
-		
-	<div class="row">
-		<div class="topbarborder">
-			<div class="small-12 columns">
-			</div>
-		</div>
-	</div>
+				<%= render partial: "shared/login_widget" %>
+				<% end %>	      
+	    </ul>
+	  </section>
+	</nav>
+
+</div>
 	
 <% end %>

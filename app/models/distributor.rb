@@ -9,7 +9,7 @@ class Distributor
 	### Profile
 	#####################
  	# General Info
- 	field :name, type: String
+ 	field :company_name, type: String
 	field :country_of_origin, type: String
 	field :year_established, type: Date
 	field :company_size, type: String

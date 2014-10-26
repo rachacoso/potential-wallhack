@@ -1,0 +1,376 @@
+
+
+		<div class="profile-outer-tile">
+
+			<div class="row">
+				<div class="small-12 columns">
+					<h1><strong><%= @profile.company_name %></strong></h1>
+					<h2><%= @profile.year_established.strftime("est. %Y") rescue nil %></h2>
+					<h3><strong><%= link_to @profile.website, "//#{@profile.website}" %></strong></h3>
+					<hr>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="medium-6 columns">
+
+					<div class="row">
+						<div class="small-2 columns">
+							<%= render partial: "shared/svg/calendar", locals: {nolabel: true} %>
+						</div>
+						<div class="small-10 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Year Established</span><br>
+								<strong><%= @profile.year_established.strftime("%Y") rescue nil %></strong>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="small-2 columns">
+							<%= render partial: "shared/svg/employees", locals: {nolabel: true} %>
+						</div>
+						<div class="small-10 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Company Size</span><br>
+								<strong><%= CompanySize.find(@profile.company_size).name %></strong>
+							</div>
+						</div>
+					</div>	
+					
+				</div>
+
+
+				<div class="medium-6 columns">
+
+					<div class="row">
+						<div class="small-2 columns">
+							<%= render partial: "shared/svg/globe", locals: {nolabel: true} %>
+						</div>
+						<div class="small-10 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Country of origin</span><br>
+								<strong><%= @profile.country_of_origin %></strong>
+							</div>
+						</div>
+					</div>			
+
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="medium-6 columns">
+
+					<div class="row">
+						<div class="small-2 columns">
+							<%= render partial: "shared/svg/factory", locals: {nolabel: true} %>
+						</div>
+						<div class="small-10 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Countries of Manufacture</span><br>
+								<strong>
+									<% @profile.products.distinct(:country_of_manufacture).each do |country| %>
+										<%= country %><br>
+									<% end %>
+								</strong>
+							</div>
+						</div>
+					</div>			
+					
+				</div>
+
+
+				<div class="medium-6 columns">
+
+					<div class="row">
+						<div class="small-2 columns">
+							<%= render partial: "shared/svg/shipping", locals: {nolabel: true} %>
+						</div>
+						<div class="small-10 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Countries of Export</span><br>
+								<strong>
+									<% @profile.export_countries.each do |ec| %>
+										<%= ec.country %><br>
+									<% end %>
+								</strong>
+							</div>
+						</div>
+					</div>		
+
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="medium-6 columns">
+
+					<div class="row">
+						<div class="small-2 columns">
+							<%= render partial: "shared/svg/sector", locals: {nolabel: true} %>
+						</div>
+						<div class="small-10 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Sectors</span><br>
+								<% @profile.sectors.each do |s| %>
+									<strong><%= s.name %></strong><br>
+								<% end %>
+							</div>
+						</div>
+					</div>			
+					
+				</div>
+
+
+				<div class="medium-6 columns">
+
+
+					<div class="row">
+						<div class="small-2 columns">
+							<%= render partial: "shared/svg/channel", locals: {nolabel: true}%>
+						</div>
+						<div class="small-10 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Channels</span><br>
+								<% @profile.channels.each do |ch| %>
+									<strong><%= ch.name %></strong><br>
+								<% end %>
+								<% if @profile.channel_capacities.where(channel_id: 0).length > 0 %>
+									<% @profile.channel_capacities.where(channel_id: 0).each do |cch| %>
+										<strong><%= cch.custom_channel_name %> *</strong><br>
+									<% end %>
+									<small>(* Custom Channels)</small>
+								<% end %>
+							</div>
+						</div>
+					</div>					
+
+
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="medium-8 columns small-centered">
+
+							<div class="row">
+								<div class="small-2 columns">
+									<%= render partial: "shared/svg/sku", locals: {nolabel: true}%>
+								</div>
+								<div class="small-10 columns">
+
+									<div class="preview-data">
+										<span class="preview-data-tile-title">Current Products</span><br>
+
+											<% if @profile.products.where(current: true).length > 0 %>
+												<% @profile.products.where(current: true).each do |p| %>
+													<%= render partial: "shared/collections_view/products", locals: {
+														collitem: p
+													} %>
+												<% end %>
+											<% else %>
+											<br>
+												[No Current Products]
+											<% end %>
+
+									</div>
+
+								</div>
+							</div>	
+				<hr>
+				</div><!-- /.medium-8 columns small-centered -->
+			</div><!-- /.row -->
+
+			<div class="row">
+				<div class="medium-8 columns small-centered">
+
+							<div class="row">
+								<div class="small-2 columns">
+									<%= render partial: "shared/svg/sku", locals: {nolabel: true}%>
+								</div>
+								<div class="small-10 columns">
+
+									<div class="preview-data">
+										<span class="preview-data-tile-title">Upcoming Products</span><br>
+
+											<% if @profile.products.where(current: false).length > 0 %>
+												<% @profile.products.where(current: false).each do |p| %>
+													<%= render partial: "shared/collections_view/products", locals: {
+														collitem: p
+													} %>
+												<% end %>
+											<% else %>
+											<br>
+												[No Upcoming Products]
+											<% end %>
+
+									</div>
+
+								</div>
+							</div>	
+				<hr>
+				</div><!-- /.medium-8 columns small-centered -->
+			</div><!-- /.row -->
+
+			<div class="row">
+				<div class="medium-8 columns small-centered">
+
+							<div class="row">
+								<div class="small-2 columns">
+									<%= render partial: "shared/svg/press", locals: {nolabel: true}%>
+								</div>
+								<div class="small-10 columns">
+
+									<div class="preview-data">
+										<span class="preview-data-tile-title">Press</span><br>
+
+											<% if @profile.press_hits.length > 0 %>
+												<% @profile.press_hits.each do |p| %>
+													<%= render partial: "shared/collections_view/press_hits", locals: {
+														collitem: p
+													} %>
+												<% end %>
+											<% else %>
+											<br>
+												[No Press Clips]
+											<% end %>
+
+									</div>
+
+								</div>
+							</div>	
+				<hr>
+				</div><!-- /.medium-8 columns small-centered -->
+			</div><!-- /.row -->
+
+
+			<div class="row">
+				<div class="medium-8 columns small-centered">
+
+							<div class="row">
+								<div class="small-2 columns">
+									<%= render partial: "shared/svg/tradeshow", locals: {nolabel: true}%>
+								</div>
+								<div class="small-10 columns">
+
+									<div class="preview-data">
+										<span class="preview-data-tile-title">Trade Shows</span><br>
+
+											<% if @profile.trade_shows.length > 0 %>
+												<% @profile.trade_shows.each do |p| %>
+													<%= render partial: "shared/collections_view/trade_shows", locals: {
+														collitem: p
+													} %>
+												<% end %>
+											<% else %>
+											<br>
+												[No Trade Shows]
+											<% end %>
+
+									</div>
+
+								</div>
+							</div>	
+				<hr>
+				</div><!-- /.medium-8 columns small-centered -->
+			</div><!-- /.row -->
+
+
+			<div class="row">
+				<div class="medium-8 columns small-centered">
+
+							<div class="row">
+								<div class="small-2 columns">
+									<%= render partial: "shared/svg/patent", locals: {nolabel: true}%>
+								</div>
+								<div class="small-10 columns">
+
+									<div class="preview-data">
+										<span class="preview-data-tile-title">Patents</span><br>
+
+											<% if @profile.patents.length > 0 %>
+												<% @profile.patents.each do |p| %>
+													<%= render partial: "shared/collections_view/patents", locals: {
+														collitem: p
+													} %>
+												<% end %>
+											<% else %>
+												[No Patents]
+											<% end %>
+
+									</div>
+
+								</div>
+							</div>	
+				<hr>
+				</div><!-- /.medium-8 columns small-centered -->		
+			</div><!-- /.row -->
+
+			<div class="row">
+				<div class="medium-8 columns small-centered">
+
+							<div class="row">
+								<div class="small-2 columns">
+									<%= render partial: "shared/svg/trademark", locals: {nolabel: true}%>
+								</div>
+								<div class="small-10 columns">
+
+									<div class="preview-data">
+										<span class="preview-data-tile-title">Trademarks</span><br>
+
+											<% if @profile.trademarks.length > 0 %>
+												<% @profile.trademarks.each do |p| %>
+													<%= render partial: "shared/collections_view/trademarks", locals: {
+														collitem: p
+													} %>
+												<% end %>
+											<% else %>
+											<br>
+												[No Trademarks]
+											<% end %>
+
+									</div>
+
+								</div>
+							</div>	
+				<hr>
+				</div><!-- /.medium-8 columns small-centered -->
+			</div><!-- /.row -->
+
+
+			<div class="row">
+				<div class="medium-8 columns small-centered">
+
+							<div class="row">
+								<div class="small-2 columns">
+									<%= render partial: "shared/svg/certification", locals: {nolabel: true}%>
+								</div>
+								<div class="small-10 columns">
+
+									<div class="preview-data">
+										<span class="preview-data-tile-title">Certifications / Regulatory Compliances</span><br>
+
+											<% if @profile.compliances.length > 0 %>
+												<% @profile.compliances.each do |p| %>
+													<%= render partial: "shared/collections_view/compliance", locals: {
+														collitem: p
+													} %>
+												<% end %>
+											<% else %>
+												<br>
+												[No Certifications / Regulatory Compliances]
+											<% end %>
+
+									</div>
+
+								</div>
+							</div>	
+
+				</div><!-- /.medium-8 columns small-centered -->		
+			</div><!-- /.row -->
+
+
+
+
+		</div> <!-- /.profile-outer-tile -->
+
+

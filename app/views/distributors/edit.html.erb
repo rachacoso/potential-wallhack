@@ -3,6 +3,16 @@
 <%= render partial: "shared/topbar" %>
 
 <div class="row">
+	<div class="medium-12 columns previewtile text-center">
+
+		<small><%= link_to 'PUBLIC Profile', distributor_public_profile_url, class: "itemformlink profilelink"%></small>
+		<small><%= link_to 'FULL Profile', distributor_full_profile_url, class: "itemformlink profilelink"%></small>
+		<small><%= link_to 'EDIT Profile', distributor_url, class: "itemformlink active profilelink"%></small><br>
+
+	</div>
+</div>
+
+<div class="row">
 	<div class="medium-12 medium-centered columns">
 
 <%#= render partial: "shared/headpanel" %>
@@ -21,7 +31,7 @@
 					<div class="medium-6 columns">
 						<div class="row">
 							<div class="medium-12 columns">
-								<%= f.text_area :name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name" %>
+								<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name" %>
 							</div>
 						</div>
 					</div>
@@ -147,7 +157,7 @@
 					</div>
 
 					<%= form_for @distributor, url: distributor_url do |f| %>
-					<%= f.hidden_field :name %>
+					<%= f.hidden_field :company_name %>
 					<div class="row">	
 						<div class="medium-10 medium-centered columns">		
 							<h3>Sectors</h3>

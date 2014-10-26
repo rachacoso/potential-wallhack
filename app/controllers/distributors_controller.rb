@@ -20,6 +20,14 @@ class DistributorsController < ApplicationController
 
 	end
 
+	def public_profile
+		@profile = @current_user.distributor
+	end
+
+	def full_profile
+		@profile = @current_user.distributor
+	end
+
 	def update
 
 		distributor = @current_user.distributor
@@ -116,7 +124,7 @@ class DistributorsController < ApplicationController
   private
   def distributor_parameters
     params.require(:distributor).permit(
-			:name,
+			:company_name,
 			:country_of_origin,
 			:website,
 			:company_size,

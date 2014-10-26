@@ -21,7 +21,7 @@
 					<small><%= link_to 'View PUBLIC Profile', dashboard_public_profile_url, class: "itemformlink profilelink"%></small>
 					<small><%= link_to 'Viewing FULL Profile', "#", class: "itemformlink active profilelink"%></small>
 					<small><%= link_to 'EDIT Distributor Profile', distributor_url, class: "itemformlink profilelink"%></small><br>
-					<div id="profile-name"><%= @profile.name %></div>
+					<div id="profile-name"><%= @profile.company_name %></div>
 					<div id="profile-year-established"><%= @profile.year_established.strftime("est. %Y") rescue nil %></div>
 					<div id="profile-website"><%= link_to @profile.website, "//#{@profile.website}" %></div>
 

@@ -1,0 +1,30 @@
+
+<%= render partial: "shared/topbar" %>
+
+<% content_for :javascript_foot do %>
+	<%= javascript_tag do %>
+
+	<% end %>
+<% end %>
+
+	<div class="row">
+
+		<div class="medium-9 columns previewtile medium-centered">
+
+			<div class="row">
+				<div class="small-12 columns text-center">
+
+					<small><%= link_to 'PUBLIC Profile', brand_public_profile_url, class: "itemformlink profilelink"%></small>
+					<small><%= link_to 'FULL Profile', "#", class: "itemformlink active profilelink"%></small>
+					<small><%= link_to 'EDIT Profile', brand_url, class: "itemformlink profilelink"%></small><br>
+
+				</div>
+			</div>
+
+			<%= render partial: "/shared/profile/brand_full_profile_tiles" %>
+
+
+
+		</div><!-- /.medium-9 columns previewtile medium-centered -->
+		
+	</div><!-- /.row -->

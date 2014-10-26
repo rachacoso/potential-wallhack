@@ -237,7 +237,7 @@ $accordion-navigation-active-bg-color: scale-color($accordion-navigation-bg-colo
 // $accordion-navigation-font-family: $body-font-family;
 
 $accordion-content-padding: 0.25em;
-$accordion-content-active-bg-color: scale-color($link-color, $lightness: 90%);
+$accordion-content-active-bg-color: white;
 
 // Alert Boxes
 
@@ -1193,16 +1193,16 @@ $tabs-navigation-font-size: rem-calc(12);
 // $topbar-bg-color: #333;
 // $topbar-bg: $topbar-bg-color;
 
-$topbar-bg-color: #E64417;
+$topbar-bg-color: #fff;
 $topbar-bg: $topbar-bg-color;
 
 // Height and margin
-// $topbar-height: 45px;
+$topbar-height: 55px;
 // $topbar-margin-bottom: 0;
 
 // Controlling the styles for the title in the top bar
 // $topbar-title-weight: $font-weight-normal;
-// $topbar-title-font-size: rem-calc(17);
+$topbar-title-font-size: rem-calc(25);
 
 // Style the top bar dropdown elements
 // $topbar-dropdown-bg: #333;
@@ -1210,11 +1210,11 @@ $topbar-bg: $topbar-bg-color;
 // $topbar-dropdown-link-bg: #333;
 // $topbar-dropdown-link-weight: $font-weight-normal;
 // $topbar-dropdown-toggle-size: 5px;
-// $topbar-dropdown-toggle-color: #fff;
+$topbar-dropdown-toggle-color: $link-color;
 // $topbar-dropdown-toggle-alpha: 0.4;
 
 // Set the link colors and styles for top-level nav
-// $topbar-link-color: #fff;
+$topbar-link-color: $link-color;
 // $topbar-link-color-hover: #fff;
 // $topbar-link-color-active: #fff;
 // $topbar-link-color-active-hover: #fff;
@@ -1243,8 +1243,8 @@ $topbar-bg: $topbar-bg-color;
 // $topbar-menu-link-transform: uppercase;
 // $topbar-menu-link-font-size: rem-calc(13);
 // $topbar-menu-link-weight: $font-weight-bold;
-// $topbar-menu-link-color: #fff;
-// $topbar-menu-icon-color: #fff;
+$topbar-menu-link-color: $link-color;
+$topbar-menu-icon-color: $link-color;
 // $topbar-menu-link-color-toggled: #888;
 // $topbar-menu-icon-color-toggled: #888;
 

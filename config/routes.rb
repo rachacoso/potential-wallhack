@@ -38,10 +38,14 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :edit, :update, :destroy, :index]
   
   get    '/distributors' => 'distributors#edit', as: 'distributor'
+  get    '/distributors/public_profile' => 'distributors#public_profile', as: 'distributor_public_profile'
+  get    '/distributors/full_profile' => 'distributors#full_profile', as: 'distributor_full_profile'
   patch  '/distributors' => 'distributors#update'
   patch  '/distributor_brands' => 'distributor_brands#update'
   
   get    '/brands' => 'brands#edit', as: 'brand'
+  get    '/brands/public_profile' => 'brands#public_profile', as: 'brand_public_profile'
+  get    '/brands/full_profile' => 'brands#full_profile', as: 'brand_full_profile'
   patch  '/brands' => 'brands#update'
 
   get '/onboard/distributor/one' => 'onboard_distributor#one', as: 'onboard_distributor_one'

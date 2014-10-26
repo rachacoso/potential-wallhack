@@ -1,6 +1,16 @@
 <%= render partial: "shared/topbar" %>
 
 <div class="row">
+	<div class="medium-12 columns previewtile text-center">
+
+		<small><%= link_to 'PUBLIC Profile', brand_public_profile_url, class: "itemformlink profilelink"%></small>
+		<small><%= link_to 'FULL Profile', brand_full_profile_url, class: "itemformlink profilelink"%></small>
+		<small><%= link_to 'EDIT Profile', brand_url, class: "itemformlink active profilelink"%></small><br>
+
+	</div>
+</div>
+
+<div class="row">
 	<div class="medium-12 medium-centered columns">
 
 		<%#= render partial: "shared/headpanel" %>

@@ -20,6 +20,7 @@
 //= require foundation/foundation.tab
 //= require foundation/foundation.accordion
 //= require foundation/foundation.equalizer
+//= require foundation/foundation.topbar
 
 
 

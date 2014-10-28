@@ -1,51 +1,42 @@
 <%= render partial: "shared/topbar" %>
 <%= render layout: "shared/panel" do %>
+
 	<div class="row">
 		<div class="medium-12 columns">
-			<h1>Sector and Channel Profile</h1>
-			<div class="row">
-				<div class="medium-10 medium-centered columns text-center">
-					<br>
-					<div class="onboard-instructions">Instructions here...</div>
-					<hr>
-				</div>
+			
+		<div class="row">
+			<div class="small-2 columns">
+				<%= render partial: "shared/svg/marketing", locals: {nolabel: true} %>
+			</div>
+			<div class="small-10 columns">
+				<h1>Brand Story</h1>
 			</div>
 		</div>
+
+		</div>
 	</div>
 
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<br>
+			<div class="onboard-instructions">
+<p>Tell us what makes your brand (and products) special and unique. </p>
+
+<p style="font-size: 0.7em;"><em>EXAMPLE: <br>O.R.G Skincare is dedicated to bringing the best traditions from Asia to the U.S. market and beyond. Our trend spotters, skincare experts, and makeup artists work with our product development team to identify leading beauty technology from Asia. We then tailor formulas for the global consumer. O.R.G’s simple but effective system is a preventative care line, designed for individuals who want beautiful skin at every age.</em></p>
+
+			</div>
+			<hr>
+		</div>
+	</div>
+
+	<div class="row">
 	<%= form_for @brand, url: brand_url do |f| %>
-	<%= hidden_field_tag :redirect, 'three_a' %>	
-	<div class="row">
-		<div class="medium-10 medium-centered columns">
-		<%= f.hidden_field :company_name %>		
-		<h3>Sectors</h3>
-			<% Sector.each do |sc| %>
-		    <div>
-		      <%= check_box_tag "sectors[#{sc.id}]", sc.id, (@brand.sectors.find(sc) rescue false) ? true : false %>
-		      <%= label_tag("sectors[#{sc.id}]", sc.name) %>
-		    </div>
-		  <% end %>
+	<%= hidden_field_tag :redirect, 'four' %>
+		<div class="medium-10 columns push-2">
+			<%= f.text_area :brand_positioning, rows: 4, label: "Brand Story", placeholder: 'Brand Story' %>
+			<%= f.submit 'Update and Continue', class: "tiny radius success button right" %>
 		</div>
-	</div>
-	<div class="row">
-		<div class="medium-10 medium-centered columns">						
-			<h3>Channels</h3>
-			<% Channel.each do |ch| %>
-		    <div>
-		    	<%= check_box_tag "channels[#{ch.id}]", ch.id, (@brand.channels.find(ch) rescue false) ? true : false  %>
-		      <%= label_tag("channels[#{ch.id}]", ch.name) %>
-		    </div>
-		  <% end %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-10 medium-centered columns">
-			<%= f.submit 'Select and Continue', class: "tiny radius success button right" %>
-		</div>
-	</div>
 	<% end %>
+	</div>
 
-	
-
-			
 <% end %>

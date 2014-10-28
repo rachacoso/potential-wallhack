@@ -3,12 +3,12 @@
 <%= render partial: "shared/topbar" %>
 
 <div class="row">
-	<div class="medium-12 columns previewtile text-center">
-
-		<small><%= link_to 'PUBLIC Profile', distributor_public_profile_url, class: "itemformlink profilelink"%></small>
-		<small><%= link_to 'FULL Profile', distributor_full_profile_url, class: "itemformlink profilelink"%></small>
-		<small><%= link_to 'EDIT Profile', distributor_url, class: "itemformlink active profilelink"%></small><br>
-
+	<div class="small-12 columns">
+		<dl class="sub-nav">
+		  <dd><%= link_to 'PUBLIC Profile', distributor_public_profile_url%></dd>
+		  <dd><%= link_to 'FULL Profile', distributor_full_profile_url %></dd>
+		  <dd class="active"><%= link_to 'EDIT Profile', "#" %></dd>
+		</dl>
 	</div>
 </div>
 

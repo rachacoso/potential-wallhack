@@ -76,6 +76,15 @@ class DistributorsController < ApplicationController
 			end
 		end
 
+		if params[:customchannels]
+
+			params[:customchannels].each do |k,v|
+				cname = v
+				cchannel = distributor.channel_capacities.find_or_create_by(custom_channel_name: cname, channel_id: 0)
+				cchannel.save
+			end
+
+		end
 
 		if distributor.save
 			# successful

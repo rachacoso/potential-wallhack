@@ -31,9 +31,9 @@
 	      <li class="has-dropdown">
 	        <a href="#">
 	        	<% if @current_user.distributor %>
-							<%= @current_user.distributor.company_name rescue @current_user.email %>
+							<%= @current_user.distributor.company_name.blank? ? "Welcome" : @current_user.distributor.company_name %>
 						<% else %>
-							<%= @current_user.brand.company_name rescue @current_user.email %>
+							<%= @current_user.brand.company_name.blank? ? "Welcome" : @current_user.brand.company_name %>
 						<% end %>
 	        </a>
 	        <ul class="dropdown">       	

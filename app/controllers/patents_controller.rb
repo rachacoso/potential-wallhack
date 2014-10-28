@@ -7,7 +7,7 @@ class PatentsController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_ten_url
+				redirect_to onboard_brand_eight_url
 			else
 				redirect_to brand_url
 			end		
@@ -22,7 +22,7 @@ class PatentsController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_ten_url
+				redirect_to onboard_brand_eight_url
 			else
 				redirect_to brand_url
 			end		
@@ -38,7 +38,7 @@ class PatentsController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_ten_url
+				redirect_to onboard_brand_eight_url
 			else
 				redirect_to brand_url
 			end		
@@ -52,7 +52,9 @@ class PatentsController < ApplicationController
     params.require(:patent).permit(
 			:product,
 			:patent_description,
-			:country
+			:country,
+			:date,
+			:status
 		)
 	end		
 

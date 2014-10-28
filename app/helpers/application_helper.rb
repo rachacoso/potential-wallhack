@@ -51,6 +51,15 @@ module ApplicationHelper
 
 	end
 
+	def check_brand_full_profile # check "completeness" of full profile
+
+		# NEED TO do
+
+		return 50
+
+	end
+
+
 
 	def check_distributor_public_profile # check "completeness" of public profile
 
@@ -77,6 +86,14 @@ module ApplicationHelper
 		percent_complete = list.to_f/complete.to_f * 100.0
 
 		return percent_complete.round
+
+	end
+
+	def check_distributor_full_profile # check "completeness" of full profile
+
+		# NEED TO do
+
+		return 50
 
 	end
 

@@ -4,6 +4,7 @@ class Channel
 
 
   field :name, type: String
+  field :description, type: String
 
   validates :name, presence: true, uniqueness: true
 

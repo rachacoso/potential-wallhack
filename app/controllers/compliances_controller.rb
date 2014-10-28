@@ -7,7 +7,7 @@ class CompliancesController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_twelve_url
+				redirect_to onboard_brand_eight_url
 			else
 				redirect_to brand_url
 			end
@@ -22,7 +22,7 @@ class CompliancesController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_twelve_url
+				redirect_to onboard_brand_eight_url
 			else
 				redirect_to brand_url
 			end
@@ -38,7 +38,7 @@ class CompliancesController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_twelve_url
+				redirect_to onboard_brand_eight_url
 			else
 				redirect_to brand_url
 			end
@@ -52,7 +52,9 @@ class CompliancesController < ApplicationController
     params.require(:compliance).permit(
 			:product_or_category,
 			:compliance_description,
-			:country
+			:country,
+			:date,
+			:status
 		)
 	end		
 

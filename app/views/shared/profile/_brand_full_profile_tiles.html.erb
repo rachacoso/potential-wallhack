@@ -1,156 +1,178 @@
 
 
-		<div class="profile-outer-tile">
+<div class="profile-outer-tile">
 
-			<div class="row">
-				<div class="small-12 columns">
-					<h1><strong><%= @profile.company_name %></strong></h1>
-					<h2><%= @profile.year_established.strftime("est. %Y") rescue nil %></h2>
-					<h3><strong><%= link_to @profile.website, "//#{@profile.website}" %></strong></h3>
-					<hr>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="medium-6 columns">
-
+	<div class="row">
+		<div class="small-12 columns">
+			<h1><strong><%= @profile.company_name %></strong></h1>
+			<!-- <h2><%= @profile.year_established.strftime("est. %Y") rescue nil %></h2> -->
+			<h3><strong><%= link_to @profile.website, "//#{@profile.website}" %></strong></h3>
+		</div>
+	</div>
+			
+			<ul class="small-block-grid-1 medium-block-grid-3">
+			<hr>
+				<li>
 					<div class="row">
-						<div class="small-2 columns">
-							<%= render partial: "shared/svg/calendar", locals: {nolabel: true} %>
+						<div class="small-3 columns">
+							<%= render partial: "shared/svg/globe", locals: {nolabel: true} %>
 						</div>
-						<div class="small-10 columns">
+						<div class="small-9 columns">
 							<div class="preview-data">
-								<span class="preview-data-tile-title">Year Established</span><br>
-								<strong><%= @profile.year_established.strftime("%Y") rescue nil %></strong>
+								<span class="preview-data-tile-title">Country of origin</span><br>
+								<strong><%= @profile.country_of_origin %></strong>
 							</div>
 						</div>
 					</div>
+				</li>
 
+				<li>
 					<div class="row">
-						<div class="small-2 columns">
+						<div class="small-3 columns">
 							<%= render partial: "shared/svg/employees", locals: {nolabel: true} %>
 						</div>
-						<div class="small-10 columns">
+						<div class="small-9 columns">
 							<div class="preview-data">
 								<span class="preview-data-tile-title">Company Size</span><br>
 								<strong><%= CompanySize.find(@profile.company_size).name %></strong>
 							</div>
 						</div>
 					</div>	
-					
-				</div>
+				</li>
 
-
-				<div class="medium-6 columns">
-
+				<li>
 					<div class="row">
-						<div class="small-2 columns">
-							<%= render partial: "shared/svg/globe", locals: {nolabel: true} %>
+						<div class="small-3 columns">
+							<%= render partial: "shared/svg/calendar", locals: {nolabel: true} %>
 						</div>
-						<div class="small-10 columns">
+						<div class="small-9 columns">
 							<div class="preview-data">
-								<span class="preview-data-tile-title">Country of origin</span><br>
-								<strong><%= @profile.country_of_origin %></strong>
+								<span class="preview-data-tile-title">Year Established</span><br>
+								<strong><%= @profile.year_established.strftime("%Y") rescue nil %></strong>
 							</div>
 						</div>
-					</div>			
+					</div>
+				</li>
+			<hr>
+			</ul>
+
+
+
+	<ul class="small-block-grid-1 medium-block-grid-2">
+
+		<li>
+
+			<div class="row">
+				<div class="small-2 columns">
+					<%= render partial: "shared/svg/globe", locals: {nolabel: true} %>
+				</div>
+				<div class="small-10 columns">
+
+					<div class="preview-data">
+						<span class="preview-data-tile-title">General Contact Information</span><br>
+						<ul class="vcard">
+						  <li class="fn"><%= @profile.contact_info.contact_name %>, <%= @profile.contact_info.contact_title %></li>
+						  <li class="street-address"><%= @profile.contact_info.address1 %></li>
+						  <li class="street-address"><%= @profile.contact_info.address2 %></li>
+						  <li class="locality"><%= @profile.contact_info.city %></li>
+						  <% unless @profile.contact_info.state.blank? && @profile.contact_info.postcode.blank? %>
+						  <li><span class="state"><%= @profile.contact_info.state %></span>, <span class="zip"><%= @profile.contact_info.postcode %></span></li>
+						  <% end %>
+						  <li class="country"><%= @profile.contact_info.country %></li>
+						  <li class="phone"><%= @profile.contact_info.phone %></li>
+						  <li class="email"><a href="mailto:<%= @profile.contact_info.email %>"><%= @profile.contact_info.email %></a></li>
+						</ul>
+					</div>
 
 				</div>
-			</div>
+			</div>	
+
+		</li>
+
+		<li>
+			<div class="row">
+				<div class="small-2 columns">
+					<%= render partial: "shared/svg/sector", locals: {nolabel: true} %>
+				</div>
+				<div class="small-10 columns">
+					<div class="preview-data">
+						<span class="preview-data-tile-title">Sectors</span><br>
+						<% @profile.sectors.each do |s| %>
+							<strong><%= s.name %></strong><br>
+						<% end %>
+					</div>
+				</div>
+			</div>	
+
+			<div class="row">
+				<div class="small-2 columns">
+					<%= render partial: "shared/svg/channel", locals: {nolabel: true}%>
+				</div>
+				<div class="small-10 columns">
+					<div class="preview-data">
+						<span class="preview-data-tile-title">Channels</span><br>
+						<% @profile.channels.each do |ch| %>
+							<strong><%= ch.name %></strong><br>
+						<% end %>
+						<% if @profile.channel_capacities.where(channel_id: 0).length > 0 %>
+							<% @profile.channel_capacities.where(channel_id: 0).each do |cch| %>
+								<strong><%= cch.custom_channel_name %> *</strong><br>
+							<% end %>
+							<small>(* Custom Channels)</small>
+						<% end %>
+					</div>
+				</div>
+			</div>	
+		</li>
+
+
+	</ul>
+
+
+	<ul class="small-block-grid-1 medium-block-grid-2">
+
+		<li>
+			<div class="row">
+				<div class="small-2 columns">
+					<%= render partial: "shared/svg/shipping", locals: {nolabel: true} %>
+				</div>
+				<div class="small-10 columns">
+					<div class="preview-data">
+						<span class="preview-data-tile-title">Countries of Export</span><br>
+						<strong>
+							<% @profile.export_countries.each do |ec| %>
+								<%= ec.country %><br>
+							<% end %>
+						</strong>
+					</div>
+				</div>
+			</div>				
+
+		</li>
+
+		<li>
+			<div class="row">
+				<div class="small-2 columns">
+					<%= render partial: "shared/svg/factory", locals: {nolabel: true} %>
+				</div>
+				<div class="small-10 columns">
+					<div class="preview-data">
+						<span class="preview-data-tile-title">Countries of Manufacture</span><br>
+						<strong>
+							<% @profile.products.distinct(:country_of_manufacture).each do |country| %>
+								<%= country %><br>
+							<% end %>
+						</strong>
+					</div>
+				</div>
+			</div>	
+		</li>
+
+	</ul>
 
 
 			<div class="row">
-				<div class="medium-6 columns">
-
-					<div class="row">
-						<div class="small-2 columns">
-							<%= render partial: "shared/svg/factory", locals: {nolabel: true} %>
-						</div>
-						<div class="small-10 columns">
-							<div class="preview-data">
-								<span class="preview-data-tile-title">Countries of Manufacture</span><br>
-								<strong>
-									<% @profile.products.distinct(:country_of_manufacture).each do |country| %>
-										<%= country %><br>
-									<% end %>
-								</strong>
-							</div>
-						</div>
-					</div>			
-					
-				</div>
-
-
-				<div class="medium-6 columns">
-
-					<div class="row">
-						<div class="small-2 columns">
-							<%= render partial: "shared/svg/shipping", locals: {nolabel: true} %>
-						</div>
-						<div class="small-10 columns">
-							<div class="preview-data">
-								<span class="preview-data-tile-title">Countries of Export</span><br>
-								<strong>
-									<% @profile.export_countries.each do |ec| %>
-										<%= ec.country %><br>
-									<% end %>
-								</strong>
-							</div>
-						</div>
-					</div>		
-
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="medium-6 columns">
-
-					<div class="row">
-						<div class="small-2 columns">
-							<%= render partial: "shared/svg/sector", locals: {nolabel: true} %>
-						</div>
-						<div class="small-10 columns">
-							<div class="preview-data">
-								<span class="preview-data-tile-title">Sectors</span><br>
-								<% @profile.sectors.each do |s| %>
-									<strong><%= s.name %></strong><br>
-								<% end %>
-							</div>
-						</div>
-					</div>			
-					
-				</div>
-
-
-				<div class="medium-6 columns">
-
-
-					<div class="row">
-						<div class="small-2 columns">
-							<%= render partial: "shared/svg/channel", locals: {nolabel: true}%>
-						</div>
-						<div class="small-10 columns">
-							<div class="preview-data">
-								<span class="preview-data-tile-title">Channels</span><br>
-								<% @profile.channels.each do |ch| %>
-									<strong><%= ch.name %></strong><br>
-								<% end %>
-								<% if @profile.channel_capacities.where(channel_id: 0).length > 0 %>
-									<% @profile.channel_capacities.where(channel_id: 0).each do |cch| %>
-										<strong><%= cch.custom_channel_name %> *</strong><br>
-									<% end %>
-									<small>(* Custom Channels)</small>
-								<% end %>
-							</div>
-						</div>
-					</div>					
-
-
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="medium-8 columns small-centered">
+				<div class="medium-10 columns small-centered">
 
 							<div class="row">
 								<div class="small-2 columns">
@@ -177,11 +199,11 @@
 								</div>
 							</div>	
 				<hr>
-				</div><!-- /.medium-8 columns small-centered -->
+				</div><!-- /.medium-10 columns small-centered -->
 			</div><!-- /.row -->
 
 			<div class="row">
-				<div class="medium-8 columns small-centered">
+				<div class="medium-10 columns small-centered">
 
 							<div class="row">
 								<div class="small-2 columns">
@@ -208,11 +230,11 @@
 								</div>
 							</div>	
 				<hr>
-				</div><!-- /.medium-8 columns small-centered -->
+				</div><!-- /.medium-10 columns small-centered -->
 			</div><!-- /.row -->
 
 			<div class="row">
-				<div class="medium-8 columns small-centered">
+				<div class="medium-10 columns small-centered">
 
 							<div class="row">
 								<div class="small-2 columns">
@@ -239,12 +261,12 @@
 								</div>
 							</div>	
 				<hr>
-				</div><!-- /.medium-8 columns small-centered -->
+				</div><!-- /.medium-10 columns small-centered -->
 			</div><!-- /.row -->
 
 
 			<div class="row">
-				<div class="medium-8 columns small-centered">
+				<div class="medium-10 columns small-centered">
 
 							<div class="row">
 								<div class="small-2 columns">
@@ -271,12 +293,12 @@
 								</div>
 							</div>	
 				<hr>
-				</div><!-- /.medium-8 columns small-centered -->
+				</div><!-- /.medium-10 columns small-centered -->
 			</div><!-- /.row -->
 
 
 			<div class="row">
-				<div class="medium-8 columns small-centered">
+				<div class="medium-10 columns small-centered">
 
 							<div class="row">
 								<div class="small-2 columns">
@@ -302,11 +324,11 @@
 								</div>
 							</div>	
 				<hr>
-				</div><!-- /.medium-8 columns small-centered -->		
+				</div><!-- /.medium-10 columns small-centered -->		
 			</div><!-- /.row -->
 
 			<div class="row">
-				<div class="medium-8 columns small-centered">
+				<div class="medium-10 columns small-centered">
 
 							<div class="row">
 								<div class="small-2 columns">
@@ -333,12 +355,12 @@
 								</div>
 							</div>	
 				<hr>
-				</div><!-- /.medium-8 columns small-centered -->
+				</div><!-- /.medium-10 columns small-centered -->
 			</div><!-- /.row -->
 
 
 			<div class="row">
-				<div class="medium-8 columns small-centered">
+				<div class="medium-10 columns small-centered">
 
 							<div class="row">
 								<div class="small-2 columns">
@@ -351,7 +373,7 @@
 
 											<% if @profile.compliances.length > 0 %>
 												<% @profile.compliances.each do |p| %>
-													<%= render partial: "shared/collections_view/compliance", locals: {
+													<%= render partial: "shared/collections_view/compliances", locals: {
 														collitem: p
 													} %>
 												<% end %>
@@ -365,7 +387,7 @@
 								</div>
 							</div>	
 
-				</div><!-- /.medium-8 columns small-centered -->		
+				</div><!-- /.medium-10 columns small-centered -->		
 			</div><!-- /.row -->
 
 

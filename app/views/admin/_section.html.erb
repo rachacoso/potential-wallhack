@@ -10,6 +10,17 @@
 			<tr>
 			<%= form_for s do |f| %>
 			<td><%= f.text_field :name, label: false %></td>
+
+			<% if profile_section.model_name.human == "Channel" %>
+				<td>&nbsp;</td><td>&nbsp;</td>
+				</tr>
+				<tr><td colspan="3">
+				<%= f.text_area :description, rows: 2, placeholder: "Description", label: false %>
+				</td></tr>
+				<tr>
+				<td>&nbsp;</td>
+			<% end %>
+
 			<td><%= link_to 'update', "#", :onclick => "$('#edit_#{dom_id(s)}').submit()".html_safe, class: "itemformlink" %></td>
 			<td><%= link_to 'delete', s, :method => :delete, data: { :confirm => "Are you sure you want to delete #{s.name}?"}, class: "itemformlink" %></td>
 			</tr>
@@ -25,16 +36,32 @@
   			</div>
 			</td></tr>
 		<% end %>
+		<tr>
+			<td colspan="3">
+				<hr>
+			</td>
+		</tr>
 		<%= form_for new_profile_section do |f| %>
 		<tr>
 			<td>
 				<%= f.text_field :name, :placeholder => "Name", label: false %>
 			</td>
-			<td>
-				<%= f.submit "ADD", class: "text-submit" %>
-			</td>
+
+			<% if profile_section.model_name.human == "Channel" %>
+				<td>&nbsp;</td><td>&nbsp;</td>
+				</tr>
+				<tr><td colspan="3">
+				<%= f.text_area :description, rows: 2, placeholder: "Description", label: false %>
+				</td></tr>
+				<tr>
+				<td>&nbsp;</td>
+			<% end %>
+
 			<td>
 				
+			</td>
+			<td>
+				<%= f.submit "ADD", class: "text-submit" %>
 			</td>
 		</tr>
 		<% end %>

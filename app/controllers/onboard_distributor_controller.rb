@@ -22,23 +22,7 @@ class OnboardDistributorController < ApplicationController
 
   end
 
-  def three_a
-
-    @distributor = @current_user.distributor
-    @sectors = @distributor.sectors rescue nil
-    @channels = @distributor.channels rescue nil
-    @new_channel_capacity = ChannelCapacity.new
-
-  end
-
   def four
-
-    @distributor = @current_user.distributor
-    @channel_capacities = @distributor.channel_capacities
-
-  end
-
-  def five
 
     @distributor = @current_user.distributor
 
@@ -48,14 +32,7 @@ class OnboardDistributorController < ApplicationController
 
   end
 
-  def six
-
-    @distributor = @current_user.distributor
-
-
-  end
-
-  def seven
+  def five
 
     @distributor = @current_user.distributor
 
@@ -64,11 +41,6 @@ class OnboardDistributorController < ApplicationController
 
   end
 
-  def eight
-
-    @distributor = @current_user.distributor
-
-  end
 
   private
   def check_usertype(type)

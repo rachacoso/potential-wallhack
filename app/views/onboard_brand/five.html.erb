@@ -3,43 +3,63 @@
 
 	<div class="row">
 		<div class="medium-12 columns">
-			<h1>Product Portfolio</h1>
+			<div class="row">
+				<div class="small-2 columns">
+					<%= render partial: "shared/svg/press", locals: {nolabel: true} %>
+				</div>
+				<div class="small-10 columns">
+					<h1>Press Hits</h1>
+				</div>
+			</div>
 		</div>
 	</div>
+
 	<div class="row">
-		<div class="medium-12 medium-centered columns text-center">
-			<br>
-			<div class="onboard-instructions">Instructions here...</div>
-			<hr>
+		<div class="medium-10 columns push-2">
+			<div class="onboard-instructions smaller">Share some of your fabulous press coverage with potential international partners. </div>
 		</div>
 	</div>
-	
+
 	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "Current SKU List",
-		coll: @current_products,
-		identifier: "name",
-		no_item_message: "No Current Products",
-		coll_new_item: @new_product,
-		coll_new_item_text: "Add a Current Product",
-		iscurrent: "true"
+		headertitle: "",
+		coll: @press_hits,
+		identifier: "source",
+		no_item_message: "No Press Hits",
+		coll_new_item: @new_press_hit,
+		coll_new_item_text: "Add a Press Hit",
+		# iscurrent: false
 	} %>
-	
+
+<br><br>
+
 	<div class="row">
-		<div class="medium-6 medium-centered columns text-center">
-			<hr>
+		<div class="medium-12 columns">
+			<div class="row">
+				<div class="small-2 columns">
+					<%= render partial: "shared/svg/tradeshow", locals: {nolabel: true} %>
+				</div>
+				<div class="small-10 columns">
+					<h1>Trade Shows</h1>
+				</div>
+			</div>
 		</div>
 	</div>
-	
+
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<div class="onboard-instructions smaller">Tell us what tradeshows you attended and/or exhibit your brand(s).</div>
+		</div>
+	</div>
+						
 	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "Upcoming SKU List",
-		coll: @upcoming_products,
+		headertitle: "",
+		coll: @trade_shows,
 		identifier: "name",
-		no_item_message: "No Upcoming Products",
-		coll_new_item: @new_product,
-		coll_new_item_text: "Add an Upcoming Product",
-		iscurrent: "false"
-	} %>
-	
+		no_item_message: "No Trade Shows",
+		coll_new_item: @new_trade_show,
+		coll_new_item_text: "Add a Trade Show",
+		# iscurrent: false
+	} %>	
 
 <%= button_to "Next", onboard_brand_six_url, method: :get, class: "tiny radius success button right" %>
 

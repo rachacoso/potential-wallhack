@@ -8,7 +8,7 @@ class ExportCountriesController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_six_url
+				redirect_to onboard_brand_seven_url
 			else
 				redirect_to brand_url
 			end		
@@ -23,7 +23,7 @@ class ExportCountriesController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_six_url
+				redirect_to onboard_brand_seven_url
 			else
 				redirect_to brand_url
 			end		
@@ -39,7 +39,7 @@ class ExportCountriesController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_six_url
+				redirect_to onboard_brand_seven_url
 			else
 				redirect_to brand_url
 			end		

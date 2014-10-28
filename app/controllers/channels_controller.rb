@@ -4,6 +4,7 @@ class ChannelsController < ApplicationController
 
 		newchannel = Channel.new
 		newchannel.name = params[:channel][:name]
+		newchannel.description = params[:channel][:description]
 
 		if newchannel.valid?
 			newchannel.save!
@@ -25,6 +26,7 @@ class ChannelsController < ApplicationController
 
 		c = Channel.find(params[:id])
 		c.name = params[:channel][:name]
+		c.description = params[:channel][:description]
 		c.save
 		redirect_to admin_url
 

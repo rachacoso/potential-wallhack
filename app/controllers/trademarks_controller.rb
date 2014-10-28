@@ -7,7 +7,7 @@ class TrademarksController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_eleven_url
+				redirect_to onboard_brand_eight_url
 			else
 				redirect_to brand_url
 			end		
@@ -22,7 +22,7 @@ class TrademarksController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_eleven_url
+				redirect_to onboard_brand_eight_url
 			else
 				redirect_to brand_url
 			end
@@ -38,7 +38,7 @@ class TrademarksController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_eleven_url
+				redirect_to onboard_brand_eight_url
 			else
 				redirect_to brand_url
 			end
@@ -52,7 +52,9 @@ class TrademarksController < ApplicationController
     params.require(:trademark).permit(
 			:product,
 			:trademark_description,
-			:country
+			:country,
+			:date,
+			:status
 		)
 	end		
 

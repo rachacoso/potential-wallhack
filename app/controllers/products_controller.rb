@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
 		brand.products.create!(product_parameters)
 
 		if params[:ob] 
-			redirect_to onboard_brand_five_url
+			redirect_to onboard_brand_four_url
 		else
 			redirect_to brand_url
 		end		
@@ -19,7 +19,7 @@ class ProductsController < ApplicationController
 		brand.products.find(params[:id]).update!(product_parameters)
 
 		if params[:ob] 
-			redirect_to onboard_brand_five_url
+			redirect_to onboard_brand_four_url
 		else
 			redirect_to brand_url
 		end		
@@ -32,7 +32,7 @@ class ProductsController < ApplicationController
 		db.destroy
 
 		if params[:ob] 
-			redirect_to onboard_brand_five_url
+			redirect_to onboard_brand_four_url
 		else
 			redirect_to brand_url
 		end		

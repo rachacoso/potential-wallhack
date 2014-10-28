@@ -1,23 +1,24 @@
-<% cb ||= nil %>
 <div class="row">
-	<div class="medium-4 columns">
+	<div class="medium-12 columns">
 		<%= f.text_field :source, label: "Source", placeholder: 'Source' %>
 	</div>
-	<div class="medium-5 columns">
+</div>
+<div class="row">
+	<div class="medium-8 columns">
 
-								<div class="row collapse">
-									<%= label_tag(:link, "Link") %>
-									<div class="small-2 columns">
-										<span class="prefix">http://</span>
-									</div>
-									<div class="small-10 columns">
-										<%= f.text_field :link, label: false %>
-									</div>
-								</div>
+		<div class="row collapse">
+			<%= label_tag(:link, "Link") %>
+			<div class="small-2 columns">
+				<span class="prefix">http://</span>
+			</div>
+			<div class="small-10 columns">
+				<%= f.text_field :link, label: false %>
+			</div>
+		</div>
 
 	</div>
-	<div class="medium-3 columns">
-		<% if cb && cb.date %>
+	<div class="medium-4 columns">
+		<% if defined?(cb) && cb.date %>
 			<%= f.text_field :date, label: "Date", value: cb.date.strftime("%d/%m/%Y"), placeholder: 'Date' , class: "datepick_full" %>
 		<% else %>
 			<%= f.text_field :date, label: "Date", placeholder: 'Date' , class: "datepick_full" %>

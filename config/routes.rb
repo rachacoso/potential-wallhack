@@ -7,8 +7,6 @@ Rails.application.routes.draw do
   get   '/logout' => 'session#destroy', as: 'logout'
 
   get   '/dashboard' => 'home#dashboard', as: 'dashboard'
-  get   '/dashboard/full_profile' => 'home#dashboard_full_profile', as: 'dashboard_full_profile'
-  get   '/dashboard/public_profile' => 'home#dashboard_public_profile', as: 'dashboard_public_profile'
 
   get   '/admin' => 'admin#index', as: 'admin'
 
@@ -51,7 +49,6 @@ Rails.application.routes.draw do
   get '/onboard/distributor/one' => 'onboard_distributor#one', as: 'onboard_distributor_one'
   get '/onboard/distributor/two' => 'onboard_distributor#two', as: 'onboard_distributor_two'
   get '/onboard/distributor/three' => 'onboard_distributor#three', as: 'onboard_distributor_three'
-  get '/onboard/distributor/three_a' => 'onboard_distributor#three_a', as: 'onboard_distributor_three_a'
   get '/onboard/distributor/four' => 'onboard_distributor#four', as: 'onboard_distributor_four'
   get '/onboard/distributor/five' => 'onboard_distributor#five', as: 'onboard_distributor_five'
   get '/onboard/distributor/six' => 'onboard_distributor#six', as: 'onboard_distributor_six'
@@ -61,16 +58,11 @@ Rails.application.routes.draw do
   get '/onboard/brand/one' => 'onboard_brand#one', as: 'onboard_brand_one'
   get '/onboard/brand/two' => 'onboard_brand#two', as: 'onboard_brand_two'
   get '/onboard/brand/three' => 'onboard_brand#three', as: 'onboard_brand_three'
-  get '/onboard/brand/three_a' => 'onboard_brand#three_a', as: 'onboard_brand_three_a'
   get '/onboard/brand/four' => 'onboard_brand#four', as: 'onboard_brand_four'
   get '/onboard/brand/five' => 'onboard_brand#five', as: 'onboard_brand_five'
   get '/onboard/brand/six' => 'onboard_brand#six', as: 'onboard_brand_six'
   get '/onboard/brand/seven' => 'onboard_brand#seven', as: 'onboard_brand_seven'
   get '/onboard/brand/eight' => 'onboard_brand#eight', as: 'onboard_brand_eight'
-  get '/onboard/brand/nine' => 'onboard_brand#nine', as: 'onboard_brand_nine'
-  get '/onboard/brand/ten' => 'onboard_brand#ten', as: 'onboard_brand_ten'
-  get '/onboard/brand/eleven' => 'onboard_brand#eleven', as: 'onboard_brand_eleven'
-  get '/onboard/brand/twelve' => 'onboard_brand#twelve', as: 'onboard_brand_twelve'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

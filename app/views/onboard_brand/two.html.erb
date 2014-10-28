@@ -2,117 +2,90 @@
 <%= render layout: "shared/panel" do %>
 
 	<div class="row">
-		<div class="medium-12 columns">
-			<h1>General Information</h1>
+		<div class="small-2 columns">
+			<%= render partial: "shared/svg/sector", locals: {nolabel: true} %>
+		</div>
+		<div class="small-10 columns">
+			<h1>Sectors</h1>
 		</div>
 	</div>
+
 	<div class="row">
-		<div class="medium-12 medium-centered columns text-center">
-			<br>
-			<div class="onboard-instructions">Instructions here...</div>
-			<hr>
+		<div class="medium-10 columns push-2">
+			<div class="onboard-instructions smaller">Tell us what category of products your company sells. <br><br>For example, if you manufacture hats, you would be in the Fashion/Accessories sector.  If you manufacture baby toys, you’d be in the Baby/Kids sector. <br><br>If you don’t see a good fit, please select “Other.”</div>
 		</div>
-	</div>
-	
+	</div>	
+<br>
 	<%= form_for @brand, url: brand_url do |f| %>
-	<%= hidden_field_tag :redirect, 'three' %>
+	<%= hidden_field_tag :redirect, 'three' %>	
 	<div class="row">
-		<div class="medium-6 columns">
-			<h3>Company Info</h3>
+		<div class="medium-10 columns push-2">
+		<%= f.hidden_field :company_name %>		
+      <input id="selectallsectors" name="selectallsectors" type="checkbox" />
+      <label for="selectallsectors" style="color: black; border: 0; background: transparent;">Select All</label>			
+			<% Sector.each do |sc| %>
+		      <%= check_box_tag "sectors[#{sc.id}]", sc.id, (@brand.sectors.find(sc) rescue false) ? true : false, class: "sectors" %>
+		      <%= label_tag("sectors[#{sc.id}]", sc.name) %>
+		  <% end %>
+			<input id="sectors_other" name="sectors[other]" type="checkbox" value="other"/>
+      <label for="sectors_other">Other</label>
+
+		  <hr>
 		</div>
-	</div>				
+
+	</div>
+
+
 	<div class="row">
-		<div class="medium-6 columns">
-			<%= f.text_field :country_of_origin, class: "country-autocomplete", placeholder: 'Country of origin' %>
+		<div class="small-2 columns">
+			<%= render partial: "shared/svg/channel", locals: {nolabel: true} %>
 		</div>
-		<div class="medium-6 columns">				
-			<%= label_tag(:year_established, "Year established") %>
-			<%= select_tag :year_established, options_for_select(1970..Time.now.year, @brand.year_established ? @brand.year_established.strftime("%Y") : '') %>
+		<div class="small-10 columns">
+			<h1>Channels</h1>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<div class="onboard-instructions smaller">Under Channels, you can share what types of retail channels you sell your products. You can select as many as are applicable. If you don’t see a channel listed, please feel free to add a channel</div>
+		</div>
+	</div>	
+<br>
+	<div class="row">
+		<div class="medium-10 columns push-2">						
+      <input id="selectallchannels" name="selectallsectors" type="checkbox" style="font-color: black;"/>
+      <label for="selectallchannels" style="color: black; border: 0; background: transparent;">Select All</label>			
+			<% Channel.each do |ch| %>
+		    	<%= check_box_tag "channels[#{ch.id}]", ch.id, (@brand.channels.find(ch) rescue false) ? true : false, class: "channels"  %>
+		      <%#= label_tag("channels[#{ch.id}]", ch.name) %>
+		      <%= label_tag "channels[#{ch.id}]" do %>
+		      	<%= ch.name %><br>
+						<%= simple_format(ch.description, {style: "font-size: 0.75em; margin-left: 2em;"}, wrapper_tag: "div") %>
+		      <% end %>
+		  <% end %>
 		</div>
 	</div>
 	<div class="row">
-		<div class="medium-6 columns">
-			<div class="row collapse">
-				<%= label_tag(:website, "Website") %>
-				<div class="small-3 columns">
-					<span class="prefix">http://</span>
-				</div>
-				<div class="small-9 columns">
-					<%= f.text_field :website, label: false %>
-				</div>
+		<div class="medium-10 columns push-2">
+			<br>		  
+		  <h3><strong>(Add Custom Channels)</strong></h3>
+		  <div id="customchannellist">
+		  	
 			</div>
-		</div>
-		<div class="medium-6 columns">
-			<%= label_tag(:company_size, "Company Size") %>
-			<%= f.collection_select(:company_size, CompanySize.all, :id, :name) %>
-		</div>
-	</div>
-
-<hr>
-
-	<%= f.fields_for :contact_info do |ff| %>
-	<div class="row">
-		<div class="medium-6 columns">
-			<h3>Company Contact Info</h3>
+			<br>
+			<input type="text" id="ccName" placeholder="Custom Channel Name" />
+			<input type="button" value="Add a Custom Channel" id="btnSave" />
+		  <hr>
 		</div>
 	</div>
 	<div class="row">
-		<div class="medium-6 columns">
-			<%= ff.text_field :contact_name %>
-		</div>
-		<div class="medium-6 columns">
-			<%= ff.text_field :contact_title %>
-		</div>						
-	</div>
-	<div class="row">
-		<div class="medium-6 columns">
-			<%= ff.text_field :email %>
-		</div>
-		<div class="medium-6 columns">
-			<%= ff.text_field :phone %>
-		</div>
-	</div>
-
-<hr>
-
-	<div class="row">
-		<div class="medium-6 columns">
-			<h3>Company Address</h3>
-		</div>
-	</div>						
-	<div class="row">
-		<div class="medium-12 columns">
-			<%= ff.text_field :address1, label: "Address" %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-12 columns">
-			<%= ff.text_field :address2, label: "Address (cont'd)" %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-4 columns">
-			<%= ff.text_field :city %>
-		</div>
-		<div class="medium-4 columns">
-			<%= ff.text_field :state %>
-		</div>
-		<div class="medium-4 columns">
-			<%= ff.text_field :postcode %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-6 columns">
-			<%= ff.text_field :country, class: "country-autocomplete", placeholder: 'Country' %>
-		</div>
-	</div>
-	<% end %>
-	<hr>
-	<div class="row">
-		<div class="medium-12 columns text-right">
-	<%= button_to "Back", onboard_brand_one_url, method: :get, class: "tiny radius success button" %> <%= f.submit 'Update and Continue', class: "tiny radius success button"  %>
+		<div class="medium-10 columns push-2">
+			<%= f.submit 'Select and Continue', class: "tiny radius success button right" %>
 		</div>
 	</div>
 	<% end %>
 
+
+			
 <% end %>
+

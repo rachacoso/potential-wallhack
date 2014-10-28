@@ -13,6 +13,21 @@
 @import "foundation/functions";
 @import "global_variables";
 
+@mixin transparent($color, $alpha) {
+  $rgba: rgba($color, $alpha);
+  // $rgb: rgb($color);
+  $ie-hex-str: ie-hex-str($rgba);
+  /* Fallback for web browsers that doesn't support RGBa */
+  // background: $rgb;
+  background: $color;
+  /* RGBa with opacity */
+  background: $rgba;
+  /* For IE 5.5 - 7*/
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+  /* For IE 8*/
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str}, endColorstr=#{$ie-hex-str})";
+}
+
 // $experimental: true;
 
 // The default font-size is set to 100% of the browser style sheet (usually 16px)
@@ -188,7 +203,7 @@ $hr-border-color: scale-color($body-font-color, $lightness: -14%);
 // $definition-list-margin-bottom: rem-calc(12);
 
 // We use these to style blockquotes
-// $blockquote-font-color: scale-color($header-font-color, $lightness: 35%);
+$blockquote-font-color: $header-font-color;
 // $blockquote-padding: rem-calc(9 20 0 19);
 // $blockquote-border: 1px solid #ddd;
 // $blockquote-cite-font-size: rem-calc(13);
@@ -811,7 +826,7 @@ $input-include-glowing-effect: false;
 
 // We use these to control the background and border styles
 // $panel-bg: scale-color(#fff, $lightness: -5%);
-$panel-bg: #FFFEF7;
+$panel-bg: white;
 $panel-border-style: dotted;
 // $panel-border-size: 1px;
 $panel-border-size: 1px;
@@ -823,7 +838,7 @@ $panel-border-size: 1px;
 // We use these to set default inner padding and bottom margin
 // $panel-margin-bottom: rem-calc(20);
 // $panel-padding: rem-calc(20);
-$panel-padding: rem-calc(25);
+$panel-padding: rem-calc(15);
 
 // We use these to set default font colors
 // $panel-font-color: #333;
@@ -1021,10 +1036,11 @@ $progress-meter-success-color: green;
 // $sub-nav-font-family: $body-font-family;
 // $sub-nav-font-size: rem-calc(14);
 // $sub-nav-font-color: #999;
+$sub-nav-font-color: $link-color;
 // $sub-nav-font-weight: $font-weight-normal;
 // $sub-nav-text-decoration: none;
 // $sub-nav-padding: rem-calc(3 16);
-// $sub-nav-border-radius: 3px;
+$sub-nav-border-radius: 0px 0px 8px 3px;
 // $sub-nav-font-color-hover: scale-color($sub-nav-font-color, $lightness: -25%);
 
 

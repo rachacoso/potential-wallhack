@@ -19,38 +19,39 @@
 
 
 	<div class="row">
-		<div class="medium-9 medium-centered columns">
-			<div class="ldpanel">
+
+		<div class="medium-3 columns">
+
+
+			<div class="ldpanel info-sidebar">
 				<div class="row">
-					<div class="medium-11 medium-centered columns">
-						<br>
-						<div class="onboard-instructions">
-							This is your Public Profile.  [Stuff here about public profiles]
-						</div>
+					<div class="small-12 columns">
+
+						<p>
+							This is your Public Profile.<br>  [Stuff here about public profiles]
+						</p>
 
 							<div class="row">
 								<div class="small-12 columns text-center">
 
 									<% percent = check_brand_public_profile %>
 
-									<div class="progress small-12 medium-8 <%= percent == 100 ? "success" : "" %>" style="margin: auto;">
+									<div class="progress small-12 <%= percent == 100 ? "success" : "" %>" style="margin: auto;">
 									  <span class="meter" style="width: <%= percent %>%"></span>
 									</div>
 
-									Your Public Profile is <%= percent == 100 ? "" : "#{percent}%" %> Complete!
+									<small>Your Public Profile is <%= percent == 100 ? "" : "#{percent}%" %> Complete!</small>
 								</div>
 							</div>
 
 					</div>
 				</div>
 			</div>
+
+
 		</div>
-	</div>
 
-
-	<div class="row">
-
-		<div class="medium-9 columns previewtile small-centered">
+		<div class="medium-9 columns previewtile">
 			
 
 			<%= render partial: "/shared/profile/brand_public_profile_tiles" %>

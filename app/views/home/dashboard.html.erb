@@ -24,28 +24,26 @@
 				<h4><strong>Profile Center</strong></h4>
 				<hr>
 				<% percentp = check_distributor_public_profile %>
-				Your <strong>Public Profile</strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> Complete!<br><br>
+				Your <strong><%= link_to 'Public Profile', distributor_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> Complete!<br><br>
 				<div class="progress small-12 <%= percentp == 100 ? "success" : "" %>">
 				  <span class="meter text-center" style="width: <%= percentp %>%"><small class="text-right"></small></span>
 				</div>
-				<br><small>[some info on your public profile]</small>
-				<br><small><%= link_to '[View your public profile]', distributor_public_profile_url %></small>
-
+				<small>[some info on your public profile]</small>
+			
 				<hr>
 
 				<% percentf = check_distributor_full_profile %>
-				Your <strong>Full Profile</strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> Complete!<br><br>
+				Your <strong><%= link_to 'Full Profile', distributor_full_profile_url %></strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> Complete!<br><br>
 				<div class="progress small-12 <%= percentf == 100 ? "success" : "" %>">
 				  <span class="meter" style="width: <%= percentf %>%"></span>
 				</div>
-				<br><small>[some info on your full profile]</small>
-				<br><small><%= link_to '[View your full profile]', distributor_full_profile_url %></small>
+				<small>[some info on your full profile]</small>
 			</div>
 
 			<div class="panel">
 				<h4><strong>Message Center</strong></h4>
 				<hr>
-				<br><small>You have <strong>3</strong> unread messages</small>
+				<small>You have <strong>3</strong> unread messages</small>
 			</div>
 
 		</div>
@@ -64,7 +62,7 @@
 			<div class="panel">
 				<p>[ Interesting Reads here? ]</p>
 			</div>
-
+ 
 
 		</div>
 	</div>
@@ -81,22 +79,19 @@
 				<h4><strong>Profile Center</strong></h4>
 				<hr>
 				<% percentp = check_brand_public_profile %>
-				Your <strong>Public Profile</strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> Complete!<br><br>
+				Your <strong><%= link_to 'Public Profile', brand_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> Complete!<br><br>
 				<div class="progress small-12 <%= percentp == 100 ? "success" : "" %>">
 				  <span class="meter text-center" style="width: <%= percentp %>%"><small class="text-right"></small></span>
 				</div>
-				<br><small>[some info on your public profile]</small>
-				<br><small><%= link_to '[View your public profile]', brand_public_profile_url %></small>
-
+				<small>[some info on your public profile]</small>
 				<hr>
 
 				<% percentf = check_brand_full_profile %>
-				Your <strong>Full Profile</strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> Complete!<br><br>
+				Your <strong><%= link_to 'Full Profile', brand_full_profile_url %></strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> Complete!<br><br>
 				<div class="progress small-12 <%= percentf == 100 ? "success" : "" %>">
 				  <span class="meter" style="width: <%= percentf %>%"></span>
 				</div>
-				<br><small>[some info on your full profile]</small>
-				<br><small><%= link_to '[View your full profile]', brand_full_profile_url %></small>
+				<small>[some info on your full profile]</small>
 			</div>
 
 			<div class="panel">

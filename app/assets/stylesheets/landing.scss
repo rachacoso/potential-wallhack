@@ -589,48 +589,48 @@ $onboard-nav-radius: 4px;
 
 // profile-icons
 
-.tabs dd > a {
-  border: 1px solid $body-font-color;
-  background-color: white;
-}
+// .tabs dd > a {
+//   border: 1px solid $body-font-color;
+//   background-color: white;
+// }
 
-.tabs dd > a:hover {
+// .tabs dd > a:hover {
 
-  .factory,
-  .employees,
-  .globe,
-  .globeinner,
-  .shipping,
-  .channel,
-  .sector,
-  .sku,
-  .press,
-  .tradeshow,
-  .patent,
-  .trademark,
-  .certification,
-  .marketing,
-  .sales,
-  .brand-portfolio,
-  .calendar {
-      transition: 0.2s;
-      // border: 1px solid $link-color;
-      fill: $link-color;
-      #globeoutline,
-      #shippingglobeoutline,
-      #factoryoutline {
-        stroke: scale-color($link-color, $lightness: 20%);
-      }
-      background-color: white;
-  }
-  .profile-icon-label {
-    border: 1px solid $link-color;
-    background-color: $link-color;
-    color: white;
-    font-weight: bold;
-  }
+//   .factory,
+//   .employees,
+//   .globe,
+//   .globeinner,
+//   .shipping,
+//   .channel,
+//   .sector,
+//   .sku,
+//   .press,
+//   .tradeshow,
+//   .patent,
+//   .trademark,
+//   .certification,
+//   .marketing,
+//   .sales,
+//   .brand-portfolio,
+//   .calendar {
+//       transition: 0.2s;
+//       // border: 1px solid $link-color;
+//       fill: $link-color;
+//       #globeoutline,
+//       #shippingglobeoutline,
+//       #factoryoutline {
+//         stroke: scale-color($link-color, $lightness: 20%);
+//       }
+//       background-color: white;
+//   }
+//   .profile-icon-label {
+//     border: 1px solid $link-color;
+//     background-color: $link-color;
+//     color: white;
+//     font-weight: bold;
+//   }
 
-}
+// }
 
 .factory,
 .employees,
@@ -679,6 +679,12 @@ $onboard-nav-radius: 4px;
   }
 }
 
+// SVG Wrapper
+.svgwrapper {
+  max-width: 6em;
+  min-width: 3.8em;
+  // border: 1px dotted scale-color($body-font-color, $lightness: 20%);
+}
 
 
 // TABS STYLING
@@ -734,5 +740,15 @@ dl.tabs {
 .sub-nav dt a, .sub-nav dd a, .sub-nav li a {
   background-color: white;
   border-radius: 0px 0px 8px 3px;
+}
+
+
+// Dashboard Styles
+
+// dashboard panels inside a foundation panel
+.dashboard-innerpanel {
+  border: 1px dotted red;
+  padding: 1em;
+  margin: 1em;
 }
 

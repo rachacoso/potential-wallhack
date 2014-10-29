@@ -841,7 +841,7 @@ $panel-border-size: 1px;
 $panel-padding: rem-calc(15);
 
 // We use these to set default font colors
-// $panel-font-color: #333;
+$panel-font-color: $body-font-color;
 // $panel-font-color-alt: #fff;
 
 // $panel-header-adjust: true;
@@ -904,7 +904,7 @@ $panel-padding: rem-calc(15);
 // $include-html-media-classes: $include-html-classes;
 
 // We use this to set the progress bar height
-// $progress-bar-height: rem-calc(25);
+$progress-bar-height: rem-calc(30);
 $progress-bar-color: #ddd  ;
 
 // We use these to control the border styles
@@ -914,7 +914,7 @@ $progress-bar-color: #ddd  ;
 // $progress-bar-border-radius: $global-radius;
 
 // We use these to control the margin & padding
-// $progress-bar-pad: rem-calc(2);
+$progress-bar-pad: rem-calc(3);
 // $progress-bar-margin-bottom: rem-calc(10);
 
 // We use these to set the meter colors

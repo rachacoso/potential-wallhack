@@ -17,72 +17,111 @@
 
 	<% if @current_user.distributor %>
 
-	<div class="row" data-equalizer>
+	<div class="row">
 		<div class="medium-4 columns">
 
-				<div class="row">
-					<div class="small-12 columns" data-equalizer-watch>
-						<div class="panel">
-							<% percent = check_distributor_public_profile %>
-							Your Public Profile is <br><br>
-							<div class="progress small-12 medium-8 <%= percent == 100 ? "success" : "" %>">
-							  <span class="meter" style="width: <%= percent %>%"></span>
-							</div>
-							<%= percent %>% Complete!
-							<br><small>[some info on your public profile]</small>
-						</div>
-						<div class="panel">
-							<% percent = check_distributor_public_profile %>
-							Your Full Profile is <br>
-							<div class="progress small-12 medium-8 <%= percent == 100 ? "success" : "" %>">
-							  <span class="meter" style="width: <%= percent %>%"></span>
-							</div>
-							<%= percent %>% Complete!
-							<br><small>[some info on your full profile]</small>
-						</div>
-
-					</div>
+			<div class="panel">
+				<h4><strong>Profile Center</strong></h4>
+				<hr>
+				<% percentp = check_distributor_public_profile %>
+				Your <strong>Public Profile</strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> Complete!<br><br>
+				<div class="progress small-12 <%= percentp == 100 ? "success" : "" %>">
+				  <span class="meter text-center" style="width: <%= percentp %>%"><small class="text-right"></small></span>
 				</div>
+				<br><small>[some info on your public profile]</small>
+				<br><small><%= link_to '[View your public profile]', distributor_public_profile_url %></small>
+
+				<hr>
+
+				<% percentf = check_distributor_full_profile %>
+				Your <strong>Full Profile</strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> Complete!<br><br>
+				<div class="progress small-12 <%= percentf == 100 ? "success" : "" %>">
+				  <span class="meter" style="width: <%= percentf %>%"></span>
+				</div>
+				<br><small>[some info on your full profile]</small>
+				<br><small><%= link_to '[View your full profile]', distributor_full_profile_url %></small>
+			</div>
+
+			<div class="panel">
+				<h4><strong>Message Center</strong></h4>
+				<hr>
+				<br><small>You have <strong>3</strong> unread messages</small>
+			</div>
 
 		</div>
-		<div class="medium-8 columns panel" data-equalizer-watch>
+
+
+		<div class="medium-8 columns">
+			
+			<div class="panel">
+				<p>[ Here's some sort of congratualtions text, the text of which depends on how much of their profile has been filled out... <br><br>i.e. if it is full and complete, put some info/links for them to start a search / get matched ....<br> otherwise there should be text about how and what they should fill out before getting matched, etc...]</p>
+			</div>
+			
+			<div class="panel">
+				<p>[Rotating Info on different market trends here??]</p>
+			</div>
+
+			<div class="panel">
+				<p>[ Interesting Reads here? ]</p>
+			</div>
+
 
 		</div>
 	</div>
+
 
 	<% end %>
 
 	<% if @current_user.brand %>
 
-	<div class="row" data-equalizer>
+	<div class="row">
 		<div class="medium-4 columns">
 
-				<div class="row">
-					<div class="small-12 columns" data-equalizer-watch>
-						<div class="panel">
-							<% percent = check_brand_public_profile %>
-							Your Public Profile is <br><br>
-							<div class="progress small-12 medium-8 <%= percent == 100 ? "success" : "" %>">
-							  <span class="meter" style="width: <%= percent %>%"></span>
-							</div>
-							<%= percent %>% Complete!
-							<br><small>[some info on your public profile]</small>
-						</div>
-						<div class="panel">
-							<% percent = check_brand_public_profile %>
-							Your Full Profile is <br>
-							<div class="progress small-12 medium-8 <%= percent == 100 ? "success" : "" %>">
-							  <span class="meter" style="width: <%= percent %>%"></span>
-							</div>
-							<%= percent %>% Complete!
-							<br><small>[some info on your full profile]</small>
-						</div>
-
-					</div>
+			<div class="panel">
+				<h4><strong>Profile Center</strong></h4>
+				<hr>
+				<% percentp = check_brand_public_profile %>
+				Your <strong>Public Profile</strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> Complete!<br><br>
+				<div class="progress small-12 <%= percentp == 100 ? "success" : "" %>">
+				  <span class="meter text-center" style="width: <%= percentp %>%"><small class="text-right"></small></span>
 				</div>
+				<br><small>[some info on your public profile]</small>
+				<br><small><%= link_to '[View your public profile]', brand_public_profile_url %></small>
 
+				<hr>
+
+				<% percentf = check_brand_full_profile %>
+				Your <strong>Full Profile</strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> Complete!<br><br>
+				<div class="progress small-12 <%= percentf == 100 ? "success" : "" %>">
+				  <span class="meter" style="width: <%= percentf %>%"></span>
+				</div>
+				<br><small>[some info on your full profile]</small>
+				<br><small><%= link_to '[View your full profile]', brand_full_profile_url %></small>
+			</div>
+
+			<div class="panel">
+				<h4><strong>Message Center</strong></h4>
+				<hr>
+				<small>You have <strong>3</strong> unread messages</small>
+			</div>
+
+	
 		</div>
-		<div class="medium-8 columns panel" data-equalizer-watch>
+
+
+		<div class="medium-8 columns">
+			
+			<div class="panel">
+				<p>[ Here's some sort of description/next steps text, the text of which depends on how much of their profile has been filled out... <br><br>i.e. if profiles are full and complete, put some info/links for them to start a search / get matched .<br> otherwise there should be text about how/what/why they should fill out before getting matched, etc... info on how to use the market research, etc.]</p>
+			</div>
+			
+			<div class="panel">
+				<p>[Rotating Info on different market trends here??]</p>
+			</div>
+
+			<div class="panel">
+				<p>[ Interesting Reads here? ]</p>
+			</div>
 
 		</div>
 	</div>

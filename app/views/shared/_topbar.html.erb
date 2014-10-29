@@ -27,7 +27,7 @@
 	
 	    <!-- Right Nav Section -->
 	    <ul class="right">
-	      <% if @current_user %>
+	      <% if @current_user && show_top_menu %>
 	      <li class="has-dropdown">
 	        <a href="#">
 	        	<% if @current_user.distributor %>

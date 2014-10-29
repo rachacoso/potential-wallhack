@@ -20,10 +20,21 @@
 
 			<%= render layout: "shared/panel_fulledit" do %>
 				<div class="row">
-					<div class="medium-12 columns">
-						<h1>General Information</h1>
+					<div class="medium-1 small-2 columns">
+						<%= render partial: "shared/svg/globe", locals: {nolabel: true} %>
+					</div>
+					<div class="medium-11 small-10 columns">
+						<h1>Company Info</h1>
 					</div>
 				</div>
+
+				<div class="row">
+					<div class="medium-12 columns">
+						<hr>
+						<h3>General Info</h3>
+					</div>
+				</div>
+
 				<%= form_for @brand, url: brand_url do |f| %>
 				<div class="row">
 					<div class="medium-6 columns">
@@ -132,7 +143,7 @@
 
 				<% end %>
 				<hr>
-				<%= f.submit 'Update', class: "tiny radius success button right"  %>
+				<%= f.submit 'Update Company Info', class: "tiny radius success button right"  %>
 
 				<% end %>
 
@@ -145,50 +156,77 @@
 			<div class="medium-6 columns">
 
 				<%= render layout: "shared/panel_fulledit", locals: {de: 'data-equalizer-watch'} do %>
-					<div class="row">
-						<div class="medium-12 columns">
-							<h1>Sector and Channel Profile</h1>
-						</div>
-					</div>
 
 					<%= form_for @brand, url: brand_url do |f| %>
 					<%= f.hidden_field :company_name %>
+
+					<div class="row">
+						<div class="small-2 columns">
+							<%= render partial: "shared/svg/sector", locals: {nolabel: true} %>
+						</div>
+						<div class="small-10 columns">
+							<h1>Sectors</h1>
+						</div>
+					</div>
+
 					<div class="row">	
-						<div class="medium-10 medium-centered columns">		
-							<h3>Sectors</h3>
+						<div class="medium-10 push-2 columns">		
 							<% Sector.each do |sc| %>
 								<%= check_box_tag "sectors[#{sc.id}]", sc.id, (@brand.sectors.find(sc) rescue false) ? true : false %>
 								<%= label_tag("sectors[#{sc.id}]", sc.name) %>
 						  <% end %>
 						</div>
 					</div>
+
 					<div class="row">
-						<div class="medium-10 medium-centered columns">						
-							<h3>Channels</h3>
+						<div class="medium-10 push-2 columns">
+							<%= f.submit 'Update Sectors', class: "tiny radius success button right" %>
+						</div>
+					</div>
+					<% end %>
+
+					<%= form_for @brand, url: brand_url do |f| %>
+					<%= f.hidden_field :company_name %>
+
+					<div class="row">
+						<div class="small-2 columns">
+							<%= render partial: "shared/svg/channel", locals: {nolabel: true} %>
+						</div>
+						<div class="small-10 columns">
+							<h1>Channels</h1>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="medium-10 push-2 columns">
+						<h3>Standard Channels</h3>					
 							<% Channel.each do |ch| %>
 								<%= check_box_tag "channels[#{ch.id}]", ch.id, (@brand.channels.find(ch) rescue false) ? true : false  %>
-								<%= label_tag("channels[#{ch.id}]", ch.name) %>
+								<%= label_tag "channels[#{ch.id}]" do %>
+									<%= ch.name %><br>
+									<%= simple_format(ch.description, {style: "font-size: 0.75em; margin-left: 2em;"}, wrapper_tag: "div") %>
+								<% end %>								
 						  <% end %>
 						</div>
 					</div>
 
 					<div class="row">
-						<div class="medium-10 medium-centered columns">
-							<%= f.submit 'Update', class: "tiny radius success button right" %>
+						<div class="medium-10 push-2 columns">
+							<%= f.submit 'Update Standard Channels', class: "tiny radius success button right" %>
 						</div>
 					</div>
 					<% end %>
 
 					<% if @brand.channel_capacities.where(channel_id: 0).first %>
 						<div class="row">
-							<div class="medium-10 medium-centered columns">
+							<div class="medium-10 push-2 columns">
 								<h3>Custom Channels</h3>
 							</div>
 						</div>
 					<% end %>
 					<% @brand.channel_capacities.where(channel_id: 0).each do |cc| %>
 						<div class="row">
-							<div class="medium-10 medium-centered columns">
+							<div class="medium-10 push-2 columns">
 								<div class="row">
 									<div class="medium-12 columns">
 										<div class="customchanneldisplay">
@@ -201,7 +239,7 @@
 					<% end %>
 
 				<div class="row">
-					<div class="medium-10 medium-centered columns">
+					<div class="medium-10 push-2 columns">
 						<div class="groupwrapper">
 
 								<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" } do |f| %>
@@ -237,22 +275,23 @@
 				<%= render layout: "shared/panel_fulledit", locals: {de: 'data-equalizer-watch'} do %>
 
 				<div class="row">
-					<div class="medium-12 columns">
-						<h1>Channel Capacities <small>(optional)</small></h1>
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/channel", locals: {nolabel: true} %>
+					</div>
+					<div class="small-10 columns">
+						<h1>Channel Capacities</h1>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="medium-12 medium-centered columns">
 						
-
-
 							<div class="row">
 								<div class="medium-6 columns text-right">
-									<h4 class="columnheader">Channel</h4>
+									<h4><strong>Channel</strong></h4>
 								</div>
 								<div class="medium-6 columns">
-									<h4 class="columnheader">Capacity</h4>
+									<h4><strong>Capacity</strong></h4>
 								</div>
 							</div>	
 
@@ -284,10 +323,10 @@
 								<% if @brand.channel_capacities.where(channel_id: 0).first %>
 									<div class="row">
 										<div class="medium-6 columns text-right">
-											<h4 class="columnheader">Custom Channel</h4>
+											<h4><strong>Custom Channel</strong></h4>
 										</div>
 										<div class="medium-6 columns">
-											<h4 class="columnheader">Capacity</h4>
+											<h4><strong>Capacity</strong></h4>
 										</div>
 									</div>
 								<% end %>
@@ -306,7 +345,7 @@
 									<div class="row">
 										<div class="medium-12 columns">
 											<hr>
-											<%= submit_tag('Update', class: "tiny radius success button right") %>
+											<%= submit_tag('Update Channel Capacities', class: "tiny radius success button right") %>
 										</div>
 									</div>
 
@@ -329,11 +368,14 @@
 
 
 
-					<div class="row">
-						<div class="medium-12 columns">
-							<h1>Countries of Export</h1>
-						</div>
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/shipping", locals: {nolabel: true} %>
 					</div>
+					<div class="small-10 columns">
+						<h1>Countries of Export</h1>
+					</div>
+				</div>
 
 
 					<div class="row">
@@ -419,17 +461,20 @@
 
 				<%= render layout: "shared/panel_fulledit", locals: {de: 'data-equalizer-watch'} do %>
 
-					<div class="row">
-						<div class="medium-12 columns">
-							<h1>Marketing Activities</h1>
-						</div>
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/marketing", locals: {nolabel: true} %>
 					</div>
+					<div class="small-10 columns">
+						<h1>Marketing Activities</h1>
+					</div>
+				</div>
 
 					<div class="row clearfix">
 					<%= form_for @brand, url: brand_url do |f| %>
 						<div class="medium-12 columns">
 							<%= f.text_area :brand_positioning, rows: 10, label: "Brand Positioning", placeholder: 'Brand Positioning' %>
-							<%= f.submit 'Update', class: "tiny radius success button right" %>
+							<%= f.submit 'Update Marketing Activities', class: "tiny radius success button right" %>
 						</div>
 					<% end %>
 					</div>
@@ -445,11 +490,14 @@
 
 				<%= render layout: "shared/panel_fulledit" do %>
 
-					<div class="row">
-						<div class="medium-12 columns">
-							<h1>Product Portfolio</h1>
-						</div>
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/sku", locals: {nolabel: true} %>
 					</div>
+					<div class="small-10 columns">
+						<h1>Product Portfolio</h1>
+					</div>
+				</div>
 
 					<%= render partial: "shared/editcollblock", locals: { 
 						headertitle: "Current SKU List",
@@ -484,11 +532,14 @@
 
 				<%= render layout: "shared/panel_fulledit" do %>
 
-					<div class="row">
-						<div class="medium-12 columns">
-							<h1>Press Hits</h1>
-						</div>
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/press", locals: {nolabel: true} %>
 					</div>
+					<div class="small-10 columns">
+						<h1>Press Hits</h1>
+					</div>
+				</div>
 					
 					<%= render partial: "shared/editcollblock", locals: { 
 						headertitle: "",
@@ -505,11 +556,14 @@
 
 				<%= render layout: "shared/panel_fulledit" do %>
 
-					<div class="row">
-						<div class="medium-12 columns">
-							<h1>Trade Shows</h1>
-						</div>
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/tradeshow", locals: {nolabel: true} %>
 					</div>
+					<div class="small-10 columns">
+						<h1>Trade Shows</h1>
+					</div>
+				</div>
 										
 
 					<%= render partial: "shared/editcollblock", locals: { 
@@ -528,11 +582,14 @@
 				<%= render layout: "shared/panel_fulledit" do %>
 
 
-					<div class="row">
-						<div class="medium-12 columns">
-							<h1>Patents</h1>
-						</div>
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/patent", locals: {nolabel: true} %>
 					</div>
+					<div class="small-10 columns">
+						<h1>Patents</h1>
+					</div>
+				</div>
 
 					<%= render partial: "shared/editcollblock", locals: { 
 						headertitle: "",
@@ -549,11 +606,14 @@
 
 				<%= render layout: "shared/panel_fulledit" do %>
 
-					<div class="row">
-						<div class="medium-12 columns">
-							<h1>Trademarks</h1>
-						</div>
+				<div class="row">
+					<div class="small-2 columns">
+						<%= render partial: "shared/svg/trademark", locals: {nolabel: true} %>
 					</div>
+					<div class="small-10 columns">
+						<h1>Trademarks</h1>
+					</div>
+				</div>
 
 					<%= render partial: "shared/editcollblock", locals: { 
 						headertitle: "",
@@ -570,10 +630,14 @@
 				<%= render layout: "shared/panel_fulledit" do %>
 
 					<div class="row">
-						<div class="medium-12 columns">
+						<div class="small-2 columns">
+							<%= render partial: "shared/svg/certification", locals: {nolabel: true} %>
+						</div>
+						<div class="small-10 columns">
 							<h1>Certifications / Regulatory Compliance</h1>
 						</div>
 					</div>
+
 
 					<%= render partial: "shared/editcollblock", locals: { 
 						headertitle: "",

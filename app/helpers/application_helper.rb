@@ -97,4 +97,12 @@ module ApplicationHelper
 
 	end
 
+	def show_top_menu # check if should show the top menu (i.e. don't show if in onboard controller)
+		if controller_name == "onboard_brand" || controller_name == "onboard_distributor"
+			return false
+		else 
+			return true
+		end
+	end
+
 end

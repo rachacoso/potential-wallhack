@@ -12,12 +12,12 @@ class ApplicationController < ActionController::Base
       if !session[:expires_at] #reset if no expire set
        session.destroy
        @current_user = nil
-       flash[:notice] = "Your session has timed out. <br> Please log in again to continue."
+       flash[:notice] = "Your session has timed out. Please log in again to continue."
        redirect_to root_url # halts request cycle
       elsif session[:expires_at] < Time.current
        session.destroy
        @current_user = nil
-       flash[:notice] = "Your session has timed out. <br> Please log in again to continue."
+       flash[:notice] = "Your session has timed out. Please log in again to continue."
        redirect_to root_url # halts request cycle
       elsif User.find(session[:user_id])
     		@current_user = User.find(session[:user_id])

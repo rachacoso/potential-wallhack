@@ -33,6 +33,7 @@
 //= require foundation-datepicker
 //= require jquery.autocomplete
 //= require countries
+//= require dropzone
 
 //= require_tree .
 

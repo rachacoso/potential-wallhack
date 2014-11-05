@@ -15,6 +15,7 @@
  *= require foundation_and_overrides
  *= require colorbox
  *= require foundation-datepicker
+ *= require dropzone
 
  
  */

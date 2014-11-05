@@ -1,5 +1,7 @@
+<%= render partial: "shared/topbar" %>
+
 <div class="row">
-	<div class="small-4 columns">
+	<div class="small-5 columns panel">
 		<h2>Edit<br><strong>User - <%=@user.email%></strong></h2>
 		<% if flash[:notice] %>
 				<div data-alert class="alert-box alert round">
@@ -12,31 +14,27 @@
 
 <div class="row">
 	
-		<div class="small-5 columns">
+		<div class="small-5 columns panel">
 			<h4>Change<br><strong>email</strong></h4>
-			<div class="backpanel">
 				<%= form_for @user, url: user_path(@user) do |f| %>
 					<%= hidden_field_tag 'update_type', 'email' %>
 					<%= f.text_field :email %>
 					<%= f.submit 'Change email', class: "tiny radius success button" %> <%= link_to 'Cancel', users_path, class: "tiny radius info button"  %>
 				<% end %>
-			</div>
 		</div>
 		
 </div>
 
 <div class="row">
 	
-		<div class="small-5 columns">
+		<div class="small-5 columns panel">
 			<h4>Change<br><strong>password</strong></h4>
-			<div class="backpanel">
 				<%= form_for @user, url: user_path(@user) do |f| %>
 					<%= hidden_field_tag 'update_type', 'password' %>
 					<%= f.password_field :new_password %>
 					<%= f.password_field :new_password_confirmation %>
 					<%= f.submit 'Change password', class: "tiny radius success button" %> <%= link_to 'Cancel', users_path, class: "tiny radius info button"  %>
-				<% end %>			
-			</div>
+				<% end %>
 		</div>
 
 </div>

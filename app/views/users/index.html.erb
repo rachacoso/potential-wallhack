@@ -1,11 +1,13 @@
-
+<%= render partial: "shared/topbar" %>
 
 
 <div class="row">
-	<div class="small-10 small-centered columns">
-		<h2>All<br><strong>Users</strong></h2>
-		<div class="AdminSectionSpacer"></div>
-
+	<div class="small-10 small-centered columns panel">
+		<h2>All <strong>Users</strong></h2>
+	</div>
+</div>
+<div class="row">
+	<div class="small-10 small-centered columns panel">
 		<% if flash[:notice] %>
 
 				<div data-alert class="alert-box success round">
@@ -18,4 +20,5 @@
 
 	</div>
 </div>
+<br>
 

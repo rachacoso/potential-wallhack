@@ -82,10 +82,11 @@ body {
   color: $info-color;
 }
 
-.wrapper {
+.bodywrapper {
   min-height: 100%;
   // background-color: #fff;
-  padding-bottom: 10em;
+  padding: 1em 0em 3em 0em;
+
 }
 
 
@@ -686,6 +687,8 @@ $onboard-nav-radius: 4px;
 .svgwrapper {
   max-width: 6em;
   min-width: 3.8em;
+  max-height: 6em;
+  min-height: 3.8em;
   // border: 1px dotted scale-color($body-font-color, $lightness: 20%);
 }
 
@@ -755,3 +758,10 @@ dl.tabs {
   margin: 1em;
 }
 
+// Partial Spacer 
+
+.listspacer {
+  border-top: 1px solid $body-font-color;
+  margin: 1em;
+
+}

@@ -105,4 +105,15 @@ module ApplicationHelper
 		end
 	end
 
+	#check to see if the collection includes pictures (so can render appropriate forms inputs)
+	def has_picture_list(collection)
+		list = [	'product',
+							'distributor_brand'	]
+		if list.include?(collection.class.name.tableize.singularize)
+			return true
+		else
+			return false
+		end
+	end
+
 end

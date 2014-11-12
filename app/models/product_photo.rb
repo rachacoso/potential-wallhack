@@ -13,6 +13,6 @@ class ProductPhoto
 	  }
 	validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 	
-	belongs_to :product
+	belongs_to :photographable, polymorphic: true
 	
 end

@@ -27,7 +27,10 @@ Rails.application.routes.draw do
   resources :trademarks, only: [:create, :update, :destroy]
   resources :compliances, only: [:create, :update, :destroy]
   resources :export_countries, only: [:create, :update, :destroy]
-  resources :product_photos, only: [:create, :destroy]
+
+
+  resources :product_photos, only: [:create]
+  delete '/product_photos/:id' => 'product_photos#destroy', as: 'product_photo_delete'
 
   # Deprecated
   # resources :sales_sizes, only: [:create, :update, :destroy]

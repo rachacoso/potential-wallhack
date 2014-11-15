@@ -7,7 +7,7 @@ class PressHitsController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_eight_url
+				redirect_to onboard_brand_five_url
 			else
 				redirect_to brand_url
 			end		
@@ -22,7 +22,24 @@ class PressHitsController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_eight_url
+				redirect_to onboard_brand_five_url
+			else
+				redirect_to brand_url
+			end	
+		end
+
+	end
+
+	def file_destroy
+		u = @current_user.distributor || @current_user.brand
+		ph = u.press_hits.find(params[:id])
+		ph.file = nil
+		ph.save!
+		if @current_user.distributor
+			redirect_to distributor_url
+		else
+			if params[:ob] 
+				redirect_to onboard_brand_five_url
 			else
 				redirect_to brand_url
 			end	
@@ -38,7 +55,7 @@ class PressHitsController < ApplicationController
 			redirect_to distributor_url
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_eight_url
+				redirect_to onboard_brand_five_url
 			else
 				redirect_to brand_url
 			end	
@@ -53,7 +70,8 @@ class PressHitsController < ApplicationController
 			:source,
 			:date,
 			:quotes,
-			:link
+			:link,
+			:file
 		)
 	end		
 

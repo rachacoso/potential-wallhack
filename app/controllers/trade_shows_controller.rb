@@ -11,7 +11,7 @@ class TradeShowsController < ApplicationController
 			end
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_nine_url
+				redirect_to onboard_brand_five_url
 			else
 				redirect_to brand_url
 			end
@@ -30,7 +30,7 @@ class TradeShowsController < ApplicationController
 			end
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_nine_url
+				redirect_to onboard_brand_five_url
 			else
 				redirect_to brand_url
 			end
@@ -50,7 +50,7 @@ class TradeShowsController < ApplicationController
 			end
 		else
 			if params[:ob] 
-				redirect_to onboard_brand_nine_url
+				redirect_to onboard_brand_five_url
 			else
 				redirect_to brand_url
 			end

@@ -113,6 +113,9 @@ body {
     margin: 0.5em 1em;
   }
 }
+.updateform {
+  padding: 0em 1em;
+}
 
 a.itemformlink {
   @include formlinkstyle
@@ -362,7 +365,7 @@ input[type=checkbox] {
   display:none; 
   margin:10px;
 }
- 
+
 /*
   Change the look'n'feel of labels (which are adjacent to radiobuttons).
   Add some margin, padding to label

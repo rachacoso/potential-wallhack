@@ -21,6 +21,8 @@ class Brand
   
   has_many :brand_photos, dependent: :destroy
 
+  has_many :library_documents, as: :documentable, dependent: :destroy
+
 	# Current/Future SKUs
 	has_many :products, dependent: :destroy
 

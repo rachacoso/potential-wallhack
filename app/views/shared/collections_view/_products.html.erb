@@ -4,6 +4,11 @@
 	<dl class="accordion" data-accordion>
 	  <dd class="accordion-navigation">
 	    <a href="#a_<%= collitem.id %>"><strong style="color: #5f5f5f;"><%= collitem.name.empty? ? "( No Name )" : collitem.name  %></strong>
+	   	<% if collitem.product_photos %>
+				<% collitem.product_photos.each do |photo| %>
+					<%= image_tag photo.photo.url(:small), :width => '25', :height => '25' %>
+				<% end %>
+			<% end %>
 	    <span class="right" style="color: #aaa;"><small>(more)</small></span></a>
 	    <div id="a_<%= collitem.id %>" class="content">
 
@@ -28,7 +33,15 @@
 		<%= simple_format(collitem.key_benefits) %>
 	</div>				
 </div>
-
+<div class="row">					
+	<div class="small-12 columns">
+		<% if collitem.product_photos %>
+			<% collitem.product_photos.each do |photo| %>
+				<%= image_tag photo.photo.url(:small) %>
+			<% end %>
+		<% end %>
+	</div>
+</div>
 
 			</div>
 		</dd>

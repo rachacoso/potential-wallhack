@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :distributor_brands, only: [:create, :update, :destroy]
   resources :trade_shows, only: [:create, :update, :destroy]
   resources :press_hits, only: [:create, :update, :destroy]
+  delete '/press_hits/file_delete/:id' => 'press_hits#file_destroy', as: 'press_hits_file_delete'
   resources :products, only: [:create, :update, :destroy]
   resources :patents, only: [:create, :update, :destroy]
   resources :trademarks, only: [:create, :update, :destroy]
@@ -31,6 +32,10 @@ Rails.application.routes.draw do
 
   resources :product_photos, only: [:create]
   delete '/product_photos/:id' => 'product_photos#destroy', as: 'product_photo_delete'
+
+  resources :library_documents, only: [:create, :index]
+  delete '/library_documents/:id' => 'library_documents#destroy', as: 'library_document_delete'
+
 
   # Deprecated
   # resources :sales_sizes, only: [:create, :update, :destroy]

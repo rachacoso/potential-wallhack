@@ -4,17 +4,26 @@
 		<div class="row">
 			<div class="medium-12 columns">
 				
-				<%= (controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? (hidden_field_tag :ob, "true") : "" %>
+				
 				<dl class="accordion" data-accordion>
 				  <dd class="accordion-navigation">
 				    <a href="#a_<%= cb.id %>"><%= cb.send(identifier).empty? ? "( No Name )" : cb.send(identifier)  %>
+			    	<% if has_picture_list(cb) %>
+					   	<% if cb.product_photos %>
+								<% cb.product_photos.each do |photo| %>
+									<%= image_tag photo.photo.url(:small), :width => '25', :height => '25' %>
+								<% end %>
+							<% end %>
+						<% end %>
 						<%= cb.class.name == "PressHit" ? cb.date.strftime("// %B %d %Y") : "" rescue nil %>
 				    <span class="right" style="color: #aaa;">(click to edit)</span></a>
 				    <div id="a_<%= cb.id %>" class="content">
 
 							<%= form_for cb do |f| %>
-							<%= render partial: "shared/collections/#{cb.class.name.tableize}", locals: {f: f, cb: cb} %>
-
+							<%= (controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? (hidden_field_tag :ob, "true") : "" %>
+							<div class="updateform">
+								<%= render partial: "shared/collections/#{cb.class.name.tableize}", locals: {f: f, cb: cb} %>
+							</div>
 							<div class="row">
 								<div class="medium-8 columns">
 									&nbsp;

@@ -13,7 +13,7 @@
 	</div>
 	<div class="medium-6 columns">
 		<small>Clipping:</small><br>
-		[link to PDF]
+		<%= collitem.file.exists? ? (link_to collitem.file_file_name, collitem.file.url) : 'No file' %>
 	</div>
 </div>
 <div class="row">			

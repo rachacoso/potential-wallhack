@@ -2,39 +2,17 @@ class TradeShowsController < ApplicationController
 
 	def create
 		u = @current_user.distributor || @current_user.brand
-		u.trade_shows.create!(trade_show_parameters)
-		if @current_user.distributor
-			if params[:ob] 
-				redirect_to onboard_distributor_seven_url
-			else
-				redirect_to distributor_url
-			end
-		else
-			if params[:ob] 
-				redirect_to onboard_brand_five_url
-			else
-				redirect_to brand_url
-			end
-		end
+		new_item = u.trade_shows.create!(trade_show_parameters)
+		
+		go_to_redirect(new_item.id.to_s)
 
 	end
 
 	def update
 		u = @current_user.distributor || @current_user.brand
 		u.trade_shows.find(params[:id]).update!(trade_show_parameters)
-		if @current_user.distributor
-			if params[:ob] 
-				redirect_to onboard_distributor_seven_url
-			else
-				redirect_to distributor_url
-			end
-		else
-			if params[:ob] 
-				redirect_to onboard_brand_five_url
-			else
-				redirect_to brand_url
-			end
-		end		
+
+		go_to_redirect(params[:id])	
 
 	end
 
@@ -42,19 +20,8 @@ class TradeShowsController < ApplicationController
 
 		d = TradeShow.find(params[:id])
 		d.destroy
-		if @current_user.distributor
-			if params[:ob] 
-				redirect_to onboard_distributor_seven_url
-			else
-				redirect_to distributor_url
-			end
-		else
-			if params[:ob] 
-				redirect_to onboard_brand_five_url
-			else
-				redirect_to brand_url
-			end
-		end
+
+		go_to_redirect
 
 
 	end
@@ -69,5 +36,37 @@ class TradeShowsController < ApplicationController
 			:years_participated,
 			:website
 		)
-	end		
+	end
+
+	def go_to_redirect(redir = nil)
+		if @current_user.distributor
+			if params[:ob] 
+				if redir
+					redirect_to onboard_distributor_five_url + "#a-" + redir, :flash => { :make_active => redir }
+				else
+					redirect_to onboard_distributor_five_url
+				end
+			else
+				if redir
+					redirect_to distributor_url + "#a-" + redir, :flash => { :make_active => redir }
+				else
+					redirect_to distributor_url
+				end
+			end
+		else
+			if params[:ob]
+				if redir
+					redirect_to onboard_brand_five_url + "#a-" + redir, :flash => { :make_active => redir }
+				else
+					redirect_to onboard_brand_five_url
+				end			 
+			else
+				if redir
+					redirect_to brand_url + "#a-" + redir, :flash => { :make_active => redir }
+				else
+					redirect_to brand_url
+				end
+			end
+		end
+	end
 end

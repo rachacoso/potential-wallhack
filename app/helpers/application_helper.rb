@@ -116,4 +116,12 @@ module ApplicationHelper
 		end
 	end
 
+	def collection_item_active(cid = nil)
+		if flash[:make_active] == cid.to_s
+			return "active"
+		else
+			return nil
+		end
+	end
+
 end

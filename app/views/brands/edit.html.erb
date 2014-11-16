@@ -28,6 +28,7 @@
 						<%= render partial: "shared/svg/globe", locals: {nolabel: true} %>
 					</div>
 					<div class="medium-11 small-10 columns">
+						<a class="anchor" id="a-companyinfo"></a>
 						<h1>Company Info</h1>
 					</div>
 				</div>
@@ -40,6 +41,7 @@
 				</div>
 
 				<%= form_for @brand, url: brand_url do |f| %>
+				<%= hidden_field_tag "redirect_anchor", "a-companyinfo" %>
 				<div class="row">
 					<div class="medium-6 columns">
 						<div class="row">
@@ -163,12 +165,14 @@
 
 					<%= form_for @brand, url: brand_url do |f| %>
 					<%= f.hidden_field :company_name %>
-
+					<%= hidden_field_tag "redirect_anchor", "a-sectors" %>
 					<div class="row">
 						<div class="small-2 columns">
 							<%= render partial: "shared/svg/sector", locals: {nolabel: true} %>
 						</div>
 						<div class="small-10 columns">
+							<a class="anchor" id="a-sectors"></a>
+
 							<h1>Sectors</h1>
 						</div>
 					</div>
@@ -191,12 +195,15 @@
 
 					<%= form_for @brand, url: brand_url do |f| %>
 					<%= f.hidden_field :company_name %>
+					<%= hidden_field_tag "redirect_anchor", "a-channels" %>
 
 					<div class="row">
 						<div class="small-2 columns">
 							<%= render partial: "shared/svg/channel", locals: {nolabel: true} %>
 						</div>
 						<div class="small-10 columns">
+							<a class="anchor" id="a-channels"></a>
+
 							<h1>Channels</h1>
 						</div>
 					</div>
@@ -283,6 +290,8 @@
 						<%= render partial: "shared/svg/channel", locals: {nolabel: true} %>
 					</div>
 					<div class="small-10 columns">
+						<a class="anchor" id="a-channelcapacity"></a>
+
 						<h1>Channel Capacities</h1>
 					</div>
 				</div>
@@ -301,7 +310,7 @@
 
 
 							<%= form_tag(channel_capacity_bulkupdate_url, method: "post") do  %>
-								
+								<%= hidden_field_tag "redirect_anchor", "a-channelcapacity" %>
 								<% if @brand.channels.empty? %>
 									<div class="row">
 										<div class="medium-12 columns text-center">
@@ -377,6 +386,7 @@
 						<%= render partial: "shared/svg/shipping", locals: {nolabel: true} %>
 					</div>
 					<div class="small-10 columns">
+						<a class="anchor" id="a-exportcountries"></a>
 						<h1>Countries of Export</h1>
 					</div>
 				</div>
@@ -429,7 +439,6 @@
 									<div class="medium-12 columns">
 										<hr>
 										<%= form_for @new_export_country, :html => { :id => "new_export_country" } do |f| %>
-										
 										<div class="rowheadback addnew">
 											<div class="row">
 												<div class="medium-8 columns">
@@ -470,12 +479,14 @@
 						<%= render partial: "shared/svg/marketing", locals: {nolabel: true} %>
 					</div>
 					<div class="small-10 columns">
+						<a class="anchor" id="a-marketing"></a>
 						<h1>Marketing Activities</h1>
 					</div>
 				</div>
 
 					<div class="row clearfix">
 					<%= form_for @brand, url: brand_url do |f| %>
+					<%= hidden_field_tag "redirect_anchor", "a-marketing" %>
 						<div class="medium-12 columns">
 							<%= f.text_area :brand_positioning, rows: 10, label: "Brand Positioning", placeholder: 'Brand Positioning' %>
 							<%= f.submit 'Update Marketing Activities', class: "tiny radius success button right" %>

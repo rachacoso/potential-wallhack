@@ -109,12 +109,11 @@ class BrandsController < ApplicationController
 			allowable_redirect = [
 				'two',
 				'three',
-				'three_a',
-				'four',
-				'six',
-				'seven',
-				'eight',
-				'complete'
+				'four'
+				# 'six',
+				# 'seven',
+				# 'eight',
+				# 'complete'
 			]
 
 			if params[:redirect]
@@ -128,10 +127,12 @@ class BrandsController < ApplicationController
 					
 				else
 					redirect_to onboard_brand_one_url
-					# allow redirect via passed parameter only if in this array else redirect to the first onboard screen
+					# allow redirect via passed parameter only if in 'allowed' array, else redirect to the first onboard screen
 				end
+			elsif params[:redirect_anchor]
+				redirect_to brand_url + "#" + params[:redirect_anchor] 
 			else
-				redirect_to brand_full_profile_url
+				redirect_to brand_url
 			end
 
 		else

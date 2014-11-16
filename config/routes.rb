@@ -69,9 +69,9 @@ Rails.application.routes.draw do
   get '/onboard/brand/three' => 'onboard_brand#three', as: 'onboard_brand_three'
   get '/onboard/brand/four' => 'onboard_brand#four', as: 'onboard_brand_four'
   get '/onboard/brand/five' => 'onboard_brand#five', as: 'onboard_brand_five'
-  get '/onboard/brand/six' => 'onboard_brand#six', as: 'onboard_brand_six'
-  get '/onboard/brand/seven' => 'onboard_brand#seven', as: 'onboard_brand_seven'
-  get '/onboard/brand/eight' => 'onboard_brand#eight', as: 'onboard_brand_eight'
+  # get '/onboard/brand/six' => 'onboard_brand#six', as: 'onboard_brand_six'
+  # get '/onboard/brand/seven' => 'onboard_brand#seven', as: 'onboard_brand_seven'
+  # get '/onboard/brand/eight' => 'onboard_brand#eight', as: 'onboard_brand_eight'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

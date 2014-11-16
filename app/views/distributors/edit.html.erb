@@ -28,6 +28,7 @@
 						<%= render partial: "shared/svg/globe", locals: {nolabel: true} %>
 					</div>
 					<div class="medium-11 small-10 columns">
+						<a class="anchor" id="a-companyinfo"></a>
 						<h1>Company Info</h1>
 					</div>
 				</div>
@@ -40,6 +41,7 @@
 				</div>
 
 				<%= form_for @distributor, url: distributor_url do |f| %>
+				<%= hidden_field_tag "redirect_anchor", "a-companyinfo" %>
 				<div class="row">
 					<div class="medium-6 columns">
 						<div class="row">
@@ -158,15 +160,16 @@
 			</div>
 		</div>
 
+<a class="anchor" id="a-sectors"></a>
 
 		<div class="row" data-equalizer>
 			<div class="medium-6 columns">
 
 				<%= render layout: "shared/panel_fulledit", locals: {de: 'data-equalizer-watch'} do %>
-
+					
 					<%= form_for @distributor, url: distributor_url do |f| %>
 					<%= f.hidden_field :company_name %>
-
+					<%= hidden_field_tag "redirect_anchor", "a-sectors" %>
 					<div class="row">
 						<div class="small-2 columns">
 							<%= render partial: "shared/svg/sector", locals: {nolabel: true} %>
@@ -192,9 +195,11 @@
 					</div>
 					<% end %>
 
+<a class="anchor" id="a-channels"></a>
+
 					<%= form_for @distributor, url: distributor_url do |f| %>
 					<%= f.hidden_field :company_name %>
-
+					<%= hidden_field_tag "redirect_anchor", "a-channels" %>
 					<div class="row">
 						<div class="small-2 columns">
 							<%= render partial: "shared/svg/channel", locals: {nolabel: true} %>
@@ -285,6 +290,8 @@
 						<div class="small-2 columns">
 							<%= render partial: "shared/svg/channel", locals: {nolabel: true} %>
 						</div>
+
+						<a class="anchor" id="a-channelcapacities"></a>
 						<div class="small-10 columns">
 							<h1>Channel Capacities</h1>
 						</div>
@@ -306,7 +313,8 @@
 
 
 							<%= form_tag(channel_capacity_bulkupdate_url, method: "post") do  %>
-								
+								<%= hidden_field_tag "redirect_anchor", "a-channelcapacities" %>
+
 								<% if @distributor.channels.empty? %>
 									<div class="row">
 										<div class="medium-12 columns text-center">
@@ -425,12 +433,15 @@
 							<%= render partial: "shared/svg/sales", locals: {nolabel: true} %>
 						</div>
 						<div class="small-10 medium-9 columns">
+							<a class="anchor" id="a-sales"></a>
 							<h1>Sales / Education Capabilities</h1>
 						</div>
 					</div>
 					<br>
-								
+							
+	
 					<%= form_for @distributor, url: distributor_url do |f| %>
+					<%= hidden_field_tag "redirect_anchor", "a-sales" %>
 					<div class="row">
 
 						<div class="medium-12 columns">
@@ -462,6 +473,7 @@
 							<%= render partial: "shared/svg/marketing", locals: {nolabel: true} %>
 						</div>
 						<div class="small-10 medium-9 columns">
+							<a class="anchor" id="a-marketing"></a>
 							<h1>Marketing / PR Capabilities</h1>
 						</div>
 					</div>
@@ -469,7 +481,7 @@
 
 
 					<%= form_for @distributor, url: distributor_url do |f| %>
-
+					<%= hidden_field_tag "redirect_anchor", "a-marketing" %>
 
 					<div class="row">
 						<div class="medium-12 columns">

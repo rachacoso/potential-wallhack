@@ -93,9 +93,6 @@ class DistributorsController < ApplicationController
 			allowable_redirect = [
 				'two',
 				'three',
-				'three_a',
-				'four',
-				'seven',
 				'complete'
 			]
 
@@ -110,10 +107,12 @@ class DistributorsController < ApplicationController
 					
 				else
 					redirect_to onboard_distributor_one_url
-					# allow redirect via passed parameter only if in this array else redirect to the first onboard screen
+					# allow redirect via passed parameter only if in 'allowed' array, else redirect to the first onboard screen
 				end
+			elsif params[:redirect_anchor]
+				redirect_to distributor_url + "#" + params[:redirect_anchor] 
 			else
-				redirect_to distributor_full_profile_url
+				redirect_to distributor_url
 			end
 
 		else

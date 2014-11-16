@@ -768,3 +768,11 @@ dl.tabs {
   margin: 1em;
 
 }
+
+// Adjust spacing of anchors
+a.anchor {
+  display: block; 
+  position: relative; 
+  top: -80px; 
+  visibility: hidden;
+}

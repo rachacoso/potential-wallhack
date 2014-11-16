@@ -4,30 +4,16 @@ class ExportCountriesController < ApplicationController
 		u = @current_user.distributor || @current_user.brand
 		u.export_countries.find_or_create_by(country: params[:export_country][:country])
 		# u.export_countries.create(export_country_parameters)
-		if @current_user.distributor
-			redirect_to distributor_url
-		else
-			if params[:ob] 
-				redirect_to onboard_brand_seven_url
-			else
-				redirect_to brand_url
-			end		
-		end
+
+		go_to_redirect
 
 	end
 
 	def update
 		u = @current_user.distributor || @current_user.brand
 		u.export_countries.find(params[:id]).update!(export_country_parameters)
-		if @current_user.distributor
-			redirect_to distributor_url
-		else
-			if params[:ob] 
-				redirect_to onboard_brand_seven_url
-			else
-				redirect_to brand_url
-			end		
-		end		
+
+		go_to_redirect
 
 	end
 
@@ -35,16 +21,8 @@ class ExportCountriesController < ApplicationController
 
 		d = ExportCountry.find(params[:id])
 		d.destroy
-		if @current_user.distributor
-			redirect_to distributor_url
-		else
-			if params[:ob] 
-				redirect_to onboard_brand_seven_url
-			else
-				redirect_to brand_url
-			end		
-		end
 
+		go_to_redirect
 
 	end
 
@@ -54,5 +32,18 @@ class ExportCountriesController < ApplicationController
     params.require(:export_country).permit(
 			:country
 		)
-	end		
+	end
+
+	def go_to_redirect
+		if @current_user.distributor
+			redirect_to distributor_url
+		else
+			if params[:ob] 
+				redirect_to onboard_brand_seven_url
+			else
+				redirect_to brand_url + "#" + "a-exportcountries" 
+			end		
+		end
+	end
+
 end

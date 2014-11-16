@@ -69,12 +69,16 @@ class ChannelCapacitiesController < ApplicationController
 		if @current_user.distributor
 			if params[:ob]
 				redirect_to onboard_distributor_four_url
+			elsif params[:redirect_anchor]
+				redirect_to distributor_url + "#" + params[:redirect_anchor] 
 			else
 				redirect_to distributor_url
-			end			
+			end		
 		else
 			if params[:ob]
 				redirect_to onboard_brand_seven_url
+			elsif params[:redirect_anchor]
+				redirect_to brand_url + "#" + params[:redirect_anchor] 
 			else
 				redirect_to brand_url
 			end

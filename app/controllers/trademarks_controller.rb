@@ -39,20 +39,15 @@ class TrademarksController < ApplicationController
 
 	def go_to_redirect(redir = nil)
 
-		if params[:ob]
-			if redir
-				redirect_to onboard_brand_eight_url + "#a-" + redir, :flash => { :make_active => redir }
-			else
-				redirect_to onboard_brand_eight_url
-			end
-		else
-			if redir
-				redirect_to brand_url + "#a-" + redir, :flash => { :make_active => redir }
-			else
-				redirect_to brand_url
-			end
-
-		end		
+		if params[:ob] && redir #onboard and redirect
+			redirect_to onboard_brand_eight_url + "#a-" + redir, :flash => { :make_active => redir }
+		elsif params[:ob] #onboard no redirect
+			redirect_to onboard_brand_eight_url
+		elsif redir # main edit page and redirect
+			redirect_to brand_url + "#a-" + redir, :flash => { :make_active => redir }
+		else # main edit page
+			redirect_to brand_url
+		end
 
 	end
 

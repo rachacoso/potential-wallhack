@@ -140,7 +140,7 @@
 					<div class="preview-data">
 						<span class="preview-data-tile-title">Countries of Export</span><br>
 						<strong>
-							<% @profile.export_countries.each do |ec| %>
+							<% @profile.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
 								<%= ec.country %><br>
 							<% end %>
 						</strong>
@@ -159,8 +159,10 @@
 					<div class="preview-data">
 						<span class="preview-data-tile-title">Countries of Manufacture</span><br>
 						<strong>
-							<% @profile.products.distinct(:country_of_manufacture).each do |country| %>
-								<%= country %><br>
+							<% @profile.products.distinct(:country_of_manufacture).sort_by(&:downcase).each do |country| %>
+								<% unless country.blank? %>
+									<%= country %><br>
+								<% end %>
 							<% end %>
 						</strong>
 					</div>

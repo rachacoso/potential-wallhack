@@ -40,33 +40,30 @@ class TradeShowsController < ApplicationController
 
 	def go_to_redirect(redir = nil)
 		if @current_user.distributor
-			if params[:ob] 
-				if redir
-					redirect_to onboard_distributor_five_url + "#a-" + redir, :flash => { :make_active => redir }
-				else
-					redirect_to onboard_distributor_five_url
-				end
-			else
-				if redir
-					redirect_to distributor_url + "#a-" + redir, :flash => { :make_active => redir }
-				else
-					redirect_to distributor_url
-				end
+			
+			if params[:ob] && redir #onboard and redirect
+				redirect_to onboard_distributor_five_url + "#a-" + redir, :flash => { :make_active => redir }
+			elsif params[:ob] #onboard no redirect
+				redirect_to onboard_distributor_five_url
+			elsif redir # main edit page and redirect
+				redirect_to distributor_url + "#a-" + redir, :flash => { :make_active => redir }
+			else # main edit page
+				redirect_to distributor_url
 			end
+
 		else
-			if params[:ob]
-				if redir
-					redirect_to onboard_brand_five_url + "#a-" + redir, :flash => { :make_active => redir }
-				else
-					redirect_to onboard_brand_five_url
-				end			 
-			else
-				if redir
-					redirect_to brand_url + "#a-" + redir, :flash => { :make_active => redir }
-				else
-					redirect_to brand_url
-				end
+
+			if params[:ob] && redir #onboard and redirect
+				redirect_to onboard_brand_five_url + "#a-" + redir, :flash => { :make_active => redir }
+			elsif params[:ob] #onboard no redirect
+				redirect_to onboard_brand_five_url
+			elsif redir # main edit page and redirect
+				redirect_to brand_url + "#a-" + redir, :flash => { :make_active => redir }
+			else # main edit page
+				redirect_to brand_url
 			end
+
 		end
 	end
+
 end

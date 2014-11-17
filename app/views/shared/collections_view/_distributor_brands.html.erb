@@ -14,7 +14,7 @@
 	<div class="row">
 		<div class="medium-6 columns">
 			<small>Category:</small><br>
-			<%= Sector.find(collitem.category).name %>
+			<%= !collitem.category.blank? ? Sector.find(collitem.category).name : "No Category Selected" %>
 		</div>
 		<div class="medium-6 columns">
 			<small>Country of Manufacture:</small><br>

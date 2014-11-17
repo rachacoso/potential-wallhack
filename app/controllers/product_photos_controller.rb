@@ -21,16 +21,56 @@ class ProductPhotosController < ApplicationController
 				flash[:error] = "Sorry, we're unable to upload that file"
 			end
 		end
-		redirect_to :back
+		go_to_redirect(params[:product_id])
 	end
 
 	def destroy
-		photo_to_delete = ProductPhoto.find(params[:id])
+		photo_to_delete = ProductPhoto.find(params[:id])	
+		parent = photo_to_delete.photographable
 		photo_to_delete.destroy
-		redirect_to :back
+		go_to_redirect(parent.id.to_s)
 
 	end
 
+
+	private
+	def go_to_redirect(redir = nil)
+
+		if @current_user.distributor
+
+			if params[:ob] 
+				if redir
+					redirect_to onboard_distributor_four_url + "#a-" + redir, :flash => { :make_active => redir }
+				else
+					redirect_to onboard_distributor_four_url
+				end
+			else
+				if redir
+					redirect_to distributor_url + "#a-" + redir, :flash => { :make_active => redir }
+				else
+					redirect_to distributor_url
+				end
+			end
+
+		else
+
+			if params[:ob]
+				if redir
+					redirect_to onboard_brand_four_url + "#a-" + redir, :flash => { :make_active => redir }
+				else
+					redirect_to onboard_brand_four_url
+				end		 
+			else
+				if redir
+					redirect_to brand_url + "#a-" + redir, :flash => { :make_active => redir }
+				else
+					redirect_to brand_url
+				end				
+			end	
+
+		end
+
+	end	
 
 
 end

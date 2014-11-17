@@ -3,13 +3,9 @@ class ProductsController < ApplicationController
 	def create
 
 		brand = @current_user.brand
-		brand.products.create!(product_parameters)
+		new_item = brand.products.create!(product_parameters)
 
-		if params[:ob] 
-			redirect_to onboard_brand_four_url
-		else
-			redirect_to brand_url
-		end		
+		go_to_redirect(new_item.id.to_s)	
 
 	end
 
@@ -18,11 +14,7 @@ class ProductsController < ApplicationController
 		brand = @current_user.brand
 		brand.products.find(params[:id]).update!(product_parameters)
 
-		if params[:ob] 
-			redirect_to onboard_brand_four_url
-		else
-			redirect_to brand_url
-		end		
+		go_to_redirect(params[:id])	
 
 	end
 
@@ -31,11 +23,7 @@ class ProductsController < ApplicationController
 		db = Product.find(params[:id])
 		db.destroy
 
-		if params[:ob] 
-			redirect_to onboard_brand_four_url
-		else
-			redirect_to brand_url
-		end		
+		go_to_redirect
 
 	end
 
@@ -50,5 +38,19 @@ class ProductsController < ApplicationController
 			:country_of_manufacture,
 			:current
 		)
-	end		
+	end
+	def go_to_redirect(redir = nil)
+
+		if params[:ob] && redir #onboard and redirect
+			redirect_to onboard_brand_four_url + "#a-" + redir, :flash => { :make_active => redir }
+		elsif params[:ob] #onboard no redirect
+			redirect_to onboard_brand_four_url
+		elsif redir # main edit page and redirect
+			redirect_to brand_url + "#a-" + redir, :flash => { :make_active => redir }
+		else # main edit page
+			redirect_to brand_url
+		end
+
+	end
+
 end

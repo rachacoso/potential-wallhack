@@ -36,7 +36,11 @@ class ExportCountriesController < ApplicationController
 
 	def go_to_redirect
 		if @current_user.distributor
-			redirect_to distributor_url
+			if params[:ob] 
+				redirect_to onboard_distributor_two_url
+			else
+				redirect_to distributor_url + "#" + "a-exportcountries" 
+			end	
 		else
 			if params[:ob] 
 				redirect_to onboard_brand_seven_url

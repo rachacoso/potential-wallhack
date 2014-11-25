@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   get    '/distributors/full_profile' => 'distributors#full_profile', as: 'distributor_full_profile'
   patch  '/distributors' => 'distributors#update'
   patch  '/distributor_brands' => 'distributor_brands#update'
+  post    '/distributors/matches' => 'distributors#get_matches', as: 'distributor_matches'
   
   get    '/brands' => 'brands#edit', as: 'brand'
   get    '/brands/public_profile' => 'brands#public_profile', as: 'brand_public_profile'
@@ -60,7 +61,7 @@ Rails.application.routes.draw do
   get '/onboard/distributor/three' => 'onboard_distributor#three', as: 'onboard_distributor_three'
   get '/onboard/distributor/four' => 'onboard_distributor#four', as: 'onboard_distributor_four'
   get '/onboard/distributor/five' => 'onboard_distributor#five', as: 'onboard_distributor_five'
-  # get '/onboard/distributor/six' => 'onboard_distributor#six', as: 'onboard_distributor_six'
+  get '/onboard/distributor/six' => 'onboard_distributor#six', as: 'onboard_distributor_six'
   # get '/onboard/distributor/seven' => 'onboard_distributor#seven', as: 'onboard_distributor_seven'
   # get '/onboard/distributor/eight' => 'onboard_distributor#eight', as: 'onboard_distributor_eight'
 
@@ -72,6 +73,9 @@ Rails.application.routes.draw do
   get '/onboard/brand/six' => 'onboard_brand#six', as: 'onboard_brand_six'
   get '/onboard/brand/seven' => 'onboard_brand#seven', as: 'onboard_brand_seven'
   get '/onboard/brand/eight' => 'onboard_brand#eight', as: 'onboard_brand_eight'
+
+  get '/matches' => 'matches#index', as: 'all_matches'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

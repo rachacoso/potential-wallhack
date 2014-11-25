@@ -40,8 +40,9 @@ class Brand
 
 	# Countries Where Exported
 	# field :countries_where_exported, type: String
-	has_many :export_countries
+	has_many :export_countries, as: :exportable, dependent: :destroy
 
+	has_many :matches, as: :matchable, dependent: :destroy
 
 	private 
 

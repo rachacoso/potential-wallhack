@@ -18,6 +18,9 @@ class DistributorsController < ApplicationController
 		@channel_capacities = @distributor.channel_capacities
 		@new_channel_capacity = ChannelCapacity.new
 
+		@export_countries = @distributor.export_countries rescue nil
+		@new_export_country = ExportCountry.new		
+
 	end
 
 	def public_profile
@@ -91,8 +94,8 @@ class DistributorsController < ApplicationController
 
 			# allow redirect via passed parameter only if in this array else redirect to the first onboard screen
 			allowable_redirect = [
-				'two',
 				'three',
+				'four',
 				'complete'
 			]
 
@@ -129,11 +132,30 @@ class DistributorsController < ApplicationController
 
 	end
 
+
+	def get_matches
+
+		country_of_origin = params[:country_of_origin]
+
+
+
+# @profile.country_of_origin
+# CompanySize.find(@profile.company_size).name
+# @profile.year_established.strftime("%Y") rescue nil
+# @profile.sectors
+# @profile.channels
+# @profile.export_countries
+# @profile.products.distinct(:country_of_manufacture).sort_by(&:downcase)
+
+
+	end
+
   private
   def distributor_parameters
     params.require(:distributor).permit(
 			:company_name,
 			:country_of_origin,
+			:countries_of_distribution,
 			:website,
 			:company_size,
 			:current_lines,

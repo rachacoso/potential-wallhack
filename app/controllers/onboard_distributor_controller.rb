@@ -13,6 +13,8 @@ class OnboardDistributorController < ApplicationController
   def two
 
     @distributor = @current_user.distributor
+    @export_countries = @distributor.export_countries rescue nil
+    @new_export_country = ExportCountry.new 
 
   end
 
@@ -26,13 +28,19 @@ class OnboardDistributorController < ApplicationController
 
     @distributor = @current_user.distributor
 
+  end
+
+  def five
+
+    @distributor = @current_user.distributor
+
     @current_brands = @distributor.distributor_brands.where(current: true) rescue nil
     @past_brands = @distributor.distributor_brands.where(current: false) rescue nil
     @new_brand = DistributorBrand.new
 
   end
 
-  def five
+  def six
 
     @distributor = @current_user.distributor
 

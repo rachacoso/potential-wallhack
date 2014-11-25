@@ -15,13 +15,13 @@ class ChannelCapacitiesController < ApplicationController
 
 		if @current_user.distributor
 			if params[:ob]
-				redirect_to onboard_distributor_three_a_url
+				redirect_to onboard_distributor_five_url
 			else
 				redirect_to distributor_url
 			end
 		else
 			if params[:ob]
-				redirect_to onboard_brand_three_a_url
+				redirect_to onboard_brand_four_url
 			else
 				redirect_to brand_url
 			end
@@ -37,7 +37,7 @@ class ChannelCapacitiesController < ApplicationController
 		u.channel_capacities.find(params[:id]).update!(channel_capacity_parameters)
 		if @current_user.distributor
 			if params[:ob]
-				redirect_to onboard_distributor_four_url
+				redirect_to onboard_distributor_five_url
 			else
 				redirect_to distributor_url
 			end			
@@ -68,7 +68,7 @@ class ChannelCapacitiesController < ApplicationController
 
 		if @current_user.distributor
 			if params[:ob]
-				redirect_to onboard_distributor_four_url
+				redirect_to onboard_distributor_five_url
 			elsif params[:redirect_anchor]
 				redirect_to distributor_url + "#" + params[:redirect_anchor] 
 			else

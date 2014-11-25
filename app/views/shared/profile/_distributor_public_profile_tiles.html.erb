@@ -10,8 +10,8 @@
 				</div>
 				<div class="small-9 columns">
 					<div class="preview-data">
-						<span class="preview-data-tile-title">Country of origin</span><br>
-						<strong><%= @profile.country_of_origin %></strong>
+						<span class="preview-data-tile-title">Headquarters</span><br>
+						<strong><%= profile.country_of_origin %></strong>
 					</div>
 				</div>
 			</div>
@@ -25,7 +25,7 @@
 				<div class="small-9 columns">
 					<div class="preview-data">
 						<span class="preview-data-tile-title">Company Size</span><br>
-						<strong><%= CompanySize.find(@profile.company_size).name %></strong>
+						<strong><%= CompanySize.find(profile.company_size).name %></strong>
 					</div>
 				</div>
 			</div>	
@@ -39,7 +39,7 @@
 				<div class="small-9 columns">
 					<div class="preview-data">
 						<span class="preview-data-tile-title">Year Established</span><br>
-						<strong><%= @profile.year_established.strftime("%Y") rescue nil %></strong>
+						<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
 					</div>
 				</div>
 			</div>
@@ -48,17 +48,36 @@
 	</ul>
 	
 
-	<ul class="small-block-grid-1 medium-block-grid-2">
+	<ul class="small-block-grid-1 medium-block-grid-3">
 
 		<li>
 			<div class="row">
-				<div class="small-2 columns">
+				<div class="small-3 columns">
+					<%= render partial: "shared/svg/shipping", locals: {nolabel: true} %>
+				</div>
+				<div class="small-9 columns">
+					<div class="preview-data">
+						<span class="preview-data-tile-title">Countries of Export</span><br>
+						<strong>
+							<% profile.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
+								<%= ec.country %><br>
+							<% end %>
+						</strong>
+					</div>
+				</div>
+			</div>				
+		</li>
+
+
+		<li>
+			<div class="row">
+				<div class="small-3 columns">
 					<%= render partial: "shared/svg/sector", locals: {nolabel: true} %>
 				</div>
-				<div class="small-10 columns">
+				<div class="small-9 columns">
 					<div class="preview-data">
 						<span class="preview-data-tile-title">Sectors</span><br>
-						<% @profile.sectors.each do |s| %>
+						<% profile.sectors.each do |s| %>
 							<strong><%= s.name %></strong><br>
 						<% end %>
 					</div>
@@ -68,17 +87,17 @@
 
 		<li>
 			<div class="row">
-				<div class="small-2 columns">
+				<div class="small-3 columns">
 					<%= render partial: "shared/svg/channel", locals: {nolabel: true}%>
 				</div>
-				<div class="small-10 columns">
+				<div class="small-9 columns">
 					<div class="preview-data">
 						<span class="preview-data-tile-title">Channels</span><br>
-						<% @profile.channels.each do |ch| %>
+						<% profile.channels.each do |ch| %>
 							<strong><%= ch.name %></strong><br>
 						<% end %>
-						<% if @profile.channel_capacities.where(channel_id: 0).length > 0 %>
-							<% @profile.channel_capacities.where(channel_id: 0).each do |cch| %>
+						<% if profile.channel_capacities.where(channel_id: 0).length > 0 %>
+							<% profile.channel_capacities.where(channel_id: 0).each do |cch| %>
 								<strong><%= cch.custom_channel_name %> *</strong><br>
 							<% end %>
 							<small>(* Custom Channels)</small>

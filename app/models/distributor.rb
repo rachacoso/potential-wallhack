@@ -17,6 +17,9 @@ class Distributor
  	has_one :contact_info, as: :distributor_contact_info, dependent: :destroy
 	accepts_nested_attributes_for :contact_info
 
+	# Countries of Distribution
+	has_many :export_countries, as: :exportable, dependent: :destroy
+
   has_and_belongs_to_many :sectors, inverse_of: nil 
 	has_and_belongs_to_many :channels, inverse_of: nil 
   
@@ -48,6 +51,7 @@ class Distributor
 
 	has_many :trade_shows, dependent: :destroy
 	
+	has_many :matches, as: :matchable, dependent: :destroy
 
 
 	private 

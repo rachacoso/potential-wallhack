@@ -1,49 +1,97 @@
 <%= render partial: "shared/topbar" %>
 <%= render layout: "shared/panel" do %>
 
+
+
 	<div class="row">
 		<div class="small-2 columns">
-			<%= render partial: "shared/svg/brandportfolio", locals: {nolabel: true} %>
+			<%= render partial: "shared/svg/channel", locals: {nolabel: true} %>
 		</div>
 		<div class="small-10 columns">
-			<h1>Brand Portfolio</h1>
+			<h1>Channel Capacities</h1>
 		</div>
 	</div>
+
 	<div class="row">
 		<div class="medium-10 columns push-2">
 			<br>
-			<div class="onboard-instructions smaller">Wow your brand partners with your track record of working with consumer products.  </div>
+			<div class="onboard-instructions smaller">One of the great selling points to a brand is how large your distribution network is. Brands love to know where you currently sell and how many doors you sell through. </div>
 			<hr>
 		</div>
 	</div>
-
-
-	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "Current Brands",
-		coll: @current_brands,
-		identifier: "brand",
-		no_item_message: "No Current Brands",
-		coll_new_item: @new_brand,
-		coll_new_item_text: "Add a Current Brand",
-		iscurrent: "true"
-	} %>
-
 	<div class="row">
-		<div class="medium-6 medium-centered columns text-center">
-			<hr>
+		<div class="medium-12 medium-centered columns">
+			
+
+
+				<div class="row">
+					<div class="medium-6 columns text-right">
+						<h4><strong>Channel</strong></h4>
+					</div>
+					<div class="medium-6 columns">
+						<h4><strong>Capacity</strong></h4>
+					</div>
+				</div>	
+
+
+				<%= form_tag(channel_capacity_bulkupdate_url, method: "post") do  %>
+					<%= hidden_field_tag :ob, 'true' %>
+					<% if @distributor.channels.empty? %>
+						<div class="row">
+							<div class="medium-12 columns text-center">
+							<h6 class="information">( Please Select Channels in Sector and Channel Profile )</h6>
+							</div>
+						</div>
+
+					<% end %>
+
+					<% @distributor.channels.each do |chan| %>
+
+						<div class="row">
+							<div class="medium-6 columns">
+								<%= label_tag "channel_capacity[bulk_ids][#{chan.id}]", chan.name, class: "right" %>
+							</div>
+							<div class="medium-3 columns end">
+								<%= number_field_tag("channel_capacity[bulk_ids][#{chan.id}]", @distributor.channel_capacities.where(channel_id: chan.id).first.capacity) %>
+							</div>
+						</div>
+		
+					<% end %>
+
+					<% if @distributor.channel_capacities.where(channel_id: 0).first %>
+						<div class="row">
+							<div class="medium-6 columns text-right">
+								<h4><strong>Custom Channel</strong></h4>
+							</div>
+							<div class="medium-6 columns">
+								<h4><strong>Capacity</strong></h4>
+							</div>
+						</div>
+					<% end %>
+					<% @distributor.channel_capacities.where(channel_id: 0).each do |cc| %>
+						<div class="row">
+							<div class="medium-6 columns">
+								<%= label_tag "channel_capacity[bulk_ids][#{cc.id}]", cc.custom_channel_name, class: "right" %>&nbsp;
+							</div>
+							<div class="medium-3 columns end">
+								<%= number_field_tag("channel_capacity[bulk_ids][#{cc.id}]", cc.capacity) %>
+							</div>
+						</div>
+
+					<% end %>
+
+						<div class="row">
+							<div class="medium-12 columns">
+								<hr>
+								<%= submit_tag('Update and continue', class: "tiny radius success button right") %>
+							</div>
+						</div>
+
+				<% end %>					
+
+			
 		</div>
 	</div>
-
-	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "Past Brands",
-		coll: @past_brands,
-		identifier: "brand",
-		no_item_message: "No Past Brands",
-		coll_new_item: @new_brand,
-		coll_new_item_text: "Add a Past Brand",
-		iscurrent: "false"
-	} %>
-
-<%= button_to "Continue", onboard_distributor_five_url, method: :get, class: "tiny radius success button right" %>
 
 <% end %>
+

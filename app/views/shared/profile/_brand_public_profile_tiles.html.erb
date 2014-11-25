@@ -10,8 +10,8 @@
 				</div>
 				<div class="small-9 columns">
 					<div class="preview-data">
-						<span class="preview-data-tile-title">Country of origin</span><br>
-						<strong><%= @profile.country_of_origin %></strong>
+						<span class="preview-data-tile-title">Country of Origin</span><br>
+						<strong><%= profile.country_of_origin %></strong>
 					</div>
 				</div>
 			</div>
@@ -25,7 +25,7 @@
 				<div class="small-9 columns">
 					<div class="preview-data">
 						<span class="preview-data-tile-title">Company Size</span><br>
-						<strong><%= CompanySize.find(@profile.company_size).name %></strong>
+						<strong><%= CompanySize.find(profile.company_size).name rescue nil %></strong>
 					</div>
 				</div>
 			</div>	
@@ -39,7 +39,7 @@
 				<div class="small-9 columns">
 					<div class="preview-data">
 						<span class="preview-data-tile-title">Year Established</span><br>
-						<strong><%= @profile.year_established.strftime("%Y") rescue nil %></strong>
+						<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
 					</div>
 				</div>
 			</div>
@@ -58,7 +58,7 @@
 				<div class="small-10 columns">
 					<div class="preview-data">
 						<span class="preview-data-tile-title">Sectors</span><br>
-						<% @profile.sectors.each do |s| %>
+						<% profile.sectors.each do |s| %>
 							<strong><%= s.name %></strong><br>
 						<% end %>
 					</div>
@@ -74,11 +74,11 @@
 				<div class="small-10 columns">
 					<div class="preview-data">
 						<span class="preview-data-tile-title">Channels</span><br>
-						<% @profile.channels.each do |ch| %>
+						<% profile.channels.each do |ch| %>
 							<strong><%= ch.name %></strong><br>
 						<% end %>
-						<% if @profile.channel_capacities.where(channel_id: 0).length > 0 %>
-							<% @profile.channel_capacities.where(channel_id: 0).each do |cch| %>
+						<% if profile.channel_capacities.where(channel_id: 0).length > 0 %>
+							<% profile.channel_capacities.where(channel_id: 0).each do |cch| %>
 								<strong><%= cch.custom_channel_name %> *</strong><br>
 							<% end %>
 							<small>(* Custom Channels)</small>
@@ -101,7 +101,7 @@
 					<div class="preview-data">
 						<span class="preview-data-tile-title">Countries of Export</span><br>
 						<strong>
-							<% @profile.export_countries.each do |ec| %>
+							<% profile.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
 								<%= ec.country %><br>
 							<% end %>
 						</strong>
@@ -120,9 +120,13 @@
 					<div class="preview-data">
 						<span class="preview-data-tile-title">Countries of Manufacture</span><br>
 						<strong>
-							<% @profile.products.distinct(:country_of_manufacture).each do |country| %>
-								<%= country %><br>
+
+							<% profile.products.distinct(:country_of_manufacture).sort_by(&:downcase).each do |country| %>
+								<% unless country.blank? %>
+									<%= country %><br>
+								<% end %>
 							<% end %>
+
 						</strong>
 					</div>
 				</div>

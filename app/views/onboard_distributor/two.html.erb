@@ -1,89 +1,107 @@
 <%= render partial: "shared/topbar" %>
-
 <%= render layout: "shared/panel" do %>
 
 	<div class="row">
-		<div class="small-2 columns">
-			<%= render partial: "shared/svg/sector", locals: {nolabel: true} %>
-		</div>
-		<div class="small-10 columns">
-			<h1>Sectors</h1>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="medium-10 columns push-2">
-			<div class="onboard-instructions smaller">Tell us what type of products you distribute. <br><br>For example, if you distribute hats, you would be in the Fashion/Accessories sector.  If you distribute baby bottles, you’d be in the Baby/Kids sector. <br><br>If you don’t see a good fit, please select “Other.”</div>
-		</div>
-	</div>	
-<br>
-	<%= form_for @distributor, url: distributor_url do |f| %>
-	<%= hidden_field_tag :redirect, 'three' %>	
-	<div class="row">
-		<div class="medium-10 columns push-2">
-		<%= f.hidden_field :company_name %>		
-      <input id="selectallsectors" name="selectallsectors" type="checkbox" />
-      <label for="selectallsectors" style="color: black; border: 0; background: transparent;">Select All</label>			
-			<% Sector.each do |sc| %>
-		      <%= check_box_tag "sectors[#{sc.id}]", sc.id, (@distributor.sectors.find(sc) rescue false) ? true : false, class: "sectors" %>
-		      <%= label_tag("sectors[#{sc.id}]", sc.name) %>
-		  <% end %>
-			<input id="sectors_other" name="sectors[other]" type="checkbox" value="other"/>
-      <label for="sectors_other">Other</label>
-
-		  <hr>
-		</div>
-
-	</div>
-
-
-	<div class="row">
-		<div class="small-2 columns">
-			<%= render partial: "shared/svg/channel", locals: {nolabel: true} %>
-		</div>
-		<div class="small-10 columns">
-			<h1>Channels</h1>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="medium-10 columns push-2">
-			<div class="onboard-instructions smaller">Under Channels, you can share what types of retail channels you sell your products. You can select as many as are applicable. If you don’t see a channel listed, please feel free to add a channel</div>
-		</div>
-	</div>	
-<br>
-	<div class="row">
-		<div class="medium-10 columns push-2">						
-      <input id="selectallchannels" name="selectallsectors" type="checkbox" style="font-color: black;"/>
-      <label for="selectallchannels" style="color: black; border: 0; background: transparent;">Select All</label>			
-			<% Channel.each do |ch| %>
-		    	<%= check_box_tag "channels[#{ch.id}]", ch.id, (@distributor.channels.find(ch) rescue false) ? true : false, class: "channels"  %>
-		      <%#= label_tag("channels[#{ch.id}]", ch.name) %>
-		      <%= label_tag "channels[#{ch.id}]" do %>
-		      	<%= ch.name %><br>
-						<%= simple_format(ch.description, {style: "font-size: 0.75em; margin-left: 2em;"}, wrapper_tag: "div") %>
-		      <% end %>
-		  <% end %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="medium-10 columns push-2">
-			<br>		  
-		  <h3><strong>(Add Custom Channels)</strong></h3>
-		  <div id="customchannellist">
-		  	
+		<div class="medium-12 columns">
+			<div class="row">
+				<div class="small-2 columns">
+					<%= render partial: "shared/svg/shipping", locals: {nolabel: true} %>
+				</div>
+				<div class="small-10 columns">
+					<h1>Countries of Distribution</h1>
+				</div>
 			</div>
-			<br>
-			<input type="text" id="ccName" placeholder="Custom Channel Name" />
-			<input type="button" value="Add a Custom Channel" id="btnSave" />
-		  <hr>
 		</div>
 	</div>
 	<div class="row">
 		<div class="medium-10 columns push-2">
-			<%= f.submit 'Select and Continue', class: "tiny radius success button right" %>
+			<br>
+			<div class="onboard-instructions smaller">
+				Tell us what international markets you distribute in <br><br>
+			</div>
+			<hr>
 		</div>
 	</div>
-	<% end %>
+
+	<div class="row">
+		<div class="medium-6 medium-centered columns">
+
+			<div class="groupwrapper">
+
+			<div class="rowitem">				
+				<div class="rowheadback">
+					<div class="row">
+						<div class="medium-8 columns">
+							Countries of Distribution
+						</div>
+						<div class="medium-4 columns">
+							&nbsp;
+						</div>
+					</div>
+				</div>	
+			</div>			
+
+			<% if !@export_countries.empty? %>
+				<% @export_countries.each do |cb| %>
+				<div class="rowitem">			
+				<div class="row">
+					<div class="medium-12 columns">
+						<%= form_for cb do |f| %>
+						
+							<div class="row">
+								<div class="medium-8 columns text-right">
+									<%= cb.country %>
+								</div>
+								<div class="medium-4 columns text-left">
+									<%= link_to 'Delete', export_country_url(cb, :ob => true), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.country}?"}%>
+								</div>
+							</div>
+
+						<% end %>
+					</div>
+				</div>
+				</div>
+				<% end %>
+			<% else %>
+				<h5>( No Countries )</h5>
+			<% end %>
+
+				<div class="rowitem">
+				<div class="row">
+					<div class="medium-12 columns">
+						<hr>
+						<%= form_for @new_export_country, :html => { :id => "new_export_country" } do |f| %>
+						<%= hidden_field_tag :ob, 'true' %>
+						<div class="rowheadback addnew">
+							<div class="row">
+								<div class="medium-8 columns">
+									Add a Country
+								</div>
+								<div class="medium-4 columns">
+									&nbsp;
+								</div>
+							</div>
+						</div>	
+						<div class="row">
+							<div class="medium-8 columns">
+								<%= f.text_field :country, class: "country-autocomplete-multi", label: false, placeholder: 'Country' %>
+							</div>
+							<div class="medium-4 columns text-left">
+								<%= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %>
+							</div>
+						</div>				
+						<% end %>
+					</div>
+				</div>
+				</div>
+
+			</div> <!-- /.groupwrapper -->
+
+		</div>
+	</div>
+
+<%= button_to "Next", onboard_distributor_three_url, method: :get, class: "tiny radius success button right" %>
 
 <% end %>
+
+

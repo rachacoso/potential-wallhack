@@ -1,0 +1,102 @@
+<% content_for :subnav do %>
+<div class="row">
+	<div class="small-12 columns">
+		<dl class="sub-nav">
+		  <dd class="active"><%= link_to 'All Matches', '#' %></dd>
+		  <dd><%= link_to 'Saved Matches', '#' %></dd>
+		</dl>
+	</div>
+</div>
+<% end %>
+
+
+
+
+
+	<div class="row">
+		<div class="small-12 columns previewtile">
+
+			<%= form_tag all_matches_url, method: 'post' do %>
+
+				<div class="row filterform">
+					<div class="medium-3 columns">
+						<strong><small>Countries</small></strong>
+						<input id="selectallcountries" name="selectallcountries" type="checkbox" style="font-color: black;" class="filter" checked/>
+						<label for="selectallcountries" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>							
+						<% @countries.each_with_index do |co, index| %>
+							<%= render partial: "shared/filter_checkbox", locals: {field: "country", label: co, fid: co, cbid: "country_#{index}", on_off_switch: filter_on_or_off(co, @country), cclass: "mfcountry" } %>
+						<% end %>
+					</div>
+					<div class="medium-3 columns">
+						<strong><small>Company Size</small></strong>
+						<input id="selectallsizes" name="selectallsizes" type="checkbox" style="font-color: black;" class="filter" checked/>
+						<label for="selectallsizes" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>						
+						<% CompanySize.all.each_with_index do |co, index| %>
+							<%= render partial: "shared/filter_checkbox", locals: {field: "size", label: co.name, fid: co.id, cbid: "size_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @size), cclass: "mfsize" } %>
+						<% end %>
+					</div>
+					<div class="medium-3 columns">
+						<strong><small>Sectors</small></strong>
+						<input id="selectallsectors" name="selectallsectors" type="checkbox" style="font-color: black;" class="filter" checked/>
+						<label for="selectallsectors" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>						
+						<% @profile.sectors.each_with_index do |co, index| %>
+							<%= render partial: "shared/filter_checkbox", locals: {field: "sector", label: co.name, fid: co.id, cbid: "sector_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @sector), cclass: "mfsector" } %>
+						<% end %>
+					</div>
+					<div class="medium-3 columns">
+						<strong><small>Channels</small></strong>
+						<input id="selectallchannels" name="selectallchannels" type="checkbox" style="font-color: black;" class="filter" checked/>
+						<label for="selectallchannels" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>						
+						<% @profile.channels.each_with_index do |co, index| %>
+							<%= render partial: "shared/filter_checkbox", locals: {field: "channel", label: co.name, fid: co.id, cbid: "channel_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @channel), cclass: "mfchannel" } %>
+						<% end %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<%= submit_tag 'Filter Results', class: "tiny radius success button right" %>
+					</div>
+				</div>
+
+			<% end %>
+
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+<% if @matches.blank? %>
+	<div class="row">
+		<div class="medium-12 columns previewtile text-center">
+			<hr>
+			No Matches. Please try altering your filter selections.
+		</div>
+	</div>
+<% else %>
+	<div class="row">
+		<div class="medium-12 columns previewtile text-center">
+			<hr>
+			<%= @matches.count %> matches!
+		</div>
+	</div>
+	<% @matches.each do |match| %>
+		<div class="row">
+			<div class="medium-3 columns previewtile">
+
+			</div>
+
+			<div class="medium-9 columns previewtile">
+				<%= render partial: "/shared/profile/brand_public_profile_tiles", locals: {profile: match} %>
+			</div>
+		</div>
+
+	<% end %>
+<% end %>

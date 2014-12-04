@@ -1,30 +1,11 @@
 <%= render partial: "shared/topbar" %>
 
+<% if @current_user.brand %>
 
-	<div class="row">
-		<div class="small-12 columns previewtile">
+	<%= render partial: "brand" %>
 
-			<%= form_tag all_matches_url, method: 'get' do %>
+<% else %>
 
-
-			<% @countries.each do |co| %>
-				<%= co %><br>
-			<% end %>
-		</div>
-	</div>
-
-
-
-<% @matches.each do |match| %>
-
-	<div class="row">
-		<div class="medium-3 columns previewtile">
-
-		</div>
-
-		<div class="medium-9 columns previewtile">
-			<%= render partial: "/shared/profile/brand_public_profile_tiles", locals: {profile: match} %>
-		</div>
-	</div>
+	<%= render partial: "distributor" %>
 
 <% end %>

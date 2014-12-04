@@ -1,5 +1,6 @@
 class Distributor
   include Mongoid::Document
+  include Mongoid::Timestamps::Short
 
   belongs_to :user
   after_create :init_contact_info
@@ -18,7 +19,7 @@ class Distributor
 	accepts_nested_attributes_for :contact_info
 
 	# Countries of Distribution
-	has_many :export_countries, as: :exportable, dependent: :destroy
+	embeds_many :export_countries, as: :exportable
 
   has_and_belongs_to_many :sectors, inverse_of: nil 
 	has_and_belongs_to_many :channels, inverse_of: nil 
@@ -53,6 +54,9 @@ class Distributor
 	
 	has_many :matches, as: :matchable, dependent: :destroy
 
+
+	# document library
+	has_many :library_documents, as: :documentable, dependent: :destroy
 
 	private 
 

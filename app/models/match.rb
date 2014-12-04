@@ -1,5 +1,6 @@
 class Match
   include Mongoid::Document
+	include Mongoid::Timestamps::Created::Short
 
 	####These are the saved matches of the distributors/brands
   

@@ -44,18 +44,22 @@
 								<%= controller_name == "brands" ? (link_to 'Dashboard', dashboard_url) : "" %>
 								<%= controller_name == "distributors" ? (link_to 'Dashboard', dashboard_url) : "" %>
 								<%= controller_name == "onboard_brand" ? (link_to 'Dashboard', dashboard_url) : "" %> 
-								<%= controller_name == "onboard_distributor" ? (link_to 'Dashboard', dashboard_url) : "" %> 
+								<%= controller_name == "onboard_distributor" ? (link_to 'Dashboard', dashboard_url) : "" %>
+								<%= controller_name == "library_documents" ? (link_to 'Dashboard', dashboard_url) : "" %> 
 								<%#= action_name =~ /dashboard*/ ? "" : "//" %>
 	          </li>
 						<li>
 							<%= link_to 'Market Insight', "#" %>
 						</li>	          
 						<li>
-							<%= link_to 'Your Matches', "/matches" %>
+							<%= link_to 'Your Matches', all_matches_url %>
 						</li>
 						<li>
 							<%= link_to 'Your Messages', "#" %>
-						</li>						
+						</li>
+						<li>
+							<%= link_to 'Your Document Library', library_documents_url %>
+						</li>
 	          <% if @current_user.distributor %>
 	          <li>
 	          	<%= link_to 'Your Profile', distributor_full_profile_url %>

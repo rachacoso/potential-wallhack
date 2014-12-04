@@ -100,17 +100,20 @@ var countriesArray = $.map(countries, function (value, key) { return { value: va
       }
   });
 
-  $('.sectors').click(function(event) {  //on click of ANY SECTOR - make sure OTHER deselected
+  $('.sectors').click(function(event) {  //on click of ANY SECTOR - make sure OTHER & SELECT ALL deselected
       if(this.checked) { // check select status
-	      	$('#sectors_other').each(function() { //loop through each checkbox
-              this.checked = false; //deselect all checkboxes with id "sectors_other"                       
-          });
+      	$('#sectors_other').each(function() { //loop through each checkbox
+            this.checked = false; //deselect all checkboxes with id "sectors_other"                       
+        });        
       }
+    	$('#selectallsectors').each(function() { //loop through each checkbox
+          this.checked = false; //deselect all checkboxes with id "sectors_other"                       
+      });        
   });
     
   $('#sectors_other').click(function(event) {  //on click of 'OTHER' SECTOR
       if(this.checked) { // check select status
-          $('.sectors').each(function() { //loop through each checkbox
+          $('.sectors,#selectallsectors').each(function() { //loop through each checkbox
               this.checked = false;  //select all checkboxes with class "sectors"               
           });
       }
@@ -129,6 +132,112 @@ var countriesArray = $.map(countries, function (value, key) { return { value: va
           });         
       }
   });
+
+  $('.channels').click(function(event) {  //on click of ANY CHANNEL - make sure SELECT ALL deselected
+    	$('#selectallchannels').each(function() { //loop through each checkbox
+          this.checked = false; //deselect all checkboxes with id "sectors_other"                       
+      });        
+  });
+
+
+
+  // MATCHING FILTERS
+
+  //Countries
+  $('#selectallcountries').click(function(event) {  //on click 
+      if(this.checked) { // check select status
+          $('.mfcountry').each(function() { //loop through each checkbox
+              this.checked = true;  //select all checkboxes with class "checkbox1"               
+          });
+      }else{
+          $('.mfcountry').each(function() { //loop through each checkbox
+              this.checked = false; //deselect all checkboxes with class "checkbox1"                       
+          });         
+      }
+  });
+
+  $('.mfcountry').click(function(event) {  //on click of ANY CHANNEL - make sure SELECT ALL deselected
+    	$('#selectallcountries').each(function() { //loop through each checkbox
+          this.checked = false; //deselect all checkboxes with id "sectors_other"                       
+      });        
+  });
+
+  //Countries of Distribution
+  $('#selectallcountriesofdistro').click(function(event) {  //on click 
+      if(this.checked) { // check select status
+          $('.mfcountryofdistro').each(function() { //loop through each checkbox
+              this.checked = true;  //select all checkboxes with class "checkbox1"               
+          });
+      }else{
+          $('.mfcountryofdistro').each(function() { //loop through each checkbox
+              this.checked = false; //deselect all checkboxes with class "checkbox1"                       
+          });         
+      }
+  });
+
+  $('.mfcountryofdistro').click(function(event) {  //on click of ANY CHANNEL - make sure SELECT ALL deselected
+      $('#selectallcountriesofdistro').each(function() { //loop through each checkbox
+          this.checked = false; //deselect all checkboxes with id "sectors_other"                       
+      });        
+  });
+
+  //Sizes
+  $('#selectallsizes').click(function(event) {  //on click 
+      if(this.checked) { // check select status
+          $('.mfsize').each(function() { //loop through each checkbox
+              this.checked = true;  //select all checkboxes with class "checkbox1"               
+          });
+      }else{
+          $('.mfsize').each(function() { //loop through each checkbox
+              this.checked = false; //deselect all checkboxes with class "checkbox1"                       
+          });         
+      }
+  });
+
+  $('.mfsize').click(function(event) {  //on click of ANY CHANNEL - make sure SELECT ALL deselected
+    	$('#selectallsizes').each(function() { //loop through each checkbox
+          this.checked = false; //deselect all checkboxes with id "sectors_other"                       
+      });        
+  });
+
+  //Sectors
+  $('#selectallsectors').click(function(event) {  //on click 
+      if(this.checked) { // check select status
+          $('.mfsector').each(function() { //loop through each checkbox
+              this.checked = true;  //select all checkboxes with class "checkbox1"               
+          });
+      }else{
+          $('.mfsector').each(function() { //loop through each checkbox
+              this.checked = false; //deselect all checkboxes with class "checkbox1"                       
+          });         
+      }
+  });
+
+  $('.mfsector').click(function(event) {  //on click of ANY CHANNEL - make sure SELECT ALL deselected
+    	$('#selectallsectors').each(function() { //loop through each checkbox
+          this.checked = false; //deselect all checkboxes with id "sectors_other"                       
+      });        
+  });
+
+  //Channels
+  $('#selectallchannels').click(function(event) {  //on click 
+      if(this.checked) { // check select status
+          $('.mfchannel').each(function() { //loop through each checkbox
+              this.checked = true;  //select all checkboxes with class "checkbox1"               
+          });
+      }else{
+          $('.mfchannel').each(function() { //loop through each checkbox
+              this.checked = false; //deselect all checkboxes with class "checkbox1"                       
+          });         
+      }
+  });
+
+  $('.mfchannel').click(function(event) {  //on click of ANY CHANNEL - make sure SELECT ALL deselected
+    	$('#selectallchannels').each(function() { //loop through each checkbox
+          this.checked = false; //deselect all checkboxes with id "sectors_other"                       
+      });        
+  });    
+
 
 
 });
@@ -163,5 +272,18 @@ function addCheckbox(name) {
 }
 
 
+$(document).foundation({
+  accordion: {
+    // specify the class used for accordion panels
+    // content_class: 'content',
+    // specify the class used for active (or open) accordion panels
+    // active_class: 'active',
+    // allow multiple accordion panels to be active at the same time
+    multi_expand: true,
+    // allow accordion panels to be closed by clicking on their headers
+    // setting to false only closes accordion panels when another is opened
+    toggleable: true
+  }
+});
 
 

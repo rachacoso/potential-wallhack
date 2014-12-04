@@ -357,54 +357,121 @@ input[type=radio]+ label:active  {
 }
 
 // CHECKBOX
-/*
-  Hide checkbox
-  we will use just the label to create pushbutton effect
-*/
-input[type=checkbox] {
-  display:none; 
-  margin:10px;
+
+// ON EDIT SCREENS
+.editform {
+
+  /*
+    Hide checkbox
+    we will use just the label to create pushbutton effect
+  */
+
+  input[type=checkbox] {
+    display:none; 
+    margin:10px;
+  }
+
+
+  /*
+    Change the look'n'feel of labels (which are adjacent to radiobuttons).
+    Add some margin, padding to label
+  */
+  input[type=checkbox] + label {
+    display:inline-block;
+    transition: color 0.5s;
+    transition: background-color 0.5s;
+    transition: border 0.5s;  
+    margin: 2px;
+    padding: 4px 12px;
+    background-color: scale-color($input-background-color, $lightness: 80%);
+    border: 1px solid scale-color($input-background-color, $lightness: 30%);
+    // background-color:#969696;
+    // border-color: #ddd;
+    color: #7f7f7f;
+    width: 100%;
+    &::before { 
+      content: "\25CE\0020";    
+    }
+  }
+  input[type=checkbox] + label:hover ,
+  input[type=checkbox]+ label:active  {
+    color: #000;
+  }
+
+  /*
+   Change background color for label next to checked radio button
+   to make it look like highlighted button
+  */
+  input[type=checkbox]:checked + label { 
+    background-image: none;
+    background-color: scale-color($input-background-color, $lightness: 30%);
+    border: 1px solid scale-color($input-background-color, $lightness: -80%);
+    color: #000;
+    // background-color: #e7e7e7;
+    &::before { 
+      content: "\25C9\0020";    
+    }
+  }
+
 }
 
-/*
-  Change the look'n'feel of labels (which are adjacent to radiobuttons).
-  Add some margin, padding to label
-*/
-input[type=checkbox] + label {
-  display:inline-block;
-  transition: color 0.5s;
-  transition: background-color 0.5s;
-  transition: border 0.5s;  
-  margin: 2px;
-  padding: 4px 12px;
-  background-color: scale-color($input-background-color, $lightness: 80%);
-  border: 1px solid scale-color($input-background-color, $lightness: 30%);
-  // background-color:#969696;
-  // border-color: #ddd;
-  color: #7f7f7f;
-  width: 100%;
-  &::before { 
-    content: "\25CE\0020";    
-  }
-}
-input[type=checkbox] + label:hover ,
-input[type=checkbox]+ label:active  {
-  color: #000;
-}
+// ON FILTER FORM (FOR MATCHES)
 
-/*
- Change background color for label next to checked radio button
- to make it look like highlighted button
-*/
-input[type=checkbox]:checked + label { 
-  background-image: none;
-  background-color: scale-color($input-background-color, $lightness: 30%);
-  border: 1px solid scale-color($input-background-color, $lightness: -80%);
-  color: #000;
-  // background-color: #e7e7e7;
-  &::before { 
-    content: "\25C9\0020";    
+.filterform {
+
+  /*
+    Hide checkbox
+    we will use just the label to create pushbutton effect
+  */
+
+  & input[type=checkbox] {
+    display:none; 
+    margin:10px;
   }
+
+
+  /*
+    Change the look'n'feel of labels (which are adjacent to radiobuttons).
+    Add some margin, padding to label
+  */
+  input[type=checkbox] + label {
+    display:inline-block;
+    transition: color 0.5s;
+    transition: background-color 0.5s;
+    transition: border 0.5s;  
+    margin: 2px;
+    padding: 4px 12px;
+    background-color: scale-color($input-background-color, $lightness: 80%);
+    border: 1px solid scale-color($input-background-color, $lightness: 30%);
+    // background-color:#969696;
+    // border-color: #ddd;
+    color: #7f7f7f;
+    width: 100%;
+    font-size: 0.65em;
+    &::before { 
+      content: "\25CE\0020";    
+    }
+  }
+  input[type=checkbox] + label:hover ,
+  input[type=checkbox]+ label:active  {
+    color: #000;
+  }
+
+  /*
+   Change background color for label next to checked radio button
+   to make it look like highlighted button
+  */
+  input[type=checkbox]:checked + label { 
+    background-image: none;
+    background-color: scale-color($input-background-color, $lightness: 30%);
+    border: 1px solid scale-color($input-background-color, $lightness: -80%);
+    color: #000;
+    // background-color: #e7e7e7;
+    &::before { 
+      content: "\25C9\0020";    
+    }
+  }
+
 }
 
 .customchanneldisplay {

@@ -19,7 +19,7 @@
 <br>
 	<%= form_for @distributor, url: distributor_url do |f| %>
 	<%= hidden_field_tag :redirect, 'four' %>	
-	<div class="row">
+	<div class="row editform">
 		<div class="medium-10 columns push-2">
 		<%= f.hidden_field :company_name %>		
       <input id="selectallsectors" name="selectallsectors" type="checkbox" />
@@ -52,9 +52,9 @@
 		</div>
 	</div>	
 <br>
-	<div class="row">
+	<div class="row editform">
 		<div class="medium-10 columns push-2">						
-      <input id="selectallchannels" name="selectallsectors" type="checkbox" style="font-color: black;"/>
+      <input id="selectallchannels" name="selectallchannels" type="checkbox" style="font-color: black;"/>
       <label for="selectallchannels" style="color: black; border: 0; background: transparent;">Select All</label>			
 			<% Channel.each do |ch| %>
 		    	<%= check_box_tag "channels[#{ch.id}]", ch.id, (@distributor.channels.find(ch) rescue false) ? true : false, class: "channels"  %>

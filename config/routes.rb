@@ -49,7 +49,6 @@ Rails.application.routes.draw do
   get    '/distributors/full_profile' => 'distributors#full_profile', as: 'distributor_full_profile'
   patch  '/distributors' => 'distributors#update'
   patch  '/distributor_brands' => 'distributor_brands#update'
-  post    '/distributors/matches' => 'distributors#get_matches', as: 'distributor_matches'
   
   get    '/brands' => 'brands#edit', as: 'brand'
   get    '/brands/public_profile' => 'brands#public_profile', as: 'brand_public_profile'
@@ -75,7 +74,8 @@ Rails.application.routes.draw do
   get '/onboard/brand/eight' => 'onboard_brand#eight', as: 'onboard_brand_eight'
 
   get '/matches' => 'matches#index', as: 'all_matches'
-
+  post '/matches' => 'matches#index'
+  get '/matches/save' => 'matches#save_match', as: 'save_match'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

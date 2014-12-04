@@ -124,4 +124,13 @@ module ApplicationHelper
 		end
 	end
 
+	# check if filter checkbox should be on or off (based on what was selected on prior searches)
+	def filter_on_or_off(item, checklist)
+		if checklist && checklist.include?(item)
+			return true
+		else
+			return false
+		end
+	end
+
 end

@@ -3,7 +3,7 @@ class ExportCountry
 
   # used for both brands (countries of export) and distributors (countries of distribution)
 
-  belongs_to :exportable, polymorphic: true
+  embedded_in :exportable, polymorphic: true
 
   field :country, type: String
 

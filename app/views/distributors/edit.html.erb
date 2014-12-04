@@ -179,7 +179,7 @@
 						</div>
 					</div>
 
-					<div class="row">	
+					<div class="row editform">	
 						<div class="medium-10 push-2 columns">		
 							<% Sector.each do |sc| %>
 								<%= check_box_tag "sectors[#{sc.id}]", sc.id, (@distributor.sectors.find(sc) rescue false) ? true : false %>
@@ -323,7 +323,7 @@
 						</div>
 					</div>
 
-					<div class="row">
+					<div class="row editform">
 						<div class="medium-10 push-2 columns">						
 							<h3>Standard Channels</h3>
 							<% Channel.each do |ch| %>
@@ -631,7 +631,7 @@
 							<h3>Where have you marketed/advertised your products?</h3>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row editform">
 						<div class="medium-4 columns">
 							<%= render partial: "shared/checkbox", locals: {field: "marketing_via_print", label: 'Print' } %>
 							<%= render partial: "shared/checkbox", locals: {field: "marketing_via_online", label: 'Online' } %>

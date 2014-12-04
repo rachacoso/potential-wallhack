@@ -18,7 +18,7 @@
 <br>
 	<%= form_for @brand, url: brand_url do |f| %>
 	<%= hidden_field_tag :redirect, 'three' %>	
-	<div class="row">
+	<div class="row editform">
 		<div class="medium-10 columns push-2">
 		<%= f.hidden_field :company_name %>		
       <input id="selectallsectors" name="selectallsectors" type="checkbox" />
@@ -51,7 +51,7 @@
 		</div>
 	</div>	
 <br>
-	<div class="row">
+	<div class="row editform">
 		<div class="medium-10 columns push-2">						
       <input id="selectallchannels" name="selectallsectors" type="checkbox" style="font-color: black;"/>
       <label for="selectallchannels" style="color: black; border: 0; background: transparent;">Select All</label>			

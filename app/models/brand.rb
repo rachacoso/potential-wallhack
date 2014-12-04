@@ -1,6 +1,7 @@
 class Brand
   include Mongoid::Document
-
+	include Mongoid::Timestamps::Short
+	
  	belongs_to :user
 	after_create :init_contact_info
 
@@ -40,7 +41,7 @@ class Brand
 
 	# Countries Where Exported
 	# field :countries_where_exported, type: String
-	has_many :export_countries, as: :exportable, dependent: :destroy
+	embeds_many :export_countries, as: :exportable
 
 	has_many :matches, as: :matchable, dependent: :destroy
 

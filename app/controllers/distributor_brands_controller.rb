@@ -40,9 +40,9 @@ class DistributorBrandsController < ApplicationController
 	def go_to_redirect(redir = nil)
 
 		if params[:ob] && redir #onboard and redirect
-			redirect_to onboard_distributor_four_url + "#a-" + redir, :flash => { :make_active => redir }
+			redirect_to onboard_distributor_five_url + "#a-" + redir, :flash => { :make_active => redir }
 		elsif params[:ob] #onboard no redirect
-			redirect_to onboard_distributor_four_url
+			redirect_to onboard_distributor_five_url
 		elsif redir # main edit page and redirect
 			redirect_to distributor_url + "#a-" + redir, :flash => { :make_active => redir }
 		else # main edit page

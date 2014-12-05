@@ -113,10 +113,51 @@ class MatchesController < ApplicationController
 
   end
 
+ 	def index_saved_matches
+ 	
+		@profile = @current_user.brand || @current_user.distributor
+
+		### Full match set is all brands in the Distributor's sectors minus any countries that have not declared a country 
+		### or Countries of Distribution
+		### (will be updated to be all countries with completed profiles)
+		@matches = @profile.saved_matches.uniq
+
+ 		render "index"
+ 	end 
+
+
+
   def save_match
 
+  	if params[:match_id]
+  		mid = params[:match_id]
+  		u = @current_user.distributor || @current_user.brand
+	  	if @current_user.distributor 
+	  		match = Brand.find(mid)
+		  	u.saved_matches << match
+		  	u.save!
+		  else # is a brand
+	  		match = Distributor.find(mid)
+		  	u.saved_matches << match
+		  	u.save!
+		  end
+	  end 
+	  redirect_to :back
 
   end
+
+
+  def unsave_match
+
+  	if params[:match_id]
+  		u = @current_user.distributor || @current_user.brand
+  		mid = u.saved_matches.find(params[:match_id])
+  		u.saved_matches.delete(mid)
+	  	u.save!
+	  end 
+	  redirect_to :back
+
+  end 
 
 
 end

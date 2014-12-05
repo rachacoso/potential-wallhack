@@ -1,3 +1,7 @@
+
+<% if action_name == "index" %>
+
+
 	<div class="row">
 		<div class="small-12 columns previewtile">
 
@@ -44,22 +48,31 @@
 				</div>
 
 			<% end %>
-
-<hr>
 		</div>
 	</div>
+
+<% end %>
+
+
 
 
 <% if @matches.blank? %>
 	<div class="row">
+		<hr>
 		<div class="medium-12 columns previewtile text-center">
-			No Matches. Please try altering your filter selections.
+			<% if action_name == "index" %>
+				No Matches. Please try altering your filter selections.
+			<% elsif action_name == "index_saved_matches" %>
+				No Saved Matches. You can save matches on the All Matches screen.
+			<% else %>
+				No Matches.
+			<% end %>
 		</div>
 	</div>
 <% else %>
 	<div class="row">
 		<div class="medium-12 columns previewtile text-center">
-			<%= @matches.count %> matches!
+			<%= @matches.count %> <%= @matches.count > 1 ? "matches!" : "match!" %>
 		</div>
 	</div>
 	<% @matches.each do |match| %>
@@ -69,7 +82,13 @@
 			</div>
 
 			<div class="medium-9 columns previewtile">
+				<% if @current_user.brand.saved_matches.find(match.id) %>
+					Saved Match (<%= link_to 'Unsave Match', unsave_match_url(match.id) %>)
+				<% else %>
+					<%= link_to 'Save Match', save_match_url(match.id) %>
+				<% end %>
 				<%= render partial: "/shared/profile/distributor_public_profile_tiles", locals: {profile: match} %>
+
 			</div>
 		</div>
 

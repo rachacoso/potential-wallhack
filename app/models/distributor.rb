@@ -1,6 +1,7 @@
 class Distributor
   include Mongoid::Document
   include Mongoid::Timestamps::Short
+	include Mongoid::Paperclip
 
   belongs_to :user
   after_create :init_contact_info
@@ -54,9 +55,42 @@ class Distributor
 	
 	has_many :matches, as: :matchable, dependent: :destroy
 
+	# array of saved brands
+	has_and_belongs_to_many :saved_matches, class_name: "Brand", inverse_of: nil
 
 	# document library
 	has_many :library_documents, as: :documentable, dependent: :destroy
+
+
+	# VERIFICATION
+	field :verified_webiste, type: Boolean
+	field :verified_facebook, type: Boolean
+	field :verified_linkedin, type: Boolean
+	field :verified_brand, type: Boolean
+	# place to put info on the brand verification (e.g. name, date, contact etc.)
+	field :verified_brand_notes, type: String
+	field :verified_location, type: Boolean
+	field :verified_brand_display, type: Boolean
+  has_mongoid_attached_file :verified_location_photo, 
+  	# :path => ':attachment/:id/:style.:extension',
+	  # :url => ":s3_domain_url",
+	  :styles => {
+	    :small    => ['100x100#'],
+	    :medium		=> ['400'],
+	    :large    => ['800>']
+	  }
+  has_mongoid_attached_file :verified_brand_display_photo, 
+  	# :path => ':attachment/:id/:style.:extension',
+	  # :url => ":s3_domain_url",
+	  :styles => {
+	    :small    => ['100x100#'],
+	    :medium		=> ['400'],
+	    :large    => ['800>']
+	  }	  
+	validates_attachment_content_type :verified_location_photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
+	validates_attachment_content_type :verified_brand_display_photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
+
+
 
 	private 
 

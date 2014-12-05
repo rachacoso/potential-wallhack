@@ -1036,7 +1036,7 @@ $progress-meter-success-color: green;
 // $sub-nav-font-family: $body-font-family;
 // $sub-nav-font-size: rem-calc(14);
 // $sub-nav-font-color: #999;
-$sub-nav-font-color: $link-color;
+$sub-nav-font-color: #aaa;
 // $sub-nav-font-weight: $font-weight-normal;
 // $sub-nav-text-decoration: none;
 // $sub-nav-padding: rem-calc(3 16);
@@ -1047,8 +1047,10 @@ $sub-nav-border-radius: 0px 0px 8px 3px;
 // We use these to control the active item styles
 // $sub-nav-active-font-weight: $font-weight-normal;
 // $sub-nav-active-bg: $primary-color;
+$sub-nav-active-bg: white;
 // $sub-nav-active-bg-hover: scale-color($sub-nav-active-bg, $lightness: -14%);
 // $sub-nav-active-color: #fff;
+$sub-nav-active-color: $primary-color;
 // $sub-nav-active-padding: $sub-nav-padding;
 // $sub-nav-active-cursor: default;
 

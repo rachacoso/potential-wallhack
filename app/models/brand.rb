@@ -1,7 +1,7 @@
 class Brand
   include Mongoid::Document
 	include Mongoid::Timestamps::Short
-	
+
  	belongs_to :user
 	after_create :init_contact_info
 
@@ -44,6 +44,11 @@ class Brand
 	embeds_many :export_countries, as: :exportable
 
 	has_many :matches, as: :matchable, dependent: :destroy
+
+	# array of saved distributors
+	has_and_belongs_to_many :saved_matches, class_name: "Distributor", inverse_of: nil
+
+
 
 	private 
 

@@ -74,8 +74,10 @@ Rails.application.routes.draw do
   get '/onboard/brand/eight' => 'onboard_brand#eight', as: 'onboard_brand_eight'
 
   get '/matches' => 'matches#index', as: 'all_matches'
+  get '/savedmatches' => 'matches#index_saved_matches', as: 'saved_matches'
   post '/matches' => 'matches#index'
-  get '/matches/save' => 'matches#save_match', as: 'save_match'
+  get '/matches/save/:match_id' => 'matches#save_match', as: 'save_match'
+  get '/matches/unsave/:match_id' => 'matches#unsave_match', as: 'unsave_match'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

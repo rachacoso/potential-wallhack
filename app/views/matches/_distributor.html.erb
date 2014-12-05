@@ -52,6 +52,7 @@
 			<% end %>
 
 		</div>
+		<hr>
 	</div>
 
 <% end %>
@@ -67,7 +68,6 @@
 <% if @matches.blank? %>
 	<div class="row">
 		<div class="medium-12 columns previewtile text-center">
-			<hr>
 			<% if action_name == "index" %>
 				No Matches. Please try altering your filter selections.
 			<% elsif action_name == "index_saved_matches" %>
@@ -80,25 +80,24 @@
 <% else %>
 	<div class="row">
 		<div class="medium-12 columns previewtile text-center">
-			<hr>
-			<%= @matches.count %> <%= @matches.count > 1 ? "matches!" : "match!" %>
+			<% if action_name == "index" %>
+				<%= @matches.count %> <%= @matches.count > 1 ? "matches!" : "match!" %>
+			<% else %>
+				<%= @matches.count %> <%= @matches.count > 1 ? "saved matches!" : "saved match!" %>
+			<% end %>
 		</div>
 	</div>
 	<% @matches.each do |match| %>
-		<div class="row">
-			<div class="medium-3 columns previewtile">
+		<div id="pot_<%= match.id %>">
+			<div class="row">
+				<div class="medium-3 columns previewtile">
 
+				</div>
+
+				<div class="medium-9 columns previewtile">
+					<%= render partial: "/shared/profile/brand_public_profile_tiles", locals: {profile: match} %>
+				</div>
 			</div>
-
-			<div class="medium-9 columns previewtile">
-				<% if @current_user.distributor.saved_matches.find(match.id) %>
-					Saved Match (<%= link_to 'Unsave Match', unsave_match_url(match.id) %>)
-				<% else %>
-					<%= link_to 'Save Match', save_match_url(match.id) %>
-				<% end %>
-				<%= render partial: "/shared/profile/brand_public_profile_tiles", locals: {profile: match} %>
-			</div>
-		</div>
-
+		</div> <!-- /.pot_<%= match.id %> -->
 	<% end %>
 <% end %>

@@ -1,0 +1,5 @@
+$('#pst_<%= @mid %>').html("<%= j (render 'save_link') %>");
+
+<% if @remove == "true" %>
+	$('#pot_<%= @mid %>').hide(350);
+<% end %>

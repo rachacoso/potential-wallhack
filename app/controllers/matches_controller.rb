@@ -130,19 +130,23 @@ class MatchesController < ApplicationController
   def save_match
 
   	if params[:match_id]
-  		mid = params[:match_id]
+  		@mid = params[:match_id]
   		u = @current_user.distributor || @current_user.brand
 	  	if @current_user.distributor 
-	  		match = Brand.find(mid)
+	  		match = Brand.find(@mid)
 		  	u.saved_matches << match
 		  	u.save!
 		  else # is a brand
-	  		match = Distributor.find(mid)
+	  		match = Distributor.find(@mid)
 		  	u.saved_matches << match
 		  	u.save!
 		  end
 	  end 
-	  redirect_to :back
+	 
+	  respond_to do |format|
+	    format.html
+	    format.js
+	  end 
 
   end
 
@@ -151,11 +155,20 @@ class MatchesController < ApplicationController
 
   	if params[:match_id]
   		u = @current_user.distributor || @current_user.brand
-  		mid = u.saved_matches.find(params[:match_id])
-  		u.saved_matches.delete(mid)
+  		@mid = params[:match_id]
+  		match = u.saved_matches.find(@mid)
+  		u.saved_matches.delete(match)
 	  	u.save!
 	  end 
-	  redirect_to :back
+
+	  if params[:remove]
+	  	@remove = params[:remove]
+	  end
+
+	  respond_to do |format|
+	    format.html
+	    format.js
+	  end 	  
 
   end 
 

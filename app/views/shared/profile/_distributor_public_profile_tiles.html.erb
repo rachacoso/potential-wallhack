@@ -1,7 +1,7 @@
 
 <div class="profile-outer-tile">
 
-<%= render partial: "savebutton", locals: {profile: profile} %>
+<%= controller_name == "matches" ? (render partial: "savebutton", locals: {profile: profile}) : "" %>
 
 	<ul class="small-block-grid-1 medium-block-grid-3">
 

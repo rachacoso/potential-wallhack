@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 	skip_before_action :require_login, only: [:new, :create]
 
 	def index
+		# @users = User.all
 		@users = User.all
 
 	end
@@ -134,6 +135,10 @@ class UsersController < ApplicationController
 				redirect_to users_path
 			end
 
+		when 'adminsubscriber'
+			user = User.find(params[:id])
+			user.update(user_parameters)
+			redirect_to :back
 		end
 
 
@@ -144,5 +149,15 @@ class UsersController < ApplicationController
 		user_to_nix.destroy
 		redirect_to users_url, notice: "You have successfully deleted the user #{user_to_nix.email}."
 	end
+
+
+	private
+
+  def user_parameters
+    params.require(:user).permit(
+			:administrator,
+			:subscriber
+		)
+	end	
 
 end

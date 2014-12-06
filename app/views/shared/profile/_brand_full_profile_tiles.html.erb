@@ -2,6 +2,8 @@
 
 <div class="profile-outer-tile">
 
+<%= controller_name == "matches" ? (render partial: "savebutton", locals: {profile: profile}) : "" %>
+
 	<div class="row">
 		<div class="small-12 columns">
 			<h1><strong><%= profile.company_name %></strong></h1>

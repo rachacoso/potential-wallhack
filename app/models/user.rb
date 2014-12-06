@@ -7,6 +7,7 @@ class User
 	field :email, type: String
 	field :password_digest, type: String
 	field :administrator, type: Boolean
+	field :subscriber, type: Boolean
 
 	validates :email, presence: true, uniqueness: true
 
@@ -23,6 +24,14 @@ class User
 			return "brand"
 		else
 			return "distributor"
+		end
+	end
+
+	def subscriber?
+		if self.subscriber
+			return true
+		else
+			return false
 		end
 	end
 

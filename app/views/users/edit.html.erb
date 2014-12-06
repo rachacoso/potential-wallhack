@@ -1,16 +1,28 @@
 <%= render partial: "shared/topbar" %>
 
+<% content_for :subnav do %>
+<div class="row">
+	<div class="small-12 columns">
+		<dl class="sub-nav">
+		  <dd><%= link_to 'All Users', users_url %></dd>
+		  <dd class="active"><%= link_to "#" do %> Edit<strong>User - <%=@user.email%></strong> <% end %></dd>
+		</dl>
+	</div>
+</div>
+<% end %>
+
+<% if flash[:notice] %>
 <div class="row">
 	<div class="small-5 columns panel">
-		<h2>Edit<br><strong>User - <%=@user.email%></strong></h2>
-		<% if flash[:notice] %>
+		
 				<div data-alert class="alert-box alert round">
 			  	<%= flash[:notice] %>
 				  <a href="#" class="close">&times;</a>
 				</div>
-		<% end %>
+		
 	</div>
 </div>
+<% end %>
 
 <div class="row">
 	
@@ -40,49 +52,17 @@
 </div>
 
 
-<% content_for :admin_footer do %>
-
-<!-- BEGIN SECTION SPACER -->
-<div class="RASectionSpacer">
+<div class="row">
+	
+		<div class="small-5 columns panel">
+			<h4>Change<br><strong>password</strong></h4>
+				<%= form_for @user, url: user_path(@user) do |f| %>
+					<%= hidden_field_tag 'update_type', 'adminsubscriber' %>
+					<%= f.check_box :administrator %>
+					<%= f.check_box :subscriber %>
+					<%= f.submit 'update', class: "tiny radius success button" %> <%= link_to 'Cancel', users_path, class: "tiny radius info button"  %>
+				<% end %>
+		</div>
 
 </div>
-<!-- END SECTION SPACER -->
-<div id="adminfooter">
-  <div class="wrap">
-    <div class="row">
-  
-		  <div class="small-4 columns leftadminmenu">
-		    <div class="small-12 columns">
-		      <%# dummy div for adminmenu formatting css quirk %>
-		    </div>
-		    <div class="small-4 columns text-right">
-		      <%= link_to users_url do %>
-		        All<br><strong>Users</strong> 
-		      <% end %>
-		    </div>
-		    <div class="small-8 columns text-left">
-		      <strong><%=@user.email%></strong>
-		    </div>
-		  </div>
-		  
-		  <div class="small-2 columns rightadminmenu">
-		    <div class="small-12 columns text-left end admin-nav-active">
-		      Edit<br><strong>User</strong>
-		    </div>
-		  </div>
 
-		  <div class="small-3 columns">
-			  &nbsp;
-		  </div>
-
-      <div class="small-3 columns text-right rightadminmenu">
-        Los Angeles Controller <strong>Audits</strong><br>
-        Welcome, <strong><%= @current_user.email %></strong><br>
-        <%= link_to 'Logout', logout_url %>
-      </div>
-
-    </div>
-  </div>
-</div>		  
-
-<% end %>

@@ -6,7 +6,7 @@
 	  <ul class="title-area">
 	    <li class="name">
 				<h1 class="tk-aw-conqueror-inline">&nbsp;Landing
-				<% if controller_name == "admin" %>
+				<% if controller_name == "admin" || controller_name == "users" %>
 					<small>for Administrators</small>
 				<% elsif @current_user %>
 					<small><%= @current_user.distributor ? "for Distributors" : "for Brands" %></small>

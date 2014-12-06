@@ -163,6 +163,8 @@ class MatchesController < ApplicationController
 
 	  if params[:remove]
 	  	@remove = params[:remove]
+	  	@profile = @current_user.brand || @current_user.distributor
+	  	@matches = @profile.saved_matches.uniq
 	  end
 
 	  respond_to do |format|

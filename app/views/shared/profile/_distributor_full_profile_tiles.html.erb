@@ -1,6 +1,8 @@
 
 		<div class="profile-outer-tile">
 
+<%= controller_name == "matches" ? (render partial: "savebutton", locals: {profile: profile}) : "" %>
+
 			<div class="row">
 				<div class="small-12 columns">
 					<h1><strong><%= profile.company_name %></strong></h1>
@@ -182,15 +184,15 @@
 						Product Marketing:<br>
 						<div class="row">
 							<div class="medium-6 columns">
-								<%= render partial: "distributor_marketing_type", locals: {name: "Print" ,p: profile.marketing_via_print}%>
-								<%= render partial: "distributor_marketing_type", locals: {name: "Online" ,p: profile.marketing_via_online}%>
-								<%= render partial: "distributor_marketing_type", locals: {name: "Email" ,p: profile.marketing_via_email}%>
-								<%= render partial: "distributor_marketing_type", locals: {name: "Outdoor" ,p: profile.marketing_via_outdoor}%>
+								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Print" ,p: profile.marketing_via_print}%>
+								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Online" ,p: profile.marketing_via_online}%>
+								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Email" ,p: profile.marketing_via_email}%>
+								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Outdoor" ,p: profile.marketing_via_outdoor}%>
 							</div>
 							<div class="medium-6 columns">
-								<%= render partial: "distributor_marketing_type", locals: {name: "Events" ,p: profile.marketing_via_events}%>
-								<%= render partial: "distributor_marketing_type", locals: {name: "Direct Mail" ,p: profile.marketing_via_direct_mail}%>
-								<%= render partial: "distributor_marketing_type", locals: {name: "Classes" ,p: profile.marketing_via_classes}%>
+								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Events" ,p: profile.marketing_via_events}%>
+								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Direct Mail" ,p: profile.marketing_via_direct_mail}%>
+								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Classes" ,p: profile.marketing_via_classes}%>
 							</div>
 						</div>
 							

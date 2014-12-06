@@ -1,11 +1,16 @@
 <%= render partial: "shared/topbar" %>
 
-
+<% content_for :subnav do %>
 <div class="row">
-	<div class="small-10 small-centered columns panel">
-		<h2>All <strong>Users</strong></h2>
+	<div class="small-12 columns">
+		<dl class="sub-nav">
+		  <dd class="active"><%= link_to '#' do %> All <strong>Users</strong> <% end %></dd>
+		</dl>
 	</div>
 </div>
+<% end %>
+
+
 <div class="row">
 	<div class="small-10 small-centered columns panel">
 		<% if flash[:notice] %>

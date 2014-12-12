@@ -6,6 +6,7 @@
 		<dl class="sub-nav">
 		  <dd <%= action_name == "index" ? "class='active'".html_safe : ""%>><%= link_to 'All Matches', all_matches_url %></dd>
 		  <dd <%= action_name == "index_saved_matches" ? "class='active'".html_safe : ""%>><%= link_to 'Saved Matches', saved_matches_url %></dd>
+		  <dd <%= action_name == "index_contacted_matches" ? "class='active'".html_safe : ""%>><%= link_to 'Contacted Matches', contacted_matches_url %></dd>
 		</dl>
 	</div>
 </div>

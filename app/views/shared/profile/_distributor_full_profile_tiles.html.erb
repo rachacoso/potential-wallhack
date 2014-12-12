@@ -1,17 +1,26 @@
 
 		<div class="profile-outer-tile">
 
-<%= controller_name == "matches" ? (render partial: "savebutton", locals: {profile: profile}) : "" %>
-
 			<div class="row">
-				<div class="small-12 columns">
-					<h1><strong><%= profile.company_name %></strong></h1>
-					<h3><strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>
+				<div class="medium-7 columns redborder">
+					<h2><strong><%= profile.company_name %></strong></h2>
+					<h3>web <%= link_to profile.website, "//#{profile.website}" %></h3>
 				</div>
+				<div class="medium-5 columns redborder">
+				
+						<div class="medium-4 columns redborder">
+						</div>
+						<div class="medium-4 columns">
+						</div>						
+						<div class="medium-4 columns">
+							<%= controller_name == "matches" ? (render partial: "savebutton", locals: {profile: profile}) : "" %>
+						</div>
+				
+				</div>				
 			</div>
 
 			<ul class="small-block-grid-1 medium-block-grid-3">
-			<hr>
+			
 				<li>
 					<div class="row">
 						<div class="small-3 columns">
@@ -53,7 +62,6 @@
 						</div>
 					</div>
 				</li>
-			<hr>
 			</ul>
 
 	<ul class="small-block-grid-1 medium-block-grid-2">

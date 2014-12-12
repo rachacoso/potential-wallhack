@@ -1,59 +1,57 @@
 
 
 <div class="row">
-<div class="medium-3 columns">
+<div class="medium-3 columns <%= action_name == "index" ? "panel" : "" %>">
 
 <% if action_name == "index" %>
-
-			<%= form_tag all_matches_url, method: 'post' do %>
-
-				<div class="row filterform">
-					<div class="small-12 columns">
-						<strong><small>Countries</small></strong>
-						<input id="selectallcountries" name="selectallcountries" type="checkbox" style="font-color: black;" class="filter" checked/>
-						<label for="selectallcountries" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>							
-						<% @countries.each_with_index do |co, index| %>
-							<%= render partial: "shared/filter_checkbox", locals: {field: "country", label: co, fid: co, cbid: "country_#{index}", on_off_switch: filter_on_or_off(co, @country), cclass: "mfcountry" } %>
-						<% end %>
-					</div>
-				</div>
-				<div class="row filterform">					
-					<div class="small-12 columns">
-						<strong><small>Company Size</small></strong>
-						<input id="selectallsizes" name="selectallsizes" type="checkbox" style="font-color: black;" class="filter" checked/>
-						<label for="selectallsizes" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>						
-						<% CompanySize.all.each_with_index do |co, index| %>
-							<%= render partial: "shared/filter_checkbox", locals: {field: "size", label: co.name, fid: co.id, cbid: "size_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @size), cclass: "mfsize" } %>
-						<% end %>
-					</div>
-				</div>
-				<div class="row filterform">
-					<div class="small-12 columns">
-						<strong><small>Sectors</small></strong>
-						<input id="selectallsectors" name="selectallsectors" type="checkbox" style="font-color: black;" class="filter" checked/>
-						<label for="selectallsectors" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>						
-						<% @profile.sectors.each_with_index do |co, index| %>
-							<%= render partial: "shared/filter_checkbox", locals: {field: "sector", label: co.name, fid: co.id, cbid: "sector_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @sector), cclass: "mfsector" } %>
-						<% end %>
-					</div>
-				</div>
-				<div class="row filterform">
-					<div class="small-12 columns">
-						<strong><small>Channels</small></strong>
-						<input id="selectallchannels" name="selectallchannels" type="checkbox" style="font-color: black;" class="filter" checked/>
-						<label for="selectallchannels" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>						
-						<% @profile.channels.each_with_index do |co, index| %>
-							<%= render partial: "shared/filter_checkbox", locals: {field: "channel", label: co.name, fid: co.id, cbid: "channel_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @channel), cclass: "mfchannel" } %>
-						<% end %>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns">
-						<%= submit_tag 'Filter Results', class: "tiny radius success button right" %>
-					</div>
-				</div>
-
+	<h3><strong> Filters </strong></h3>
+	<%= form_tag all_matches_url, method: 'post' do %>
+	<div class="row filterform">
+		<div class="small-12 columns">
+			<strong><small>Countries</small></strong>
+			<input id="selectallcountries" name="selectallcountries" type="checkbox" style="font-color: black;" class="filter" checked/>
+			<label for="selectallcountries" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>							
+			<% @countries.each_with_index do |co, index| %>
+				<%= render partial: "shared/filter_checkbox", locals: {field: "country", label: co, fid: co, cbid: "country_#{index}", on_off_switch: filter_on_or_off(co, @country), cclass: "mfcountry" } %>
 			<% end %>
+		</div>
+	</div>
+	<div class="row filterform">					
+		<div class="small-12 columns">
+			<strong><small>Company Size</small></strong>
+			<input id="selectallsizes" name="selectallsizes" type="checkbox" style="font-color: black;" class="filter" checked/>
+			<label for="selectallsizes" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>						
+			<% CompanySize.all.each_with_index do |co, index| %>
+				<%= render partial: "shared/filter_checkbox", locals: {field: "size", label: co.name, fid: co.id, cbid: "size_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @size), cclass: "mfsize" } %>
+			<% end %>
+		</div>
+	</div>
+	<div class="row filterform">
+		<div class="small-12 columns">
+			<strong><small>Sectors</small></strong>
+			<input id="selectallsectors" name="selectallsectors" type="checkbox" style="font-color: black;" class="filter" checked/>
+			<label for="selectallsectors" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>						
+			<% @profile.sectors.each_with_index do |co, index| %>
+				<%= render partial: "shared/filter_checkbox", locals: {field: "sector", label: co.name, fid: co.id, cbid: "sector_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @sector), cclass: "mfsector" } %>
+			<% end %>
+		</div>
+	</div>
+	<div class="row filterform">
+		<div class="small-12 columns">
+			<strong><small>Channels</small></strong>
+			<input id="selectallchannels" name="selectallchannels" type="checkbox" style="font-color: black;" class="filter" checked/>
+			<label for="selectallchannels" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>						
+			<% @profile.channels.each_with_index do |co, index| %>
+				<%= render partial: "shared/filter_checkbox", locals: {field: "channel", label: co.name, fid: co.id, cbid: "channel_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @channel), cclass: "mfchannel" } %>
+			<% end %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<%= submit_tag 'Filter Results', class: "tiny radius success button right" %>
+		</div>
+	</div>
+	<% end %>
 
 <% end %>
 

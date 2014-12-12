@@ -75,6 +75,7 @@ Rails.application.routes.draw do
 
   get '/matches' => 'matches#index', as: 'all_matches'
   get '/savedmatches' => 'matches#index_saved_matches', as: 'saved_matches'
+  get '/contacteddmatches' => 'matches#index_contacted_matches', as: 'contacted_matches'
   post '/matches' => 'matches#index'
   get '/matches/save/:match_id' => 'matches#save_match', as: 'save_match'
   get '/matches/unsave/:match_id/:remove' => 'matches#unsave_match', as: 'unsave_match'

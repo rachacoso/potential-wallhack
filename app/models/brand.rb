@@ -43,8 +43,6 @@ class Brand
 	# field :countries_where_exported, type: String
 	embeds_many :export_countries, as: :exportable
 
-	has_many :matches, as: :matchable, dependent: :destroy
-
 	# array of saved distributors
 	has_and_belongs_to_many :saved_matches, class_name: "Distributor", inverse_of: nil
 

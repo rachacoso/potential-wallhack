@@ -2,9 +2,7 @@
 	
 	<% if action_name == "index" %>
 		<div class="row">
-			<div class="medium-10 columns">
-			</div>
-			<div class="medium-2 columns">
+			<div class="small-12 columns">
 
 					<% if @current_user.send(@current_user.type?).saved_matches.find(profile.id) %>
 					<div id="pst_<%= profile.id %>">
@@ -26,9 +24,7 @@
 	<% elsif action_name == "index_saved_matches" %>
 
 		<div class="row">
-			<div class="medium-10 columns">
-			</div>
-			<div class="medium-2 columns">
+			<div class="small-12 columns">
 				<div id="pst_<%= profile.id %>">
 					<div class="profile-save-tile text-center active">
 						<%= link_to 'Saved', unsave_match_url(profile.id,"true"), remote: true %>

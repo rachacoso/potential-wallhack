@@ -1,7 +1,16 @@
 
 <div class="profile-outer-tile">
 
-<%= controller_name == "matches" ? (render partial: "savebutton", locals: {profile: profile}) : "" %>
+
+	<div class="row">
+		<div class="medium-9 columns">
+
+		</div>
+		<div class="medium-3 columns">
+			<%= controller_name == "matches" ? (render partial: "savebutton", locals: {profile: profile}) : "" %>
+		</div>
+	</div>
+
 
 	<ul class="small-block-grid-1 medium-block-grid-3">
 

@@ -125,7 +125,17 @@ class MatchesController < ApplicationController
  		render "index"
  	end 
 
+  def index_contacted_matches
+		@profile = @current_user.brand || @current_user.distributor
 
+		### Full match set is all brands in the Distributor's sectors minus any countries that have not declared a country 
+		### or Countries of Distribution
+		### (will be updated to be all countries with completed profiles)
+		@matches = @profile.saved_matches.uniq
+
+ 		render "index"
+
+  end
 
   def save_match
 
@@ -173,6 +183,7 @@ class MatchesController < ApplicationController
 	  end 	  
 
   end 
+
 
 
 end

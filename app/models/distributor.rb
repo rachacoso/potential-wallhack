@@ -52,8 +52,6 @@ class Distributor
 	field :customer_database_size, type: Integer
 
 	has_many :trade_shows, dependent: :destroy
-	
-	has_many :matches, as: :matchable, dependent: :destroy
 
 	# array of saved brands
 	has_and_belongs_to_many :saved_matches, class_name: "Brand", inverse_of: nil

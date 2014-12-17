@@ -1,0 +1,10 @@
+<%= (action_name == "index") && (@current_user.send(@current_user.type?).saved_matches.find(match.id)) ? "(saved)" : "" %>
+<% if action_name == "index" || action_name == "index_saved_matches" %>
+	<% if this_match = get_match(match) %>
+		<% if this_match.initial_contact_by == @current_user.type? %>
+			(you have contacted)
+		<% else %>
+			(contacting you)
+		<% end %>
+	<% end %>
+<% end %>

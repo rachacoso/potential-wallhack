@@ -2,14 +2,14 @@ class Match
   include Mongoid::Document
 	include Mongoid::Timestamps::Short
 
-	####These are the saved matches of the distributors/brands
+	belongs_to :distributor
+	belongs_to :brand
   
-  # id of distributor/brand match
-  field :distributor_id, type: String
-  field :brand_id, type: String
+  field :initial_contact_by, type: String
 
   # is the match accepted by contactee
   field :accepted, type: Boolean
+  field :intro_message, type: String
 
   has_many :messages, dependent: :destroy
 

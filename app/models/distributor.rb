@@ -53,8 +53,20 @@ class Distributor
 
 	has_many :trade_shows, dependent: :destroy
 
-	# array of saved brands
+	# array of saved brand matches
 	has_and_belongs_to_many :saved_matches, class_name: "Brand", inverse_of: nil
+
+	has_many :matches do 
+		def contacted_by_me
+			where(initial_contact_by: "distributor", accepted: false)
+		end
+		def contacting_me
+			where(initial_contact_by: "brand", accepted: false)
+		end		
+		def accepted
+			where(accepted: true)
+		end	
+	end
 
 	# document library
 	has_many :library_documents, as: :documentable, dependent: :destroy

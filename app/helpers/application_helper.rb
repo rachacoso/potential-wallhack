@@ -133,5 +133,14 @@ module ApplicationHelper
 		end
 	end
 
+	# Return the match object for corresponding profile
+	def get_match(profile)
+		if @current_user.distributor
+			return @current_user.distributor.matches.where(brand_id: profile.id).first
+		elsif @current_user.brand
+			return @current_user.brand.matches.where(distributor_id: profile.id).first
+		end
+	end
+
 
 end

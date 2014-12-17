@@ -10,7 +10,7 @@
 			<h3><small>web</small> <strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>
 		</div>
 		<div class="medium-3 columns">
-			<%= controller_name == "matches" ? (render partial: "savebutton", locals: {profile: profile}) : "" %>
+			
 		</div>
 	</div>
 			
@@ -79,7 +79,7 @@
 						  <li class="street-address"><%= profile.contact_info.address1 %></li>
 						  <li class="street-address"><%= profile.contact_info.address2 %></li>
 						  <% unless profile.contact_info.city.blank? && profile.contact_info.state.blank? && profile.contact_info.postcode.blank? %>
-						  <li><span class="locality"><%= profile.contact_info.city %></span><span class="state"><%= profile.contact_info.state %></span>, <span class="zip"><%= profile.contact_info.postcode %></span></li>
+						  <li><span class="locality"><%= profile.contact_info.city %></span> <span class="state"><%= profile.contact_info.state %></span>, <span class="zip"><%= profile.contact_info.postcode %></span></li>
 						  <% end %>
 						  <li class="country"><%= profile.contact_info.country %></li>
 						  <li class="phone"><%= profile.contact_info.phone %></li>

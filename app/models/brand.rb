@@ -43,9 +43,20 @@ class Brand
 	# field :countries_where_exported, type: String
 	embeds_many :export_countries, as: :exportable
 
-	# array of saved distributors
+	# array of saved distributor matches
 	has_and_belongs_to_many :saved_matches, class_name: "Distributor", inverse_of: nil
 
+	has_many :matches do 
+		def contacted_by_me
+			where(initial_contact_by: "brand", accepted: false)
+		end
+		def contacting_me
+			where(initial_contact_by: "distributor", accepted: false)
+		end				
+		def accepted
+			where(accepted: true)
+		end
+	end
 
 
 	private 

@@ -1103,10 +1103,8 @@ $sub-nav-active-color: $primary-color;
 
 // These control the background color for the table and even rows
 // $table-bg: #fff;
-$table-bg: none;
 
 // $table-even-row-bg: #f9f9f9  ;
-$table-even-row-bg: none ;
 // These control the table cell border style
 $table-border-style: dotted;
 // $table-border-size: 1px;
@@ -1117,7 +1115,6 @@ $table-border-style: dotted;
 
 // These control the table head styles
 // $table-head-bg: #f5f5f5  ;
-$table-head-bg: scale-color(#2C3838, $lightness: 10%);
 // $table-head-font-size: rem-calc(14);
 // $table-head-font-color: #222;
 $table-head-font-color: $body-font-color;

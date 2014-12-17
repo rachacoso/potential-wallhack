@@ -1,6 +1,6 @@
 
 <div class="row">
-<div class="medium-3 columns">
+<div class="medium-2 columns <%= action_name == "index" ? "panel" : "" %>">
 
 
 <% if action_name == "index" %>
@@ -9,44 +9,44 @@
 	<div class="row filterform">
 		<div class="small-12 columns">
 			<strong><small>Headquarters</small></strong>
-			<input id="selectallcountries" name="selectallcountries" type="checkbox" style="font-color: black;" class="filter" checked/>
-			<label for="selectallcountries" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>							
 			<% @countries.each_with_index do |co, index| %>
 				<%= render partial: "shared/filter_checkbox", locals: {field: "country", label: co, fid: co, cbid: "country_#{index}", on_off_switch: filter_on_or_off(co, @country), cclass: "mfcountry filterform" } %>
 			<% end %>
+			<input id="selectallcountries" name="selectallcountries" type="checkbox" style="font-color: black;" class="filter" checked/>
+			<label for="selectallcountries" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>			
 			<hr>
 		</div>
 	</div>
 	<div class="row filterform">
 		<div class="small-12 columns">
 			<strong><small>Countries of Distribution</small></strong>
-			<input id="selectallcountriesofdistro" name="selectallcountriesofdistro" type="checkbox" style="font-color: black;" class="filter" checked/>
-			<label for="selectallcountriesofdistro" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>							
 			<% @countries_of_distribution.each_with_index do |co, index| %>
 				<%= render partial: "shared/filter_checkbox", locals: {field: "country_of_distribution", label: co, fid: co, cbid: "countryofdistro_#{index}", on_off_switch: filter_on_or_off(co, @country_of_distribution), cclass: "mfcountryofdistro" } %>
 			<% end %>
+			<input id="selectallcountriesofdistro" name="selectallcountriesofdistro" type="checkbox" style="font-color: black;" class="filter" checked/>
+			<label for="selectallcountriesofdistro" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>
 			<hr>
 		</div>		
 	</div>
 	<div class="row filterform">
 		<div class="small-12 columns">
 			<strong><small>Company Size</small></strong>
-			<input id="selectallsizes" name="selectallsizes" type="checkbox" style="font-color: black;" class="filter" checked/>
-			<label for="selectallsizes" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>						
 			<% CompanySize.all.each_with_index do |co, index| %>
 				<%= render partial: "shared/filter_checkbox", locals: {field: "size", label: co.name, fid: co.id, cbid: "size_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @size), cclass: "mfsize" } %>
 			<% end %>
+			<input id="selectallsizes" name="selectallsizes" type="checkbox" style="font-color: black;" class="filter" checked/>
+			<label for="selectallsizes" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>
 			<hr>
 		</div>
 	</div>
 	<div class="row filterform">
 		<div class="small-12 columns">
 			<strong><small>Channels</small></strong>
-			<input id="selectallchannels" name="selectallchannels" type="checkbox" style="font-color: black;" class="filter" checked/>
-			<label for="selectallchannels" style="color: black; border: 0; background: transparent;">Select/Deselect All</label>						
 			<% @profile.channels.each_with_index do |co, index| %>
 				<%= render partial: "shared/filter_checkbox", locals: {field: "channel", label: co.name, fid: co.id, cbid: "channel_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @channel), cclass: "mfchannel" } %>
 			<% end %>
+			<input id="selectallchannels" name="selectallchannels" type="checkbox" style="font-color: black;" class="filter" checked/>
+			<label for="selectallchannels" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>
 			<hr>
 		</div>
 	</div>
@@ -59,8 +59,8 @@
 	<% end %>
 <% end %>
 
-</div> <!-- /.medium-3 columns-->
-<div class="medium-9 columns">
+</div> <!-- /.medium-2 columns-->
+<div class="medium-10 columns">
 
 <% if @matches.blank? %>
 	<div class="row">
@@ -71,35 +71,50 @@
 				No Saved Matches. You can save matches on the All Matches screen.
 			<% elsif action_name == "index_contacted_matches" %>
 				No Contacted Matches. You can contact matches on the All Matches or Saved Matches screens.
+			<% elsif action_name == "index_incoming_matches" %>
+				No Matches have contacted you.				
 			<% end %>
 		</div>
 	</div>
 <% else %>
+
 	<div class="row">
-		<div class="small-12 columns previewtile text-center">
-
-			<% if action_name == "index" %>
-				<%= @matches.count %> <%= @matches.count > 1 ? "matches" : "match" %>
-			<% elsif action_name == "index_saved_matches" %>
-				<div id="saved-match-count"><%= @matches.count %> <%= @matches.count > 1 ? "saved matches" : "saved match" %></div>
-			<% end %>
-
+		<div class="small-11 push-1 columns">
+			<table>
+				  <thead>
+				  	<tr><th width="800" colspan="2">
+				  		<%= render "counts" %>
+				  	</th></tr>
+				  	<tr>
+				  		<th>
+								Company
+					  	</th>
+				  		<th>
+								Countries of Distribution
+					  	</th>
+					  </tr>				  	
+				  </thead>
+			  	<tbody>
+					<% @matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
+					<tr>
+						<td><%= link_to match.company_name, view_match_url(match.id, action_name) %>
+						<%= match.user.subscriber? %>	
+						<%= render partial: "match_list_indicators", locals: {match: match} %> 
+						</td>
+						<td>
+							<% match.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
+								<%= ec.country %> <%= ec.country == match.country_of_origin ? "<small>(Headquarters)</small>".html_safe : "" %><br>
+							<% end %>
+						</td>
+					</tr>
+					<% end %>
+					</tbody>
+		</table>
 		</div>
 	</div>
-	<% @matches.each do |match| %>
-		<div id="pot_<%= match.id %>">
-			<div class="row">
-				<div class="small-12 columns previewtile">
-					<% if @current_user.subscriber? %>
-						<%= render partial: "/shared/profile/distributor_full_profile_tiles", locals: {profile: match} %>
-					<% else %>
-						<%= render partial: "/shared/profile/distributor_public_profile_tiles", locals: {profile: match} %>
-					<% end %>
-				</div>
-			</div>
-		</div> <!-- /.pot_<%= match.id %> -->
-	<% end %>
 <% end %>
 
-</div> <!-- /.medium-9 columns-->
+
+
+</div> <!-- /.medium-10 columns-->
 </div> <!-- /.row -->

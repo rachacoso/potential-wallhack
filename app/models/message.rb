@@ -7,6 +7,7 @@ class Message
   belongs_to :match
   
   # id of distributor/brand match
+  field :recipient
   field :text, type: String
 
 end

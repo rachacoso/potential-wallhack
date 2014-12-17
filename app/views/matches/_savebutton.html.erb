@@ -1,5 +1,5 @@
 
-	
+<% if @current_user.subscriber? %>	
 	<% if action_name == "index" %>
 		<div class="row">
 			<div class="small-12 columns">
@@ -33,4 +33,44 @@
 			</div>
 		</div>
 
+	<% elsif action_name == "view_match" %>
+
+		<div class="row">
+			<div class="small-12 columns">
+
+					<% if @current_user.send(@current_user.type?).saved_matches.find(profile.id) %>
+					<div id="pst_<%= profile.id %>">
+						<div class="profile-save-tile text-center active">
+							<%= link_to 'Saved', unsave_match_url(profile.id,"false"), remote: true %>
+						</div>
+					</div>
+					<% else %>
+					<div id="pst_<%= profile.id %>">
+						<div class="profile-save-tile text-center">
+							<%= link_to 'Save', save_match_url(profile.id), remote: true %>
+						</div>
+					</div>
+					<% end %>
+
+			</div>
+		</div>
+
+
 	<% end %>
+
+<% else %>	
+
+	<div class="row">
+		<div class="small-12 columns">
+			<div>
+			<div class="profile-save-tile text-center deactivate">
+				<span data-tooltip aria-haspopup="true" class="has-tip" title="Available only to Subscribers" style>
+				<%= link_to 'Save', "#" %>
+				</span>
+			</div>
+			</div>
+		</div>
+	</div>
+
+<% end %>
+

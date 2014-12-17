@@ -117,25 +117,40 @@ class MatchesController < ApplicationController
  	
 		@profile = @current_user.brand || @current_user.distributor
 
-		### Full match set is all brands in the Distributor's sectors minus any countries that have not declared a country 
-		### or Countries of Distribution
-		### (will be updated to be all countries with completed profiles)
 		@matches = @profile.saved_matches.uniq
 
  		render "index"
  	end 
 
-  def index_contacted_matches
+  def index_contacted_matches # matches you contacted
+
 		@profile = @current_user.brand || @current_user.distributor
 
-		### Full match set is all brands in the Distributor's sectors minus any countries that have not declared a country 
-		### or Countries of Distribution
-		### (will be updated to be all countries with completed profiles)
-		@matches = @profile.saved_matches.uniq
+		case @current_user.type?
+		when "distributor"
+			@matches = Brand.find(@profile.matches.contacted_by_me.pluck(:brand_id))
+		when "brand"
+			@matches = Distributor.find(@profile.matches.contacted_by_me.pluck(:distributor_id))
+		end
 
  		render "index"
 
   end
+
+  def index_incoming_matches # matches contacting you
+
+		@profile = @current_user.brand || @current_user.distributor
+		
+		case @current_user.type?
+		when "distributor"
+			@matches = Brand.find(@profile.matches.contacting_me.pluck(:brand_id))
+		when "brand"
+			@matches = Distributor.find(@profile.matches.contacting_me.pluck(:distributor_id))
+		end
+
+ 		render "index"
+
+  end  
 
   def save_match
 
@@ -184,6 +199,55 @@ class MatchesController < ApplicationController
 
   end 
 
+  def view_match
 
+  	if @current_user.distributor 
+  		@match = Brand.find(params[:match_id])
+	  else # is a brand
+  		@match = Distributor.find(params[:match_id])
+	  end
+  
+	  @referrer = params[:referrer]
+
+  end 
+
+  def contact_match
+
+		if params[:match_id] && params[:m]
+			new_match = Match.new
+	  	if @current_user.distributor 
+	  		u = @current_user.distributor
+	  		@match = Brand.find(params[:match_id])
+	  		icb = "distributor"
+		  else # is a brand
+		  	u = @current_user.brand
+	  		@match = Distributor.find(params[:match_id])
+	  		icb = "brand"
+		  end
+
+			new_match.initial_contact_by = icb
+			new_match.accepted = false
+
+			if !params[:m].blank?
+				new_match.intro_message = params[:m]
+			else
+				new_match.intro_message = "#{u.company_name} would like to work with you."
+			end
+
+			u.matches << new_match
+			@match.matches << new_match
+			
+
+		else 
+
+
+		end
+
+	  respond_to do |format|
+	    format.html
+	    format.js
+	  end
+
+  end
 
 end

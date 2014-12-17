@@ -24,6 +24,8 @@ class ApplicationController < ActionController::Base
       else
        session.destroy
        @current_user = nil
+       flash[:notice] = "You must be logged in to access"
+       redirect_to root_url # halts request cycle       
       end
   	end
   end

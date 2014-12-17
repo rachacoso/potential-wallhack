@@ -1,0 +1,66 @@
+
+	
+<% if @current_user.subscriber? %>
+		<div class="row">
+			<div class="small-12 columns">
+
+				<% if this_match = get_match(profile) %>
+					<% if @current_user.type? == this_match.initial_contact_by %>
+					<div id="pct_<%= profile.id %>">
+						<div class="profile-save-tile text-center">
+							<%= link_to 'Contacted - Awaiting Reply', "#", remote: true %>
+						</div>
+					</div>
+					<% else %>
+					<div id="pct_<%= profile.id %>">
+						<div class="profile-save-tile text-center">
+							<%= link_to 'Respond to this request', "#", remote: true %>
+						</div>
+					</div>
+					<% end %>
+				<% else %>
+				<div id="pct_<%= profile.id %>">
+					<div class="profile-save-tile text-center">
+						<%#= link_to 'Contact', contact_match_url(profile.id), remote: true %>
+						<%= link_to 'Contact', "#", :data => {:'reveal-id' => "contactModal"} %>
+						<%#= @current_user.send(@current_user.type?).matches.where(brand_id: profile.id).first %>
+					</div>
+				</div>					
+				<% end %>
+
+
+
+				<div id="contactModal" class="reveal-modal small" data-reveal>
+
+				  <h2><strong><%= profile.company_name %></strong></h2>
+				  <p class="lead">Contact them.</p>
+				  <p>Send them a message</p>
+
+					<%= form_tag contact_match_url, method: 'get', remote: true do %>
+						<%= hidden_field_tag(:match_id, profile.id) %>
+					  <%= label_tag(:m, "Message:") %>
+					  <%= text_field_tag(:m) %>
+					  <%= submit_tag("Contact") %>
+					<% end %> 
+
+				  <a class="close-reveal-modal">&#215;</a>
+				</div>
+
+			</div>
+		</div>
+
+<% else %>	
+
+	<div class="row">
+		<div class="small-12 columns">
+			<div>
+			<div class="profile-save-tile text-center deactivate">
+				<span data-tooltip aria-haspopup="true" class="has-tip" title="Available only to Subscribers" style>
+				<%= link_to 'Contact', "#" %>
+				</span>
+			</div>
+			</div>
+		</div>
+	</div>
+
+<% end %>

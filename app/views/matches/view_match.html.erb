@@ -1,0 +1,50 @@
+<%= render partial: "shared/topbar" %>
+
+<% content_for :subnav do %>
+<div class="row">
+	<div class="small-12 columns">
+		<dl class="sub-nav">
+			<% if @referrer %>
+				<% if @referrer == "index" %>
+				  <dd><%= link_to 'Back to All Matches', all_matches_url %></dd>
+				<% elsif @referrer == "index_saved_matches" %>  
+				  <dd><%= link_to 'Back to Saved Matches', saved_matches_url %></dd>
+				<% elsif @referrer == "index_contacted_matches" %>  
+				  <dd><%= link_to 'Back to matches you contacted', contacted_matches_url %></dd>			  
+				<% elsif @referrer == "index_incoming_matches" %>  
+				  <dd><%= link_to 'Back to matches contacting you', incoming_matches_url %></dd>			  
+			  <% end %>
+		  <% else %>
+				<dd><%= link_to 'All Matches', all_matches_url %></dd>
+		  <% end %>
+		  <dd class="active"><%= link_to "Viewing Profile - <strong>#{@match.company_name}</strong>".html_safe, "#" %></dd>
+		</dl>
+	</div>
+</div>
+<% end %>
+
+	<div class="row">
+		<div class="medium-2 columns previewtile panel">
+			<%= render partial: "savebutton", locals: {profile: @match} %>
+			<%= render partial: "contactbutton", locals: {profile: @match} %>
+		</div>
+		<div class="medium-10 columns previewtile">
+			<% if @current_user.distributor %>
+
+				<% if @current_user.subscriber? %>
+					<%= render partial: "/shared/profile/brand_full_profile_tiles", locals: {profile: @match} %>
+				<% else %>
+					<%= render partial: "/shared/profile/brand_public_profile_tiles", locals: {profile: @match} %>
+				<% end %>
+
+			<% elsif @current_user.brand %>
+
+				<% if @current_user.subscriber? %>
+					<%= render partial: "/shared/profile/distributor_full_profile_tiles", locals: {profile: @match} %>
+				<% else %>
+					<%= render partial: "/shared/profile/distributor_public_profile_tiles", locals: {profile: @match} %>
+				<% end %>
+
+			<% end %>
+		</div>
+	</div>

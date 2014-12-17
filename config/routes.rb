@@ -75,10 +75,13 @@ Rails.application.routes.draw do
 
   get '/matches' => 'matches#index', as: 'all_matches'
   get '/savedmatches' => 'matches#index_saved_matches', as: 'saved_matches'
-  get '/contacteddmatches' => 'matches#index_contacted_matches', as: 'contacted_matches'
+  get '/contactedmatches' => 'matches#index_contacted_matches', as: 'contacted_matches'
+  get '/incomingmatches' => 'matches#index_incoming_matches', as: 'incoming_matches'
   post '/matches' => 'matches#index'
   get '/matches/save/:match_id' => 'matches#save_match', as: 'save_match'
   get '/matches/unsave/:match_id/:remove' => 'matches#unsave_match', as: 'unsave_match'
+  get '/matches/view/:match_id/:referrer' => 'matches#view_match', as: 'view_match'
+  get '/matches/contact/:match_id' => 'matches#contact_match', as: 'contact_match'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

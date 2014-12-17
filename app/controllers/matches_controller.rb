@@ -8,7 +8,7 @@ class MatchesController < ApplicationController
 			### Full match set is all brands in the Distributor's sectors minus any countries that have not declared a country 
 			### or Countries of Distribution
 			### (will be updated to be all countries with completed profiles)
-			@all_matches = Distributor.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
+			@all_matches = Distributor.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
 
 			# set of countries for the filter
 			@countries = @all_matches.pluck(:country_of_origin).sort_by{ |m| m.downcase }
@@ -64,7 +64,7 @@ class MatchesController < ApplicationController
 
 			### Full match set is all brands in the Distributor's sectors minus any countries that have not declared a country 
 			### (will be updated to be all countries with completed profiles)
-			@all_matches = Brand.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
+			@all_matches = Brand.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
 
 			# set of countries for the filter
 			@countries = @all_matches.pluck(:country_of_origin).sort_by{ |m| m.downcase }
@@ -117,7 +117,7 @@ class MatchesController < ApplicationController
  	
 		@profile = @current_user.brand || @current_user.distributor
 
-		@matches = @profile.saved_matches.uniq
+		@matches = @profile.saved_matches.subscribed.uniq
 
  		render "index"
  	end 
@@ -128,9 +128,9 @@ class MatchesController < ApplicationController
 
 		case @current_user.type?
 		when "distributor"
-			@matches = Brand.find(@profile.matches.contacted_by_me.pluck(:brand_id))
+			@matches = Brand.subscribed.find(@profile.matches.contacted_by_me.pluck(:brand_id))
 		when "brand"
-			@matches = Distributor.find(@profile.matches.contacted_by_me.pluck(:distributor_id))
+			@matches = Distributor.subscribed.find(@profile.matches.contacted_by_me.pluck(:distributor_id))
 		end
 
  		render "index"
@@ -143,9 +143,9 @@ class MatchesController < ApplicationController
 
 		case @current_user.type?
 		when "distributor"
-			@matches = Brand.find(@profile.matches.contacting_me.pluck(:brand_id))
+			@matches = Brand.subscribed.find(@profile.matches.contacting_me.pluck(:brand_id))
 		when "brand"
-			@matches = Distributor.find(@profile.matches.contacting_me.pluck(:distributor_id))
+			@matches = Distributor.subscribed.find(@profile.matches.contacting_me.pluck(:distributor_id))
 		end
 
  		render "index"

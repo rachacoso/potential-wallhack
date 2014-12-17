@@ -60,6 +60,7 @@ class Brand
 		end
 	end
 
+	scope :subscribed, ->{where(subscriber: true)}
 
 	private 
 

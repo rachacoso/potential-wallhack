@@ -101,6 +101,7 @@ class Distributor
 	validates_attachment_content_type :verified_location_photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 	validates_attachment_content_type :verified_brand_display_photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 
+	scope :subscribed, ->{where(subscriber: true)}
 
 	private 
 

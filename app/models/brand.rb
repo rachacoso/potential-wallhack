@@ -5,6 +5,8 @@ class Brand
  	belongs_to :user
 	after_create :init_contact_info
 
+	field :subscriber, type: Boolean
+	
   #####################
 	### Profile
 	#####################

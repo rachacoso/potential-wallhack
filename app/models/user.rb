@@ -7,7 +7,6 @@ class User
 	field :email, type: String
 	field :password_digest, type: String
 	field :administrator, type: Boolean
-	field :subscriber, type: Boolean
 
 	validates :email, presence: true, uniqueness: true
 
@@ -18,6 +17,10 @@ class User
 	has_one :distributor, dependent: :destroy
 
 	accepts_nested_attributes_for :user_profile
+	accepts_nested_attributes_for :brand
+	accepts_nested_attributes_for :distributor
+
+	scope :is_subscriber, ->{where(subscriber: true)}
 
 	def type?
 		if self.brand
@@ -28,7 +31,8 @@ class User
 	end
 
 	def subscriber?
-		if self.subscriber
+		u = self.distributor || self.brand
+		if u.subscriber
 			return true
 		else
 			return false

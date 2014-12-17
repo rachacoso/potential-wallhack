@@ -156,7 +156,13 @@ class UsersController < ApplicationController
   def user_parameters
     params.require(:user).permit(
 			:administrator,
-			:subscriber
+			brand_attributes: [ 
+				:subscriber
+			],
+			distributor_attributes: [ 
+				:subscriber
+			]
+
 		)
 	end	
 

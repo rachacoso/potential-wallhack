@@ -59,7 +59,10 @@
 				<%= form_for @user, url: user_path(@user) do |f| %>
 					<%= hidden_field_tag 'update_type', 'adminsubscriber' %>
 					<%= f.check_box :administrator %>
-					<%= f.check_box :subscriber %>
+					<%= f.fields_for (@user.distributor ? :distributor : :brand) do |ff| %>
+					<%= ff.check_box :subscriber %>
+					<% end %>
+
 					<%= f.submit 'update', class: "tiny radius success button" %> <%= link_to 'Cancel', users_path, class: "tiny radius info button"  %>
 				<% end %>
 		</div>

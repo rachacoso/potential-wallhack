@@ -20,7 +20,7 @@
 	<div class="row filterform">
 		<div class="small-12 columns">
 			<strong><small>Countries of Distribution</small></strong>
-			<% @countries_of_distribution.each_with_index do |co, index| %>
+			<% @countries_of_distribution.sort.each_with_index do |co, index| %>
 				<%= render partial: "shared/filter_checkbox", locals: {field: "country_of_distribution", label: co, fid: co, cbid: "countryofdistro_#{index}", on_off_switch: filter_on_or_off(co, @country_of_distribution), cclass: "mfcountryofdistro" } %>
 			<% end %>
 			<input id="selectallcountriesofdistro" name="selectallcountriesofdistro" type="checkbox" style="font-color: black;" class="filter" checked/>

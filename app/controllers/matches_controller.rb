@@ -140,7 +140,7 @@ class MatchesController < ApplicationController
   def index_incoming_matches # matches contacting you
 
 		@profile = @current_user.brand || @current_user.distributor
-		
+
 		case @current_user.type?
 		when "distributor"
 			@matches = Brand.find(@profile.matches.contacting_me.pluck(:brand_id))

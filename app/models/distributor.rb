@@ -6,6 +6,7 @@ class Distributor
   belongs_to :user
   after_create :init_contact_info
 
+	field :subscriber, type: Boolean
 
  	#####################
 	### Profile
@@ -99,7 +100,6 @@ class Distributor
 	  }	  
 	validates_attachment_content_type :verified_location_photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 	validates_attachment_content_type :verified_brand_display_photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
-
 
 
 	private 

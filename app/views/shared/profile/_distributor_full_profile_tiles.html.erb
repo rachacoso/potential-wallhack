@@ -35,7 +35,7 @@
 						<div class="small-9 columns">
 							<div class="preview-data">
 								<span class="preview-data-tile-title">Company Size</span><br>
-								<strong><%= CompanySize.find(profile.company_size).name %></strong>
+								<strong><%= CompanySize.find(profile.company_size).name rescue nil %></strong>
 							</div>
 						</div>
 					</div>	

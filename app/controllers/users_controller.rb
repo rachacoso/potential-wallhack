@@ -4,7 +4,8 @@ class UsersController < ApplicationController
 
 	def index
 		# @users = User.all
-		@users = User.all
+		@distributors = User.all.reject{ |r| r.distributor.nil?}
+		@brands = User.all.reject{ |r| r.brand.nil? }.reject{ |r| r.brand.company_name.nil? }
 
 	end
 

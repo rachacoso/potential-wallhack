@@ -4,10 +4,11 @@
 <div class="row">
 	<div class="small-12 columns">
 		<dl class="sub-nav">
-		  <dd <%= action_name == "index" ? "class='active'".html_safe : ""%>><%= link_to 'All Matches', all_matches_url %></dd>
-		  <dd <%= action_name == "index_saved_matches" ? "class='active'".html_safe : ""%>><%= link_to 'Saved Matches', saved_matches_url %></dd>
-		  <dd <%= action_name == "index_contacted_matches" ? "class='active'".html_safe : ""%>><%= link_to 'Matches you are contacting', contacted_matches_url %></dd>
-		  <dd <%= action_name == "index_incoming_matches" ? "class='active'".html_safe : ""%>><%= link_to 'Matches contacting you', incoming_matches_url %></dd>
+			<% matchtype = @current_user.distributor ? "Brands" : "Distributors" %>
+		  <dd <%= action_name == "index" ? "class='active'".html_safe : ""%>><%= link_to "All #{matchtype}", all_matches_url %></dd>
+		  <dd <%= action_name == "index_saved_matches" ? "class='active'".html_safe : ""%>><%= link_to "Saved #{matchtype}", saved_matches_url %></dd>
+		  <dd <%= action_name == "index_contacted_matches" ? "class='active'".html_safe : ""%>><%= link_to "#{matchtype} you are contacting", contacted_matches_url %></dd>
+		  <dd <%= action_name == "index_incoming_matches" ? "class='active'".html_safe : ""%>><%= link_to "#{matchtype} contacting you", incoming_matches_url %></dd>
 		</dl>
 	</div>
 </div>

@@ -10,20 +10,30 @@
 </div>
 <% end %>
 
+<% if flash[:notice] %>
+<div class="row">
+	<div class="small-10 small-centered columns panel">
+		<div data-alert class="alert-box success round">
+	  	<%= flash[:notice] %>
+		  <a href="#" class="close">&times;</a>
+		</div>		
+	</div>
+</div>
+<% end %>
 
 <div class="row">
 	<div class="small-10 small-centered columns panel">
-		<% if flash[:notice] %>
+		<h3><strong>Distributors</strong></h3><hr>
+		<%= render partial: @distributors.sort_by { |d| d.distributor.company_name }, spacer_template: "shared/indexspacer" %>
+	</div>
+</div>
 
-				<div data-alert class="alert-box success round">
-			  	<%= flash[:notice] %>
-				  <a href="#" class="close">&times;</a>
-				</div>
-		<% end %>
-
-		<%= render partial: @users, spacer_template: "shared/indexspacer" %>
-
+<div class="row">
+	<div class="small-10 small-centered columns panel">
+		<h3><strong>Brands</strong></h3><hr>
+		<%= render partial: @brands.sort_by { |b| b.brand.company_name }, spacer_template: "shared/indexspacer" %>
 	</div>
 </div>
 <br>
+
 

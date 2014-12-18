@@ -4,12 +4,10 @@
 		<div class="row">
 			<div class="small-12 columns">
 
-				<% if this_match = get_match(profile) %>
-					<% if @current_user.type? == this_match.initial_contact_by %>
+				<% if this_match(profile) %>
+					<% if i_contacted(this_match(@match)) %>
 					<div id="pct_<%= profile.id %>">
-						<div class="profile-save-tile text-center">
-							<%= link_to 'Contacted - Awaiting Reply', "#", remote: true %>
-						</div>
+						<%= render "contacted_link" %>
 					</div>
 					<% else %>
 					<div id="pct_<%= profile.id %>">

@@ -1,7 +1,7 @@
-<%= (action_name == "index") && (@current_user.send(@current_user.type?).saved_matches.find(match.id)) ? "(saved)" : "" %>
+<%= (action_name == "index" || action_name == "index_contacted_matches" || action_name == "index_incoming_matches") && (@current_user.send(@current_user.type?).saved_matches.find(match.id)) ? "(saved)" : "" %>
 <% if action_name == "index" || action_name == "index_saved_matches" %>
-	<% if this_match = get_match(match) %>
-		<% if this_match.initial_contact_by == @current_user.type? %>
+	<% if this_match(match) %>
+		<% if i_contacted(this_match(match)) %>
 			(you have contacted)
 		<% else %>
 			(contacting you)

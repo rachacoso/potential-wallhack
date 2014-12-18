@@ -5,30 +5,41 @@
 	<div class="small-12 columns">
 		<dl class="sub-nav">
 			<% if @referrer %>
+				<% matchtype = @current_user.distributor ? "Brand" : "Distributor" %>
 				<% if @referrer == "index" %>
-				  <dd><%= link_to 'Back to All Matches', all_matches_url %></dd>
+				  <dd><%= link_to "Back to All #{matchtype}s", all_matches_url %></dd>
 				<% elsif @referrer == "index_saved_matches" %>  
-				  <dd><%= link_to 'Back to Saved Matches', saved_matches_url %></dd>
+				  <dd><%= link_to "Back to Saved #{matchtype}s", saved_matches_url %></dd>
 				<% elsif @referrer == "index_contacted_matches" %>  
-				  <dd><%= link_to 'Back to matches you contacted', contacted_matches_url %></dd>			  
+				  <dd><%= link_to "Back to #{matchtype}s you contacted", contacted_matches_url %></dd>			  
 				<% elsif @referrer == "index_incoming_matches" %>  
-				  <dd><%= link_to 'Back to matches contacting you', incoming_matches_url %></dd>			  
+				  <dd><%= link_to "Back to #{matchtype}s contacting you", incoming_matches_url %></dd>			  
 			  <% end %>
 		  <% else %>
 				<dd><%= link_to 'All Matches', all_matches_url %></dd>
 		  <% end %>
-		  <dd class="active"><%= link_to "Viewing Profile - <strong>#{@match.company_name}</strong>".html_safe, "#" %></dd>
+		  <dd class="active"><%= link_to "Viewing #{matchtype} - <strong>#{@match.company_name}</strong>".html_safe, "#" %></dd>
 		</dl>
 	</div>
 </div>
 <% end %>
 
 	<div class="row">
-		<div class="medium-2 columns previewtile panel">
+		<div class="medium-2 columns previewtile">
+			<div class="profile-outer-tile">
 			<%= render partial: "savebutton", locals: {profile: @match} %>
 			<%= render partial: "contactbutton", locals: {profile: @match} %>
+			</div>
 		</div>
 		<div class="medium-10 columns previewtile">
+			<% if this_match(@match) %>
+				<% if i_contacted(this_match(@match)) %>
+					<%= render partial: "outgoing_contact" %>
+				<% else %>
+					<%= render partial: "incoming_contact" %>
+				<% end %>
+			<% end %>
+			
 			<% if @current_user.distributor %>
 
 				<% if @current_user.subscriber? %>

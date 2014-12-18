@@ -1,7 +1,64 @@
 
 <div class="row">
-<div class="medium-2 columns <%= action_name == "index" ? "panel" : "" %>">
 
+<div class="medium-10 push-2 columns">
+
+<% if @matches.blank? %>
+	<div class="row">
+		<div class="small-12 columns previewtile text-left">
+			<% if action_name == "index" %>
+				No Distributors. Please try altering your filter selections.
+			<% elsif action_name == "index_saved_matches" %>
+				No Saved Distributors. You can save matches on the All Matches screen.
+			<% elsif action_name == "index_contacted_matches" %>
+				No Contacted Distributors. You can contact matches on the All Matches or Saved Matches screens.
+			<% elsif action_name == "index_incoming_matches" %>
+				No Distributors have contacted you.				
+			<% end %>
+		</div>
+	</div>
+<% else %>
+
+	<div class="row">
+		<div class="small-11 push-1 columns">
+			<table>
+				  <thead>
+				  	<tr><th width="800" colspan="2">
+				  		<%= render "counts" %>
+				  	</th></tr>
+				  	<tr>
+				  		<th>
+								Company
+					  	</th>
+				  		<th>
+								Countries of Distribution
+					  	</th>
+					  </tr>				  	
+				  </thead>
+			  	<tbody>
+					<% @matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
+					<tr>
+						<td><%= link_to match.company_name, view_match_url(match.id, action_name) %>	
+						<%= render partial: "match_list_indicators", locals: {match: match} %> 
+						</td>
+						<td>
+							<% match.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
+								<%= ec.country %> <%= ec.country == match.country_of_origin ? "<small>(Headquarters)</small>".html_safe : "" %><br>
+							<% end %>
+						</td>
+					</tr>
+					<% end %>
+					</tbody>
+		</table>
+		</div>
+	</div>
+<% end %>
+
+
+
+</div> <!-- /.medium-10 push-2 columns-->
+
+<div class="medium-2 pull-10 columns <%= action_name == "index" ? "panel" : "" %>">
 
 <% if action_name == "index" %>
 	<h3><strong> Filters </strong></h3>
@@ -59,62 +116,6 @@
 	<% end %>
 <% end %>
 
-</div> <!-- /.medium-2 columns-->
-<div class="medium-10 columns">
+</div> <!-- /.medium-2 pull-10 columns-->
 
-<% if @matches.blank? %>
-	<div class="row">
-		<div class="small-12 columns previewtile text-left">
-			<% if action_name == "index" %>
-				No Matches. Please try altering your filter selections.
-			<% elsif action_name == "index_saved_matches" %>
-				No Saved Matches. You can save matches on the All Matches screen.
-			<% elsif action_name == "index_contacted_matches" %>
-				No Contacted Matches. You can contact matches on the All Matches or Saved Matches screens.
-			<% elsif action_name == "index_incoming_matches" %>
-				No Matches have contacted you.				
-			<% end %>
-		</div>
-	</div>
-<% else %>
-
-	<div class="row">
-		<div class="small-11 push-1 columns">
-			<table>
-				  <thead>
-				  	<tr><th width="800" colspan="2">
-				  		<%= render "counts" %>
-				  	</th></tr>
-				  	<tr>
-				  		<th>
-								Company
-					  	</th>
-				  		<th>
-								Countries of Distribution
-					  	</th>
-					  </tr>				  	
-				  </thead>
-			  	<tbody>
-					<% @matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
-					<tr>
-						<td><%= link_to match.company_name, view_match_url(match.id, action_name) %>
-						<%= match.user.subscriber? %>	
-						<%= render partial: "match_list_indicators", locals: {match: match} %> 
-						</td>
-						<td>
-							<% match.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
-								<%= ec.country %> <%= ec.country == match.country_of_origin ? "<small>(Headquarters)</small>".html_safe : "" %><br>
-							<% end %>
-						</td>
-					</tr>
-					<% end %>
-					</tbody>
-		</table>
-		</div>
-	</div>
-<% end %>
-
-
-
-</div> <!-- /.medium-10 columns-->
 </div> <!-- /.row -->

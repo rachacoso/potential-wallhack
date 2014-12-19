@@ -1,14 +1,24 @@
 <div class="profile-outer-tile">
 
 	<div class="row">
-		<div class="medium-9 columns">
-			<h2><strong><%= @match.company_name %></strong> has contacted you</h2>
-			
-			<%= this_match(@match).intro_message %>
+		<div class="medium-12 columns">
+			<h4><strong><%= @match.company_name %></strong><br> would like to start a conversation with you</h4>
 		</div>
-		<div class="medium-3 columns">
-
+	</div>
+	<div class="row">
+		<div class="small-11 small-centered columns">
+			<div class="bubble-them">
+				<%= this_match(@match).intro_message %>
+			</div>
 		</div>				
 	</div>
+
+	<div class="row">
+		<div class="small-11 small-centered columns">
+			<div class="bubble-you">
+				[sample response]
+			</div>
+		</div>				
+	</div>	
 
 </div>

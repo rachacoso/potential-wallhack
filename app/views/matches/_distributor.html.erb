@@ -2,7 +2,7 @@
 
 <div class="row">
 
-<div class="medium-10 push-2 columns">
+<div class="medium-9 push-3 columns">
 
 <% if @matches.blank? %>
 	<div class="row">
@@ -21,7 +21,7 @@
 <% else %>
 
 	<div class="row">
-		<div class="small-11 push-1 columns">
+		<div class="small-12 columns">
 			<table>
 				  <thead>
 				  	<tr><th width="800" colspan="2">
@@ -51,11 +51,11 @@
 	</div>
 <% end %>
 
-</div> <!-- /.medium-10 push-2 columns-->
+</div> <!-- /.medium-9 push-3 columns-->
 
 
-<div class="medium-2 pull-10 columns <%= action_name == "index" ? "panel" : "" %>">
-
+<div class="medium-3 pull-9 columns <%= action_name == "index" ? "previewtile" : "" %>">
+<div class="profile-outer-tile">
 <% if action_name == "index" %>
 	<h3><strong> Filters </strong></h3>
 	<%= form_tag all_matches_url, method: 'post' do %>
@@ -111,9 +111,9 @@
 	<% end %>
 
 <% end %>
+</div>
 
-
-</div> <!-- /.medium-2 pull-10 columns-->
+</div> <!-- /.medium-3 pull-9 columns-->
 
 
 </div> <!-- /.row -->

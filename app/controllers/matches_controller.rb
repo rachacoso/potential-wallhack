@@ -11,7 +11,7 @@ class MatchesController < ApplicationController
 			@all_matches = Distributor.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
 
 			# set of countries for the filter
-			@countries = @all_matches.pluck(:country_of_origin).sort_by{ |m| m.downcase }
+			@countries = @all_matches.pluck(:country_of_origin).uniq.sort_by{ |m| m.downcase }
 			@countries_of_distribution = Array.new
 			@all_matches.each do |m|
 				if !m.export_countries.blank?
@@ -32,7 +32,7 @@ class MatchesController < ApplicationController
 					@country_of_distribution = params[:filter][:country_of_distribution]
 					@matches = @matches.in("export_countries.country" => @country_of_distribution.keys)
 				else
-					@size = CompanySize.all.pluck(:id).to_s
+					@country_of_distribution = @countries_of_distribution
 				end 
 				if params[:filter][:size]
 					@size = params[:filter][:size]

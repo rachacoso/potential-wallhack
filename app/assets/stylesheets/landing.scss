@@ -598,6 +598,11 @@ $onboard-nav-radius: 4px;
 // Preview Tiles
 // Distributor/Brand Profile CSS
 
+.profile-item {
+  border: 1px solid grey;
+}
+
+
 .profile-outer-tile {
   border: 1px solid scale-color($link-color, $lightness: 70%);
   @include transparent(#fff, 0.95);
@@ -864,17 +869,36 @@ a.anchor {
 
 // Speech Bubbles
 
+$them-color: #FFF7D8;
+$them-border: #B2A573;
+$you-color: #F1F2FF;
+$you-border: #8589B2;
+
 .bubble-them
 {
 position: relative;
-width: 100%;
+width: 98%;
 min-height: 100px;
-padding: 1em;
-background: #ccc;
+// padding: 1em;
+background: $them-color;
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
 border-radius: 10px;
-border: 1px solid #ccc;
+border: 2px solid $them-border;
+}
+
+.bubble-them:before 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 15px 15px 15px 0;
+border-color: transparent $them-color;
+display: block;
+width: 0;
+z-index: 2;
+left: -13px;
+top: 25px;
 }
 
 .bubble-them:after 
@@ -883,7 +907,7 @@ content: '';
 position: absolute;
 border-style: solid;
 border-width: 15px 15px 15px 0;
-border-color: transparent #ccc;
+border-color: transparent $them-border;
 display: block;
 width: 0;
 z-index: 1;
@@ -891,26 +915,40 @@ left: -15px;
 top: 25px;
 }
 
+
 .bubble-you
 {
 position: relative;
-width: 100%;
+width: 98%;
 min-height: 100px;
-padding: 1em;
-background: #ccc;
+// padding: 20px;
+background: $you-color;
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
 border-radius: 10px;
-border: 1px solid #ccc;
+border: 2px solid $you-border;
 }
 
+.bubble-you:before 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 15px 0 15px 15px;
+border-color: transparent $you-color;
+display: block;
+width: 0;
+z-index: 2;
+right: -13px;
+top: 25px;
+}
 .bubble-you:after 
 {
 content: '';
 position: absolute;
 border-style: solid;
 border-width: 15px 0 15px 15px;
-border-color: transparent #ccc;
+border-color: transparent $you-border;
 display: block;
 width: 0;
 z-index: 1;

@@ -1,17 +1,19 @@
+<% match = this_match(@match) %>
 <div class="profile-outer-tile">
 
 	<div class="row">
-		<div class="medium-12 text-right columns">
+		<div class="medium-5 columns">
 			<h4>You have requested a conversation with <br><strong><%= @match.company_name %></strong></h4>
 		</div>
-	</div>
 	
-	<div class="row">
-		<div class="small-11 small-centered columns">
+		<div class="medium-7 columns">
 			<div class="bubble-you">
-				<%= this_match(@match).intro_message %>
+				<%= match.intro_message %>
 			</div>
-		</div>
+			<small>Sent <%= match.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small>
+		</div>	
+
+
 	</div>
 
 </div>

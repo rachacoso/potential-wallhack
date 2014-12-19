@@ -59,8 +59,9 @@
 </div> <!-- /.medium-9 push-3 columns-->
 
 <div class="medium-3 pull-9 columns <%= action_name == "index" ? "previewtile" : "" %>">
-<div class="profile-outer-tile">
+
 <% if action_name == "index" %>
+<div class="profile-outer-tile">
 	<h3><strong> Filters </strong></h3>
 	<%= form_tag all_matches_url, method: 'post' do %>
 	<div class="row filterform">
@@ -114,8 +115,9 @@
 		</div>
 	</div>
 	<% end %>
-<% end %>
 </div>
+<% end %>
+
 </div> <!-- /.medium-3 pull-9 columns-->
 
 </div> <!-- /.row -->

@@ -42,11 +42,14 @@
 									
 									<% if cb.product_photos %>
 										<% photourlstring =  "product_photo_delete_url(photo" + ((controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? ", :ob => 'true'" : "") + ")" %>
+										<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
 										<% cb.product_photos.each do |photo| %>
-												<%= image_tag photo.photo.url(:small) %>
-												<%= link_to 'X', eval(photourlstring), :method => 'delete', data: { :confirm => 'Are you sure you want to delete this photo?'}  %>
-											<br>
+												<li>
+													<%= image_tag photo.photo.url(:small) %>
+													<%= link_to 'X', eval(photourlstring), :method => 'delete', data: { :confirm => 'Are you sure you want to delete this photo?'}  %>
+												</li>
 										<% end %>
+										</ul>
 									<% end %>
 								</div>
 							</div>

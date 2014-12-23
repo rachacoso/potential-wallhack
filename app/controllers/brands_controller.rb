@@ -9,7 +9,7 @@ class BrandsController < ApplicationController
 		@brand = @current_user.brand
 		
 		@current_products = @brand.products.where(current: true) rescue nil
-		@upcoming_products = @brand.products.where(current: false) rescue nil
+		@past_products = @brand.products.where(current: false) rescue nil
 		@new_product = Product.new
 		
 		@trade_shows = @brand.trade_shows rescue nil

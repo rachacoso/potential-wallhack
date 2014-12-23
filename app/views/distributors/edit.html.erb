@@ -1,16 +1,12 @@
 <%= render partial: "shared/topbar" %>
 
 
-<% content_for :subnav do %>
-<div class="row">
-	<div class="small-12 columns">
+<%= render layout: "subnav" do %>
 		<dl class="sub-nav">
 		  <dd><%= link_to 'PUBLIC Profile', distributor_public_profile_url%></dd>
 		  <dd><%= link_to 'FULL Profile', distributor_full_profile_url %></dd>
 		  <dd class="active"><%= link_to 'EDIT Profile', "#" %></dd>
 		</dl>
-	</div>
-</div>
 <% end %>
 
 <div class="row">

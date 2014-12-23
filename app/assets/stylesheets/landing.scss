@@ -56,7 +56,6 @@ body {
 
 
 
-
 /////////////
 // DEV STYLES
 /////////////
@@ -633,9 +632,10 @@ $onboard-nav-radius: 4px;
     padding: 0.25em 0.5em;
   }
   .preview-data {
-    // border: 1px solid #547DB2;
-    border-radius: 8px;
-    // padding: 0.5em 0.5em;
+    border: 2px solid #547DB2;
+    border-radius: 4px;
+    font-size: 0.75em;
+    padding: 0.5em 1em;
   }
   .preview-data-title {
     background-color: $link-color;
@@ -644,7 +644,8 @@ $onboard-nav-radius: 4px;
   .preview-data-tile-title {
 
     color: scale-color(black, $lightness: 65%);
-    font-size: 0.75em;
+    font-size: 0.85em;
+    // font-weight: bold;
   }  
 }
 

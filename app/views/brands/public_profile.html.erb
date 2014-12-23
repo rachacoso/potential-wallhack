@@ -7,52 +7,43 @@
 	<% end %>
 <% end %>
 
-<% content_for :subnav do %>
-<div class="row">
-	<div class="small-12 columns">
+<%= render layout: "subnav" do %>
 		<dl class="sub-nav">
 		  <dd class="active"><%= link_to 'PUBLIC Profile', "#" %></dd>
 		  <dd><%= link_to 'FULL Profile', brand_full_profile_url %></dd>
 		  <dd><%= link_to 'EDIT Profile', brand_url %></dd>
 		</dl>
-	</div>
-</div>
 <% end %>
 
 	<div class="row">
 
-		<div class="medium-3 columns">
+		<div class="medium-12 columns">
 
+			<div data-alert class="alert-box secondary radius">
+				 
 
-			<div class="ldpanel info-sidebar">
-				<div class="row">
-					<div class="small-12 columns">
-
-						<p>
+					<div class="row">
+						<div class="small-6 columns">
 							This is your Public Profile.<br>  [Stuff here about public profiles]
-						</p>
-
-							<div class="row">
-								<div class="small-12 columns text-center">
-
-									<% percent = check_brand_public_profile %>
-
-									<div class="progress small-12 <%= percent == 100 ? "success" : "" %>" style="margin: auto;">
-									  <span class="meter" style="width: <%= percent %>%"></span>
-									</div>
-
-									<small>Your Public Profile is <%= percent == 100 ? "" : "#{percent}%" %> Complete!</small>
-								</div>
+						</div>
+						<div class="small-6 columns text-center">					
+							<% percent = check_brand_public_profile %>
+							<div class="progress small-12 <%= percent == 100 ? "success" : "" %>" style="margin: auto;">
+							  <span class="meter" style="width: <%= percent %>%"></span>
 							</div>
-
+							<small>Your Public Profile is <%= percent == 100 ? "" : "#{percent}%" %> Complete!</small>
+						</div>
 					</div>
-				</div>
-			</div>
 
+				</div><!-- /.alert-box success radius -->
 
-		</div>
+		</div><!--/.medium-12 columns -->
 
-		<div class="medium-9 columns previewtile">
+	</div><!-- /.row -->
+
+	<div class="row">
+
+		<div class="medium-12 columns previewtile">
 			
 
 			<%= render partial: "/shared/profile/brand_public_profile_tiles", locals: {profile: @profile} %>

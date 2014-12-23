@@ -826,7 +826,7 @@ $input-include-glowing-effect: false;
 
 // We use these to control the background and border styles
 // $panel-bg: scale-color(#fff, $lightness: -5%);
-$panel-bg: white;
+$panel-bg: #fff;
 $panel-border-style: dotted;
 // $panel-border-size: 1px;
 $panel-border-size: 1px;
@@ -905,7 +905,7 @@ $panel-font-color: $body-font-color;
 
 // We use this to set the progress bar height
 $progress-bar-height: rem-calc(30);
-$progress-bar-color: #ddd  ;
+$progress-bar-color: #fff  ;
 
 // We use these to control the border styles
 // $progress-bar-border-color: scale-color(#fff, $lightness: 20%);
@@ -1030,11 +1030,13 @@ $progress-meter-success-color: green;
 
 // We use these to control margin and padding
 // $sub-nav-list-margin: rem-calc(-4 0 18);
+$sub-nav-list-margin: rem-calc(-4 0 0);
 // $sub-nav-list-padding-top: rem-calc(4);
 
 // We use this to control the definition
 // $sub-nav-font-family: $body-font-family;
 // $sub-nav-font-size: rem-calc(14);
+$sub-nav-font-size: rem-calc(12);
 // $sub-nav-font-color: #999;
 $sub-nav-font-color: #aaa;
 // $sub-nav-font-weight: $font-weight-normal;
@@ -1047,10 +1049,9 @@ $sub-nav-border-radius: 0px 0px 0px 0px;
 // We use these to control the active item styles
 // $sub-nav-active-font-weight: $font-weight-normal;
 // $sub-nav-active-bg: $primary-color;
-$sub-nav-active-bg: white;
+$sub-nav-active-bg: gray;
 // $sub-nav-active-bg-hover: scale-color($sub-nav-active-bg, $lightness: -14%);
 // $sub-nav-active-color: #fff;
-$sub-nav-active-color: $primary-color;
 // $sub-nav-active-padding: $sub-nav-padding;
 // $sub-nav-active-cursor: default;
 
@@ -1208,7 +1209,7 @@ $tabs-navigation-font-size: rem-calc(12);
 // $topbar-bg-color: #333;
 // $topbar-bg: $topbar-bg-color;
 
-$topbar-bg-color: #fff;
+$topbar-bg-color: #eee;
 $topbar-bg: $topbar-bg-color;
 
 // Height and margin
@@ -1231,6 +1232,7 @@ $topbar-dropdown-toggle-color: $link-color;
 // Set the link colors and styles for top-level nav
 $topbar-link-color: $link-color;
 // $topbar-link-color-hover: #fff;
+// $topbar-link-color-active: #fff;
 // $topbar-link-color-active: #fff;
 // $topbar-link-color-active-hover: #fff;
 // $topbar-link-weight: $font-weight-normal;

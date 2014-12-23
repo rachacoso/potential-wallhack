@@ -1,220 +1,32 @@
+<div class="profile-outer-tile">
+	<div class="row">
 
-		<div class="profile-outer-tile">
 
-			<div class="row">
-				<div class="medium-9 columns">
-					<h2><strong><%= profile.company_name %></strong></h2>
-					<h3>web <%= link_to profile.website, "//#{profile.website}" %></h3>
-				</div>
-				<div class="medium-3 columns">
 
-				</div>				
-			</div>
-
-			<ul class="small-block-grid-1 medium-block-grid-3">
-			
-				<li>
-					<div class="row">
-						<div class="small-3 columns">
-							<%= render partial: "shared/svg/globe", locals: {nolabel: true} %>
-						</div>
-						<div class="small-9 columns">
-							<div class="preview-data">
-								<span class="preview-data-tile-title">Headquarters</span><br>
-								<strong><%= profile.country_of_origin %></strong>
-							</div>
-						</div>
-					</div>
-				</li>
-
-				<li>
-					<div class="row">
-						<div class="small-3 columns">
-							<%= render partial: "shared/svg/employees", locals: {nolabel: true} %>
-						</div>
-						<div class="small-9 columns">
-							<div class="preview-data">
-								<span class="preview-data-tile-title">Company Size</span><br>
-								<strong><%= CompanySize.find(profile.company_size).name rescue nil %></strong>
-							</div>
-						</div>
-					</div>	
-				</li>
-
-				<li>
-					<div class="row">
-						<div class="small-3 columns">
-							<%= render partial: "shared/svg/calendar", locals: {nolabel: true} %>
-						</div>
-						<div class="small-9 columns">
-							<div class="preview-data">
-								<span class="preview-data-tile-title">Year Established</span><br>
-								<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
-							</div>
-						</div>
-					</div>
-				</li>
-			</ul>
-
-	<ul class="small-block-grid-1 medium-block-grid-2">
-
-		<li>
+		<div class="medium-8 large-9 columns">
 
 			<div class="row">
-				<div class="small-2 columns">
-					<%= render partial: "shared/svg/globe", locals: {nolabel: true} %>
-				</div>
-				<div class="small-10 columns">
-
-					<div class="preview-data">
-						<span class="preview-data-tile-title">General Contact Information</span><br>
-						<ul class="vcard">
-						  <li class="fn"><%= profile.contact_info.contact_name %>, <%= profile.contact_info.contact_title %></li>
-						  <li class="street-address"><%= profile.contact_info.address1 %></li>
-						  <li class="street-address"><%= profile.contact_info.address2 %></li>
-						  <% unless profile.contact_info.city.blank? && profile.contact_info.state.blank? && profile.contact_info.postcode.blank? %>
-						  <li><span class="locality"><%= profile.contact_info.city %></span> <span class="state"><%= profile.contact_info.state %></span>, <span class="zip"><%= profile.contact_info.postcode %></span></li>
-						  <% end %>
-						  <li class="country"><%= profile.contact_info.country %></li>
-						  <li class="phone"><%= profile.contact_info.phone %></li>
-						  <li class="email"><a href="mailto:<%= profile.contact_info.email %>"><%= profile.contact_info.email %></a></li>
-						</ul>
-					</div>
-
+				<div class="small-12 columns">
+					<h1><strong><%= profile.company_name %></strong></h1>
+					<h3><small>web</small> <strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>
+					<hr>
 				</div>
 			</div>
 
-		</li>
-
-		<li>
-
-			<div class="row">
-				<div class="small-2 columns">
-					<%= render partial: "shared/svg/shipping", locals: {nolabel: true} %>
-				</div>
-				<div class="small-10 columns">
-					<div class="preview-data">
-						<span class="preview-data-tile-title">Countries of Distribution</span><br>
-						<strong>
-							<% profile.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
-								<%= ec.country %><br>
-							<% end %>
-						</strong>
-					</div>
-				</div>
-			</div>
-		</li>
-		<li>
-			<div class="row">
-				<div class="small-2 columns">
-					<%= render partial: "shared/svg/sector", locals: {nolabel: true} %>
-				</div>
-				<div class="small-10 columns">
-					<div class="preview-data">
-						<span class="preview-data-tile-title">Sectors</span><br>
-						<% profile.sectors.each do |s| %>
-							<strong><%= s.name %></strong><br>
-						<% end %>
-					</div>
-				</div>
-			</div>
-		</li>
-		<li>
-			<div class="row">
-				<div class="small-2 columns">
-					<%= render partial: "shared/svg/channel", locals: {nolabel: true}%>
-				</div>
-				<div class="small-10 columns">
-					<div class="preview-data">
-						<span class="preview-data-tile-title">Channels</span><br>
-						<% profile.channels.each do |ch| %>
-							<strong><%= ch.name %></strong><br>
-						<% end %>
-						<% if profile.channel_capacities.where(channel_id: 0).length > 0 %>
-							<% profile.channel_capacities.where(channel_id: 0).each do |cch| %>
-								<strong><%= cch.custom_channel_name %> *</strong><br>
-							<% end %>
-							<small>(* Custom Channels)</small>
-						<% end %>
-					</div>
-				</div>
-			</div>
-		</li>
-
-		
-		<li>
-			<div class="row">
-				<div class="small-2 columns">
-					<%= render partial: "shared/svg/sales", locals: {nolabel: true}%>
-				</div>
-				<div class="small-10 columns">
-
-					<div class="preview-data">
-						<span class="preview-data-tile-title">Sales and Education</span><br>
-						Inside Sales Force Size:<br>
-						<strong><%= profile.inside_sales_size %></strong><br><br>
-						Outside Sales Force Size:<br>
-						<strong><%= profile.outside_sales_size %></strong><br>
-					</div>
-
-				</div>
-			</div>
-		</li>
-
-		<li>
-			<div class="row">
-				<div class="small-2 columns">
-					<%= render partial: "shared/svg/marketing", locals: {nolabel: true}%>
-				</div>
-				<div class="small-10 columns">
-
-					<div class="preview-data">
-						<span class="preview-data-tile-title">Marketing and PR</span><br>
-
-						Internal Marketing/PR Team Size:<br>
-						<strong><%= profile.internal_marketing_size %></strong><br><br>
-
-						External Marketing/PR?:<br>
-						<strong><%= profile.employ_pr_agency ? "Yes" : "No" %></strong><br><br>
-						
-						Customer Database Size:<br>
-						<strong><%= profile.customer_database_size %></strong><br><br>
-						
-						Product Marketing:<br>
-						<div class="row">
-							<div class="medium-6 columns">
-								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Print" ,p: profile.marketing_via_print}%>
-								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Online" ,p: profile.marketing_via_online}%>
-								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Email" ,p: profile.marketing_via_email}%>
-								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Outdoor" ,p: profile.marketing_via_outdoor}%>
-							</div>
-							<div class="medium-6 columns">
-								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Events" ,p: profile.marketing_via_events}%>
-								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Direct Mail" ,p: profile.marketing_via_direct_mail}%>
-								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Classes" ,p: profile.marketing_via_classes}%>
-							</div>
-						</div>
-							
-					</div>
-
-				</div>
-			</div>
-		</li>
-
-	</ul>
 
 
-			<div class="row">
-				<div class="medium-10 columns small-centered">
+
+
+
 
 							<div class="row">
-								<div class="small-2 columns">
+								<div class="small-2 medium-2 large-1 columns">
 									<%= render partial: "shared/svg/brandportfolio", locals: {nolabel: true}%>
 								</div>
-								<div class="small-10 columns">
+								<div class="small-10 medium-10 large-11 columns">
 
 									<div class="preview-data">
-										<span class="preview-data-tile-title">Current Brand Portfolio</span><br>
+										<span class="preview-data-tile-title"><h2><strong>Current Brand Portfolio</strong></h2></span>
 
 
 											<% if profile.distributor_brands.where(current: true).length > 0 %>
@@ -233,22 +45,16 @@
 
 								</div>
 							</div>	
-				<hr>
-				</div><!-- /.medium-10 columns small-centered-->		
-			</div><!-- /.row -->
 
-
-			<div class="row">
-				<div class="medium-10 columns small-centered">
 
 							<div class="row">
-								<div class="small-2 columns">
+								<div class="small-2 medium-2 large-1 columns">
 									<%= render partial: "shared/svg/brandportfolio", locals: {nolabel: true}%>
 								</div>
-								<div class="small-10 columns">
+								<div class="small-10 medium-10 large-11 columns">
 
 									<div class="preview-data">
-										<span class="preview-data-tile-title">Future Brand Portfolio</span><br>
+										<span class="preview-data-tile-title"><h2><strong>Past Brand Portfolio</strong></h2></span>
 
 
 										<% if profile.distributor_brands.where(current: false).length > 0 %>
@@ -259,27 +65,22 @@
 											<% end %>
 										<% else %>
 										<br>
-											[No Upcoming Brands]
+											[No Past Brands]
 										<% end %>
 
 
 									</div>
 
 								</div>
-							</div>	
-				<hr>
-				</div><!-- /.medium-10 columns small-centered-->		
-			</div><!-- /.row -->
+							</div>								
 
 
-			<div class="row">
-				<div class="medium-10 columns small-centered">
 
 							<div class="row">
-								<div class="small-2 columns">
+								<div class="small-2 medium-2 large-1 columns">
 									<%= render partial: "shared/svg/tradeshow", locals: {nolabel: true}%>
 								</div>
-								<div class="small-10 columns">
+								<div class="small-10 medium-10 large-11 columns">
 
 									<div class="preview-data">
 										<span class="preview-data-tile-title">Trade Shows</span><br>
@@ -300,7 +101,187 @@
 								</div>
 							</div>	
 
-				</div><!-- /.medium-10 columns small-centered-->		
-			</div><!-- /.row -->
 
-		</div><!-- /.profile-outer-tile -->
+		</div> <!--/.medium-8 large-9 columns -->
+		
+
+		<div class="medium-4 large-3 columns">
+
+
+					<div class="row">
+						<div class="small-2 medium-3 columns">
+							<%= render partial: "shared/svg/globe", locals: {nolabel: true} %>
+						</div>
+						<div class="small-10 medium-9 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Headquarters</span><br>
+								<strong><%= profile.country_of_origin %></strong>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="small-2 medium-3 columns">
+							<%= render partial: "shared/svg/employees", locals: {nolabel: true} %>
+						</div>
+						<div class="small-10 medium-9 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Company Size</span><br>
+								<strong><%= CompanySize.find(profile.company_size).name rescue nil %></strong>
+							</div>
+						</div>
+					</div>	
+
+					<div class="row">
+						<div class="small-2 medium-3 columns">
+							<%= render partial: "shared/svg/calendar", locals: {nolabel: true} %>
+						</div>
+						<div class="small-10 medium-9 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Year Established</span><br>
+								<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
+							</div>
+						</div>
+					</div>					
+
+					<div class="row">
+						<div class="small-2 medium-3 columns">
+							<%= render partial: "shared/svg/shipping", locals: {nolabel: true} %>
+						</div>
+						<div class="small-10 medium-9 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Countries of Distribution</span><br>
+								<strong>
+									<% profile.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
+										<%= ec.country %><br>
+									<% end %>
+								</strong>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="small-2 medium-3 columns">
+							<%= render partial: "shared/svg/sector", locals: {nolabel: true} %>
+						</div>
+						<div class="small-10 medium-9 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Sectors</span><br>
+								<% profile.sectors.each do |s| %>
+									<strong><%= s.name %></strong><br>
+								<% end %>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="small-2 medium-3 columns">
+							<%= render partial: "shared/svg/channel", locals: {nolabel: true}%>
+						</div>
+						<div class="small-10 medium-9 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Channels</span><br>
+								<% profile.channels.each do |ch| %>
+									<strong><%= ch.name %></strong><br>
+								<% end %>
+								<% if profile.channel_capacities.where(channel_id: 0).length > 0 %>
+									<% profile.channel_capacities.where(channel_id: 0).each do |cch| %>
+										<strong><%= cch.custom_channel_name %> *</strong><br>
+									<% end %>
+									<small>(* Custom Channels)</small>
+								<% end %>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="small-2 medium-3 columns">
+							<%= render partial: "shared/svg/sales", locals: {nolabel: true}%>
+						</div>
+						<div class="small-10 medium-9 columns">
+
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Sales and Education</span><br><br>
+
+									Inside Sales Force:<br>
+									<strong><%= profile.inside_sales_size %></strong>
+									<hr>
+									Outside Sales Force:<br>
+									<strong><%= profile.outside_sales_size %></strong>
+
+							</div>
+
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="small-2 medium-3 columns">
+							<%= render partial: "shared/svg/marketing", locals: {nolabel: true}%>
+						</div>
+						<div class="small-10 medium-9 columns">
+
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Marketing and PR</span><br><br>
+
+
+										Internal Marketing/ <br>PR Team Size:<br>
+										<strong><%= profile.internal_marketing_size %></strong><hr>
+
+										<strong><%= profile.employ_pr_agency ? "Does use" : "Does not use" %></strong>
+										<br>External Marketing/PR<hr>
+
+										Customer Database Size:<br>
+										<strong><%= profile.customer_database_size %></strong><hr>
+
+
+
+										Product Marketing:<br>
+
+										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Print" ,p: profile.marketing_via_print}%>
+										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Online" ,p: profile.marketing_via_online}%>
+										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Email" ,p: profile.marketing_via_email}%>
+										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Outdoor" ,p: profile.marketing_via_outdoor}%>
+										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Events" ,p: profile.marketing_via_events}%>
+										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Direct Mail" ,p: profile.marketing_via_direct_mail}%>
+										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Classes" ,p: profile.marketing_via_classes}%>
+
+									
+							</div>
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="small-2 medium-3 columns">
+							<%= render partial: "shared/svg/globe", locals: {nolabel: true} %>
+						</div>
+						<div class="small-10 medium-9 columns">
+
+							<div class="preview-data">
+								<span class="preview-data-tile-title">General Contact Information</span><br>
+								  <strong><%= profile.contact_info.contact_name %>,<br> <%= profile.contact_info.contact_title %><br></strong>
+								  <%= profile.contact_info.address1 %><br>
+								  <%= profile.contact_info.address2 %><br>
+								  <% unless profile.contact_info.city.blank? && profile.contact_info.state.blank? && profile.contact_info.postcode.blank? %>
+								  <%= profile.contact_info.city %> <%= profile.contact_info.state %> <%= profile.contact_info.postcode %><br>
+								  <% end %>
+								  <%= profile.contact_info.country %><br>
+								  <%= profile.contact_info.phone %><br>
+								  <a href="mailto:<%= profile.contact_info.email %>"><%= profile.contact_info.email %></a>
+							</div>
+
+						</div>
+					</div>
+
+
+
+		</div> <!--/.medium-4 large-3 columns -->
+
+
+
+	</div> <!--/.row -->
+</div> <!--/.profile-outer-tile -->

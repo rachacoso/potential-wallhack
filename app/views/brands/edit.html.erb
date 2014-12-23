@@ -1,17 +1,13 @@
 <%= render partial: "shared/topbar" %>
 
-
-<% content_for :subnav do %>
-<div class="row">
-	<div class="small-12 columns">
+<%= render layout: "subnav" do %>
 		<dl class="sub-nav">
 		  <dd><%= link_to 'PUBLIC Profile', brand_public_profile_url%></dd>
 		  <dd><%= link_to 'FULL Profile', brand_full_profile_url %></dd>
 		  <dd class="active"><%= link_to 'EDIT Profile', "#" %></dd>
 		</dl>
-	</div>
-</div>
 <% end %>
+
 
 
 <div class="row">
@@ -532,12 +528,12 @@
 						</div>
 					
 					<%= render partial: "shared/editcollblock", locals: { 
-						headertitle: "Upcoming SKU List (optional)",
-						coll: @upcoming_products,
+						headertitle: "Past SKU List (optional)",
+						coll: @past_products,
 						identifier: "name",
-						no_item_message: "No Upcoming Products",
+						no_item_message: "No Past Products",
 						coll_new_item: @new_product,
-						coll_new_item_text: "Add an Upcoming Product",
+						coll_new_item_text: "Add Past Product",
 						iscurrent: "false"
 					} %>
 

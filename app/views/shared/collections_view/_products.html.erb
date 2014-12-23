@@ -1,48 +1,43 @@
 
+<hr>
+			<div class="row" data-equalizer>
+						
 
+				<div class="medium-4 columns preview-data" data-equalizer-watch>
 
-	<dl class="accordion" data-accordion>
-	  <dd class="accordion-navigation">
-	    <a href="#a_<%= collitem.id %>"><strong style="color: #5f5f5f;"><%= collitem.name.empty? ? "( No Name )" : collitem.name  %></strong>
-	   	<% if collitem.product_photos %>
-				<% collitem.product_photos.each do |photo| %>
-					<%= image_tag photo.photo.url(:small), :width => '25', :height => '25' %>
-				<% end %>
-			<% end %>
-	    <span class="right" style="color: #aaa;"><small>(more)</small></span></a>
-	    <div id="a_<%= collitem.id %>" class="content">
+					<h2><strong style="color: #5f5f5f;"><%= collitem.name.empty? ? "( No Name )" : collitem.name  %></strong><br></h2>
+					<small>MSRP:</small><br>
+					$<%= collitem.msrp %><hr>
+					<small>Country of Manufacture:</small><br>
+					<%= collitem.country_of_manufacture %><hr>
+					<small>Description:</small><br>
+					<%= simple_format(collitem.description) %>
+					<small>Key Benefits:</small><br>
+					<%= simple_format(collitem.key_benefits) %>
+				</div>	
 
+				<div class="medium-8 columns" data-equalizer-watch>
+					<ul class="small-block-grid-2 medium-block-grid-3 ">
+					<% if !collitem.product_photos.blank? %>
+						<% collitem.product_photos.each do |photo| %>
+							<li>
+							<a data-dropdown="d_<%= photo.id %>" href="#"><%= image_tag photo.photo.url(:small) %></a>
+							<div id="d_<%= photo.id %>" data-dropdown-content class="f-dropdown content medium" aria-hidden="true" tabindex="-1">
+							  <%= image_tag photo.photo.url(:large), width: "400"%>
+							</div>
+							</li>
+						<% end %>
+					<% else %>
+						<li><%= image_tag Display.all.first.default_product_photo.url(:large) %></li>
+					<% end %>
+					</ul>
+				</div>
 
-<div class="row">
-	<div class="medium-6 columns">
-		<small>MSRP:</small><br>
-		$<%= collitem.msrp %>
-	</div>
-	<div class="medium-6 columns">
-		<small>Country of Manufacture:</small><br>
-		<%= collitem.country_of_manufacture %>
-	</div>									
-</div>
-<div class="row">					
-	<div class="medium-6 columns">
-		<small>Description:</small><br>
-		<%= simple_format(collitem.description) %>
-	</div>
-	<div class="medium-6 columns">
-		<small>Key Benefits:</small><br>
-		<%= simple_format(collitem.key_benefits) %>
-	</div>				
-</div>
-<div class="row">					
-	<div class="small-12 columns">
-		<% if collitem.product_photos %>
-			<% collitem.product_photos.each do |photo| %>
-				<%= image_tag photo.photo.url(:small) %>
-			<% end %>
-		<% end %>
-	</div>
-</div>
 
 			</div>
-		</dd>
-	</dl>
+
+
+
+
+		
+	

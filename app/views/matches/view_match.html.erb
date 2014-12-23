@@ -24,9 +24,10 @@
 </div>
 <% end %>
 
+
 	<div class="row">
 
-		<div class="medium-9 push-3 columns previewtile">
+		<div class="medium-9 medium-push-3 columns previewtile">
 			<% if this_match(@match) %>
 				<% if i_contacted(this_match(@match)) %>
 					<%= render partial: "outgoing_contact" %>
@@ -34,7 +35,19 @@
 					<%= render partial: "incoming_contact" %>
 				<% end %>
 			<% end %>
-			
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="medium-12 columns previewtile">
+
+			<div class="row">
+				<div class="medium-8 columns">
+
+				</div>
+				<div class="medium-2 columns"><%= render partial: "contactbutton", locals: {profile: @match} %></div>
+				<div class="medium-2 columns"><%= render partial: "savebutton", locals: {profile: @match} %></div>
+			</div>
 			<% if @current_user.distributor %>
 
 				<% if @current_user.subscriber? %>
@@ -53,12 +66,5 @@
 
 			<% end %>
 		</div>
-
-		<div class="medium-3 pull-9 columns previewtile">
-			<div class="profile-outer-tile">
-			<%= render partial: "savebutton", locals: {profile: @match} %>
-			<%= render partial: "contactbutton", locals: {profile: @match} %>
-			</div>
-		</div>
-		
 	</div>
+

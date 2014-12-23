@@ -4,6 +4,7 @@ class DisplaysController < ApplicationController
 		newdisplay = Display.new
 		newdisplay.background_color = params[:display][:background_color]
 		newdisplay.background_photo = params[:display][:background_photo]
+		newdisplay.default_product_photo = params[:display][:default_product_photo]
 
 		if newdisplay.valid?
 			newdisplay.save!
@@ -31,9 +32,13 @@ class DisplaysController < ApplicationController
 		else		
 
 			display.background_color = params[:display][:background_color]
+			display.default_product_photo = params[:display][:default_product_photo]
 			unless params[:display][:background_photo].blank?
 				display.background_photo = params[:display][:background_photo]
 			end
+			unless params[:display][:default_product_photo].blank?
+				display.default_product_photo = params[:display][:default_product_photo]
+			end			
 
 		end
 

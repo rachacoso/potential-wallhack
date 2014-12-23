@@ -2,11 +2,11 @@
 <div class="profile-outer-tile">
 
 	<div class="row">
-		<div class="medium-5 columns">
+		<div class="small-12 medium-5 columns">
 			<h4><strong><%= @match.company_name %></strong><br> would like to start a conversation with you</h4>
 		</div>
 
-		<div class="medium-7 columns">
+		<div class="small-11 medium-7 columns">
 			<div class="bubble-them">
 				<%= match.intro_message %>
 			</div>
@@ -22,6 +22,24 @@
 			<div class="bubble-you">
 				[sample response]
 			</div>
+		</div>				
+	</div>	
+
+	<div class="row">
+		<hr>
+		<div class="small-12 columns">
+				
+			<%= form_for Message.new, remote: true do |f| %>
+			<div class="row collapse">
+				<div class="small-11 columns">
+					<%= f.text_field :text, label: false %>
+				</div>
+				<div class="small-1 columns">
+					<%= f.submit 'Reply', :class => " button postfix", :style => "margin-top: 0;" %>
+				</div>
+			</div>
+			<% end %>
+			
 		</div>				
 	</div>	
 

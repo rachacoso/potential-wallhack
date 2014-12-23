@@ -15,7 +15,7 @@ class AdminController < ApplicationController
 			@display_info = Display.new
 	  else
 			@display_info = Display.all.first
-			@background_photo = @display_info.background_photo
+			
 		end
 
   end

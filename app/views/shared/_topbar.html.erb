@@ -37,7 +37,7 @@
 						<% end %>
 	        </a>
 	        <ul class="dropdown">       	
-	          <li class="active">
+	          <li>
 								<%= action_name == "front" ? (link_to 'Dashboard', dashboard_url) : "" %> 
 								<%= controller_name == "admin" ? (link_to 'Dashboard', dashboard_url) : "" %>
 								<%= controller_name == "home" ? (link_to 'Dashboard', dashboard_url) : "" %>
@@ -52,7 +52,7 @@
 						<li>
 							<%= link_to 'Market Insight', "#" %>
 						</li>	          
-						<li>
+						<li class="active">
 							<% matchtype = @current_user.type? == "distributor" ? "Brand" : "Distributor" %>
 							<%= link_to "Your #{matchtype} Matches", all_matches_url %>
 						</li>

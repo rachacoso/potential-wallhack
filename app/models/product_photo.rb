@@ -11,6 +11,8 @@ class ProductPhoto
 	    :medium		=> ['400'],
 	    :large    => ['800>']
 	  }
+	  #, :convert_options => { :all => '-background white -flatten' }
+
 	validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 	
 	belongs_to :photographable, polymorphic: true

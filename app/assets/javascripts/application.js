@@ -22,6 +22,7 @@
 //= require foundation/foundation.equalizer
 //= require foundation/foundation.topbar
 //= require foundation/foundation.tooltip
+//= require foundation/foundation.dropdown
 
 
 

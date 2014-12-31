@@ -7,7 +7,7 @@
 
 				<div class="medium-4 columns preview-data" data-equalizer-watch>
 
-					<h2><strong style="color: #5f5f5f;"><%= collitem.brand.empty? ? "( No Name )" : collitem.brand  %></strong><br></h2>
+					<h3><strong style="color: #5f5f5f;"><%= collitem.brand.empty? ? "( No Name )" : collitem.brand  %></strong><br></h3>
 					<small>Category:</small><br>
 					<%= !collitem.category.blank? ? Sector.find(collitem.category).name : "No Category Selected" %><hr>
 					<small>Country of Manufacture:</small><br>

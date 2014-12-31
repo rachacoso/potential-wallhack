@@ -605,10 +605,14 @@ $onboard-nav-radius: 4px;
 .profile-outer-tile {
   border: 1px solid scale-color($link-color, $lightness: 70%);
   @include transparent(#fff, 0.95);
+  margin: 0.5em;
+}
+
+.profile-outer-border-tile {
+  border-radius: 3px;
+  @include transparent(#fff, 0.95);
+  background: #e4e4e4;
   margin-bottom: 2em;
-  h1 {
-    font-size: 3em;
-  }
 }
 
 .profile-save-tile {
@@ -771,22 +775,23 @@ $onboard-nav-radius: 4px;
 }
 
 
-// TABS STYLING
+// // TABS STYLING
 
 .tabs dd > a, .tabs .tab-title > a {
-  padding: 2px 2px;
-  width: 4.7rem;
+  // padding: 2px 2px;
+  // width: 4.7rem;
+  border-radius: 5px;
 }
 
-dl.tabs {
-  text-align: right;
-  padding: 100;
-}
+// dl.tabs {
+//   text-align: right;
+//   padding: 100;
+// }
 
-// override default tab content padding
-.tabs-content > .content {
-  padding: 0em;
-}
+// // override default tab content padding
+// .tabs-content > .content {
+//   padding: 0em;
+// }
 
 
 // Front Page Styling

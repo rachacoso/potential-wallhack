@@ -1,29 +1,43 @@
 <% match = this_match(@match) %>
 <div class="profile-outer-tile">
 
+
+
 	<div class="row">
-		<div class="small-12 medium-5 columns">
-			<h4><strong><%= @match.company_name %></strong><br> would like to start a conversation with you</h4>
-		</div>
-
-		<div class="small-11 medium-7 columns">
-			<div class="bubble-them">
-				<%= match.intro_message %>
+			<div class="small-12 columns" style="background: #7ecdec">
+				<% if match.messages %>
+				<h4><strong><%= @match.company_name %></strong> started a conversation with you</h4>
+				<% else %>
+				<h4><strong><%= @match.company_name %></strong> would like a conversation with you</h4>
+				<% end %>
 			</div>
-			
-			<small>Sent <%= match.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small>
-			
-		</div>
-
 	</div>
+
 
 	<div class="row">
 		<div class="small-11 small-centered columns">
-			<div class="bubble-you">
-				[sample response]
+			<div class="bubble-them">
+				<%= match.intro_message %>
 			</div>
-		</div>				
-	</div>	
+			<small>Sent <%= match.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small>	
+		</div>
+	</div>
+
+	<div id="message-list">
+		<% if match.messages %>
+		<% @messages = match.messages %>
+		<%= render 'shared/messages/message_list' %>
+		<% end %>
+	<!-- 	<div class="row">
+			<div class="small-11 small-centered columns">
+				<div class="bubble-you">
+					[sample response]
+				</div>
+			</div>				
+		</div>	 -->
+	</div>
+
+
 
 	<div class="row">
 		<hr>
@@ -33,6 +47,8 @@
 			<div class="row collapse">
 				<div class="small-11 columns">
 					<%= f.text_field :text, label: false %>
+					<%= f.hidden_field :recipient, value: (@current_user.type? == 'distributor' ? 'brand' : 'distributor') %>
+					<%= hidden_field_tag :match_id, match.id %>
 				</div>
 				<div class="small-1 columns">
 					<%= f.submit 'Reply', :class => " button postfix", :style => "margin-top: 0;" %>

@@ -203,10 +203,12 @@ class MatchesController < ApplicationController
 
   	if @current_user.distributor 
   		@match = Brand.find(params[:match_id])
+  		@messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages rescue nil
 	  else # is a brand
   		@match = Distributor.find(params[:match_id])
+  		@messages = @current_user.brand.matches.where(distributor_id: @match.id).first.messages rescue nil
 	  end
-  
+
 	  @referrer = params[:referrer]
 
   end 
@@ -236,7 +238,13 @@ class MatchesController < ApplicationController
 
 			u.matches << new_match
 			@match.matches << new_match
-			
+
+			# get new data for the page refresh [NEED TO REFACTOR]
+	  	if @current_user.distributor 
+	  		@messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages rescue nil
+		  else # is a brand
+	  		@messages = @current_user.brand.matches.where(distributor_id: @match.id).first.messages rescue nil
+		  end			
 
 		else 
 

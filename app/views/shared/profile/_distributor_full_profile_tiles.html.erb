@@ -1,23 +1,21 @@
+<div class="profile-outer-border-tile">
 <div class="profile-outer-tile">
 	<div class="row">
+		<div class="small-8 columns">
+			<h2><strong><%= profile.company_name %></strong></h2>
+			<h3><small>web</small> <strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>
+		</div>
+		<% if controller_name == "matches" %>
+		<div class="medium-2 columns"><%= render partial: "contactbutton", locals: {profile: @match} %></div>
+		<div class="medium-2 columns"><%= render partial: "savebutton", locals: {profile: @match} %></div>
+		<% end %>
+	</div>
+</div>
 
+<div class="profile-outer-tile">
 
-
+	<div class="row">
 		<div class="medium-8 large-9 columns">
-
-			<div class="row">
-				<div class="small-12 columns">
-					<h1><strong><%= profile.company_name %></strong></h1>
-					<h3><small>web</small> <strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>
-					<hr>
-				</div>
-			</div>
-
-
-
-
-
-
 
 							<div class="row">
 								<div class="small-2 medium-2 large-1 columns">
@@ -26,7 +24,7 @@
 								<div class="small-10 medium-10 large-11 columns">
 
 									<div class="preview-data">
-										<span class="preview-data-tile-title"><h2><strong>Current Brand Portfolio</strong></h2></span>
+										<span class="preview-data-tile-title"><h3><strong>Current Brand Portfolio</strong></h3></span>
 
 
 											<% if profile.distributor_brands.where(current: true).length > 0 %>
@@ -54,7 +52,7 @@
 								<div class="small-10 medium-10 large-11 columns">
 
 									<div class="preview-data">
-										<span class="preview-data-tile-title"><h2><strong>Past Brand Portfolio</strong></h2></span>
+										<span class="preview-data-tile-title"><h3><strong>Past Brand Portfolio</strong></h3></span>
 
 
 										<% if profile.distributor_brands.where(current: false).length > 0 %>
@@ -285,3 +283,4 @@
 
 	</div> <!--/.row -->
 </div> <!--/.profile-outer-tile -->
+</div> <!--/.profile-outer-border-tile -->

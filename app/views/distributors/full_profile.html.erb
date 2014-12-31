@@ -7,41 +7,48 @@
 	<% end %>
 <% end %>
 
-<%= render layout: "subnav" do %>
-		<dl class="sub-nav">
-		  <dd><%= link_to 'PUBLIC Profile', distributor_public_profile_url%></dd>
-		  <dd class="active"><%= link_to 'FULL Profile', "#" %></dd>
-		  <dd><%= link_to 'EDIT Profile', distributor_url %></dd>
-		</dl>
-<% end %>
+<div class="row">
+	<div class="large-12 columns">
+		<ul class="breadcrumbs">
+		  <li class="current"><%= link_to "Your #{@current_user.type?} profile", "#" %></li>
+		</ul>					
+	</div>
+</div>
 
 
-	<div class="row">
+<div class="row">
+<div class="medium-5 push-7 columns">
+	<ul class="button-group even-3">
+  <li><%= link_to 'PUBLIC Profile', distributor_public_profile_url, class: "tiny button secondary" %></li>
+  <li><%= link_to 'FULL Profile', "#", class: "tiny button info"%></li>
+  <li><%= link_to 'EDIT Profile', distributor_url, class: "tiny button secondary" %></li>
+  </ul>
+</div>
+</div>
 
-		<div class="medium-12 columns">
-			<div data-alert class="alert-box secondary radius">
-		  
+
+<div class="row">
+<div class="small-12 columns">
+	<div data-alert class="alert-box secondary radius">
+		<div class="row">
+			<div class="small-6 columns">
+					<p>This is your Full Profile.<br>  [Stuff here about full profiles]</p>
+			</div>
+			<div class="small-6 columns">					
 				<div class="row">
-
-					<div class="small-6 columns">
-						<p>
-							This is your Full Profile.<br>  [Stuff here about public profiles]
-						</p>
-					</div>
-
-					<div class="small-6 columns text-center">
+					<div class="small-12 columns text-center">
 						<% percent = check_distributor_full_profile %>
 						<div class="progress small-12 <%= percent == 100 ? "success" : "" %>" style="margin: auto;">
 						  <span class="meter" style="width: <%= percent %>%"></span>
 						</div>
 						<small>Your Full Profile is <%= percent == 100 ? "" : "#{percent}%" %> Complete!</small>
 					</div>
-
 				</div>
 			</div>
 		</div>
-
 	</div>
+</div>
+</div>
 
 	<div class="row">
 		<div class="medium-12 columns previewtile">

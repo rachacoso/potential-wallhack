@@ -1,70 +1,48 @@
 <%= render partial: "shared/topbar" %>
 
 <% content_for :subnav do %>
+
 <div class="row">
 	<div class="small-12 columns">
-		<dl class="sub-nav">
+		<ul class="breadcrumbs">
 			<% if @referrer %>
+
 				<% matchtype = @current_user.distributor ? "Brand" : "Distributor" %>
-				<% if @referrer == "index" %>
-				  <dd><%= link_to "Back to All #{matchtype}s", all_matches_url %></dd>
-				<% elsif @referrer == "index_saved_matches" %>  
-				  <dd><%= link_to "Back to Saved #{matchtype}s", saved_matches_url %></dd>
+				<li><%= link_to "Your #{matchtype} Matches", all_matches_url %></li>
+				
+				<%# if @referrer == "index" %>
+				  <%#= link_to "All #{matchtype}s", all_matches_url %>
+				<% if @referrer == "index_saved_matches" %>  
+				  <li><%= link_to "Saved #{matchtype}s", saved_matches_url %></li>
 				<% elsif @referrer == "index_contacted_matches" %>  
-				  <dd><%= link_to "Back to #{matchtype}s you contacted", contacted_matches_url %></dd>			  
+				  <li><%= link_to "#{matchtype}s you contacted", contacted_matches_url %></li>
 				<% elsif @referrer == "index_incoming_matches" %>  
-				  <dd><%= link_to "Back to #{matchtype}s contacting you", incoming_matches_url %></dd>			  
+				  <li><%= link_to "#{matchtype}s contacting you", incoming_matches_url %></li>
 			  <% end %>
+			  
 		  <% else %>
-				<dd><%= link_to 'All Matches', all_matches_url %></dd>
+				<li><%= link_to 'All Matches', all_matches_url %></li>
 		  <% end %>
-		  <dd class="active"><%= link_to "Viewing #{matchtype} - <strong>#{@match.company_name}</strong>".html_safe, "#" %></dd>
-		</dl>
+		  <li class="current"><%= link_to "<strong>#{@match.company_name}</strong>".html_safe, "#" %></li>
+		</ul>
+
 	</div>
 </div>
+
+
 <% end %>
 
+<div id="match-view">
 
-	<div class="row">
+<%= render "match_view" %>
 
-		<div class="medium-9 medium-push-3 columns previewtile">
-			<% if this_match(@match) %>
-				<% if i_contacted(this_match(@match)) %>
-					<%= render partial: "outgoing_contact" %>
-				<% else %>
-					<%= render partial: "incoming_contact" %>
-				<% end %>
-			<% end %>
-		</div>
-	</div>
+</div> <!-- /.#match-view -->
 
-	<div class="row">
-		<div class="medium-12 columns previewtile">
 
-			<div class="row">
-				<div class="medium-8 columns">
 
-				</div>
-				<div class="medium-2 columns"><%= render partial: "contactbutton", locals: {profile: @match} %></div>
-				<div class="medium-2 columns"><%= render partial: "savebutton", locals: {profile: @match} %></div>
-			</div>
-			<% if @current_user.distributor %>
 
-				<% if @current_user.subscriber? %>
-					<%= render partial: "/shared/profile/brand_full_profile_tiles", locals: {profile: @match} %>
-				<% else %>
-					<%= render partial: "/shared/profile/brand_public_profile_tiles", locals: {profile: @match} %>
-				<% end %>
 
-			<% elsif @current_user.brand %>
 
-				<% if @current_user.subscriber? %>
-					<%= render partial: "/shared/profile/distributor_full_profile_tiles", locals: {profile: @match} %>
-				<% else %>
-					<%= render partial: "/shared/profile/distributor_public_profile_tiles", locals: {profile: @match} %>
-				<% end %>
 
-			<% end %>
-		</div>
-	</div>
+
 

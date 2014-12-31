@@ -5,7 +5,7 @@
 <% elsif action_name == "index_saved_matches" %>
 	<div id="saved-match-count" class="matchcount"><%= @matches.count %> <%= @matches.count > 1 ? "saved #{matchtype}s" : "saved #{matchtype}" %></div>
 <% elsif action_name == "index_contacted_matches" %>
-	<div id="saved-match-count" class="matchcount"><%= @matches.count %> <%= @matches.count > 1 ? "#{matchtype}s you are contacting" : "#{matchtype} you are contacting" %></div>
+	<div id="saved-match-count" class="matchcount"><%= @matches.count %> <%= @matches.count > 1 ? "#{matchtype}s you contacted" : "#{matchtype} you contacted" %></div>
 <% elsif action_name == "index_incoming_matches" %>
 	<div id="saved-match-count" class="matchcount"><%= @matches.count %> <%= @matches.count > 1 ? "#{matchtype}s contacting you" : "#{matchtype} contacting you" %></div>		
 <% end %>

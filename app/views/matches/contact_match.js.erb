@@ -1,3 +1,5 @@
-$('#pct_<%= @match.id %>').html("<%= j (render 'contacted_link') %>");
+// $('#pct_<%= @match.id %>').html("<%= j (render 'contacted_link') %>");
+
+$('#match-view').html("<%= j (render 'match_view') %>");
 
 $('#contactModal').foundation('reveal', 'close');

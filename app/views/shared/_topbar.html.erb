@@ -5,18 +5,12 @@
 	<nav class="top-bar" data-topbar role="navigation">
 	  <ul class="title-area">
 	    <li class="name">
-				<h1 class="tk-aw-conqueror-inline">&nbsp;Landing
+				<h1 style="color: white">&nbsp;Landing
 				<% if controller_name == "admin" || controller_name == "users" %>
 					<small>for Administrators</small>
 				<% elsif @current_user %>
 					<small><%= @current_user.distributor ? "for Distributors" : "for Brands" %></small>
-				<% end %>
-				<% if ( ["distributors","brands"].include? controller_name ) %>
-					<small style="color: #aaa;"> // Your Profile</small>
-				<% end %>
-				<% if ( action_name == "dashboard" ) %>
-					<small style="color: #aaa;"> // Your Dashboard</small>
-				<% end %>				
+				<% end %>		
 				</h1>      
 	    </li>
 	     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->

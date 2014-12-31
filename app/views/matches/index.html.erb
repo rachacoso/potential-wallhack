@@ -5,28 +5,26 @@
 <% content_for :subnav do %>
 <div class="row">
 	<div class="small-12 columns">
-		<div class="ldpanel">
-			
-			<div class="row">
-				<div class="large-3 columns">
-					<strong>Your <%= @current_user.type? == "brand" ? "Distributor" : "Brand" %> Matches</strong>
-				</div>
-
-				<div class="large-9 columns">			
-					<dl class="sub-nav">
-						<% matchtype = @current_user.distributor ? "Brands" : "Distributors" %>
-					  <dd <%= action_name == "index" ? "class='active'".html_safe : ""%>><%= link_to "All #{matchtype}", all_matches_url %></dd>
-					  <dd <%= action_name == "index_saved_matches" ? "class='active'".html_safe : ""%>><%= link_to "Saved #{matchtype}", saved_matches_url %></dd>
-					  <dd <%= action_name == "index_contacted_matches" ? "class='active'".html_safe : ""%>><%= link_to "#{matchtype} you are contacting", contacted_matches_url %></dd>
-					  <dd <%= action_name == "index_incoming_matches" ? "class='active'".html_safe : ""%>><%= link_to "#{matchtype} contacting you", incoming_matches_url %></dd>
-					</dl>
-				</div>
-			</div>
-
-		</div>
+		<ul class="breadcrumbs">
+			<% matchtype = @current_user.distributor ? "Brand" : "Distributor" %>
+		  <li class="current"><%= link_to "Your #{matchtype} Matches", "#" %></li>
+		</ul>
 	</div>
 </div>
+</div>
 <% end %>
+
+<div class="row">
+<div class="medium-9 push-3 columns">
+	<% matchtype = @current_user.distributor ? "Brands" : "Distributors" %>
+	<ul class="button-group even-4">
+  <li><%= action_name == "index" ? (link_to "All #{matchtype}", all_matches_url, class: "tiny button info") : (link_to "All #{matchtype}", all_matches_url, class: "tiny button secondary") %></li>
+  <li><%= action_name == "index_saved_matches" ? (link_to "Saved #{matchtype}", saved_matches_url, class: "tiny button info") : (link_to "Saved #{matchtype}", saved_matches_url, class: "tiny button secondary") %></li>
+  <li><%= action_name == "index_contacted_matches" ? (link_to "#{matchtype} you contacted", contacted_matches_url, class: "tiny button info") : (link_to "#{matchtype} you contacted", contacted_matches_url, class: "tiny button secondary") %></li>
+  <li><%= action_name == "index_incoming_matches" ? (link_to "#{matchtype} contacting you", incoming_matches_url, class: "tiny button info") : (link_to "#{matchtype} contacting you", incoming_matches_url, class: "tiny button secondary") %></li>
+	</ul>
+</div>
+</div>
 
 <% if @current_user.brand %>
 

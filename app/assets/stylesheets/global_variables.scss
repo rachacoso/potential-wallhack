@@ -7,7 +7,7 @@
 // We use these to control various global styles
 $body-bg: #C6CBCC;
 $content-body-bg: #FFFEF7;
-$body-font-color: #1D4E89;
+$body-font-color: #333;
 $body-font-color-analogue: #7DA1BF;
 // $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 $body-font-family: "jaf-facitweb",sans-serif;
@@ -24,14 +24,14 @@ $body-font-family: "jaf-facitweb",sans-serif;
 
 // We use these as default colors throughout
 // $primary-color: #008CBA;
-$primary-color: #FF8B18;
+$primary-color: #7ecdec;
 // $secondary-color: #e7e7e7;
 $alert-color: #f04124;
 $success-color: #955251;
 // $warning-color: #f08a24;
 // $info-color: #a0d3e8;
 $info-color: #FF6D11;
-$link-color: #955251;
+$link-color: #7ecdec;
 
 
 // $input-background-color: scale-color(#7DA1BF, $lightness: 80%);

@@ -83,7 +83,7 @@ Rails.application.routes.draw do
   get '/matches/view/:match_id/:referrer' => 'matches#view_match', as: 'view_match'
   get '/matches/contact/:match_id' => 'matches#contact_match', as: 'contact_match'
 
-  resources :messages, only: [:new, :create]
+  resources :messages, only: [:create]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

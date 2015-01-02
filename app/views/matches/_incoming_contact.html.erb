@@ -5,10 +5,10 @@
 
 	<div class="row">
 			<div class="small-12 columns" style="background: #7ecdec">
-				<% if match.messages %>
+				<% if !match.messages.blank? %>
 				<h4><strong><%= @match.company_name %></strong> started a conversation with you</h4>
 				<% else %>
-				<h4><strong><%= @match.company_name %></strong> would like a conversation with you</h4>
+				<h4><strong><%= @match.company_name %></strong> would like to have a conversation with you</h4>
 				<% end %>
 			</div>
 	</div>
@@ -24,7 +24,7 @@
 	</div>
 
 	<div id="message-list">
-		<% if match.messages %>
+		<% if !match.messages.blank? %>
 		<% @messages = match.messages %>
 		<%= render 'shared/messages/message_list' %>
 		<% end %>
@@ -46,7 +46,7 @@
 			<%= form_for Message.new, remote: true do |f| %>
 			<div class="row collapse">
 				<div class="small-11 columns">
-					<%= f.text_field :text, label: false %>
+					<%= f.text_field :text, label: false, id: "message-input" %>
 					<%= f.hidden_field :recipient, value: (@current_user.type? == 'distributor' ? 'brand' : 'distributor') %>
 					<%= hidden_field_tag :match_id, match.id %>
 				</div>

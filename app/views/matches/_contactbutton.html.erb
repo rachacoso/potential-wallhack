@@ -4,30 +4,14 @@
 		<div class="row">
 			<div class="small-12 columns">
 
-				<% if this_match(profile) %>
-					<% if i_contacted(this_match(@match)) %>
-					<div id="pct_<%= profile.id %>">
-						<%= render "contacted_link" %>
-					</div>
-					<% else %>
-					<div id="pct_<%= profile.id %>">
-						<div class="profile-save-tile text-center">
-							<%= link_to 'Respond to this request', "#", remote: true %>
-						</div>
-					</div>
-					<% end %>
-				<% else %>
+				<% if !this_match(profile) %>
 				<div id="pct_<%= profile.id %>">
 					<div class="profile-save-tile text-center">
 						<%#= link_to 'Contact', contact_match_url(profile.id), remote: true %>
 						<%= link_to 'Contact', "#", :data => {:'reveal-id' => "contactModal"} %>
 						<%#= @current_user.send(@current_user.type?).matches.where(brand_id: profile.id).first %>
 					</div>
-				</div>					
-				<% end %>
-
-
-
+				</div>
 				<div id="contactModal" class="reveal-modal small" data-reveal>
 
 				  <h2><strong><%= profile.company_name %></strong></h2>
@@ -42,7 +26,8 @@
 					<% end %> 
 
 				  <a class="close-reveal-modal">&#215;</a>
-				</div>
+				</div>					
+				<% end %>
 
 			</div>
 		</div>

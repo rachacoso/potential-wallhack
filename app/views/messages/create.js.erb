@@ -1,2 +1,4 @@
+<% if @messages %>
 $('#message-list').html("<%= j (render 'shared/messages/message_list') %>");
-$('#message-list').scrollTop($('#message-list').prop("scrollHeight"));
+$('#message-input').val('');
+<% end %>

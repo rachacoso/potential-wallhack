@@ -60,6 +60,25 @@ body {
 // DEV STYLES
 /////////////
 
+/*
+ * Let's target IE to respect aspect ratios and sizes for img tags containing SVG files
+ *
+ * [1] IE9
+ * [2] IE10+
+ */
+/* 1 */
+.ie9 img[src*=".svg"] {
+  width: 100%; 
+}
+/* 2 */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  img[src*=".svg"] {
+    width: 100%; 
+  }
+}
+
+
+
 /////////////
 // ERRORS/ALERTS STYLES
 /////////////
@@ -879,9 +898,11 @@ $them-color: #FFF7D8;
 $them-border: #B2A573;
 $you-color: #F1F2FF;
 $you-border: #8589B2;
+$bubble-font-size: 0.8em;
 
 .bubble-them
 {
+& p {font-size: $bubble-font-size;}
 position: relative;
 width: 98%;
 min-height: 100px;
@@ -924,6 +945,7 @@ top: 25px;
 
 .bubble-you
 {
+& p {font-size: $bubble-font-size;}
 position: relative;
 width: 98%;
 min-height: 100px;
@@ -961,4 +983,7 @@ z-index: 1;
 right: -15px;
 top: 25px;
 }
-
+#message-list {
+  // max-height: 200px;
+  // overflow-y: scroll;
+}

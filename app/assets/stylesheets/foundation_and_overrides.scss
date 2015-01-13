@@ -1140,7 +1140,7 @@ $table-row-font-color: $body-font-color;
 
 // $include-html-tabs-classes: $include-html-classes;
 
-// $tabs-navigation-padding: rem-calc(10);
+$tabs-navigation-padding: rem-calc(5);
 $tabs-navigation-bg-color: #eee;
 $tabs-navigation-active-bg-color: #333;
 $tabs-navigation-hover-bg-color: #ddd;
@@ -1209,7 +1209,7 @@ $tabs-navigation-font-size: rem-calc(14);
 // $topbar-bg-color: #333;
 // $topbar-bg: $topbar-bg-color;
 
-$topbar-bg-color: #333;
+$topbar-bg-color: $landing-dark-gray;
 $topbar-bg: $topbar-bg-color;
 
 // Height and margin
@@ -1223,6 +1223,7 @@ $topbar-title-font-size: rem-calc(25);
 // Style the top bar dropdown elements
 // $topbar-dropdown-bg: #333;
 // $topbar-dropdown-link-color: #fff;
+$topbar-dropdown-link-color: $link-color;
 // $topbar-dropdown-link-bg: #333;
 // $topbar-dropdown-link-weight: $font-weight-normal;
 // $topbar-dropdown-toggle-size: 5px;
@@ -1232,6 +1233,7 @@ $topbar-dropdown-toggle-color: $link-color;
 // Set the link colors and styles for top-level nav
 $topbar-link-color: $link-color;
 // $topbar-link-color-hover: #fff;
+$topbar-link-color-hover: $landing-yellow;
 // $topbar-link-color-active: #fff;
 // $topbar-link-color-active: #fff;
 // $topbar-link-color-active-hover: #fff;

@@ -201,6 +201,7 @@ class MatchesController < ApplicationController
 
   def view_match
 
+  	
   	if @current_user.distributor 
   		@match = Brand.find(params[:match_id])
   		@messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages rescue nil
@@ -213,9 +214,11 @@ class MatchesController < ApplicationController
 
   end 
 
+
+
   def contact_match
 
-		if params[:match_id] && params[:m]
+		if params[:match_id] && !params[:m].blank?
 			new_match = Match.new
 	  	if @current_user.distributor 
 	  		u = @current_user.distributor
@@ -240,7 +243,7 @@ class MatchesController < ApplicationController
 			@match.matches << new_match
 
 			# get new data for the page refresh [NEED TO REFACTOR]
-	  	if @current_user.distributor 
+	  	if @current_user.distributor
 	  		@messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages rescue nil
 		  else # is a brand
 	  		@messages = @current_user.brand.matches.where(distributor_id: @match.id).first.messages rescue nil
@@ -248,7 +251,12 @@ class MatchesController < ApplicationController
 
 		else 
 
-
+	  	if @current_user.distributor 
+	  		@match = Brand.find(params[:match_id])
+		  else # is a brand
+	  		@match = Distributor.find(params[:match_id])
+		  end
+		  
 		end
 
 	  respond_to do |format|

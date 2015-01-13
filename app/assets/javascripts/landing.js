@@ -240,7 +240,18 @@ var countriesArray = $.map(countries, function (value, key) { return { value: va
 
 
 
+  // MODIFICATIONS FOR NO SVG SUPPORT
+  if(!Modernizr.svg) {
+    /* swap png for svgs */
+    $('img[src*="svg"]').attr('src', function () {
+    return $(this).attr('src').replace('.svg', '.png');
+    });
+  }
+
 });
+
+
+
 
 
 // Adding Custom Channels

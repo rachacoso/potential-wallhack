@@ -5,12 +5,17 @@
 	<nav class="top-bar" data-topbar role="navigation">
 	  <ul class="title-area">
 	    <li class="name">
-				<h1 style="color: white">&nbsp;Landing
+
+				<h1>
+				<img src="/images/LandingLogo.svg" height="50" width="125" alt="Landing International" />
+				<img src="/images/MarketplaceLogo.svg" height="40" width="40" alt="Marketplace" />
+				<small style="color: white">Marketplace
 				<% if controller_name == "admin" || controller_name == "users" %>
-					<small>for Administrators</small>
+					for Administrators
 				<% elsif @current_user %>
-					<small><%= @current_user.distributor ? "for Distributors" : "for Brands" %></small>
-				<% end %>		
+					<%= @current_user.distributor ? "for Distributors" : "for Brands" %>
+				<% end %>
+				</small>
 				</h1>      
 	    </li>
 	     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
@@ -54,7 +59,7 @@
 							<%= link_to "Your #{matchtype} Partners(name?)", "#" %>
 						</li>						
 						<li>
-							<%= link_to 'Your Messages', "#" %>
+							<%= link_to 'Your Messages', messages_url %>
 						</li>
 						<li>
 							<%= link_to 'Your Document Library', library_documents_url %>

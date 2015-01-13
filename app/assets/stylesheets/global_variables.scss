@@ -4,13 +4,21 @@
 // $font-weight-normal: normal !default
 // $font-weight-bold: bold !default
 
+
+// Landing colors
+$landing-yellow: #FCEE21;
+$landing-blue: #33CCFF;
+$landing-light-gray: #f2f2f2;
+$landing-middle-gray: #B3B3B3;
+$landing-dark-gray: #333;
+
 // We use these to control various global styles
 $body-bg: #C6CBCC;
 $content-body-bg: #FFFEF7;
 $body-font-color: #333;
 $body-font-color-analogue: #7DA1BF;
 // $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-$body-font-family: "jaf-facitweb",sans-serif;
+$body-font-family: "proxima-nova", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 // $body-font-weight: $font-weight-normal;
 // $body-font-style: normal;
 
@@ -24,14 +32,16 @@ $body-font-family: "jaf-facitweb",sans-serif;
 
 // We use these as default colors throughout
 // $primary-color: #008CBA;
-$primary-color: #7ecdec;
+$primary-color: $landing-dark-gray;
 // $secondary-color: #e7e7e7;
 $alert-color: #f04124;
 $success-color: #955251;
 // $warning-color: #f08a24;
 // $info-color: #a0d3e8;
 $info-color: #FF6D11;
-$link-color: #7ecdec;
+$link-color: $landing-blue;
+
+
 
 
 // $input-background-color: scale-color(#7DA1BF, $lightness: 80%);

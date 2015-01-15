@@ -762,9 +762,9 @@ $onboard-nav-radius: 4px;
   &:hover {
     fill: scale-color($body-font-color, $lightness: 20%);
   }
-  .active & {
-    fill: $link-color;
-  }
+  // .active & {
+  //   fill: $link-color;
+  // }
 }
 
 

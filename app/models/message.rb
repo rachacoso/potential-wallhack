@@ -1,6 +1,6 @@
 class Message
   include Mongoid::Document
-	include Mongoid::Timestamps::Short
+	include Mongoid::Timestamps::Created::Short
 
 	####These are the saved matches of the distributors/brands
   
@@ -10,5 +10,6 @@ class Message
   field :recipient, type: String
   field :text, type: String
   field :read, type: Boolean
+
 
 end

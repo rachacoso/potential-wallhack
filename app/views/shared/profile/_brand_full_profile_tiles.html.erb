@@ -4,6 +4,11 @@
 		<div class="small-8 columns">
 			<h2><strong><%= profile.company_name %></strong></h2>
 			<h3><small>web</small> <strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>
+
+		<% if profile.user.last_login %>
+			Active in the past <%= last_logged_in(profile.user.last_login) %>
+		<% end %>
+		<br>
 		</div>
 		<% if controller_name == "matches" %>
 		<div class="medium-2 columns"><%= render partial: "contactbutton", locals: {profile: @match} %></div>

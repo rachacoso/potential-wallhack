@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :get_current_user
   before_action :require_login
   before_action :get_display
+  before_action :get_unread_message_count
   
 	private
   def get_current_user
@@ -32,13 +33,25 @@ class ApplicationController < ActionController::Base
  
   def require_login
     unless @current_user
-      flash[:notice] = "You must be logged in to access"
+      flash[:notice] = "You must be logged in to accesser"
       redirect_to root_url # halts request cycle
     end
   end
 
   def get_display
-    @display = Display.all.first rescue nil
+    if @current_user
+      @display = Display.all.first rescue nil
+    end 
+  end
+
+  def get_unread_message_count
+    if @current_user
+      u = @current_user.distributor || @current_user.brand
+      if u.matches
+        @match_ids = u.matches.pluck(:id)
+        @messages_unread = Message.where(read: false, recipient: @current_user.type?).in(match_id: @match_ids)
+      end
+    end
   end
 
 end

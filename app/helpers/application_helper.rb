@@ -150,5 +150,25 @@ module ApplicationHelper
 		end
 	end
 
+	# Messages Helpers
+	# Mark messages as read
+	def mark_as_read(message)
+		message.read = true
+		message.save!
+	end
+	# Get # of unread messages
+	def unread_count(message)
+		message.where(read: false, recipient: @current_user.type?).count
+	end
+
+	def last_logged_in(last_login)
+			if (1.day.ago..Time.now).cover?(last_login)
+				return "day"
+			elsif (1.week.ago..Time.now).cover?(last_login)
+				return "week"
+			elsif (1.month.ago..Time.now).cover?(last_login)
+				return "month"
+			end
+	end
 
 end

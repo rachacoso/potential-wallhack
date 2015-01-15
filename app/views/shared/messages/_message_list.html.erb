@@ -1,40 +1,31 @@
 	
 
+Unread Messages (from view helper [for this conversaton]): <%= unread_count(@messages) %><br>
+Unread Messages (from application controller [for all conversations]): <%= @messages_unread.count %><Br>
+Match IDS: <%= @match_ids %>
+
+
+
 <% if @messages.count > 3 %>
 <div class="row">
 	<div class="small-10 small-centered columns text-center" style="background: #ccc; font-size: 0.8em;">
 		<%= link_to all_messages_url(this_match(@match).id), remote: true do %>
-			[View <%= @messages.count - 3 %> Older Messages]
+			View entire conversation [<%= @messages.count - 3 %> Oldest Messages Hidden]
 		<% end %>
 	</div>
 </div>
 <% end %>
 
-<!-- <div class="row">
-	<div class="small-10 small-centered columns">
-		<div class="row">
-		<div class="small-4 columns text-center" style="font-size: 0.6em;">
-			[View Last 5 Messages]
-		</div>
-		<div class="small-4 columns text-center" style="font-size: 0.6em;">
-			[View Last 4 Messages]
-		</div>
-		<div class="small-4 columns text-center" style="font-size: 0.6em;">
-			[View Last 3 Messages]
-		</div>
-		</div>
-	</div>
-</div> -->
 
-	<% @messages.desc('c_at').limit(3).reverse_each do |m| %>
-	<div class="row">
-		<div class="small-11 small-centered <%= m.recipient == @current_user.type? ? "medium-9 medium-pull-1" : "medium-9 medium-push-1" %> columns">
-			<div class=<%= m.recipient == @current_user.type? ? "bubble-them" : "bubble-you" %>>
-				<%= simple_format(m.text) %>
-			</div>
-			<div class=<%= m.recipient == @current_user.type? ? "" : "text-right" %>>
-				<small>Sent <%= m.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small>	
-			</div>
+<% @messages.desc('c_at').limit(3).reverse_each do |m| %>
+<div class="row">
+	<div class="small-11 small-centered <%= m.recipient == @current_user.type? ? "medium-9 medium-pull-1" : "medium-9 medium-push-1" %> columns">
+		<div class=<%= m.recipient == @current_user.type? ? "bubble-them" : "bubble-you" %>>
+			<%= simple_format(m.text) %>
+		</div>
+		<div class=<%= m.recipient == @current_user.type? ? "" : "text-right" %>>
+			<small>Sent <%= m.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small>	
 		</div>
 	</div>
-	<% end %>
+</div>
+<% end %>

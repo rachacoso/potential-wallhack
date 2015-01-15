@@ -7,7 +7,7 @@ class User
 	field :email, type: String
 	field :password_digest, type: String
 	field :administrator, type: Boolean
-
+	field :last_login, type: DateTime
 	validates :email, presence: true, uniqueness: true
 
 	has_secure_password

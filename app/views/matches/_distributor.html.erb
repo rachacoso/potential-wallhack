@@ -43,9 +43,13 @@
 						<td><%= link_to match.company_name, view_match_url(match.id, action_name) %>
 						<%= render partial: "match_list_indicators", locals: {match: match} %>
 						<% if match.user.last_login %>
-							Active in the past <%= last_logged_in(match.user.last_login) %>
+							Active in the past <%= last_activity(match.user.last_login) %>
 						<% end %>
-						
+						<% has_unread, count = unread_count_from_match(match) %>
+						<% if has_unread %>
+						<br>You have <%= count %> unread messages
+						<% end %>
+
 						</td>
 						<td><%= match.country_of_origin %></td>
 					</tr>

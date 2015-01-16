@@ -9,7 +9,7 @@
 				<h1>
 				<img src="/images/LandingLogo.svg" height="50" width="125" alt="Landing International" />
 				<img src="/images/MarketplaceLogo.svg" height="40" width="40" alt="Marketplace" />
-				<small style="color: white">Marketplace
+				<small style="color: white"><strong>Marketplace</strong>
 				<% if controller_name == "admin" || controller_name == "users" %>
 					for Administrators
 				<% elsif @current_user %>
@@ -29,6 +29,9 @@
 	      <% if @current_user && show_top_menu %>
 	      <li class="has-dropdown">
 	        <a href="#">
+	      	<% if @messages_unread > 0 %>
+						<span class="secondary radius label" style="font-weight: 700; font-size: 1.5em; margin-right: 0.5em;">!</span>
+	      	<% end %>	        	
 	        	<% if @current_user.distributor %>
 							<%= @current_user.distributor.company_name.blank? ? "Welcome" : @current_user.distributor.company_name %>
 						<% else %>
@@ -46,7 +49,6 @@
 								<%= controller_name == "onboard_distributor" ? (link_to 'Dashboard', dashboard_url) : "" %>
 								<%= controller_name == "library_documents" ? (link_to 'Dashboard', dashboard_url) : "" %>
 								<%= controller_name == "matches" ? (link_to 'Dashboard', dashboard_url) : "" %> 
-								<%#= action_name =~ /dashboard*/ ? "" : "//" %>
 	          </li>
 						<li>
 							<%= link_to 'Market Insight', "#" %>
@@ -59,7 +61,12 @@
 							<%= link_to "Your #{matchtype} Partners(name?)", "#" %>
 						</li>	 -->					
 						<li>
-							<%= link_to 'Your Messages', messages_url %>
+							<%= link_to messages_url do %>
+								Your Messages 
+									<% if @messages_unread > 0 %>
+									<span class="alert radius label"><%= @messages_unread %></span>
+									<% end %>
+							<% end %>
 						</li>
 						<li>
 							<%= link_to 'Your Document Library', library_documents_url %>

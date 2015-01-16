@@ -6,7 +6,7 @@
 			<h3><small>web</small> <strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>
 
 		<% if profile.user.last_login %>
-			Active in the past <%= last_logged_in(profile.user.last_login) %>
+			Active in the past <%= last_activity(profile.user.last_login) %>
 		<% end %>
 		<br>
 		</div>

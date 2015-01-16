@@ -156,12 +156,35 @@ module ApplicationHelper
 		message.read = true
 		message.save!
 	end
+
+
 	# Get # of unread messages
-	def unread_count(message)
-		message.where(read: false, recipient: @current_user.type?).count
+
+	def unread_count_from_messages(messages)
+		messages.where(read: false, recipient: @current_user.type?).count
 	end
 
-	def last_logged_in(last_login)
+	def unread_count_from_match(match)
+		if @current_user.type? == "distributor"
+			if k = match.matches.where(distributor_id: @current_user.distributor.id).first
+				# k.messages.where(read: false, recipient: "distributor").count
+				count = unread_count_from_messages(k.messages)
+			end
+		else
+			if k = match.matches.where(brand_id: @current_user.brand.id).first
+				# k.messages.where(read: false, recipient: "brand").count
+				count = unread_count_from_messages(k.messages)
+			end
+		end
+		if count && count > 0
+			return true, count
+		else 
+			return false
+		end
+	end
+
+	# Last Activity Indicator
+	def last_activity(last_login)
 			if (1.day.ago..Time.now).cover?(last_login)
 				return "day"
 			elsif (1.week.ago..Time.now).cover?(last_login)

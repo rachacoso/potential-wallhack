@@ -1,10 +1,7 @@
 	
 
-Unread Messages (from view helper [for this conversaton]): <%= unread_count(@messages) %><br>
-Unread Messages (from application controller [for all conversations]): <%= @messages_unread.count %><Br>
-Match IDS: <%= @match_ids %>
-
-
+Unread Messages (from view helper [for this conversaton]): <%= unread_count_from_messages(@messages) %><br>
+Unread Messages (from application controller [for all conversations]): <%= @messages_unread %><Br>
 
 <% if @messages.count > 3 %>
 <div class="row">

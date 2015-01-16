@@ -48,8 +48,8 @@ class ApplicationController < ActionController::Base
     if @current_user
       u = @current_user.distributor || @current_user.brand
       if u.matches
-        @match_ids = u.matches.pluck(:id)
-        @messages_unread = Message.where(read: false, recipient: @current_user.type?).in(match_id: @match_ids)
+        match_ids = u.matches.pluck(:id)
+        @messages_unread = Message.in(match_id: match_ids).where(read: false, recipient: @current_user.type?).count
       end
     end
   end

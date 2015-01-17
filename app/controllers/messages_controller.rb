@@ -27,6 +27,13 @@ class MessagesController < ApplicationController
 	def index
 		u = @current_user.brand || @current_user.distributor
 		@matches = u.matches
+		@unread_list = Array.new
+		@matches.each do |m|
+			if m.messages.where(read: false, recipient: @current_user.type?).exists?
+				@unread_list << m
+			end
+		end
+
 	end
 
 	def all_messages

@@ -30,6 +30,14 @@ class User
 		end
 	end
 
+	def type_inverse?
+		if self.brand
+			return "distributor"
+		else
+			return "brand"
+		end
+	end
+
 	def subscriber?
 		u = self.distributor || self.brand
 		if u.subscriber

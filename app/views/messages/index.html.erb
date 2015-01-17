@@ -1,6 +1,18 @@
 <%= render partial: "shared/topbar" %>
 
+
 <div class="row">
+	<div class="small-12 columns">
+		<% @unread_list.each do |m| %>
+			<% this_one = m.send(@current_user.type_inverse?) %>
+			<%= link_to this_one.company_name, view_match_url(this_one.id, "na") %>
+			<%= this_one.company_name %><br>
+		<% end %>
+
+	</div>
+</div>
+
+<!-- <div class="row">
 	<div class="small-12 columns">
 		<% @matches.each do |match| %>
 			<% unless match.messages.blank? %>
@@ -14,4 +26,4 @@
 			<% end %>
 		<% end %>
 	</div>
-</div>
+</div> -->

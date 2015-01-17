@@ -14,6 +14,14 @@ class HomeController < ApplicationController
 
 	def dashboard
 		@profile = @current_user.brand || @current_user.distributor
+
+		matches = @profile.matches
+		@unread_list = Array.new
+		matches.each do |m|
+			if m.messages.where(read: false, recipient: @current_user.type?).exists?
+				@unread_list << m
+			end
+		end
 		
 	end
 

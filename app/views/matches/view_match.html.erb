@@ -6,10 +6,8 @@
 	<div class="small-12 columns">
 		<ul class="breadcrumbs">
 			<% if @referrer %>
-
-				<% matchtype = @current_user.distributor ? "Brand" : "Distributor" %>
+				<% matchtype = @current_user.type_inverse? %>
 				<li><%= link_to "Your #{matchtype} Matches", all_matches_url %></li>
-				
 				<%# if @referrer == "index" %>
 				  <%#= link_to "All #{matchtype}s", all_matches_url %>
 				<% if @referrer == "index_saved_matches" %>  

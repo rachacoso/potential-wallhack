@@ -26,6 +26,13 @@
 				<h4><strong>Message Center</strong></h4>
 				<hr>
 				<small>You have <strong><%= @messages_unread %></strong> unread messages</small>
+
+				<% @unread_list.each do |m| %>
+					<% this_one = m.send(@current_user.type_inverse?) %>
+					<%= link_to this_one.company_name, view_match_url(this_one.id, "na") %>
+					<%= this_one.company_name %><br>
+				<% end %>
+
 			</div>
 
 			<div class="panel">
@@ -88,8 +95,21 @@
 
 			<div class="panel">
 				<h4><strong>Message Center</strong></h4>
+
+
+				<% @unread_list.each do |m| %>
+					<% this_one = m.send(@current_user.type_inverse?) %>
+					<% a,b  = unread_count_from_match(this_one) %>
+					<%= link_to this_one.company_name, view_match_url(this_one.id, "na") %> <strong><small> <%= b %> unread messages </small></strong><br>
+					<% unless m == @unread_list.last %>
+						<hr style="border-top: 1px solid #ccc">
+					<% end %>
+				<% end %>
+
 				<hr>
 				<small>You have <strong><%= @messages_unread %></strong> unread messages</small>
+
+
 			</div>
 
 			<div class="panel">

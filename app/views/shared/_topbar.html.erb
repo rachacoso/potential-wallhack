@@ -30,7 +30,7 @@
 	      <li class="has-dropdown">
 	        <a href="#">
 	      	<% if @messages_unread > 0 %>
-						<span class="secondary radius label" style="font-weight: 700; font-size: 1.5em; margin-right: 0.5em; color: red;"> ! </span>
+						<span class="secondary radius label unread-message-count-badge"> ! </span>
 	      	<% end %>	        	
 	        	<% if @current_user.distributor %>
 							<%= @current_user.distributor.company_name.blank? ? "Welcome" : @current_user.distributor.company_name %>

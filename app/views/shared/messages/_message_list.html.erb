@@ -24,6 +24,7 @@ Unread Messages (from application controller [for all conversations]): <%= @mess
 		<div class=<%= m.recipient == @current_user.type? ? "" : "text-right" %>>
 			<small>Sent <%= m.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %>
 			<span style="color: red;"><%= m.read && m.recipient == @current_user.type_inverse? ? "read" : "" %></span>
+			<span style="color: red;"><%= !m.read && m.recipient == @current_user.type? ? "NEW!" : "" %></span>
 			</small>	
 		</div>
 	</div>

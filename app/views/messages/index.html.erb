@@ -2,28 +2,23 @@
 
 
 <div class="row">
-	<div class="small-12 columns">
+	<div class="large-12 columns">
+		<ul class="breadcrumbs">
+		  <li class="current"><%= link_to "Your Messages", "#" %></li>
+		</ul>					
+	</div>
+</div>
+
+<div class="row">
+	<div class="small-12 medium-8 columns">
 		<% @unread_list.each do |m| %>
 			<% this_one = m.send(@current_user.type_inverse?) %>
-			<%= link_to this_one.company_name, view_match_url(this_one.id, "na") %>
-			<%= this_one.company_name %><br>
+			<% a,b  = unread_count_from_match(this_one) %>
+			<%= link_to this_one.company_name, view_match_url(this_one.id, "na") %> <strong><small> <%= b %> unread messages </small></strong><br>
+			<% unless m == @unread_list.last %>
+				<hr style="border-top: 1px solid #ccc">
+			<% end %>
 		<% end %>
 
 	</div>
 </div>
-
-<!-- <div class="row">
-	<div class="small-12 columns">
-		<% @matches.each do |match| %>
-			<% unless match.messages.blank? %>
-
-				<%= @current_user.type? == "brand" ? match.distributor.company_name : match.brand.company_name %><br>
-				
-				<% match.messages.desc('c_at').reverse_each do |message| %>
-					<%= message.text %><br>
-					<%= message.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %><br><br>
-				<% end %>
-			<% end %>
-		<% end %>
-	</div>
-</div> -->

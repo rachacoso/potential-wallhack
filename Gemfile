@@ -56,6 +56,8 @@ gem 'country_select', github: 'stefanpenner/country_select'
 
 gem 'rails_12factor', group: :production
 
+gem 'rails_autolink'
+
 group :production do
   gem 'pg'
 end

@@ -201,7 +201,6 @@ class MatchesController < ApplicationController
 
   def view_match
 
-  	
   	if @current_user.distributor 
   		@match = Brand.find(params[:match_id])
   		@messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages rescue nil

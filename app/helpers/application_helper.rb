@@ -153,8 +153,10 @@ module ApplicationHelper
 	# Messages Helpers
 	# Mark messages as read
 	def mark_as_read(message)
-		message.read = true
-		message.save!
+		if message.recipient == @current_user.type? && !message.read	
+			message.read = true
+			message.save!
+		end
 	end
 
 

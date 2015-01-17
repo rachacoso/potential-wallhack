@@ -21,13 +21,12 @@
 		</div>
 	</div>
 
-	<div id="message-list">
-		<% if !match.messages.blank? %>
-		<%# @messages = match.messages %>
-		<%= render 'shared/messages/message_list' %>
-		<% end %>
-	</div>
 
+<% if !match.messages.blank? %>
+	<div id="message-list">
+		<%= render 'shared/messages/message_list' %>
+	</div>
+<% end %>
 
 
 	<div class="row">

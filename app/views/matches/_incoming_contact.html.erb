@@ -1,8 +1,6 @@
 <% match = this_match(@match) %>
 <div class="profile-outer-tile">
 
-
-
 	<div class="row">
 			<div class="small-12 columns" style="background: #7ecdec">
 				<% if !match.messages.blank? %>
@@ -25,25 +23,19 @@
 
 	<div id="message-list">
 		<% if !match.messages.blank? %>
-		<% @messages = match.messages %>
+		<%# @messages = match.messages %>
 		<%= render 'shared/messages/message_list' %>
 		<% end %>
-	<!-- 	<div class="row">
-			<div class="small-11 small-centered columns">
-				<div class="bubble-you">
-					[sample response]
-				</div>
-			</div>				
-		</div>	 -->
 	</div>
 
 
 
 	<div class="row">
 		<hr>
-		<div class="small-12 columns">
+		<div class="medium-10 medium-push-2 columns">
 				
 			<%= form_for Message.new, remote: true do |f| %>
+			<div class="bubble-you">
 			<div class="row">
 				<div class="small-11 small-centered columns">
 					<%= f.text_area :text, label: false, id: "message-input", rows: "5" %>
@@ -51,13 +43,13 @@
 					<%= hidden_field_tag :match_id, match.id %>
 				</div>
 			</div>
+			</div>
 			<div class="row">
 				<div class="small-11 small-centered columns text-right">
 					<%= f.submit 'Send Message', :class => " button tiny expand", :style => "margin-top: 0;" %>
 				</div>
-			</div>
 			<% end %>
-			
+			</div>			
 		</div>				
 	</div>	
 

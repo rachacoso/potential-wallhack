@@ -905,7 +905,7 @@ $bubble-font-size: 0.8em;
 & p {font-size: $bubble-font-size;}
 position: relative;
 width: 98%;
-min-height: 100px;
+// min-height: 100px;
 // padding: 1em;
 background: $them-color;
 -webkit-border-radius: 10px;
@@ -925,7 +925,7 @@ display: block;
 width: 0;
 z-index: 2;
 left: -13px;
-top: 25px;
+top: 10px;
 }
 
 .bubble-them:after 
@@ -939,7 +939,7 @@ display: block;
 width: 0;
 z-index: 1;
 left: -15px;
-top: 25px;
+top: 10px;
 }
 
 
@@ -948,7 +948,7 @@ top: 25px;
 & p {font-size: $bubble-font-size;}
 position: relative;
 width: 98%;
-min-height: 100px;
+// min-height: 100px;
 // padding: 20px;
 background: $you-color;
 -webkit-border-radius: 10px;
@@ -968,7 +968,7 @@ display: block;
 width: 0;
 z-index: 2;
 right: -13px;
-top: 25px;
+top: 10px;
 }
 .bubble-you:after 
 {
@@ -981,7 +981,7 @@ display: block;
 width: 0;
 z-index: 1;
 right: -15px;
-top: 25px;
+top: 10px;
 }
 #message-list {
   // max-height: 200px;

@@ -1,11 +1,17 @@
 <%= render partial: "shared/topbar" %>
 
-<% @matches.each do |match| %>
-	<% unless match.messages.blank? %>
-		<%= @current_user.type? == "brand" ? match.distributor.company_name : match.brand.company_name %><br>
-		<% match.messages.desc('c_at').reverse_each do |message| %>
-			<%= message.text %><br>
-			<%= message.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %><br><br>
+<div class="row">
+	<div class="small-12 columns">
+		<% @matches.each do |match| %>
+			<% unless match.messages.blank? %>
+
+				<%= @current_user.type? == "brand" ? match.distributor.company_name : match.brand.company_name %><br>
+				
+				<% match.messages.desc('c_at').reverse_each do |message| %>
+					<%= message.text %><br>
+					<%= message.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %><br><br>
+				<% end %>
+			<% end %>
 		<% end %>
-	<% end %>
-<% end %>
+	</div>
+</div>

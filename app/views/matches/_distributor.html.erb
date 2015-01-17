@@ -6,13 +6,13 @@
 
 <% if @matches.blank? %>
 	<div class="row">
-		<div class="small-12 columns previewtile text-left">
+		<div class="small-10 small-centered columns previewtile text-center">
 			<% if action_name == "index" %>
-				No Brands. Please try altering your filter selections.
+				No Brands. <br>Please try altering your filter selections.
 			<% elsif action_name == "index_saved_matches" %>
-				No Saved Brands. You can save matches on the All Matches screen.
+				No Saved Brands. <br>You can save matches on the All Matches screen.
 			<% elsif action_name == "index_contacted_matches" %>
-				No Contacted Brands. You can contact matches on the All Matches or Saved Matches screens.
+				No Contacted Brands. <br>You can contact matches on the <br>All Matches or Saved Matches screens.
 			<% elsif action_name == "index_incoming_matches" %>
 				No Brands have contacted you.
 			<% end %>

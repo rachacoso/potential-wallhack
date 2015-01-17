@@ -8,6 +8,7 @@ class Match
   field :initial_contact_by, type: String
 
   # is the match accepted by contactee
+  field :read, type: Boolean
   field :accepted, type: Boolean
   field :intro_message, type: String
 

@@ -995,3 +995,13 @@ top: 10px;
   color: red;  
 }
 
+#mc-new-contacts, #mc-unread-messages {
+  // border: 1px solid red;
+  margin: 1em 0em;
+  padding-bottom: 1em;
+  border: 1px solid $landing-middle-gray;
+  #mc-unread-messages-inner, #mc-new-contacts-inner {
+    padding: 1em;
+  }
+}
+

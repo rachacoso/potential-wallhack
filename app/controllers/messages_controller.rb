@@ -2,11 +2,17 @@ class MessagesController < ApplicationController
 
 	def create
 
-		if !params[:message][:text].blank?
+		unless params[:message][:text].blank?
 			user = @current_user.distributor || @current_user.brand
 			m = user.matches.find(params[:match_id])
-			m.messages << Message.new(recipient: params[:message][:recipient], text: params[:message][:text], read: false)
+			m.messages << Message.new(recipient: @current_user.type_inverse?, text: params[:message][:text], read: false)
 			@messages = m.messages
+
+			# mark as accepted if this is first communication
+			if params[:message][:new_contact]
+				m.accepted = true
+				m.save!
+			end
 
 			# for messages list rendering [NEED TO REFACTOR AND CLARIFY NAMING -- TOO CONFUSING -- i.e. LOOK AT MESSAGE_LIST and MESSAGE_LIST_ALL in shared]
 			if @current_user.distributor
@@ -33,6 +39,7 @@ class MessagesController < ApplicationController
 				@unread_list << m
 			end
 		end
+		@new_requests_list = @matches.where(accepted: false, initial_contact_by: @current_user.type_inverse?)
 
 	end
 

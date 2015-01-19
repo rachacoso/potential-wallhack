@@ -8,13 +8,13 @@
 	<div class="row">
 		<div class="small-10 small-centered columns previewtile text-center">
 			<% if action_name == "index" %>
-				No Brands. <br>Please try altering your filter selections.
+				<h2>No Brands</h2> <br>Please try altering your filter selections.
 			<% elsif action_name == "index_saved_matches" %>
-				No Saved Brands. <br>You can save matches on the All Matches screen.
+				<h2>No Saved Brands</h2> <br>You can save brand matches on the <%= link_to 'All Brands', all_matches_url %> screen.
 			<% elsif action_name == "index_contacted_matches" %>
-				No Contacted Brands. <br>You can contact matches on the <br>All Matches or Saved Matches screens.
+				<h2>You haven't contacted any brands</h2> <br>You can contact brands on the <br><%= link_to 'All Brands', all_matches_url %> or <%= link_to 'Saved Brands', saved_matches_url %> screens.
 			<% elsif action_name == "index_incoming_matches" %>
-				No Brands have contacted you.
+				<h2>No brands have contacted you</h2> <br>Make sure <%= link_to 'Your Profile', distributor_full_profile_url %> is complete.
 			<% end %>
 		</div>
 	</div>
@@ -40,15 +40,31 @@
 			  	<tbody>
 					<% @matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
 					<tr>
-						<td><%= link_to match.company_name, view_match_url(match.id, action_name) %>
-						<%= render partial: "match_list_indicators", locals: {match: match} %>
-						<% if match.user.last_login %>
-							Active in the past <%= last_activity(match.user.last_login) %>
-						<% end %>
-						<% has_unread, count = unread_count_from_match(match) %>
-						<% if has_unread %>
-						<br>You have <%= count %> unread messages
-						<% end %>
+						<td>
+							<div class="row">
+								<div class="medium-3 columns">
+									<img src="images/Default_Logo.svg" width="200" height="200">
+								</div>
+								<div class="medium-9 columns">
+									<h2><%= link_to match.company_name, view_match_url(match.id, action_name) %></h2>
+								</div>
+							</div>
+							<div class="row">
+								<div class="medium-12 columns">
+									<%= render partial: "match_list_indicators", locals: {match: match} %>
+
+
+									<% if match.user.last_login %>
+										Active in the past <%= last_activity(match.user.last_login) %>
+									<% end %>
+
+
+									<% has_unread, count = unread_count_from_match(match) %>
+									<% if has_unread %>
+									<br>You have <%= count %> unread messages
+									<% end %>
+								</div>
+							</div>
 
 						</td>
 						<td><%= match.country_of_origin %></td>

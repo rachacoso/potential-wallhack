@@ -22,6 +22,8 @@ class HomeController < ApplicationController
 				@unread_list << m
 			end
 		end
+
+		@new_requests_list = matches.where(accepted: false, initial_contact_by: @current_user.type_inverse?)
 		
 	end
 

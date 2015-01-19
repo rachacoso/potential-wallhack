@@ -21,12 +21,12 @@
 		</div>	
 	</div>
 
-	<% if !@messages.blank? %>
-	<div id="message-list">
-	<%= render 'shared/messages/message_list' %>
-	</div>		
-	<% end %>
 
+	<div id="message-list">
+	<% if !@messages.blank? %>
+	<%= render 'shared/messages/message_list' %>
+	<% end %>
+	</div>
 
 <% if !@messages.blank? %>
 	<div class="row">
@@ -38,7 +38,10 @@
 			<div class="row">
 				<div class="small-11 small-centered columns">
 					<%= f.text_area :text, label: false, id: "message-input", rows: "5" %>
-					<%= f.hidden_field :recipient, value: (@current_user.type? == 'distributor' ? 'brand' : 'distributor') %>
+					<%#= f.hidden_field :recipient, value: (@current_user.type? == 'distributor' ? 'brand' : 'distributor') %>
+					<% if match.messages.blank? %>
+					<%= f.hidden_field :new_contact, value: 'true' %>
+					<% end %>
 					<%= hidden_field_tag :match_id, match.id %>
 				</div>
 			</div>

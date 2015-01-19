@@ -29,7 +29,7 @@
 	      <% if @current_user && show_top_menu %>
 	      <li class="has-dropdown">
 	        <a href="#">
-	      	<% if @messages_unread > 0 %>
+	      	<% if @messages_unread > 0 || @new_contact_messages > 0 %>
 						<span class="secondary radius label unread-message-count-badge"> ! </span>
 	      	<% end %>	        	
 	        	<% if @current_user.distributor %>
@@ -63,9 +63,12 @@
 						</li>	 -->					
 						<li>
 							<%= link_to messages_url do %>
-								Your Messages 
+								Your Messages <br>
 									<% if @messages_unread > 0 %>
-									<span class="alert radius label"><%= @messages_unread %></span>
+										<span class="alert radius label"><%= @messages_unread %> new messages </span><br>
+									<% end %>
+									<% if @new_contact_messages > 0 %>
+										<span class="success radius label"><%= @new_contact_messages %> new requests</span>
 									<% end %>
 							<% end %>
 						</li>

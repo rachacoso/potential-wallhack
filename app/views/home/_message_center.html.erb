@@ -1,0 +1,45 @@
+<div class="panel">
+	<h4><strong>Message Center</strong></h4>
+	<hr>
+
+	<% if @messages_unread > 0 %>
+		<div id="mc-unread-messages">	
+			<small>
+				<span class="alert label"><%= @messages_unread %> unread messages</span>
+			</small>
+			<div id="mc-unread-messages-inner">
+			<% @unread_list.each do |m| %>
+				<% this_one = m.send(@current_user.type_inverse?) %>
+				<% a,b  = unread_count_from_match(this_one) %>
+				<%= link_to this_one.company_name, view_match_url(this_one.id, "na") %> <strong><small> <%= b %> unread messages </small></strong><br>
+				<% unless m == @unread_list.last %>
+					<hr style="border-top: 1px solid #ccc">
+				<% end %>
+			<% end %>
+			</div>
+		</div>
+	<% else %>
+		<p><small>No unread messages</small></p>
+	<% end %>
+	
+	<% if @new_contact_messages > 0 %>
+		<div id="mc-new-contacts">
+			<small>
+				<span class="success label"><%= @new_contact_messages %> new contact requests</span> 
+			</small>
+		
+			<div id="mc-new-contacts-inner">
+			<% @new_requests_list.each do |m| %>
+				<% this_one = m.send(@current_user.type_inverse?) %>
+				<%= link_to this_one.company_name, view_match_url(this_one.id, "na") %>
+				<% unless m == @new_requests_list.last %>
+					<hr style="border-top: 1px solid #ccc">
+				<% end %>
+			<% end %>
+			</div>
+		</div>
+	<% else %>
+		<p><small>No new contact requests</small></p>
+	<% end %>
+
+</div>

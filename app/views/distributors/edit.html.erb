@@ -57,7 +57,7 @@
 							<div class="medium-12 columns">
 								<%= f.label :logo do %>
 								Company logo <br>
-								<%= image_tag @distributor.logo.url(:medium), width: "200", height: "200", alt: "Logo" %>
+								<%= image_tag @distributor.logo.url(:medium), width: "200", height: "200", alt: "Logo", id: "logo-preview"%>
 								<% end %>
 								<br>
 								<%= f.file_field :logo, label: false, accept: 'image/png,image/gif,image/jpeg' %>

@@ -248,6 +248,27 @@ var countriesArray = $.map(countries, function (value, key) { return { value: va
     });
   }
 
+
+  // LOGO PREVIEW
+  $("#brand_logo").change(function(){
+      if (this.files && this.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+              $('#logo-preview').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(this.files[0]);
+      }
+  });
+  $("#distributor_logo").change(function(){
+      if (this.files && this.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+              $('#logo-preview').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(this.files[0]);
+      }
+  });  
+
 });
 
 

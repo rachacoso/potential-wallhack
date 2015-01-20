@@ -14,7 +14,37 @@
   <div class="content active" id="panel1">
     
 		<div class="row">
-			<div class="medium-9 medium-push-3 columns previewtile">
+
+			<div class="medium-4 columns text-right">
+
+			<div class="view-match-company-info">
+				<%= image_tag @match.logo.url(:medium), width: "200", height: "200", alt: "Logo" %>
+
+				<h2><strong><%= @match.company_name %></strong></h2>
+				<h3><small>web</small> <strong><%= link_to @match.website, "//#{@match.website}" %></strong></h3>
+
+				<% if this_match(@match) %>
+					<% if i_contacted(this_match(@match)) %>
+						<span class="plt-indicator-info"><strong>You Contacted</strong> <%= @match.company_name %></span>
+					<% else %>
+						<span class="plt-indicator-info"><%= @match.company_name %> <strong>Contacted You</strong></span>
+					<% end %>
+				<% end %>
+
+				<% if this_match(@match) %>
+					<% if !this_match(@match).messages.blank? %>
+						<span class="plt-indicator-info">In Conversation</span>
+					<% end %>
+				<% end %>
+
+				<% if @match.user.last_login %>
+					<span class="plt-indicator-info">Active in the past <strong><%= last_activity(@match.user.last_login) %></strong></span>
+				<% end %>
+			</div>
+
+
+			</div>
+			<div class="medium-8 columns previewtile">
 				<% if this_match(@match) %>
 					<% if i_contacted(this_match(@match)) %>
 						<%= render partial: "outgoing_contact" %>

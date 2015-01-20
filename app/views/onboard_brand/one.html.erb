@@ -33,6 +33,18 @@
 			<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name" %>
 		</div>
 	</div>
+
+	<div class="row">
+		<div class="medium-12 columns">
+			<%= f.label :logo do %>
+			Company logo <br>
+			<%= image_tag @brand.logo.url(:medium), width: "200", height: "200", alt: "Logo", id: "logo-preview" %>
+			<% end %>
+			<br>
+			<%= f.file_field :logo, label: false, accept: 'image/png,image/gif,image/jpeg' %>
+		</div>
+	</div>
+
 	<div class="row">
 		<div class="medium-6 columns">
 			<%= f.text_field :country_of_origin, class: "country-autocomplete", placeholder: 'Country of origin' %>

@@ -1,18 +1,36 @@
 <div class="profile-outer-border-tile">
 <div class="profile-outer-tile">
 	<div class="row">
-		<div class="small-8 columns">
+
+		<div class="medium-3 columns">
+			<img src="/images/Default_Logo.svg" width="200" height="200">
+		</div>		
+		<div class="medium-7 columns">
 			<h2><strong><%= profile.company_name %></strong></h2>
 			<h3><small>web</small> <strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>
 
+			<% if this_match(profile) %>
+				<% if i_contacted(this_match(profile)) %>
+					<span class="plt-indicator-info">You Contacted</span>
+				<% else %>
+					<span class="plt-indicator-info">Contacted You</span>
+				<% end %>
+			<% end %>
+
+			<% if this_match(profile) %>
+				<% if !this_match(profile).messages.blank? %>
+					<span class="plt-indicator-info">In Conversation</span>
+				<% end %>
+			<% end %>
+
 		<% if profile.user.last_login %>
-			Active in the past <%= last_activity(profile.user.last_login) %>
+			<span class="plt-indicator-info">Active in the past <strong><%= last_activity(profile.user.last_login) %></strong></span>
 		<% end %>
 		<br>
 		</div>
 		<% if controller_name == "matches" %>
-		<div class="medium-2 columns"><%= render partial: "contactbutton", locals: {profile: @match} %></div>
-		<div class="medium-2 columns"><%= render partial: "savebutton", locals: {profile: @match} %></div>
+		<div class="medium-1 columns"><%= render partial: "contactbutton", locals: {profile: @match} %></div>
+		<div class="medium-1 columns"><%= render partial: "savebutton", locals: {profile: @match} %></div>
 		<% end %>
 	</div>
 </div>

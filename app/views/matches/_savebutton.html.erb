@@ -1,20 +1,22 @@
 
 <% if @current_user.subscriber? %>	
-	<% if action_name == "index" %>
+
+	<% if action_name == "index" || action_name == "view_match" || action_name == "contact_match" || action_name == "index_incoming_matches" || action_name == "index_contacted_matches"%>
+
 		<div class="row">
-			<div class="small-12 columns">
+			<div class="small-12 columns text-right">
 
 					<% if @current_user.send(@current_user.type?).saved_matches.find(profile.id) %>
 					<div id="pst_<%= profile.id %>">
-						<div class="profile-save-tile text-center active">
-							<%= link_to 'Saved', unsave_match_url(profile.id,"false"), remote: true %>
-						</div>
+						<%= link_to unsave_match_url(profile.id,"false"), remote: true do %>
+							<span class="plt-indicator-action-on">Saved</span>
+						<% end %>
 					</div>
 					<% else %>
 					<div id="pst_<%= profile.id %>">
-						<div class="profile-save-tile text-center">
-							<%= link_to 'Save', save_match_url(profile.id), remote: true %>
-						</div>
+						<%= link_to save_match_url(profile.id), remote: true do %>
+							<span class="plt-indicator-action-off">Save</span>
+						<% end %>
 					</div>
 					<% end %>
 
@@ -26,32 +28,10 @@
 		<div class="row">
 			<div class="small-12 columns">
 				<div id="pst_<%= profile.id %>">
-					<div class="profile-save-tile text-center active">
-						<%= link_to 'Saved', unsave_match_url(profile.id,"true"), remote: true %>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	<% elsif action_name == "view_match" || action_name == "contact_match" %>
-
-		<div class="row">
-			<div class="small-12 columns">
-
-					<% if @current_user.send(@current_user.type?).saved_matches.find(profile.id) %>
-					<div id="pst_<%= profile.id %>">
-						<div class="profile-save-tile text-center active">
-							<%= link_to 'Saved', unsave_match_url(profile.id,"false"), remote: true %>
-						</div>
-					</div>
-					<% else %>
-					<div id="pst_<%= profile.id %>">
-						<div class="profile-save-tile text-center">
-							<%= link_to 'Save', save_match_url(profile.id), remote: true %>
-						</div>
-					</div>
+					<%= link_to unsave_match_url(profile.id,"true"), remote: true do %>
+						<span class="plt-indicator-action-on">Saved</span>
 					<% end %>
-
+				</div>
 			</div>
 		</div>
 
@@ -62,13 +42,9 @@
 
 	<div class="row">
 		<div class="small-12 columns">
-			<div>
-			<div class="profile-save-tile text-center deactivate">
-				<span data-tooltip aria-haspopup="true" class="has-tip" title="Available only to Subscribers" style>
-				<%= link_to 'Save', "#" %>
-				</span>
-			</div>
-			</div>
+			<span data-tooltip aria-haspopup="true" class="has-tip" title="Available only to Subscribers" style>
+			<span class="plt-indicator-action-off">Save</span>
+			</span>
 		</div>
 	</div>
 

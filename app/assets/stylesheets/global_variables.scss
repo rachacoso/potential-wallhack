@@ -8,6 +8,7 @@
 // Landing colors
 $landing-yellow: #FCEE21;
 $landing-blue: #33CCFF;
+$landing-orange: #FF6D11;
 $landing-light-gray: #f2f2f2;
 $landing-middle-gray: #B3B3B3;
 $landing-dark-gray: #333;
@@ -31,13 +32,11 @@ $body-font-family: "proxima-nova", "Helvetica Neue", Helvetica, Roboto, Arial, s
 // $default-float: left;
 
 // We use these as default colors throughout
-// $primary-color: #008CBA;
 $primary-color: $landing-dark-gray;
-// $secondary-color: #e7e7e7;
-$alert-color: #f04124;
+$secondary-color: $landing-light-gray;
+$alert-color: $landing-orange;
 $success-color: $landing-middle-gray;
-// $warning-color: #f08a24;
-// $info-color: #a0d3e8;
+$warning-color: #f08a24;
 $info-color: #FF6D11;
 $link-color: $landing-blue;
 

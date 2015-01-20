@@ -38,34 +38,11 @@
 				  </thead>
 			  	<tbody>
 					<% @matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
-					<tr>
+					<tr id="pot_<%= match.id %>">
 						<td>
+							
+						<%= render partial: "shared/profile/profile_list_tile", locals: {match: match} %>
 
-							<div class="row">
-								<div class="medium-3 columns">
-									<img src="images/Default_Logo.svg" width="200" height="200">
-								</div>
-								<div class="medium-9 columns">
-									<h2><%= link_to match.company_name, view_match_url(match.id, action_name) %></h2>
-								</div>
-							</div>
-							<div class="row">
-								<div class="medium-12 columns">
-									<%= render partial: "match_list_indicators", locals: {match: match} %>
-
-
-									<% if match.user.last_login %>
-										Active in the past <%= last_activity(match.user.last_login) %>
-									<% end %>
-
-
-									<% has_unread, count = unread_count_from_match(match) %>
-									<% if has_unread %>
-									<br>You have <%= count %> unread messages
-									<% end %>
-								</div>
-							</div>
-						
 						</td>
 						<td>
 

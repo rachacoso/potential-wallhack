@@ -63,13 +63,15 @@
 						</li>	 -->					
 						<li>
 							<%= link_to messages_url do %>
-								Your Messages <br>
+								Your Messages 
+								<div class="text-right">
 									<% if @messages_unread > 0 %>
 										<span class="alert radius label"><%= @messages_unread %> new messages </span><br>
 									<% end %>
 									<% if @new_contact_messages > 0 %>
 										<span class="success radius label"><%= @new_contact_messages %> new requests</span>
 									<% end %>
+								</div>
 							<% end %>
 						</li>
 						<li>

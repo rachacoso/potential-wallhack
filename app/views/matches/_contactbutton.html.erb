@@ -2,15 +2,16 @@
 	
 <% if @current_user.subscriber? %>
 		<div class="row">
-			<div class="small-12 columns">
+			<div class="small-12 columns text-right">
 
 				<% if !this_match(profile) %>
 				<div id="pct_<%= profile.id %>">
-					<div class="profile-save-tile text-center">
-						<%#= link_to 'Contact', contact_match_url(profile.id), remote: true %>
-						<%= link_to 'Contact', "#", :data => {:'reveal-id' => "contactModal"} %>
-						<%#= @current_user.send(@current_user.type?).matches.where(brand_id: profile.id).first %>
-					</div>
+					
+						
+						<%= link_to "#", :data => {:'reveal-id' => "contactModal"} do %>
+							<span class="plt-indicator-action-off">Contact</span>
+						<% end %>						
+					
 				</div>
 				<div id="contactModal" class="reveal-modal small" data-reveal>
 

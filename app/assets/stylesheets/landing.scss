@@ -1,5 +1,6 @@
 @import "foundation/functions";
 @import "global_variables";
+@import "foundation/components/labels";
 
 body {
   min-height: 100%;
@@ -634,17 +635,7 @@ $onboard-nav-radius: 4px;
   margin-bottom: 2em;
 }
 
-.profile-save-tile {
-  border: 1px solid scale-color($link-color, $lightness: 70%);
-  @include transparent(#fff, 0.95);
-  margin-bottom: 0.25em;
-  font-size: 0.75em;
-  font-weight: bold;
-  &.active {
-    background: scale-color($link-color, $lightness: 70%);
-    color: white;
-  }
-}
+
 
 .previewtile {
   // margin: 1em 0em;
@@ -1004,4 +995,79 @@ top: 10px;
     padding: 1em;
   }
 }
+
+.proflie-list-tile {
+   border: 1px solid $landing-middle-gray;
+   border-radius: 1em;
+   padding: 1em;
+   margin: 0.5em;
+}
+
+.message-index-indicator {
+  @include label(
+    // This options sets label padding
+    $padding:rem-calc(4 8 6),
+    // This option sets label text-size
+    $text-size:rem-calc(11),
+    // This option sets label background-color
+    $bg:$landing-middle-gray,
+    // This option sets the radius of the label
+    $radius:2px
+  );  
+}
+
+.plt-indicator-info {
+  @include label(
+    // This options sets label padding
+    $padding:rem-calc(4 8 6),
+    // This option sets label text-size
+    $text-size:rem-calc(11),
+    // This option sets label background-color
+    $bg:$landing-light-gray,
+    // This option sets the radius of the label
+    $radius:2px
+  );
+  margin-bottom: 0.5em;
+}
+
+.plt-indicator-action-on {
+  @include label(
+    // This options sets label padding
+    $padding:rem-calc(4 8 6),
+    // This option sets label text-size
+    $text-size:rem-calc(11),
+    // This option sets label background-color
+    $bg:$landing-blue,
+    // This option sets the radius of the label
+    $radius:2px
+  );
+  margin-bottom: 0.5em;
+}
+.plt-indicator-action-off {
+  @include label(
+    // This options sets label padding
+    $padding:rem-calc(4 8 6),
+    // This option sets label text-size
+    $text-size:rem-calc(11),
+    // This option sets label background-color
+    $bg:scale-color($landing-blue, $lightness: 50%),
+    // This option sets the radius of the label
+    $radius:2px
+  );
+  margin-bottom: 0.5em;
+}
+.plt-indicator-alert {
+  @include label(
+    // This options sets label padding
+    $padding:rem-calc(4 8 6),
+    // This option sets label text-size
+    $text-size:rem-calc(11),
+    // This option sets label background-color
+    $bg:$landing-orange,
+    // This option sets the radius of the label
+    $radius:2px
+  );
+  margin-bottom: 0.5em;
+}
+
 

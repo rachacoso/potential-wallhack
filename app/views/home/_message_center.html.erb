@@ -5,13 +5,15 @@
 	<% if @messages_unread > 0 %>
 		<div id="mc-unread-messages">	
 			<small>
-				<span class="alert label"><%= @messages_unread %> unread messages</span>
+				<span class="alert label"><%= @messages_unread %> unread message<%= @messages_unread > 1 ? "s" : "" %></span>
 			</small>
 			<div id="mc-unread-messages-inner">
 			<% @unread_list.each do |m| %>
 				<% this_one = m.send(@current_user.type_inverse?) %>
 				<% a,b  = unread_count_from_match(this_one) %>
-				<%= link_to this_one.company_name, view_match_url(this_one.id, "na") %> <strong><small> <%= b %> unread messages </small></strong><br>
+				<%= link_to this_one.company_name, view_match_url(this_one.id, "na") %>
+				<strong><small><%= b %> message<%= b > 1 ? "s" : "" %></small></strong>
+				<br>
 				<% unless m == @unread_list.last %>
 					<hr style="border-top: 1px solid #ccc">
 				<% end %>
@@ -25,7 +27,7 @@
 	<% if @new_contact_messages > 0 %>
 		<div id="mc-new-contacts">
 			<small>
-				<span class="success label"><%= @new_contact_messages %> new contact requests</span> 
+				<span class="success label"><%= @new_contact_messages %> new contact request<%= @new_contact_messages > 1 ? "s" : "" %></span> 
 			</small>
 		
 			<div id="mc-new-contacts-inner">

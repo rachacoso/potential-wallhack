@@ -10,9 +10,9 @@
 
 			<% if this_match(profile) %>
 				<% if i_contacted(this_match(profile)) %>
-					<span class="plt-indicator-info">You Contacted</span>
+					<span class="plt-indicator-info"><strong>You Contacted</strong> <%= profile.company_name %></span>
 				<% else %>
-					<span class="plt-indicator-info">Contacted You</span>
+					<span class="plt-indicator-info"><%= profile.company_name %> <strong>Contacted You</strong></span>
 				<% end %>
 			<% end %>
 
@@ -29,7 +29,7 @@
 		</div>
 		<% if controller_name == "matches" %>
 		<div class="medium-1 columns"><%= render partial: "contactbutton", locals: {profile: @match} %></div>
-		<div class="medium-1 columns"><%= render partial: "savebutton", locals: {profile: @match} %></div>
+		<div class="medium-1 columns"><%= render partial: "shared/profile/components/savebutton", locals: {profile: @match} %></div>
 		<% end %>
 	</div>
 </div>

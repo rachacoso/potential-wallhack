@@ -9,8 +9,8 @@
 		<h2><%= link_to match.company_name, view_match_url(match.id, action_name) %></h2>
 	</div>
 	<div class="medium-2 columns text-right">
-		<% if action_name == "index" || action_name == "index_contacted_matches" || action_name == "index_incoming_matches" || action_name == "index_saved_matches" %> 
-			<%= render partial: "savebutton", locals: {profile: match} %>
+		<% if controller_name == "matches" || controller_name == "messages" %> 
+			<%= render partial: "shared/profile/components/savebutton", locals: {profile: match} %>
 		<% end %>
 	</div>
 
@@ -32,9 +32,9 @@
 		<% if action_name == "index" || action_name == "index_saved_matches" %>
 			<% if this_match(match) %>
 				<% if i_contacted(this_match(match)) %>
-					<span class="plt-indicator-info">You Contacted <strong><%= match.company_name %></strong></span>
+					<span class="plt-indicator-info"><strong>You Contacted</strong> <%= match.company_name %></span>
 				<% else %>
-					<span class="plt-indicator-info"><strong><%= match.company_name %></strong> Contacted You</span>
+					<span class="plt-indicator-info"><%= match.company_name %> <strong>Contacted You</strong></span>
 				<% end %>
 			<% end %>
 		<% end %>

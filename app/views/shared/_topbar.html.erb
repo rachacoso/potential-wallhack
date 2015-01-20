@@ -66,10 +66,10 @@
 								Your Messages 
 								<div class="text-right">
 									<% if @messages_unread > 0 %>
-										<span class="alert radius label"><%= @messages_unread %> new messages </span><br>
+										<span class="alert radius label"><%= @messages_unread %> new message<%= @messages_unread > 1 ? "s" : "" %> </span><br>
 									<% end %>
 									<% if @new_contact_messages > 0 %>
-										<span class="success radius label"><%= @new_contact_messages %> new requests</span>
+										<span class="success radius label"><%= @new_contact_messages %> new request<%= @new_contact_messages > 1 ? "s" : "" %></span>
 									<% end %>
 								</div>
 							<% end %>

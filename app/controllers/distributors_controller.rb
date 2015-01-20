@@ -142,6 +142,7 @@ class DistributorsController < ApplicationController
 			:country_of_origin,
 			:countries_of_distribution,
 			:website,
+			:logo,
 			:company_size,
 			:current_lines,
 			:major_competitors,

@@ -51,14 +51,26 @@
 				<%= form_for @distributor, url: distributor_url do |f| %>
 				<%= hidden_field_tag "redirect_anchor", "a-companyinfo" %>
 				<div class="row">
-					<div class="medium-6 columns">
+					<div class="medium-4 columns">
+
+						<div class="row">
+							<div class="medium-12 columns">
+								<%= f.label :logo do %>
+								Company logo <br>
+								<%= image_tag @distributor.logo.url(:medium), width: "200", height: "200", alt: "Logo" %>
+								<% end %>
+								<br>
+								<%= f.file_field :logo, label: false, accept: 'image/png,image/gif,image/jpeg' %>
+							</div>
+						</div>	
+											
+					</div>
+					<div class="medium-8 columns">
 						<div class="row">
 							<div class="medium-12 columns">
 								<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name" %>
 							</div>
-						</div>
-					</div>
-					<div class="medium-6 columns">
+						</div>						
 						<div class="row">
 							<div class="medium-6 columns">
 								<%= f.text_field :country_of_origin, class: "country-autocomplete", placeholder: 'Country (Headquarters)' %>

@@ -157,6 +157,7 @@ class BrandsController < ApplicationController
 			:year_established,
 			:company_size,
 			:website,
+			:logo,
 			:countries_where_exported,
 			:brand_positioning,
 			contact_info_attributes: [ 

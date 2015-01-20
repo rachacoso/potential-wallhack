@@ -1,6 +1,7 @@
 class Brand
   include Mongoid::Document
 	include Mongoid::Timestamps::Short
+	include Mongoid::Paperclip
 
  	belongs_to :user
 	after_create :init_contact_info
@@ -16,6 +17,16 @@ class Brand
 	field :year_established, type: Date
 	field :company_size, type: String
 	field :website, type: String
+
+	has_mongoid_attached_file :logo, 
+  	# :path => ':attachment/:id/:style.:extension',
+	  # :url => ":s3_domain_url",
+	  :default_url => "/assets/medium/Default_Logo.svg",
+	  :styles => {
+	    :medium    => ['200x200#']
+	  }	  
+	validates_attachment_content_type :logo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
+	
  	has_one :contact_info, as: :brand_contact_info, dependent: :destroy
 	accepts_nested_attributes_for :contact_info
 

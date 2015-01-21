@@ -30,6 +30,9 @@
 		<% if controller_name == "matches" %>
 		<div class="medium-1 columns"><%= render partial: "contactbutton", locals: {profile: @match} %></div>
 		<div class="medium-1 columns"><%= render partial: "shared/profile/components/savebutton", locals: {profile: @match} %></div>
+		<% else %>
+		<%# NEEDED FOR FORMATTING OF PROFILE VIEW IN EDITING PAGES PURPOSES%> 
+		<div class="medium-2 columns">&nbsp;</div>
 		<% end %>
 	</div>
 </div>

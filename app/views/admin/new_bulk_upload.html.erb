@@ -1,0 +1,20 @@
+<%= render partial: "shared/topbar_admin" %>
+
+<div class="row">
+	<div class="small-12 columns">
+		<%= form_tag new_bulk_upload_url, method: 'post', action: :upload, multipart: true do %>
+
+			<%= file_field_tag(:file) %>
+			<%= submit_tag("Load") %>
+
+		<% end %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="small-12 columns">
+		<div id="file-folder">
+
+		</div>
+	</div>
+</div>

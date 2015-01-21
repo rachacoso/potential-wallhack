@@ -39,9 +39,9 @@ class ApplicationController < ActionController::Base
   end
 
   def get_display
-    if @current_user
+    
       @display = Display.all.first rescue nil
-    end 
+    
   end
 
   def get_unread_message_count

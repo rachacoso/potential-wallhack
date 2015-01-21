@@ -1,0 +1,21 @@
+<%= render partial: "shared/topbar_admin" %>
+
+<div class="row">
+	<div class="small-12 columns">
+
+<% thing = @csv.to_a.map {|row| row.to_hash } %>
+
+<% thing.each do |row| %>
+	
+	<% row.each do |k,v| %>
+		<%= k %> // <%= v %> <br>
+	<% end %>
+	<p>yyyyyy</p>
+<% end %>
+
+
+
+
+
+	</div>
+</div>

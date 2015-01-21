@@ -1,5 +1,9 @@
 class AdminController < ApplicationController
-  
+  require 'csv'
+  CSV::Converters[:blank_to_nil] = lambda do |field|
+    field && field.empty? ? nil : field
+  end
+
   def index
   	@sector = Sector.all
   	@channel = Channel.all
@@ -20,5 +24,29 @@ class AdminController < ApplicationController
 
   end
 
+  def new_bulk_upload
+
+
+
+  end
+
+  def do_bulk_upload
+    if params[:file]
+
+      f = params[:file]
+
+      @csv = CSV.new(f.read, headers: true, :header_converters => :symbol, :converters => :all)
+      
+      
+
+    end
+
+    # respond_to do |format|
+    #   format.html
+    #   format.js
+    # end 
+
+
+  end
 
 end

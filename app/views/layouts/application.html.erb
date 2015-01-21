@@ -14,14 +14,7 @@
 
   <%= content_for?(:javascript_head) ? yield(:javascript_head) : "" %>
 
-	<% if @display %>
-		<%= javascript_tag do %>
-			<% if @display.background_photo_file_name %>
-			var bgImage = <%= "\"#{@display.background_photo.url(:large)}\"".html_safe %>;
-			<% end %>
-			var bgColor = <%= "\"\##{@display.background_color}\"".html_safe %>;
-		<% end %>
-	<% end %>
+
 
 </head>
 <body>

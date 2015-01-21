@@ -1,5 +1,5 @@
 var hasBG = typeof bgImage != 'undefined';
-var bgDefaultColor = "#FFFEF7";
+var bgDefaultColor = "#FFFFFF";
 
 
 $( document ).ready(function() {

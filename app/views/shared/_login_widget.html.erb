@@ -1,28 +1,28 @@
 
 <li class="has-form">
 	<div id="loginwidget">
-  <div class="row collapse">
 		<%= form_tag '/login', method: 'post', id: "loginform" do %>
-		<div class="medium-5 columns">
-			<%= email_field_tag :email, '', placeholder: 'email'%>
-		</div>
-		<div class="medium-5 columns">
-			<%= password_field_tag :password, '', placeholder: 'password' %>
-		</div>
-		<div class="medium-2 columns">
-				<%= submit_tag "Login", class: "submit-link", style: "padding:0;" %>
-				<%#= link_to 'Login', "#", :onclick => "$('#loginform').submit()".html_safe %>
+	  <div class="row collapse">
+			<div class="medium-5 columns">
+				<%= email_field_tag :email, '', placeholder: 'EMAIL'%>
+			</div>
+			<div class="medium-5 columns">
+				<%= password_field_tag :password, '', placeholder: 'PASSWORD' %>
+			</div>
+			<div class="medium-2 columns">
+					<%#= submit_tag "LOGIN", class: "submit-link-login", style: "padding:0;" %>
+					<%= link_to 'LOGIN', "#", :onclick => "$('#loginform').submit()".html_safe, class: "alert button expand" %>
+			</div>
 		</div>
 		<% end %>
-	</div>
-	<div class="row">
-		<div class="medium-10 columns">
-			<div class="errornotice <%= flash[:notice] ? "error-on" : "" %>"><%= flash[:notice] ? flash[:notice].html_safe : "&nbsp;".html_safe %></div>
+		<div class="row">
+			<div class="medium-10 columns">
+				<div class="errornotice <%= flash[:notice] ? "error-on" : "" %>"><%= flash[:notice] ? flash[:notice].html_safe : "&nbsp;".html_safe %></div>
+			</div>
+			<div class="medium-2 columns">
+				&nbsp;
+			</div>
 		</div>
-		<div class="medium-2 columns">
-			&nbsp;
-		</div>
-	</div>
 	</div>
 </li>
 

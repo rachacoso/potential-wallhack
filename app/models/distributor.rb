@@ -23,7 +23,7 @@ class Distributor
 	has_mongoid_attached_file :logo, 
   	# :path => ':attachment/:id/:style.:extension',
 	  # :url => ":s3_domain_url",
-	  :default_url => "/assets/medium/Default_Logo.svg",
+	  :default_url => "https://s3.amazonaws.com/landingintl-us/defaults/Default_Logo.png",
 	  :styles => {
 	    :medium    => ['200x200']
 	  },

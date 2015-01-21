@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
   def get_unread_message_count
     if @current_user
       u = @current_user.distributor || @current_user.brand
-      m = u.matches
+      m = u.matches rescue nil
       if m
         match_ids = m.pluck(:id)
         @messages_unread = Message.in(match_id: match_ids).where(read: false, recipient: @current_user.type?).count

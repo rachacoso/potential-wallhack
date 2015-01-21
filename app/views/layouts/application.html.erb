@@ -28,8 +28,7 @@
 
 <%= yield %>
 
-<br>
-<br>
+
 <%= javascript_include_tag "application" %>
 <%= content_for?(:javascript_foot) ? yield(:javascript_foot) : "" %>
 </body>

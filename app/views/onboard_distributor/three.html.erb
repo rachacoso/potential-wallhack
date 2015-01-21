@@ -82,9 +82,12 @@
 
 	<div class="row">
 		<div class="medium-10 columns push-2">
-			<%= f.submit 'Select and Continue', class: "tiny radius success button right" %>
+			
+			<%= f.submit 'Select and Continue', class: "tiny radius alert button right" %>
+			<% end %>
+			<%= render "shared/profileform/return_later" %>
 		</div>
 	</div>
-	<% end %>
+	
 
 <% end %>

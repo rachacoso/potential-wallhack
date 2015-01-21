@@ -592,7 +592,7 @@ $onboard-nav-radius: 4px;
 }
 
 // Text Styled Submit Buttons
-.submit-link {
+.submit-link, #submit-login {
   background-color: transparent;
   text-decoration: none;
   border: none;
@@ -602,14 +602,8 @@ $onboard-nav-radius: 4px;
   margin-top: 0em !important; 
 }
 
-.submit-link-login {
-  background-color: transparent;
-  text-decoration: none;
-  border: none;
-  color: $link-color;
-  cursor: pointer;
-  font-size: 1em;
-  // margin-top: 0em !important; 
+#submit-login {
+  margin-top: 0.3em !important; 
 }
 
 // Onboarding Info Text
@@ -828,24 +822,31 @@ $onboard-nav-radius: 4px;
   max-width: initial; 
 }
 
-.front-middle-panel {
-  min-height: 100%;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 5em;
-  @include transparent(black, 0.3);
+#front-footer {
+  background-color: $landing-dark-gray;
+  padding-top: 2em;
+  color: $landing-light-gray;
+}
+
+
+// .front-middle-panel {
+//   min-height: 100%;
+//   width: 100%;
+//   margin-left: auto;
+//   margin-right: auto;
+//   padding-top: 5em;
+//   @include transparent(black, 0.3);
 
   
-}
+// }
 
-.front-bottom-panel {
-  min-height: 100%;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;  
-  padding-top: 5em;
-}
+// .front-bottom-panel {
+//   min-height: 100%;
+//   width: 100%;
+//   margin-left: auto;
+//   margin-right: auto;  
+//   padding-top: 5em;
+// }
 
 // Subnav Styling Override (change color of inactive items)
 

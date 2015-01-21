@@ -23,8 +23,9 @@ class Brand
 	  # :url => ":s3_domain_url",
 	  :default_url => "/assets/medium/Default_Logo.svg",
 	  :styles => {
-	    :medium    => ['200x200#']
-	  }	  
+	    :medium    => ['200x200']
+	  },
+	  :default_style => :medium
 	validates_attachment_content_type :logo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 	
  	has_one :contact_info, as: :brand_contact_info, dependent: :destroy

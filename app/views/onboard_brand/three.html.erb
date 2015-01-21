@@ -34,9 +34,11 @@
 	<%= hidden_field_tag :redirect, 'four' %>
 		<div class="medium-10 columns push-2">
 			<%= f.text_area :brand_positioning, rows: 4, label: "Brand Story", placeholder: 'Brand Story' %>
-			<%= f.submit 'Update and Continue', class: "tiny radius success button right" %>
-		</div>
+			<%= f.submit 'Update and Continue', class: "tiny radius alert button right" %>
 	<% end %>
+			<%= render "shared/profileform/return_later" %>
+		</div>
+	
 	</div>
 
 <% end %>

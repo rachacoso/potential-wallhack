@@ -5,6 +5,11 @@ class ExportCountriesController < ApplicationController
 		u.export_countries.find_or_create_by(country: params[:export_country][:country])
 		# u.export_countries.create(export_country_parameters)
 
+	  # respond_to do |format|
+		 #  format.html
+		 #  format.js
+	  # end
+
 		go_to_redirect
 
 	end
@@ -19,7 +24,8 @@ class ExportCountriesController < ApplicationController
 
 	def destroy
 
-		d = ExportCountry.find(params[:id])
+		u = @current_user.distributor || @current_user.brand
+		d = u.export_countries.find(params[:id])
 		d.destroy
 
 		go_to_redirect

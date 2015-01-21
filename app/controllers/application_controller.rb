@@ -13,12 +13,12 @@ class ApplicationController < ActionController::Base
       if !session[:expires_at] #reset if no expire set
        session.destroy
        @current_user = nil
-       flash[:notice] = "Your session has timed out. Please log in again to continue."
+       flash[:notice] = "YOUR SESSION HAS TIMED OUT. PLEASE LOG IN AGAIN"
        redirect_to root_url # halts request cycle
       elsif session[:expires_at] < Time.current
        session.destroy
        @current_user = nil
-       flash[:notice] = "Your session has timed out. Please log in again to continue."
+       flash[:notice] = "YOUR SESSION HAS TIMED OUT. PLEASE LOG IN AGAIN"
        redirect_to root_url # halts request cycle
       elsif User.find(session[:user_id])
     		@current_user = User.find(session[:user_id])
@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
  
   def require_login
     unless @current_user
-      flash[:notice] = "You must be logged in to accesser"
+      flash[:notice] = "YOU MUST BE LOGGED IN TO ACCESS"
       redirect_to root_url # halts request cycle
     end
   end

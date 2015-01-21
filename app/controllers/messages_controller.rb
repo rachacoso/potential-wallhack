@@ -4,7 +4,8 @@ class MessagesController < ApplicationController
 
 		unless params[:message][:text].blank?
 			user = @current_user.distributor || @current_user.brand
-			m = user.matches.find(params[:match_id])
+			mm = user.matches
+			m = mm.find(params[:match_id])
 			m.messages << Message.new(recipient: @current_user.type_inverse?, text: params[:message][:text], read: false)
 			@messages = m.messages
 
@@ -20,6 +21,8 @@ class MessagesController < ApplicationController
 			else
 				@match = m.distributor
 			end
+
+			@new_contact_messages = mm.where(accepted: false, initial_contact_by: @current_user.type_inverse?).count
 
 		end
 

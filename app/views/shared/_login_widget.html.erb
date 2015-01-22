@@ -14,12 +14,23 @@
 					<%#= link_to 'LOGIN', "#", :onclick => "$('#loginform').submit()".html_safe, class: "alert button expand" %>
 			</div>
 		</div>
-		<% end %>
+		
 		<div class="row">
-			<div class="medium-12 columns">
-				<div class="errornotice <%= flash[:notice] ? "error-on" : "" %>"><%= flash[:notice] ? flash[:notice].html_safe : "&nbsp;".html_safe %></div>
+			<div class="small-12 columns">
+				<div class="row">
+					<div class="small-1 columns">
+						<%= check_box_tag :keep_me_logged_in %>
+					</div>
+					<div class="small-10 columns">
+						<%= label_tag :keep_me_logged_in, 'KEEP ME LOGGED IN' %>
+					</div>
+					<div class="errornotice <%= flash[:notice] ? "error-on" : "" %>">
+						<%= flash[:notice] ? flash[:notice].html_safe : "&nbsp;".html_safe %>
+					</div>
+				</div>
 			</div>
 		</div>
+		<% end %>
 	</div>
 </li>
 

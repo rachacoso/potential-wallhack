@@ -25,21 +25,14 @@ class DisplaysController < ApplicationController
 	def update
 		display = Display.find(params[:id])
 
-		if !params[:display]
-
-			display.background_photo = nil
-
-		else		
-
-			display.background_color = params[:display][:background_color]
-			display.default_product_photo = params[:display][:default_product_photo]
-			unless params[:display][:background_photo].blank?
-				display.background_photo = params[:display][:background_photo]
+		if params[:photo]
+			if params[:photo] == "background"
+				display.background_photo = nil
+			elsif params[:photo] == "product"
+				display.default_product_photo = nil
 			end
-			unless params[:display][:default_product_photo].blank?
-				display.default_product_photo = params[:display][:default_product_photo]
-			end			
-
+		else		
+			display.update(display_parameters)		
 		end
 
 
@@ -51,6 +44,16 @@ class DisplaysController < ApplicationController
 		end
 
 	end
+
+
+  private
+  def display_parameters
+    params.require(:display).permit(
+			:background_color,
+			:background_photo,
+			:default_product_photo
+		)
+	end 
 
 
 end

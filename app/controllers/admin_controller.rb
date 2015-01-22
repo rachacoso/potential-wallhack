@@ -19,7 +19,6 @@ class AdminController < ApplicationController
 			@display_info = Display.new
 	  else
 			@display_info = Display.all.first
-			
 		end
 
   end

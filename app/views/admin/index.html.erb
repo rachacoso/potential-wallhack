@@ -29,17 +29,17 @@
 			<div class="row">
 				<div class="medium-5 columns">
 					<%= f.label :background_photo do %>
-					<h3>Background Photo</h3>
-					<% if @display_info.background_photo_file_name %>
-						<%= image_tag @display_info.background_photo.url(:small) %>
-					<% else %>
-						<strong>No Background Photo</strong>
-					<% end %>
+						<h3>Background Photo</h3>
+						<% if @display_info.background_photo_file_name %>
+							<%= image_tag @display_info.background_photo.url(:small) %>
+						<% else %>
+							<strong>No Background Photo</strong>
+						<% end %>
 					<% end %>
 				</div>
 				<div class="medium-4 columns end">
 				<%= f.file_field :background_photo, label: "&nbsp;".html_safe, accept: 'image/png,image/gif,image/jpeg' %>
-				<%= @display_info.background_photo_file_name ? (link_to "Delete This Photo", display_url(@display_info), :method => 'put', data: { :confirm => 'Are you sure you want to remove the background photo?'}) : ""  %>
+				<%= @display_info.background_photo_file_name ? (link_to "Delete This Photo", display_delete_url(@display_info,"background"), :method => 'put', data: { :confirm => 'Are you sure you want to remove the background photo?'}) : ""  %>
 				</div>				
 			</div>
 			<hr>
@@ -63,7 +63,7 @@
 				</div>
 				<div class="medium-4 columns end">
 				<%= f.file_field :default_product_photo, label: "&nbsp;".html_safe, accept: 'image/png,image/gif,image/jpeg' %>
-				<%= @display_info.default_product_photo_file_name ? (link_to "Delete This Photo", display_url(@display_info), :method => 'put', data: { :confirm => 'Are you sure you want to remove the default product photo?'}) : ""  %>
+				<%= @display_info.default_product_photo_file_name ? (link_to "Delete This Photo", display_delete_url(@display_info,"product"), :method => 'put', data: { :confirm => 'Are you sure you want to remove the default product photo?'}) : ""  %>
 				</div>				
 			</div>
 

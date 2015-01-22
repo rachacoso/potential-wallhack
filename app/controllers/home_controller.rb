@@ -9,6 +9,7 @@ class HomeController < ApplicationController
 			@newuser = User.new
 			@newuser.build_user_profile
 		end
+
 	end
 
 
@@ -26,8 +27,6 @@ class HomeController < ApplicationController
 		@new_requests_list = matches.where(accepted: false, initial_contact_by: @current_user.type_inverse?)
 		
 	end
-
-
 
 
 end

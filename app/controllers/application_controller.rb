@@ -9,21 +9,10 @@ class ApplicationController < ActionController::Base
   
 	private
   def get_current_user
-  	if session[:user_id]
-      if !session[:expires_at] #reset if no expire set
-       session.destroy
-       @current_user = nil
-       flash[:notice] = "YOUR SESSION HAS TIMED OUT. PLEASE LOG IN AGAIN"
-       redirect_to root_url # halts request cycle
-      elsif session[:expires_at] < Time.current
-       session.destroy
-       @current_user = nil
-       flash[:notice] = "YOUR SESSION HAS TIMED OUT. PLEASE LOG IN AGAIN"
-       redirect_to root_url # halts request cycle
-      elsif User.find(session[:user_id])
-    		@current_user = User.find(session[:user_id])
+  	if cookies[:auth_token]
+      if a = User.where(:auth_token => cookies[:auth_token]).first
+    		@current_user = a
       else
-       session.destroy
        @current_user = nil
        flash[:notice] = "You must be logged in to access"
        redirect_to root_url # halts request cycle       

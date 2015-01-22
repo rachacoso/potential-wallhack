@@ -9,9 +9,12 @@ class SessionController < ApplicationController
 	def create
 		user = User.where(email: params[:email]).first
 		if user && user.authenticate(params[:password])
-			session[:user_id] = user.id.to_s
-			session[:expires_at] = Time.current + 24.hours
-			session[:last_logged_in] = user.last_login
+
+	    if params[:keep_me_logged_in]
+	      cookies.permanent[:auth_token] = user.auth_token
+	    else
+	      cookies[:auth_token] = user.auth_token  
+	    end
 			user.last_login = DateTime.now
 			user.save!
 			redirect_to '/dashboard'
@@ -23,7 +26,7 @@ class SessionController < ApplicationController
 
 	def destroy
 		# session[:user_id] = nil
-		session.destroy
+		cookies.delete(:auth_token)
 		redirect_to '/'
 	end
 

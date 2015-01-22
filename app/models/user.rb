@@ -3,8 +3,10 @@ class User
 	include ActiveModel::SecurePassword 	# this, along with the 
 																				# 'has_secure_password' below
 																				# enables all the pwd hashing
+	before_create { generate_token(:auth_token) }
 
 	field :email, type: String
+	field :auth_token, type: String
 	field :password_digest, type: String
 	field :administrator, type: Boolean
 	field :last_login, type: DateTime
@@ -21,6 +23,14 @@ class User
 	accepts_nested_attributes_for :distributor
 
 	scope :is_subscriber, ->{where(subscriber: true)}
+
+  
+  
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.where(column => self[column]).exists?
+  end
 
 	def type?
 		if self.brand

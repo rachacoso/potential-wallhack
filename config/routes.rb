@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post '/bulkupdate' => 'channel_capacities#bulkupdate', as: 'channel_capacity_bulkupdate'
 
   resources :displays, only: [:create, :update, :destroy]
+  put '/displays/:id/:photo' => 'displays#update', as: 'display_delete'
   resources :distributor_brands, only: [:create, :update, :destroy]
   resources :trade_shows, only: [:create, :update, :destroy]
   resources :press_hits, only: [:create, :update, :destroy]

@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :require_login
   before_action :get_display
   before_action :get_unread_message_count
-  
+  before_action :administrator_redirect
+
 	private
   def get_current_user
   	if cookies[:auth_token]
@@ -41,6 +42,14 @@ class ApplicationController < ActionController::Base
         match_ids = m.pluck(:id)
         @messages_unread = Message.in(match_id: match_ids).where(read: false, recipient: @current_user.type?).count
         @new_contact_messages = m.where(accepted: false, initial_contact_by: @current_user.type_inverse?).count
+      end
+    end
+  end
+
+  def administrator_redirect
+    if @current_user && @current_user.administrator
+      unless controller_name == "users" || controller_name == "admin" || controller_name == "session"
+        redirect_to admin_url
       end
     end
   end

@@ -2,6 +2,9 @@ class UsersController < ApplicationController
 
 	skip_before_action :require_login, only: [:new, :create]
 
+	#restrict to administrators only
+	before_action :administrators_only
+
 	def index
 		# @users = User.all
 		@distributors = User.all.reject{ |r| r.distributor.nil?}
@@ -197,6 +200,12 @@ class UsersController < ApplicationController
 			redirect_to users_url
 		else
 			redirect_to root_url
+		end
+	end
+
+	def administrators_only
+		unless @current_user.administrator
+			redirect_to dashboard_url
 		end
 	end
 

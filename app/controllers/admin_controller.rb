@@ -1,4 +1,8 @@
 class AdminController < ApplicationController
+  
+  #restrict to administrators only
+  before_action :administrators_only
+
   require 'csv'
   CSV::Converters[:blank_to_nil] = lambda do |field|
     field && field.empty? ? nil : field
@@ -42,7 +46,12 @@ class AdminController < ApplicationController
     #   format.js
     # end 
 
+  end
 
+  def administrators_only
+    unless @current_user.administrator
+      redirect_to dashboard_url
+    end
   end
 
 end

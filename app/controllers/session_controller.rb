@@ -17,7 +17,11 @@ class SessionController < ApplicationController
 	    end
 			user.last_login = DateTime.now
 			user.save!
-			redirect_to '/dashboard'
+			if user.administrator
+				redirect_to admin_url
+			else
+				redirect_to '/dashboard'
+			end
 		else
 			flash[:notice] = "INVALID EMAIL OR PASSWORD"
 			redirect_to login_url

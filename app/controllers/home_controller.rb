@@ -9,9 +9,11 @@ class HomeController < ApplicationController
 			@newuser = User.new
 			@newuser.build_user_profile
 		end
-
 	end
 
+	def login
+
+	end
 
 	def dashboard
 		@profile = @current_user.brand || @current_user.distributor

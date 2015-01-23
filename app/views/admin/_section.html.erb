@@ -1,10 +1,10 @@
 <div class="row">
-	<div class="medium-9 columns">
+	<div class="medium-9 medium-centered columns">
 		<div class="ldpanel">
 
 		<h1><%= profile_section_name %></h1>
 		
-		<table>
+		<table width="100%">
 		<tr><th>Name</th><th></th><th>&nbsp;</th></tr>
 		<% profile_section.each do |s| %>
 			<tr>
@@ -57,10 +57,8 @@
 				<td>&nbsp;</td>
 			<% end %>
 
-			<td>
-				
-			</td>
-			<td>
+			<td colspan="2">
+
 				<%= f.submit "ADD", class: "text-submit" %>
 			</td>
 		</tr>

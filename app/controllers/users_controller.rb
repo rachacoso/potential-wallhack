@@ -7,6 +7,15 @@ class UsersController < ApplicationController
 		@distributors = User.all.reject{ |r| r.distributor.nil?}
 		@brands = User.all.reject{ |r| r.brand.nil? }.reject{ |r| r.brand.company_name.nil? }
 
+		@admins = User.where(administrator: true)
+
+		# # PAGINATE ARRAYS
+		# @brands = Kaminari.paginate_array(@brands).page(1).per(3)
+		# @brands2 = Kaminari.paginate_array(@brands).page(2).per(3)
+
+		@newuser = User.new
+		@newuser.build_user_profile
+
 	end
 
 	def new
@@ -21,75 +30,92 @@ class UsersController < ApplicationController
 			flash[:error] = "That email address is already in use"
 			@newuser = User.new
 			@newuser.build_user_profile
-			redirect_to root_url
+			redirection
 
 		elsif params[:user][:email].blank?
 
 			flash[:error] = "Email field cannot be blank"
 			@newuser = User.new
 			@newuser.build_user_profile
-			redirect_to root_url
+			redirection
 
 		elsif params[:user][:user_profile_attributes][:firstname].blank? || params[:user][:user_profile_attributes][:lastname].blank?
 
 			flash[:error] = "Please enter a first and last name"
 			@newuser = User.new
 			@newuser.build_user_profile
-			redirect_to root_url
+			redirection
 
 		elsif params[:user][:password].blank? || params[:user][:password_confirmation].blank?
 
 			flash[:error] = "Password fields cannot be blank"
 			@newuser = User.new
 			@newuser.build_user_profile
-			redirect_to root_url
+			redirection
 
 		elsif params[:user][:password] != params[:user][:password_confirmation]
 
 			flash[:error] = "Passwords did not match"
 			@newuser = User.new
 			@newuser.build_user_profile
-			redirect_to root_url
+			redirection
 
 		else
 
-			user = User.new
-			
-			user.build_user_profile
-			user.email = params[:user][:email]
-			user.password = params[:user][:password]
-			user.password_confirmation = params[:user][:password_confirmation]
-			user.user_profile.firstname = params[:user][:user_profile_attributes][:firstname]
-			user.user_profile.lastname = params[:user][:user_profile_attributes][:lastname]
-			user.save!
+			if params[:administrator] #create ADMIN user
+				user = User.new
 
-			#create profile for the selected user type
-			if params[:user_type] == 'distributor' || params[:user_type] == 'brand' # restrict to only allowed values
-				createusertype = "create_" + params[:user_type]
-				user.send(createusertype) # create relation
- 
-				# prepopulate contact info with user info (user can change later)
-				cinfo = user.send(params[:user_type]).contact_info
-				cinfo.contact_name = params[:user][:user_profile_attributes][:firstname] + " " + params[:user][:user_profile_attributes][:lastname]
-				cinfo.email = params[:user][:email]
-				cinfo.save
+				user.build_user_profile
+				user.email = params[:user][:email]
+				user.password = params[:user][:password]
+				user.password_confirmation = params[:user][:password_confirmation]
+				user.user_profile.firstname = params[:user][:user_profile_attributes][:firstname]
+				user.user_profile.lastname = params[:user][:user_profile_attributes][:lastname]
+				user.administrator = true
+				user.save!
+				redirect_to users_url
 
-			end
+			else 
 
-			session[:user_id] = user.id.to_s
-			session[:expires_at] = Time.current + 24.hours
+				user = User.new
+				
+				user.build_user_profile
+				user.email = params[:user][:email]
+				user.password = params[:user][:password]
+				user.password_confirmation = params[:user][:password_confirmation]
+				user.user_profile.firstname = params[:user][:user_profile_attributes][:firstname]
+				user.user_profile.lastname = params[:user][:user_profile_attributes][:lastname]
+				user.save!
 
-			if params[:user_type] == 'distributor'
-				redirect_to onboard_distributor_one_url
-			elsif params[:user_type] == 'brand'
-				redirect_to onboard_brand_one_url
-			else
-				redirect_to dashboard_url
+				#create profile for the selected user type
+				if params[:user_type] == 'distributor' || params[:user_type] == 'brand' # restrict to only allowed values
+					createusertype = "create_" + params[:user_type]
+					user.send(createusertype) # create relation
+	 
+					# prepopulate contact info with user info (user can change later)
+					cinfo = user.send(params[:user_type]).contact_info
+					cinfo.contact_name = params[:user][:user_profile_attributes][:firstname] + " " + params[:user][:user_profile_attributes][:lastname]
+					cinfo.email = params[:user][:email]
+					cinfo.save
+
+				end
+
+				cookies[:auth_token] = user.auth_token
+
+				if params[:user_type] == 'distributor'
+					redirect_to onboard_distributor_one_url
+				elsif params[:user_type] == 'brand'
+					redirect_to onboard_brand_one_url
+				else
+					redirect_to dashboard_url
+				end
+
 			end
 
 		end
 
 	end
+
 
 	def edit
 		@user = User.find(params[:id])
@@ -156,7 +182,6 @@ class UsersController < ApplicationController
 
   def user_parameters
     params.require(:user).permit(
-			:administrator,
 			brand_attributes: [ 
 				:subscriber
 			],
@@ -166,5 +191,13 @@ class UsersController < ApplicationController
 
 		)
 	end	
+
+	def redirection 
+		if params[:administrator]
+			redirect_to users_url
+		else
+			redirect_to root_url
+		end
+	end
 
 end

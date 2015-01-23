@@ -35,6 +35,7 @@ body {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str}, endColorstr=#{$ie-hex-str})";
 }
 
+
 // Button Styled Text Link 
 
 @mixin formlinkstyle($color: $link-color, $font-size: 0.65em) {
@@ -209,16 +210,11 @@ a.itemformlink.profilelink {
 }
 
 .ldpanel {
-  /* Safari 3-4, iOS 1-3.2, Android 1.6- */
-  -webkit-border-radius: 3px; 
-  /* Firefox 1-3.6 */
-  -moz-border-radius: 3px; 
-  /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
   border-radius: 3px; 
 	border: 1px dotted scale-color($link-color, $lightness: 50%);
   padding: 0.5em 1em;
   margin: 0.5em 0em 1.5em 0em;
-  @include transparent(#fff, 0.9);
+  @include transparent(#fff, 1);
   h1 {
     padding: 0em 0.4em;
     background-color: $body-font-color;
@@ -488,6 +484,10 @@ input[type=radio]+ label:active  {
 
 }
 
+.top-bar input[type=checkbox] {
+  top: 0px;
+}
+
 .customchanneldisplay {
   padding: 4px 12px;
   border: 1px dotted scale-color($input-background-color, $lightness: -80%);
@@ -560,11 +560,6 @@ $onboard-nav-radius: 4px;
     margin-right: auto;
     list-style-type: none;
     display:inline-block;
-    /* Safari 3-4, iOS 1-3.2, Android 1.6- */
-    -webkit-border-radius: $onboard-nav-radius; 
-    /* Firefox 1-3.6 */
-    -moz-border-radius: $onboard-nav-radius;
-    /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
     border-radius: $onboard-nav-radius; 
     &.active {
       background-color: scale-color($link-color, $lightness: 30%);
@@ -1090,3 +1085,9 @@ top: 10px;
   padding: 0.7em;
 }
 
+// CONTROL DISPLAY OF TEXT UNDER TOPBAR LOGIN
+.top-bar-login-text {
+  color: $landing-light-gray;
+  font-size: 0.7em;
+
+}

@@ -14,8 +14,8 @@ class ApplicationController < ActionController::Base
     		@current_user = a
       else
        @current_user = nil
-       flash[:notice] = "You must be logged in to access"
-       redirect_to root_url # halts request cycle       
+       flash[:notice] = "YOU MUST BE LOGGED IN TO ACCESS"
+       redirect_to login_url # halts request cycle       
       end
   	end
   end
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   def require_login
     unless @current_user
       flash[:notice] = "YOU MUST BE LOGGED IN TO ACCESS"
-      redirect_to root_url # halts request cycle
+      redirect_to login_url # halts request cycle
     end
   end
 

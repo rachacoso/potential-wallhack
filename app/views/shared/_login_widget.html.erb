@@ -15,17 +15,15 @@
 			</div>
 		</div>
 		
-		<div class="row">
+		<div class="row collapse">
 			<div class="small-12 columns">
 				<div class="row">
-					<div class="small-1 columns">
+					<div class="small-6 columns" style="padding-top: 10px; padding-left: 0px;">
 						<%= check_box_tag :keep_me_logged_in %>
+						<%= label_tag :keep_me_logged_in, 'KEEP ME LOGGED IN', class: "top-bar-login-text" %>
 					</div>
-					<div class="small-10 columns">
-						<%= label_tag :keep_me_logged_in, 'KEEP ME LOGGED IN' %>
-					</div>
-					<div class="errornotice <%= flash[:notice] ? "error-on" : "" %>">
-						<%= flash[:notice] ? flash[:notice].html_safe : "&nbsp;".html_safe %>
+					<div class="small-4 columns end text-right" style="padding-top: 10px; padding-left: 0px;">
+						<small><%= link_to 'forgot password?', '#' %></small>
 					</div>
 				</div>
 			</div>

@@ -1,48 +1,90 @@
-<% content_for :title do %>
-  Login
+<%= render partial: "shared/topbar" %>
+
+<% content_for :javascript_head do %>
+	<% if @display %>
+		<%= javascript_tag do %>
+			<% if @display.background_photo_file_name %>
+			var bgImage = <%= "\"#{@display.background_photo.url(:large)}\"".html_safe %>;
+			<% end %>
+			var bgColor = <%= "\"\##{@display.background_color}\"".html_safe %>;
+		<% end %>
+	<% end %>
 <% end %>
 
+<div class="front-top-panel">
+	<div class="row">
+		<div class="medium-7 medium-centered columns">
 
+			<div class="ldpanel">
 
-<div class="row">
-	<div class="medium-9 columns">
+			  <div class="row">
+					<div class="small-12 columns">
+						<h2><img src="/images/li_blue_round.png" width="50" height="50" alt="Landing International" /> Log In </h2>
+					</div>
+				</div>
 
-		<h2>[Name TBD]</h2>
-
-		<div class="row">
-			<div class="medium-12 columns">
-				<% if flash[:notice] %>
-						<div data-alert class="alert-box success">
-					  	<%= flash[:notice] %>
-						  <a href="#" class="close">&times;</a>
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="errornotice <%= flash[:notice] ? "error-on" : "" %>">
+							<%= flash[:notice] ? flash[:notice].html_safe : "&nbsp;".html_safe %>
 						</div>
-				<% end %>
+					</div>
+				</div>
 
-				<% if flash[:error] %>
-						<div data-alert class="alert-box warning">
-					  	<%= flash[:error] %>
-						  <a href="#" class="close">&times;</a>
+				<%= form_tag '/login', method: 'post', id: "loginform" do %>
+			  <div class="row">
+					<div class="small-12 columns">
+						<%= email_field_tag :email, '', placeholder: 'EMAIL'%>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<%= password_field_tag :password, '', placeholder: 'PASSWORD' %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-8 columns">
+						<div class="row">
+							<div class="small-1 columns">
+								<%= check_box_tag :keep_me_logged_in %>
+							</div>
+							<div class="small-11 columns">
+								<%= label_tag :keep_me_logged_in, 'KEEP ME LOGGED IN' %>
+							</div>
 						</div>
+					</div>
+					<div class="medium-4 columns text-right">
+						<%= submit_tag "LOGIN", class: "alert button", id: "submit-login", style: "padding:0;" %>
+						<%#= link_to 'LOGIN', "#", :onclick => "$('#loginform').submit()".html_safe, class: "alert button expand" %>
+					</div>
+				</div>
 				<% end %>
-			</div>
-		</div>
 
-		<div class="row">
-			<div class="medium-5 columns">
-				<%= form_tag '/login', method: 'post' do %>
-					<%= email_field_tag :email, '', placeholder: 'email'%> 
+				<div class="row">
+					<div class="medium-6 medium-centered columns text-center">
+						<small><%= link_to 'forgot password?', '#' %></small>
+					</div>
+				</div>
+				<br>
 			</div>
-			<div class="medium-1 columns" style="padding: 1.2em;">
-				/
-			</div>
-			<div class="medium-5 columns">
-				<%= password_field_tag :password, '', placeholder: 'password' %>
-			</div>
-			<div class="medium-1 columns">
-					<%= submit_tag 'login', class: "tiny radius success button" %>
-				<% end %>
-			</div>
-		</div>
 
+		</div>
 	</div>
+</div>
+
+<div id="front-footer">
+	<div class="row">
+
+		<div class="medium-12 columns" >
+
+			
+				<p>Developing solve frontline; worldwide, public sector measures emergency response efficient future inspire social change. Raise awareness; resourceful political save lives scalable. </p>
+
+				<p>Nelson Mandela; combat HIV/AIDS rights-based approach transform the world long-term, agenda, Martin Luther King Jr. storytelling save the world Bill and Melinda Gates civic engagement reduce carbon emissions plumpy'nut justice. </p>
+
+				<p>Global; enable strengthen democracy development international development immunize, participatory monitoring Cesar Chavez shifting landscape. Local life-saving underprivileged, human being, sanitation; legitimize; Gandhi Rockefeller. </p>				
+			
+		</div>
+	
+	</div> <!-- /.row -->
 </div>

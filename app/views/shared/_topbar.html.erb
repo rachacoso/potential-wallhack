@@ -8,17 +8,9 @@
 	    <li class="name">
 
 				<h1>
-
+				<%= link_to root_url do %>
 				<img src="/images/LandingLogo.svg" height="50" width="125" alt="Landing International" />
-				-
-				<img src="/images/MarketplaceLogo.svg" height="30" width="30" alt="Marketplace" />
-				<small style="color: white"><strong>Marketplace</strong>
-				<% if controller_name == "admin" || controller_name == "users" %>
-					for Administrators
-				<% elsif @current_user %>
-					<%= @current_user.distributor ? "for Distributors" : "for Brands" %>
 				<% end %>
-				</small>
 				</h1>      
 	    </li>
 	     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
@@ -37,9 +29,9 @@
 							<span class="secondary radius label" id="unread-message-count-badge"> ! </span>
 			    	<% end %>    	
 		      	<% if @current_user.distributor %>
-							<%= @current_user.distributor.company_name.blank? ? "Welcome" : @current_user.distributor.company_name %>
+							(D) <%= @current_user.distributor.company_name.blank? ? "Welcome" : @current_user.distributor.company_name %>
 						<% else %>
-							<%= @current_user.brand.company_name.blank? ? "Welcome" : @current_user.brand.company_name %>
+							(B) <%= @current_user.brand.company_name.blank? ? "Welcome" : @current_user.brand.company_name %>
 						<% end %>
 		      </a>
 		      <ul class="dropdown">       	
@@ -92,7 +84,7 @@
 		      </ul>
 		    </li>
 		    <% end %>
-				<% if !@current_user %>
+				<% if !@current_user && controller_name != 'session' %>
 				<%= render partial: "shared/login_widget" %>
 				<% end %>	      
 		  </ul>

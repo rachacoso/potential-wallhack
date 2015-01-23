@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get   '/dashboard' => 'home#dashboard', as: 'dashboard'
 
   get   '/admin' => 'admin#index', as: 'admin'
+  
+
   get   '/admin/new_bulk_upload' => 'admin#new_bulk_upload', as: 'new_bulk_upload'
   post   '/admin/new_bulk_upload' => 'admin#do_bulk_upload'
 

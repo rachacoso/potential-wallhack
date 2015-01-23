@@ -4,18 +4,14 @@
 
 	<nav class="top-bar" data-topbar role="navigation">
 
+
 	  <ul class="title-area">
 	    <li class="name">
 
 				<h1>
+				<%= link_to admin_url do %>
 				<img src="/images/LandingLogo.svg" height="50" width="125" alt="Landing International" />
-				-
-				<img src="/images/MarketplaceLogo.svg" height="30" width="30" alt="Marketplace" />
-				<small style="color: white"><strong>Marketplace</strong>
-
-					for Administrators
-
-				</small>
+				<% end %>
 				</h1>      
 	    </li>
 	     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
@@ -30,14 +26,8 @@
     <% if @current_user && show_top_menu %>
     <li class="has-dropdown">
       <a href="#">
-	    	<% if @messages_unread > 0 || @new_contact_messages > 0 %>
-					<span class="secondary radius label" id="unread-message-count-badge"> ! </span>
-	    	<% end %>    	
-      	<% if @current_user.distributor %>
-					<%= @current_user.distributor.company_name.blank? ? "Welcome" : @current_user.distributor.company_name %>
-				<% else %>
-					<%= @current_user.brand.company_name.blank? ? "Welcome" : @current_user.brand.company_name %>
-				<% end %>
+				(Administrator)    	      	
+				<%= @current_user.user_profile.firstname.blank? ? "Welcome" : @current_user.user_profile.firstname %>
       </a>
       <ul class="dropdown">       	
         <li>

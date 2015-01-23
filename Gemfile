@@ -58,6 +58,8 @@ gem 'rails_12factor', group: :production
 
 gem 'rails_autolink'
 
+gem 'kaminari'
+
 group :production do
   gem 'pg'
 end

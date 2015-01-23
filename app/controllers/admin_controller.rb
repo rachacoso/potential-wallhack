@@ -20,12 +20,9 @@ class AdminController < ApplicationController
 	  else
 			@display_info = Display.all.first
 		end
-
   end
 
   def new_bulk_upload
-
-
 
   end
 

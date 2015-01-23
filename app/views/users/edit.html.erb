@@ -1,15 +1,18 @@
 <%= render partial: "shared/topbar_admin" %>
 
 
+
 <% content_for :subnav do %>
+
 <div class="row">
 	<div class="small-12 columns">
-		<dl class="sub-nav">
-		  <dd><%= link_to 'All Users', users_url %></dd>
-		  <dd class="active"><%= link_to "#" do %> Edit<strong>User - <%=@user.email%></strong> <% end %></dd>
-		</dl>
+		<ul class="breadcrumbs">
+		  <li><%= link_to "All Users", users_url %></li>
+		  <li class="current"><%= link_to "#" do %> Edit User - <strong><%=@user.email%></strong> <% end %></li>
+		</ul>					
 	</div>
 </div>
+
 <% end %>
 
 <% if flash[:notice] %>
@@ -52,14 +55,13 @@
 
 </div>
 
-
+<% unless @user.administrator %>
 <div class="row">
 	
 		<div class="small-5 columns panel">
-			<h4>Change<br><strong>password</strong></h4>
+			<h4>Change<br><strong>status</strong></h4>
 				<%= form_for @user, url: user_path(@user) do |f| %>
 					<%= hidden_field_tag 'update_type', 'adminsubscriber' %>
-					<%= f.check_box :administrator %>
 					<%= f.fields_for (@user.distributor ? :distributor : :brand) do |ff| %>
 					<%= ff.check_box :subscriber %>
 					<% end %>
@@ -69,4 +71,4 @@
 		</div>
 
 </div>
-
+<% end %>

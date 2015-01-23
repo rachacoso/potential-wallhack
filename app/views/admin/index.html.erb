@@ -1,7 +1,14 @@
 <%= render partial: "shared/topbar_admin" %>
 
 <br>
-
+<div class="row">
+	<div class="large-12 columns">
+		<ul class="breadcrumbs">
+		  <li class="current"><%= link_to "Admin Main Page", "#" %></li>
+		</ul>					
+	</div>
+</div>
+<%= @company_size %>
 <%= render partial: "section", locals: {profile_section: @sector, new_profile_section: @new_sector, profile_section_name: 'Sectors'} %>
 
 <%= render partial: "section", locals: {profile_section: @channel, new_profile_section: @new_channel, profile_section_name: 'Channels'} %>
@@ -11,18 +18,14 @@
 <%#= render partial: "section", locals: {profile_section: @country, new_profile_section: @new_country, profile_section_name: 'Countries'} %>
 
 <div class="row">
-	<div class="medium-9 columns">
+	<div class="medium-9 medium-centered columns">
 		<div class="ldpanel">
 			<h1>Display</h1>
 
 			<% if flash[:"displays_error"] %>
-				<tr><td colspan="3"><div data-alert class="alert-box alert">
-					<% flash[:"displays_error"].each do |k,v| %>
-						<%= k %> <%= v %> <br>
-					<% end %>
-					<a href="#" class="close">&times;</a>
-				</td></tr>
-				</div>
+				<% flash[:"displays_error"].each do |k,v| %>
+					<%= k %> <%= v %> <br>
+				<% end %>
 			<% end %>
 
 			<%= form_for @display_info do |f| %>

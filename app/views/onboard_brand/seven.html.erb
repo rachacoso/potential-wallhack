@@ -43,15 +43,15 @@
 			</div>			
 			<div id="export-countries-list">
 			<%# FOR FUTURE AJAX %>
-			<%= render "shared/profileform/export_countries" %>
+			<%#= render "shared/profileform/export_countries" %>
+			<%= render "shared/profile/components/export_countries_list" %>
 			 
 			</div> <!-- /.export-countries-list -->
 				<div class="rowitem">
 				<div class="row">
 					<div class="medium-12 columns">
 						<hr>
-						<%= form_for @new_export_country, :html => { :id => "new_export_country" } do |f| %>
-						<%= hidden_field_tag :ob, 'true' %>
+						<%= form_for @new_export_country, :html => { :id => "new_export_country" }, remote: true do |f| %>
 						<div class="rowheadback addnew">
 							<div class="row">
 								<div class="medium-8 columns">
@@ -67,8 +67,8 @@
 								<%= f.text_field :country, class: "country-autocomplete-multi", label: false, placeholder: 'Country' %>
 							</div>
 							<div class="medium-4 columns text-left">
-								<%#= f.submit %>
-								<%= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %>
+								<%= f.submit "ADD", class: "tiny button submit" %>
+								<%#= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %>
 							</div>
 						</div>				
 						<% end %>

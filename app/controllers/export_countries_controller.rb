@@ -1,16 +1,21 @@
 class ExportCountriesController < ApplicationController
 
 	def create
+
 		u = @current_user.distributor || @current_user.brand
-		u.export_countries.find_or_create_by(country: params[:export_country][:country])
-		# u.export_countries.create(export_country_parameters)
 
-	  # respond_to do |format|
-		 #  format.html
-		 #  format.js
-	  # end
+		unless params[:export_country][:country].empty?
+			u.export_countries.find_or_create_by(country: params[:export_country][:country])
+		end
 
-		go_to_redirect
+		@export_countries = u.export_countries rescue nil
+	  
+	  respond_to do |format|
+		  format.html
+		  format.js
+	  end
+
+		# go_to_redirect
 
 	end
 
@@ -27,8 +32,14 @@ class ExportCountriesController < ApplicationController
 		u = @current_user.distributor || @current_user.brand
 		d = u.export_countries.find(params[:id])
 		d.destroy
+		@export_countries = u.export_countries rescue nil
 
-		go_to_redirect
+	  respond_to do |format|
+		  format.html
+		  format.js
+	  end
+
+		# go_to_redirect
 
 	end
 

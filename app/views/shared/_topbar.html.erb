@@ -50,13 +50,13 @@
 						<li>
 							<%= link_to 'Market Insight', "#" %>
 						</li>	          
-						<li class="active">
+						<li>
 							<% matchtype = @current_user.type? == "distributor" ? "Brand" : "Distributor" %>
 							<%= link_to "Your #{matchtype} Matches", all_matches_url %>
 						</li>				
 						<li>
 							<%= link_to messages_url do %>
-								Your Messages 
+								Message Center 
 								<div class="text-right">
 									<% if @messages_unread > 0 %>
 										<span class="alert radius label" id="top-bar-messages-unread"><span id="top-bar-messages-unread-number"><%= @messages_unread %></span> new message<%= @messages_unread > 1 ? "s" : "" %> <br></span>

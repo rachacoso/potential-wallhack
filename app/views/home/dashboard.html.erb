@@ -15,123 +15,47 @@
 	</div>
 </div>
 
+<div class="row">
 
-	<% if @current_user.distributor %>
-
-	<div class="row">
-		<div class="medium-4 columns">
-
-
-			<%= render "message_center" %>
-
-			<div class="panel">
-				<h4><strong>Profile Center</strong></h4>
-				<hr>
-				<% percentp = check_distributor_public_profile %>
-				Your <strong><%= link_to 'Public Profile', distributor_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> Complete!<br><br>
-				<div class="progress small-12 <%= percentp == 100 ? "success" : "" %>">
-				  <span class="meter text-center" style="width: <%= percentp %>%"><small class="text-right"></small></span>
-				</div>
-				<small>[some info on your public profile]</small>
-			
-				<hr>
-
-				<% percentf = check_distributor_full_profile %>
-				Your <strong><%= link_to 'Full Profile', distributor_full_profile_url %></strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> Complete!<br><br>
-				<div class="progress small-12 <%= percentf == 100 ? "success" : "" %>">
-				  <span class="meter" style="width: <%= percentf %>%"></span>
-				</div>
-				<small>[some info on your full profile]</small>
+	<div class="medium-4 columns">
+		<div class="row">
+			<div class="small-12 columns">
+				<%= image_tag "/images/marketplace.svg" %>
 			</div>
-
-			<div class="panel">
-				<h4><strong>Rating</strong></h4>
-				<hr>
-				<small>You have <strong>3</strong> points of 6 total.</small>
-			</div>
-
-
-
 		</div>
+		<br>
+		<%= render "marketplace" %>
 
 
-		<div class="medium-8 columns">
-			
-			<div class="panel">
-				<p>[ Here's some sort of congratualtions text, the text of which depends on how much of their profile has been filled out... <br><br>i.e. if it is full and complete, put some info/links for them to start a search / get matched ....<br> otherwise there should be text about how and what they should fill out before getting matched, etc...]</p>
+
+	</div>
+
+	<div class="medium-4 columns">
+		<div class="row">
+			<div class="small-12 columns">
+				<%= image_tag "/images/insights.svg" %>
 			</div>
-			
-			<div class="panel">
-				<p>[Rotating Info on different market trends here??]</p>
-			</div>
-
-			<div class="panel">
-				<p>[ Interesting Reads here? ]</p>
-			</div>
- 
-
 		</div>
+		<br>
+		<%= render "insights" %>
+
+
+
+	</div>
+
+	<div class="medium-4 columns">
+		<div class="row">
+			<div class="small-12 columns">
+				<%= image_tag "/images/agency.svg" %>
+			</div>
+		</div>
+		<br>
+		<%= render "agency" %>
+
 	</div>
 
 
-	<% end %>
+</div>
 
-	<% if @current_user.brand %>
-
-	<div class="row">
-		<div class="medium-4 columns">
-
-
-			<%= render "message_center" %>
-
-
-
-			<div class="panel">
-				<h4><strong>Profile Center</strong></h4>
-				<hr>
-				<% percentp = check_brand_public_profile %>
-				Your <strong><%= link_to 'Public Profile', brand_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> Complete!<br><br>
-				<div class="progress small-12 <%= percentp == 100 ? "success" : "" %>">
-				  <span class="meter text-center" style="width: <%= percentp %>%"><small class="text-right"></small></span>
-				</div>
-				<small>[some info on your public profile]</small>
-				<hr>
-
-				<% percentf = check_brand_full_profile %>
-				Your <strong><%= link_to 'Full Profile', brand_full_profile_url %></strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> Complete!<br><br>
-				<div class="progress small-12 <%= percentf == 100 ? "success" : "" %>">
-				  <span class="meter" style="width: <%= percentf %>%"></span>
-				</div>
-				<small>[some info on your full profile]</small>
-			</div>
-
-			<div class="panel">
-				<h4><strong>Rating</strong></h4>
-				<hr>
-				<small>You have <strong>3</strong> points of 6 total.</small>
-				<h3>[Blah blah here about how to improve your rating]</h3>
-			</div>
 	
-		</div>
-
-
-		<div class="medium-8 columns">
-			
-			<div class="panel">
-				<p>[ Here's some sort of description/next steps text, the text of which depends on how much of their profile has been filled out... <br><br>i.e. if profiles are full and complete, put some info/links for them to start a search / get matched .<br> otherwise there should be text about how/what/why they should fill out before getting matched, etc... info on how to use the market research, etc.]</p>
-			</div>
-			
-			<div class="panel">
-				<p>[Rotating Info on different market trends here??]</p>
-			</div>
-
-			<div class="panel">
-				<p>[ Interesting Reads here? ]</p>
-			</div>
-
-		</div>
-	</div>
-
-
-	<% end %>
 

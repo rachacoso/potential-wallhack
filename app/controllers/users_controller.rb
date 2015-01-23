@@ -204,7 +204,7 @@ class UsersController < ApplicationController
 	end
 
 	def administrators_only
-		unless @current_user.administrator
+		unless @current_user && @current_user.administrator
 			redirect_to dashboard_url
 		end
 	end

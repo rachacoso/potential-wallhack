@@ -26,7 +26,8 @@ class HomeController < ApplicationController
 			end
 		end
 
-		@new_requests_list = matches.where(accepted: false, initial_contact_by: @current_user.type_inverse?)
+		@incoming_requests_list = matches.where(accepted: false, initial_contact_by: @current_user.type_inverse?)
+		@outgoing_requests_list = matches.where(accepted: false, initial_contact_by: @current_user.type?)
 		
 	end
 

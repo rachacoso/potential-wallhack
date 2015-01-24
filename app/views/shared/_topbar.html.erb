@@ -15,79 +15,130 @@
 	    </li>
 	     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
 	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+
 	  </ul>
 		
-		
+
 
 		<section class="top-bar-section">
-		  <!-- Right Nav Section -->
+
 		  <ul class="right">
-		    <% if @current_user && show_top_menu %>
-		    <li class="has-dropdown">
-		      <a href="#">
-			    	<% if @messages_unread > 0 || @new_contact_messages > 0 %>
-							<span class="secondary radius label" id="unread-message-count-badge"> ! </span>
-			    	<% end %>    	
-		      	<% if @current_user.distributor %>
-							(D) <%= @current_user.distributor.company_name.blank? ? "Welcome" : @current_user.distributor.company_name %>
-						<% else %>
-							(B) <%= @current_user.brand.company_name.blank? ? "Welcome" : @current_user.brand.company_name %>
+	    <% if @current_user && show_top_menu %>
+		    
+			<li class="divider"></li>
+			<!-- Marketplace Nav Section -->
+			<li class="has-dropdown">
+				<a href="#"> 					
+				<img src="/images/logos_marketplace.svg" height="30" width="30" alt="Marketplace" />		
+				<% if controller_name == "matches" || controller_name == "messages" || controller_name == "library_documents" || controller_name == "distributors" || controller_name == "brands" %>
+				Marketplace
+				<% end %>
+
+	    	<% if @messages_unread > 0 || @new_contact_messages > 0 %>
+				<span style="color: red; font-weight: 900; font-size: 1em;"> ! </span> 
+	    	<% end %>					
+				</a>
+			
+				<ul class="dropdown">
+			
+					<li>
+						<% matchtype = @current_user.type? == "distributor" ? "Brand" : "Distributor" %>
+						<%= link_to "#{matchtype} Matches", all_matches_url %>
+					</li>							
+
+					<li>
+						<%= link_to messages_url do %>
+							Message Center 
+							<div class="text-right">
+								<% if @messages_unread > 0 %>
+									<span class="alert radius label" id="top-bar-messages-unread"><span id="top-bar-messages-unread-number"><%= @messages_unread %></span> new message<%= @messages_unread > 1 ? "s" : "" %> <br></span>
+								<% end %>
+								<% if @new_contact_messages > 0 %>
+									<span class="alert radius label" id="top-bar-new-contact-messages"><span id="top-bar-new-contact-messages-number"><%= @new_contact_messages %></span> new request<%= @new_contact_messages > 1 ? "s" : "" %></span>
+								<% end %>
+							</div>
 						<% end %>
-		      </a>
-		      <ul class="dropdown">       	
-		        <li>
-								<%= action_name == "front" ? (link_to 'Dashboard', dashboard_url) : "" %> 
-								<%= controller_name == "admin" ? (link_to 'Dashboard', dashboard_url) : "" %>
-								<%= controller_name == "home" ? (link_to 'Dashboard', dashboard_url) : "" %>
-								<%= controller_name == "brands" ? (link_to 'Dashboard', dashboard_url) : "" %>
-								<%= controller_name == "distributors" ? (link_to 'Dashboard', dashboard_url) : "" %>
-								<%= controller_name == "onboard_brand" ? (link_to 'Dashboard', dashboard_url) : "" %> 
-								<%= controller_name == "onboard_distributor" ? (link_to 'Dashboard', dashboard_url) : "" %>
-								<%= controller_name == "library_documents" ? (link_to 'Dashboard', dashboard_url) : "" %>
-								<%= controller_name == "matches" ? (link_to 'Dashboard', dashboard_url) : "" %> 
-								<%= controller_name == "messages" ? (link_to 'Dashboard', dashboard_url) : "" %> 
-		        </li>
-						<li>
-							<%= link_to 'Market Insight', "#" %>
-						</li>	          
-						<li>
-							<% matchtype = @current_user.type? == "distributor" ? "Brand" : "Distributor" %>
-							<%= link_to "Your #{matchtype} Matches", all_matches_url %>
-						</li>				
-						<li>
-							<%= link_to messages_url do %>
-								Message Center 
-								<div class="text-right">
-									<% if @messages_unread > 0 %>
-										<span class="alert radius label" id="top-bar-messages-unread"><span id="top-bar-messages-unread-number"><%= @messages_unread %></span> new message<%= @messages_unread > 1 ? "s" : "" %> <br></span>
-									<% end %>
-									<% if @new_contact_messages > 0 %>
-										<span class="alert radius label" id="top-bar-new-contact-messages"><span id="top-bar-new-contact-messages-number"><%= @new_contact_messages %></span> new request<%= @new_contact_messages > 1 ? "s" : "" %></span>
-									<% end %>
-								</div>
-							<% end %>
-						</li>
-						<li>
-							<%= link_to 'Your Document Library', library_documents_url %>
-						</li>
-		        <% if @current_user.distributor %>
-		        <li>
-		        	<%= link_to 'Your Profile', distributor_full_profile_url %>
-		        </li>
-		        <% end %>
-		        <% if @current_user.brand %>
-		        <li>
-		        	<%= link_to 'Your Profile', brand_full_profile_url %>
-		        </li>
-		        <% end %>
-		        <li><%= link_to 'Logout', logout_url %></li>
-		      </ul>
-		    </li>
-		    <% end %>
-				<% if !@current_user && controller_name != 'session' %>
-				<%= render partial: "shared/login_widget" %>
-				<% end %>	      
+					</li>
+
+					<li>
+						<%= link_to 'Document Library', library_documents_url %>
+					</li>
+
+	        <% if @current_user.distributor %>
+	        <li>
+	        	<%= link_to 'Your Profile', distributor_full_profile_url %>
+	        </li>
+	        <% end %>
+	        <% if @current_user.brand %>
+	        <li>
+	        	<%= link_to 'Your Profile', brand_full_profile_url %>
+	        </li>
+	        <% end %>
+
+				</ul>
+			</li>
+
+			<!-- Insights Nav Section -->
+			<li class="has-dropdown">
+				<a href="#">
+				<img src="/images/logos_insights.svg" height="30" width="30" alt="Insights" />
+
+				</a>
+			
+				<ul class="dropdown">
+					<li>
+						<%= link_to 'Market Insights', "#" %>
+					</li>
+				</ul>
+			</li>
+
+			<!-- Agency Nav Section -->
+			<li class="has-dropdown">
+				<a href="#">
+				<img src="/images/logos_agency.svg" height="30" width="30" alt="Agency" />
+				</a>
+			
+				<ul class="dropdown">
+					<li>
+						<%= link_to 'Coming Soon', "#" %>
+					</li>										
+				</ul>
+			</li>
+
+			<li class="divider"></li>
+			<li <%= action_name == "dashboard" ? 'class="active"'.html_safe : ''%>>
+				<%= link_to 'DASHBOARD', dashboard_url, id: "menu-dashboard" %> 
+			</li>
+			<li class="divider"></li>
+
+		  <!-- User Nav Section -->
+	    <li class="has-dropdown">
+	      <a href="#">   	
+	      	<% if @current_user.distributor %>
+						(D) <%= @current_user.distributor.company_name.blank? ? "Welcome" : @current_user.distributor.company_name %>
+					<% else %>
+						(B) <%= @current_user.brand.company_name.blank? ? "Welcome" : @current_user.brand.company_name %>
+					<% end %>
+	      </a>
+	      <ul class="dropdown">       	
+					<li>
+						<%= link_to 'Your Account', "#" %>
+					</li>	          			
+
+	        <li><%= link_to 'Logout', logout_url %></li>
+	      </ul>
+	    </li>
+	    <% end %>
+
+
+			<% if !@current_user && controller_name != 'session' %>
+			<%= render partial: "shared/login_widget" %>
+			<% end %>
+
 		  </ul>
+
+
+
 
 		</section>
 

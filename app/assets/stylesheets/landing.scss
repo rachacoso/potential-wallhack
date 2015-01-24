@@ -1103,4 +1103,16 @@ top: 10px;
 }
 #dashboard-agency-content {
   background-color: $landing-middle-gray;
+  opacity: 0.4;
+}
+#dashboard-agency-head {
+  opacity: 0.4;
+}
+
+#menu-dashboard {
+  color: $landing-orange;
+  font-weight: 700;
+  .active & {
+    color: $landing-dark-gray;
+  }
 }

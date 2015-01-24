@@ -43,7 +43,10 @@
 
 		<% if action_name == "index" || action_name == "index_saved_matches" || action_name == "index_contacted_matches" || action_name == "index_incoming_matches" %>
 			<% if m %>
-				<% if !m.messages.blank? %>
+				<% if m.messages.blank? && m.initial_contact_by == @current_user.type? %>
+					<span class="plt-indicator-info">Awaiting Response</span>
+				<% end %>
+				<% unless m.messages.blank? %>
 					<span class="plt-indicator-info">In Conversation</span>
 				<% end %>
 			<% end %>

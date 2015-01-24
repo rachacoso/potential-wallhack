@@ -1091,3 +1091,16 @@ top: 10px;
   font-size: 0.7em;
 
 }
+
+#dashboard-marketplace-content, #dashboard-insights-content, #dashboard-agency-content {
+  padding: rem-calc(5) rem-calc(5) 0 rem-calc(5);
+}
+#dashboard-marketplace-content {
+  background-color: $landing-blue;
+}
+#dashboard-insights-content {
+  background-color: $landing-yellow;
+}
+#dashboard-agency-content {
+  background-color: $landing-middle-gray;
+}

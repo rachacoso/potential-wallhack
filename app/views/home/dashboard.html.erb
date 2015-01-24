@@ -17,45 +17,72 @@
 
 <div class="row">
 
-	<div class="medium-4 columns">
+	<div class="medium-4 columns hide-for-small-only">
 		<div class="row">
-			<div class="small-12 columns">
+			<div class="small-12 columns text-center">
 				<%= image_tag "/images/marketplace.svg" %>
 			</div>
 		</div>
-		<br>
-		<%= render "marketplace" %>
-
-
-
 	</div>
 
-	<div class="medium-4 columns">
+	<div class="medium-4 columns hide-for-small-only">
 		<div class="row">
-			<div class="small-12 columns">
+			<div class="small-12 columns text-center">
 				<%= image_tag "/images/insights.svg" %>
 			</div>
 		</div>
-		<br>
-		<%= render "insights" %>
-
-
-
 	</div>
 
-	<div class="medium-4 columns">
+	<div class="medium-4 columns hide-for-small-only">
 		<div class="row">
-			<div class="small-12 columns">
+			<div class="small-12 columns text-center">
 				<%= image_tag "/images/agency.svg" %>
 			</div>
 		</div>
-		<br>
-		<%= render "agency" %>
-
 	</div>
-
 
 </div>
 
-	
+<div class="row" data-equalizer>
+
+	<div class="medium-4 columns">
+		<div class="row hide-for-medium-up">
+			<div class="small-12 columns text-center">
+				<%= image_tag "/images/marketplace.svg" %>
+			</div>
+		</div>
+		<div id="dashboard-marketplace-content" data-equalizer-watch>
+		<%= render "marketplace" %>
+		</div>
+	</div>
+
+	<div class="medium-4 columns">
+		<div class="row hide-for-medium-up">
+			<div class="small-12 columns text-center">
+				<%= image_tag "/images/insights.svg" %>
+			</div>
+		</div>
+
+		<div id="dashboard-insights-content" data-equalizer-watch>
+			<%= render "insights" %>
+		</div>
+	</div>
+
+	<div class="medium-4 columns">
+
+		<div class="row hide-for-medium-up">
+			<div class="small-12 columns text-center">
+				<%= image_tag "/images/agency.svg" %>
+			</div>
+		</div>
+
+		<div id="dashboard-agency-content" data-equalizer-watch>		
+			<%= render "agency" %>
+		</div>
+	</div>
+
+</div>
+
+<br>
+<br>	
 

@@ -10,7 +10,7 @@
 </div>
 
 <div class="row">
-	<div class="medium-9 medium-centered columns">
+	<div class="medium-6 columns">
 
 		<div class="row">
 			<div class="medium-6 columns">
@@ -20,16 +20,20 @@
 				<% if @messages_unread > 0 %>
 					<span class="message-index-indicator"><%= @messages_unread %> unread message<%= @messages_unread > 1 ? "s" : "" %></span>
 				<% end %>
-			</div>	
+			</div>
+			<div class="small-12 columns">
+				<hr>
+			</div>
 		</div>
 
 		<div class="row">
 			<div class="small-12 columns">
 
+
 				<% if @messages_unread > 0 %>
 				
 					<div class="row">
-						<div class="medium-10 medium-centered columns">	
+						<div class="small-12 columns">	
 							<% @unread_list.each do |m| %>
 								<% this_one = m.send(@current_user.type_inverse?) %>
 
@@ -45,26 +49,30 @@
 
 			</div>
 		</div>
+	
+	</div>
 
-			<hr>
+	<div class="medium-6 columns">
 
 		<div class="row">
-			<div class="medium-6 columns">
+			<div class="medium-8 columns">
 				<h1> Contact Requests</h1>
 			</div>
-			<div class="medium-6 columns text-right end" style="padding-top: 0.8em; padding-bottom: 0.8em;">
+			<div class="medium-4 columns text-right end" style="padding-top: 0.8em; padding-bottom: 0.8em;">
 				<% if @new_contact_messages > 0 %>
 					<span class="message-index-indicator"><%= @new_contact_messages %> new contact request<%= @new_contact_messages > 1 ? "s" : "" %></span>
 				<% end %>
-			</div>	
+			</div>
+			<div class="small-12 columns">
+				<hr>
+			</div>
 		</div>
 
 		<div class="row">
 			<div class="small-12 columns">
-
 				<% if @new_contact_messages > 0 %>
 					<div class="row">
-						<div class="medium-10 medium-centered columns">					
+						<div class="small-12 columns">					
 							<% @new_requests_list.each do |m| %>
 								<% this_one = m.send(@current_user.type_inverse?) %>
 								<%= render partial: "shared/profile/profile_list_tile", locals: {match: this_one} %>
@@ -74,9 +82,10 @@
 				<% else %>
 					<h3>No new contact requests</h3>
 				<% end %>
-
 			</div>
 		</div>
 
 	</div>
+
+
 </div>

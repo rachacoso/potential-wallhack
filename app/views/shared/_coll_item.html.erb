@@ -1,4 +1,4 @@
-<% urlstring = cb.class.name.tableize.singularize + "_url(cb" + ((controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? ", :ob => 'true'" : "") + ")" %>
+<% urlstring = cb.class.name.tableize.singularize + "_url(cb" + (ob ? ", :ob => 'true'" : "") + ")" %>
 
 	<div id="delete-collitem-<%= cb.id %>">
 		<a class="anchor" id="a-<%= cb.id %>"></a>
@@ -20,7 +20,7 @@
 				    <div id="a_<%= cb.id %>" class="content <%= collection_item_active(cb.id) %>">
 
 							<%= form_for cb, remote: true do |f| %>
-							<%= (controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? (hidden_field_tag :ob, "true") : "" %>
+							<%= ob ? (hidden_field_tag :ob, "true") : "" %>
 							<div class="updateform">
 								<%= render partial: "shared/collections/#{cb.class.name.tableize}", locals: {f: f, cb: cb} %>
 							</div>
@@ -43,7 +43,7 @@
 									<hr>
 									
 									<% if cb.product_photos %>
-										<% photourlstring =  "product_photo_delete_url(photo" + ((controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? ", :ob => 'true'" : "") + ")" %>
+										<% photourlstring =  "product_photo_delete_url(photo" + ( ob ? ", :ob => 'true'" : "") + ")" %>
 										<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
 										<% cb.product_photos.each do |photo| %>
 												<li>
@@ -59,7 +59,7 @@
 								<div class="small-6 columns">
 									<%= form_for ProductPhoto.new do |f| %>
 										<%= hidden_field_tag 'product_id', cb.id %>
-										<%= (controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? (hidden_field_tag :ob, "true") : "" %>
+										<%= ob ? (hidden_field_tag :ob, "true") : "" %>
 							      <div class="row">
 							        <div class="small-6 columns">
 								          <%= f.file_field :photo, label: 'Select Product Photo', accept: 'image/png,image/gif,image/jpeg' %>

@@ -17,8 +17,8 @@
 <% else %> <%# differentiate between old/new product %>
 	<div id="collection-<%= coll_new_item.class.to_s.downcase %>-<%= iscurrent %>">
 <% end %>
-
-	<%= render(partial: "shared/coll_item", collection: coll, as: :cb, locals: {identifier: identifier}) || "<h5>( #{no_item_message} )</h5>".html_safe %>
+	<% ob = (controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? true : false %>
+	<%= render(partial: "shared/coll_item", collection: coll, as: :cb, locals: {identifier: identifier, ob: ob}) || "<h5>( #{no_item_message} )</h5>".html_safe %>
 
 	</div>
 

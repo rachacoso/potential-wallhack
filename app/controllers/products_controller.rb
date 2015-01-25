@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
 
 	def create
-
 		brand = @current_user.brand
 		new_item = brand.products.create!(product_parameters)
 		@identifier = 'name'
@@ -12,6 +11,12 @@ class ProductsController < ApplicationController
 			@collection = brand.products.where(current: true)
 		else
 			@collection = brand.products.where(current: false)
+		end
+
+		if params[:ob]
+			@ob = true
+		else
+			@ob = false
 		end
 
 		# @iscurrent ||= false
@@ -53,6 +58,12 @@ class ProductsController < ApplicationController
 		else
 			@collection = brand.products.where(current: false)
 			@no_item_message = 'No Past Products'
+		end
+
+		if params[:ob]
+			@ob = true
+		else
+			@ob = false
 		end
 
 		respond_to do |format|

@@ -13,6 +13,12 @@ class DistributorBrandsController < ApplicationController
 			@collection = distributor.distributor_brands.where(current: false)
 		end
 
+		if params[:ob]
+			@ob = true
+		else
+			@ob = false
+		end
+
 		respond_to do |format|
 			format.html
 			format.js
@@ -49,6 +55,12 @@ class DistributorBrandsController < ApplicationController
 		else
 			@collection = brand.distributor_brands.where(current: false)
 			@no_item_message = 'No Past Distributor Brands'
+		end
+
+		if params[:ob]
+			@ob = true
+		else
+			@ob = false
 		end
 
 		respond_to do |format|

@@ -40,9 +40,9 @@ class ProductPhotosController < ApplicationController
 
 			if params[:ob] 
 				if redir
-					redirect_to onboard_distributor_four_url + "#a-" + redir, :flash => { :make_active => redir }
+					redirect_to onboard_distributor_five_url + "#a-" + redir, :flash => { :make_active => redir }
 				else
-					redirect_to onboard_distributor_four_url
+					redirect_to onboard_distributor_five_url
 				end
 			else
 				if redir

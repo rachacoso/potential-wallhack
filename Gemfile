@@ -60,6 +60,8 @@ gem 'rails_autolink'
 
 gem 'kaminari'
 
+gem 'remotipart', '~> 1.2'
+
 group :production do
   gem 'pg'
 end

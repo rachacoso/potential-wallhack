@@ -3,25 +3,58 @@ class DistributorBrandsController < ApplicationController
 	def create
 		distributor = @current_user.distributor
 		new_item = distributor.distributor_brands.create!(distributor_brand_parameters)
+		@identifier = 'brand'
+		@iscurrent = params[:distributor_brand][:current]
+		@new_item_id = new_item.id
 
-		go_to_redirect(new_item.id.to_s)
+		if @iscurrent == "true"
+			@collection = distributor.distributor_brands.where(current: true)
+		else
+			@collection = distributor.distributor_brands.where(current: false)
+		end
+
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 
 	def update
 		distributor = @current_user.distributor
-		distributor.distributor_brands.find(params[:id]).update!(distributor_brand_parameters)
+		@collitem = distributor.distributor_brands.find(params[:id])
+		@collitem.update!(distributor_brand_parameters)
 
-		go_to_redirect(params[:id])
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 
 	def destroy
 
-		db = DistributorBrand.find(params[:id])
-		db.destroy
-		
-		go_to_redirect
+		@collitemid = params[:id]
+		d = DistributorBrand.find(@collitemid)
+		@iscurrent = d.current
+		@collection_name = d.class.to_s.downcase
+		d.destroy
+
+		@identifier = 'brand'
+
+		distributor = @current_user.distributor
+		if @iscurrent 
+			@collection = distributor.distributor_brands.where(current: true)
+			@no_item_message = 'No Current Distributor Brands'
+		else
+			@collection = brand.distributor_brands.where(current: false)
+			@no_item_message = 'No Past Distributor Brands'
+		end
+
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 

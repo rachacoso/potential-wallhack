@@ -3,25 +3,47 @@ class PatentsController < ApplicationController
 	def create
 		u = @current_user.distributor || @current_user.brand
 		new_item = u.patents.create!(patent_parameters)
+		@identifier = 'product'
+		@new_item_id = new_item.id
+		
+		@collection = u.trade_shows
 
-		go_to_redirect(new_item.id.to_s)
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 
 	def update
 		u = @current_user.distributor || @current_user.brand
-		u.patents.find(params[:id]).update!(patent_parameters)
+		@collitem = u.patents.find(params[:id])
+		@collitem.update!(patent_parameters)
 
-		go_to_redirect(params[:id])
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 
 	def destroy
 
-		d = Patent.find(params[:id])
-		d.destroy
 
-		go_to_redirect
+		u = @current_user.distributor || @current_user.brand
+
+		@collitemid = params[:id]
+		d = Patent.find(@collitemid)
+		@collection_name = d.class.to_s.downcase
+		d.destroy
+		@identifier = 'product'
+		@collection = u.patents
+		@no_item_message = 'No Patents'
+
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 

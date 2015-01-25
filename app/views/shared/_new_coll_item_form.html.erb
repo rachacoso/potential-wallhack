@@ -1,7 +1,7 @@
 <% iscurrent ||= nil %>
 <% form_id, collection_name = get_collection_variables(newitem, iscurrent) %>
 
-<%= form_for newitem, :html => { :id => "#{form_id}" } do |f| %>
+<%= form_for newitem, :html => { :id => "#{form_id}" }, remote: true do |f| %>
 <%= iscurrent.nil? ?  "" : (f.hidden_field :current, value: iscurrent) %>
 <%= (controller.controller_name == "onboard_distributor") || (controller.controller_name == "onboard_brand") ? (hidden_field_tag :ob, "true") : "" %>
 
@@ -25,7 +25,8 @@
 		</div>
 		<div class="medium-4 columns text-right">
 			<div class="addnewformsubmit">
-			<%= link_to 'Add', "#", :onclick => "$('##{form_id}').submit()".html_safe %>
+			<%= f.submit 'ADD' %>
+			<%#= link_to 'Add', "#", :onclick => "$('##{form_id}').submit()".html_safe %>
 			</div>
 		</div>
 	</div>

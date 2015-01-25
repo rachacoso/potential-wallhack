@@ -3,25 +3,44 @@ class TrademarksController < ApplicationController
 	def create
 		u = @current_user.distributor || @current_user.brand
 		new_item = u.trademarks.create!(trademark_parameters)
-
-		go_to_redirect(new_item.id.to_s)
+		@identifier = 'product'
+		@new_item_id = new_item.id
+		@collection = u.trademarks
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 
 	def update
 		u = @current_user.distributor || @current_user.brand
-		u.trademarks.find(params[:id]).update!(trademark_parameters)
+		@collitem = u.trademarks.find(params[:id])
+		@collitem.update!(trademark_parameters)
 
-		go_to_redirect(params[:id])	
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 
 	def destroy
 
-		d = Trademark.find(params[:id])
+		u = @current_user.distributor || @current_user.brand
+
+		@collitemid = params[:id]
+		d = Trademark.find(@collitemid)
+		@collection_name = d.class.to_s.downcase
 		d.destroy
-		
-		go_to_redirect
+		@identifier = 'name'
+		@collection = u.trademark
+		@no_item_message = 'No Trademarks'
+
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 

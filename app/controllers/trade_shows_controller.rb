@@ -3,26 +3,44 @@ class TradeShowsController < ApplicationController
 	def create
 		u = @current_user.distributor || @current_user.brand
 		new_item = u.trade_shows.create!(trade_show_parameters)
-		
-		go_to_redirect(new_item.id.to_s)
+		@identifier = 'name'
+		@new_item_id = new_item.id
+		@collection = u.trade_shows
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 
 	def update
 		u = @current_user.distributor || @current_user.brand
-		u.trade_shows.find(params[:id]).update!(trade_show_parameters)
+		@collitem = u.trade_shows.find(params[:id])
+		@collitem.update!(trade_show_parameters)
 
-		go_to_redirect(params[:id])	
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 
 	def destroy
 
-		d = TradeShow.find(params[:id])
+		u = @current_user.distributor || @current_user.brand
+
+		@collitemid = params[:id]
+		d = TradeShow.find(@collitemid)
+		@collection_name = d.class.to_s.downcase
 		d.destroy
+		@identifier = 'name'
+		@collection = u.trade_shows
+		@no_item_message = 'No Trade Shows'
 
-		go_to_redirect
-
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 

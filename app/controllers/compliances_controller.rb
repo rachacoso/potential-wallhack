@@ -3,25 +3,48 @@ class CompliancesController < ApplicationController
 	def create
 		u = @current_user.distributor || @current_user.brand
 		new_item = u.compliances.create!(compliance_parameters)
-
-		go_to_redirect(new_item.id.to_s)
+		@identifier = 'product_or_category'
+		@new_item_id = new_item.id
+		@collection = u.compliances
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 
 	def update
 		u = @current_user.distributor || @current_user.brand
-		u.compliances.find(params[:id]).update!(compliance_parameters)
+		@collitem = u.compliances.find(params[:id])
+		@collitem.update!(compliance_parameters)
 
-		go_to_redirect(params[:id])
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 
 	def destroy
 
-		d = Compliance.find(params[:id])
+		@collitemid = params[:id]
+		d = Compliance.find(@collitemid)
 		d.destroy
 
-		go_to_redirect
+		u = @current_user.distributor || @current_user.brand
+
+		@collitemid = params[:id]
+		d = Compliance.find(@collitemid)
+		@collection_name = d.class.to_s.downcase
+		d.destroy
+		@identifier = 'product_or_category'
+		@collection = u.compliances
+		@no_item_message = 'No Certifications/Regulatory Compliance'
+
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 

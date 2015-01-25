@@ -4,26 +4,61 @@ class ProductsController < ApplicationController
 
 		brand = @current_user.brand
 		new_item = brand.products.create!(product_parameters)
+		@identifier = 'name'
+		@iscurrent = params[:product][:current]
+		@new_item_id = new_item.id
 
-		go_to_redirect(new_item.id.to_s)	
+		if @iscurrent == "true"
+			@collection = brand.products.where(current: true)
+		else
+			@collection = brand.products.where(current: false)
+		end
 
+		# @iscurrent ||= false
+		respond_to do |format|
+			format.html
+			format.js
+		end 
+	
 	end
 
 	def update
 
 		brand = @current_user.brand
-		brand.products.find(params[:id]).update!(product_parameters)
+		@collitem = brand.products.find(params[:id])
+		@collitem.update!(product_parameters)
 
-		go_to_redirect(params[:id])	
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 
 	def destroy
 
-		db = Product.find(params[:id])
-		db.destroy
+		
+		@collitemid = params[:id]
+		d = Product.find(@collitemid)
+		@iscurrent = d.current
+		@collection_name = d.class.to_s.downcase
+		d.destroy
 
-		go_to_redirect
+		@identifier = 'name'
+
+		brand = @current_user.brand
+		if @iscurrent 
+			@collection = brand.products.where(current: true)
+			@no_item_message = 'No Current Products'
+		else
+			@collection = brand.products.where(current: false)
+			@no_item_message = 'No Past Products'
+		end
+
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 

@@ -1,5 +1,6 @@
 <% urlstring = cb.class.name.tableize.singularize + "_url(cb" + ((controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? ", :ob => 'true'" : "") + ")" %>
 
+	<div id="delete-collitem-<%= cb.id %>">
 		<a class="anchor" id="a-<%= cb.id %>"></a>
 		<div class="rowitem">
 		<div class="row">
@@ -18,18 +19,19 @@
 				    <span class="right" style="color: #4D94DB;">(click to edit)</span></a>
 				    <div id="a_<%= cb.id %>" class="content <%= collection_item_active(cb.id) %>">
 
-							<%= form_for cb do |f| %>
+							<%= form_for cb, remote: true do |f| %>
 							<%= (controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? (hidden_field_tag :ob, "true") : "" %>
 							<div class="updateform">
 								<%= render partial: "shared/collections/#{cb.class.name.tableize}", locals: {f: f, cb: cb} %>
 							</div>
 							<div class="row">
-								<div class="medium-8 columns">
-									&nbsp;
+								<div class="medium-7 columns">
 								</div>
-								<div class="medium-4 columns text-right">
-									<%= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-									<%= link_to 'Delete', eval(urlstring), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.send(identifier)}?"}%>
+								<div class="medium-5 columns text-right">
+									<span id="update-collitem-<%= cb.id %>" style="color: red;"></span> &nbsp;
+									<%= f.submit 'Update', class: "button tiny" %>
+									<%#= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+									<%= link_to 'Delete', eval(urlstring), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.send(identifier)}?", :remote => true }, class: "button tiny" %>
 								</div>
 							</div>
 							<% end %>
@@ -55,15 +57,15 @@
 							</div>
 							<div class="row">
 								<div class="small-6 columns">
-									<%= form_for(ProductPhoto.new) do |f| %>
+									<%= form_for ProductPhoto.new do |f| %>
 										<%= hidden_field_tag 'product_id', cb.id %>
 										<%= (controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? (hidden_field_tag :ob, "true") : "" %>
-							      <div class="row collapse">
+							      <div class="row">
 							        <div class="small-6 columns">
-							          <%= f.file_field :photo, label: "&nbsp;".html_safe, accept: 'image/png,image/gif,image/jpeg' %>
+								          <%= f.file_field :photo, label: 'Select Product Photo', accept: 'image/png,image/gif,image/jpeg' %>
 							        </div>
 							        <div class="small-6 columns">
-							          <%= f.submit 'Add Product Photo', :class=> 'button small postfix' %>
+							          <%= f.submit 'Add Product Photo', :class=> 'button tiny' %>
 							        </div>
 							      </div>
 
@@ -82,3 +84,4 @@
 			</div>
 		</div>
 		</div>
+	</div>

@@ -3,16 +3,27 @@ class PressHitsController < ApplicationController
 	def create
 		u = @current_user.distributor || @current_user.brand
 		new_item = u.press_hits.create!(press_hit_parameters)
+		@identifier = 'source'
+		@new_item_id = new_item.id
+		
+		@collection = u.press_hits
 
-		go_to_redirect(new_item.id.to_s)
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 
 	def update
 		u = @current_user.distributor || @current_user.brand
-		u.press_hits.find(params[:id]).update!(press_hit_parameters)
+		@collitem = u.press_hits.find(params[:id])
+		@collitem.update!(press_hit_parameters)
 
-		go_to_redirect(params[:id])
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 
@@ -28,10 +39,21 @@ class PressHitsController < ApplicationController
 
 	def destroy
 
-		d = PressHit.find(params[:id])
+		u = @current_user.distributor || @current_user.brand
+
+		@collitemid = params[:id]
+		d = PressHit.find(@collitemid)
+		@collection_name = d.class.to_s.downcase
 		d.destroy
 
-		go_to_redirect
+		@identifier = 'source'
+		@collection = u.press_hits
+		@no_item_message = 'No Press Hits'
+
+		respond_to do |format|
+			format.html
+			format.js
+		end 
 
 	end
 

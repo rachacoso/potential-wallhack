@@ -1,0 +1,8 @@
+<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+<% cb.product_photos.each do |photo| %>
+		<li>
+			<%= image_tag photo.photo.url(:small) %>
+			<%= link_to 'X', product_photo_delete_url(photo), :method => 'delete', data: { :confirm => 'Are you sure you want to delete this photo?', remote: true}  %>
+		</li>
+<% end %>
+</ul>

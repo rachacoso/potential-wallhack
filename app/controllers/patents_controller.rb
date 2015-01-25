@@ -6,7 +6,7 @@ class PatentsController < ApplicationController
 		@identifier = 'product'
 		@new_item_id = new_item.id
 		
-		@collection = u.trade_shows
+		@collection = u.patents
 
 		respond_to do |format|
 			format.html
@@ -28,7 +28,6 @@ class PatentsController < ApplicationController
 	end
 
 	def destroy
-
 
 		u = @current_user.distributor || @current_user.brand
 

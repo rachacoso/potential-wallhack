@@ -12,25 +12,33 @@
 
 	<div class="medium-4 columns hide-for-small-only">
 		<div class="row">
-			<div class="small-12 columns text-center">
-				<%= image_tag "/images/marketplace.svg" %>
+			<div class="small-12 columns">
+				<ul class="breadcrumbs marketplace">
+				  <li class="current"><img src="/images/logos_marketplace.svg" height="30" width="30" alt="Marketplace" /> <%= link_to "MARKETPLACE", "#" %></li>
+				</ul>
 			</div>
 		</div>
 	</div>
 
 	<div class="medium-4 columns hide-for-small-only">
 		<div class="row">
-			<div class="small-12 columns text-center">
-				<%= image_tag "/images/insights.svg" %>
+			<div class="small-12 columns">
+				<ul class="breadcrumbs insights">
+				  <li class="current"><img src="/images/logos_insights.svg" height="30" width="30" alt="Insights" /> <%= link_to "INSIGHTS", "#" %></li>
+				</ul>
 			</div>
 		</div>
 	</div>
 
 	<div class="medium-4 columns hide-for-small-only">
-		<div class="row" id="dashboard-agency-head">
-			<div class="small-12 columns text-center">
-				<%= image_tag "/images/agency.svg" %>
+		<div class="inactive" id="dashboard-agency-head">
+		<div class="row">
+			<div class="small-12 columns">
+				<ul class="breadcrumbs agency">
+				  <li class="current"><img src="/images/logos_agency.svg" height="30" width="30" alt="Agency" /> <%= link_to "AGENCY", "#" %></li>
+				</ul>
 			</div>
+		</div>
 		</div>
 	</div>
 
@@ -69,7 +77,7 @@
 			</div>
 		</div>
 
-		<div id="dashboard-agency-content" data-equalizer-watch>		
+		<div id="dashboard-agency-content" class="inactive" data-equalizer-watch>		
 			<%= render "agency" %>
 		</div>
 	</div>

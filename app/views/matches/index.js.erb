@@ -4,19 +4,25 @@ $('#match-list').hide().html("<%= j (render 'brand_match_list') %>").fadeIn(500)
 
 <% case action_name %>
 <% when "index" %>
+
+	<% if @resetfilter == true %>
+	$('.filterform :checkbox').prop('checked', true); 
+	<% end %>
+
 	$('#filter-form-container').fadeIn(500);
-	$('.match-groups').removeClass('info').addClass('secondary');
-	$('#all-matches-url').removeClass('secondary').addClass('info');
+	$('.match-groups').removeClass('primary').addClass('secondary');
+	$('#all-matches-url').removeClass('secondary').addClass('primary');
+
 <% when "index_saved_matches" %>
 	$('#filter-form-container').fadeOut(500);
-	$('.match-groups').removeClass('info').addClass('secondary');
-	$('#saved-matches-url').removeClass('secondary').addClass('info');
+	$('.match-groups').removeClass('primary').addClass('secondary');
+	$('#saved-matches-url').removeClass('secondary').addClass('primary');
 <% when "index_contacted_matches" %>
 	$('#filter-form-container').fadeOut(500);
-	$('.match-groups').removeClass('info').addClass('secondary');
-	$('#outgoing-matches-url').removeClass('secondary').addClass('info');
+	$('.match-groups').removeClass('primary').addClass('secondary');
+	$('#outgoing-matches-url').removeClass('secondary').addClass('primary');
 <% when "index_incoming_matches" %>
 	$('#filter-form-container').fadeOut(500);
-	$('.match-groups').removeClass('info').addClass('secondary');
-	$('#incoming-matches-url').removeClass('secondary').addClass('info');
+	$('.match-groups').removeClass('primary').addClass('secondary');
+	$('#incoming-matches-url').removeClass('secondary').addClass('primary');
 <% end %>

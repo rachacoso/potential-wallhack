@@ -4,8 +4,16 @@ var bgDefaultColor = "#FFFFFF";
 
 $( document ).ready(function() {
 
+// MODIFICATIONS FOR NO SVG SUPPORT
+  if(!Modernizr.svg) {
+    /* swap png for svgs */
+    $('img[src*="svg"]').attr('src', function () {
+    return $(this).attr('src').replace('.svg', '.png');
+    });
+  }
+
 // for autocomplete
-var countriesArray = $.map(countries, function (value, key) { return { value: value, data: key }; });
+  var countriesArray = $.map(countries, function (value, key) { return { value: value, data: key }; });
 
 // Background Img
 	if (hasBG) {
@@ -187,17 +195,6 @@ var countriesArray = $.map(countries, function (value, key) { return { value: va
           this.checked = false; //deselect all checkboxes with id "sectors_other"                       
       });        
   });    
-
-
-
-  // MODIFICATIONS FOR NO SVG SUPPORT
-  if(!Modernizr.svg) {
-    /* swap png for svgs */
-    $('img[src*="svg"]').attr('src', function () {
-    return $(this).attr('src').replace('.svg', '.png');
-    });
-  }
-
 
 
   // ADDING CUSTOM CHANNELS

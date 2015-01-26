@@ -1,7 +1,7 @@
 
 
 <% unless @messages_unread > 0 || @new_contact_messages > 0 %>
-	$('#unread-message-count-badge').hide()
+	$('#unread-message-badge').fadeOut(500)
 <% end %>	 
 
 <% if @messages_unread > 0 %>

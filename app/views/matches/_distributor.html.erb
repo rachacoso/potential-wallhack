@@ -12,7 +12,7 @@
 
 
 <div class="medium-3 pull-9 columns <%= action_name == "index" ? "previewtile" : "" %>">
-
+<div id="filter-form-container">
 <% if action_name == "index" %>
 <div class="profile-outer-tile">
 	<h3><strong> Filters </strong></h3>
@@ -69,9 +69,6 @@
 	<% end %>
 </div>
 <% end %>
-
-
+</div> <!-- #filter-form-container -->
 </div> <!-- /.medium-3 pull-9 columns-->
-
-
 </div> <!-- /.row -->

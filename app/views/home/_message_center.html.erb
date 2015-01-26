@@ -20,8 +20,6 @@
 			<% end %>
 			</div>
 		</div>
-	<% else %>
-		<p><small>No unread messages</small></p>
 	<% end %>
 	
 	<% if @new_contact_messages > 0 %>
@@ -40,8 +38,6 @@
 			<% end %>
 			</div>
 		</div>
-	<% else %>
-		<p><small>No incoming contact requests</small></p>
 	<% end %>
 
 	<% if @outgoing_requests_list.count > 0 %>
@@ -60,8 +56,10 @@
 			<% end %>
 			</div>
 		</div>
-	<% else %>
-		<p><small>No outgoing contact requests</small></p>
+	<% end %>
+
+	<% unless @messages_unread > 0 || @new_contact_messages > 0 || @outgoing_requests_list.count > 0 %>
+		<h4>No Messages</h4>
 	<% end %>
 
 </div>

@@ -111,6 +111,10 @@ class MatchesController < ApplicationController
 
 		end
 
+		if params[:fr] == 'true'
+			@resetfilter = true
+		end
+
 		respond_to do |format|
 			format.html
 			format.js

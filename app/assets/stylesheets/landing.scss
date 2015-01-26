@@ -988,10 +988,9 @@ top: 10px;
   // overflow-y: scroll;
 }
 
-#unread-message-count-badge {
-  font-weight: 700;
+#unread-message-badge {
+  font-weight: 900;
   font-size: 1.5em;
-  margin-right: 0.5em;
   color: red !important;
 }
 
@@ -1092,34 +1091,6 @@ top: 10px;
 
 }
 
-#dashboard-marketplace-content, #dashboard-insights-content, #dashboard-agency-content {
-  padding: rem-calc(5) rem-calc(5) 0 rem-calc(5);
-}
-#dashboard-marketplace-content {
-  background-color: $landing-blue;
-}
-#dashboard-insights-content {
-  background-color: $landing-yellow;
-}
-#dashboard-agency-content {
-  background-color: $landing-middle-gray;
-  opacity: 0.4;
-}
-#dashboard-agency-head {
-  opacity: 0.4;
-}
-
-#menu-dashboard {
-  color: $landing-orange;
-  font-weight: 700;
-  .active & {
-    color: $landing-dark-gray;
-  }
-}
-
-#menu-dashboard a:hover {
-  color: red !important;
-}
 
 
 // STYLE FILE UPLOAD
@@ -1138,4 +1109,53 @@ top: 10px;
   cursor: pointer;
   opacity: 0;
   filter: alpha(opacity=0);
+}
+
+// DASHBOARD STYLES
+
+$dashboard-marketplace-color: scale-color($landing-blue, $lightness: 50%);
+$dashboard-insights-color: scale-color($landing-yellow, $lightness: 40%);
+$dashboard-agency-color: scale-color($landing-middle-gray, $lightness: 50%);
+
+#dashboard-marketplace-content, #dashboard-insights-content, #dashboard-agency-content {
+  padding: rem-calc(5) rem-calc(5) 0 rem-calc(5);
+}
+#dashboard-marketplace-content {
+  background-color: $dashboard-marketplace-color;
+}
+#dashboard-insights-content {
+  background-color: $dashboard-insights-color;
+}
+#dashboard-agency-content {
+  background-color: $dashboard-agency-color;
+  &.inactive {
+    opacity: 0.4;
+  }
+}
+#dashboard-agency-head {
+  &.inactive {
+    opacity: 0.4;
+  }
+}
+
+#menu-dashboard {
+  color: $landing-orange;
+  font-weight: 700;
+  .active & {
+    color: $landing-dark-gray;
+  }
+}
+
+#menu-dashboard a:hover {
+  color: red !important;
+}
+
+.breadcrumbs.marketplace {
+  background-color: $dashboard-marketplace-color;
+}
+.breadcrumbs.insights {
+  background-color: $dashboard-insights-color;
+}
+.breadcrumbs.agency {
+  background-color: $dashboard-agency-color;
 }

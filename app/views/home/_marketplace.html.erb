@@ -6,9 +6,8 @@
 
 			<%= render "message_center" %>
 
+			<h2 class="dashboard-section-title">Profile Center</h2>
 			<div class="panel">
-				<h2>Profile Center</h2>
-				<hr>
 				<% percentp = check_distributor_public_profile %>
 				Your <strong><%= link_to 'Public Profile', distributor_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> Complete!<br><br>
 				<div class="progress small-12 <%= percentp == 100 ? "success" : "" %>">
@@ -26,9 +25,8 @@
 				<small>[some info on your full profile]</small>
 			</div>
 
+			<h2 class="dashboard-section-title">Rating</h2>
 			<div class="panel">
-				<h2>Rating</h2>
-				<hr>
 				<small>You have <strong>3</strong> points of 6 total.</small>
 			</div>
 
@@ -47,10 +45,8 @@
 			<%= render "message_center" %>
 
 
-
+			<h2 class="dashboard-section-title">Profile Center</h2>
 			<div class="panel">
-				<h2>Profile Center</h2>
-				<hr>
 				<% percentp = check_brand_public_profile %>
 				Your <strong><%= link_to 'Public Profile', brand_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> Complete!<br><br>
 				<div class="progress small-12 <%= percentp == 100 ? "success" : "" %>">
@@ -67,11 +63,10 @@
 				<small>[some info on your full profile]</small>
 			</div>
 
+			<h2 class="dashboard-section-title">Rating</h2>
 			<div class="panel">
-				<h2>Rating</h2>
-				<hr>
 				<small>You have <strong>3</strong> points of 6 total.</small>
-				<h3>[Blah blah here about how to improve your rating]</h3>
+				<p>[Blah blah here about how to improve your rating]</p>
 			</div>
 	
 		</div>

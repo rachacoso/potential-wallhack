@@ -4,81 +4,90 @@
 <% content_for :javascript_foot do %>
 	<%= javascript_tag do %>
 
+		$('#dashboard-marketplace-header').on('click', function(e) {
+			$('#dashboard-marketplace-container').hide().removeClass('medium-4 medium-2').addClass('medium-8').fadeIn(500);
+			$('#dashboard-insights-container, #dashboard-agency-container').hide().removeClass('medium-4 medium-8 medium-centered').addClass('medium-2').fadeIn(500);
+			$('#dashboard-insights-content-inner, #dashboard-agency-content-inner').hide();
+			$('#dashboard-marketplace-content-inner').fadeIn(500);
+			$(document).foundation();
+			$(document).foundation('equalizer', 'reflow');			
+		});
+
+		$('#dashboard-insights-header').on('click', function(e) {
+			$('#dashboard-insights-container').hide().removeClass('medium-4 medium-2').addClass('medium-8').fadeIn(500);
+			$('#dashboard-marketplace-container, #dashboard-agency-container').hide().removeClass('medium-4 medium-8').addClass('medium-2').fadeIn(500);
+			$('#dashboard-marketplace-content-inner, #dashboard-agency-content-inner').hide();
+			$('#dashboard-insights-content-inner').fadeIn(500);
+			$(document).foundation();
+			$(document).foundation('equalizer', 'reflow');			
+		});
+
+
+		$('#dashboard-agency-header').on('click', function(e) {
+			$('#dashboard-agency-container').hide().removeClass('medium-4 medium-2').addClass('medium-8').fadeIn(500);
+			$('#dashboard-insights-container, #dashboard-marketplace-container').hide().removeClass('medium-4 medium-8').addClass('medium-2').fadeIn(500);
+			$('#dashboard-insights-content-inner, #dashboard-marketplace-content-inner').hide();
+			$('#dashboard-agency-content-inner').fadeIn(500);
+			$(document).foundation();
+			$(document).foundation('equalizer', 'reflow');
+		});
+
+
 	<% end %>
 <% end %>
 
+<div class-"row">
+	<div class="small-12 columns text-center">
+		<h4><small>[CLICK ON HEADER TO EXPAND SECTION]</small></h4>
+	</div>
+</div>
+<div class="row" data-equalizer>
 
-<div class="row">
-
-	<div class="medium-4 columns hide-for-small-only">
+	<div class="medium-4 columns" id="dashboard-marketplace-container">
 		<div class="row">
-			<div class="small-12 columns">
+			<div class="small-12 columns" id="dashboard-marketplace-header">
 				<ul class="breadcrumbs marketplace">
 				  <li class="current"><img src="/images/logos_marketplace.svg" height="30" width="30" alt="Marketplace" /> <%= link_to "MARKETPLACE", "#" %></li>
 				</ul>
+
+			</div>
+		</div>
+		<div id="dashboard-marketplace-content" data-equalizer-watch>
+			<div id="dashboard-marketplace-content-inner">
+			<%= render "marketplace" %>
 			</div>
 		</div>
 	</div>
 
-	<div class="medium-4 columns hide-for-small-only">
+	<div class="medium-4 columns" id="dashboard-insights-container">
 		<div class="row">
-			<div class="small-12 columns">
+			<div class="small-12 columns" id="dashboard-insights-header">
 				<ul class="breadcrumbs insights">
 				  <li class="current"><img src="/images/logos_insights.svg" height="30" width="30" alt="Insights" /> <%= link_to "INSIGHTS", "#" %></li>
 				</ul>
 			</div>
 		</div>
+
+		<div id="dashboard-insights-content" data-equalizer-watch>
+			<div id="dashboard-insights-content-inner">
+			<%= render "insights" %>
+			</div>
+		</div>
 	</div>
 
-	<div class="medium-4 columns hide-for-small-only">
-		<div class="inactive" id="dashboard-agency-head">
+	<div class="medium-4 columns" id="dashboard-agency-container">
 		<div class="row">
-			<div class="small-12 columns">
+			<div class="small-12 columns" id="dashboard-agency-header">
 				<ul class="breadcrumbs agency">
 				  <li class="current"><img src="/images/logos_agency.svg" height="30" width="30" alt="Agency" /> <%= link_to "AGENCY", "#" %></li>
 				</ul>
 			</div>
 		</div>
-		</div>
-	</div>
 
-</div>
-
-<div class="row" data-equalizer>
-
-	<div class="medium-4 columns">
-		<div class="row hide-for-medium-up">
-			<div class="small-12 columns text-center">
-				<%= image_tag "/images/marketplace.svg" %>
-			</div>
-		</div>
-		<div id="dashboard-marketplace-content" data-equalizer-watch>
-		<%= render "marketplace" %>
-		</div>
-	</div>
-
-	<div class="medium-4 columns">
-		<div class="row hide-for-medium-up">
-			<div class="small-12 columns text-center">
-				<%= image_tag "/images/insights.svg" %>
-			</div>
-		</div>
-
-		<div id="dashboard-insights-content" data-equalizer-watch>
-			<%= render "insights" %>
-		</div>
-	</div>
-
-	<div class="medium-4 columns">
-
-		<div class="row hide-for-medium-up">
-			<div class="small-12 columns text-center">
-				<%= image_tag "/images/agency.svg" %>
-			</div>
-		</div>
-
-		<div id="dashboard-agency-content" class="inactive" data-equalizer-watch>		
+		<div id="dashboard-agency-content" data-equalizer-watch>
+			<div id="dashboard-agency-content-inner">	
 			<%= render "agency" %>
+			</div>
 		</div>
 	</div>
 

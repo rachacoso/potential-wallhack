@@ -1159,3 +1159,11 @@ $dashboard-agency-color: scale-color($landing-middle-gray, $lightness: 50%);
 .breadcrumbs.agency {
   background-color: $dashboard-agency-color;
 }
+
+.dashboard-section-title {
+  font-weight: 300;
+  padding-left: rem-calc(3);
+}
+#dashboard-marketplace-header, #dashboard-insights-header, #dashboard-agency-header {
+  cursor: pointer;
+}

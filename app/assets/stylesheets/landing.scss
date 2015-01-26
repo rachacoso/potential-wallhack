@@ -408,7 +408,7 @@ input[type=radio]+ label:active  {
     background-color: scale-color($input-background-color, $lightness: 80%);
     border: 1px solid scale-color($input-background-color, $lightness: 30%);
     // background-color:#969696;
-    // border-color: #ddd;
+    // border-color: #ddd;    
     color: #7f7f7f;
     width: 100%;
   }
@@ -457,10 +457,9 @@ input[type=radio]+ label:active  {
     transition: border 0.5s;  
     margin: 2px;
     padding: 4px 12px;
-    background-color: scale-color($input-background-color, $lightness: 80%);
-    border: 1px solid scale-color($input-background-color, $lightness: 30%);
-    // background-color:#969696;
-    // border-color: #ddd;
+    background-color: scale-color($landing-blue, $lightness: 80%);
+    border: 1px solid scale-color($landing-blue, $lightness: 30%);
+    border-radius: 10px;
     color: #7f7f7f;
     width: 100%;
     font-size: 0.65em;
@@ -476,8 +475,9 @@ input[type=radio]+ label:active  {
   */
   input[type=checkbox]:checked + label { 
     background-image: none;
-    background-color: scale-color($input-background-color, $lightness: 30%);
-    border: 1px solid scale-color($input-background-color, $lightness: -80%);
+    background-color: scale-color($landing-blue, $lightness: 30%);
+    border: 1px solid scale-color($landing-blue, $lightness: -20%);
+    border-radius: 10px;
     color: #000;
     // background-color: #e7e7e7;
   }

@@ -3,57 +3,11 @@
 <div class="row">
 
 <div class="medium-9 push-3 columns">
+<div id="match-list">
 
-<% if @matches.blank? %>
-	<div class="row">
-		<div class="small-10 small-centered columns previewtile text-center">
-			<% if action_name == "index" %>
-				<h2>No Brands</h2> <br>Please try altering your filter selections.
-			<% elsif action_name == "index_saved_matches" %>
-				<h2>No Saved Brands</h2> <br>You can save brand matches on the <%= link_to 'All Brands', all_matches_url %> screen.
-			<% elsif action_name == "index_contacted_matches" %>
-				<h2>You haven't contacted any brands</h2> <br>You can contact brands on the <br><%= link_to 'All Brands', all_matches_url %> or <%= link_to 'Saved Brands', saved_matches_url %> screens.
-			<% elsif action_name == "index_incoming_matches" %>
-				<h2>No brands have contacted you</h2> <br>Make sure <%= link_to 'Your Profile', distributor_full_profile_url %> is complete.
-			<% end %>
-		</div>
-	</div>
-<% else %>
+<%= render "distributor_match_list" %>
 
-	<div class="row">
-		<div class="small-12 columns">
-
-			<table>
-				  <thead>
-				  	<tr><th width="800" colspan="2">
-							<%= render "counts" %>
-				  	</th></tr>
-				  	<tr>
-				  		<th>
-								Company
-					  	</th>
-				  		<th>
-								Country of Origin
-					  	</th>
-					  </tr>				  	
-				  </thead>
-			  	<tbody>
-					<% @matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
-					<tr id="pot_<%= match.id %>">
-						<td>
-
-						<%= render partial: "shared/profile/profile_list_tile", locals: {match: match} %>
-
-						</td>
-						<td><%= match.country_of_origin %></td>
-					</tr>
-					<% end %>
-					</tbody>
-		</table>
-		</div>
-	</div>
-<% end %>
-
+</div><!--/#match-list -->	
 </div> <!-- /.medium-9 push-3 columns-->
 
 
@@ -62,7 +16,7 @@
 <% if action_name == "index" %>
 <div class="profile-outer-tile">
 	<h3><strong> Filters </strong></h3>
-	<%= form_tag all_matches_url, method: 'post' do %>
+	<%= form_tag all_matches_url, id: 'filters-form', method: 'post', remote: true do %>
 	<div class="row filterform">
 		<div class="small-12 columns">
 			<strong><small>Countries</small></strong>					

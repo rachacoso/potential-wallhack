@@ -15,6 +15,7 @@ var countriesArray = $.map(countries, function (value, key) { return { value: va
 		$( 'body' ).css( "background", bg );
 	};
 
+  // FOR FORM COUNTRY AND DATE FIELDS
   initialize();
 
 
@@ -86,6 +87,11 @@ var countriesArray = $.map(countries, function (value, key) { return { value: va
 
 
   // MATCHING FILTERS
+
+  // SUBMIT FORM ON FILTER SELECT
+  $('.filterform :checkbox').on('click', function(e) {
+    $('#filters-form').submit();
+  });
 
   //Countries
   $('#selectallcountries').click(function(event) {  //on click 
@@ -193,6 +199,21 @@ var countriesArray = $.map(countries, function (value, key) { return { value: va
   }
 
 
+
+  // ADDING CUSTOM CHANNELS
+  $('#btnSave').click(function() {
+    addCheckbox($('#ccName').val());
+  });
+
+  $('#customchannellist').on( "click", "input", function() {
+    $( this ).parent('span').remove();
+  });
+
+  $('#ccName').on('click focusin', function() {
+    this.value = '';
+  });
+
+
   // LOGO PREVIEW
   $("#brand_logo").change(function(){
       if (this.files && this.files[0]) {
@@ -217,37 +238,6 @@ var countriesArray = $.map(countries, function (value, key) { return { value: va
 
 
 
-
-
-// Adding Custom Channels
-
-$(document).ready(function() {
-
-    $('#btnSave').click(function() {
-      addCheckbox($('#ccName').val());
-    });
-
-		$('#customchannellist').on( "click", "input", function() {
-		  $( this ).parent('span').remove();
-		});
-
-		$('#ccName').on('click focusin', function() {
-	    this.value = '';
-		});
-
-});
-
-function addCheckbox(name) {
-	var container = $('#customchannellist');
-	var inputs = container.find('input');
-	var id = inputs.length+1;
-
-	$('<span />', { id: 'ccspan'+id }).appendTo(container)
-	$('<input />', { type: 'checkbox', id: 'cb'+id, value: name, name: 'customchannels['+id+']', checked: 'checked', class: 'customchannelinput' }).appendTo( '#' + 'ccspan' + id );
-	$('<label />', { 'for': 'cb'+id, text: name }).appendTo( '#' + 'ccspan' + id );
-}
-
-
 $(document).foundation({
   accordion: {
     // specify the class used for accordion panels
@@ -261,6 +251,16 @@ $(document).foundation({
     toggleable: true
   }
 });
+
+function addCheckbox(name) {
+	var container = $('#customchannellist');
+	var inputs = container.find('input');
+	var id = inputs.length+1;
+
+	$('<span />', { id: 'ccspan'+id }).appendTo(container)
+	$('<input />', { type: 'checkbox', id: 'cb'+id, value: name, name: 'customchannels['+id+']', checked: 'checked', class: 'customchannelinput' }).appendTo( '#' + 'ccspan' + id );
+	$('<label />', { 'for': 'cb'+id, text: name }).appendTo( '#' + 'ccspan' + id );
+}
 
 function initialize () {
   // Date Picker
@@ -295,9 +295,6 @@ function initialize () {
         })
       .select();
     });
-
-
-
 
   $('.country-autocomplete').devbridgeAutocomplete({
     lookup: countriesArray,

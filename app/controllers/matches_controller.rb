@@ -111,6 +111,11 @@ class MatchesController < ApplicationController
 
 		end
 
+		respond_to do |format|
+			format.html
+			format.js
+		end
+
   end
 
  	def index_saved_matches

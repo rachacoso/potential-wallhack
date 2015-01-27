@@ -113,13 +113,20 @@
 
 		  <!-- User Nav Section -->
 	    <li class="has-dropdown">
-	      <a href="#">   	
+	    	
+	      <a href="#">
+	      	<span class="show-for-large-up">
 	      	<% if @current_user.distributor %>
 						(D) <%= @current_user.distributor.company_name.blank? ? "Welcome" : @current_user.distributor.company_name %>
 					<% else %>
 						(B) <%= @current_user.brand.company_name.blank? ? "Welcome" : @current_user.brand.company_name %>
 					<% end %>
+					</span>
+					<span class="hide-for-large-up">
+					Welcome
+			    </span>	
 	      </a>
+
 	      <ul class="dropdown">       	
 					<li>
 						<%= link_to 'Your Account', "#" %>

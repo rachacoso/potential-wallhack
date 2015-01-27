@@ -1167,3 +1167,6 @@ $dashboard-agency-color: scale-color($landing-middle-gray, $lightness: 50%);
 #dashboard-marketplace-header, #dashboard-insights-header, #dashboard-agency-header {
   cursor: pointer;
 }
+#dashboard-marketplace-container, #dashboard-insights-container, #dashboard-agency-container {
+  margin-bottom: rem-calc(20);
+}

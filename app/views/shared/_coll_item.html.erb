@@ -1,5 +1,5 @@
 <% urlstring = cb.class.name.tableize.singularize + "_url(cb" + (ob ? ", :ob => 'true'" : "") + ")" %>
-
+<% ob ||= false %>
 	<div id="delete-collitem-<%= cb.id %>">
 		<a class="anchor" id="a-<%= cb.id %>"></a>
 		<div class="rowitem">

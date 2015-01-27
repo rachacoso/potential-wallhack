@@ -41,36 +41,17 @@
 				</div>	
 			</div>			
 
-			<% if !@export_countries.empty? %>
-				<% @export_countries.each do |cb| %>
-				<div class="rowitem">			
-				<div class="row">
-					<div class="medium-12 columns">
-						<%= form_for cb do |f| %>
-						
-							<div class="row">
-								<div class="medium-8 columns text-right">
-									<%= cb.country %>
-								</div>
-								<div class="medium-4 columns text-left">
-									<%= link_to 'Delete', export_country_url(cb, :ob => true), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.country}?"}%>
-								</div>
-							</div>
+			<div id="export-countries-list">
 
-						<% end %>
-					</div>
-				</div>
-				</div>
-				<% end %>
-			<% else %>
-				<h5>( No Countries )</h5>
-			<% end %>
+			<%= render "shared/profile/components/export_countries_list" %>
+			 
+			</div> <!-- /.export-countries-list -->
 
 				<div class="rowitem">
 				<div class="row">
 					<div class="medium-12 columns">
 						<hr>
-						<%= form_for @new_export_country, :html => { :id => "new_export_country" } do |f| %>
+						<%= form_for @new_export_country, :html => { :id => "new_export_country" }, remote: true do |f| %>
 						<%= hidden_field_tag :ob, 'true' %>
 						<div class="rowheadback addnew">
 							<div class="row">
@@ -87,7 +68,8 @@
 								<%= f.text_field :country, class: "country-autocomplete-multi", label: false, placeholder: 'Country' %>
 							</div>
 							<div class="medium-4 columns text-left">
-								<%= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %>
+								<%= f.submit "ADD", class: "tiny button submit" %>
+								<%#= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %>
 							</div>
 						</div>				
 						<% end %>

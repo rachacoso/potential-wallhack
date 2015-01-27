@@ -17,37 +17,33 @@
 
 
 <div class="row">
-<div class="medium-5 push-7 columns">
-	<ul class="button-group even-3">
-  <li><%= link_to 'PUBLIC Profile', brand_public_profile_url, class: "tiny button secondary" %></li>
-  <li><%= link_to 'FULL Profile', "#", class: "tiny button info"%></li>
-  <li><%= link_to 'EDIT Profile', brand_url, class: "tiny button secondary" %></li>
-  </ul>
-</div>
-</div>
-
-
-<div class="row">
-<div class="small-12 columns">
-	<div data-alert class="alert-box secondary radius">
-		<div class="row">
-			<div class="small-6 columns">
-					<p>This is your Full Profile.<br>  [Stuff here about full profiles]</p>
-			</div>
-			<div class="small-6 columns">					
-				<div class="row">
-					<div class="small-12 columns text-center">
-						<% percent = check_brand_full_profile %>
-						<div class="progress small-12 <%= percent == 100 ? "success" : "" %>" style="margin: auto;">
-						  <span class="meter" style="width: <%= percent %>%"></span>
+	<div class="medium-5 push-7 columns">
+		<ul class="button-group even-3">
+	  <li><%= link_to 'PUBLIC Profile', brand_public_profile_url, class: "tiny button secondary" %></li>
+	  <li><%= link_to 'FULL Profile', "#", class: "tiny button info"%></li>
+	  <li><%= link_to 'EDIT Profile', brand_url, class: "tiny button secondary" %></li>
+	  </ul>
+	</div>
+	<div class="medium-7 pull-5 columns">
+		<div data-alert class="alert-box secondary radius">
+			<div class="row">
+				<div class="small-6 columns">
+						<p>This is your Full Profile.<br>  [Stuff here about full profiles]</p>
+				</div>
+				<div class="small-6 columns">					
+					<div class="row">
+						<div class="small-12 columns text-center">
+							<% percent = check_brand_full_profile %>
+							<div class="progress small-12 <%= percent == 100 ? "success" : "" %>" style="margin: auto;">
+							  <span class="meter" style="width: <%= percent %>%"></span>
+							</div>
+							<small>Your Full Profile is <%= percent == 100 ? "" : "#{percent}%" %> Complete!</small>
 						</div>
-						<small>Your Full Profile is <%= percent == 100 ? "" : "#{percent}%" %> Complete!</small>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 
 	<div class="row">

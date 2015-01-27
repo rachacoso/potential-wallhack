@@ -53,7 +53,7 @@ class DistributorBrandsController < ApplicationController
 			@collection = distributor.distributor_brands.where(current: true)
 			@no_item_message = 'No Current Distributor Brands'
 		else
-			@collection = brand.distributor_brands.where(current: false)
+			@collection = distributor.distributor_brands.where(current: false)
 			@no_item_message = 'No Past Distributor Brands'
 		end
 

@@ -6,6 +6,7 @@ class TradeShowsController < ApplicationController
 		@identifier = 'name'
 		@new_item_id = new_item.id
 		@collection = u.trade_shows
+
 		respond_to do |format|
 			format.html
 			format.js

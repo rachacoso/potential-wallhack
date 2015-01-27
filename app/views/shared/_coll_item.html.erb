@@ -1,5 +1,5 @@
-<% urlstring = cb.class.name.tableize.singularize + "_url(cb" + (ob ? ", :ob => 'true'" : "") + ")" %>
 <% ob ||= false %>
+<% urlstring = cb.class.name.tableize.singularize + "_url(cb" + (ob ? ", :ob => 'true'" : "") + ")" %>
 	<div id="delete-collitem-<%= cb.id %>">
 		<a class="anchor" id="a-<%= cb.id %>"></a>
 		<div class="rowitem">
@@ -25,9 +25,7 @@
 								<%= render partial: "shared/collections/#{cb.class.name.tableize}", locals: {f: f, cb: cb} %>
 							</div>
 							<div class="row">
-								<div class="medium-7 columns">
-								</div>
-								<div class="medium-5 columns text-right">
+								<div class="small-12 columns text-right">
 									<span id="update-collitem-<%= cb.id %>" style="color: red;"></span> &nbsp;
 									<%= f.submit 'Update', class: "button tiny" %>
 									<%#= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>

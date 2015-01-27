@@ -9,6 +9,8 @@
 			$('#dashboard-insights-container, #dashboard-agency-container').hide().removeClass('medium-4 medium-8 medium-centered').addClass('medium-2').fadeIn(500);
 			$('#dashboard-insights-content-inner, #dashboard-agency-content-inner').hide();
 			$('#dashboard-marketplace-content-inner').fadeIn(500);
+			$('#marketplace-h2, #insights-h1, #agency-h1').hide();
+			$('#marketplace-h1, #insights-h2, #agency-h2').show();			
 			$(document).foundation();
 			$(document).foundation('equalizer', 'reflow');			
 		});
@@ -18,6 +20,8 @@
 			$('#dashboard-marketplace-container, #dashboard-agency-container').hide().removeClass('medium-4 medium-8').addClass('medium-2').fadeIn(500);
 			$('#dashboard-marketplace-content-inner, #dashboard-agency-content-inner').hide();
 			$('#dashboard-insights-content-inner').fadeIn(500);
+			$('#marketplace-h1, #insights-h2, #agency-h1').hide();
+			$('#marketplace-h2, #insights-h1, #agency-h2').show();
 			$(document).foundation();
 			$(document).foundation('equalizer', 'reflow');			
 		});
@@ -28,6 +32,8 @@
 			$('#dashboard-insights-container, #dashboard-marketplace-container').hide().removeClass('medium-4 medium-8').addClass('medium-2').fadeIn(500);
 			$('#dashboard-insights-content-inner, #dashboard-marketplace-content-inner').hide();
 			$('#dashboard-agency-content-inner').fadeIn(500);
+			$('#marketplace-h1, #insights-h1, #agency-h2').hide();
+			$('#marketplace-h2, #insights-h2, #agency-h1').show();			
 			$(document).foundation();
 			$(document).foundation('equalizer', 'reflow');
 		});
@@ -46,11 +52,13 @@
 	<div class="medium-4 columns" id="dashboard-marketplace-container">
 		<div class="row">
 			<div class="small-12 columns" id="dashboard-marketplace-header">
-				<ul class="breadcrumbs marketplace">
+				<ul class="breadcrumbs marketplace" id="marketplace-h1">
 				  <li class="current"><img src="/images/logos_marketplace.svg" height="30" width="30" alt="Marketplace" /> <%= link_to "MARKETPLACE", "#" %></li>
 				</ul>
-
-			</div>
+				<ul class="breadcrumbs marketplace" style="display: none;" id="marketplace-h2">
+				  <li class="current"><img src="/images/logos_marketplace.svg" height="30" width="30" alt="Marketplace" /></li>
+				</ul>
+			</div>			
 		</div>
 		<div id="dashboard-marketplace-content" data-equalizer-watch>
 			<div id="dashboard-marketplace-content-inner">
@@ -62,9 +70,12 @@
 	<div class="medium-4 columns" id="dashboard-insights-container">
 		<div class="row">
 			<div class="small-12 columns" id="dashboard-insights-header">
-				<ul class="breadcrumbs insights">
+				<ul class="breadcrumbs insights" id="insights-h1">
 				  <li class="current"><img src="/images/logos_insights.svg" height="30" width="30" alt="Insights" /> <%= link_to "INSIGHTS", "#" %></li>
 				</ul>
+				<ul class="breadcrumbs insights" style="display: none;" id="insights-h2">
+				  <li class="current"><img src="/images/logos_insights.svg" height="30" width="30" alt="Insights" /></li>
+				</ul>				
 			</div>
 		</div>
 
@@ -78,9 +89,12 @@
 	<div class="medium-4 columns" id="dashboard-agency-container">
 		<div class="row">
 			<div class="small-12 columns" id="dashboard-agency-header">
-				<ul class="breadcrumbs agency">
+				<ul class="breadcrumbs agency" id="agency-h1">
 				  <li class="current"><img src="/images/logos_agency.svg" height="30" width="30" alt="Agency" /> <%= link_to "AGENCY", "#" %></li>
 				</ul>
+				<ul class="breadcrumbs agency" style="display: none;" id="agency-h2">
+				  <li class="current"><img src="/images/logos_agency.svg" height="30" width="30" alt="Agency" /></li>
+				</ul>				
 			</div>
 		</div>
 

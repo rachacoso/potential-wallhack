@@ -24,11 +24,10 @@
 <br>
 <%= content_for?(:subnav) ? yield(:subnav) : "" %>
 
-<div class="row">
-<div class="small-11 columns small-centered">
+
 <%= yield %>
-</div>
-</div>
+
+
 <%= javascript_include_tag "application" %>
 <%= content_for?(:javascript_foot) ? yield(:javascript_foot) : "" %>
 </body>

@@ -92,13 +92,13 @@
 								</div>
 							</div>								
 
-
+<hr>
 
 							<div class="row">
 								<div class="small-12 columns">
 
 									<div class="preview-data">
-										<span class="preview-data-tile-title">Trade Shows</span><br>
+										<span class="preview-data-tile-title"><strong>Trade Shows</strong></span><br>
 
 											<% if profile.trade_shows.length > 0 %>
 												<% profile.trade_shows.each do |p| %>
@@ -120,13 +120,19 @@
 						<div class="small-12 columns">
 
 							<div class="preview-data">
-								<span class="preview-data-tile-title">Sales and Education</span><br><br>
-
-									<h6><small>Inside Sales Force:</small> <strong><%= profile.inside_sales_size %></strong></h6>
-									
-									
-									<h6><small>Outside Sales Force:</small> <strong><%= profile.outside_sales_size %></strong></h6>
-								
+								<span class="preview-data-tile-title"><strong>Sales and Education</strong></span><br>
+								<table width="100%">
+									<tr>
+										<td>
+											<h6>Inside Sales Force: <strong><%= profile.inside_sales_size %></strong></h6>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<h6>Outside Sales Force: <strong><%= profile.outside_sales_size %></strong></h6>
+										</td>
+									</tr>
+								</table>
 							</div>
 							
 						</div>
@@ -137,37 +143,55 @@
 						<div class="small-12 columns">
 							<div class="preview-data">
 
-								<span class="preview-data-tile-title">Marketing and PR</span><br><br>
+								<span class="preview-data-tile-title"><strong>Marketing and PR</strong></span><br>
 
-										<h6><small>Internal Marketing/ PR Team Size:</small> <strong><%= profile.internal_marketing_size %></strong></h6>
+								<table width="100%">
+									<tr>
+										<td>
+											<h6>Internal Marketing/ PR Team Size: <strong><%= profile.internal_marketing_size %></strong></h6>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<h6><strong><%= profile.employ_pr_agency ? "Has" : "No" %></strong> External Marketing/PR<h6>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<h6>Customer Database Size: <strong><%= profile.customer_database_size %></strong></h6>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="row">
+												<div class="small-4 columns">
+													<h6>Product Marketing:</h6>
+												</div><!--/.small-4-->
+												<div class="small-8 columns">
 
-										<h6><strong><%= profile.employ_pr_agency ? "Has" : "No" %></strong>
-										<small>External Marketing/PR</small><h6>
+													<div class="row">
+														<div class="small-6 columns">
+															<strong>
+															<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Print" ,p: profile.marketing_via_print}%>
+															<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Online" ,p: profile.marketing_via_online}%>
+															<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Email" ,p: profile.marketing_via_email}%>
+															</strong>
+														</div><!--/.small-6-->
+														<div class="small-6 columns">
+															<strong>
+															<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Outdoor" ,p: profile.marketing_via_outdoor}%>													
+															<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Events" ,p: profile.marketing_via_events}%>
+															<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Direct Mail" ,p: profile.marketing_via_direct_mail}%>
+															<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Classes" ,p: profile.marketing_via_classes}%>		
+															</strong>
+														</div><!--/.small-6-->
+													</div><!--/.row-->		
 
-										<h6><small>Customer Database Size:</small> <strong><%= profile.customer_database_size %></strong></h6>
-
-
-
-										<h6><small>Product Marketing:</small></h6>
-
-										<div class="row">
-											<div class="small-6 columns">
-												<strong>
-												<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Print" ,p: profile.marketing_via_print}%>
-												<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Online" ,p: profile.marketing_via_online}%>
-												<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Email" ,p: profile.marketing_via_email}%>
-
-												</strong>
-											</div><!--/.small-6-->
-											<div class="small-6 columns">
-												<strong>
-												<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Outdoor" ,p: profile.marketing_via_outdoor}%>													
-												<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Events" ,p: profile.marketing_via_events}%>
-												<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Direct Mail" ,p: profile.marketing_via_direct_mail}%>
-												<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Classes" ,p: profile.marketing_via_classes}%>		
-												</strong>
-											</div><!--/.small-6-->
-										</div><!--/.row-->
+												</div><!--/.small-8-->
+											</div><!--/.row-->
+										</td>
+									</tr>			
+								</table>										
 
 							</div>
 						</div>

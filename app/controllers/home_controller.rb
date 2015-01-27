@@ -8,6 +8,7 @@ class HomeController < ApplicationController
 		else
 			@newuser = User.new
 			@newuser.build_user_profile
+			render layout: "front"
 		end
 	end
 
@@ -28,7 +29,8 @@ class HomeController < ApplicationController
 
 		@incoming_requests_list = matches.where(accepted: false, initial_contact_by: @current_user.type_inverse?)
 		@outgoing_requests_list = matches.where(accepted: false, initial_contact_by: @current_user.type?)
-		
+
+
 	end
 
 

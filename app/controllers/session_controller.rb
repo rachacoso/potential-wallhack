@@ -3,7 +3,7 @@ class SessionController < ApplicationController
 	skip_before_action :require_login, only: [:new, :create]
 
 	def new
-		
+		render layout: "front"
 	end
 
 	def create

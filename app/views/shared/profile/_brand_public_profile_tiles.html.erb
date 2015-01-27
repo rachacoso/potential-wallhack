@@ -1,151 +1,113 @@
 
-<div class="profile-outer-tile">
+<div class="row">
+	<div class="small-8 small-centered columns">
+	
+		<div class="profile-outer-tile">
 
-
-	<div class="row">
-		<div class="medium-9 columns">
-
-		</div>
-		<div class="medium-3 columns">
-			
-		</div>
-	</div>
-
-
-	<ul class="small-block-grid-1 medium-block-grid-3">
-
-		<li>
 			<div class="row">
-				<div class="small-3 columns">
-					<%= render partial: "shared/svg/globe", locals: {nolabel: true} %>
-				</div>
-				<div class="small-9 columns">
-					<div class="preview-data">
-						<span class="preview-data-tile-title">Country of Origin</span><br>
-						<strong><%= profile.country_of_origin %></strong>
+				<div class="medium-4 columns">
+
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Country of Origin</span><br>
+								<strong><%= profile.country_of_origin %></strong>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-		</li>
 
-		<li>
-			<div class="row">
-				<div class="small-3 columns">
-					<%= render partial: "shared/svg/employees", locals: {nolabel: true} %>
-				</div>
-				<div class="small-9 columns">
-					<div class="preview-data">
-						<span class="preview-data-tile-title">Company Size</span><br>
-						<strong><%= CompanySize.find(profile.company_size).name rescue nil %></strong>
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Company Size</span><br>
+								<strong><%= CompanySize.find(profile.company_size).name rescue nil %></strong>
+							</div>
+						</div>
+					</div>	
+
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Year Established</span><br>
+								<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>	
-		</li>
 
-		<li>
-			<div class="row">
-				<div class="small-3 columns">
-					<%= render partial: "shared/svg/calendar", locals: {nolabel: true} %>
-				</div>
-				<div class="small-9 columns">
-					<div class="preview-data">
-						<span class="preview-data-tile-title">Year Established</span><br>
-						<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
-					</div>
-				</div>
-			</div>
-		</li>
-	<hr>
-	</ul>
+				</div><!--/.medium-4 columns -->
 
-	<ul class="small-block-grid-1 medium-block-grid-2">
+				<div class="medium-4 columns">
 
-
-		<li>
-			<div class="row">
-				<div class="small-2 columns">
-					<%= render partial: "shared/svg/sector", locals: {nolabel: true} %>
-				</div>
-				<div class="small-10 columns">
-					<div class="preview-data">
-						<span class="preview-data-tile-title">Sectors</span><br>
-						<% profile.sectors.each do |s| %>
-							<strong><%= s.name %></strong><br>
-						<% end %>
-					</div>
-				</div>
-			</div>
-		</li>
-
-		<li>
-			<div class="row">
-				<div class="small-2 columns">
-					<%= render partial: "shared/svg/channel", locals: {nolabel: true}%>
-				</div>
-				<div class="small-10 columns">
-					<div class="preview-data">
-						<span class="preview-data-tile-title">Channels</span><br>
-						<% profile.channels.each do |ch| %>
-							<strong><%= ch.name %></strong><br>
-						<% end %>
-						<% if profile.channel_capacities.where(channel_id: 0).length > 0 %>
-							<% profile.channel_capacities.where(channel_id: 0).each do |cch| %>
-								<strong><%= cch.custom_channel_name %> *</strong><br>
-							<% end %>
-							<small>(* Custom Channels)</small>
-						<% end %>
-					</div>
-				</div>
-			</div>	
-		</li>
-
-
-	</ul>
-	<ul class="small-block-grid-1 medium-block-grid-2">
-
-		<li>
-			<div class="row">
-				<div class="small-2 columns">
-					<%= render partial: "shared/svg/shipping", locals: {nolabel: true} %>
-				</div>
-				<div class="small-10 columns">
-					<div class="preview-data">
-						<span class="preview-data-tile-title">Countries of Export</span><br>
-						<strong>
-							<% profile.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
-								<%= ec.country %><br>
-							<% end %>
-						</strong>
-					</div>
-				</div>
-			</div>				
-
-		</li>
-
-		<li>
-			<div class="row">
-				<div class="small-2 columns">
-					<%= render partial: "shared/svg/factory", locals: {nolabel: true} %>
-				</div>
-				<div class="small-10 columns">
-					<div class="preview-data">
-						<span class="preview-data-tile-title">Countries of Manufacture</span><br>
-						<strong>
-
-							<% profile.products.distinct(:country_of_manufacture).sort_by(&:downcase).each do |country| %>
-								<% unless country.blank? %>
-									<%= country %><br>
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Sectors</span><br>
+								<% profile.sectors.each do |s| %>
+									<strong><%= s.name %></strong><br>
 								<% end %>
-							<% end %>
-
-						</strong>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>	
-		</li>
 
-	</ul>
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Channels</span><br>
+								<% profile.channels.each do |ch| %>
+									<strong><%= ch.name %></strong><br>
+								<% end %>
+								<% if profile.channel_capacities.where(channel_id: 0).length > 0 %>
+									<% profile.channel_capacities.where(channel_id: 0).each do |cch| %>
+										<strong><%= cch.custom_channel_name %> *</strong><br>
+									<% end %>
+									<small>(* Custom Channels)</small>
+								<% end %>
+							</div>
+						</div>
+					</div>	
+			
+				</div><!--/.medium-4 columns -->
 
-</div> <!-- /.profile-outer-tile -->
+				<div class="medium-4 columns">
+
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Countries of Export</span><br>
+								<strong>
+									<% profile.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
+										<%= ec.country %><br>
+									<% end %>
+								</strong>
+							</div>
+						</div>
+					</div>				
+
+
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Countries of Manufacture</span><br>
+								<strong>
+
+									<% profile.products.distinct(:country_of_manufacture).sort_by(&:downcase).each do |country| %>
+										<% unless country.blank? %>
+											<%= country %><br>
+										<% end %>
+									<% end %>
+
+								</strong>
+							</div>
+						</div>
+					</div>
+
+				</div><!--/.medium-4 columns -->
+
+			</div><!--/.row -->
+
+		</div> <!-- /.profile-outer-tile -->
+
+	</div>
+</div>
 
 

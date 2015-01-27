@@ -312,7 +312,7 @@ select.hover {
 
 
 // placeholder styling
-$placeholder-color: scale-color($input-background-color, $lightness: 70%);
+$placeholder-color: scale-color($input-background-color, $lightness: -30%);
 
 ::-webkit-input-placeholder {
    color: $placeholder-color;
@@ -625,18 +625,10 @@ $onboard-nav-radius: 4px;
 
 
 .profile-outer-tile {
-  border: 1px solid scale-color($link-color, $lightness: 70%);
+  border: 2px solid scale-color($landing-blue, $lightness: 70%);
   @include transparent(#fff, 0.95);
   margin: 0.5em;
 }
-
-.profile-outer-border-tile {
-  border-radius: 3px;
-  @include transparent(#fff, 0.95);
-  background: #e4e4e4;
-  margin-bottom: 2em;
-}
-
 
 
 .previewtile {
@@ -648,9 +640,9 @@ $onboard-nav-radius: 4px;
     padding: 0.25em 0.5em;
   }
   .preview-data {
-    border: 2px solid #547DB2;
-    border-radius: 4px;
-    font-size: 0.75em;
+    // border: 1px solid #547DB2;
+    // border-radius: 4px;
+    font-size: 0.85em;
     padding: 0.5em 1em;
   }
   .preview-data-title {

@@ -37,21 +37,21 @@
 								<div class="row collapse">
 									<%= f.fields_for :user_profile do |ff| %>
 									<div class="medium-6 columns">
-										<%= ff.text_field :firstname, :placeholder => 'First Name', :label => false  %>
+										<%= ff.text_field :firstname, :placeholder => 'FIRST NAME', :label => false  %>
 									</div>
 									<div class="medium-6 columns">
-										<%= ff.text_field :lastname, :placeholder => 'Last Name', :label => false  %>
+										<%= ff.text_field :lastname, :placeholder => 'LAST NAME', :label => false  %>
 									</div>
 									<% end %>
 								
 									<div class="medium-12 columns">
-									<%= f.text_field :email, :placeholder => 'Email (will be used as your login)', :label => false %>
+									<%= f.text_field :email, :placeholder => 'EMAIL (will be used as your login)', :label => false %>
 									</div>
 									<div class="medium-12 columns">
-									<%= f.password_field :password, :placeholder => 'Password', :label => false %>
+									<%= f.password_field :password, :placeholder => 'PASSWORD', :label => false %>
 									</div>
 									<div class="medium-12 columns">
-									<%= f.password_field :password_confirmation, :placeholder => 'Password (repeat)', :label => false %>
+									<%= f.password_field :password_confirmation, :placeholder => 'PASSWORD (repeat)', :label => false %>
 									</div>
 									<div class="medium-12 columns">
 									<%= f.submit 'Sign Up', class: "submit-link" %>

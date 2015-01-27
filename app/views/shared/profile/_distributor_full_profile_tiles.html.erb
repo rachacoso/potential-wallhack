@@ -1,4 +1,4 @@
-<div class="profile-outer-border-tile">
+
 <div class="profile-outer-tile">
 	<div class="row">
 
@@ -44,13 +44,10 @@
 		<div class="medium-8 large-9 columns">
 
 							<div class="row">
-								<div class="small-2 medium-2 large-1 columns">
-									<%= render partial: "shared/svg/brandportfolio", locals: {nolabel: true}%>
-								</div>
-								<div class="small-10 medium-10 large-11 columns">
+								<div class="small-12 columns">
 
 									<div class="preview-data">
-										<span class="preview-data-tile-title"><h3><strong>Current Brand Portfolio</strong></h3></span>
+										<span class="preview-data-tile-title"><h2><strong>Current Brand Portfolio</strong></h2></span>
 
 
 											<% if profile.distributor_brands.where(current: true).length > 0 %>
@@ -72,13 +69,10 @@
 
 
 							<div class="row">
-								<div class="small-2 medium-2 large-1 columns">
-									<%= render partial: "shared/svg/brandportfolio", locals: {nolabel: true}%>
-								</div>
-								<div class="small-10 medium-10 large-11 columns">
+								<div class="small-12 columns">
 
 									<div class="preview-data">
-										<span class="preview-data-tile-title"><h3><strong>Past Brand Portfolio</strong></h3></span>
+										<span class="preview-data-tile-title"><h2><strong>Past Brand Portfolio</strong></h2></span>
 
 
 										<% if profile.distributor_brands.where(current: false).length > 0 %>
@@ -101,10 +95,7 @@
 
 
 							<div class="row">
-								<div class="small-2 medium-2 large-1 columns">
-									<%= render partial: "shared/svg/tradeshow", locals: {nolabel: true}%>
-								</div>
-								<div class="small-10 medium-10 large-11 columns">
+								<div class="small-12 columns">
 
 									<div class="preview-data">
 										<span class="preview-data-tile-title">Trade Shows</span><br>
@@ -125,18 +116,72 @@
 								</div>
 							</div>	
 
+					<div class="row">
+						<div class="small-12 columns">
+
+							<div class="preview-data">
+								<span class="preview-data-tile-title">Sales and Education</span><br><br>
+
+									<h6><small>Inside Sales Force:</small> <strong><%= profile.inside_sales_size %></strong></h6>
+									
+									
+									<h6><small>Outside Sales Force:</small> <strong><%= profile.outside_sales_size %></strong></h6>
+								
+							</div>
+							
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="preview-data">
+
+								<span class="preview-data-tile-title">Marketing and PR</span><br><br>
+
+										<h6><small>Internal Marketing/ PR Team Size:</small> <strong><%= profile.internal_marketing_size %></strong></h6>
+
+										<h6><strong><%= profile.employ_pr_agency ? "Has" : "No" %></strong>
+										<small>External Marketing/PR</small><h6>
+
+										<h6><small>Customer Database Size:</small> <strong><%= profile.customer_database_size %></strong></h6>
+
+
+
+										<h6><small>Product Marketing:</small></h6>
+
+										<div class="row">
+											<div class="small-6 columns">
+												<strong>
+												<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Print" ,p: profile.marketing_via_print}%>
+												<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Online" ,p: profile.marketing_via_online}%>
+												<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Email" ,p: profile.marketing_via_email}%>
+
+												</strong>
+											</div><!--/.small-6-->
+											<div class="small-6 columns">
+												<strong>
+												<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Outdoor" ,p: profile.marketing_via_outdoor}%>													
+												<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Events" ,p: profile.marketing_via_events}%>
+												<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Direct Mail" ,p: profile.marketing_via_direct_mail}%>
+												<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Classes" ,p: profile.marketing_via_classes}%>		
+												</strong>
+											</div><!--/.small-6-->
+										</div><!--/.row-->
+
+							</div>
+						</div>
+					</div>
+
 
 		</div> <!--/.medium-8 large-9 columns -->
 		
 
-		<div class="medium-4 large-3 columns">
+		<div class="medium-4 large-3 columns text-right">
 
 
 					<div class="row">
-						<div class="small-2 medium-3 columns">
-							<%= render partial: "shared/svg/globe", locals: {nolabel: true} %>
-						</div>
-						<div class="small-10 medium-9 columns">
+						<div class="small-12 columns">
 							<div class="preview-data">
 								<span class="preview-data-tile-title">Headquarters</span><br>
 								<strong><%= profile.country_of_origin %></strong>
@@ -146,10 +191,7 @@
 
 
 					<div class="row">
-						<div class="small-2 medium-3 columns">
-							<%= render partial: "shared/svg/employees", locals: {nolabel: true} %>
-						</div>
-						<div class="small-10 medium-9 columns">
+						<div class="small-12 columns">
 							<div class="preview-data">
 								<span class="preview-data-tile-title">Company Size</span><br>
 								<strong><%= CompanySize.find(profile.company_size).name rescue nil %></strong>
@@ -158,10 +200,7 @@
 					</div>	
 
 					<div class="row">
-						<div class="small-2 medium-3 columns">
-							<%= render partial: "shared/svg/calendar", locals: {nolabel: true} %>
-						</div>
-						<div class="small-10 medium-9 columns">
+						<div class="small-12 columns">
 							<div class="preview-data">
 								<span class="preview-data-tile-title">Year Established</span><br>
 								<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
@@ -170,10 +209,7 @@
 					</div>					
 
 					<div class="row">
-						<div class="small-2 medium-3 columns">
-							<%= render partial: "shared/svg/shipping", locals: {nolabel: true} %>
-						</div>
-						<div class="small-10 medium-9 columns">
+						<div class="small-12 columns">
 							<div class="preview-data">
 								<span class="preview-data-tile-title">Countries of Distribution</span><br>
 								<strong>
@@ -187,10 +223,7 @@
 
 
 					<div class="row">
-						<div class="small-2 medium-3 columns">
-							<%= render partial: "shared/svg/sector", locals: {nolabel: true} %>
-						</div>
-						<div class="small-10 medium-9 columns">
+						<div class="small-12 columns">
 							<div class="preview-data">
 								<span class="preview-data-tile-title">Sectors</span><br>
 								<% profile.sectors.each do |s| %>
@@ -201,10 +234,7 @@
 					</div>
 
 					<div class="row">
-						<div class="small-2 medium-3 columns">
-							<%= render partial: "shared/svg/channel", locals: {nolabel: true}%>
-						</div>
-						<div class="small-10 medium-9 columns">
+						<div class="small-12 columns">
 							<div class="preview-data">
 								<span class="preview-data-tile-title">Channels</span><br>
 								<% profile.channels.each do |ch| %>
@@ -222,69 +252,7 @@
 
 
 					<div class="row">
-						<div class="small-2 medium-3 columns">
-							<%= render partial: "shared/svg/sales", locals: {nolabel: true}%>
-						</div>
-						<div class="small-10 medium-9 columns">
-
-							<div class="preview-data">
-								<span class="preview-data-tile-title">Sales and Education</span><br><br>
-
-									Inside Sales Force:<br>
-									<strong><%= profile.inside_sales_size %></strong>
-									<hr>
-									Outside Sales Force:<br>
-									<strong><%= profile.outside_sales_size %></strong>
-
-							</div>
-
-						</div>
-					</div>
-
-
-					<div class="row">
-						<div class="small-2 medium-3 columns">
-							<%= render partial: "shared/svg/marketing", locals: {nolabel: true}%>
-						</div>
-						<div class="small-10 medium-9 columns">
-
-							<div class="preview-data">
-								<span class="preview-data-tile-title">Marketing and PR</span><br><br>
-
-
-										Internal Marketing/ <br>PR Team Size:<br>
-										<strong><%= profile.internal_marketing_size %></strong><hr>
-
-										<strong><%= profile.employ_pr_agency ? "Does use" : "Does not use" %></strong>
-										<br>External Marketing/PR<hr>
-
-										Customer Database Size:<br>
-										<strong><%= profile.customer_database_size %></strong><hr>
-
-
-
-										Product Marketing:<br>
-
-										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Print" ,p: profile.marketing_via_print}%>
-										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Online" ,p: profile.marketing_via_online}%>
-										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Email" ,p: profile.marketing_via_email}%>
-										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Outdoor" ,p: profile.marketing_via_outdoor}%>
-										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Events" ,p: profile.marketing_via_events}%>
-										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Direct Mail" ,p: profile.marketing_via_direct_mail}%>
-										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Classes" ,p: profile.marketing_via_classes}%>
-
-									
-							</div>
-
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="small-2 medium-3 columns">
-							<%= render partial: "shared/svg/globe", locals: {nolabel: true} %>
-						</div>
-						<div class="small-10 medium-9 columns">
-
+						<div class="small-12 columns">
 							<div class="preview-data">
 								<span class="preview-data-tile-title">General Contact Information</span><br>
 								  <strong><%= profile.contact_info.contact_name %>,<br> <%= profile.contact_info.contact_title %><br></strong>
@@ -309,4 +277,3 @@
 
 	</div> <!--/.row -->
 </div> <!--/.profile-outer-tile -->
-</div> <!--/.profile-outer-border-tile -->

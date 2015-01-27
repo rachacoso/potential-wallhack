@@ -68,8 +68,60 @@
 				<br>
 			</div>
 
-		</div>
-	</div>
+		</div><!--/.medium-6 medium-centered columns -->
+	</div><!-- /.row -->
+
+	<div class="row">
+		<div class="medium-6 medium-centered columns">
+
+			<div class="ldpanel">
+				<h2><strong>Sign Up...</strong></h2>
+				<div class="row">
+					<div class="medium-12 columns text-right">
+						
+						<%= form_for @newuser, url: users_path do |f| %>
+						<div class="row" style="margin-bottom: 1em;">
+							<div class="medium-12 columns">
+								<%= radio_button_tag(:user_type, "brand", selected: true) %>
+								<%= label_tag(:user_type_brand, "as a Brand") %>
+								<%= radio_button_tag(:user_type, "distributor") %>
+								<%= label_tag(:user_type_distributor, "as a Distributor") %>
+							</div>
+						</div>
+						<div class="errornotice <%= flash[:error] ? "error-on" : "" %>"><%= flash[:error] ? flash[:error].upcase.html_safe : "&nbsp;".html_safe %></div>
+						<div class="row collapse">
+							<%= f.fields_for :user_profile do |ff| %>
+							<div class="medium-6 columns">
+								<%= ff.text_field :firstname, :placeholder => 'FIRST NAME', :label => false  %>
+							</div>
+							<div class="medium-6 columns">
+								<%= ff.text_field :lastname, :placeholder => 'LAST NAME', :label => false  %>
+							</div>
+							<% end %>
+						
+							<div class="medium-12 columns">
+							<%= f.text_field :email, :placeholder => 'EMAIL (will be used as your login)', :label => false %>
+							</div>
+							<div class="medium-12 columns">
+							<%= f.password_field :password, :placeholder => 'PASSWORD', :label => false %>
+							</div>
+							<div class="medium-12 columns">
+							<%= f.password_field :password_confirmation, :placeholder => 'PASSWORD (repeat)', :label => false %>
+							</div>
+							<div class="medium-12 columns">
+							<%= f.submit 'Sign Up', class: "submit-link" %>
+							</div>
+						</div>
+						<% end %>
+
+
+					</div>
+				</div>
+			</div>
+
+		</div><!--/.medium-6 medium-centered columns -->
+	</div><!-- /.row -->
+
 </div>
 
 <div id="front-footer">

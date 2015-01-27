@@ -27,10 +27,6 @@ class CompliancesController < ApplicationController
 
 	def destroy
 
-		@collitemid = params[:id]
-		d = Compliance.find(@collitemid)
-		d.destroy
-
 		u = @current_user.distributor || @current_user.brand
 
 		@collitemid = params[:id]

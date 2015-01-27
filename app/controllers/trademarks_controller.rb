@@ -33,8 +33,8 @@ class TrademarksController < ApplicationController
 		d = Trademark.find(@collitemid)
 		@collection_name = d.class.to_s.downcase
 		d.destroy
-		@identifier = 'name'
-		@collection = u.trademark
+		@identifier = 'product'
+		@collection = u.trademarks
 		@no_item_message = 'No Trademarks'
 
 		respond_to do |format|

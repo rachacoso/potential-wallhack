@@ -3,7 +3,13 @@ class SessionController < ApplicationController
 	skip_before_action :require_login, only: [:new, :create]
 
 	def new
-		render layout: "front"
+		if @current_user
+			redirect_to dashboard_url
+		else
+			@newuser = User.new
+			@newuser.build_user_profile
+			render layout: "front"
+		end
 	end
 
 	def create

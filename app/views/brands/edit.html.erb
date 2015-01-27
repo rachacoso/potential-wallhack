@@ -166,7 +166,7 @@
 
 				<% end %>
 				<hr>
-				<%= f.submit 'Update Company Info', class: "tiny radius success button right"  %>
+				<%= f.submit 'Update Company Info', class: "tiny radius alert button right"  %>
 
 				<% end %>
 
@@ -202,7 +202,7 @@
 
 					<div class="row">
 						<div class="medium-10 push-2 columns">
-							<%= f.submit 'Update Sectors', class: "tiny radius success button right" %>
+							<%= f.submit 'Update Sectors', class: "tiny radius alert button right" %>
 						</div>
 					</div>
 					<% end %>
@@ -234,7 +234,7 @@
 
 					<div class="row">
 						<div class="medium-10 push-2 columns">
-							<%= f.submit 'Update Standard Channels', class: "tiny radius success button right" %>
+							<%= f.submit 'Update Standard Channels', class: "tiny radius alert button right" %>
 						</div>
 					</div>
 					<% end %>
@@ -366,7 +366,7 @@
 									<div class="row">
 										<div class="medium-12 columns">
 											<hr>
-											<%= submit_tag('Update Channel Capacities', class: "tiny radius success button right") %>
+											<%= submit_tag('Update Channel Capacities', class: "tiny radius alert button right") %>
 										</div>
 									</div>
 
@@ -439,7 +439,8 @@
 											<%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %>
 										</div>
 										<div class="medium-4 columns">
-											<%= f.submit "ADD", class: "tiny button submit", style: "padding:0.3em; border-radius: 5px; background: transparent; color: blue; border: 1px solid blue;" %>
+											<%= submit_tag('ADD', class: "tiny radius alert button") %>
+											<%#= f.submit "ADD", class: "tiny button alert submit", style: "padding:0.3em; border-radius: 5px; background: transparent; color: blue; border: 1px solid blue;" %>
 											<%#= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %>
 										</div>
 									</div>				
@@ -473,7 +474,7 @@
 					<%= hidden_field_tag "redirect_anchor", "a-marketing" %>
 						<div class="medium-12 columns">
 							<%= f.text_area :brand_positioning, rows: 10, label: "Brand Positioning", placeholder: 'Brand Positioning' %>
-							<%= f.submit 'Update Marketing Activities', class: "tiny radius success button right" %>
+							<%= f.submit 'Update Marketing Activities', class: "tiny radius alert button right" %>
 						</div>
 					<% end %>
 					</div>

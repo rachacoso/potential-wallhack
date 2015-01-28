@@ -12,6 +12,13 @@ $( document ).ready(function() {
     });
   }
 
+// FOR AJAX FORM SUBMIT LOADING MODAL
+
+$('.ajax-form').on('submit', function(e) {
+    $('#loading-modal').foundation('reveal', 'open');
+    return true;
+});
+
 // for autocomplete
   var countriesArray = $.map(countries, function (value, key) { return { value: value, data: key }; });
 

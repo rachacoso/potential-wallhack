@@ -48,6 +48,8 @@ class AdminController < ApplicationController
 
   end
 
+  private
+  
   def administrators_only
     unless @current_user.administrator
       redirect_to dashboard_url

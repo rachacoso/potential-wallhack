@@ -1,5 +1,7 @@
 class SectorsController < ApplicationController
   
+  before_action :administrators_only
+
 	def create
 		c = Sector.new
 		c.name = params[:sector][:name]
@@ -28,5 +30,12 @@ class SectorsController < ApplicationController
 
 	end
 
-
+  private
+  
+  def administrators_only
+    unless @current_user.administrator
+      redirect_to dashboard_url
+    end
+  end
+  
 end

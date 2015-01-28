@@ -11,6 +11,7 @@ class MatchesController < ApplicationController
 			@all_matches = Distributor.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
 
 			# set of countries for the filter
+			# @countries = @all_matches.pluck(:country_of_origin).uniq.sort_by{ |m| m.downcase }
 			@countries = @all_matches.pluck(:country_of_origin).uniq.sort_by{ |m| m.downcase }
 			@countries_of_distribution = Array.new
 			@all_matches.each do |m|
@@ -67,7 +68,7 @@ class MatchesController < ApplicationController
 			@all_matches = Brand.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
 
 			# set of countries for the filter
-			@countries = @all_matches.pluck(:country_of_origin).sort_by{ |m| m.downcase }
+			@countries = @all_matches.pluck(:country_of_origin).uniq.sort_by{ |m| m.downcase }
 
 
 			if params[:filter]

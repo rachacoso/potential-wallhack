@@ -1,5 +1,7 @@
 class ChannelsController < ApplicationController
   
+  before_action :administrators_only
+
 	def create
 
 		newchannel = Channel.new
@@ -32,5 +34,12 @@ class ChannelsController < ApplicationController
 
 	end
 
+  private
+  
+  def administrators_only
+    unless @current_user.administrator
+      redirect_to dashboard_url
+    end
+  end
 
 end

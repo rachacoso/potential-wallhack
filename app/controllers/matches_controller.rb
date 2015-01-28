@@ -8,7 +8,7 @@ class MatchesController < ApplicationController
 			### Full match set is all brands in the Distributor's sectors minus any countries that have not declared a country 
 			### or Countries of Distribution
 			### (will be updated to be all countries with completed profiles)
-			@all_matches = Distributor.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
+			@all_matches = Distributor.where(subscriber: true).in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
 
 			# set of countries for the filter
 			# @countries = @all_matches.pluck(:country_of_origin).uniq.sort_by{ |m| m.downcase }
@@ -65,7 +65,7 @@ class MatchesController < ApplicationController
 
 			### Full match set is all brands in the Distributor's sectors minus any countries that have not declared a country 
 			### (will be updated to be all countries with completed profiles)
-			@all_matches = Brand.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
+			@all_matches = Brand.where(subscriber: true).in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
 
 			# set of countries for the filter
 			@countries = @all_matches.pluck(:country_of_origin).uniq.sort_by{ |m| m.downcase }

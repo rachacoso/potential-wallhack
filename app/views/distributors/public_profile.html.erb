@@ -17,38 +17,42 @@
 
 
 <div class="row">
-<div class="medium-5 push-7 columns">
-	<ul class="button-group even-3">
-  <li><%= link_to 'PUBLIC Profile', "#", class: "tiny button info"%></li>
-  <li><%= link_to 'FULL Profile', distributor_full_profile_url, class: "tiny button secondary" %></li>
-  <li><%= link_to 'EDIT Profile', distributor_url, class: "tiny button secondary" %></li>
-  </ul>
-</div>
-</div>
-
-
-<div class="row">
-<div class="small-12 columns">
-	<div data-alert class="alert-box secondary radius">
+	<div class="medium-6 push-6 columns">
+		<ul class="button-group even-3">
+	  <li><%= link_to 'PUBLIC Profile', "#", class: "tiny button info"%></li>
+	  <li><%= link_to 'FULL Profile', distributor_full_profile_url, class: "tiny button secondary" %></li>
+	  <li><%= link_to 'EDIT Profile', distributor_url, class: "tiny button secondary" %></li>
+	  </ul>
+	</div>
+	<div class="medium-6 pull-6 columns">
+		
 		<div class="row">
-			<div class="small-6 columns">
-					<p>This is your Public Profile.<br>  [Stuff here about public profiles]</p>
-			</div>
-			<div class="small-6 columns">					
+		<div class="small-12 columns">
+			<div data-alert class="alert-box secondary radius">
 				<div class="row">
-					<div class="small-12 columns text-center">
-						<% percent = check_distributor_public_profile %>
-						<div class="progress small-12 <%= percent == 100 ? "success" : "" %>" style="margin: auto;">
-						  <span class="meter" style="width: <%= percent %>%"></span>
+					<div class="small-6 columns">
+							<p>This is your Public Profile.<br>  [Stuff here about public profiles]</p>
+					</div>
+					<div class="small-6 columns">					
+						<div class="row">
+							<div class="small-12 columns text-center">
+								<% percent = check_distributor_public_profile %>
+								<div class="progress small-12 <%= percent == 100 ? "success" : "" %>" style="margin: auto;">
+								  <span class="meter" style="width: <%= percent %>%"></span>
+								</div>
+								<small>Your Public Profile is <%= percent == 100 ? "" : "#{percent}%" %> Complete!</small>
+							</div>
 						</div>
-						<small>Your Public Profile is <%= percent == 100 ? "" : "#{percent}%" %> Complete!</small>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+		</div>
+
+	</div><!--/.medium-6 pull-6-->
 </div>
-</div>
+
+
 
 	<div class="row">
 		<div class="medium-12 columns previewtile">

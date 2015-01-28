@@ -11,7 +11,7 @@
 
 
 <div class="row">
-<div class="medium-5 push-7 columns">
+<div class="medium-6 push-6 columns">
 	<ul class="button-group even-3">
   <li><%= link_to 'PUBLIC Profile', distributor_public_profile_url, class: "tiny button secondary" %></li>
   <li><%= link_to 'FULL Profile', distributor_full_profile_url, class: "tiny button secondary" %></li>
@@ -168,7 +168,7 @@
 
 				<% end %>
 				<hr>
-				<%= f.submit 'Update Company Info', class: "tiny radius success button right"  %>
+				<%= f.submit 'Update Company Info', class: "tiny radius alert button right"  %>
 
 				<% end %>
 
@@ -204,7 +204,7 @@
 
 					<div class="row">
 						<div class="medium-10 push-2 columns">
-							<%= f.submit 'Update Sectors', class: "tiny radius success button right" %>
+							<%= f.submit 'Update Sectors', class: "tiny radius alert button right" %>
 						</div>
 					</div>
 					<% end %>
@@ -249,7 +249,7 @@
 
 						<div id="export-countries-list">	
 							
-							<%= render "shared/profile/components/export_countries_list" %>
+							<%= render "shared/profileform/export_countries_list" %>
 
 						</div>					
 
@@ -329,37 +329,20 @@
 
 					<div class="row">
 						<div class="medium-10 push-2 columns">
-							<%= f.submit 'Update Standard Channels', class: "tiny radius success button right" %>
+							<%= f.submit 'Update Standard Channels', class: "tiny radius alert button right" %>
 						</div>
 					</div>
 					<% end %>
 
-					<% if @distributor.channel_capacities.where(channel_id: 0).first %>
-						<div class="row">
-							<div class="medium-10 push-2 columns">
-								<h3>Custom Channels</h3>
-							</div>
-						</div>
-					<% end %>
-					<% @distributor.channel_capacities.where(channel_id: 0).each do |cc| %>
-						<div class="row">
-							<div class="medium-10 push-2 columns">
-								<div class="row">
-									<div class="medium-12 columns">
-										<div class="customchanneldisplay">
-											<%= cc.custom_channel_name %> <%= link_to 'Delete', cc, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cc.custom_channel_name}?"}, class: "right itemformlink" %>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					<% end %>
+					<div id="custom-channels-list">
+						<%= render partial: 'shared/profileform/custom_channels_list', locals:{u: @distributor} %>
+					</div>
 
 				<div class="row">
 					<div class="medium-10 push-2 columns">
 						<div class="groupwrapper">
 
-								<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" } do |f| %>
+								<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" }, remote: true do |f| %>
 									<div class="row">
 										<div class="medium-12 columns">
 											<h3>Add Custom Channel</h3>
@@ -371,7 +354,8 @@
 											<%= f.text_field :custom_channel_name, label: false, placeholder: 'Custom Channel Name' %>
 										</div>
 										<div class="medium-3 columns text-right" style="padding: 0.7em 1em;">
-											<%= link_to 'add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe, class: "itemformlink" %>
+											<%= f.submit 'ADD', class: "tiny radius alert button right" %>
+											<%#= link_to 'add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe, class: "itemformlink" %>
 										</div>
 									</div>
 
@@ -436,32 +420,14 @@
 					
 								<% end %>
 
-								<% if @distributor.channel_capacities.where(channel_id: 0).first %>
-									<div class="row">
-										<div class="medium-6 columns text-right">
-											<h4><strong>Custom Channel</strong></h4>
-										</div>
-										<div class="medium-6 columns">
-											<h4><strong>Capacity</strong></h4>
-										</div>
-									</div>
-								<% end %>
-								<% @distributor.channel_capacities.where(channel_id: 0).each do |cc| %>
-									<div class="row">
-										<div class="medium-6 columns">
-											<%= label_tag "channel_capacity[bulk_ids][#{cc.id}]", cc.custom_channel_name, class: "right" %>&nbsp;
-										</div>
-										<div class="medium-3 columns end">
-											<%= number_field_tag("channel_capacity[bulk_ids][#{cc.id}]", cc.capacity) %>
-										</div>
-									</div>
-
-								<% end %>
+								<div id="custom-channel-capacities-list">
+									<%= render partial: 'shared/profileform/custom_channel_capacities_list', locals:{u: @distributor} %>
+								</div>
 
 									<div class="row">
 										<div class="medium-12 columns">
 											<hr>
-											<%= submit_tag('Update Channel Capacities', class: "tiny radius success button right") %>
+											<%= submit_tag('Update Channel Capacities', class: "tiny radius alert button right") %>
 										</div>
 									</div>
 
@@ -549,7 +515,7 @@
 					<div class="row">
 						<div class="medium-12 columns">
 							<hr>
-							<%= f.submit 'Update Sales/Education Capabilities', class: "tiny radius success button right" %>
+							<%= f.submit 'Update Sales/Education Capabilities', class: "tiny radius alert button right" %>
 						</div>
 					</div>
 					<% end %>	
@@ -636,7 +602,7 @@
 						</div>
 					</div>
 						<hr>
-						 <%= f.submit 'Update Marketing / PR Capabilities', class: "tiny radius success button right"  %>
+						 <%= f.submit 'Update Marketing / PR Capabilities', class: "tiny radius alert button right"  %>
 
 					<% end %>
 

@@ -10,22 +10,24 @@ class ChannelCapacitiesController < ApplicationController
 		# cchannel.capacity = ccap
 		cchannel.save
 
-		# DEPRECATED
-		# u.channel_capacities.create!(channel_capacity_parameters)
-
-		if @current_user.distributor
-			if params[:ob]
-				redirect_to onboard_distributor_five_url
-			else
-				redirect_to distributor_url
-			end
-		else
-			if params[:ob]
-				redirect_to onboard_brand_four_url
-			else
-				redirect_to brand_url
-			end
+		respond_to do |format|
+			format.html
+			format.js
 		end
+
+		# if @current_user.distributor
+		# 	if params[:ob]
+		# 		redirect_to onboard_distributor_five_url
+		# 	else
+		# 		redirect_to distributor_url
+		# 	end
+		# else
+		# 	if params[:ob]
+		# 		redirect_to onboard_brand_four_url
+		# 	else
+		# 		redirect_to brand_url
+		# 	end
+		# end
 
 
 
@@ -90,19 +92,24 @@ class ChannelCapacitiesController < ApplicationController
 
 		d = ChannelCapacity.find(params[:id])
 		d.destroy
-		if @current_user.distributor
-			if params[:ob]
-				redirect_to onboard_distributor_three_a_url
-			else
-				redirect_to distributor_url
-			end			
-		else
-			if params[:ob]
-				redirect_to onboard_brand_three_a_url
-			else
-				redirect_to brand_url
-			end
-		end
+
+		respond_to do |format|
+			format.html
+			format.js
+		end		
+		# if @current_user.distributor
+		# 	if params[:ob]
+		# 		redirect_to onboard_distributor_three_a_url
+		# 	else
+		# 		redirect_to distributor_url
+		# 	end			
+		# else
+		# 	if params[:ob]
+		# 		redirect_to onboard_brand_three_a_url
+		# 	else
+		# 		redirect_to brand_url
+		# 	end
+		# end
 
 
 	end

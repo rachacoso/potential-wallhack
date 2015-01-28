@@ -199,7 +199,9 @@ $( document ).ready(function() {
 
   // ADDING CUSTOM CHANNELS
   $('#btnSave').click(function() {
-    addCheckbox($('#ccName').val());
+    if ($('#ccName').val()) {
+      addCheckbox($('#ccName').val());
+    };
   });
 
   $('#customchannellist').on( "click", "input", function() {
@@ -250,14 +252,14 @@ $(document).foundation({
 });
 
 function addCheckbox(name) {
-	var container = $('#customchannellist');
-	var inputs = container.find('input');
-	var id = inputs.length+1;
+    var container = $('#customchannellist');
+    var inputs = container.find('input');
+    var id = inputs.length+1;
 
-	$('<span />', { id: 'ccspan'+id }).appendTo(container)
-	$('<input />', { type: 'checkbox', id: 'cb'+id, value: name, name: 'customchannels['+id+']', checked: 'checked', class: 'customchannelinput' }).appendTo( '#' + 'ccspan' + id );
-	$('<label />', { 'for': 'cb'+id, text: name }).appendTo( '#' + 'ccspan' + id );
-}
+    $('<span />', { id: 'ccspan'+id }).appendTo(container)
+    $('<input />', { type: 'checkbox', id: 'cb'+id, value: name, name: 'customchannels['+id+']', checked: 'checked', class: 'customchannelinput' }).appendTo( '#' + 'ccspan' + id );
+    $('<label />', { 'for': 'cb'+id, text: name }).appendTo( '#' + 'ccspan' + id );
+  }
 
 function initialize () {
   // Date Picker

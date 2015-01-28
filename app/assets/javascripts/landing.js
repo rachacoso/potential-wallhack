@@ -105,10 +105,7 @@ $( document ).ready(function() {
 
   // MATCHING FILTERS
 
-  // SUBMIT FORM ON FILTER SELECT
-  $('.filterform :checkbox').on('click', function(e) {
-    $('#filters-form').submit();
-  });
+
 
   //Countries
   $('#selectallcountries').click(function(event) {  //on click 
@@ -205,6 +202,12 @@ $( document ).ready(function() {
       });        
   });    
 
+
+  // SUBMIT FORM ON FILTER SELECT
+  $('.filterform :checkbox').on('click', function(e) {
+    $('#filters-form').submit();
+  });
+  
 
   // ADDING CUSTOM CHANNELS
   $('#btnSave').click(function() {

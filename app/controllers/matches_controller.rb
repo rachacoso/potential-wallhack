@@ -19,6 +19,10 @@ class MatchesController < ApplicationController
 					@countries_of_distribution = (@countries_of_distribution << m.export_countries.pluck(:country)).flatten!
 				end
 			end
+			@country = @countries
+			@country_of_distribution = @countries_of_distribution
+			@size = CompanySize.all.pluck(:id).to_s
+			@channel = @profile.channel_ids.to_s
 
 			if params[:filter]
 				@matches = @all_matches
@@ -27,35 +31,39 @@ class MatchesController < ApplicationController
 					@country = params[:filter][:country]
 					@matches = @matches.in(country_of_origin: @country.keys)
 				else
-					@country = @countries
+					@matches = nil
+					return
 				end 
 				if params[:filter][:country_of_distribution]
 					@country_of_distribution = params[:filter][:country_of_distribution]
 					@matches = @matches.in("export_countries.country" => @country_of_distribution.keys)
 				else
-					@country_of_distribution = @countries_of_distribution
+					@matches = nil
+					return
 				end 
 				if params[:filter][:size]
 					@size = params[:filter][:size]
 					@matches = @matches.in(company_size: @size.keys)
 				else
-					@size = CompanySize.all.pluck(:id).to_s
+					@matches = nil
+					return
 				end 
 				if params[:filter][:channel]
 					@channel = params[:filter][:channel]
 					@matches = @matches.in(channel_ids: @channel.keys)
 				else
-					@channel = @profile.channel_ids.to_s
+					@matches = nil
+					return
 				end
 
 
 			else
 				
-				@matches = @all_matches
-				@country = @countries
-				@country_of_distribution = @countries_of_distribution
-				@size = CompanySize.all.pluck(:id).to_s
-				@channel = @profile.channel_ids.to_s
+				if params[:filter_form]
+					@matches = nil
+				else
+					@matches = @all_matches
+				end
 
 			end
 
@@ -69,7 +77,10 @@ class MatchesController < ApplicationController
 
 			# set of countries for the filter
 			@countries = @all_matches.pluck(:country_of_origin).uniq.sort_by{ |m| m.downcase }
-
+			@country = @countries
+			@size = CompanySize.all.pluck(:id).to_s
+			@sector = @profile.sector_ids.to_s
+			@channel = @profile.channel_ids.to_s
 
 			if params[:filter]
 				@matches = @all_matches
@@ -78,35 +89,39 @@ class MatchesController < ApplicationController
 					@country = params[:filter][:country]
 					@matches = @matches.in(country_of_origin: @country.keys)
 				else
-					@country = @countries
+					@matches = nil
+					return
 				end 
 				if params[:filter][:size]
 					@size = params[:filter][:size]
 					@matches = @matches.in(company_size: @size.keys)
 				else
-					@size = CompanySize.all.pluck(:id).to_s
+					@matches = nil
+					return
 				end 
 				if params[:filter][:sector]
 					@sector = params[:filter][:sector]
 					@matches = @matches.in(sector_ids: @sector.keys)
 				else
-					@sector = @profile.sector_ids.to_s
+					@matches = nil
+					return
 				end
 				if params[:filter][:channel]
 					@channel = params[:filter][:channel]
 					@matches = @matches.in(channel_ids: @channel.keys)
 				else
-					@channel = @profile.channel_ids.to_s
+					@matches = nil
+					return
 				end
 
 
 			else
-				
-				@matches = @all_matches
-				@country = @countries
-				@size = CompanySize.all.pluck(:id).to_s
-				@sector = @profile.sector_ids.to_s
-				@channel = @profile.channel_ids.to_s
+
+				if params[:filter_form]
+					@matches = nil
+				else				
+					@matches = @all_matches
+				end
 
 			end
 

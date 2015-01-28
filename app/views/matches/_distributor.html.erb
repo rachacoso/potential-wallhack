@@ -17,6 +17,7 @@
 <div class="profile-outer-tile">
 	<h3><strong> Filters </strong></h3>
 	<%= form_tag all_matches_url, id: 'filters-form', method: 'post', remote: true do %>
+	<%= hidden_field_tag "filter_form", "true" %>
 	<div class="row filterform">
 		<div class="small-12 columns">
 			<strong><small>Countries</small></strong>					

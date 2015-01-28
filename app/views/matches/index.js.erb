@@ -1,5 +1,11 @@
-$('#match-list').hide().html("<%= j (render 'brand_match_list') %>").fadeIn(500);
 
+<% if @current_user.brand %>
+	$('#match-list').hide().html("<%= j (render 'brand_match_list') %>").fadeIn(500);
+<% else %>
+	$('#match-list').hide().html("<%= j (render 'distributor_match_list') %>").fadeIn(500);
+<% end %>
+$(document).foundation();
+$(document).foundation('tooltip', 'reflow');
 
 
 <% case action_name %>

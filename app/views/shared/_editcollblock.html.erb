@@ -26,8 +26,6 @@
 		<div class="row">
 			<div class="medium-12 columns">
 								<hr>
-<%= coll_new_item.class.to_s.downcase %>
-<%= iscurrent.nil? ? "" : iscurrent %>
 				<% if iscurrent.nil? %>
 					<%= render partial: "shared/new_coll_item_form", locals: {newitem: coll_new_item, titletext: coll_new_item_text} %>
 				<% else %>

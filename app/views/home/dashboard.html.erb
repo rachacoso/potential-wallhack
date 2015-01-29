@@ -4,6 +4,7 @@
 <% content_for :javascript_foot do %>
 
 <% end %>
+
 <% if browser.chrome? %>
 chrome
 <% end %>
@@ -25,10 +26,10 @@ safari
 		<div class="row">
 			<div class="small-12 columns" id="dashboard-marketplace-header">
 				<ul class="breadcrumbs marketplace" id="marketplace-h1">
-				  <li class="current"><img src="/images/logos_marketplace.svg" height="30" width="30" alt="Marketplace" /> <%= link_to "MARKETPLACE", "#" %></li>
+				  <li class="current"><%= render "shared/imageswap/marketplace_logo" %> <%= link_to "MARKETPLACE", "#" %></li>
 				</ul>
 				<ul class="breadcrumbs marketplace" style="display: none;" id="marketplace-h2">
-				  <li class="current"><img src="/images/logos_marketplace.svg" height="30" width="30" alt="Marketplace" /></li>
+				  <li class="current"><%= render "shared/imageswap/marketplace_logo" %> </li>
 				</ul>
 			</div>			
 		</div>
@@ -43,10 +44,10 @@ safari
 		<div class="row">
 			<div class="small-12 columns" id="dashboard-insights-header">
 				<ul class="breadcrumbs insights" id="insights-h1">
-				  <li class="current"><img src="/images/logos_insights.svg" height="30" width="30" alt="Insights" /> <%= link_to "INSIGHTS", "#" %></li>
+				  <li class="current"><%= render "shared/imageswap/insights_logo" %> <%= link_to "INSIGHTS", "#" %></li>
 				</ul>
 				<ul class="breadcrumbs insights" style="display: none;" id="insights-h2">
-				  <li class="current"><img src="/images/logos_insights.svg" height="30" width="30" alt="Insights" /></li>
+				  <li class="current"><%= render "shared/imageswap/insights_logo" %></li>
 				</ul>				
 			</div>
 		</div>
@@ -62,10 +63,10 @@ safari
 		<div class="row">
 			<div class="small-12 columns" id="dashboard-agency-header">
 				<ul class="breadcrumbs agency" id="agency-h1">
-				  <li class="current"><img src="/images/logos_agency.svg" height="30" width="30" alt="Agency" /> <%= link_to "AGENCY", "#" %></li>
+				  <li class="current"><%= render "shared/imageswap/agency_logo" %> <%= link_to "AGENCY", "#" %></li>
 				</ul>
 				<ul class="breadcrumbs agency" style="display: none;" id="agency-h2">
-				  <li class="current"><img src="/images/logos_agency.svg" height="30" width="30" alt="Agency" /></li>
+				  <li class="current"><%= render "shared/imageswap/agency_logo" %></li>
 				</ul>				
 			</div>
 		</div>

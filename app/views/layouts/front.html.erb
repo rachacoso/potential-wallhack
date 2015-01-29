@@ -31,13 +31,6 @@
 <%= javascript_include_tag "application" %>
 <%= content_for?(:javascript_foot) ? yield(:javascript_foot) : "" %>
 
-<% if browser.ie? %>
-	<%= javascript_tag do %>
-	  $('img[src*="svg"]').attr('src', function () {
-	  return $(this).attr('src').replace('.svg', '.png');
-	  });
-	<% end %>
-<% end %>
 
 </body>
 </html>

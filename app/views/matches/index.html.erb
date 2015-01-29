@@ -7,7 +7,7 @@
 	<div class="small-12 columns">
 		<ul class="breadcrumbs marketplace">
 			<% matchtype = @current_user.distributor ? "Brand" : "Distributor" %>
-		  <li class="current"><img src="/images/logos_marketplace.svg" height="30" width="30" alt="Marketplace" /> <%= link_to "Your #{matchtype} Matches", "#" %></li>
+		  <li class="current"><%= render "shared/imageswap/marketplace_logo" %> <%= link_to "Your #{matchtype} Matches", "#" %></li>
 		</ul>
 	</div>
 </div>

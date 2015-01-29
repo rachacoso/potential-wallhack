@@ -7,22 +7,23 @@
 <div class="row">
 	<div class="small-12 columns">
 		<ul class="breadcrumbs marketplace">
-			<li><img src="/images/logos_marketplace.svg" height="30" width="30" alt="Marketplace" /> 
+			<li><%= render "shared/imageswap/marketplace_logo" %>
 			<% if @referrer %>
 				<% matchtype = @current_user.type_inverse? %>
-				<%= link_to "Your #{matchtype} Matches", all_matches_url %>
+				<%= link_to "Your #{matchtype} Matches", all_matches_url %></li>
+
 				<% if @referrer == "index_saved_matches" %>  
-				  <%= link_to "Saved #{matchtype}s", saved_matches_url %>
+				  <li><%= link_to "Saved #{matchtype}s", saved_matches_url %><img src="/images/breadcrumb_shim.gif" height="30" width="2" alt="Marketplace" style="visibility: hidden;"/></li>
 				<% elsif @referrer == "index_contacted_matches" %>  
-				  <%= link_to "#{matchtype}s you contacted", contacted_matches_url %>
+				  <li><%= link_to "#{matchtype}s you contacted", contacted_matches_url %><img src="/images/breadcrumb_shim.gif" height="30" width="2" alt="Marketplace" style="visibility: hidden;"/></li>
 				<% elsif @referrer == "index_incoming_matches" %>  
-				  <%= link_to "#{matchtype}s contacting you", incoming_matches_url %>
+				  <li><%= link_to "#{matchtype}s contacting you", incoming_matches_url %><img src="/images/breadcrumb_shim.gif" height="30" width="2" alt="Marketplace" style="visibility: hidden;"/></li>
 			  <% end %>
 		  <% else %>
 				<%= link_to 'All Matches', all_matches_url %>
 		  <% end %>
 		  </li>
-		  <li class="current"> <%= link_to (@current_user.subscriber? ? "<strong>#{@match.company_name}</strong>".html_safe : "[Name Hidden]"), "#" %> <img src="/images/logos_marketplace.svg" height="30" width="30" alt="Marketplace" style="visibility: hidden;"/></li>
+		  <li class="current"> <%= link_to (@current_user.subscriber? ? "<strong>#{@match.company_name}</strong>".html_safe : "[Name Hidden]"), "#" %> <img src="/images/breadcrumb_shim.gif" height="30" width="2" alt="Marketplace" style="visibility: hidden;"/></li>
 		</ul>
 	</div>
 </div>

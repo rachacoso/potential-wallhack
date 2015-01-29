@@ -196,4 +196,17 @@ module ApplicationHelper
 			end
 	end
 
+	# GET PROFILE INFORMATION FOR MATCHES
+	def get_profile_info_brand(m)
+		size = CompanySize.find(m.company_size).name
+		sectors = Sector.find(m.sector_ids)
+		channels = Channel.find(m.channel_ids)
+		return size, sectors, channels
+	end
+	def get_profile_info_distributor(m)
+		size = CompanySize.find(m.company_size).name
+		channels = Channel.find(m.channel_ids)
+		return size, channels
+	end
+
 end

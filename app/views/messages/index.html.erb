@@ -9,83 +9,104 @@
 	</div>
 </div>
 
+<% if @current_user.subscriber? %>
 <div class="row">
-	<div class="medium-6 columns">
-
+	<div class="small-11 small-centered columns">
+		
 		<div class="row">
 			<div class="medium-6 columns">
-				<h1> Messages</h1>
-			</div>
-			<div class="medium-6 columns text-right end" style="padding-top: 0.8em; padding-bottom: 0.8em;">
-				<% if @messages_unread > 0 %>
-					<span class="message-index-indicator"><%= @messages_unread %> unread message<%= @messages_unread > 1 ? "s" : "" %></span>
-				<% end %>
-			</div>
-			<div class="small-12 columns">
-				<hr>
-			</div>
-		</div>
 
-		<div class="row">
-			<div class="small-12 columns">
-
-
-				<% if @messages_unread > 0 %>
-				
-					<div class="row">
-						<div class="small-12 columns">	
-							<% @unread_list.each do |m| %>
-								<% this_one = m.send(@current_user.type_inverse?) %>
-
-								<%= render partial: "shared/profile/profile_list_tile", locals: {match: this_one} %>
-
-							<% end %>
-						</div>
+				<div class="row">
+					<div class="medium-8 columns">
+						<h1> Messages</h1>
 					</div>
+					<div class="medium-4 columns text-right end" style="padding-top: 0.8em; padding-bottom: 0.8em;">
+						<% if @messages_unread > 0 %>
+							<span class="message-index-indicator"><%= @messages_unread %> unread message<%= @messages_unread > 1 ? "s" : "" %></span>
+						<% end %>
+					</div>
+				</div><!--/.row-->
+				<div class="row">
+					<div class="small-12 columns">
+						<hr>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+
+				<div class="row">
+					<div class="small-12 columns">
+
+						<% if @messages_unread > 0 %>
+						
+							<div class="row">
+								<div class="small-12 columns">	
+									<% @unread_list.each do |m| %>
+										<% this_one = m.send(@current_user.type_inverse?) %>
+
+										<%= render partial: "shared/profile/profile_list_tile", locals: {match: this_one} %>
+
+									<% end %>
+								</div>
+							</div>
+					
+						<% else %>
+							<h3>No unread messages</h3>
+						<% end %>
+
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+
 			
-				<% else %>
-					<h3>No unread messages</h3>
-				<% end %>
+			</div><!--/.medium-6-->
 
-			</div>
-		</div>
-	
-	</div>
+			<div class="medium-6 columns">
 
-	<div class="medium-6 columns">
-
-		<div class="row">
-			<div class="medium-8 columns">
-				<h1> Contact Requests</h1>
-			</div>
-			<div class="medium-4 columns text-right end" style="padding-top: 0.8em; padding-bottom: 0.8em;">
-				<% if @new_contact_messages > 0 %>
-					<span class="message-index-indicator"><%= @new_contact_messages %> new contact request<%= @new_contact_messages > 1 ? "s" : "" %></span>
-				<% end %>
-			</div>
-			<div class="small-12 columns">
-				<hr>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="small-12 columns">
-				<% if @new_contact_messages > 0 %>
-					<div class="row">
-						<div class="small-12 columns">					
-							<% @new_requests_list.each do |m| %>
-								<% this_one = m.send(@current_user.type_inverse?) %>
-								<%= render partial: "shared/profile/profile_list_tile", locals: {match: this_one} %>
-							<% end %>
-						</div>
+				<div class="row">
+					<div class="medium-8 columns">
+						<h1> Contact Requests</h1>
 					</div>
-				<% else %>
-					<h3>No new contact requests</h3>
-				<% end %>
-			</div>
-		</div>
+					<div class="medium-4 columns text-right end" style="padding-top: 0.8em; padding-bottom: 0.8em;">
+						<% if @new_contact_messages > 0 %>
+							<span class="message-index-indicator"><%= @new_contact_messages %> new contact request<%= @new_contact_messages > 1 ? "s" : "" %></span>
+						<% end %>
+					</div>
+				</div><!--/.row-->
 
-	</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<hr>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+
+				<div class="row">
+					<div class="small-12 columns">
+						<% if @new_contact_messages > 0 %>
+							<div class="row">
+								<div class="small-12 columns">					
+									<% @new_requests_list.each do |m| %>
+										<% this_one = m.send(@current_user.type_inverse?) %>
+										<%= render partial: "shared/profile/profile_list_tile", locals: {match: this_one} %>
+									<% end %>
+								</div>
+							</div>
+						<% else %>
+							<h3>No new contact requests</h3>
+						<% end %>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+
+			
+			</div><!--/.medium-6-->
+
+		</div><!--/.row-->
 
 
-</div>
+	</div><!--/.small-11 small-centered-->
+</div><!--/.row-->
+<% else %>
+<div class="row">
+	<div class="small-11 small-centered text-center columns">
+		<h1>Available to subscribers only</h1>
+	</div><!--/.small-11 small-centered text-center-->
+</div><!--/.row-->
+<% end %>
+

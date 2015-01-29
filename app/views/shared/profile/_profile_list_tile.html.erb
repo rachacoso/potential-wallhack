@@ -21,13 +21,45 @@
 
 </div>
 
+<% if controller_name == "matches" %>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="row">
+				<div class="small-12 columns">
+					<% if @current_user.distributor %>
+						<% size,sectors,channels = get_profile_info_brand(match) %>
+					<% else %>
+						<% size,channels = get_profile_info_distributor(match) %>		
+					<% end %>
 
-
-<div class="row">
-	<div class="small-12 columns">
-&nbsp;
+					<div class="row">
+						<div class="small-2 columns">
+							&nbsp;
+						</div><!--/.small-2-->
+						<div class="small-3 columns text-right">
+							<%= @current_user.distributor ?  size : "&nbsp;".html_safe %>
+						</div><!--/.small-2-->
+						<div class="small-3 columns text-right">
+							<% if @current_user.distributor %>
+								<% sectors.each do |s| %>
+									<%= s.name %><br>
+								<% end %>
+							<% else %>
+								<%= size %>
+							<% end %>
+						</div><!--/.small-2-->
+						<div class="small-4 columns text-right">
+							<% channels.each do |c| %>
+								<%= c.name %><br>
+							<% end %>
+						</div><!--/.small-2-->
+					</div><!--/.row-->
+				<br><br>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+		</div>
 	</div>
-</div>
+<% end %>
 
 <% if @current_user.subscriber? %>
 	<div class="row">

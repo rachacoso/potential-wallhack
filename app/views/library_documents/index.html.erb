@@ -8,6 +8,7 @@
   </div>
 </div>
 
+<% if @current_user.subscriber? %>
 <div class="row">
 	<div class="medium-12 medium-centered columns">
 
@@ -40,5 +41,11 @@
 	</div>
 </div>
 
-
+<% else %>
+<div class="row">
+  <div class="small-11 small-centered text-center columns">
+    <h1>Available to subscribers only</h1>
+  </div><!--/.small-11 small-centered text-center-->
+</div><!--/.row-->
+<% end %>
 

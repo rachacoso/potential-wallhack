@@ -39,7 +39,7 @@
 	</div>
 	<div class="row filterform">
 		<div class="small-12 columns">
-			<strong><small>That can help me sell in:</small></strong>
+			<strong><small>That can sell me in:</small></strong>
 			<% @profile.channels.each_with_index do |co, index| %>
 				<%= render partial: "shared/filter_checkbox", locals: {field: "channel", label: co.name, fid: co.id, cbid: "channel_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @channel), cclass: "mfchannel" } %>
 			<% end %>

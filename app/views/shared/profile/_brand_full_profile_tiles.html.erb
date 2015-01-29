@@ -1,12 +1,12 @@
 <div class="row">
-	<div class="medium-7 medium-centered columns">
+	<div class="medium-9 large-8 medium-centered columns">
 
 		<div class="profile-outer-tile">
 			<div class="row">
 				<div class="medium-3 columns">
 					<%= image_tag profile.logo.url, alt: "Logo" %>
 				</div>
-				<div class="medium-7 columns">
+				<div class="medium-6 columns">
 					<h2><strong><%= profile.company_name %></strong></h2>
 					<h3><small>web</small> <strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>
 
@@ -30,11 +30,11 @@
 				<br>
 				</div>
 				<% if controller_name == "matches" %>
-				<div class="medium-1 columns"><%= render partial: "contactbutton", locals: {profile: @match} %></div>
-				<div class="medium-1 columns"><%= render partial: "shared/profile/components/savebutton", locals: {profile: @match} %></div>
+				
+				<div class="medium-3 columns text-right"><%= render partial: "contactbutton", locals: {profile: @match} %> <%= render partial: "shared/profile/components/savebutton", locals: {profile: @match} %></div>
 				<% else %>
 				<%# NEEDED FOR FORMATTING OF PROFILE VIEW IN EDITING PAGES PURPOSES%> 
-				<div class="medium-2 columns">&nbsp;</div>
+				<div class="medium-3 columns">&nbsp;</div>
 				<% end %>
 			</div>
 		</div>
@@ -327,7 +327,7 @@
 							<div class="row">
 								<div class="small-12 columns">
 									<div class="preview-data">
-										<span class="preview-data-tile-title">Countries of Export</span><br>
+										<span class="preview-data-tile-title">Current Countries of Distribution</span><br>
 										<strong>
 											<% profile.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
 												<%= ec.country %><br>

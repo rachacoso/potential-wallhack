@@ -141,8 +141,23 @@ class MatchesController < ApplicationController
  	def index_saved_matches
  	
 		@profile = @current_user.brand || @current_user.distributor
-
 		@matches = @profile.saved_matches.subscribed.uniq
+
+		case @current_user.type?
+			
+		when "distributor"
+			@all_matches = Brand.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
+		when "brand"
+			@all_matches = Distributor.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
+			@countries_of_distribution = Array.new
+			@all_matches.each do |m|
+				if !m.export_countries.blank?
+					@countries_of_distribution = (@countries_of_distribution << m.export_countries.pluck(:country)).uniq.flatten!
+				end
+			end
+		end
+
+		@countries = @all_matches.pluck(:country_of_origin).uniq.sort_by{ |m| m.downcase }
 
  		render "index"
  	end 
@@ -152,11 +167,22 @@ class MatchesController < ApplicationController
 		@profile = @current_user.brand || @current_user.distributor
 
 		case @current_user.type?
+
 		when "distributor"
 			@matches = Brand.subscribed.find(@profile.matches.contacted_by_me.pluck(:brand_id))
+			@all_matches = Brand.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
 		when "brand"
 			@matches = Distributor.subscribed.find(@profile.matches.contacted_by_me.pluck(:distributor_id))
+			@all_matches = Distributor.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
+			@countries_of_distribution = Array.new
+			@all_matches.each do |m|
+				if !m.export_countries.blank?
+					@countries_of_distribution = (@countries_of_distribution << m.export_countries.pluck(:country)).uniq.flatten!
+				end
+			end			
 		end
+
+		@countries = @all_matches.pluck(:country_of_origin).uniq.sort_by{ |m| m.downcase }
 
  		render "index"
 
@@ -169,10 +195,20 @@ class MatchesController < ApplicationController
 		case @current_user.type?
 		when "distributor"
 			@matches = Brand.subscribed.find(@profile.matches.contacting_me.pluck(:brand_id))
+			@all_matches = Brand.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
 		when "brand"
 			@matches = Distributor.subscribed.find(@profile.matches.contacting_me.pluck(:distributor_id))
+			@all_matches = Distributor.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
+			@countries_of_distribution = Array.new
+			@all_matches.each do |m|
+				if !m.export_countries.blank?
+					@countries_of_distribution = (@countries_of_distribution << m.export_countries.pluck(:country)).uniq.flatten!
+				end
+			end					
 		end
 
+		@countries = @all_matches.pluck(:country_of_origin).uniq.sort_by{ |m| m.downcase }
+		
  		render "index"
 
   end  

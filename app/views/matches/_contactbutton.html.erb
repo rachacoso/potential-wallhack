@@ -1,18 +1,18 @@
 
 	
 <% if @current_user.subscriber? %>
-		<div class="row">
-			<div class="small-12 columns text-right">
+<!-- 		<div class="row">
+			<div class="small-12 columns text-right"> -->
 
 				<% if !this_match(profile) %>
-				<div id="pct_<%= profile.id %>">
+				<span id="pct_<%= profile.id %>">
 					
 						
 						<%= link_to "#", :data => {:'reveal-id' => "contactModal"} do %>
 							<span class="plt-indicator-action-off">Contact</span>
 						<% end %>						
 					
-				</div>
+				</span>
 				<div id="contactModal" class="reveal-modal small" data-reveal>
 
 				  <h2>Contact<br><strong><%= profile.company_name %></strong></h2>
@@ -29,21 +29,21 @@
 				</div>					
 				<% end %>
 
-			</div>
-		</div>
+<!-- 			</div>
+		</div> -->
 
 <% else %>	
 
-	<div class="row">
-		<div class="small-12 columns">
-			<div>
-			<div class="profile-save-tile text-center deactivate">
+<!-- 	<div class="row">
+		<div class="small-12 columns"> -->
+<!-- 			<div> -->
+			<span class="profile-save-tile text-center deactivate">
 				<span data-tooltip aria-haspopup="true" class="has-tip" title="Available only to Subscribers" style>
 				<%= link_to 'Contact', "#" %>
 				</span>
-			</div>
-			</div>
-		</div>
-	</div>
+			</span>
+<!-- 			</div> -->
+<!-- 		</div>
+	</div> -->
 
 <% end %>

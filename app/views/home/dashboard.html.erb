@@ -4,6 +4,15 @@
 <% content_for :javascript_foot do %>
 
 <% end %>
+<% if browser.chrome? %>
+chrome
+<% end %>
+<% if browser.ie? %>
+ie
+<% end %>
+<% if browser.safari? %>
+safari
+<% end %>
 
 <div class-"row">
 	<div class="small-12 columns text-center">

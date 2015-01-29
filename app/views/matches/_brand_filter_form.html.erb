@@ -1,0 +1,59 @@
+<div id="filter-form-container">
+<% if action_name == "index" %>
+<div class="filter-form-panel">
+	<h2><strong> I'm Looking for Distributors... </strong></h2>
+	<%= form_tag all_matches_url, id: 'filters-form', method: 'post', remote: true do %>
+	<%= hidden_field_tag "filter_form", "true" %>
+	<div class="row filterform">
+		<div class="small-12 columns">
+			<strong><small>From:</small></strong>
+			<% @countries.each_with_index do |co, index| %>
+				<%= render partial: "shared/filter_checkbox", locals: {field: "country", label: co, fid: co, cbid: "country_#{index}", on_off_switch: filter_on_or_off(co, @country), cclass: "mfcountry filterform" } %>
+			<% end %>
+			<input id="selectallcountries" name="selectallcountries" type="checkbox" style="font-color: black;" class="filter" checked/>
+			<label for="selectallcountries" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>			
+		<br><br>
+		</div>
+	</div>
+	<div class="row filterform">
+		<div class="small-12 columns">
+			<strong><small>So I Can Sell In:</small></strong>
+			<% @countries_of_distribution.sort.each_with_index do |co, index| %>
+				<%= render partial: "shared/filter_checkbox", locals: {field: "country_of_distribution", label: co, fid: co, cbid: "countryofdistro_#{index}", on_off_switch: filter_on_or_off(co, @country_of_distribution), cclass: "mfcountryofdistro" } %>
+			<% end %>
+			<input id="selectallcountriesofdistro" name="selectallcountriesofdistro" type="checkbox" style="font-color: black;" class="filter" checked/>
+			<label for="selectallcountriesofdistro" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>
+		<br><br>
+		</div>		
+	</div>
+	<div class="row filterform">
+		<div class="small-12 columns">
+			<strong><small>Of This Size:</small></strong>
+			<% CompanySize.all.each_with_index do |co, index| %>
+				<%= render partial: "shared/filter_checkbox", locals: {field: "size", label: co.name, fid: co.id, cbid: "size_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @size), cclass: "mfsize" } %>
+			<% end %>
+			<input id="selectallsizes" name="selectallsizes" type="checkbox" style="font-color: black;" class="filter" checked/>
+			<label for="selectallsizes" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>
+		<br><br>
+		</div>
+	</div>
+	<div class="row filterform">
+		<div class="small-12 columns">
+			<strong><small>That can help me sell in:</small></strong>
+			<% @profile.channels.each_with_index do |co, index| %>
+				<%= render partial: "shared/filter_checkbox", locals: {field: "channel", label: co.name, fid: co.id, cbid: "channel_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @channel), cclass: "mfchannel" } %>
+			<% end %>
+			<input id="selectallchannels" name="selectallchannels" type="checkbox" style="font-color: black;" class="filter" checked/>
+			<label for="selectallchannels" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="small-12 columns">
+			<%#= submit_tag 'Filter Results', class: "tiny radius success button right" %>
+		</div>
+	</div>
+	<% end %>
+</div>
+<% end %>
+</div> <!-- #filter-form-container -->

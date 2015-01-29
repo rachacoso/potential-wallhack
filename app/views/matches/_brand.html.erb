@@ -1,74 +1,20 @@
+<div class="row">
+	<div class="medium-9 push-3 columns">
+		<%#= render "index_section_links" %>
+	</div>
+</div>
 
 <div class="row">
 
-<div class="medium-9 push-3 columns">
-<div id="match-list">
+	<div class="medium-9 push-3 columns">
+		<%= render "index_section_links" %>
+		<div id="match-list">
+			<%= render "brand_match_list" %>
+		</div><!--/#match-list -->
+	</div> <!-- /.medium-9 push-3 columns-->
 
-<%= render "brand_match_list" %>
-
-</div><!--/#match-list -->
-</div> <!-- /.medium-9 push-3 columns-->
-
-<div class="medium-3 pull-9 columns <%= action_name == "index" ? "previewtile" : "" %>">
-<div id="filter-form-container">
-<% if action_name == "index" %>
-<div class="profile-outer-tile">
-	<h3><strong> Filters </strong></h3>
-	<%= form_tag all_matches_url, id: 'filters-form', method: 'post', remote: true do %>
-	<%= hidden_field_tag "filter_form", "true" %>
-	<div class="row filterform">
-		<div class="small-12 columns">
-			<strong><small>Headquarters</small></strong>
-			<% @countries.each_with_index do |co, index| %>
-				<%= render partial: "shared/filter_checkbox", locals: {field: "country", label: co, fid: co, cbid: "country_#{index}", on_off_switch: filter_on_or_off(co, @country), cclass: "mfcountry filterform" } %>
-			<% end %>
-			<input id="selectallcountries" name="selectallcountries" type="checkbox" style="font-color: black;" class="filter" checked/>
-			<label for="selectallcountries" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>			
-			<hr>
-		</div>
-	</div>
-	<div class="row filterform">
-		<div class="small-12 columns">
-			<strong><small>Countries of Distribution</small></strong>
-			<% @countries_of_distribution.sort.each_with_index do |co, index| %>
-				<%= render partial: "shared/filter_checkbox", locals: {field: "country_of_distribution", label: co, fid: co, cbid: "countryofdistro_#{index}", on_off_switch: filter_on_or_off(co, @country_of_distribution), cclass: "mfcountryofdistro" } %>
-			<% end %>
-			<input id="selectallcountriesofdistro" name="selectallcountriesofdistro" type="checkbox" style="font-color: black;" class="filter" checked/>
-			<label for="selectallcountriesofdistro" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>
-			<hr>
-		</div>		
-	</div>
-	<div class="row filterform">
-		<div class="small-12 columns">
-			<strong><small>Company Size</small></strong>
-			<% CompanySize.all.each_with_index do |co, index| %>
-				<%= render partial: "shared/filter_checkbox", locals: {field: "size", label: co.name, fid: co.id, cbid: "size_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @size), cclass: "mfsize" } %>
-			<% end %>
-			<input id="selectallsizes" name="selectallsizes" type="checkbox" style="font-color: black;" class="filter" checked/>
-			<label for="selectallsizes" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>
-			<hr>
-		</div>
-	</div>
-	<div class="row filterform">
-		<div class="small-12 columns">
-			<strong><small>Channels</small></strong>
-			<% @profile.channels.each_with_index do |co, index| %>
-				<%= render partial: "shared/filter_checkbox", locals: {field: "channel", label: co.name, fid: co.id, cbid: "channel_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @channel), cclass: "mfchannel" } %>
-			<% end %>
-			<input id="selectallchannels" name="selectallchannels" type="checkbox" style="font-color: black;" class="filter" checked/>
-			<label for="selectallchannels" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="small-12 columns">
-			<%#= submit_tag 'Filter Results', class: "tiny radius success button right" %>
-		</div>
-	</div>
-	<% end %>
-</div>
-<% end %>
-</div> <!-- #filter-form-container -->
-</div> <!-- /.medium-3 pull-9 columns-->
+	<div class="medium-3 pull-9 columns">
+		<%= render "brand_filter_form" %>
+	</div> <!-- /.medium-3 pull-9 columns-->
 
 </div> <!-- /.row -->

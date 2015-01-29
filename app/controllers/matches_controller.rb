@@ -16,7 +16,7 @@ class MatchesController < ApplicationController
 			@countries_of_distribution = Array.new
 			@all_matches.each do |m|
 				if !m.export_countries.blank?
-					@countries_of_distribution = (@countries_of_distribution << m.export_countries.pluck(:country)).flatten!
+					@countries_of_distribution = (@countries_of_distribution << m.export_countries.pluck(:country)).uniq.flatten!
 				end
 			end
 			@country = @countries

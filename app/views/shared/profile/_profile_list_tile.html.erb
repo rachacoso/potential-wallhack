@@ -12,6 +12,9 @@
 	<div class="medium-7 columns">
 		<% cname = @current_user.subscriber? ? match.company_name : "[Name Hidden]" %>
 		<h2><%= link_to cname, view_match_url(match.id, action_name) %></h2>
+		<% if match.class.to_s == "Distributor" %>
+		Rating: <%= match.rating ? match.rating : "N/A" %>
+		<% end %>
 	</div>
 	<div class="medium-2 columns text-right">
 		<% if controller_name == "matches" || controller_name == "messages" %> 

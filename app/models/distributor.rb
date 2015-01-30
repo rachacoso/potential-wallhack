@@ -17,6 +17,7 @@ class Distributor
 	field :year_established, type: Date
 	field :company_size, type: String
 	field :website, type: String
+	field :rating, type: Integer
  	has_one :contact_info, as: :distributor_contact_info, dependent: :destroy
 	accepts_nested_attributes_for :contact_info
 

@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="medium-9 large-8 medium-centered columns">
+	<div class="medium-9 medium-centered columns">
 
 		<div class="profile-outer-tile">
 			<div class="row">
@@ -91,7 +91,7 @@
 										<div class="small-12 columns">
 
 												<div class="preview-data">
-												<span class="preview-data-tile-title"><h2><strong>Past Products</strong></h2></span>
+												<span class="preview-data-tile-title"><h2><strong>Upcoming Products</strong></h2></span>
 
 													<div class="row">
 														<div class="small-12 columns">
@@ -105,7 +105,7 @@
 																<% end %>
 															<% else %>
 															<br>
-																[No Past Products]
+																[No Upcoming Products]
 															<% end %>
 														</div>
 													</div>
@@ -120,6 +120,23 @@
 					</div><!-- /.row -->
 
 		<hr>
+					<div class="row">
+						<div class="small-12 columns">
+
+										<div class="row">
+
+											<div class="small-12 columns">
+								
+												<div class="preview-data">
+												<span class="preview-data-tile-title"><strong>Brand Positioning</strong></span><br>
+
+												<%= simple_format(profile.brand_positioning) %>
+												</div>
+
+											</div>
+										</div>						
+						</div><!-- /.small-12 columns -->
+					</div><!-- /.row -->
 
 					<div class="row">
 						<div class="small-12 columns">
@@ -337,20 +354,7 @@
 								</div>
 							</div>			
 
-							<div class="row">
-								<div class="small-12 columns">
-									<div class="preview-data">
-										<span class="preview-data-tile-title">Countries of Manufacture</span><br>
-										<strong>
-											<% profile.products.distinct(:country_of_manufacture).sort_by(&:downcase).each do |country| %>
-												<% unless country.blank? %>
-													<%= country %><br>
-												<% end %>
-											<% end %>
-										</strong>
-									</div>
-								</div>
-							</div>	
+
 
 							<div class="row">
 								<div class="small-12 columns">

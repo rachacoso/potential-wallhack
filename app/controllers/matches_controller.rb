@@ -27,13 +27,13 @@ class MatchesController < ApplicationController
 			if params[:filter]
 				@matches = @all_matches
 
-				if params[:filter][:country]
-					@country = params[:filter][:country]
-					@matches = @matches.in(country_of_origin: @country.keys)
-				else
-					@matches = nil
-					return
-				end 
+				# if params[:filter][:country]
+				# 	@country = params[:filter][:country]
+				# 	@matches = @matches.in(country_of_origin: @country.keys)
+				# else
+				# 	@matches = nil
+				# 	return
+				# end 
 				if params[:filter][:country_of_distribution]
 					@country_of_distribution = params[:filter][:country_of_distribution]
 					@matches = @matches.in("export_countries.country" => @country_of_distribution.keys)

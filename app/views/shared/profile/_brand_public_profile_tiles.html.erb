@@ -1,11 +1,11 @@
 
 <div class="row">
-	<div class="small-8 small-centered columns">
+	<div class="medium-5 large-4 medium-centered columns">
 	
 		<div class="profile-outer-tile">
 
 			<div class="row">
-				<div class="medium-4 columns">
+				<div class="medium-6 columns">
 
 					<div class="row">
 						<div class="small-12 columns">
@@ -19,15 +19,6 @@
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="preview-data">
-								<span class="preview-data-tile-title">Company Size</span><br>
-								<strong><%= CompanySize.find(profile.company_size).name rescue nil %></strong>
-							</div>
-						</div>
-					</div>	
-
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="preview-data">
 								<span class="preview-data-tile-title">Year Established</span><br>
 								<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
 							</div>
@@ -36,7 +27,7 @@
 
 				</div><!--/.medium-4 columns -->
 
-				<div class="medium-4 columns">
+				<div class="medium-6 columns">
 
 					<div class="row">
 						<div class="small-12 columns">
@@ -68,40 +59,6 @@
 			
 				</div><!--/.medium-4 columns -->
 
-				<div class="medium-4 columns">
-
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="preview-data">
-								<span class="preview-data-tile-title">Current Countries of Distribution</span><br>
-								<strong>
-									<% profile.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
-										<%= ec.country %><br>
-									<% end %>
-								</strong>
-							</div>
-						</div>
-					</div>				
-
-
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="preview-data">
-								<span class="preview-data-tile-title">Countries of Manufacture</span><br>
-								<strong>
-
-									<% profile.products.distinct(:country_of_manufacture).sort_by(&:downcase).each do |country| %>
-										<% unless country.blank? %>
-											<%= country %><br>
-										<% end %>
-									<% end %>
-
-								</strong>
-							</div>
-						</div>
-					</div>
-
-				</div><!--/.medium-4 columns -->
 
 			</div><!--/.row -->
 

@@ -23,15 +23,7 @@
 					  <thead>
 					  	<tr><th width="800" colspan="2">
 								<%= render "counts" %>
-					  	</th></tr>
-					  	<tr>
-					  		<th>
-									Company
-						  	</th>
-					  		<th>
-									Country of Origin
-						  	</th>
-						  </tr>				  	
+					  	</th></tr>		  	
 					  </thead>
 				  	<tbody>
 						<% @matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
@@ -41,7 +33,6 @@
 							<%= render partial: "shared/profile/profile_list_tile", locals: {match: match} %>
 
 							</td>
-							<td><%= match.country_of_origin %></td>
 						</tr>
 						<% end %>
 						</tbody>
@@ -70,15 +61,7 @@
 						  <thead>
 						  	<tr><th width="800" colspan="2">
 									<%= render "counts" %>
-						  	</th></tr>
-						  	<tr>
-						  		<th>
-										Company
-							  	</th>
-						  		<th>
-										Country of Origin
-							  	</th>
-							  </tr>				  	
+						  	</th></tr>			  	
 						  </thead>
 					  	<tbody>
 							<% @matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
@@ -88,7 +71,7 @@
 								<%= render partial: "shared/profile/profile_list_tile", locals: {match: match} %>
 
 								</td>
-								<td><%= match.country_of_origin %></td>
+
 							</tr>
 							<% end %>
 							</tbody>

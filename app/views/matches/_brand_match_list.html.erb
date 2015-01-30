@@ -23,15 +23,7 @@
 					  <thead>
 					  	<tr><th width="800" colspan="2">
 					  		<%= render "counts" %>
-					  	</th></tr>
-					  	<tr>
-					  		<th>
-									Company
-						  	</th>
-					  		<th>
-									Countries of Distribution
-						  	</th>
-						  </tr>				  	
+					  	</th></tr>		  	
 					  </thead>
 				  	<tbody>
 						<% @matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
@@ -39,13 +31,6 @@
 							<td>
 								
 							<%= render partial: "shared/profile/profile_list_tile", locals: {match: match} %>
-
-							</td>
-							<td>
-
-								<% match.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
-									<%= ec.country %> <%= ec.country == match.country_of_origin ? "<small>(Headquarters)</small>".html_safe : "" %><br>
-								<% end %>
 
 							</td>
 						</tr>
@@ -75,15 +60,7 @@
 						  <thead>
 						  	<tr><th width="800" colspan="2">
 						  		<%= render "counts" %>
-						  	</th></tr>
-						  	<tr>
-						  		<th>
-										Company
-							  	</th>
-						  		<th>
-										Countries of Distribution
-							  	</th>
-							  </tr>				  	
+						  	</th></tr>	  	
 						  </thead>
 					  	<tbody>
 							<% @matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
@@ -93,13 +70,7 @@
 								<%= render partial: "shared/profile/profile_list_tile", locals: {match: match} %>
 
 								</td>
-								<td>
 
-									<% match.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
-										<%= ec.country %> <%= ec.country == match.country_of_origin ? "<small>(Headquarters)</small>".html_safe : "" %><br>
-									<% end %>
-
-								</td>
 							</tr>
 							<% end %>
 							</tbody>

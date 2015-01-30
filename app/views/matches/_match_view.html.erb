@@ -63,19 +63,11 @@
 
 				<% if @current_user.distributor %>
 
-					<% if @current_user.subscriber? %>
-						<%= render partial: "/shared/profile/brand_full_profile_tiles", locals: {profile: @match} %>
-					<% else %>
-						<%= render partial: "/shared/profile/brand_public_profile_tiles", locals: {profile: @match} %>
-					<% end %>
+						<%= render partial: "/shared/profile/brand_full_profile", locals: {profile: @match} %>
 
 				<% elsif @current_user.brand %>
 
-					<% if @current_user.subscriber? %>
-						<%= render partial: "/shared/profile/distributor_full_profile_tiles", locals: {profile: @match} %>
-					<% else %>
-						<%= render partial: "/shared/profile/distributor_public_profile_tiles", locals: {profile: @match} %>
-					<% end %>
+						<%= render partial: "/shared/profile/distributor_full_profile", locals: {profile: @match} %>
 
 				<% end %>
 			</div>
@@ -93,7 +85,8 @@
 			<% if @current_user.subscriber? %>
 				<%= render partial: "/shared/profile/brand_full_profile_tiles", locals: {profile: @match} %>
 			<% else %>
-				<%= render partial: "/shared/profile/brand_public_profile_tiles", locals: {profile: @match} %>
+				<%# LEGACY?  SEE IF CAN REMOVE %>
+				<%#= render partial: "/shared/profile/brand_public_profile_tiles", locals: {profile: @match} %>
 			<% end %>
 
 		<% elsif @current_user.brand %>
@@ -101,7 +94,8 @@
 			<% if @current_user.subscriber? %>
 				<%= render partial: "/shared/profile/distributor_full_profile_tiles", locals: {profile: @match} %>
 			<% else %>
-				<%= render partial: "/shared/profile/distributor_public_profile_tiles", locals: {profile: @match} %>
+				<%# LEGACY?  SEE IF CAN REMOVE %>
+				<%#= render partial: "/shared/profile/distributor_public_profile_tiles", locals: {profile: @match} %>
 			<% end %>
 
 		<% end %>

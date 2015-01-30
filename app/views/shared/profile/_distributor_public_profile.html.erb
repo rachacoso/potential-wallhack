@@ -1,20 +1,24 @@
-
 <div class="row">
-	<div class="medium-5 large-4 medium-centered columns">
+	<div class="small-12 columns">
 	
-		<div class="profile-outer-tile">
+		
 
 			<div class="row">
-				<div class="medium-6 columns">
-
+				<div class="small-6 medium-8 columns text-right">
+					
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="preview-data">
-								<span class="preview-data-tile-title">Country of Origin</span><br>
-								<strong><%= profile.country_of_origin %></strong>
+								<span class="preview-data-tile-title">Countries of Distribution</span><br>
+								<strong>
+									<% profile.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
+										<%= ec.country %> <%= ec.country == profile.country_of_origin ? "<small>(Headquarters)</small>".html_safe : "" %><br>
+									<% end %>
+								</strong>
 							</div>
 						</div>
 					</div>
+
 
 					<div class="row">
 						<div class="small-12 columns">
@@ -23,11 +27,12 @@
 								<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
 							</div>
 						</div>
-					</div>
+					</div>		
 
-				</div><!--/.medium-4 columns -->
+				</div>
 
-				<div class="medium-6 columns">
+
+				<div class="small-6 medium-4 columns">
 
 					<div class="row">
 						<div class="small-12 columns">
@@ -55,16 +60,12 @@
 								<% end %>
 							</div>
 						</div>
-					</div>	
-			
-				</div><!--/.medium-4 columns -->
+					</div>
 
+				</div>
+			</div>
 
-			</div><!--/.row -->
-
-		</div> <!-- /.profile-outer-tile -->
+		
 
 	</div>
 </div>
-
-

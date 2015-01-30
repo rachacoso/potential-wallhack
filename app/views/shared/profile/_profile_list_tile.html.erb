@@ -1,113 +1,99 @@
 
 <div class="profile-list-tile">
 
-<div class="row">
-	<div class="medium-3 columns">
-		<% if @current_user.subscriber? %>
-		<%= image_tag match.logo.url(:medium), width: "200", height: "200", alt: "Logo" %>
-		<% else %>
-		no
-		<% end %>
-	</div>
-	<div class="medium-7 columns">
-		<% cname = @current_user.subscriber? ? match.company_name : "[Name Hidden]" %>
-		<h2><%= link_to cname, view_match_url(match.id, action_name) %></h2>
-		<% if match.class.to_s == "Distributor" %>
-		Rating: <%= match.rating ? match.rating : "N/A" %>
-		<% end %>
-	</div>
-	<div class="medium-2 columns text-right">
-		<% if controller_name == "matches" || controller_name == "messages" %> 
-			<%= render partial: "shared/profile/components/savebutton", locals: {profile: match} %>
-		<% end %>
-	</div>
-
-</div>
-
-<% if controller_name == "matches" %>
 	<div class="row">
-		<div class="small-12 columns">
+		<div class="medium-3 columns">
+			<% if @current_user.subscriber? %>
+			<%= image_tag match.logo.url(:medium), width: "200", height: "200", alt: "Logo" %>
+			<% else %>
+			no
+			<% end %>
+		</div>
+		<div class="medium-9 columns">
+
+			<div class="row">
+				<div class="medium-9 columns">
+					<% if @current_user.subscriber? %>
+						<h2><%= link_to match.company_name, view_match_url(match.id, action_name) %></h2>
+					<% else %>
+						<h2><span data-tooltip aria-haspopup="true" class="has-tip" title="<%= match.class.to_s %> name hidden. Subscribe to view full profile">
+						<%= ("&blk12;" * match.company_name.length).html_safe %>
+						</span></h2>
+					<% end %>
+
+					<% if match.class.to_s == "Distributor" %>
+					Rating: <%= match.rating ? match.rating : "N/A" %>
+					<% end %>
+				</div>
+				<div class="medium-3 columns text-right">
+					<% if controller_name == "matches" || controller_name == "messages" %> 
+						<%= render partial: "shared/profile/components/savebutton", locals: {profile: match} %>
+					<% end %>
+				</div>			
+			</div><!--/.row-->
+
+			<% if @current_user.subscriber? %>
+				<div class="row">
+					<div class="small-12 columns">
+
+						<% m = this_match(match) %>
+						<% if action_name == "index" || action_name == "index_saved_matches" %>		
+							<% if m %>
+								<% if i_contacted(m) %>
+									<span class="plt-indicator-info"><strong>You Contacted</strong> <%= match.company_name %></span>
+								<% else %>
+									<% if m.accepted %>
+										<span class="plt-indicator-info"><%= match.company_name %> <strong>Contacted You</strong></span>
+									<% end %>
+								<% end %>
+							<% end %>
+						<% end %>
+
+						<% if action_name == "index" || action_name == "index_saved_matches" || action_name == "index_contacted_matches" || action_name == "index_incoming_matches" %>
+							<% if m %>
+								<% if m.messages.blank? && m.initial_contact_by == @current_user.type? %>
+									<span class="plt-indicator-info">Awaiting Response</span>
+								<% end %>
+								<% unless m.messages.blank? %>
+									<span class="plt-indicator-info">In Conversation</span>
+								<% end %>
+							<% end %>
+						<% end %>
+
+						<% if match.user.last_login %>
+							<span class="plt-indicator-info">Active in the past <strong><%= last_activity(match.user.last_login) %></strong></span>
+						<% end %>
+
+						<br>
+
+						<% has_unread, count = unread_count_from_match(match) %>
+						<% if has_unread %>
+						<span class="plt-indicator-alert"><%= count %> unread message<%= count > 1 ? "s" : "" %></span>
+						<% end %>
+						<% if m %>
+						<%= !m.accepted && !i_contacted(m) ? "<span class='plt-indicator-alert'>NEW contact request from #{match.company_name}</span>".html_safe : "" %>
+						<% end %>
+
+					</div>
+				</div>
+			<% end %>
+
+
 			<div class="row">
 				<div class="small-12 columns">
-					<% if @current_user.distributor %>
-						<% size,sectors,channels = get_profile_info_brand(match) %>
-					<% else %>
-						<% size,channels = get_profile_info_distributor(match) %>		
-					<% end %>
 
-					<div class="row">
-						<div class="small-2 columns">
-							&nbsp;
-						</div><!--/.small-2-->
-						<div class="small-3 columns text-right">
-							<%= @current_user.distributor ?  size : "&nbsp;".html_safe %>
-						</div><!--/.small-2-->
-						<div class="small-3 columns text-right">
-							<% if @current_user.distributor %>
-								<% sectors.each do |s| %>
-									<%= s.name %><br>
-								<% end %>
-							<% else %>
-								<%= size %>
-							<% end %>
-						</div><!--/.small-2-->
-						<div class="small-4 columns text-right">
-							<% channels.each do |c| %>
-								<%= c.name %><br>
-							<% end %>
-						</div><!--/.small-2-->
-					</div><!--/.row-->
-				<br><br>
-				</div><!--/.small-12-->
-			</div><!--/.row-->
-		</div>
-	</div>
-<% end %>
-
-<% if @current_user.subscriber? %>
-	<div class="row">
-		<div class="small-12 columns text-right">
-
-			<% m = this_match(match) %>
-			<% if action_name == "index" || action_name == "index_saved_matches" %>		
-				<% if m %>
-					<% if i_contacted(m) %>
-						<span class="plt-indicator-info"><strong>You Contacted</strong> <%= match.company_name %></span>
-					<% else %>
-						<% if m.accepted %>
-							<span class="plt-indicator-info"><%= match.company_name %> <strong>Contacted You</strong></span>
-						<% end %>
-					<% end %>
+				<% if match.class.to_s == "Distributor" %>
+				<%= render partial: "shared/profile/distributor_public_profile", locals: {profile: match} %>
+				<% else %>
+				<%= render partial: "shared/profile/brand_public_profile", locals: {profile: match} %>
 				<% end %>
-			<% end %>
 
-			<% if action_name == "index" || action_name == "index_saved_matches" || action_name == "index_contacted_matches" || action_name == "index_incoming_matches" %>
-				<% if m %>
-					<% if m.messages.blank? && m.initial_contact_by == @current_user.type? %>
-						<span class="plt-indicator-info">Awaiting Response</span>
-					<% end %>
-					<% unless m.messages.blank? %>
-						<span class="plt-indicator-info">In Conversation</span>
-					<% end %>
-				<% end %>
-			<% end %>
+				</div>
+			</div>
 
-			<% if match.user.last_login %>
-				<span class="plt-indicator-info">Active in the past <strong><%= last_activity(match.user.last_login) %></strong></span>
-			<% end %>
 
-			<br>
+		</div><!--/.medium-9-->
+	</div><!--/.row-->
 
-			<% has_unread, count = unread_count_from_match(match) %>
-			<% if has_unread %>
-			<span class="plt-indicator-alert"><%= count %> unread message<%= count > 1 ? "s" : "" %></span>
-			<% end %>
-			<% if m %>
-			<%= !m.accepted && !i_contacted(m) ? "<span class='plt-indicator-alert'>NEW contact request from #{match.company_name}</span>".html_safe : "" %>
-			<% end %>
-
-		</div>
-	</div>
-<% end %>
 
 </div>

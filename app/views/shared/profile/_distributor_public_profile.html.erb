@@ -9,12 +9,12 @@
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="preview-data">
-								<span class="preview-data-tile-title">Countries of Distribution</span><br>
-								<strong>
+								<h5>Countries of Distribution</h5>
+								
 									<% profile.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
-										<%= ec.country %> <%= ec.country == profile.country_of_origin ? "<small>(Headquarters)</small>".html_safe : "" %><br>
+										<strong><%= ec.country %> <%= ec.country == profile.country_of_origin ? "<small>(Headquarters)</small>".html_safe : "" %></strong><br>
 									<% end %>
-								</strong>
+								
 							</div>
 						</div>
 					</div>
@@ -23,8 +23,8 @@
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="preview-data">
-								<span class="preview-data-tile-title">Year Established</span><br>
-								<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
+								<h5>Year Established</h5>
+								<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong><br>
 							</div>
 						</div>
 					</div>		
@@ -37,7 +37,7 @@
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="preview-data">
-								<span class="preview-data-tile-title">Sectors</span><br>
+								<h5>Sectors</h5>
 								<% profile.sectors.each do |s| %>
 									<strong><%= s.name %></strong><br>
 								<% end %>
@@ -48,7 +48,7 @@
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="preview-data">
-								<span class="preview-data-tile-title">Channels</span><br>
+								<h5>Channels</h5>
 								<% profile.channels.each do |ch| %>
 									<strong><%= ch.name %></strong><br>
 								<% end %>

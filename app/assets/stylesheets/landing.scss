@@ -722,9 +722,11 @@ $onboard-nav-radius: 4px;
   }
   .preview-data-tile-title {
 
-    color: scale-color(black, $lightness: 65%);
-    font-size: 0.85em;
-    // font-weight: bold;
+    color: scale-color(red, $lightness: 65%);
+    font-size: 0.65em;
+    font-weight: 200;
+    padding-bottom: rem-calc(10);
+    font-weight: bold;
   }  
 }
 

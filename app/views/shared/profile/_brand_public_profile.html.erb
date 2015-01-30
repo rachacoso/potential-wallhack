@@ -1,7 +1,7 @@
 
 <div class="row">
 	<div class="small-12 columns">
-	
+
 		
 
 			<div class="row">
@@ -10,7 +10,7 @@
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="preview-data">
-								<span class="preview-data-tile-title">Country of Origin</span><br>
+								<h5>Country of Origin</h5>
 								<strong><%= profile.country_of_origin %></strong>
 							</div>
 						</div>
@@ -19,7 +19,7 @@
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="preview-data">
-								<span class="preview-data-tile-title">Year Established</span><br>
+								<h5>Year Established</h5>
 								<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
 							</div>
 						</div>
@@ -32,7 +32,7 @@
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="preview-data">
-								<span class="preview-data-tile-title">Sectors</span><br>
+								<h5>Sectors</h5>
 								<% profile.sectors.each do |s| %>
 									<strong><%= s.name %></strong><br>
 								<% end %>
@@ -43,7 +43,7 @@
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="preview-data">
-								<span class="preview-data-tile-title">Channels</span><br>
+								<h5>Channels</h5>
 								<% profile.channels.each do |ch| %>
 									<strong><%= ch.name %></strong><br>
 								<% end %>

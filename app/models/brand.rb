@@ -23,8 +23,10 @@ class Brand
 	  # :url => ":s3_domain_url",
 	  :default_url => "https://s3.amazonaws.com/landingintl-us/defaults/Default_Logo.png",
 	  :styles => {
-	    :medium    => ['200x200']
+	    :medium    => ['200x200'],
+	    :public    => ['200x200']
 	  },
+	  :convert_options => {:public => "-blur 0x8, -swirl 90"},
 	  :default_style => :medium
 	validates_attachment_content_type :logo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 	

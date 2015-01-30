@@ -3,7 +3,7 @@
 
 	<div class="row">
 		<div class="medium-3 columns">
-			<% if @current_user.subscriber? %>
+			<% if @current_user.subscriber? && action_name != "public_profile"  %>
 			<%= image_tag match.logo.url(:medium), width: "200", height: "200", alt: "Logo" %>
 			<% else %>
 			no
@@ -13,7 +13,7 @@
 
 			<div class="row">
 				<div class="medium-9 columns">
-					<% if @current_user.subscriber? %>
+					<% if @current_user.subscriber? && action_name != "public_profile" %>
 						<h2><%= link_to match.company_name, view_match_url(match.id, action_name) %></h2>
 					<% else %>
 						<h2><span data-tooltip aria-haspopup="true" class="has-tip" title="<%= match.class.to_s %> name hidden. Subscribe to view full profile">
@@ -32,7 +32,7 @@
 				</div>			
 			</div><!--/.row-->
 
-			<% if @current_user.subscriber? %>
+			<% if @current_user.subscriber? && action_name != "public_profile"  %>
 				<div class="row">
 					<div class="small-12 columns">
 

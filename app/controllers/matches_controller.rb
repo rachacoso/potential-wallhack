@@ -8,7 +8,7 @@ class MatchesController < ApplicationController
 			### Full match set is all brands in the Distributor's sectors minus any countries that have not declared a country 
 			### or Countries of Distribution
 			### (will be updated to be all countries with completed profiles)
-			@all_matches = Distributor.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
+			@all_matches = Distributor.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
 
 			# set of countries for the filter
 			# @countries = @all_matches.pluck(:country_of_origin).uniq.sort_by{ |m| m.downcase }
@@ -16,13 +16,17 @@ class MatchesController < ApplicationController
 			@countries_of_distribution = Array.new
 			@all_matches.each do |m|
 				if !m.export_countries.blank?
-					@countries_of_distribution = (@countries_of_distribution << m.export_countries.pluck(:country)).uniq.flatten!
+					@countries_of_distribution = (@countries_of_distribution << m.export_countries.pluck(:country)).flatten!
 				end
 			end
 			@country = @countries
-			@country_of_distribution = @countries_of_distribution
+			@country_of_distribution = @countries_of_distribution.uniq
 			@size = CompanySize.all.pluck(:id).to_s
-			@channel = @profile.channel_ids.to_s
+			@channel = Channel.all.pluck(:id).to_s
+			# use the following only if decide to use the brand's channel selection in profile 
+			# as auto-filter for types of distributors
+			# i.e. the channels in profile are "channels we would like to sell in" as opposed to "channels they CURRENTLY sell in"
+			# @channel = @profile.channel_ids.to_s   
 
 			if params[:filter]
 				@matches = @all_matches
@@ -41,6 +45,7 @@ class MatchesController < ApplicationController
 					@matches = nil
 					return
 				end 
+
 				if params[:filter][:size]
 					@size = params[:filter][:size]
 					@matches = @matches.in(company_size: @size.keys)
@@ -48,6 +53,7 @@ class MatchesController < ApplicationController
 					@matches = nil
 					return
 				end 
+
 				if params[:filter][:channel]
 					@channel = params[:filter][:channel]
 					@matches = @matches.in(channel_ids: @channel.keys)

@@ -40,7 +40,7 @@
 	<div class="row filterform">
 		<div class="small-12 columns">
 			<strong><small>That Can Place Me In:</small></strong>
-			<% @profile.channels.each_with_index do |co, index| %>
+			<% Channel.all.each_with_index do |co, index| %>
 				<%= render partial: "shared/filter_checkbox", locals: {field: "channel", label: co.name, fid: co.id, cbid: "channel_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @channel), cclass: "mfchannel" } %>
 			<% end %>
 			<input id="selectallchannels" name="selectallchannels" type="checkbox" style="font-color: black;" class="filter" checked/>

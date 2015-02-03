@@ -34,13 +34,6 @@ gem 'bcrypt', '~> 3.1.7'
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Use Puma as the app server
-gem 'puma'
-
-# Abort requests that are taking too long
-# config in config/initializers/timeout.rb
-gem "rack-timeout"
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

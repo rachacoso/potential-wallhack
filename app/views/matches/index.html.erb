@@ -12,15 +12,27 @@
 	</div>
 </div>
 
-
-
-
-<% if @current_user.brand %>
-
-	<%= render partial: "brand" %>
+<% if @current_user.send(@current_user.type?).sectors.blank? %>
+	
+	<div class="row">
+		<div class="small-12 columns text-center">
+			<h2><strong>You don't have you SECTOR designated in 
+				<%= link_to 'Your Profile', eval("#{@current_user.type?}_url(:anchor => 'a-sectors')") %>
+			</strong> <br>
+			You can't get matched with <%=@current_user.type_inverse?.capitalize%>s without a designated SECTOR.</h2>
+		</div>
+	</div>
 
 <% else %>
 
-	<%= render partial: "distributor" %>
+	<% if @current_user.brand %>
+
+		<%= render partial: "brand" %>
+
+	<% else %>
+
+		<%= render partial: "distributor" %>
+
+	<% end %>
 
 <% end %>

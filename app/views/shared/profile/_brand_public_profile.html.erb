@@ -1,70 +1,38 @@
 
 <div class="row">
-	<div class="small-12 columns">
+	
+	<div class="small-6 medium-6 text-right columns" style="padding: 0em;">
+		<div class="preview-data">
+			<small>Country of Origin</small>
+			<strong><%= profile.country_of_origin %></strong>
+		</div>							
+		<div class="preview-data">
+			<small>Year Established</small>
+			<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
+		</div>
+		<div class="preview-data">
+			<small>Sectors</small><br>
+			<% profile.sectors.each do |s| %>
+				<strong><%= s.name %></strong><br>
+			<% end %>
+		</div>
+	</div><!--/.small-6 medium-6 text-right-->
 
-		
-
-			<div class="row">
-				<div class="small-6 medium-8 columns text-right">
-
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="preview-data">
-								<h5>Country of Origin</h5>
-								<strong><%= profile.country_of_origin %></strong>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="preview-data">
-								<h5>Year Established</h5>
-								<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
-							</div>
-						</div>
-					</div>
-
-				</div><!--/.medium-8 columns -->
-
-				<div class="small-6 medium-4 columns">
-
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="preview-data">
-								<h5>Sectors</h5>
-								<% profile.sectors.each do |s| %>
-									<strong><%= s.name %></strong><br>
-								<% end %>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="preview-data">
-								<h5>Channels</h5>
-								<% profile.channels.each do |ch| %>
-									<strong><%= ch.name %></strong><br>
-								<% end %>
-								<% if profile.channel_capacities.where(channel_id: 0).length > 0 %>
-									<% profile.channel_capacities.where(channel_id: 0).each do |cch| %>
-										<strong><%= cch.custom_channel_name %> *</strong><br>
-									<% end %>
-									<small>(* Custom Channels)</small>
-								<% end %>
-							</div>
-						</div>
-					</div>	
-			
-				</div><!--/.medium-4 columns -->
-
-
-			</div><!--/.row -->
-
-		
-
-	</div>
-</div>
+	<div class="small-6 medium-6 text-right columns">
+		<div class="preview-data">
+			<small>Channels</small><br>
+			<% profile.channels.each do |ch| %>
+				<strong><%= ch.name %></strong><br>
+			<% end %>
+			<% if profile.channel_capacities.where(channel_id: 0).length > 0 %>
+				<% profile.channel_capacities.where(channel_id: 0).each do |cch| %>
+					<strong><%= cch.custom_channel_name %> *</strong><br>
+				<% end %>
+				<small>(* Custom Channels)</small>
+			<% end %>
+		</div>
+	</div><!--/.small-6 medium-6 text-right-->
+	
+</div><!-- /.row -->
 
 

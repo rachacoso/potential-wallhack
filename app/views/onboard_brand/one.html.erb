@@ -48,7 +48,7 @@
 				</div>
 				<div class="small-12 columns">				
 					<%= label_tag(:year_established, "Year established") %>
-					<%= select_tag :year_established, options_for_select(1900..Time.now.year, @brand.year_established ? @brand.year_established.strftime("%Y") : '') %>
+					<%= select_tag :year_established, options_for_select(1900..Time.now.year, @brand.year_established ? @brand.year_established.strftime("%Y") : '2000') %>
 				</div>
 			</div>
 

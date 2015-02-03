@@ -18,10 +18,7 @@ class PressHit
 											'application/msword',
 											'application/vnd.openxmlformats-officedocument.presentationml.slideshow',
 											'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-											'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-											'image/jpeg', 
-											'image/png', 
-											'image/gif'
+											'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 										]
 
 	validates_attachment_size :file, :in => 0.megabytes..2.megabytes

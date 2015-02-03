@@ -38,15 +38,15 @@
 								<div class="row collapse">
 									<%= f.fields_for :user_profile do |ff| %>
 									<div class="medium-6 columns">
-										<%= ff.text_field :firstname, :placeholder => 'FIRST NAME', :label => false  %>
+										<%= ff.text_field :firstname, :placeholder => 'FIRST NAME', :value => @user_firstname, :label => false  %>
 									</div>
 									<div class="medium-6 columns">
-										<%= ff.text_field :lastname, :placeholder => 'LAST NAME', :label => false  %>
+										<%= ff.text_field :lastname, :placeholder => 'LAST NAME', :value => @user_lastname, :label => false  %>
 									</div>
 									<% end %>
 								
 									<div class="medium-12 columns">
-									<%= f.text_field :email, :placeholder => 'EMAIL (will be used as your login)', :label => false %>
+									<%= f.text_field :email, :placeholder => 'EMAIL (will be used as your login)', :value => @user_email, :label => false %>
 									</div>
 									<div class="medium-12 columns">
 									<%= f.password_field :password, :placeholder => 'PASSWORD', :label => false %>
@@ -55,7 +55,19 @@
 									<%= f.password_field :password_confirmation, :placeholder => 'PASSWORD (repeat)', :label => false %>
 									</div>
 									<div class="medium-12 columns">
-									<%= f.submit 'Sign Up', class: "submit-link" %>
+										<br>
+										<a href="#" data-reveal-id="newUserConfirm" class="button small" id="new-user-submit-link">JOIN!</a>
+									
+									</div>
+								</div>
+								
+								
+								<div id="newUserConfirm" class="reveal-modal small" data-reveal>
+								  <h2><strong>You are signing up as a <span id="user-type" style="text-transform: uppercase;">brand</span>.</strong> <br> Is this correct?</h2>
+								  <a class="close-reveal-modal">x</a>
+								  <div class="text-right">
+								  <%= link_to 'Yes', '#', class: "button tiny radius", id: "new-user-submit"%>
+								  <%= link_to 'No! I made a mistake!', '#', class: "button tiny radius", id: "new-user-decline"%>
 									</div>
 								</div>
 								<% end %>
@@ -100,6 +112,22 @@
 
 
 
+<% content_for :javascript_foot do %>
+	<%= javascript_tag do %>
+		$('#new-user-submit').on('click', function(e) {
+			e.preventDefault();
+			$('#new_user').submit();
+			$('#newUserConfirm').foundation('reveal', 'close');
+		});
+		$('#new-user-decline').on('click', function(e) {
+			e.preventDefault();
+			$('#newUserConfirm').foundation('reveal', 'close');
+		});
+		$('input[name="user_type"]').on('change', function(e) {
+			$('#user-type').html($(this).val());
+		});
 
+	<% end %>
+<% end %>
 
 

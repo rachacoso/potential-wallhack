@@ -5,9 +5,12 @@ class UsersController < ApplicationController
 	#restrict to administrators only
 	before_action :administrators_only, only: [:index, :edit, :update, :destroy]
 
+	# persist the parameters on failed validation during new user signup
+	before_action :persist_params, only: [:create]
+
 	def index
 		# @users = User.all
-		@distributors = User.all.reject{ |r| r.distributor.nil?}
+		@distributors = User.all.reject{ |r| r.distributor.nil?}.reject{ |r| r.distributor.company_name.nil? }
 		@brands = User.all.reject{ |r| r.brand.nil? }.reject{ |r| r.brand.company_name.nil? }
 
 		@admins = User.where(administrator: true)
@@ -38,9 +41,11 @@ class UsersController < ApplicationController
 		elsif params[:user][:email].blank?
 
 			flash[:error] = "Email field cannot be blank"
+			persist_params
 			@newuser = User.new
 			@newuser.build_user_profile
 			redirection
+
 
 		elsif params[:user][:user_profile_attributes][:firstname].blank? || params[:user][:user_profile_attributes][:lastname].blank?
 
@@ -88,6 +93,7 @@ class UsersController < ApplicationController
 				user.password_confirmation = params[:user][:password_confirmation]
 				user.user_profile.firstname = params[:user][:user_profile_attributes][:firstname]
 				user.user_profile.lastname = params[:user][:user_profile_attributes][:lastname]
+				user.last_login = DateTime.now
 				user.save!
 
 				#create profile for the selected user type
@@ -199,7 +205,20 @@ class UsersController < ApplicationController
 		if params[:administrator]
 			redirect_to users_url
 		else
-			redirect_to root_url
+			# redirect_to root_url
+			render 'home/front'
+		end
+	end
+
+	def persist_params
+		if params[:user][:email]
+			@user_email = params[:user][:email]
+		end
+		if params[:user][:user_profile_attributes][:firstname]
+			@user_firstname = params[:user][:user_profile_attributes][:firstname]
+		end
+		if params[:user][:user_profile_attributes][:lastname]
+			@user_lastname = params[:user][:user_profile_attributes][:lastname]
 		end
 	end
 

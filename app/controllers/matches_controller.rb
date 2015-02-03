@@ -46,14 +46,6 @@ class MatchesController < ApplicationController
 					return
 				end 
 
-				if params[:filter][:size]
-					@size = params[:filter][:size]
-					@matches = @matches.in(company_size: @size.keys)
-				else
-					@matches = nil
-					return
-				end 
-
 				if params[:filter][:channel]
 					@channel = params[:filter][:channel]
 					@matches = @matches.in(channel_ids: @channel.keys)
@@ -94,13 +86,6 @@ class MatchesController < ApplicationController
 				if params[:filter][:country]
 					@country = params[:filter][:country]
 					@matches = @matches.in(country_of_origin: @country.keys)
-				else
-					@matches = nil
-					return
-				end 
-				if params[:filter][:size]
-					@size = params[:filter][:size]
-					@matches = @matches.in(company_size: @size.keys)
 				else
 					@matches = nil
 					return

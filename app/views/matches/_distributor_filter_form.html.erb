@@ -15,17 +15,6 @@
 		<br><br>
 		</div>
 	</div>
-	<div class="row filterform">					
-		<div class="small-12 columns">
-			<strong><small>Of this Size:</small></strong>
-			<% CompanySize.all.each_with_index do |co, index| %>
-				<%= render partial: "shared/filter_checkbox", locals: {field: "size", label: co.name, fid: co.id, cbid: "size_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @size), cclass: "mfsize" } %>
-			<% end %>
-			<input id="selectallsizes" name="selectallsizes" type="checkbox" style="font-color: black;" class="filter" checked/>
-			<label for="selectallsizes" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>
-		<br><br>
-		</div>
-	</div>
 	<div class="row filterform">
 		<div class="small-12 columns">
 			<strong><small>in these Sectors:</small></strong>

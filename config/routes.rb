@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :company_sizes, only: [:create, :update, :destroy]
   resources :countries, only: [:create, :update, :destroy]
   resources :channel_capacities, only: [:create, :update, :destroy]
+  resources :brand_photos, only: [:create, :destroy]
 
   post '/bulkupdate' => 'channel_capacities#bulkupdate', as: 'channel_capacity_bulkupdate'
 

@@ -2,8 +2,8 @@ class BrandPhotosController < ApplicationController
 
 
 	def create
-		if params[:product_photo]
-			newfile = params[:product_photo][:photo]
+		if params[:brand_photo]
+			newfile = params[:brand_photo][:photo]
 		end
 
 		if newfile.nil?
@@ -16,12 +16,24 @@ class BrandPhotosController < ApplicationController
 				flash[:error] = "Sorry, we're unable to upload that file"
 			end
 		end
+
+		if params[:ob]
+			redirect_to onboard_brand_five_url(:anchor => 'a-brand-photos')
+		else
+			redirect_to brand_url(:anchor => 'a-brand-photos')
+		end
+
 	end
 
 	def destroy
 		photo_to_delete = BrandPhoto.find(params[:id])
 		photo_to_delete.destroy
-		redirect_to :back
+
+		if params[:ob]
+			redirect_to onboard_brand_five_url(:anchor => 'a-brand-photos')
+		else
+			redirect_to brand_url(:anchor => 'a-brand-photos')
+		end
 
 	end
 

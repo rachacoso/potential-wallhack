@@ -7,7 +7,7 @@ class ProductPhoto
   	# :path => ':attachment/:id/:style.:extension',
 	  # :url => ":s3_domain_url",
 	  :styles => {
-	    :small    => ['100x100#'],
+	    :small    => ['100x100'],
 	    :medium		=> ['400'],
 	    :large    => ['800>']
 	  }

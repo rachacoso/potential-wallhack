@@ -3,12 +3,14 @@
 
 		<div class="profile-outer-tile">
 			<div class="row">
-				<div class="medium-3 columns">
-					<%= image_tag profile.logo.url, alt: "Logo" %>
+				<div class="medium-2 columns">
+					<%= image_tag profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
 				</div>
-				<div class="medium-6 columns">
+				<div class="medium-7 columns">
 					<h2><strong><%= profile.company_name %></strong></h2>
 					<h3><small>web</small> <strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>
+								
+					<%= simple_format(profile.brand_positioning) %>
 
 					<% if this_match(profile) %>
 						<% if i_contacted(this_match(profile)) %>
@@ -28,9 +30,11 @@
 					<span class="plt-indicator-info">Active in the past <strong><%= last_activity(profile.user.last_login) %></strong></span>
 				<% end %>
 				<br>
+
+
 				</div>
+
 				<% if controller_name == "matches" %>
-				
 				<div class="medium-3 columns text-right"><%= render partial: "contactbutton", locals: {profile: @match} %> <%= render partial: "shared/profile/components/savebutton", locals: {profile: @match} %></div>
 				<% else %>
 				<%# NEEDED FOR FORMATTING OF PROFILE VIEW IN EDITING PAGES PURPOSES%> 
@@ -120,49 +124,64 @@
 					</div><!-- /.row -->
 
 		<hr>
-					<div class="row">
-						<div class="small-12 columns">
 
-										<div class="row">
+<div class="row">
+	<div class="small-12 columns">
+		<div class="row">
+			<div class="small-12 columns">
 
-											<div class="small-12 columns">
-								
-												<div class="preview-data">
-												<span class="preview-data-tile-title"><strong>Brand Positioning</strong></span><br>
-
-												<%= simple_format(profile.brand_positioning) %>
-												</div>
-
-											</div>
-										</div>						
-						</div><!-- /.small-12 columns -->
-					</div><!-- /.row -->
-
-					<div class="row">
-						<div class="small-12 columns">
-
-										<div class="row">
-
-											<div class="small-12 columns">
-								
-												<div class="preview-data">
-												<span class="preview-data-tile-title"><strong>Press</strong></span><br>
-
-													<% if profile.press_hits.length > 0 %>
-														<% profile.press_hits.each do |p| %>
-															<%= render partial: "shared/collections_view/press_hits", locals: {
-																collitem: p
-															} %>
-														<% end %>
-													<% else %>
-														[No Press Clips]
-													<% end %>
-												</div>
-
+				<div class="preview-data">
+				<span class="preview-data-tile-title"><strong>Brand Gallery</strong></span><br>				
+				<% if profile.brand_photos %>
+					<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+					<% profile.brand_photos.each do |photo| %>
+							<li>
+								<div style="display: table; height: 120px; width: 120px; overflow: hidden; border: 1px solid gray;">
+									<div style="display: table-cell; vertical-align: middle;">
+										<div>
+											<a data-dropdown="d_<%= photo.id %>" href="#"><%= image_tag photo.photo.url(:small) %></a>
+											<div id="d_<%= photo.id %>" data-dropdown-content class="f-dropdown content medium" aria-hidden="true" tabindex="-1">
+											  <%= image_tag photo.photo.url(:large), width: "400"%>
 											</div>
 										</div>
+									</div>
+								</div>
+							</li>
+					<% end %>
+					</ul>
+				<% else %>
+					<h3>[No Brand Photos]</h3>
+				<% end %>
+				</div>
 
-						
+			</div>
+		</div>	
+	</div>
+</div>
+
+					<div class="row">
+						<div class="small-12 columns">
+
+							<div class="row">
+								<div class="small-12 columns">
+					
+									<div class="preview-data">
+									<span class="preview-data-tile-title"><strong>Press</strong></span><br>
+
+										<% if profile.press_hits.length > 0 %>
+											<% profile.press_hits.each do |p| %>
+												<%= render partial: "shared/collections_view/press_hits", locals: {
+													collitem: p
+												} %>
+											<% end %>
+										<% else %>
+											[No Press Clips]
+										<% end %>
+									</div>
+
+								</div>
+							</div>
+
 						</div><!-- /.small-12 columns -->
 					</div><!-- /.row -->
 

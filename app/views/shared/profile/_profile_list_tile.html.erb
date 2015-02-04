@@ -20,7 +20,6 @@
 						<%= ("&blk12;" * match.company_name.length).html_safe %>
 						</span></h2>
 					<% end %>
-					
 					<%  if @current_user.subscriber? && action_name != "public_profile" %>
 						<% if match.class.to_s == "Brand" %>
 							<%= simple_format(match.brand_positioning) %>
@@ -85,41 +84,46 @@
 			<% end %>
 
 
-			<div class="row">
-				<div class="medium-6 columns">
-					<%  if @current_user.subscriber? && action_name != "public_profile" %>
-						<ul class="small-block-grid-2 medium-block-grid-3 ">
-							<% if match.class.to_s == "Brand" %>
-								<% if collitem = match.products.first %>
-									<% unless collitem.product_photos.blank? %>
-										<% collitem.product_photos.each do |photo| %>
-											<li>
-											<a data-dropdown="d_<%= photo.id %>" href="#"><%= image_tag photo.photo.url(:small) %></a>
-											<div id="d_<%= photo.id %>" data-dropdown-content class="f-dropdown content medium" aria-hidden="true" tabindex="-1">
-											  <%= image_tag photo.photo.url(:large), width: "400"%>
-											</div>
-											</li>
-										<% end %>
-									<% end %>
-								<% end %>
-							<% end %>
-						</ul>
-					<% end %>
-				</div>
-				<div class="medium-6 columns">
 
-				<% if match.class.to_s == "Distributor" %>
-				<%= render partial: "shared/profile/distributor_public_profile", locals: {profile: match} %>
-				<% else %>
-				<%= render partial: "shared/profile/brand_public_profile", locals: {profile: match} %>
-				<% end %>
-
-				</div>
-			</div>
 
 
 		</div><!--/.medium-9-->
 	</div><!--/.row-->
+
+	<div class="row">
+		<div class="medium-6 columns">
+			<%  if @current_user.subscriber? && action_name != "public_profile" %>
+				<ul class="small-block-grid-2 medium-block-grid-6 ">
+					<% if match.class.to_s == "Brand" %>
+						<% if collitem = match.products %>
+							<% collitem.each do |c| %>
+									<% c.product_photos.each do |photo| %>
+										<li>
+										<a data-dropdown="d_<%= photo.id %>" href="#"><%= image_tag photo.photo.url(:small) %></a>
+										<div id="d_<%= photo.id %>" data-dropdown-content class="f-dropdown content medium" aria-hidden="true" tabindex="-1">
+										  <%= c.name %>
+										  <%= image_tag photo.photo.url(:large), width: "400"%>
+
+										</div>
+										</li>
+									<% end %>
+
+							<% end %>
+						<% end %>
+					<% end %>
+				</ul>
+			<% end %>
+		</div>
+		<div class="medium-6 columns">
+
+		<% if match.class.to_s == "Distributor" %>
+		<%= render partial: "shared/profile/distributor_public_profile", locals: {profile: match} %>
+		<% else %>
+		<%= render partial: "shared/profile/brand_public_profile", locals: {profile: match} %>
+		<% end %>
+
+	</div><!--/.medium-6-->
+</div><!--/.row-->
 
 
 </div>

@@ -6,11 +6,11 @@ class BrandPhoto
 		# :path => ':attachment/:id/:style.:extension',
 		# :url => ":s3_domain_url",  
 	  :styles => {
-	    :small    => ['100x100#',   :jpg],
+	    :small    => ['100x100',   :jpg],
 	    :large    => ['1280',   :jpg]
 	  }
 	validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 
-	belongs_to :product
+	belongs_to :brand
 
 end

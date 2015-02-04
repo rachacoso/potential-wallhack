@@ -4,10 +4,10 @@
 		<div class="profile-outer-tile">
 			<div class="row">
 
-				<div class="medium-3 columns">
-					<%= image_tag profile.logo.url, alt: "Logo" %>
+				<div class="medium-2 columns">
+					<%= image_tag profile.logo.url, width: "100", height: "100", alt: "Logo" %>
 				</div>		
-				<div class="medium-6 columns">
+				<div class="medium-7 columns">
 					<h2><strong><%= profile.company_name %></strong></h2>
 					<h3><small>web</small> <strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>
 

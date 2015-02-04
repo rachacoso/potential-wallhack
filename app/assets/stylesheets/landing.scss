@@ -871,7 +871,10 @@ $onboard-nav-radius: 4px;
 .tabs dd > a, .tabs .tab-title > a {
   // padding: 2px 2px;
   // width: 4.7rem;
-  border-radius: 5px;
+  border-radius: 5px 5px 0px 0px;
+}
+.tabs {
+  border-bottom: 1px solid $landing-middle-gray;
 }
 
 // dl.tabs {
@@ -1283,5 +1286,7 @@ $dashboard-agency-color: scale-color($landing-middle-gray, $lightness: 50%);
     text-align: center;
     z-index: 11; /* 1px higher than the overlay layer */
     display: none;
+    color: white;
+    font-weight: 700;
 }
 

@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   delete '/library_documents/:id' => 'library_documents#destroy', as: 'library_document_delete'
 
 
+
   # Deprecated
   # resources :sales_sizes, only: [:create, :update, :destroy]
   # resources :marketing_spends, only: [:create, :update, :destroy]
@@ -88,6 +89,7 @@ Rails.application.routes.draw do
   get '/matches/unsave/:match_id/:remove' => 'matches#unsave_match', as: 'unsave_match'
   get '/matches/view/:match_id/:referrer' => 'matches#view_match', as: 'view_match'
   get '/matches/contact/:match_id' => 'matches#contact_match', as: 'contact_match'
+  get '/matches/search' => 'matches#search', as: 'search'
 
   resources :messages, only: [:create, :index]
 

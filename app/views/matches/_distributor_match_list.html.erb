@@ -1,3 +1,4 @@
+
 <% if @current_user.subscriber? %>
 
 	<% if @matches.blank? %>
@@ -11,6 +12,8 @@
 					<h2>You haven't contacted any brands</h2> <br>You can contact brands on the <br><%= link_to 'All Brands', all_matches_url %> or <%= link_to 'Saved Brands', saved_matches_url %> screens.
 				<% elsif action_name == "index_incoming_matches" %>
 					<h2>No brands have contacted you</h2> <br>Make sure <%= link_to 'Your Profile', distributor_full_profile_url %> is complete.
+				<% elsif action_name == "search" %>
+					<h2>No brands found</h2> <br> Please try adjusting your search.
 				<% end %>
 			</div>
 		</div>

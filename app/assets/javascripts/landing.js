@@ -395,3 +395,12 @@ function initialize () {
   });
 }
 
+
+$(document)
+  .ajaxStart(function () {
+    $('.ajax-wait').show();
+  })
+  .ajaxStop(function () {
+    $('.ajax-wait').hide();
+  });
+

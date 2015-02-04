@@ -1255,3 +1255,33 @@ $dashboard-agency-color: scale-color($landing-middle-gray, $lightness: 50%);
 #dashboard-marketplace-container, #dashboard-insights-container, #dashboard-agency-container {
   margin-bottom: rem-calc(20);
 }
+
+// AJAX OVERLAY AND WAIT MODAL
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+}
+
+.modal {
+    width: 200px;
+    height: 100px;
+    line-height: 100px;
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+    background-color: $landing-orange;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 11; /* 1px higher than the overlay layer */
+    display: none;
+}
+

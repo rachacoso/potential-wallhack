@@ -36,10 +36,10 @@
 			</div>	
 			<div class="row">
 				<div class="medium-8 columns">
-					<%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %>
+					<%= f.text_field :country, class: "country-autocomplete", id: "export-countries-input", label: false, placeholder: 'Country' %>
 				</div>
 				<div class="medium-4 columns text-left">
-					<%= f.submit "ADD", class: "tiny button submit", style: "padding:0.3em; border-radius: 5px; background: transparent; color: blue; border: 1px solid blue;" %>
+					<%= f.submit "ADD", class: "tiny alert button submit radius", style: "margin-top: 0;" %>
 					<%#= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %>
 				</div>
 			</div>				

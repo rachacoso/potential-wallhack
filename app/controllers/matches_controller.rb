@@ -20,7 +20,7 @@ class MatchesController < ApplicationController
 				end
 			end
 			@country = @countries
-			@country_of_distribution = @countries_of_distribution.uniq
+			@country_of_distribution = @countries_of_distribution.uniq!
 			@size = CompanySize.all.pluck(:id).to_s
 			@channel = Channel.all.pluck(:id).to_s
 			# use the following only if decide to use the brand's channel selection in profile 

@@ -30,8 +30,26 @@ class ProductsController < ApplicationController
 	def update
 
 		brand = @current_user.brand
-		@collitem = brand.products.find(params[:id])
-		@collitem.update!(product_parameters)
+		# @collitem = brand.products.find(params[:id])
+		# @collitem.update!(product_parameters)
+
+		collitem = brand.products.find(params[:id])
+		collitem.update!(product_parameters)
+		@identifier = 'name'
+		@iscurrent = collitem.current
+		@new_item_id = collitem.id
+
+		if @iscurrent
+			@collection = brand.products.where(current: true)
+		else
+			@collection = brand.products.where(current: false)
+		end
+
+		if params[:ob]
+			@ob = true
+		else
+			@ob = false
+		end
 
 		respond_to do |format|
 			format.html
@@ -85,18 +103,6 @@ class ProductsController < ApplicationController
 			:current
 		)
 	end
-	def go_to_redirect(redir = nil)
 
-		if params[:ob] && redir #onboard and redirect
-			redirect_to onboard_brand_four_url + "#a-" + redir, :flash => { :make_active => redir }
-		elsif params[:ob] #onboard no redirect
-			redirect_to onboard_brand_four_url
-		elsif redir # main edit page and redirect
-			redirect_to brand_url + "#a-" + redir, :flash => { :make_active => redir }
-		else # main edit page
-			redirect_to brand_url
-		end
-
-	end
 
 end

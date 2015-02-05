@@ -17,8 +17,13 @@ class PressHitsController < ApplicationController
 
 	def update
 		u = @current_user.distributor || @current_user.brand
-		@collitem = u.press_hits.find(params[:id])
-		@collitem.update!(press_hit_parameters)
+		collitem = u.press_hits.find(params[:id])
+		collitem.update!(press_hit_parameters)
+
+		@identifier = 'source'
+		@new_item_id = collitem.id
+		
+		@collection = u.press_hits
 
 		respond_to do |format|
 			format.html

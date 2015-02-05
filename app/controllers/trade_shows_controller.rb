@@ -16,8 +16,12 @@ class TradeShowsController < ApplicationController
 
 	def update
 		u = @current_user.distributor || @current_user.brand
-		@collitem = u.trade_shows.find(params[:id])
-		@collitem.update!(trade_show_parameters)
+		collitem = u.trade_shows.find(params[:id])
+		collitem.update!(trade_show_parameters)
+
+		@identifier = 'name'
+		@new_item_id = collitem.id
+		@collection = u.trade_shows
 
 		respond_to do |format|
 			format.html

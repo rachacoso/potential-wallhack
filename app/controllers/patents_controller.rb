@@ -17,8 +17,13 @@ class PatentsController < ApplicationController
 
 	def update
 		u = @current_user.distributor || @current_user.brand
-		@collitem = u.patents.find(params[:id])
-		@collitem.update!(patent_parameters)
+		collitem = u.patents.find(params[:id])
+		collitem.update!(patent_parameters)
+
+		@identifier = 'product'
+		@new_item_id = collitem.id
+		
+		@collection = u.patents
 
 		respond_to do |format|
 			format.html

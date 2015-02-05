@@ -28,8 +28,24 @@ class DistributorBrandsController < ApplicationController
 
 	def update
 		distributor = @current_user.distributor
-		@collitem = distributor.distributor_brands.find(params[:id])
-		@collitem.update!(distributor_brand_parameters)
+		collitem = distributor.distributor_brands.find(params[:id])
+		collitem.update!(distributor_brand_parameters)
+
+		@identifier = 'brand'
+		@iscurrent = collitem.current
+		@new_item_id = collitem.id
+
+		if @iscurrent
+			@collection = distributor.distributor_brands.where(current: true)
+		else
+			@collection = distributor.distributor_brands.where(current: false)
+		end
+
+		if params[:ob]
+			@ob = true
+		else
+			@ob = false
+		end
 
 		respond_to do |format|
 			format.html

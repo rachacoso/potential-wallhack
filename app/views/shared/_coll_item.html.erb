@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="medium-12 columns">
 				<dl class="accordion" data-accordion>
-				  <dd class="accordion-navigation <%= collection_item_active(cb.id) %>">
+				  <dd id="a_head_<%= cb.id %>" class="accordion-navigation <%= collection_item_active(cb.id) %>">
 				    <a href="#a_<%= cb.id %>"><%= cb.send(identifier).empty? ? "( No Name )" : cb.send(identifier)  %>
 			    	<% if has_picture_list(cb) %>
 					   	<% if cb.product_photos %>

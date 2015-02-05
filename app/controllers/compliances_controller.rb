@@ -15,8 +15,12 @@ class CompliancesController < ApplicationController
 
 	def update
 		u = @current_user.distributor || @current_user.brand
-		@collitem = u.compliances.find(params[:id])
-		@collitem.update!(compliance_parameters)
+		collitem = u.compliances.find(params[:id])
+		collitem.update!(compliance_parameters)
+
+		@identifier = 'product_or_category'
+		@new_item_id = collitem.id
+		@collection = u.compliances
 
 		respond_to do |format|
 			format.html

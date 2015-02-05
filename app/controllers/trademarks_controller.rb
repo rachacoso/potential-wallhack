@@ -15,8 +15,12 @@ class TrademarksController < ApplicationController
 
 	def update
 		u = @current_user.distributor || @current_user.brand
-		@collitem = u.trademarks.find(params[:id])
-		@collitem.update!(trademark_parameters)
+		collitem = u.trademarks.find(params[:id])
+		collitem.update!(trademark_parameters)
+
+		@identifier = 'product'
+		@new_item_id = collitem.id
+		@collection = u.trademarks
 
 		respond_to do |format|
 			format.html

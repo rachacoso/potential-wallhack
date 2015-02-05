@@ -97,12 +97,22 @@
 
 			<h2 class="dashboard-section-title">Markets</h2>
 			<div class="panel">
-				<%= link_to 'Brazil', matches_url(:country => 'Brazil') %><br>
-				<%= link_to 'China', matches_url(:country => 'China') %><br>
-				<%= link_to 'India', matches_url(:country => 'India') %><br>
-				<%= link_to 'Korea', matches_url(:country => 'Korea') %><br>
-				<%= link_to 'Russia', matches_url(:country => 'Russia') %><br>
-				<%= link_to 'United Kingdom', matches_url(:country => 'United Kingdom') %>
+
+				<% @countries_of_distribution.sort_by{ |m| m.downcase }.each do |c| %>
+				
+					<%= form_tag all_matches_url, id: "#{c.downcase.gsub(/\s/, '-')}-form", method: 'post' do %>
+					<input type="hidden" name="filter[country_of_distribution][<%= c %>]" value="true" />
+					<input type="hidden" name="filter[all_channels]" value="true" />
+					<% end %>
+
+				<% end %>
+				<ul class="small-block-grid-2">
+				<% @countries_of_distribution.sort_by{ |m| m.downcase }.each do |c| %>
+					<li><%= link_to c, "#", :onclick => "event.preventDefault();$('##{c.downcase.gsub(/\s/, '-')}-form').submit();".html_safe, class: "marketslink" %></li>
+				<% end %>
+				</ul>
+
+
 			</div>
 
 		</div>

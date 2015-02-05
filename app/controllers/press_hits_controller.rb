@@ -1,8 +1,13 @@
 class PressHitsController < ApplicationController
+	require 'date'
 
 	def create
 		u = @current_user.distributor || @current_user.brand
 		new_item = u.press_hits.create!(press_hit_parameters)
+		if params[:press_hit][:date]
+			new_item.date = Date.strptime(params[:press_hit][:date], '%m/%d/%Y')
+			new_item.save!
+		end
 		@identifier = 'source'
 		@new_item_id = new_item.id
 		
@@ -19,7 +24,11 @@ class PressHitsController < ApplicationController
 		u = @current_user.distributor || @current_user.brand
 		collitem = u.press_hits.find(params[:id])
 		collitem.update!(press_hit_parameters)
-
+		if params[:press_hit][:date]
+			collitem.date = Date.strptime(params[:press_hit][:date], '%m/%d/%Y')
+			collitem.save!
+		end
+		
 		@identifier = 'source'
 		@new_item_id = collitem.id
 		
@@ -67,7 +76,7 @@ class PressHitsController < ApplicationController
   def press_hit_parameters
     params.require(:press_hit).permit(
 			:source,
-			:date,
+			# :date,
 			:quotes,
 			:link,
 			:file

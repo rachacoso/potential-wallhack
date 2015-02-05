@@ -344,7 +344,7 @@ function initialize () {
   });
 
   $('.datepick_full').fdatepicker({
-    format: "dd/mm/yyyy",
+    format: "mm/dd/yyyy",
     startView: 2,
     minViewMode: 2
   });

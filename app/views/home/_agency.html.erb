@@ -1,24 +1,63 @@
+
+<% if @current_user.distributor %>
+
 	<div class="row">
 		<div class="small-12 columns">
-			<h2 class="dashboard-section-title">Message Center</h2>
+			<h2 class="dashboard-section-title">Coming Soon</h2>
 			<div class="panel">
-					
-				<h4>No Messages</h4>
+
+				<p>The Landing International Agency is a full-service international development agency that works with distributors to identify and sign brands for distribution or licensing partnerships in their markets.</p>
 
 			</div>
-			<h2 class="dashboard-section-title">Task List</h2>
+			<h2 class="dashboard-section-title">Contact Us</h2>
 			<div class="panel">
-				<ul>
-					<li> Thing to do
-					<li> Thing to do
-					<li> Thing to do
-				</ul>
-			</div>
-			<h2 class="dashboard-section-title">Live Chat</h2>
-			<div class="panel" style="min-height: 10em;">
-				<p>>> Waiting for account manager...</p>
+
+				<p>Email <a href="mailto:agency@landinginternational.com">agency@landinginternational.com</a> for more information.</p>
+
 			</div>
  
 
 		</div>
 	</div>
+
+
+<% elsif @current_user.brand %>
+
+
+	<div class="row">
+		<div class="small-12 columns">
+			<h2 class="dashboard-section-title">Coming Soon</h2>
+			<div class="panel">
+
+				<p>The Landing International Agency is a full-service international development agency that works with brands to create an international expansion strategy, identify and qualify distribution partners, negotiate agreements and manage distributor relationships. We serve as an extension of our clients’ teams to create revenue opportunities and grow their international business.</p>
+
+			</div>
+
+
+			<h2 class="dashboard-section-title"> Features/Benefits</h2>
+			<div class="panel">
+				<ul>
+					<li>Customized strategy and business plan for international expansion</li>
+					<li>Dedicated account executive to source and close international deals</li>
+					<li>Increase profitability of international deals</li>
+					<li>Monitor, support, equip your distributor partners</li>
+					<li>Centralized system for order management and communications</li>
+					<li>Support your partners with marketing and new product information</li>
+					<li>Efficiency in managing relationships</li>
+				</ul>
+			</div>
+
+			<h2 class="dashboard-section-title">Contact Us</h2>
+			<div class="panel">
+
+				<p>Email <a href="mailto:agency@landinginternational.com">agency@landinginternational.com</a> for more information.</p>
+
+			</div>
+ 
+
+		</div>
+	</div>
+
+
+
+<% end %>

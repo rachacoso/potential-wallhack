@@ -1,0 +1,51 @@
+<div class="groupwrapper">
+
+<!-- 	<div class="rowitem">				
+		<div class="rowheadback">
+			<div class="row">
+				<div class="medium-8 columns">
+					Distribution Countries
+				</div>
+				<div class="medium-4 columns">
+					&nbsp;
+				</div>
+			</div>
+		</div>	
+	</div>	 -->
+<br>
+	<div id="export-countries-list">	
+		
+		<%= render "shared/profileform/export_countries_list" %>
+
+	</div>					
+
+	<div class="rowitem">
+	<div class="row">
+		<div class="medium-12 columns">
+			<hr>
+			<%= form_for @new_export_country, :html => { :id => "new_export_country" }, remote: true do |f| %>
+			<div class="rowheadback addnew">
+				<div class="row">
+					<div class="medium-8 columns">
+						Add a Country
+					</div>
+					<div class="medium-4 columns">
+						&nbsp;
+					</div>
+				</div>
+			</div>	
+			<div class="row">
+				<div class="medium-8 columns">
+					<%= f.text_field :country, class: "country-autocomplete", label: false, placeholder: 'Country' %>
+				</div>
+				<div class="medium-4 columns text-left">
+					<%= f.submit "ADD", class: "tiny button submit", style: "padding:0.3em; border-radius: 5px; background: transparent; color: blue; border: 1px solid blue;" %>
+					<%#= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %>
+				</div>
+			</div>				
+			<% end %>
+		</div>
+	</div>
+	</div>
+
+</div> <!-- /.groupwrapper -->

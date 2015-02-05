@@ -23,20 +23,36 @@
 				  <span class="meter" style="width: <%= percentf %>%"></span>
 				</div>
 				<small>[some info on your full profile]</small>
+
+
+				<hr>
+
+				<h3>Your <strong><%= link_to 'RATING', brand_full_profile_url %></strong> is <strong>3</strong> out of <strong>5</strong> [stars].</h3>
+				
+				<p>[image of rating here... are we using stars? discs? something else?]</p>
+				<small>[Blah blah here about how to improve your rating... and RATING above links to section of profile that incorporates]</small>
+
 			</div>
 
-			<h2 class="dashboard-section-title">Rating</h2>
+
+
+			<h2 class="dashboard-section-title">Find Brands</h2>
 			<div class="panel">
-				<small>You have <strong>3</strong> points of 6 total.</small>
+				<%= link_to 'Find Brands', matches_url %>
 			</div>
 
+
+			<h2 class="dashboard-section-title">Markets</h2>
+			<div class="panel">
+				<%= link_to 'Find Brands', matches_url %>
+			</div>
 
 
 		</div>
 	</div>
-<% end %>
 
-<% if @current_user.brand %>
+
+<% elsif @current_user.brand %>
 
 	<div class="row">
 		<div class="small-12 columns">
@@ -48,27 +64,47 @@
 			<h2 class="dashboard-section-title">Profile Center</h2>
 			<div class="panel">
 				<% percentp = check_brand_public_profile %>
-				Your <strong><%= link_to 'Public Profile', brand_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> Complete!<br><br>
+				<h3>Your <strong><%= link_to 'Public Profile', brand_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> Complete!</h3>
 				<div class="progress small-12 <%= percentp == 100 ? "success" : "" %>">
 				  <span class="meter text-center" style="width: <%= percentp %>%"><small class="text-right"></small></span>
 				</div>
 				<small>[some info on your public profile]</small>
+
 				<hr>
 
 				<% percentf = check_brand_full_profile %>
-				Your <strong><%= link_to 'Full Profile', brand_full_profile_url %></strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> Complete!<br><br>
+				<h3>Your <strong><%= link_to 'Full Profile', brand_full_profile_url %></strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> Complete!</h3>
 				<div class="progress small-12 <%= percentf == 100 ? "success" : "" %>">
 				  <span class="meter" style="width: <%= percentf %>%"></span>
 				</div>
 				<small>[some info on your full profile]</small>
+
+				<hr>
+
+
+				<h3>Your <strong><%= link_to 'RATING', brand_full_profile_url %></strong> is <strong>3</strong> out of <strong>5</strong> [stars].</h3>
+				
+				<p>[image of rating here... are we using stars? discs? something else?]</p>
+				<small>[Blah blah here about how to improve your rating... and RATING above links to section of profile that incorporates]</small>
+
+			</div>
+			
+
+			<br><br>
+			<div class="text-center">
+			<%= link_to 'Find Distributors', matches_url, class: 'button large alert' %>
 			</div>
 
-			<h2 class="dashboard-section-title">Rating</h2>
+			<h2 class="dashboard-section-title">Markets</h2>
 			<div class="panel">
-				<small>You have <strong>3</strong> points of 6 total.</small>
-				<p>[Blah blah here about how to improve your rating]</p>
+				<%= link_to 'Brazil', matches_url(:country => 'Brazil') %><br>
+				<%= link_to 'China', matches_url(:country => 'China') %><br>
+				<%= link_to 'India', matches_url(:country => 'India') %><br>
+				<%= link_to 'Korea', matches_url(:country => 'Korea') %><br>
+				<%= link_to 'Russia', matches_url(:country => 'Russia') %><br>
+				<%= link_to 'United Kingdom', matches_url(:country => 'United Kingdom') %>
 			</div>
-	
+
 		</div>
 	</div>
 

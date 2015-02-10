@@ -1,38 +1,184 @@
 <%= render partial: "shared/topbar" %>
 
-<% content_for :subnav do %>
+<% content_for :css_head do %>
+	<style>
+		body{
+/*			background: transparent url("/images/map.svg") fixed center;
+			background-size: 85%;
+			background-repeat: no-repeat;*/
+		}
+	</style>
 <% end %>
 
 <div class="row">
-	<div class="small-12 columns">
-		<ul class="breadcrumbs marketplace">
-			<% matchtype = @current_user.distributor ? "Brand" : "Distributor" %>
-		  <li class="current"><%= render "shared/imageswap/marketplace_logo" %> <%= link_to "Your #{matchtype} Matches", "#" %></li>
-		</ul>
-	</div>
-</div>
+	<div class="medium-2 hide-for-small-only columns text-right" id="side-nav-container">
+		<%= render 'shared/matches/side_nav' %>
+	</div><!--/.medium-4 hide-for-small-only -->
+
 
 <% if @current_user.send(@current_user.type?).sectors.blank? %>
 	
-	<div class="row">
-		<div class="small-12 columns text-center">
+	
+		<div class="small-12 medium-10 columns text-center">
 			<h2><strong>You don't have you SECTOR designated in 
 				<%= link_to 'Your Profile', eval("#{@current_user.type?}_url(:anchor => 'a-sectors')") %>
 			</strong> <br>
 			You can't get matched with <%=@current_user.type_inverse?.capitalize%>s without a designated SECTOR.</h2>
 		</div>
-	</div>
-
+	
 <% else %>
 
-	<% if @current_user.brand %>
+	<% case @current_user.type? %>
+	<% when 'brand'%>
 
-		<%= render partial: "brand" %>
 
-	<% else %>
+		<div class="small-12 medium-10 columns">
+		<div id="match-map-container">
+			<div class="row show-for-small-only">
+				<div class="small-12 columns">
+					<h2>Find a Distributor for:</h2>		
+				</div><!--/.small-12-->
+			</div>
 
-		<%= render partial: "distributor" %>
+			<div id="match-reset" class="hide-for-small-only">
+			<% if @matches %><h3><strong><%= render "counts" %></strong></h3><% end %>
+			<h4><%= link_to '> search another country', all_matches_url %></h4>
+			</div>
+
+			<div id="match-list">
+				<div class="row">
+					<div class="small-12 columns" >
+						<% if @country %>
+							<%= render 'brand_match_list' %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+
+
+			<div id="match-search">
+				<%= render partial: "brand_search_start" %>
+			</div>
+		</div><!--/.match-map-container -->
+		</div><!--/.small-12 medium-9-->
+	</div><!--/.row-->
+
+
+
+		<% if @country %>
+			<% content_for :javascript_foot do %>
+				<%= javascript_tag do %>
+					$( document ).ready(function() {
+
+						var country = $('#match-<%=@country%>');
+						var countryAnchor = $('#match-<%=@country%> a');
+						var titleBlock = $('#match-title');
+						var title = $('#match-title h2');
+						var theRest = $('<%=@rest %>');
+						var reset = $('#match-reset');
+						var list = $('#match-list');
+						var map = $('#match-map-container');
+
+						setTimeout(function() {
+							theRest.fadeTo(500, 0, function(){
+								theRest.css('visibility', 'hidden');
+							}); // duration, opacity, callback
+						}, 250);
+
+						setTimeout(function() {
+							country.animate({"left" : "30px", "top" : "3%"}, 500);
+							countryAnchor.animate({"font-size" : "1em"}, 500);
+							countryAnchor.attr("href", "<%= all_matches_url %>");
+							countryAnchor.css("background", "rgba(0,0,0,0.6)");
+							titleBlock.animate({"left" : "30px"}, 500);
+							title.animate({"font-size" : "1em"}, 500);
+							list.fadeIn(500);
+							map.css('background', 'transparent');
+						}, 500);
+
+						setTimeout(function() {
+							reset.css('visibility', 'visible');
+						}, 750);
+
+					});
+				<% end %>
+			<% end %>
+		<% end %>
+
+	<% when 'distributor' %>
+
+
+
+		<div id="match-title" class="hide-for-small-only">
+		<h2>Browse brands in:</h2>
+		</div>
+		<div class="row show-for-small-only">
+			<div class="small-12 columns">
+				<h2>Browse brands in:</h2>		
+			</div><!--/.small-12-->
+		</div>
+
+		<div id="match-reset" class="hide-for-small-only">
+		<% if @matches %><h3><strong><%= render "counts" %></strong></h3><% end %>
+		<h4><%= link_to '> browse another sector', all_matches_url %></h4>
+		</div>
+
+		<div id="match-list">
+			<div class="row">
+				<div class="small-12 columns" style="padding-left: 0px; padding-right: 0px;">
+					<% if @sector %>
+						<%= render 'distributor_match_list' %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="match-search">
+			<%= render partial: "distributor_search_start" %>
+		</div>
+
+		<% if @sector %>
+			<% content_for :javascript_foot do %>
+				<%= javascript_tag do %>
+					$( document ).ready(function() {
+
+						var sector = $('#match-<%=@sector%>');
+						var sectorAnchor = $('#match-<%=@sector%> a');
+						var titleBlock = $('#match-title');
+						var title = $('#match-title h2');
+						var theRest = $('<%=@rest %>');
+						var reset = $('#match-reset');
+						var list = $('#match-list');
+
+						setTimeout(function() {
+							theRest.fadeTo(500, 0, function(){
+								theRest.css('visibility', 'hidden');
+							}); // duration, opacity, callback
+						}, 250);
+
+						setTimeout(function() {
+							sector.animate({"left" : "30px", "top" : "22%"}, 500);
+							sectorAnchor.animate({"font-size" : "1.5em"}, 500);
+							sectorAnchor.attr("href", "<%= all_matches_url %>");
+							sectorAnchor.css("background", "rgba(0,0,0,0.6)");
+							titleBlock.animate({"left" : "30px"}, 500);
+							title.animate({"font-size" : "1em"}, 500);
+							list.animate({"left" : "25%"}, 500);
+						}, 500);
+
+						setTimeout(function() {
+							reset.css('visibility', 'visible');
+						}, 750);
+
+					});
+				<% end %>
+			<% end %>
+		<% end %>
+
 
 	<% end %>
 
+
 <% end %>
+

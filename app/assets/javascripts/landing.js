@@ -21,16 +21,29 @@ $( document ).ready(function() {
 // });
 
 
+// for background map on matches
+  var divWidth = $('#match-map-container').width();
+  var setHeight = divWidth / 1.9;
+  $('#match-map-container').height( setHeight );
+
+  $(window).on('resize', function(e){
+    var divWidth = $('#match-map-container').width();
+    var setHeight = divWidth / 1.9;
+    $('#match-map-container').height( setHeight );
+  });
+
+
+
 // for autocomplete
   var countriesArray = $.map(countries, function (value, key) { return { value: value, data: key }; });
 
 // Background Img
-	if (hasBG) {
-		$.backstretch( bgImage, {fade: 500});	
-	} else {
-		var bg = (typeof bgColor != 'undefined') ? bgColor : bgDefaultColor
-		$( 'body' ).css( "background", bg );
-	};
+	// if (hasBG) {
+	// 	$.backstretch( bgImage, {fade: 500});	
+	// } else {
+	// 	var bg = (typeof bgColor != 'undefined') ? bgColor : bgDefaultColor
+	// 	$( 'body' ).css( "background", bg );
+	// };
 
   // FOR FORM COUNTRY AND DATE FIELDS
   initialize();
@@ -306,8 +319,8 @@ $( document ).ready(function() {
     $(document).foundation('equalizer', 'reflow');      
   });
 
-});
 
+});
 
 
 $(document).foundation({

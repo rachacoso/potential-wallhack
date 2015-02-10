@@ -1,0 +1,16 @@
+
+<% sectors = Sector.all %>
+<% sectors.each do |s| %>
+<div class="hide-for-small-only" id="match-<%=s.id%>">
+	<%= link_to s.name, all_matches_url(:sector => s.id), class: "match-map" %>
+</div>
+<% end %>
+
+<div class="row show-for-small-only">
+	<div class="small-12 columns">
+		<% sectors.each do |s| %>
+			<%= link_to s.name, all_matches_url%><br>
+		<% end %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+

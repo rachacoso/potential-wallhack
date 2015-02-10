@@ -3,7 +3,7 @@
 
 	<% if @matches.blank? %>
 		<div class="row">
-			<div class="small-10 small-centered columns previewtile text-center">
+			<div class="small-10 small-centered columns previewtile match-empty text-center">
 				<% if action_name == "index" %>
 					<h2>No Brands</h2> <br>Please try altering your filter selections.
 				<% elsif action_name == "index_saved_matches" %>
@@ -19,25 +19,24 @@
 		</div>
 	<% else %>
 
-		<div class="row">
+		<div class="row" style="padding: 0px;">
 			<div class="small-12 columns">
 
 				<table width="100%">
-					  <thead>
-					  	<tr><th width="800" colspan="2">
-								<%= render "counts" %>
-					  	</th></tr>		  	
-					  </thead>
+
 				  	<tbody>
+
 						<% @matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
 						<tr id="pot_<%= match.id %>">
 							<td>
 
-							<%= render partial: "shared/profile/profile_list_tile", locals: {match: match} %>
+							<%= render partial: "shared/profile/profile_list_tile_small", locals: {match: match} %>
 
 							</td>
+
 						</tr>
 						<% end %>
+
 						</tbody>
 			</table>
 			</div>
@@ -52,7 +51,7 @@
 		<% if @matches.blank? %>
 			<div class="row">
 				<div class="small-10 small-centered columns previewtile text-center">
-						<h2>No Brands</h2> <br>Please try altering your filter selections.
+						<h2>No Distributors</h2> <br>Please try altering your filter selections.
 				</div>
 			</div>
 		<% else %>
@@ -67,6 +66,7 @@
 						  	</th></tr>			  	
 						  </thead>
 					  	<tbody>
+
 							<% @matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
 							<tr id="pot_<%= match.id %>">
 								<td>

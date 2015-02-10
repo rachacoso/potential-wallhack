@@ -1,19 +1,11 @@
 
 <%= render partial: "shared/topbar" %>
 
-<% content_for :javascript_foot do %>
-	<%= javascript_tag do %>
-
-	<% end %>
-<% end %>
-
 <div class="row">
-	<div class="large-12 columns">
-		<ul class="breadcrumbs marketplace">
-		  <li class="current"><%= render "shared/imageswap/marketplace_logo" %> <%= link_to "Your #{@current_user.type?} profile", "#" %></li>
-		</ul>					
-	</div>
-</div>
+	<div class="medium-2 hide-for-small-only columns text-right" id="side-nav-container">
+		<%= render 'shared/matches/side_nav' %>
+	</div><!--/.medium-4 hide-for-small-only -->
+	<div class="small-12 medium-10 columns">
 
 
 <div class="row">
@@ -53,3 +45,7 @@
 
 		</div><!-- /.medium-9 columns previewtile medium-centered -->
 	</div><!-- /.row -->
+
+	</div>
+</div>
+

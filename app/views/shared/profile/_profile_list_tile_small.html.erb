@@ -1,0 +1,84 @@
+
+<div class="profile-list-tile-small">
+
+	<div class="row">
+		<div class="medium-1 columns">
+			<% if @current_user.subscriber? && action_name != "public_profile"  %>
+			<%= image_tag match.logo.url(:medium), width: "40", height: "40", alt: "Logo" %>
+			<% else %>
+			<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= match.class.to_s %> logo hidden. Subscribe to view full profile"><%= image_tag match.logo.url(:public), width: "40", height: "40", alt: "Logo" %></span>
+			<% end %>
+		</div>
+		<div class="medium-11 columns">
+			<div class="row">
+				<div class="small-4 columns">
+					<% if @current_user.subscriber? && action_name != "public_profile" %>
+						<strong><%= link_to match.company_name, view_match_url(match.id, action_name) %></strong>
+					<% else %>
+						<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= match.class.to_s %> name hidden. Subscribe to view full profile">
+						<%= ("&blk12;" * match.company_name.length).html_safe %>
+						</span>
+					<% end %>				
+				</div><!--/.small-4-->
+				<div class="small-8 columns text-right">
+
+					<% if @current_user.subscriber? && action_name != "public_profile"  %>
+						<div class="row">
+							<div class="small-12 columns">
+
+								<% m = this_match(match) %>
+								<% if action_name == "index" || action_name == "index_saved_matches" %>		
+									<% if m %>
+										<% if i_contacted(m) %>
+											<span class="plt-indicator-info"><strong>You Contacted</strong> <%= match.company_name %></span>
+										<% else %>
+											<% if m.accepted %>
+												<span class="plt-indicator-info"><%= match.company_name %> <strong>Contacted You</strong></span>
+											<% end %>
+										<% end %>
+									<% end %>
+								<% end %>
+
+								<% if action_name == "index" || action_name == "index_saved_matches" || action_name == "index_contacted_matches" || action_name == "index_incoming_matches" %>
+									<% if m %>
+										<% if m.messages.blank? && m.initial_contact_by == @current_user.type? %>
+											<span class="plt-indicator-info">Awaiting Response</span>
+										<% end %>
+										<% unless m.messages.blank? %>
+											<span class="plt-indicator-info">In Conversation</span>
+										<% end %>
+									<% end %>
+								<% end %>
+
+								<% if match.user.last_login %>
+									<span class="plt-indicator-info">Active in the past <strong><%= last_activity(match.user.last_login) %></strong></span>
+								<% end %>
+
+								<br>
+
+								<% has_unread, count = unread_count_from_match(match) %>
+								<% if has_unread %>
+								<span class="plt-indicator-alert"><%= count %> unread message<%= count > 1 ? "s" : "" %></span>
+								<% end %>
+								<% if m %>
+								<%= !m.accepted && !i_contacted(m) ? "<span class='plt-indicator-alert'>NEW contact request from #{match.company_name}</span>".html_safe : "" %>
+								<% end %>
+
+							</div>
+						</div>
+					<% end %>				
+					
+				</div><!--/.small-8-->
+			</div><!--/.row-->	
+
+			<div class="row">
+				<div class="small-12 columns">
+						
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+
+
+		</div><!--/.medium-11-->
+
+	</div>
+</div>

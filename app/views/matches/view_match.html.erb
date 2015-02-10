@@ -1,8 +1,14 @@
 
 <%= render partial: "shared/topbar" %>
 
+<div class="row">
+	<div class="medium-2 hide-for-small-only columns text-right" id="side-nav-container">
+		<%= render 'shared/matches/side_nav' %>
+	</div><!--/.medium-4 hide-for-small-only -->
 
-<% content_for :subnav do %>
+	<div class="medium-10 small-12 columns">
+
+
 
 <div class="row">
 	<div class="small-12 columns">
@@ -10,7 +16,7 @@
 			<li><%= render "shared/imageswap/marketplace_logo" %>
 			<% if @referrer %>
 				<% matchtype = @current_user.type_inverse? %>
-				<%= link_to "Your #{matchtype} Matches", all_matches_url %></li>
+				<%= link_to "Find #{matchtype}s", all_matches_url %></li>
 
 				<% if @referrer == "index_saved_matches" %>  
 				  <li><%= link_to "Saved #{matchtype}s", saved_matches_url %><img src="/images/breadcrumb_shim.gif" height="30" width="2" alt="Marketplace" style="visibility: hidden;"/></li>
@@ -29,7 +35,6 @@
 </div>
 
 
-<% end %>
 
 <div id="match-view">
 
@@ -38,7 +43,8 @@
 </div> <!-- /.#match-view -->
 
 
-
+	</div><!--/.medium-10-->
+</div>
 
 
 

@@ -1,5 +1,5 @@
 var hasBG = typeof bgImage != 'undefined';
-var bgDefaultColor = "#FFFFFF";
+var bgDefaultColor = "#B3B3B3";
 
 
 $( document ).ready(function() {
@@ -26,11 +26,17 @@ $( document ).ready(function() {
   var setHeight = divWidth / 1.9;
   $('#match-map-container').height( setHeight );
 
+  // // set min height for content area
+  // var sideWidth = $('#side-nav-content').width();
+  // var sideHeight = sideWidth / 1.9;
+  // $('#side-nav-content').css('min-height' , sideHeight );
+
   $(window).on('resize', function(e){
     var divWidth = $('#match-map-container').width();
     var setHeight = divWidth / 1.9;
-    $('#match-map-container').height( setHeight );
+    $('#match-map-container').height( setHeight );    
   });
+
 
 
 
@@ -38,12 +44,12 @@ $( document ).ready(function() {
   var countriesArray = $.map(countries, function (value, key) { return { value: value, data: key }; });
 
 // Background Img
-	// if (hasBG) {
-	// 	$.backstretch( bgImage, {fade: 500});	
-	// } else {
-	// 	var bg = (typeof bgColor != 'undefined') ? bgColor : bgDefaultColor
-	// 	$( 'body' ).css( "background", bg );
-	// };
+	if (hasBG) {
+		$.backstretch( bgImage, {fade: 500});	
+	} else {
+		var bg = (typeof bgColor != 'undefined') ? bgColor : bgDefaultColor
+		$( 'body' ).css( "background", bg );
+	};
 
   // FOR FORM COUNTRY AND DATE FIELDS
   initialize();

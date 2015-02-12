@@ -1,16 +1,46 @@
 
-<% sectors = Sector.all %>
-<% sectors.each do |s| %>
-<div class="hide-for-small-only" id="match-<%=s.id%>">
-	<%= link_to s.name, all_matches_url(:sector => s.id), class: "match-map" %>
-</div>
-<% end %>
+<% if @current_user.distributor.sectors %>
 
-<div class="row show-for-small-only">
-	<div class="small-12 columns">
-		<% sectors.each do |s| %>
-			<%= link_to s.name, all_matches_url%><br>
+	<% sectors = Sector.find(@current_user.distributor.sector_ids) %>
+
+	<% content_for :css_head do %>
+	
+		<style>
+		<% length = sectors.length %>
+		<% if length > 1 %>
+			<% start_loc = 50 - ((15 * (length - 1))/2).round %>
+		<% else %>
+			<% start_loc = 50 %>
 		<% end %>
-	</div><!--/.small-12-->
-</div><!--/.row-->
+		<% sectors.each_with_index do |s, index| %>
+			#match-<%= s.id %> {
+			  position: absolute;
+			  left: 35%;
+			  top: <%= start_loc + (15 * index)%>%;
+			}
+		<% end %>
+		</style>
 
+	<% end %>
+
+	<% sectors.each do |s| %>
+	<div class="hide-for-small-only" id="match-<%=s.id%>">
+		<%= link_to s.name, all_matches_url(:sector => s.id), class: "match-map" %>
+	</div>
+	<% end %>
+
+	<div class="row show-for-small-only">
+		<div class="small-12 columns">
+			<% sectors.each do |s| %>
+				<%= link_to s.name, all_matches_url%><br>
+			<% end %>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+
+<% else %>
+	<div class="row">
+		<div class="small-12 columns">
+			<h1>You must have at least one sector selected in your profile to see matches.</h1>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+<% end %>

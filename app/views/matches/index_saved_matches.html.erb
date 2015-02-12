@@ -2,24 +2,22 @@
 <%= render partial: "shared/topbar" %>
 
 
-<div class="row">
+<div class="row collapse">
 	<div class="medium-2 hide-for-small-only columns text-right" id="side-nav-container">
 		<%= render 'shared/matches/side_nav' %>
 	</div><!--/.medium-4 hide-for-small-only -->
 
-	<div class="medium-10 small-12 columns">
-		<div id="match-map-container">
-			<% unless @matches.blank? %>
-			<div class="saved-contacted-match-header">
-			<small><strong><%= render "counts" %></strong></small>
-			</div>	
-			<% end %>
-			<div class="saved-contacted-match-list">
-			<%= render "#{@current_user.type?}_match_list" %>
-			</div>
+	<div class="medium-10 small-12 columns" id="side-nav-content">
+
+		<% unless @matches.blank? %>
+		<div class="saved-contacted-match-header">
+		<small><strong><%= render "counts" %></strong></small>
+		</div>	
+		<% end %>
+		<div class="saved-contacted-match-list">
+		<%= render "#{@current_user.type?}_match_list" %>
 		</div>
 
-		
 	</div><!--/.medium-10-->
 </div>
 

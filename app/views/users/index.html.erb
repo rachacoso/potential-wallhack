@@ -81,7 +81,11 @@
 		<div class="row">
 			<div class="small-10 small-centered columns panel">
 				<h3><strong>Distributors</strong></h3><hr>
+				<% if !@distributors.empty? %>
 				<%= render partial: @distributors.sort_by { |d| d.distributor.company_name }, spacer_template: "shared/indexspacer" %>
+				<% else %>
+				<h3><em>No Distributors</em></h3>
+				<% end %>
 			</div>
 		</div>
 	</div>
@@ -90,7 +94,11 @@
 		<div class="row">
 			<div class="small-10 small-centered columns panel">
 				<h3><strong>Brands</strong></h3><hr>
+				<% if !@brands.empty? %>
 				<%= render partial: @brands.sort_by { |b| b.brand.company_name }, spacer_template: "shared/indexspacer" %>
+				<% else %>
+				<h3><em>No Brands</em></h3>
+				<% end %>				
 			</div>
 		</div>
 	</div>

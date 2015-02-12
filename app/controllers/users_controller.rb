@@ -220,6 +220,9 @@ class UsersController < ApplicationController
 		if params[:user][:user_profile_attributes][:lastname]
 			@user_lastname = params[:user][:user_profile_attributes][:lastname]
 		end
+		if params[:user_type]
+			@user_type = params[:user_type]
+		end
 	end
 
 	def administrators_only

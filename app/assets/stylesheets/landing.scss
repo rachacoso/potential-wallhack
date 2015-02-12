@@ -6,6 +6,13 @@ body {
   min-height: 100%;
 }
 
+h1, h2, h3 {
+  font-weight: 100;
+}
+h4, h5, h6 {
+  font-weight: 200;
+}
+
 // div {
 //   border: 1px solid red; 
 // }
@@ -663,12 +670,13 @@ $onboard-nav-radius: 4px;
 
 // Onboarding Info Text
 .onboard-instructions {
-  border: 1px dotted scale-color($link-color, $lightness: 70%);
+  // border: 1px dotted scale-color($link-color, $lightness: 70%);
   border-radius: 8px;
   padding: 1em;
   color: $body-font-color;
   margin-bottom: 1em;
-  @include transparent($landing-blue, 0.3);
+  // @include transparent($landing-blue, 0.3);
+  background: scale-color($landing-blue, $lightness: 70%);
   &.smaller {
     font-size: 0.75em;
     line-height: 1.5em;
@@ -690,7 +698,7 @@ $onboard-nav-radius: 4px;
 
 .profile-edit-form-onboard {
   border-radius: 3px; 
-  border: 1px dotted scale-color($link-color, $lightness: 50%);
+  // border: 1px dotted scale-color($link-color, $lightness: 50%);
   padding: 0em 1em;
   margin: 0.5em 0em 1.5em 0em;
   h1 {
@@ -699,6 +707,7 @@ $onboard-nav-radius: 4px;
     font-weight: 100;
     border-bottom: 1px solid $landing-dark-gray;
   }
+  background: white;
 }
 
 // Preview Tiles
@@ -1099,6 +1108,23 @@ top: 10px;
    min-height: rem-calc(200);
 }
 
+.profile-list-tile-small {
+   border: 1px solid $landing-middle-gray;
+   border-radius: 1em;
+   background: white;
+   padding: 1em;
+}
+
+.profile-list-tile-small-sq {
+   border: 1px solid $landing-middle-gray;
+   width: rem-calc(175);
+   height: rem-calc(175);
+   border-radius: 1em;
+   background: white;
+   padding: 1em;
+   margin: 0.5em;
+}
+
 .message-index-indicator {
   @include label(
     // This options sets label padding
@@ -1309,11 +1335,28 @@ $dashboard-agency-color: scale-color($landing-middle-gray, $lightness: 50%);
 #match-map-container {
   position: relative;
   background: transparent url("/images/map.svg");
-  background-position:  top;
-  background-size: 100%;
+  background-position:  center;
+  background-size: 95%;
   background-repeat: no-repeat;
-  // border: 1px dotted gray;
 }
+.match-map-overlay {
+  @include transparent(#fff, 0.4);
+  height: 100%
+}
+#side-nav-container {
+  background: $landing-light-gray;
+  border-radius: 9px 0px 0px 9px;
+}
+
+#side-nav-content {
+  border: 1px solid $landing-light-gray;
+  border-radius: 0px 9px 9px 9px;
+  background: white;
+  padding: 1em;
+  margin-bottom: 2em;
+  min-height: 80vh;
+}
+
 //BRAND
 #match-russia, {
   position: absolute;
@@ -1322,17 +1365,17 @@ $dashboard-agency-color: scale-color($landing-middle-gray, $lightness: 50%);
 }
 #match-china {
   position: absolute;
-  left: 76%;
+  left: 74%;
   top: 34%;
 }
 #match-korea {
   position: absolute;
-  left: 84%;
+  left: 83%;
   top: 31%;
 }
 #match-india {
   position: absolute;
-  left: 69%;
+  left: 68%;
   top: 47%;
 }
 #match-brazil {
@@ -1347,26 +1390,7 @@ $dashboard-agency-color: scale-color($landing-middle-gray, $lightness: 50%);
 }
 
 
-//DISTRIBUTOR
 
-// #match-baby/kids
-#match-5418b657706f72e34f070000 {
-  position: absolute;
-  left: 35%;
-  top: 25%;
-}
-// #match-fashion
-#match-5418b661706f72e34f080000 {
-  position: absolute;
-  left: 35%;
-  top: 40%;
-}
-// #match-personalcare
-#match-5418b64f706f72e34f060000 {
-  position: absolute;
-  left: 35%;
-  top: 55%;
-}
 
 #match-title {
   position: absolute;
@@ -1376,25 +1400,21 @@ $dashboard-agency-color: scale-color($landing-middle-gray, $lightness: 50%);
 }
 
 #match-reset {
-  position: absolute;
-  left: 30px;
-  top: 10%;
-  background: white;
-  visibility: hidden;
+margin-bottom: 1em;
+  h1 {
+    font-weight: 100;
+  }
 }
 
 #match-list {
-  position: absolute;
+  // position: relative;
   padding: 0em;
-  top: 3%;
-  left: 25%;
-  max-height:70%;
-  width:73%;
+  // top: 75px;
+  // left: 5%;
+  width:100%;
   z-index: 10;
-  border: 1px dotted rgba(0,0,0,0.2);
-  overflow-y: scroll;
-  overflow-x: hidden;
-  display:none;
+  // border: 1px dotted rgba(0,0,0,0.2);
+  margin-bottom: 5em;
 }
 
 a.match-map {
@@ -1403,7 +1423,7 @@ a.match-map {
   padding: rem-calc(3);
   padding-top: rem-calc(2) !important;
   font-weight: 100;
-  font-size: rem-calc(15);
+  font-size: rem-calc(25);
   border: 1px solid black;
   border-radius: 3px;
 }
@@ -1413,16 +1433,15 @@ a.match-map:hover {
 }
 
 .saved-contacted-match-list {
-  background: transparent;
-  border: 5px solid rgba(0,0,0,0.2);
+  // @include transparent(#fff, 0.4);
+  // border: 5px solid rgba(0,0,0,0.2);
+  // position: absolute;
   padding-top:0px;
-  max-height: 500px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  top: 0;
 }
 
 .saved-contacted-match-header {
-  background: rgba(255,255,255,0.6);
+  // background: rgba(255,255,255,0.6);
   padding: 1em;
 }
 
@@ -1443,3 +1462,12 @@ a.match-map:hover {
 .side-nav li.active > a {
   color: red !important;
 }
+
+
+// MESSAGE CENTER STYES
+.messages-panel {
+  padding: rem-calc(15);
+  background: $landing-light-gray;
+  border: 1px solid $landing-light-gray;
+}
+

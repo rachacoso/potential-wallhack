@@ -21,10 +21,6 @@ class MatchesController < ApplicationController
 					"uk"
 				]
 				@country = params[:country]
-				rest = all_countries - [@country]
-				@rest = rest.map { |n| "#match-#{n}"}.join(",")
-
-				#to match up with db names of the countries
 				countries_map = {
 					"russia" => "Russia",
 					"china" => "China",
@@ -33,8 +29,8 @@ class MatchesController < ApplicationController
 					"korea" => "South Korea",
 					"uk" => "United Kingdom"
 				}
-				# @matches = @all_matches.in("export_countries.country" => "austra")
 				@matches = @all_matches.in("export_countries.country" => countries_map[@country])
+				@country_proper = countries_map[@country]
 			end
 
 
@@ -45,7 +41,8 @@ class MatchesController < ApplicationController
 
 			### Full match set is all brands in the Distributor's sectors minus any countries that have not declared a country 
 			### (will be updated to be all countries with completed profiles)
-			@all_matches = Brand.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
+			# @all_matches = Brand.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
+			@all_matches = Brand.all
 			# exclude any that are in contact already
 			@all_matches = @all_matches.not_in(_id: @profile.matches.pluck(:brand_id)) 
 			if params[:sector]
@@ -114,10 +111,13 @@ class MatchesController < ApplicationController
 
 		case @current_user.type?
 		when "distributor"
-			@matches = Brand.subscribed.find(@profile.matches.contacting_me.pluck(:brand_id))
+			@matches = Brand.find(@profile.matches.contacting_me.pluck(:brand_id))
+			# @matches = Brand.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
 			# @all_matches = Brand.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
 		when "brand"
-			@matches = Distributor.subscribed.find(@profile.matches.contacting_me.pluck(:distributor_id))
+
+			@matches = Distributor.find(@profile.matches.contacting_me.pluck(:distributor_id))
+			# @matches = Distributor.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
 			# @all_matches = Distributor.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
 			# @countries_of_distribution = Array.new
 			# @all_matches.each do |m|

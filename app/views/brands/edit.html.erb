@@ -4,7 +4,7 @@
 	<div class="medium-2 hide-for-small-only columns text-right" id="side-nav-container">
 		<%= render 'shared/matches/side_nav' %>
 	</div><!--/.medium-4 hide-for-small-only -->
-	<div class="small-12 medium-10 columns">
+	<div class="small-12 medium-10 columns" id="side-nav-content">
 
 
 <div class="row">
@@ -354,32 +354,6 @@
 
 				<%= render layout: "shared/panel_fulledit", locals: {de: 'data-equalizer-watch'} do %>
 
-
-
-				<div class="row">
-					<div class="small-12 columns">
-						<a class="anchor" id="a-exportcountries"></a>
-						<h1>Countries of Export</h1>
-					</div
-				</div>
-
-
-				<div class="row">
-					<div class="medium-12 medium-centered columns">
-
-						<%= render 'shared/profileform/export_countries_form' %>
-
-					</div>
-				</div>
-
-				<% end %>
-
-			</div>
-			
-			<div class="medium-6 columns">
-
-				<%= render layout: "shared/panel_fulledit", locals: {de: 'data-equalizer-watch'} do %>
-
 				<div class="row">
 					<div class="small-12 columns">
 						<a class="anchor" id="a-marketing"></a>
@@ -398,6 +372,31 @@
 					</div>
 
 				<% end %>
+
+			</div>
+			
+			<div class="medium-6 columns">
+
+				<%= render layout: "shared/panel_fulledit", locals: {de: 'data-equalizer-watch'} do %>
+
+				<div class="row">
+					<div class="small-12 columns">
+						<a class="anchor" id="a-exportcountries"></a>
+						<h1>Current Countries of Distribution</h1>
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="medium-12 medium-centered columns">
+
+						<%= render 'shared/profileform/export_countries_form' %>
+
+					</div>
+				</div>
+
+				<% end %>
+
 
 			</div>
 		</div>

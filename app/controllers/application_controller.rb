@@ -14,11 +14,12 @@ class ApplicationController < ActionController::Base
       if a = User.where(:auth_token => cookies[:auth_token]).first
     		@current_user = a
       else
+       cookies.delete :auth_token
        @current_user = nil
        flash[:notice] = "YOU MUST BE LOGGED IN TO ACCESS"
        redirect_to login_url # halts request cycle       
       end
-  	end
+    end
   end
  
   def require_login

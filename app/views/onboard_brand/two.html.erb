@@ -24,8 +24,6 @@
 		      <%= check_box_tag "sectors[#{sc.id}]", sc.id, (@brand.sectors.find(sc) rescue false) ? true : false, class: "sectors" %>
 		      <%= label_tag("sectors[#{sc.id}]", sc.name) %>
 		  <% end %>
-			<input id="sectors_other" name="sectors[other]" type="checkbox" value="other"/>
-      <label for="sectors_other">Other</label>
 
 		  <hr>
 		</div>

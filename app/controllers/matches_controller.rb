@@ -87,22 +87,13 @@ class MatchesController < ApplicationController
 
 		case @current_user.type?
 		when "distributor"
-			@matches = Brand.find(@profile.matches.contacted_by_me.pluck(:brand_id))
-		# 	@all_matches = Brand.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
+			@matches_waiting = Brand.find(@profile.matches.contacted_by_me_waiting.pluck(:brand_id))
+			@matches_accepted = Brand.find(@profile.matches.contacted_by_me_accepted.pluck(:brand_id))
 		when "brand"
-			@matches = Distributor.find(@profile.matches.contacted_by_me.pluck(:distributor_id))
-		# 	@all_matches = Distributor.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
-		# 	@countries_of_distribution = Array.new
-		# 	@all_matches.each do |m|
-		# 		if !m.export_countries.blank?
-		# 			@countries_of_distribution = (@countries_of_distribution << m.export_countries.pluck(:country)).uniq.flatten!
-		# 		end
-		# 	end			
+			@matches_waiting = Distributor.find(@profile.matches.contacted_by_me_waiting.pluck(:distributor_id))
+			@matches_accepted = Distributor.find(@profile.matches.contacted_by_me_accepted.pluck(:distributor_id))		
 		end
 
-		# @countries = @all_matches.pluck(:country_of_origin).uniq.sort_by{ |m| m.downcase }
-
-	 	# render "index"
 
   end
 
@@ -112,25 +103,12 @@ class MatchesController < ApplicationController
 
 		case @current_user.type?
 		when "distributor"
-			@matches = Brand.find(@profile.matches.contacting_me.pluck(:brand_id))
-			# @matches = Brand.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
-			# @all_matches = Brand.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
+			@matches_waiting = Brand.find(@profile.matches.contacting_me_waiting.pluck(:brand_id))
+			@matches_accepted = Brand.find(@profile.matches.contacting_me_accepted.pluck(:brand_id))
 		when "brand"
-
-			@matches = Distributor.find(@profile.matches.contacting_me.pluck(:distributor_id))
-			# @matches = Distributor.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
-			# @all_matches = Distributor.subscribed.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
-			# @countries_of_distribution = Array.new
-			# @all_matches.each do |m|
-			# 	if !m.export_countries.blank?
-			# 		@countries_of_distribution = (@countries_of_distribution << m.export_countries.pluck(:country)).uniq.flatten!
-			# 	end
-			# end					
+			@matches_waiting = Distributor.find(@profile.matches.contacting_me_waiting.pluck(:distributor_id))	
+			@matches_accepted = Distributor.find(@profile.matches.contacting_me_accepted.pluck(:distributor_id))
 		end
-
-		# @countries = @all_matches.pluck(:country_of_origin).uniq.sort_by{ |m| m.downcase }
-		
- 		# render "index"
 
   end  
 

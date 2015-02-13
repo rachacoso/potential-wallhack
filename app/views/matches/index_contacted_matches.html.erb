@@ -8,13 +8,36 @@
 	</div><!--/.medium-4 hide-for-small-only -->
 
 	<div class="medium-10 small-12 columns" id="side-nav-content">
-		<% unless @matches.blank? %>
-		<div class="saved-contacted-match-header">
-		<small><strong><%= render "counts" %></strong></small>
-		</div>	
-		<% end %>
+<% if @current_user.subscriber? %>
+
+		<% unless @matches_accepted.blank? %>
+		<div class="messages-panel">
+		<h2>Current Conversations</h2>
+		<small><strong><%= render partial: "counts", locals: {matches: @matches_accepted} %></strong></small>
+		<hr>		
 		<div class="saved-contacted-match-list">
-		<%= render "#{@current_user.type?}_match_list" %>
+		<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches_accepted} %>
 		</div>
+		</div>
+		<% end %>
+
+		<% unless @matches_accepted.blank? || @matches_waiting.blank? %>
+		<hr>
+		<% end %>
+
+		<% unless @matches_waiting.blank? %>
+		<div class="messages-panel">
+		<h2>Awaiting Response</h2>
+		<small><strong><%= render partial: "counts", locals: {matches: @matches_waiting} %></strong></small>
+		<hr>
+		<div class="saved-contacted-match-list">
+		<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches_waiting} %>
+		</div>
+		</div>
+		<% end %>
+
+<% else %>
+	<h2>Available to subscribers only</h2>
+<% end %>
 	</div><!--/.medium-10-->
 </div>

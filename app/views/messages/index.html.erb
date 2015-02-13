@@ -14,13 +14,12 @@
 					<div class="small-12 columns">
 
 						<div class="row collapse">
-							<div class="medium-8 columns">
-								<h2>Messages</h2>
-							</div>
-							<div class="medium-4 columns " style="padding-top: 0.8em; padding-bottom: 0.8em;">
-								<% if @messages_unread > 0 %>
-									<span class="message-index-indicator"><%= @messages_unread %> unread message<%= @messages_unread > 1 ? "s" : "" %></span>
-								<% end %>
+							<div class="small-12 columns">
+								<h2>Messages
+									<% if @messages_unread > 0 %>
+									<br><small><%= @messages_unread %> unread message<%= @messages_unread > 1 ? "s" : "" %></small>
+									<% end %>
+								</h2>
 							</div>
 						</div><!--/.row-->
 						<div class="row collapse">
@@ -35,13 +34,26 @@
 								<% if @messages_unread > 0 %>
 								
 									<div class="row collapse">
-										<div class="small-12 columns">	
-											<% @unread_list.each do |m| %>
+										<div class="small-12 columns">
+
+											<table width="100%">
+												<tbody>
+
+												<% @unread_list.each do |m|  %>
 												<% this_one = m.send(@current_user.type_inverse?) %>
+												<tr id="pot_<%= this_one.id %>">
+													<td>
 
-												<%= render partial: "shared/profile/profile_list_tile", locals: {match: this_one} %>
+													<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {match: this_one} %>
 
-											<% end %>
+													</td>
+
+												</tr>
+												<% end %>
+
+												</tbody>
+											</table>
+
 										</div>
 									</div>
 							
@@ -62,13 +74,12 @@
 					<div class="small-12 columns">
 
 						<div class="row collapse">
-							<div class="medium-8 columns">
-								<h2> Contact Requests</h2>
-							</div>
-							<div class="medium-4 columns text-right end" style="padding-top: 0.8em; padding-bottom: 0.8em;">
-								<% if @new_contact_messages > 0 %>
-									<span class="message-index-indicator"><%= @new_contact_messages %> new contact request<%= @new_contact_messages > 1 ? "s" : "" %></span>
-								<% end %>
+							<div class="small-12 columns">
+								<h2> Contact Requests
+									<% if @new_contact_messages > 0 %>
+										<br><small><%= @new_contact_messages %> new contact request<%= @new_contact_messages > 1 ? "s" : "" %></small>
+									<% end %>									
+								</h2>
 							</div>
 						</div><!--/.row-->
 
@@ -82,11 +93,27 @@
 							<div class="small-12 columns">
 								<% if @new_contact_messages > 0 %>
 									<div class="row">
-										<div class="small-12 columns">					
-											<% @new_requests_list.each do |m| %>
+										<div class="small-12 columns">
+
+											<table width="100%">
+												<tbody>
+
+												<% @new_requests_list.each do |m|  %>
 												<% this_one = m.send(@current_user.type_inverse?) %>
-												<%= render partial: "shared/profile/profile_list_tile", locals: {match: this_one} %>
-											<% end %>
+												<tr id="pot_<%= this_one.id %>">
+													<td>
+
+													<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {match: this_one} %>
+
+													</td>
+
+												</tr>
+												<% end %>
+
+												</tbody>
+											</table>
+
+
 										</div>
 									</div>
 								<% else %>
@@ -104,6 +131,12 @@
 		<div class="row collapse">
 			<div class="small-11 small-centered text-center columns">
 				<h1>Available to subscribers only</h1>
+								<% if @new_contact_messages > 0 %>
+									<h3>You have been contacted by <%= @new_contact_messages %> <%= @current_user.type_inverse? %><%= @new_contact_messages > 1 ? "s" : "" %><br>
+										<%= link_to 'SUBSCRIBE', '#' %> to connect!
+									</h3>
+								<% end %>
+
 			</div><!--/.small-11 small-centered text-center-->
 		</div><!--/.row-->
 		<% end %>

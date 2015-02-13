@@ -73,10 +73,22 @@ class Distributor
 
 	has_many :matches do 
 		def contacted_by_me
-			where(initial_contact_by: "distributor", accepted: false)
+			where(initial_contact_by: "distributor")
 		end
 		def contacting_me
+			where(initial_contact_by: "brand")
+		end
+		def contacted_by_me_waiting
+			where(initial_contact_by: "distributor", accepted: false)
+		end
+		def contacting_me_waiting
 			where(initial_contact_by: "brand", accepted: false)
+		end				
+		def contacted_by_me_accepted
+			where(initial_contact_by: "distributor", accepted: true)
+		end
+		def contacting_me_accepted
+			where(initial_contact_by: "brand", accepted: true)
 		end		
 		def accepted
 			where(accepted: true)

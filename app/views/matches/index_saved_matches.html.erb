@@ -8,16 +8,13 @@
 	</div><!--/.medium-4 hide-for-small-only -->
 
 	<div class="medium-10 small-12 columns" id="side-nav-content">
-
-		<% unless @matches.blank? %>
+		<% unless @matches.blank? || !@current_user.subscriber? %>
 		<div class="saved-contacted-match-header">
-		<small><strong><%= render "counts" %></strong></small>
+		<small><strong><%= render partial: "counts", locals: {matches: @matches} %></strong></small>
 		</div>	
 		<% end %>
 		<div class="saved-contacted-match-list">
-		<%= render "#{@current_user.type?}_match_list" %>
+		<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches} %>
 		</div>
-
 	</div><!--/.medium-10-->
 </div>
-

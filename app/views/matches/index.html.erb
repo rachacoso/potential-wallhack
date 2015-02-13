@@ -39,13 +39,13 @@
 
 		<div id="match-reset">
 			<h1><%= @country_proper %></h1>
-			<strong><%= render "counts" %></strong>
+			<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
 			<small><%= link_to 'SEARCH ANOTHER COUNTRY', all_matches_url %></small>
 		</div>
 		<div id="match-list">
 			<div class="row">
 				<div class="small-12 columns" >
-					<%= render 'brand_match_list' %>
+					<%= render partial: 'brand_match_list', locals: {matches: @matches} %>
 				</div>
 			</div>
 		</div>
@@ -73,13 +73,15 @@
 
 		<div id="match-reset">
 			<h1><%= Sector.find(@sector).name %></h1>
-			<strong><%= render "counts" %></strong>
+			<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
+			<% unless @current_user.send(@current_user.type?).sectors.length < 2  %>
 			<small><%= link_to 'BROWSE ANOTHER SECTOR', all_matches_url %></small>
+			<% end %>
 		</div>
 		<div id="match-list">
 			<div class="row">
 				<div class="small-12 columns" >
-					<%= render 'distributor_match_list' %>
+					<%= render partial: 'distributor_match_list', locals: {matches: @matches}  %>
 				</div>
 			</div>
 		</div>

@@ -6,25 +6,27 @@
 		<% matchtype = @current_user.type? == "distributor" ? "Brands" : "Distributors" %>
 		<%= link_to "Find #{matchtype}", all_matches_url %>
 	</li>							
-
+<li class="divider"></li>
 	<li <%= (controller_name == "matches" && action_name == "index_saved_matches") ? "class='active'".html_safe : "" %>>
 		<% matchtype = @current_user.type? == "distributor" ? "Brands" : "Distributors" %>
 		<%= link_to "Saved #{matchtype}", saved_matches_url %>
 	</li>		
+<li class="divider"></li>
+	
 
 	<li <%= (controller_name == "matches" && action_name == "index_contacted_matches") ? "class='active'".html_safe : "" %>>
 		<% matchtype = @current_user.type? == "distributor" ? "Brands" : "Distributors" %>
-		<%= link_to "#{matchtype} you contacted", contacted_matches_url %>
+		<%= link_to "Conversations - #{matchtype} you contacted", contacted_matches_url %>
 	</li>		
 
 	<li <%= (controller_name == "matches" && action_name == "index_incoming_matches") ? "class='active'".html_safe : "" %>>
 		<% matchtype = @current_user.type? == "distributor" ? "Brands" : "Distributors" %>
-		<%= link_to "#{matchtype} contacting you", incoming_matches_url %>
+		<%= link_to "Conversations - #{matchtype} contacting you", incoming_matches_url %>
 	</li>
 
 	<li <%= (controller_name == "messages") ? "class='active'".html_safe : "" %>>
 		<%= link_to messages_url do %>
-			Message Center 
+			Notifications
 			<div class="text-right">
 				<% if @messages_unread > 0 %>
 					<span class="alert radius label" id="top-bar-messages-unread"><span id="top-bar-messages-unread-number"><%= @messages_unread %></span> new message<%= @messages_unread > 1 ? "s" : "" %> <br></span>
@@ -35,17 +37,16 @@
 			</div>
 		<% end %>
 	</li>
-
+<li class="divider"></li>
 	<li <%= (controller_name == "library_documents" ) ? "class='active'".html_safe : "" %>>
 		<%= link_to 'Document Library', library_documents_url %>
 	</li>
-
+<li class="divider"></li>
   <% if @current_user.distributor %>
   <li <%= (controller_name == "distributors" ) ? "class='active'".html_safe : "" %>>
   	<%= link_to 'Your Profile', distributor_full_profile_url %>
   </li>
-  <% end %>
-  <% if @current_user.brand %>
+  <% elsif @current_user.brand %>
   <li <%= (controller_name == "brands" ) ? "class='active'".html_safe : "" %>>
   	<%= link_to 'Your Profile', brand_full_profile_url %>
   </li>

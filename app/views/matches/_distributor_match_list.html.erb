@@ -2,21 +2,9 @@
 <% if @current_user.subscriber? %>
 
 	<% if matches.blank? %>
-		<div class="row">
-			<div class="small-10 small-centered columns previewtile match-empty text-center">
-				<% if action_name == "index" %>
-					<h2>No Brands</h2> <br>Please try altering your filter selections.
-				<% elsif action_name == "index_saved_matches" %>
-					<h2>No Saved Brands</h2> <br>You can save brand matches on the <%= link_to 'All Brands', all_matches_url %> screen.
-				<% elsif action_name == "index_contacted_matches" %>
-					<h2>You haven't contacted any brands</h2> <br>You can contact brands on the <br><%= link_to 'All Brands', all_matches_url %> or <%= link_to 'Saved Brands', saved_matches_url %> screens.
-				<% elsif action_name == "index_incoming_matches" %>
-					<h2>No brands have contacted you</h2> <br>Make sure <%= link_to 'Your Profile', distributor_full_profile_url %> is complete.
-				<% elsif action_name == "search" %>
-					<h2>No brands found</h2> <br> Please try adjusting your search.
-				<% end %>
-			</div>
-		</div>
+
+		<%= render "no_matches" %>
+
 	<% else %>
 
 		<div class="row" style="padding: 0px;">
@@ -56,31 +44,28 @@
 			</div>
 		<% else %>
 
-			<div class="row">
-				<div class="small-12 columns">
+		<div class="row" style="padding: 0px;">
+			<div class="small-12 columns">
 
-					<table width="100%">
-						  <thead>
-						  	<tr><th width="800" colspan="2">
-									<%= render "counts" %>
-						  	</th></tr>			  	
-						  </thead>
-					  	<tbody>
+				<table width="100%">
+					<tbody>
 
-							<% matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
-							<tr id="pot_<%= match.id %>">
-								<td>
+					<% matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
+					<tr id="pot_<%= match.id %>">
+						<td>
 
-								<%= render partial: "shared/profile/profile_list_tile", locals: {match: match} %>
+						<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {match: match} %>
 
-								</td>
+						</td>
 
-							</tr>
-							<% end %>
-							</tbody>
+					</tr>
+					<% end %>
+
+					</tbody>
 				</table>
-				</div>
+				
 			</div>
+		</div>
 		<% end %>
 
 
@@ -89,7 +74,12 @@
 
 		<div class="row">
 			<div class="small-10 small-centered columns previewtile text-center">
-				<h2>Available to subscribers only</h2>
+				<h1>Available to subscribers only</h1>
+				<% if @new_contact_messages > 0 %>
+					<h3>You have been contacted by <%= @new_contact_messages %> <%= @current_user.type_inverse? %><%= @new_contact_messages > 1 ? "s" : "" %><br>
+						<%= link_to 'SUBSCRIBE', '#' %> to connect!
+					</h3>
+				<% end %>						
 			</div>
 		</div>
 

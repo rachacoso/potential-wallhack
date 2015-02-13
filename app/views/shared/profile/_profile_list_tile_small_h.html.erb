@@ -28,7 +28,7 @@
 							<div class="small-12 columns">
 
 								<% m = this_match(match) %>
-								<% if action_name == "index" || action_name == "index_contacted_matches" %>		
+								<% if action_name == "index" || action_name == "index_contacted_matches" || action_name == "index_conversations"  %>		
 									<% if m %>
 										<% if i_contacted(m) %>
 											<span class="plt-indicator-info"><strong>You Contacted</strong> <%= match.company_name %></span>

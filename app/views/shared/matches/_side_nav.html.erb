@@ -12,31 +12,21 @@
 		<%= link_to "Saved #{matchtype}", saved_matches_url %>
 	</li>		
 <li class="divider"></li>
-	
 
-	<li <%= (controller_name == "matches" && action_name == "index_contacted_matches") ? "class='active'".html_safe : "" %>>
-		<% matchtype = @current_user.type? == "distributor" ? "Brands" : "Distributors" %>
-		<%= link_to "Conversations - #{matchtype} you contacted", contacted_matches_url %>
-	</li>		
+<li <%= (controller_name == "matches" && action_name == "index_conversations") ? "class='active'".html_safe : "" %>>
+	<%= link_to conversations_url do %>
+		Conversations
+		<div class="text-right">
+			<% if @messages_unread > 0 %>
+				<span class="alert radius label" id="top-bar-messages-unread"><span id="top-bar-messages-unread-number"><%= @messages_unread %></span> new message<%= @messages_unread > 1 ? "s" : "" %> <br></span>
+			<% end %>
+			<% if @new_contact_messages > 0 %>
+				<span class="alert radius label" id="top-bar-new-contact-messages"><span id="top-bar-new-contact-messages-number"><%= @new_contact_messages %></span> new request<%= @new_contact_messages > 1 ? "s" : "" %></span>
+			<% end %>
+		</div>
+	<% end %>
+</li>
 
-	<li <%= (controller_name == "matches" && action_name == "index_incoming_matches") ? "class='active'".html_safe : "" %>>
-		<% matchtype = @current_user.type? == "distributor" ? "Brands" : "Distributors" %>
-		<%= link_to "Conversations - #{matchtype} contacting you", incoming_matches_url %>
-	</li>
-
-	<li <%= (controller_name == "messages") ? "class='active'".html_safe : "" %>>
-		<%= link_to messages_url do %>
-			Notifications
-			<div class="text-right">
-				<% if @messages_unread > 0 %>
-					<span class="alert radius label" id="top-bar-messages-unread"><span id="top-bar-messages-unread-number"><%= @messages_unread %></span> new message<%= @messages_unread > 1 ? "s" : "" %> <br></span>
-				<% end %>
-				<% if @new_contact_messages > 0 %>
-					<span class="alert radius label" id="top-bar-new-contact-messages"><span id="top-bar-new-contact-messages-number"><%= @new_contact_messages %></span> new request<%= @new_contact_messages > 1 ? "s" : "" %></span>
-				<% end %>
-			</div>
-		<% end %>
-	</li>
 <li class="divider"></li>
 	<li <%= (controller_name == "library_documents" ) ? "class='active'".html_safe : "" %>>
 		<%= link_to 'Document Library', library_documents_url %>
@@ -49,6 +39,13 @@
   <% elsif @current_user.brand %>
   <li <%= (controller_name == "brands" ) ? "class='active'".html_safe : "" %>>
   	<%= link_to 'Your Profile', brand_full_profile_url %>
+  </li>
+  <% end %>
+
+  <% if action_name == "view_match" %>
+  <li class="divider"></li>
+  <li class="active">
+  	<%= link_to 'View Profile', "#" %>
   </li>
   <% end %>
 

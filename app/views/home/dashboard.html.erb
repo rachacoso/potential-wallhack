@@ -5,24 +5,11 @@
 
 <% end %>
 
-<div class-"row">
-	<div class="small-12 columns text-center">
-		<h4><small>[CLICK ON HEADER TO EXPAND SECTION]</small></h4>
-	</div>
-</div>
-<div class="row" data-equalizer>
 
-	<div class="medium-4 columns" id="dashboard-marketplace-container">
-		<div class="row">
-			<div class="small-12 columns" id="dashboard-marketplace-header">
-				<ul class="breadcrumbs marketplace" id="marketplace-h1">
-				  <li class="current"><%= render "shared/imageswap/marketplace_logo" %> <%= link_to "MARKETPLACE", "#" %></li>
-				</ul>
-				<ul class="breadcrumbs marketplace" style="display: none;" id="marketplace-h2">
-				  <li class="current"><%= render "shared/imageswap/marketplace_logo" %> </li>
-				</ul>
-			</div>			
-		</div>
+<div class="row collapse" data-equalizer>
+
+	<div class="medium-8 columns" id="dashboard-marketplace-container">
+
 		<div id="dashboard-marketplace-content" data-equalizer-watch>
 			<div id="dashboard-marketplace-content-inner">
 			<%= render "marketplace" %>
@@ -30,38 +17,15 @@
 		</div>
 	</div>
 
-	<div class="medium-4 columns" id="dashboard-insights-container">
-		<div class="row">
-			<div class="small-12 columns" id="dashboard-insights-header">
-				<ul class="breadcrumbs insights" id="insights-h1">
-				  <li class="current"><%= render "shared/imageswap/insights_logo" %> <%= link_to "INSIGHTS", "#" %></li>
-				</ul>
-				<ul class="breadcrumbs insights" style="display: none;" id="insights-h2">
-				  <li class="current"><%= render "shared/imageswap/insights_logo" %></li>
-				</ul>				
-			</div>
-		</div>
+	<div class="medium-4 columns" id="dashboard-insights-container"  data-equalizer-watch>
 
-		<div id="dashboard-insights-content" data-equalizer-watch>
+		<div id="dashboard-insights-content">
 			<div id="dashboard-insights-content-inner">
 			<%= render "insights" %>
 			</div>
 		</div>
-	</div>
 
-	<div class="medium-4 columns" id="dashboard-agency-container">
-		<div class="row">
-			<div class="small-12 columns" id="dashboard-agency-header">
-				<ul class="breadcrumbs agency" id="agency-h1">
-				  <li class="current"><%= render "shared/imageswap/agency_logo" %> <%= link_to "AGENCY", "#" %></li>
-				</ul>
-				<ul class="breadcrumbs agency" style="display: none;" id="agency-h2">
-				  <li class="current"><%= render "shared/imageswap/agency_logo" %></li>
-				</ul>				
-			</div>
-		</div>
-
-		<div id="dashboard-agency-content" data-equalizer-watch>
+		<div id="dashboard-agency-content">
 			<div id="dashboard-agency-content-inner">	
 			<%= render "agency" %>
 			</div>

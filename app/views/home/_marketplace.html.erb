@@ -1,11 +1,33 @@
+<div class="row">
+	<div class="small-12 columns text-right">
+		<h1>Marketplace <%= render "shared/imageswap/marketplace_logo" %></h1>
+	</div>
+</div>
+
 <% if @current_user.distributor %>
 
 	<div class="row">
 		<div class="small-12 columns">
 
+		<h2 class="dashboard-section-title">Find Brands</h2>
+		<div id="match-map-container" style="border: 1px solid gray;">
+			<div class="row show-for-small-only">
+				<div class="small-12 columns">
+					<h2>Browse Brands:</h2>		
+				</div><!--/.small-12-->
+			</div>
 
-			<%= render "message_center" %>
+			<div id="match-search">
+				<%= render partial: "matches/distributor_search_start" %>
+			</div>
 
+		</div><!--/.match-map-container -->
+		<div class="row">
+			<div class="medium-6 columns">
+				<%= render "message_center" %>	
+			</div><!--/.medium-6-->
+			<div class="medium-6 columns">
+				
 			<h2 class="dashboard-section-title">Profile Center</h2>
 			<div class="panel">
 				<% percentp = check_distributor_public_profile %>
@@ -35,17 +57,11 @@
 			</div>
 
 
+			</div><!--/.medium-6-->
+		</div><!--/.row-->
 
-			<h2 class="dashboard-section-title">Find Brands</h2>
-			<div class="panel">
-				<%= link_to 'Find Brands', matches_url %>
-			</div>
+			
 
-
-			<h2 class="dashboard-section-title">Markets</h2>
-			<div class="panel">
-				<%= link_to 'Find Brands', matches_url %>
-			</div>
 
 
 		</div>
@@ -57,10 +73,26 @@
 	<div class="row">
 		<div class="small-12 columns">
 
+		<h2 class="dashboard-section-title">Find Distributors</h2>
+		<div id="match-map-container">
+			<div class="row show-for-small-only">
+				<div class="small-12 columns">
+					<h2>Find a Distributor for:</h2>		
+				</div><!--/.small-12-->
+			</div>
+		
+			<div id="match-search">
+				<%= render partial: "matches/brand_search_start" %>
+			</div>
 
-			<%= render "message_center" %>
+		</div><!--/.match-map-container -->
 
-
+		<div class="row">
+			<div class="medium-6 columns">
+				<%= render "message_center" %>	
+			</div><!--/.medium-6-->
+			<div class="medium-6 columns">
+				
 			<h2 class="dashboard-section-title">Profile Center</h2>
 			<div class="panel">
 				<% percentp = check_brand_public_profile %>
@@ -90,30 +122,13 @@
 			</div>
 			
 
-			<br><br>
-			<div class="text-center">
-			<%= link_to 'Find Distributors', matches_url, class: 'button large alert' %>
-			</div>
-
-			<h2 class="dashboard-section-title">Markets</h2>
-			<div class="panel">
-
-				<% @countries_of_distribution.sort_by{ |m| m.downcase }.each do |c| %>
-				
-					<%= form_tag all_matches_url, id: "#{c.downcase.gsub(/\s/, '-')}-form", method: 'post' do %>
-					<input type="hidden" name="filter[country_of_distribution][<%= c %>]" value="true" />
-					<input type="hidden" name="filter[all_channels]" value="true" />
-					<% end %>
-
-				<% end %>
-				<ul class="small-block-grid-2">
-				<% @countries_of_distribution.sort_by{ |m| m.downcase }.each do |c| %>
-					<li><%= link_to c, "#", :onclick => "event.preventDefault();$('##{c.downcase.gsub(/\s/, '-')}-form').submit();".html_safe, class: "marketslink" %></li>
-				<% end %>
-				</ul>
+			</div><!--/.medium-6-->
+		</div><!--/.row-->
+			
 
 
-			</div>
+
+
 
 		</div>
 	</div>

@@ -1279,13 +1279,18 @@ $dashboard-agency-color: scale-color($landing-middle-gray, $lightness: 50%);
   font-weight: 300;
   padding-left: rem-calc(3);
 }
-#dashboard-marketplace-header, #dashboard-insights-header, #dashboard-agency-header {
-  cursor: pointer;
-}
+// #dashboard-marketplace-header, #dashboard-insights-header, #dashboard-agency-header {
+//   cursor: pointer;
+// }
 #dashboard-marketplace-container, #dashboard-insights-container, #dashboard-agency-container {
   margin-bottom: rem-calc(20);
 }
 
+#dashboard-marketplace-content, #dashboard-insights-content, #dashboard-agency-content {
+  padding-top: 1em;
+  padding-bottom: 1em;
+
+}
 // AJAX OVERLAY AND WAIT MODAL
 
 .overlay {
@@ -1352,7 +1357,7 @@ $dashboard-agency-color: scale-color($landing-middle-gray, $lightness: 50%);
 #side-nav-content {
   border: 1px solid $landing-light-gray;
   border-radius: 0px 9px 9px 9px;
-  background: white;
+  background: scale-color($landing-blue, $lightness: 50%);
   padding: 1em;
   margin-bottom: 2em;
   min-height: 80vh;

@@ -42,15 +42,16 @@ class MatchesController < ApplicationController
 			### Full match set is all brands in the Distributor's sectors minus any countries that have not declared a country 
 			### (will be updated to be all countries with completed profiles)
 			# @all_matches = Brand.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
-			@all_matches = Brand.all
+			match_set = Brand.all
 			# exclude any that are in contact already
-			@all_matches = @all_matches.not_in(_id: @profile.matches.pluck(:brand_id)) 
+			all_matches = match_set.not_in(_id: @profile.matches.pluck(:brand_id))
+
 			if params[:sector]
-				all_sectors = Sector.all.pluck(:id).map { |n| n.to_s }				
 				@sector = params[:sector]
-				rest = all_sectors - [@sector]
-				@rest = rest.map { |n| "#match-#{n}"}.join(",")
-				@matches = @all_matches.in(sector_ids: @sector)
+				@matches = all_matches.in(sector_ids: @sector)
+			elsif @profile.sectors.length == 1
+				@sector = @profile.sectors.first.id
+				@matches = all_matches.in(sector_ids: @sector)
 			end
 
 		end

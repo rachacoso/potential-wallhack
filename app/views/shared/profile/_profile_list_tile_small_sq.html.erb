@@ -2,7 +2,9 @@
 <div class="profile-list-tile-small-sq">
 
 			<% if @current_user.subscriber? && action_name != "public_profile"  %>
-			<%= image_tag match.logo.url(:medium), width: "40", height: "40", alt: "Logo" %>
+			<div class="profile-logo-area text-center">
+				<%= image_tag match.logo.url(:medium), width: "90", alt: "Logo" %>
+			</div>
 			<% else %>
 			<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= match.class.to_s %> logo hidden. Subscribe to view full profile"><%= image_tag match.logo.url(:public), width: "40", height: "40", alt: "Logo" %></span>
 			<% end %>

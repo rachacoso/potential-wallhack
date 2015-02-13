@@ -2,14 +2,14 @@
 <div class="profile-list-tile-small">
 
 	<div class="row">
-		<div class="medium-1 columns">
+		<div class="medium-2 columns">
 			<% if @current_user.subscriber? && action_name != "public_profile"  %>
-			<%= image_tag match.logo.url(:medium), width: "40", height: "40", alt: "Logo" %>
+			<%= image_tag match.logo.url(:medium), width: "100", alt: "Logo" %>
 			<% else %>
 			<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= match.class.to_s %> logo hidden. Subscribe to view full profile"><%= image_tag match.logo.url(:public), width: "40", height: "40", alt: "Logo" %></span>
 			<% end %>
 		</div>
-		<div class="medium-11 columns">
+		<div class="medium-10 columns">
 			<div class="row">
 				<div class="small-4 columns">
 					<% if @current_user.subscriber? && action_name != "public_profile" %>
@@ -18,12 +18,13 @@
 						<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= match.class.to_s %> name hidden. Subscribe to view full profile">
 						<%= ("&blk12;" * match.company_name.length).html_safe %>
 						</span>
-					<% end %>				
+					<% end %><br>
+					[rating]
 				</div><!--/.small-4-->
 				<div class="small-8 columns text-right">
 
 					<% if @current_user.subscriber? && action_name != "public_profile"  %>
-						<div class="row">
+
 							<div class="small-12 columns">
 
 								<% m = this_match(match) %>
@@ -54,7 +55,6 @@
 									<span class="plt-indicator-info">Active in the past <strong><%= last_activity(match.user.last_login) %></strong></span>
 								<% end %>
 
-								<br>
 
 								<% has_unread, count = unread_count_from_match(match) %>
 								<% if has_unread %>
@@ -65,17 +65,12 @@
 								<% end %>
 
 							</div>
-						</div>
+
 					<% end %>				
 					
 				</div><!--/.small-8-->
 			</div><!--/.row-->	
 
-			<div class="row">
-				<div class="small-12 columns">
-						
-				</div><!--/.small-12-->
-			</div><!--/.row-->
 
 
 		</div><!--/.medium-11-->

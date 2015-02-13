@@ -1106,19 +1106,20 @@ top: 10px;
    padding: 1em;
    margin: 0.5em;
    min-height: rem-calc(200);
+
 }
 
 .profile-list-tile-small {
-   border: 1px solid $landing-middle-gray;
-   border-radius: 1em;
-   background: white;
-   padding: 1em;
+   // border: 1px solid $landing-middle-gray;
+   // border-radius: 1em;
+   // background: white;
+   // padding: 1em;
 }
 
 .profile-list-tile-small-sq {
    border: 1px solid $landing-middle-gray;
    width: rem-calc(175);
-   height: rem-calc(175);
+   min-height: rem-calc(175);
    border-radius: 1em;
    background: white;
    padding: 1em;

@@ -1367,12 +1367,12 @@ $dashboard-agency-color: scale-color($landing-middle-gray, $lightness: 50%);
 //BRAND
 #match-russia, {
   position: absolute;
-  left: 72%;
+  left: 69%;
   top: 18%;
 }
 #match-china {
   position: absolute;
-  left: 74%;
+  left: 72%;
   top: 34%;
 }
 #match-korea {
@@ -1430,7 +1430,7 @@ a.match-map {
   padding: rem-calc(3);
   padding-top: rem-calc(2) !important;
   font-weight: 100;
-  font-size: rem-calc(25);
+  font-size: rem-calc(20);
   border: 1px solid black;
   border-radius: 3px;
 }

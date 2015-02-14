@@ -719,7 +719,7 @@ $onboard-nav-radius: 4px;
 
 
 .profile-outer-tile {
-  border: 2px solid scale-color($landing-blue, $lightness: 70%);
+  border: 1px solid scale-color($landing-blue, $lightness: 70%);
   @include transparent(#fff, 0.95);
   margin: 0.5em;
 }
@@ -1194,7 +1194,8 @@ top: 10px;
 }
 
 .view-match-company-info {
-  border: 1px solid $landing-middle-gray; 
+  // border: 1px solid $landing-middle-gray;
+  background: white; 
   border-radius: 2px;
   padding: 0.7em;
 }

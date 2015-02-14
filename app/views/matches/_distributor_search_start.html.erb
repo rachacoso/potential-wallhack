@@ -1,7 +1,8 @@
 
 <% if @current_user.distributor.sectors %>
 
-	<% sectors = Sector.find(@current_user.distributor.sector_ids) %>
+	<%# sectors = Sector.find(@current_user.distributor.sector_ids) %>
+	<% sectors = Sector.all %>
 
 	<% content_for :css_head do %>
 	

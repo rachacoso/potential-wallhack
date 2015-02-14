@@ -10,10 +10,7 @@
 					$<%= collitem.msrp %><hr>
 					<small>Country of Manufacture:</small><br>
 					<%= collitem.country_of_manufacture %><hr>
-					<small>Description:</small><br>
-					<%= simple_format(collitem.description) %>
-					<small>Key Benefits:</small><br>
-					<%= simple_format(collitem.key_benefits) %>
+
 				</div>	
 
 				<div class="medium-8 columns" data-equalizer-watch>
@@ -32,7 +29,12 @@
 					<% end %>
 					</ul>
 				</div>
-
+				<div class="small-12 columns">
+										<small>Description:</small><br>
+					<%= simple_format(collitem.description) %>
+					<small>Key Benefits:</small><br>
+					<%= simple_format(collitem.key_benefits) %>
+				</div><!--/.small-12-->
 
 			</div>
 

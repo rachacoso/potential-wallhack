@@ -31,29 +31,27 @@
 			<h2 class="dashboard-section-title">Profile Center</h2>
 			<div class="panel">
 				<% percentp = check_distributor_public_profile %>
-				Your <strong><%= link_to 'Public Profile', distributor_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> Complete!<br><br>
+				Your <strong><%= link_to 'Public Profile', distributor_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> complete!<br><br>
 				<div class="progress small-12 <%= percentp == 100 ? "success" : "" %>">
 				  <span class="meter text-center" style="width: <%= percentp %>%"><small class="text-right"></small></span>
 				</div>
-				<small>[some info on your public profile]</small>
-			
+				<small>Your public profile is viewable by all registered brands. It displays limited publicly available information including countries of distribution, year established, product sector and retail channels.</small>
+
 				<hr>
 
 				<% percentf = check_distributor_full_profile %>
-				Your <strong><%= link_to 'Full Profile', distributor_full_profile_url %></strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> Complete!<br><br>
+				Your <strong><%= link_to 'Full Profile', distributor_full_profile_url %></strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> complete!<br><br>
 				<div class="progress small-12 <%= percentf == 100 ? "success" : "" %>">
 				  <span class="meter" style="width: <%= percentf %>%"></span>
 				</div>
-				<small>[some info on your full profile]</small>
-
-
+				<small>Your full profile is viewable only by premium brand subscribers. It contains information that helps brands determine whether your company is a good fit for their international expansion.</small>
+				
 				<hr>
 
 				<h3>Your <strong><%= link_to 'RATING', brand_full_profile_url %></strong> is <strong>3</strong> out of <strong>5</strong> [stars].</h3>
 				
 				<p>[image of rating here... are we using stars? discs? something else?]</p>
 				<small>[Blah blah here about how to improve your rating... and RATING above links to section of profile that incorporates]</small>
-
 			</div>
 
 
@@ -96,28 +94,20 @@
 			<h2 class="dashboard-section-title">Profile Center</h2>
 			<div class="panel">
 				<% percentp = check_brand_public_profile %>
-				<h3>Your <strong><%= link_to 'Public Profile', brand_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> Complete!</h3>
+				<h3>Your <strong><%= link_to 'Public Profile', brand_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> complete!</h3>
 				<div class="progress small-12 <%= percentp == 100 ? "success" : "" %>">
 				  <span class="meter text-center" style="width: <%= percentp %>%"><small class="text-right"></small></span>
 				</div>
-				<small>[some info on your public profile]</small>
+				<small>Your public profile is viewable by all registered distributors. It displays limited publicly available information, including your country of origin, year established, product sector and retail channels.</small>
 
 				<hr>
 
 				<% percentf = check_brand_full_profile %>
-				<h3>Your <strong><%= link_to 'Full Profile', brand_full_profile_url %></strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> Complete!</h3>
+				<h3>Your <strong><%= link_to 'Full Profile', brand_full_profile_url %></strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> complete!</h3>
 				<div class="progress small-12 <%= percentf == 100 ? "success" : "" %>">
 				  <span class="meter" style="width: <%= percentf %>%"></span>
 				</div>
-				<small>[some info on your full profile]</small>
-
-				<hr>
-
-
-				<h3>Your <strong><%= link_to 'RATING', brand_full_profile_url %></strong> is <strong>3</strong> out of <strong>5</strong> [stars].</h3>
-				
-				<p>[image of rating here... are we using stars? discs? something else?]</p>
-				<small>[Blah blah here about how to improve your rating... and RATING above links to section of profile that incorporates]</small>
+				<small>Your full profile is viewable only by premium distributor subscribers. It contains information that helps distributors determine whether your brand would be a good fit for their market and their portfolio. </small>
 
 			</div>
 			

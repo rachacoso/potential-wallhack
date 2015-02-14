@@ -49,9 +49,9 @@ class MatchesController < ApplicationController
 			if params[:sector]
 				@sector = params[:sector]
 				@matches = all_matches.in(sector_ids: @sector)
-			elsif @profile.sectors.length == 1
-				@sector = @profile.sectors.first.id
-				@matches = all_matches.in(sector_ids: @sector)
+			# elsif @profile.sectors.length == 1
+			# 	@sector = @profile.sectors.first.id
+			# 	@matches = all_matches.in(sector_ids: @sector)
 			end
 
 		end

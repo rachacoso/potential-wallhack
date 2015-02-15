@@ -4,12 +4,17 @@ class ExportCountriesController < ApplicationController
 
 		u = @current_user.distributor || @current_user.brand
 
-		unless params[:export_country][:country].empty?
-			u.export_countries.find_or_create_by(country: params[:export_country][:country])
+		if !params[:export_country][:country].empty?
+			new_country = u.export_countries.find_or_initialize_by(country: params[:export_country][:country])
+			if new_country.valid?
+				u.save
+			else
+				new_country.destroy
+			end
 		end
 
-		@export_countries = u.export_countries rescue nil
-	  
+		@export_countries = u.export_countries
+
 	  respond_to do |format|
 		  format.html
 		  format.js

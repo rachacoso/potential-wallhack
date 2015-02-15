@@ -18,6 +18,10 @@ class Brand
 	field :company_size, type: String
 	field :website, type: String
 
+	validates_inclusion_of :country_of_origin, in: [ 
+		"United States"
+		 ]
+
 	has_mongoid_attached_file :logo, 
   	# :path => ':attachment/:id/:style.:extension',
 	  # :url => ":s3_domain_url",
@@ -57,7 +61,7 @@ class Brand
 
 	# Countries Where Exported
 	# field :countries_where_exported, type: String
-	embeds_many :export_countries, as: :exportable
+	embeds_many :export_countries, as: :exportable, cascade_callbacks: true
 
 	# array of saved distributor matches
 	has_and_belongs_to_many :saved_matches, class_name: "Distributor", inverse_of: nil

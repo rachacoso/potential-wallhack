@@ -8,5 +8,10 @@ class ExportCountry
   field :country, type: String
 
   validates :country, presence: true
+	validates_inclusion_of :country, in: [ 
+		"United States",
+		"Japan",
+		"Angola"
+	]
 
 end

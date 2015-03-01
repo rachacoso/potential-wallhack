@@ -2,16 +2,19 @@ class DistributorBrandsController < ApplicationController
 
 	def create
 		distributor = @current_user.distributor
-		new_item = distributor.distributor_brands.create!(distributor_brand_parameters)
+		
 		@identifier = 'brand'
 		@iscurrent = params[:distributor_brand][:current]
-		@new_item_id = new_item.id
 
 		if @iscurrent == "true"
+			new_item = distributor.distributor_brands.create!(current: true)
 			@collection = distributor.distributor_brands.where(current: true)
 		else
+			new_item = distributor.distributor_brands.create!(current: false)
 			@collection = distributor.distributor_brands.where(current: false)
 		end
+
+		@new_item_id = new_item.id
 
 		if params[:ob]
 			@ob = true
@@ -67,10 +70,10 @@ class DistributorBrandsController < ApplicationController
 		distributor = @current_user.distributor
 		if @iscurrent 
 			@collection = distributor.distributor_brands.where(current: true)
-			@no_item_message = 'No Current Distributor Brands'
+			@no_item_message = 'No Current Brands'
 		else
 			@collection = distributor.distributor_brands.where(current: false)
-			@no_item_message = 'No Past Distributor Brands'
+			@no_item_message = 'No Past Brands'
 		end
 
 		if params[:ob]

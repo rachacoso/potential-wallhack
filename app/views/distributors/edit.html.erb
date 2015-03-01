@@ -404,8 +404,14 @@
 						</div>
 					</div>
 
-					<%= render partial: "shared/editcollblock", locals: { 
-						headertitle: "Current Brands",
+					<div class="row">
+						<div class="medium-12 columns">
+							<h3>Current Brands</h3>
+							<hr>
+						</div>
+					</div>
+
+					<%= render partial: "shared/editcollblock", locals: {
 						coll: @current_brands,
 						identifier: "brand",
 						no_item_message: "No Current Brands",
@@ -415,13 +421,13 @@
 					} %>
 					
 					<div class="row">
-						<div class="medium-6 medium-centered columns text-center">
+						<div class="medium-12 columns">
+							<h3>Past Brands</h3>
 							<hr>
 						</div>
 					</div>
 
-					<%= render partial: "shared/editcollblock", locals: { 
-						headertitle: "Past Brands",
+					<%= render partial: "shared/editcollblock", locals: {
 						coll: @past_brands,
 						identifier: "brand",
 						no_item_message: "No Past Brands",
@@ -573,8 +579,7 @@
 						</div>
 					</div>
 
-					<%= render partial: "shared/editcollblock", locals: { 
-						headertitle: "Shows Participated in",
+					<%= render partial: "shared/editcollblock", locals: {
 						coll: @trade_shows,
 						identifier: "name",
 						no_item_message: "No Trade Shows",

@@ -414,8 +414,13 @@
 					</div>
 				</div>
 
-					<%= render partial: "shared/editcollblock", locals: { 
-						headertitle: "Current SKU List",
+					<div class="row">
+						<div class="medium-12 columns">
+							<h3>Current Products</h3>
+							<hr>
+						</div>
+					</div>
+					<%= render partial: "shared/editcollblock", locals: {
 						coll: @current_products,
 						identifier: "name",
 						no_item_message: "No Current Products",
@@ -424,14 +429,14 @@
 						iscurrent: "true"
 					} %>
 					
-						<div class="row">
-							<div class="medium-6 medium-centered columns text-center">
-								<hr>
-							</div>
+					<div class="row">
+						<div class="medium-12 columns">
+							<h3>Upcoming Products</h3>
+							<hr>
 						</div>
+					</div>
 					
-					<%= render partial: "shared/editcollblock", locals: { 
-						headertitle: "Upcoming SKU List (optional)",
+					<%= render partial: "shared/editcollblock", locals: {
 						coll: @past_products,
 						identifier: "name",
 						no_item_message: "No Upcoming Products",
@@ -509,8 +514,7 @@
 					</div>
 				</div>
 					
-					<%= render partial: "shared/editcollblock", locals: { 
-						headertitle: "",
+					<%= render partial: "shared/editcollblock", locals: {
 						coll: @press_hits,
 						identifier: "source",
 						no_item_message: "No Press Hits",
@@ -531,8 +535,7 @@
 				</div>
 										
 
-					<%= render partial: "shared/editcollblock", locals: { 
-						headertitle: "",
+					<%= render partial: "shared/editcollblock", locals: {
 						coll: @trade_shows,
 						identifier: "name",
 						no_item_message: "No Trade Shows",
@@ -553,8 +556,7 @@
 					</div>
 				</div>
 
-					<%= render partial: "shared/editcollblock", locals: { 
-						headertitle: "",
+					<%= render partial: "shared/editcollblock", locals: {
 						coll: @patents,
 						identifier: "product",
 						no_item_message: "No Patents",
@@ -574,8 +576,7 @@
 					</div>
 				</div>
 
-					<%= render partial: "shared/editcollblock", locals: { 
-						headertitle: "",
+					<%= render partial: "shared/editcollblock", locals: {
 						coll: @trademarks,
 						identifier: "product",
 						no_item_message: "No Trademarks",
@@ -595,8 +596,7 @@
 					</div>
 
 
-					<%= render partial: "shared/editcollblock", locals: { 
-						headertitle: "",
+					<%= render partial: "shared/editcollblock", locals: {
 						coll: @compliances,
 						identifier: "product_or_category",
 						no_item_message: "No Certifications / Regulatory Compliances",

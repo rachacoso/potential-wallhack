@@ -167,11 +167,12 @@ a.itemformlink.profilelink {
     transition: 0.2s;
     // padding: 0.1em 0.4em;
     border-radius: 0px;
-    font-size: 0.75em;
-    border-bottom: 2px solid scale-color(#ABBACC, $lightness: -30%);
+    font-size: 1.25em;
+    font-weight: 100;
+    // border-bottom: 2px solid scale-color(#ABBACC, $lightness: -30%);
     &:hover {
       background-color: scale-color(#ABBACC, $lightness: -30%);
-      border-bottom: 2px solid #efefef;
+      // border-bottom: 2px solid #efefef;
       color: white;
     }
   }

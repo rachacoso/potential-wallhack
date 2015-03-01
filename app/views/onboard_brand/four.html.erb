@@ -26,9 +26,15 @@
 			<hr>
 		</div>
 	</div>
+
+	<div class="row">
+		<div class="medium-12 columns">
+			<h3>Current Products</h3>
+			<hr>
+		</div>
+	</div>
 	
-	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "Current SKU List",
+	<%= render partial: "shared/editcollblock", locals: {
 		coll: @current_products,
 		identifier: "name",
 		no_item_message: "No Current Products",
@@ -38,13 +44,13 @@
 	} %>
 	
 	<div class="row">
-		<div class="medium-6 medium-centered columns text-center">
+		<div class="medium-12 columns">
+			<h3>Upcoming Products</h3>
 			<hr>
 		</div>
 	</div>
 	
 	<%= render partial: "shared/editcollblock", locals: { 
-		headertitle: "Upcoming SKU List (optional)",
 		coll: @past_products,
 		identifier: "name",
 		no_item_message: "No Upcoming Products",

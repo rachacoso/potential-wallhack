@@ -53,16 +53,13 @@
 									<% end %>
 								</div>
 							</div>
-							<div class="row">
-								<div class="small-6 columns">
+							<div class="row collapse">
+								<div class="small-12 columns">
 									<%= form_for ProductPhoto.new do |f| %>
 										<%= hidden_field_tag 'product_id', cb.id %>
 										<%= ob ? (hidden_field_tag :ob, "true") : "" %>
 							      <div class="row">
-							        <div class="small-6 columns">
-								          <%= f.file_field :photo, label: 'Select Product Photo', accept: 'image/png,image/gif,image/jpeg' %>
-							        </div>
-							        <div class="small-6 columns">
+							        <div class="small-12 columns text-right">
 							          <%= f.submit 'Add Product Photo', :class=> 'button tiny' %>
 							        </div>
 							      </div>

@@ -9,9 +9,15 @@ class ExportCountry
 
   validates :country, presence: true
 	validates_inclusion_of :country, in: [ 
-		"United States",
+		"Angola",
+		"Australia",
+		"Canada",
+		"European Union",		
 		"Japan",
-		"Angola"
+		"New Zealand",
+		"South Korea",
+		"United Kingdom",
+		"United States"
 	]
 
 end

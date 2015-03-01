@@ -2,7 +2,7 @@ class PatentsController < ApplicationController
 
 	def create
 		u = @current_user.distributor || @current_user.brand
-		new_item = u.patents.create!(patent_parameters)
+		new_item = u.patents.create!
 		@identifier = 'product'
 		@new_item_id = new_item.id
 		

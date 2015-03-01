@@ -12,20 +12,20 @@
 	</div>
 	<% end %>
 
-<% if iscurrent.nil? %> 
-	<div id="collection-<%= coll_new_item.class.to_s.downcase %>">
-<% else %> <%# differentiate between old/new product %>
-	<div id="collection-<%= coll_new_item.class.to_s.downcase %>-<%= iscurrent %>">
-<% end %>
+	<% if iscurrent.nil? %> 
+		<div id="collection-<%= coll_new_item.class.to_s.downcase %>">
+	<% else %> <%# differentiate between old/new product %>
+		<div id="collection-<%= coll_new_item.class.to_s.downcase %>-<%= iscurrent %>">
+	<% end %>
+
 	<% ob = (controller_name == "onboard_distributor") || (controller_name == "onboard_brand") ? true : false %>
-	<%= render(partial: "shared/coll_item", collection: coll, as: :cb, locals: {identifier: identifier, ob: ob}) || "<h5>( #{no_item_message} )</h5>".html_safe %>
+	<%= render(partial: "shared/coll_item", collection: coll, as: :cb, locals: {identifier: identifier, ob: ob}) || "<div class='row'><div class='small-12 columns'><h5>( #{no_item_message} )</h5></div></div>".html_safe %>
 
 	</div>
 
-	<div class="rowitem">
-		<div class="row">
+	
+		<div class="row collapse">
 			<div class="medium-12 columns">
-								<hr>
 				<% if iscurrent.nil? %>
 					<%= render partial: "shared/new_coll_item_form", locals: {newitem: coll_new_item, titletext: coll_new_item_text} %>
 				<% else %>
@@ -34,6 +34,5 @@
 
 			</div>
 		</div>
-	</div>
-
+	
 </div> <!-- /.groupwrapper -->

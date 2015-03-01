@@ -1,6 +1,8 @@
 <h2 class="dashboard-section-title">Message Center</h2>
 <div class="panel">
 
+<% if @current_user.subscriber? %>
+
 	<% if @messages_unread > 0 %>
 		<div id="mc-unread-messages">	
 			<small>
@@ -61,4 +63,17 @@
 		<h4>No Messages</h4>
 	<% end %>
 
+<% else %>
+	<div class="row">
+		<div class="small-12 text-center columns">
+			<% if  @new_contact_messages > 0  %>
+				<h3>An Interested <%= @current_user.type_inverse? %> is trying to contact you. Subscribe to connect!</h3>
+			<% elsif @messages_unread > 0 %>
+				<h3>You have unread messages. <br>Renew your subscribe to access!</h3>
+			<% else %>
+				<h3>Available to Subscribers Only</h3>
+			<% end %>
+		</div><!--/.small-12 text-center-->
+	</div><!--/.row-->
+<% end %>
 </div>

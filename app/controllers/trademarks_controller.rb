@@ -2,7 +2,7 @@ class TrademarksController < ApplicationController
 
 	def create
 		u = @current_user.distributor || @current_user.brand
-		new_item = u.trademarks.create!(trademark_parameters)
+		new_item = u.trademarks.create!
 		@identifier = 'product'
 		@new_item_id = new_item.id
 		@collection = u.trademarks

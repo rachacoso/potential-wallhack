@@ -17,6 +17,8 @@ class Distributor
 	field :year_established, type: Date
 	field :company_size, type: String
 	field :website, type: String
+	field :facebook, type: String
+	field :linkedin, type: String
 	field :rating, type: Integer
  	has_one :contact_info, as: :distributor_contact_info, dependent: :destroy
 	accepts_nested_attributes_for :contact_info
@@ -101,14 +103,13 @@ class Distributor
 
 	# VERIFICATION
 	field :verified_webiste, type: Boolean
-	field :verified_facebook, type: Boolean
-	field :verified_linkedin, type: Boolean
-	field :verified_brand, type: Boolean
-	# place to put info on the brand verification (e.g. name, date, contact etc.)
-	field :verified_brand_notes, type: String
+	field :verified_social_media, type: Boolean # facebook or linkedin
+	field :verified_client_brand, type: Boolean # verfication of current brand client
+	field :verified_business_registration, type: String
 	field :verified_location, type: Boolean
 	field :verified_brand_display, type: Boolean
-  has_mongoid_attached_file :verified_location_photo, 
+	field :verification_notes, type: String 	# place to put addtional notes on the verification (visible to landing only)
+  has_mongoid_attached_file :verification_location_photo, 
   	# :path => ':attachment/:id/:style.:extension',
 	  # :url => ":s3_domain_url",
 	  :styles => {
@@ -116,16 +117,32 @@ class Distributor
 	    :medium		=> ['400'],
 	    :large    => ['800>']
 	  }
-  has_mongoid_attached_file :verified_brand_display_photo, 
+
+	validates_attachment_content_type :verification_location_photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
+  has_mongoid_attached_file :verification_brand_display_photo, 
   	# :path => ':attachment/:id/:style.:extension',
 	  # :url => ":s3_domain_url",
 	  :styles => {
 	    :small    => ['100x100#'],
 	    :medium		=> ['400'],
 	    :large    => ['800>']
-	  }	  
-	validates_attachment_content_type :verified_location_photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
-	validates_attachment_content_type :verified_brand_display_photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
+	  }
+	validates_attachment_content_type :verification_brand_display_photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
+
+  has_mongoid_attached_file :verification_business_certificate
+  	# :path => ':attachment/:id/:style.:extension',
+	  # :url => ":s3_domain_url",
+	validates_attachment_content_type :verification_business_certificate, 
+		:content_type=>[	'application/pdf', 
+											'application/vnd.ms-excel', 
+											'application/vnd.ms-powerpoint', 
+											'application/msword',
+											'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+											'application/vnd.openxmlformats-officedocument.presentationml.slideshow',
+											'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+											'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+										]
+	validates_attachment_size :verification_business_certificate, :in => 0.megabytes..2.megabytes
 
 	scope :subscribed, ->{where(subscriber: true)}
 

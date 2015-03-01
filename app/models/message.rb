@@ -8,6 +8,7 @@ class Message
   
   # id of distributor/brand match
   field :recipient, type: String
+  field :subject, type: String
   field :text, type: String
   field :read, type: Boolean
 

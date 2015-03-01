@@ -8,13 +8,16 @@
 	</div><!--/.medium-4 hide-for-small-only -->
 
 	<div class="medium-10 small-12 columns" id="side-nav-content">
+		<div class="messages-panel">
 		<% unless @matches.blank? || !@current_user.subscriber? %>
-		<div class="saved-contacted-match-header">
+		<h2>Saved</h2>
 		<small><strong><%= render partial: "counts", locals: {matches: @matches} %></strong></small>
-		</div>	
+		
+		<hr>
 		<% end %>
 		<div class="saved-contacted-match-list">
 		<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches} %>
+		</div>
 		</div>
 	</div><!--/.medium-10-->
 </div>

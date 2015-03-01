@@ -5,30 +5,17 @@
 <%= iscurrent.nil? ?  "" : (f.hidden_field :current, value: iscurrent) %>
 <%= (controller.controller_name == "onboard_distributor") || (controller.controller_name == "onboard_brand") ? (hidden_field_tag :ob, "true") : "" %>
 
-<div class="addnewform">
-	<div class="rowheadback addnew">
-		<div class="row">
-			<div class="medium-8 columns">
-				<%= titletext %>
-			</div>
-			<div class="medium-4 columns">
-				&nbsp;
-			</div>
-		</div>
-	</div>	
-	<div class="addnewforminputs">
-	<%= render partial: "shared/collections/#{collection_name}", locals: {f: f} %>
-	</div>
+
 	<div class="row">
 		<div class="medium-8 columns">
 			&nbsp;
 		</div>
 		<div class="medium-4 columns text-right">
 			<div class="addnewformsubmit">
-			<%= f.submit 'ADD', class: "tiny radius alert button right" %>
+			<%= f.submit "#{titletext}", class: "tiny radius alert button right" %>
 			<%#= link_to 'Add', "#", :onclick => "$('##{form_id}').submit()".html_safe %>
 			</div>
 		</div>
 	</div>
-</div>
+
 <% end %>

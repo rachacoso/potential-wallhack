@@ -4,10 +4,10 @@ class PressHit
 
   belongs_to :brand
 
-  field :source, type: String
-  field :date, type: Date
-  field :quotes, type: String
-  field :link, type: String
+  field :source, type: String, default: ""
+  field :date, type: Date, default: -> { DateTime.now }
+  field :quotes, type: String, default: ""
+  field :link, type: String, default: ""
 
   has_mongoid_attached_file :file
   	# :path => ':attachment/:id/:style.:extension',

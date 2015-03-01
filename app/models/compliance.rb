@@ -3,10 +3,10 @@ class Compliance
 
   belongs_to :brand
 
-  field :product_or_category, type: String
-  field :compliance_description, type: String
-  field :country, type: String
-  field :date, type: Date
-  field :status, type: String
+  field :product_or_category, type: String, default: ""
+  field :compliance_description, type: String, default: ""
+  field :country, type: String, default: ""
+  field :date, type: Date, default: -> { DateTime.now }
+  field :status, type: String, default: ""
 
 end

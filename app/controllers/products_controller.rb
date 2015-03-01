@@ -2,16 +2,19 @@ class ProductsController < ApplicationController
 
 	def create
 		brand = @current_user.brand
-		new_item = brand.products.create!(product_parameters)
+		
 		@identifier = 'name'
 		@iscurrent = params[:product][:current]
-		@new_item_id = new_item.id
 
 		if @iscurrent == "true"
+			new_item = brand.products.create!(current: true)
 			@collection = brand.products.where(current: true)
 		else
+			new_item = brand.products.create!(current: false)
 			@collection = brand.products.where(current: false)
 		end
+
+		@new_item_id = new_item.id
 
 		if params[:ob]
 			@ob = true

@@ -7,13 +7,23 @@
 	<div class="small-12 medium-10 columns" id="side-nav-content">
 
 <% if @current_user.send(@current_user.type?).sectors.blank? %>
-	
-	
-			<h2><strong>You don't have you SECTOR designated in 
-				<%= link_to 'Your Profile', eval("#{@current_user.type?}_url(:anchor => 'a-sectors')") %>
-			</strong> <br>
-			You can't get matched with <%=@current_user.type_inverse?.capitalize%>s without a designated SECTOR.</h2>
-	
+	<div class="row">
+		<div class="medium-8 medium-centered columns">
+			<div class="panel text-left">
+				<div class="row">
+					<div class="medium-2 columns">
+						<h1>[ <strong style="color: red;">!</strong> ]</h1>
+					</div><!--/.medium-4-->
+					<div class="medium-10 columns">
+						<h3>You don't have you SECTOR designated in 
+							<%= link_to 'Your Profile', eval("#{@current_user.type?}_url(:anchor => 'a-sectors')") %>
+						</h3>
+						<h3>You can't get matched with <%=@current_user.type_inverse?.capitalize%>s without a designated SECTOR.</h3>			
+					</div><!--/.medium-10-->
+				</div><!--/.row-->
+			</div>
+		</div><!--/.medium-6 medium-centered-->
+	</div><!--/.row-->
 <% else %>
 
 	<% case @current_user.type? %>
@@ -36,12 +46,13 @@
 		</div><!--/.match-map-container -->
 
 	<% else %>
-
+	<div class="messages-panel">
 		<div id="match-reset">
 			<h1><%= @country_proper %></h1>
 			<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
 			<small><%= link_to 'SEARCH ANOTHER COUNTRY', all_matches_url %></small>
 		</div>
+		<hr>
 		<div id="match-list">
 			<div class="row">
 				<div class="small-12 columns" >
@@ -49,7 +60,7 @@
 				</div>
 			</div>
 		</div>
-
+	</div>
 	<% end %>
 
 	<% when 'distributor' %>
@@ -70,22 +81,23 @@
 		</div><!--/.match-map-container -->
 
 	<% else %>
-
-		<div id="match-reset">
-			<h1><%= Sector.find(@sector).name %></h1>
-			<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
-			<% unless @current_user.send(@current_user.type?).sectors.length < 2  %>
-			<small><%= link_to 'BROWSE ANOTHER SECTOR', all_matches_url %></small>
-			<% end %>
-		</div>
-		<div id="match-list">
-			<div class="row">
-				<div class="small-12 columns" >
-					<%= render partial: 'distributor_match_list', locals: {matches: @matches}  %>
+		<div class="messages-panel">
+			<div id="match-reset">
+				<h1><%= Sector.find(@sector).name %></h1>
+				<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
+				<% unless @current_user.send(@current_user.type?).sectors.length < 2  %>
+				<small><%= link_to 'BROWSE ANOTHER SECTOR', all_matches_url %></small>
+				<% end %>
+			</div>
+			<hr>
+			<div id="match-list">
+				<div class="row">
+					<div class="small-12 columns" >
+						<%= render partial: 'distributor_match_list', locals: {matches: @matches}  %>
+					</div>
 				</div>
 			</div>
 		</div>
-
 	<% end %>
 
 	<% end %>
@@ -93,5 +105,6 @@
 
 <% end %>
 
-	</div><!--/.row-->
+	</div><!--/.small-12 medium-10 -->
+</div><!--/.row-->
 

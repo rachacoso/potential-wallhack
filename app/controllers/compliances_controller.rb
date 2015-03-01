@@ -2,7 +2,9 @@ class CompliancesController < ApplicationController
 
 	def create
 		u = @current_user.distributor || @current_user.brand
-		new_item = u.compliances.create!(compliance_parameters)
+
+		new_item = u.compliances.create!
+		
 		@identifier = 'product_or_category'
 		@new_item_id = new_item.id
 		@collection = u.compliances

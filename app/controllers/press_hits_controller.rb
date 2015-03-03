@@ -3,11 +3,11 @@ class PressHitsController < ApplicationController
 
 	def create
 		u = @current_user.distributor || @current_user.brand
-		new_item = u.press_hits.create!
-		# unless params[:press_hit][:date].empty?
-		# 	new_item.date = Date.strptime(params[:press_hit][:date], '%m/%d/%Y')
-		# 	new_item.save
-		# end
+		new_item = u.press_hits.create!(press_hit_parameters)
+		unless params[:press_hit][:date].empty?
+			new_item.date = Date.strptime(params[:press_hit][:date], '%m/%d/%Y')
+			new_item.save
+		end
 		@identifier = 'source'
 		@new_item_id = new_item.id
 		

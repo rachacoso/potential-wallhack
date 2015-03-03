@@ -2,7 +2,7 @@ class TradeShowsController < ApplicationController
 
 	def create
 		u = @current_user.distributor || @current_user.brand
-		new_item = u.trade_shows.create!
+		new_item = u.trade_shows.create!(trade_show_parameters)
 		@identifier = 'name'
 		@new_item_id = new_item.id
 		@collection = u.trade_shows

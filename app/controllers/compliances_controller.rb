@@ -3,7 +3,7 @@ class CompliancesController < ApplicationController
 	def create
 		u = @current_user.distributor || @current_user.brand
 
-		new_item = u.compliances.create!
+		new_item = u.compliances.create!(compliance_parameters)
 		
 		@identifier = 'product_or_category'
 		@new_item_id = new_item.id

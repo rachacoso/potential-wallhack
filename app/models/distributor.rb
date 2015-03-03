@@ -102,13 +102,16 @@ class Distributor
 
 
 	# VERIFICATION
-	field :verified_webiste, type: Boolean
+	# CONTROLLED BY ADMIN
+	field :verified_website, type: Boolean
 	field :verified_social_media, type: Boolean # facebook or linkedin
 	field :verified_client_brand, type: Boolean # verfication of current brand client
-	field :verified_business_registration, type: String
+	field :verified_business_registration, type: Boolean
 	field :verified_location, type: Boolean
 	field :verified_brand_display, type: Boolean
 	field :verification_notes, type: String 	# place to put addtional notes on the verification (visible to landing only)
+
+	# CONTROLLED BY USER
   has_mongoid_attached_file :verification_location_photo, 
   	# :path => ':attachment/:id/:style.:extension',
 	  # :url => ":s3_domain_url",
@@ -117,8 +120,8 @@ class Distributor
 	    :medium		=> ['400'],
 	    :large    => ['800>']
 	  }
-
 	validates_attachment_content_type :verification_location_photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
+  
   has_mongoid_attached_file :verification_brand_display_photo, 
   	# :path => ':attachment/:id/:style.:extension',
 	  # :url => ":s3_domain_url",

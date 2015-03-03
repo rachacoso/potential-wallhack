@@ -171,10 +171,14 @@ a.itemformlink.profilelink {
     font-weight: 100;
     // border-bottom: 2px solid scale-color(#ABBACC, $lightness: -30%);
     &:hover {
-      background-color: scale-color(#ABBACC, $lightness: -30%);
+      background-color: $landing-dark-gray;
       // border-bottom: 2px solid #efefef;
       color: white;
     }
+  }
+
+  .accordion-navigation.active > a {
+    color: white;
   }
 
   .rowheadback {

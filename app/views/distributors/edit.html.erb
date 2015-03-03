@@ -592,6 +592,35 @@
 			</div>
 		</div>
 
+		<div class="row">
+			<div class="medium-10 medium-centered columns">
+				<%= render layout: "shared/panel_fulledit" do %>
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h1>Verification</h1>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h3>Website: <%= @current_user.distributor.verified_website ? "Verified" : "Not Verified" %></h3>
+							<h3>Facebook / LinkedIn: <%= @current_user.distributor.verified_social_media ? "Verified" : "Not Verified" %></h3>
+							<h3>Client Brand: <%= @current_user.distributor.verified_client_brand ? "Verified" : "Not Verified" %></h3>
+
+						</div><!--/.small-12-->
+						<div class="small-12 columns">
+							<h3>Business Registration: <%= @current_user.distributor.verified_business_registration ? "Verified" : "Not Verified" %></h3>
+							<h3>Location: <%= @current_user.distributor.verified_location ? "Verified" : "Not Verified" %></h3>
+							<h3>Brand Display: <%= @current_user.distributor.verified_brand_display ? "Verified" : "Not Verified" %></h3>							
+
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+
+				<% end %>
+			</div>
+		</div>		
+
 	</div>
 </div>
 

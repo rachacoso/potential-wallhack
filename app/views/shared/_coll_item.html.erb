@@ -18,7 +18,6 @@
 						<%= cb.class.name == "PressHit" ? cb.date.strftime("// %B %d %Y") : "" rescue nil %>
 				    <span class="right" style="color: #4D94DB;">(click to edit)</span></a>
 				    <div id="a_<%= cb.id %>" class="content <%= collection_item_active(cb.id) %>">
-
 							<%= form_for cb, remote: true do |f| %>
 							<%= ob ? (hidden_field_tag :ob, "true") : "" %>
 							<div class="updateform">
@@ -80,3 +79,5 @@
 		</div>
 		</div>
 	</div>
+
+

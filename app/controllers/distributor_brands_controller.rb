@@ -2,15 +2,15 @@ class DistributorBrandsController < ApplicationController
 
 	def create
 		distributor = @current_user.distributor
-		
+		new_item = distributor.distributor_brands.create!(distributor_brand_parameters)
 		@identifier = 'brand'
 		@iscurrent = params[:distributor_brand][:current]
 
 		if @iscurrent == "true"
-			new_item = distributor.distributor_brands.create!(current: true)
+			# new_item = distributor.distributor_brands.create!(current: true)
 			@collection = distributor.distributor_brands.where(current: true)
 		else
-			new_item = distributor.distributor_brands.create!(current: false)
+			# new_item = distributor.distributor_brands.create!(current: false)
 			@collection = distributor.distributor_brands.where(current: false)
 		end
 

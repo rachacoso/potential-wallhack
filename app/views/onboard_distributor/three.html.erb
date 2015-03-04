@@ -26,7 +26,6 @@
 		      <%= label_tag("sectors[#{sc.id}]", sc.name) %>
 		  <% end %>
 
-		  <hr>
 		</div>
 
 	</div>
@@ -68,18 +67,21 @@
 			<br>
 			<input type="text" id="ccName" placeholder="Custom Channel Name" />
 			<input type="button" value="Add a Custom Channel" id="btnSave" />
-		  <hr>
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="medium-10 columns push-2">
-			
-			<%= f.submit 'Select and Continue', class: "tiny radius alert button right" %>
-			<% end %>
-			<%= render "shared/profileform/return_later" %>
+
+	<br><br>
+	<div class="row onboard-submit-footer">
+		<div class="medium-12 columns text-right">
+			<div class="row">
+				<div class="small-12">
+					<%= f.submit 'Next', class: "tiny radius alert button right" %>
+					<% end %>
+					<%= render "shared/profileform/return_later" %>
+				</div>
+			</div>
 		</div>
 	</div>
-	
 
 <% end %>

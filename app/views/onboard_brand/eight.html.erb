@@ -178,6 +178,12 @@
 		# iscurrent: false
 	} %>
 
-<%= button_to "Finish", dashboard_url, method: :get, class: "tiny radius alert button right" %>
-<%= render "shared/profileform/return_later" %>
+	<br><br>
+	<div class="row onboard-submit-footer">
+		<div class="medium-12 columns text-right">
+			<%= button_to "Finish", dashboard_url, method: :get, class: "tiny radius alert button right" %>
+		</div>
+	</div>
+
+
 <% end %>

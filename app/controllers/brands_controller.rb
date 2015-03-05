@@ -146,7 +146,6 @@ class BrandsController < ApplicationController
 
 		end
 
-
 	end	
 
   private

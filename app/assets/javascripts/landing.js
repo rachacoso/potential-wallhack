@@ -244,25 +244,25 @@ $( document ).ready(function() {
   });
 
 
-  // LOGO PREVIEW
-  $("#brand_logo").change(function(){
-      if (this.files && this.files[0]) {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-              $('#logo-preview').attr('src', e.target.result);
-          }
-          reader.readAsDataURL(this.files[0]);
-      }
-  });
-  $("#distributor_logo").change(function(){
-      if (this.files && this.files[0]) {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-              $('#logo-preview').attr('src', e.target.result);
-          }
-          reader.readAsDataURL(this.files[0]);
-      }
-  });
+  // // LOGO PREVIEW
+  // $("#brand_logo").change(function(){
+  //     if (this.files && this.files[0]) {
+  //         var reader = new FileReader();
+  //         reader.onload = function (e) {
+  //             $('#logo-preview').attr('src', e.target.result);
+  //         }
+  //         reader.readAsDataURL(this.files[0]);
+  //     }
+  // });
+  // $("#distributor_logo").change(function(){
+  //     if (this.files && this.files[0]) {
+  //         var reader = new FileReader();
+  //         reader.onload = function (e) {
+  //             $('#logo-preview').attr('src', e.target.result);
+  //         }
+  //         reader.readAsDataURL(this.files[0]);
+  //     }
+  // });
 
 
   // DASHBOARD UI  
@@ -412,6 +412,26 @@ function initialize () {
     noSuggestionNotice: 'Sorry, no matching results',
     tabDisabled: true
   });
+
+  // FILE UPLOAD
+
+  $('#distributor_verification_business_certificate').change(function() { 
+      // select the form and submit
+      $('#business-registration-form').submit(); 
+  });
+  $('#distributor_verification_location_photo').change(function() { 
+      // select the form and submit
+      $('#location-form').submit(); 
+  });
+  $('#distributor_verification_brand_display_photo').change(function() { 
+      // select the form and submit
+      $('#brand-display-form').submit(); 
+  });
+  $('#distributor_logo, #brand_logo').change(function() { 
+      // select the form and submit
+      $('#company-info-form').submit(); 
+  });     
+
 }
 
 

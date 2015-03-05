@@ -115,6 +115,7 @@ class Distributor
   has_mongoid_attached_file :verification_location_photo, 
   	# :path => ':attachment/:id/:style.:extension',
 	  # :url => ":s3_domain_url",
+	  :default_url => "https://s3.amazonaws.com/landingintl-us/defaults/Default_Logo.png",
 	  :styles => {
 	    :small    => ['100x100#'],
 	    :medium		=> ['400'],
@@ -125,6 +126,7 @@ class Distributor
   has_mongoid_attached_file :verification_brand_display_photo, 
   	# :path => ':attachment/:id/:style.:extension',
 	  # :url => ":s3_domain_url",
+	  :default_url => "https://s3.amazonaws.com/landingintl-us/defaults/Default_Logo.png",
 	  :styles => {
 	    :small    => ['100x100#'],
 	    :medium		=> ['400'],
@@ -137,13 +139,14 @@ class Distributor
 	  # :url => ":s3_domain_url",
 	validates_attachment_content_type :verification_business_certificate, 
 		:content_type=>[	'application/pdf', 
-											'application/vnd.ms-excel', 
 											'application/vnd.ms-powerpoint', 
 											'application/msword',
-											'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 											'application/vnd.openxmlformats-officedocument.presentationml.slideshow',
 											'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-											'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+											'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+											'image/jpeg', 
+											'image/png', 
+											'image/gif'
 										]
 	validates_attachment_size :verification_business_certificate, :in => 0.megabytes..2.megabytes
 

@@ -42,7 +42,7 @@
 					</div>
 				</div>
 
-				<%= form_for @brand, url: brand_url do |f| %>
+				<%= form_for @brand, :html => {id: 'company-info-form'}, url: brand_url do |f| %>
 				<%= hidden_field_tag "redirect_anchor", "a-companyinfo" %>
 				<div class="row">
 					<div class="medium-4 columns">
@@ -54,7 +54,7 @@
 								<%= image_tag @brand.logo.url(:medium), width: "200", height: "200", alt: "Logo", id: "logo-preview" %>
 								<% end %>
 								<br>
-								<%= f.file_field :logo, label: false, accept: 'image/png,image/gif,image/jpeg' %>
+								<%= f.file_field :logo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>
 							</div>
 						</div>	
 

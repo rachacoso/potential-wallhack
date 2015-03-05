@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
 
   def administrator_redirect
     if @current_user && @current_user.administrator
-      unless controller_name == "users" || controller_name == "admin" || controller_name == "session"
+      unless controller_name == "users" || controller_name == "admin" || controller_name == "session" || controller_name == "sectors" || controller_name == "channels" || controller_name = "comapny_sizes" || controller_name = "displays" 
         redirect_to admin_url
       end
     end

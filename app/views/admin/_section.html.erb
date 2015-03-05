@@ -26,7 +26,9 @@
 			</tr>
 			<% end %>
 		<% end %>
-		
+		<% if flash[:sector_error] %>
+			test
+		<% end %>
 		<% if flash[:"#{profile_section.name.downcase}_error"] %>
 			<tr><td colspan="3"><div data-alert class="alert-box alert">
 				<% flash[:"#{profile_section.name.downcase}_error"].each do |k,v| %>

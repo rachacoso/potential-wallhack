@@ -106,7 +106,8 @@ class Distributor
 	field :verified_website, type: Boolean
 	field :verified_social_media, type: Boolean # facebook or linkedin
 	field :verified_client_brand, type: Boolean # verfication of current brand client
-	field :verified_business_registration, type: Boolean
+	field :verified_business_registration, type: Boolean # verfication of government registration
+	field :verified_business_certificate, type: Boolean # verfication of uploaded certificate doc
 	field :verified_location, type: Boolean
 	field :verified_brand_display, type: Boolean
 	field :verification_notes, type: String 	# place to put addtional notes on the verification (visible to landing only)

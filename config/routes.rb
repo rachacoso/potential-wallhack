@@ -56,6 +56,7 @@ Rails.application.routes.draw do
   get    '/distributors/full_profile' => 'distributors#full_profile', as: 'distributor_full_profile'
   patch  '/distributors' => 'distributors#update'
   patch  '/distributor_brands' => 'distributor_brands#update'
+  patch  '/distributors/validation/:id' => 'distributors#validationupdate', as: 'distributor_validation'
   
   get    '/brands' => 'brands#edit', as: 'brand'
   get    '/brands/public_profile' => 'brands#public_profile', as: 'brand_public_profile'

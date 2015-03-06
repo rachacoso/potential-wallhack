@@ -35,6 +35,7 @@ class DistributorsController < ApplicationController
 
 		distributor = @current_user.distributor
 
+
 		# set general fields
 		distributor.update(distributor_parameters)
 
@@ -133,7 +134,18 @@ class DistributorsController < ApplicationController
 
 	end
 
+	def validationupdate
+		distributor = Distributor.find(params[:id])
+		distributor.update!(distributor_parameters)
+		distributor.save!
 
+		# update rating
+		# points = 0
+		# if distributor.
+
+		redirect_to edit_user_url(distributor.user)
+
+	end
 
   private
   def distributor_parameters
@@ -142,6 +154,8 @@ class DistributorsController < ApplicationController
 			:country_of_origin,
 			:countries_of_distribution,
 			:website,
+			:facebook,
+			:linkedin,
 			:logo,
 			:company_size,
 			:current_lines,
@@ -178,6 +192,14 @@ class DistributorsController < ApplicationController
 			:verification_location_photo,
 			:verification_brand_display_photo,
 			:verification_business_certificate,
+			:verified_website,
+			:verified_social_media,
+			:verified_client_brand,
+			:verified_business_registration,
+			:verified_business_certificate,
+			:verified_location,
+			:verified_brand_display,
+			:verification_notes,
 			contact_info_attributes: [ 
 				:contact_name,
 				:contact_title,

@@ -81,7 +81,10 @@
 							<div class="medium-6 columns">
 
 								<div class="row collapse">
-									<%= label_tag(:website, "Website") %>
+									<div class="small-12 columns">
+									<%= label_tag(:website, "Website (#{@current_user.distributor.verified_website ? "Verified" : "Not Verified"})") %>
+									</div><!--/.small-12-->
+									
 									<div class="small-3 columns">
 										<span class="prefix">http://</span>
 									</div>
@@ -96,6 +99,22 @@
 								<%= f.collection_select(:company_size, CompanySize.all, :id, :name) %>
 							</div>
 						</div>
+
+						<div class="row">
+							<div class="small-12 columns">
+								<br>
+								<span style="font-size: 0.875rem;color: #646464;display: block;font-weight: normal;line-height: 1.5;margin-bottom: 0;">Social Media ( <%= @current_user.distributor.verified_social_media ? "Verified" : "Not Verified" %> )</span>
+							</div><!--/.small-12-->							
+							<div class="medium-6 columns">
+								<%= label_tag(:facebook, "Facebook") %>
+								<%= f.text_field :facebook, label: false %>
+							</div>
+							<div class="medium-6 columns">
+								<%= label_tag(:linkedin, "LinkedIn") %>
+								<%= f.text_field :linkedin, label: false %>
+							</div>
+
+						</div>						
 					</div>
 				</div>
 
@@ -603,24 +622,28 @@
 					</div>
 
 					<div class="row">
-						<div class="small-4 columns">
+						<div class="small-6 columns">
 							<h3><strong>Website:</strong> <br><%= @current_user.distributor.verified_website ? "Verified" : "Not Verified" %></h3>
-						</div><!--/.small-4 -->
-						<div class="small-4 columns">
+						</div><!--/.small-6 -->
+						<div class="small-6 columns">
 							<h3><strong>Facebook / LinkedIn:</strong> <br><%= @current_user.distributor.verified_social_media ? "Verified" : "Not Verified" %></h3>
-						</div><!--/.small-4 -->
-						<div class="small-4 columns">
+						</div><!--/.small-6 -->
+						<div class="small-6 columns">
 							<h3><strong>Client Brand:</strong> <br><%= @current_user.distributor.verified_client_brand ? "Verified" : "Not Verified" %></h3>
-						</div><!--/.small-4 -->
+						</div><!--/.small-6 -->
+						<div class="small-6 columns">
+							<h3><strong>Business Registration:</strong> <br><%= @current_user.distributor.verified_business_registration ? "Verified" : "Not Verified" %></h3>
+						</div><!--/.small-6 -->
+
 					</div><!--/.row-->
 					<div class="row">					
 						<div class="medium-4 columns">
-							<hr>
-							<h3><strong>Business Registration:</strong> <br><%= @current_user.distributor.verified_business_registration ? "Verified" : "Not Verified" %></h3>
+
+							<h3><strong>Business Certificate:</strong> <br><%= @current_user.distributor.verified_business_certificate ? "Verified" : "Not Verified" %></h3>
 							<%= form_for @distributor, :html => {id: 'business-registration-form'}, url: distributor_url do |f| %>
 								<%= hidden_field_tag "redirect_anchor", "a-verification" %>
 								<%= f.label :verification_business_certificate do %>
-								Business Registration <br>
+								Business Certificate <br>
 								<div class="text-center">
 								<div style="height: 200px; width: 200px;">
 									<% if @distributor.verification_business_certificate.exists? %>
@@ -641,7 +664,7 @@
 							<% end %>
 						</div><!--/.medium-4-->
 						<div class="medium-4 columns">
-							<hr>
+
 							<h3><strong>Location:</strong> <br><%= @current_user.distributor.verified_location ? "Verified" : "Not Verified" %></h3>
 							<%= form_for @distributor, :html => {id: 'location-form'}, url: distributor_url do |f| %>
 								<%= hidden_field_tag "redirect_anchor", "a-verification" %>
@@ -655,7 +678,7 @@
 							<% end %>	
 						</div><!--/.medium-4-->
 						<div class="medium-4 columns">
-							<hr>
+
 							<h3><strong>Brand Display:</strong> <br><%= @current_user.distributor.verified_brand_display ? "Verified" : "Not Verified" %></h3>
 							<%= form_for @distributor, :html => {id: 'brand-display-form'}, url: distributor_url do |f| %>
 								<%= hidden_field_tag "redirect_anchor", "a-verification" %>

@@ -4,7 +4,7 @@ class Distributor
 	include Mongoid::Paperclip
 
   belongs_to :user
-  after_create :init_contact_info
+  after_create :init_info
 
 	field :subscriber, type: Boolean
 
@@ -155,8 +155,10 @@ class Distributor
 
 	private 
 
-	def init_contact_info
+	def init_info
 		self.create_contact_info
+		self.rating = 0
+		self.save
 	end
 
 

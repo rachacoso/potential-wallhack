@@ -136,12 +136,33 @@ class DistributorsController < ApplicationController
 
 	def validationupdate
 		distributor = Distributor.find(params[:id])
-		distributor.update!(distributor_parameters)
-		distributor.save!
+
+		rating_items = [ 
+			:verified_website,
+			:verified_social_media,
+			:verified_client_brand,
+			:verified_business_registration,
+			:verified_business_certificate,
+			:verified_location,
+			:verified_brand_display,
+		]
 
 		# update rating
-		# points = 0
-		# if distributor.
+
+		rating_items.each do |item|
+			if params[:distributor][item].to_bool && distributor.send(item)
+				next
+			elsif !params[:distributor][item].to_bool && !distributor.send(item)
+				next				
+			elsif params[:distributor][item].to_bool && !distributor.send(item)
+				distributor.rating += 1
+			elsif !params[:distributor][item].to_bool && distributor.send(item)
+				distributor.rating -= 1
+			end
+		end
+
+		distributor.update!(distributor_parameters)
+		distributor.save!		
 
 		redirect_to edit_user_url(distributor.user)
 

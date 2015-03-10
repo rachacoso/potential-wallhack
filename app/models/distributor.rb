@@ -19,7 +19,8 @@ class Distributor
 	field :website, type: String
 	field :facebook, type: String
 	field :linkedin, type: String
-	field :rating, type: Integer
+	field :rating, type: Integer, default: 0 # validation rating 0-7 based on validation criterion
+	field :completeness, type: Integer, default: 0 # 0-3 depending on completeness of profile fields
  	has_one :contact_info, as: :distributor_contact_info, dependent: :destroy
 	accepts_nested_attributes_for :contact_info
 
@@ -157,7 +158,6 @@ class Distributor
 
 	def init_info
 		self.create_contact_info
-		self.rating = 0
 		self.save
 	end
 

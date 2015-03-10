@@ -9,6 +9,7 @@
 				</div>		
 				<div class="medium-7 columns">
 					<h1><%= profile.company_name %></h1>
+					<h3>Rating: <%= profile.rating ? profile.rating : "N/A" %></h3>
 					<h3><small>web</small> <strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>
 
 					<% if this_match(profile) %>

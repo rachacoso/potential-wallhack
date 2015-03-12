@@ -125,14 +125,25 @@
 
 		<% else %>
 		<div class="row collapse">
-			<div class="small-11 small-centered text-center columns">
+			<div class="small-6 small-centered text-center columns">
 				<h1>Available to subscribers only</h1>
 								<% if @new_contact_messages > 0 %>
 									<h3>You have been contacted by <%= @new_contact_messages %> <%= @current_user.type_inverse? %><%= @new_contact_messages > 1 ? "s" : "" %><br>
 										<%= link_to 'SUBSCRIBE', '#' %> to connect!
 									</h3>
 								<% end %>
-
+						    <% if @messages_unread > 0 || @new_contact_messages > 0 %>
+									<div class="panel text-left">
+										<div class="row">
+											<div class="medium-2 columns">
+												<h1>[ <strong style="color: red;">!</strong> ]</h1>
+											</div><!--/.medium-4-->
+											<div class="medium-10 columns">
+												<h3> A <%= @current_user.type_inverse? %> is interested in communicating with you. <br> <%= link_to 'SUBSCRIBE', '#' %> to initiate/resume contact. </h3>							
+											</div><!--/.medium-10-->
+										</div><!--/.row-->
+									</div>
+						    <% end %>
 			</div><!--/.small-11 small-centered text-center-->
 		</div><!--/.row-->
 		<% end %>

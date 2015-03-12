@@ -1,9 +1,8 @@
-<div class="row">
-	<div class="small-12 columns text-right">
-		<h1>Marketplace <%= render "shared/imageswap/marketplace_logo" %></h1>
-	</div>
+<div id="dashboard-marketplace-header">
+	<h1><%= render "shared/imageswap/marketplace_logo" %> Marketplace</h1>
 </div>
 
+<div id="dashboard-marketplace-content">
 <% if @current_user.distributor %>
 
 	<div class="row">
@@ -71,7 +70,7 @@
 	<div class="row">
 		<div class="small-12 columns">
 
-		<h2 class="dashboard-section-title">Find Distributors</h2>
+		<h3 class="dashboard-section-title">FIND DISTRIBUTORS IN NEW MARKETS</h3>
 		<div id="match-map-container">
 			<div class="row show-for-small-only">
 				<div class="small-12 columns">
@@ -85,14 +84,28 @@
 
 		</div><!--/.match-map-container -->
 
-		<div class="row">
-			<div class="medium-6 columns">
-				<%= render "message_center" %>	
-			</div><!--/.medium-6-->
-			<div class="medium-6 columns">
-				
-			<h2 class="dashboard-section-title">Profile Center</h2>
-			<div class="panel">
+
+		</div>
+	</div>
+
+
+<% end %>
+</div>
+
+<div id="dashboard-marketplace-header">
+	<h3>Messages</h3>
+</div>
+<div id="dashboard-marketplace-content">
+	<%= render "message_center" %>
+</div>
+
+
+<div id="dashboard-marketplace-header">
+	<h3>Profile</h3>
+</div>
+<div id="dashboard-marketplace-content">
+
+			<div class="dashboard-profile-panel">
 				<% percentp = check_brand_public_profile %>
 				<h3>Your <strong><%= link_to 'Public Profile', brand_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> complete!</h3>
 				<div class="progress small-12 <%= percentp == 100 ? "success" : "" %>">
@@ -110,18 +123,5 @@
 				<small>Your full profile is viewable only by premium distributor subscribers. It contains information that helps distributors determine whether your brand would be a good fit for their market and their portfolio. </small>
 
 			</div>
-			
 
-			</div><!--/.medium-6-->
-		</div><!--/.row-->
-			
-
-
-
-
-
-		</div>
-	</div>
-
-
-<% end %>
+</div>

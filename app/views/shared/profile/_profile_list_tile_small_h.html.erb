@@ -19,7 +19,11 @@
 						<%= ("&blk12;" * match.company_name.length).html_safe %>
 						</span>
 					<% end %><br>
-					[rating]
+					<% if match.class.to_s == 'Distributor' %>
+						Rating: <%= match.rating %><br>
+						Completeness: <%= match.completeness %><br>
+						Total: <%= match.rating + match.completeness %>
+					<% end %>
 				</div><!--/.small-4-->
 				<div class="small-8 columns text-right">
 

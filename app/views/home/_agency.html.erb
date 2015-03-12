@@ -1,12 +1,8 @@
-<div class="row">
-	<div class="small-12 columns text-left">
-
-		<h1><%= render "shared/imageswap/agency_logo" %> Agency</h1>
-	</div>
+<div id="dashboard-agency-header">
+	<h1><%= render "shared/imageswap/agency_logo" %> Agency</h1>
 </div>
 
-
-
+<div id="dashboard-marketplace-content">
 <% if @current_user.distributor %>
 
 	<div class="row">
@@ -31,7 +27,7 @@
 
 	<div class="row">
 		<div class="small-12 columns">
-			<div class="panel">
+			<div class="agency-panel">
 
 				<p>The Landing International Agency is a full-service international development agency that works with brands to create an international expansion strategy, identify and qualify distribution partners, negotiate agreements and manage distributor relationships. We serve as an extension of our clients’ teams to create revenue opportunities and grow their international business.</p>
 
@@ -47,3 +43,4 @@
 
 
 <% end %>
+</div>

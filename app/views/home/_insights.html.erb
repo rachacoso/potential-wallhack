@@ -1,57 +1,26 @@
-<div class="row">
-	<div class="small-12 columns text-left">
-		<h1><%= render "shared/imageswap/insights_logo" %> Insights</h1>
-	</div>
+<div id="dashboard-insights-header">
+	<h1><%= render "shared/imageswap/insights_logo" %> Insights</h1>
 </div>
 
+<div id="dashboard-insights-content">
 	<div class="row">
 		<div class="small-12 columns">
-			<h2 class="dashboard-section-title">Insights Reports</h2>
-			<div class="panel">
-				<div class="row">
-					<div class="medium-6 columns">
-						<img src="images/China.svg" width="300" height="300">
-					</div>
-					<div class="medium-6 columns text-right">
-						<h2>China</h2>						
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns">
+			<h3 class="dashboard-section-title">Featured Insight Reports</h3>
 
-<p>Inclusive beneficiaries challenges; volunteer emergency response rural development, lasting change significant citizens of change vaccine social free-speech partnership benefit. Healthcare, human rights; institutions lifting people up citizenry change lives.</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns text-right">
-<%= link_to 'Purchase the full report', '#', class: 'button tiny alert' %>
-					</div>
-				</div>
-
-			</div>
-
-			<div class="panel">
-				<div class="row">
-					<div class="medium-6 columns text-left">
-						<h2>India</h2>						
-					</div>					
-					<div class="medium-6 columns">
-						<img src="images/India.svg" width="300" height="300">
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns">
-<p>Inclusive beneficiaries challenges; volunteer emergency response rural development, lasting change significant citizens of change vaccine social free-speech partnership benefit. Healthcare, human rights; institutions lifting people up citizenry change lives.</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns text-right">
-<%= link_to 'Purchase the full report', '#', class: 'button tiny alert' %>
-					</div>
-				</div>
-
-			</div>
+<%= render partial: "insights_country_panel", locals: {country: "UNITED KINGDOM", image: "insights_uk.jpg", text: "Brits are open, curious and savvy when it comes to buying into new, engaging or better value products"} %>
+<hr>
+<%= render partial: "insights_country_panel", locals: {country: "INDIA", image: "insights_india.jpg", text: "India has a fast-growing and formidable middle class that is changing the market for consumer goods"} %>
+<hr>
+<%= render partial: "insights_country_panel", locals: {country: "BRAZIL", image: "insights_brazil.jpg", text: "37% of Brazil’s 60 million households will belong to the middle and affluent classes by 2020, compared with", credits: "Photo by: 
+<br>Peter Molnar"} %>
+<hr>
+<%= render partial: "insights_country_panel", locals: {country: "CHINA", image: "insights_china.jpg", text: "China is the largest country in the world with 1.4 billion people, representing 19.24% of the world’s"} %>
+<hr>
+<%= render partial: "insights_country_panel", locals: {country: "SOUTH KOREA", image: "insights_korea.jpg", text: "South Korea has become a trend-setter and influencer for fashion and luxury in Asia. Korea is considered"} %>
+<hr>
+<%= render partial: "insights_country_panel", locals: {country: "RUSSIA", image: "insights_russia.jpg", text: "Russia is predicted to become the largest consumer market in Europe by 2018. Russia’s middle class"} %>
 
 
 		</div>
 	</div>
+</div>

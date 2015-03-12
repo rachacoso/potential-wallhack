@@ -1,5 +1,5 @@
 var hasBG = typeof bgImage != 'undefined';
-var bgDefaultColor = "#B3B3B3";
+var bgDefaultColor = "#E5E5E5";
 
 
 $( document ).ready(function() {
@@ -264,66 +264,6 @@ $( document ).ready(function() {
   //     }
   // });
 
-
-  // DASHBOARD UI  
-
-  // $('#dashboard-marketplace-header').on('click', function(e) {
-  //   if ( $('#dashboard-marketplace-container').hasClass('medium-8') ) {
-  //     $('#dashboard-marketplace-container').hide().removeClass('medium-8').addClass('medium-4').fadeIn(500);
-  //     $('#dashboard-insights-container, #dashboard-agency-container').hide().removeClass('medium-2').addClass('medium-4').fadeIn(500);
-  //     $('#dashboard-marketplace-content-inner, #dashboard-insights-content-inner, #dashboard-agency-content-inner').fadeIn(500);
-  //     $('#marketplace-h2, #insights-h2, #agency-h2').hide();
-  //     $('#marketplace-h1, #insights-h1, #agency-h1').show();      
-  //   } else {
-  //     $('#dashboard-marketplace-container').hide().removeClass('medium-4 medium-2').addClass('medium-8').fadeIn(500);
-  //     $('#dashboard-insights-container, #dashboard-agency-container').hide().removeClass('medium-4 medium-8 medium-centered').addClass('medium-2').fadeIn(500);
-  //     $('#dashboard-insights-content-inner, #dashboard-agency-content-inner').hide();
-  //     $('#dashboard-marketplace-content-inner').fadeIn(500);
-  //     $('#marketplace-h2, #insights-h1, #agency-h1').hide();
-  //     $('#marketplace-h1, #insights-h2, #agency-h2').show();         
-  //   }
-  //     $(document).foundation();
-  //     $(document).foundation('equalizer', 'reflow');           
-  // });
-
-  // $('#dashboard-insights-header').on('click', function(e) {
-  //   if ( $('#dashboard-insights-container').hasClass('medium-8') ) {
-  //     $('#dashboard-insights-container').hide().removeClass('medium-8').addClass('medium-4').fadeIn(500);
-  //     $('#dashboard-marketplace-container, #dashboard-agency-container').hide().removeClass('medium-2').addClass('medium-4').fadeIn(500);
-  //     $('#dashboard-marketplace-content-inner, #dashboard-insights-content-inner, #dashboard-agency-content-inner').fadeIn(500);
-  //     $('#marketplace-h2, #insights-h2, #agency-h2').hide();
-  //     $('#marketplace-h1, #insights-h1, #agency-h1').show();      
-  //   } else {
-  //     $('#dashboard-insights-container').hide().removeClass('medium-4 medium-2').addClass('medium-8').fadeIn(500);
-  //     $('#dashboard-marketplace-container, #dashboard-agency-container').hide().removeClass('medium-4 medium-8').addClass('medium-2').fadeIn(500);
-  //     $('#dashboard-marketplace-content-inner, #dashboard-agency-content-inner').hide();
-  //     $('#dashboard-insights-content-inner').fadeIn(500);
-  //     $('#marketplace-h1, #insights-h2, #agency-h1').hide();
-  //     $('#marketplace-h2, #insights-h1, #agency-h2').show();
-  //   }    
-  //   $(document).foundation();
-  //   $(document).foundation('equalizer', 'reflow');         
-  // });
-
-
-  // $('#dashboard-agency-header').on('click', function(e) { 
-  //   if ( $('#dashboard-agency-container').hasClass('medium-8') ) {
-  //     $('#dashboard-agency-container').hide().removeClass('medium-8').addClass('medium-4').fadeIn(500);
-  //     $('#dashboard-insights-container, #dashboard-marketplace-container').hide().removeClass('medium-2').addClass('medium-4').fadeIn(500);
-  //     $('#dashboard-marketplace-content-inner, #dashboard-insights-content-inner, #dashboard-agency-content-inner').fadeIn(500);
-  //     $('#marketplace-h2, #insights-h2, #agency-h2').hide();
-  //     $('#marketplace-h1, #insights-h1, #agency-h1').show();      
-  //   } else {
-  //     $('#dashboard-agency-container').hide().removeClass('medium-4 medium-2').addClass('medium-8').fadeIn(500);
-  //     $('#dashboard-insights-container, #dashboard-marketplace-container').hide().removeClass('medium-4 medium-8').addClass('medium-2').fadeIn(500);
-  //     $('#dashboard-insights-content-inner, #dashboard-marketplace-content-inner').hide();
-  //     $('#dashboard-agency-content-inner').fadeIn(500);
-  //     $('#marketplace-h1, #insights-h1, #agency-h2').hide();
-  //     $('#marketplace-h2, #insights-h2, #agency-h1').show();
-  //   }       
-  //   $(document).foundation();
-  //   $(document).foundation('equalizer', 'reflow');      
-  // });
 
 
 });

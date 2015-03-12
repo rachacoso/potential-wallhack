@@ -26,38 +26,58 @@
 	    <% if @current_user && show_top_menu %>
 		    
 			<li class="divider"></li>
-			<!-- Marketplace Nav Section -->
-			<li>
+			<!-- MARKETS Nav Section -->
+			<li class="has-dropdown">
 				<a href="<%= all_matches_url %>"> 					
-				<%= render "shared/imageswap/marketplace_logo" %>		
+				MARKETS
 				<% if controller_name == "matches" || controller_name == "messages" || controller_name == "library_documents" || controller_name == "distributors" || controller_name == "brands" %>
-				Marketplace
+				<!-- CONTROLS HERE FOR ADJUSTING DISPLAY OF BAR BUTTON -->
 				<% end %>
+				</a>
 
+	      <ul class="dropdown">
+	        <li>
+	        	<label>MARKETPLACE</label>
+	        </li>	      	
+					<li>
+						<%= link_to "FIND #{@current_user.type_inverse?.upcase}S", all_matches_path, class: 'text-right' %>
+					</li>	          			
+	        <li>
+	        	<%= link_to "SAVED #{@current_user.type_inverse?.upcase}S", saved_matches_path, class: 'text-right' %>
+	        </li>
+	        <li>
+	        	<%= link_to "CONTACTED #{@current_user.type_inverse?.upcase}S", contacted_matches_path, class: 'text-right' %>
+	        </li>
+	        <li>
+	        	<label>AGENCY</label>
+	        </li>
+	        <li>
+	        	<%= link_to "PROJECTS BY COUNTRY", "#", class: 'text-right' %>
+	        </li>
+	        <li>
+	        	<label>INSIGHTS</label>
+	        </li>
+	        <li>
+	        	<%= link_to 'REPORTS BY COUNTRY', "#", class: 'text-right' %>
+	        </li>
+	      </ul>
+
+			</li>
+
+			<!-- MESSAGES Nav Section -->
+			<li>
+				<a href="#">
+				<%#= render "shared/imageswap/agency_insights" %>
+				<%= link_to conversations_path do %>
+				MESSAGES
 	    	<% if @messages_unread > 0 || @new_contact_messages > 0 %>
 				<span id="unread-message-badge"> ! </span> 
-	    	<% end %>					
+	    	<% end %>
+	    	<% end %>
 				</a>
 			</li>
 
-			<!-- Insights Nav Section -->
-			<li>
-				<a href="#">
-				<%= render "shared/imageswap/insights_logo" %>
-				</a>
-			</li>
 
-			<!-- Agency Nav Section -->
-			<li>
-				<a href="#">
-				<%= render "shared/imageswap/agency_logo" %>
-				</a>
-			</li>
-
-			<li class="divider"></li>
-			<li <%= action_name == "dashboard" ? 'class="active"'.html_safe : ''%>>
-				<%= link_to 'HOME', dashboard_url, id: "menu-dashboard" %> 
-			</li>
 			<li class="divider"></li>
 
 		  <!-- User Nav Section -->
@@ -76,12 +96,38 @@
 			    </span>	
 	      </a>
 
-	      <ul class="dropdown">       	
+	      <ul class="dropdown">
+	      	<li>
+			      <%= link_to 'DASHBOARD', dashboard_url, id: "menu-dashboard", class: 'text-right' %>
+		      </li>
 					<li>
-						<%= link_to 'Your Account', "#" %>
-					</li>	          			
-
-	        <li><%= link_to 'Logout', logout_url %></li>
+						<%= link_to 'PLANS', "#", class: 'text-right' %>
+					</li>
+					<li class="divider"></li>
+	        <li>
+	        	<label>MARKETPLACE</label>
+	        </li>
+	        <li>
+	        	<%= link_to 'PREVIEW PROFILE', "#", class: 'text-right' %>
+	        </li>
+	        <li>
+	        	<%= link_to 'EDIT PROFILE', "#", class: 'text-right' %>
+	        </li>
+	        <li>
+	        	<label>AGENCY</label>
+	        </li>
+	        <li>
+	        	<%= link_to 'EDIT GLOBAL TERMS', "#", class: 'text-right' %>
+	        </li>
+	        <li>
+	        	<label>INSIGHTS</label>
+	        </li>
+	        <li>
+	        	<%= link_to 'PURCHASED REPORTS', "#", class: 'text-right' %>
+	        </li>
+	        <li class="divider"></li>
+	        <li><%= link_to 'SETTINGS', '#', class: 'text-right' %></li>
+	        <li><%= link_to 'LOGOUT', logout_url, class: 'text-right' %></li>
 	      </ul>
 	    </li>
 	    <% end %>

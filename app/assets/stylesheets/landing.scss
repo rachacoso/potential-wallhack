@@ -216,10 +216,14 @@ a.itemformlink.profilelink {
     padding: 0em;
   }     
 }
+.top-bar-section .dropdown li:not(.has-form) a:not(.button) {
+  line-height: 3;
+}
 .topbarborder {
   border-bottom: 1px dotted $link-color;
   height:1em;
 }
+
 
 .ldpanel {
   border-radius: 3px; 
@@ -1500,3 +1504,5 @@ a.match-map:hover {
   -khtml-opacity: 0;
   opacity: 0;
 }
+
+

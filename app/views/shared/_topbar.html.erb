@@ -46,7 +46,13 @@
 	        	<%= link_to "SAVED #{@current_user.type_inverse?.upcase}S", saved_matches_path, class: 'text-right' %>
 	        </li>
 	        <li>
-	        	<%= link_to "CONTACTED #{@current_user.type_inverse?.upcase}S", contacted_matches_path, class: 'text-right' %>
+	        	<%= link_to "#{@current_user.type_inverse?.upcase}S YOU CONTACTED", contacted_matches_path, class: 'text-right' %>
+	        </li>
+	        <li>
+	        	<%= link_to "#{@current_user.type_inverse?.upcase}S CONTACTING YOU", incoming_matches_path, class: 'text-right' %>
+	        </li>
+	        <li>
+	        	<%= link_to "CURRENT CONVERSATIONS", conversations_path, class: 'text-right' %>
 	        </li>
 	        <li>
 	        	<label>AGENCY</label>
@@ -108,10 +114,10 @@
 	        	<label>MARKETPLACE</label>
 	        </li>
 	        <li>
-	        	<%= link_to 'PREVIEW PROFILE', "#", class: 'text-right' %>
+	        	<%= link_to 'PREVIEW PROFILE', eval("#{@current_user.type?}_full_profile_path"), class: 'text-right' %>
 	        </li>
 	        <li>
-	        	<%= link_to 'EDIT PROFILE', "#", class: 'text-right' %>
+	        	<%= link_to 'EDIT PROFILE', eval("#{@current_user.type?}_path"), class: 'text-right' %>
 	        </li>
 	        <li>
 	        	<label>AGENCY</label>

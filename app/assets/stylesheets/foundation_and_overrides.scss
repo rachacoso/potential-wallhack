@@ -908,8 +908,8 @@ $panel-font-color: $body-font-color;
 // $include-html-media-classes: $include-html-classes;
 
 // We use this to set the progress bar height
-$progress-bar-height: rem-calc(30);
-$progress-bar-color: #fff  ;
+$progress-bar-height: rem-calc(20);
+$progress-bar-color: $landing-light-gray ;
 
 // We use these to control the border styles
 // $progress-bar-border-color: scale-color(#fff, $lightness: 20%);
@@ -1202,6 +1202,7 @@ $tabs-navigation-font-size: rem-calc(11);
 // $tooltip-rounded: $global-rounded;
 // $tooltip-pip-size: 5px;
 // $tooltip-max-width: 300px;
+$tooltip-max-width: 500px;
 
 //
 // TOP BAR

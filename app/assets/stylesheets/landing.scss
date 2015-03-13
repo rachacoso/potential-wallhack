@@ -1268,7 +1268,8 @@ $dashboard-agency-color: $landing-teal;
 #dashboard-marketplace-content, #dashboard-insights-content, #dashboard-agency-content {
   padding: rem-calc(10);
   hr {
-     border: 0.5px solid $landing-middle-gray;
+     // border: 1px solid $landing-middle-gray;
+     border-color: $landing-middle-gray;
      margin-top: 0px;
   }
 }
@@ -1294,6 +1295,13 @@ $dashboard-agency-color: $landing-teal;
     padding: rem-calc(10);
   }
 }
+
+
+.image-credits-content {
+  font-size:0.2em;
+  padding-left: 2px;
+}
+
 .insights-panel-image {
   position: relative;
   .insights-panel-image-label {

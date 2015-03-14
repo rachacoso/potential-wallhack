@@ -1,7 +1,7 @@
 <%= render partial: "shared/topbar" %>
 
 <div class="row collapse">
-	<div class="small-12 columns" id="page-content">
+	<div class="small-12 columns" style="background: white;">
 
 
 <% if @current_user.send(@current_user.type?).sectors.blank? %>
@@ -30,18 +30,20 @@
 
 	<% if !@country %>	
 
+<div class="row">
+	<div class="medium-3 columns"><h1 style="margin-top: 50px;">FIND DISTRIBUTORS IN NEW MARKETS</h1>		</div><!--/.medium-3-->
+	<div class="medium-6 columns">
 		<div id="match-map-container">
-			<div class="row collapse">
-				<div class="small-12 columns">
-					<h2>Find a Distributor for:</h2>		
-				</div><!--/.small-12-->
-			</div>
 
 			<div id="match-search">
 				<%= render partial: "brand_search_start" %>
 			</div>
 
 		</div><!--/.match-map-container -->
+	</div><!--/.medium-6-->
+	<div class="medium-3 columns"> &nbsp; </div><!--/.medium-3-->
+
+</div>
 
 	<% else %>
 	<div class="messages-panel">

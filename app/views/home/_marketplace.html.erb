@@ -8,58 +8,19 @@
 	<div class="row">
 		<div class="small-12 columns">
 
-		<h2 class="dashboard-section-title">Find Brands</h2>
-		<div id="match-map-container" style="border: 1px solid gray;">
-			<div class="row show-for-small-only">
-				<div class="small-12 columns">
-					<h2>Browse Brands:</h2>		
-				</div><!--/.small-12-->
-			</div>
-
-			<div id="match-search">
-				<%= render partial: "matches/distributor_search_start" %>
-			</div>
-
-		</div><!--/.match-map-container -->
-		<div class="row">
-			<div class="medium-6 columns">
-				<%= render "message_center" %>	
-			</div><!--/.medium-6-->
-			<div class="medium-6 columns">
-				
-			<h2 class="dashboard-section-title">Profile Center</h2>
-			<div class="panel">
-				<% percentp = check_distributor_public_profile %>
-				Your <strong><%= link_to 'Public Profile', distributor_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> complete!<br><br>
-				<div class="progress small-12 <%= percentp == 100 ? "success" : "" %>">
-				  <span class="meter text-center" style="width: <%= percentp %>%"><small class="text-right"></small></span>
+			<h2 class="dashboard-section-title">Find Brands</h2>
+			<div id="match-map-container" style="border: 1px solid gray;">
+				<div class="row show-for-small-only">
+					<div class="small-12 columns">
+						<h2>Browse Brands:</h2>		
+					</div><!--/.small-12-->
 				</div>
-				<small>Your public profile is viewable by all registered brands. It displays limited publicly available information including countries of distribution, year established, product sector and retail channels.</small>
 
-				<hr>
-
-				<% percentf = check_distributor_full_profile %>
-				Your <strong><%= link_to 'Full Profile', distributor_full_profile_url %></strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> complete!<br><br>
-				<div class="progress small-12 <%= percentf == 100 ? "success" : "" %>">
-				  <span class="meter" style="width: <%= percentf %>%"></span>
+				<div id="match-search">
+					<%= render partial: "matches/distributor_search_start" %>
 				</div>
-				<small>Your full profile is viewable only by premium brand subscribers. It contains information that helps brands determine whether your company is a good fit for their international expansion.</small>
-				
-				<hr>
 
-				<h3>Your <strong><%= link_to 'RATING', brand_full_profile_url %></strong> is <strong>3</strong> out of <strong>5</strong> [stars].</h3>
-				
-				<p>[image of rating here... discs?]</p>
-				<small>Your ratings help identify you as a credible business partner. Your ratings are based on the completeness of your profile and verification of your company’s website, social media presence, business license and other factors. </small>
-			</div>
-
-
-			</div><!--/.medium-6-->
-		</div><!--/.row-->
-
-			
-
-
+			</div><!--/.match-map-container -->		
 
 		</div>
 	</div>
@@ -92,6 +53,8 @@
 <% end %>
 </div>
 
+
+
 <div id="dashboard-marketplace-header">
 	<h3>Messages</h3>
 </div>
@@ -100,6 +63,70 @@
 </div>
 
 
+<% if @current_user.distributor %>
+
+<div id="dashboard-marketplace-header">
+	<h3>Profile</h3>
+</div>
+<div id="dashboard-marketplace-content">
+
+			<div class="dashboard-profile-panel">
+
+				<% percentp = check_distributor_public_profile %>
+				<div class="row">
+					<div class="medium-6 columns">
+						<h3>Your <strong><%= link_to 'Public Profile', brand_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> complete!
+						<br>
+						<small><span data-tooltip aria-haspopup="true" class="has-tip" title="Your public profile is viewable by all registered brands. It displays limited publicly available information including countries of distribution, year established, product sector and retail channels.">What is this?</span></small>
+						</h3>
+						
+					</div><!--/.medium-6-->
+					<div class="medium-6 columns">
+						<div class="progress round small-12 <%= percentp == 100 ? "success" : "" %>">
+						  <span class="meter text-center" style="width: <%= percentp %>%"><small class="text-right"></small></span>
+						</div>
+					</div><!--/.medium-6-->
+				</div><!--/.row-->
+				
+
+
+				<hr>
+
+				<% percentf = check_distributor_full_profile %>
+				<div class="row">
+					<div class="medium-6 columns">
+						<h3>Your <strong><%= link_to 'Full Profile', brand_full_profile_url %></strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> complete!
+						<br>
+						<small><span data-tooltip aria-haspopup="true" class="has-tip radius" title="Your full profile is viewable only by premium brand subscribers. It contains information that helps brands determine whether your company is a good fit for their international expansion.">What is this?</span></small>
+						</h3>
+						
+					</div><!--/.medium-6-->
+					<div class="medium-6 columns">
+						<div class="progress round small-12 <%= percentf == 100 ? "success" : "" %>">
+						  <span class="meter text-center" style="width: <%= percentf %>%"><small class="text-right"></small></span>
+						</div>
+					</div><!--/.medium-6-->
+				</div><!--/.row-->
+
+				<hr>
+
+				<div class="row">
+					<div class="medium-6 columns">
+						<h3>Your <strong><%= link_to 'RATING', brand_full_profile_url %></strong> is <strong>3.5</strong> out of <strong>5</strong></h3>
+						
+						<small><span data-tooltip aria-haspopup="true" class="has-tip radius" title="Your ratings help identify you as a credible business partner. Your ratings are based on the completeness of your profile and verification of your company’s website, social media presence, business license and other factors. ">What is this?</span></small>
+					</div><!--/.medium-6-->
+					<div class="medium-6 columns">
+						<p>[image of rating here]</p>
+					</div><!--/.medium-6-->
+				</div><!--/.row-->
+
+			</div>
+
+</div>
+
+
+<% elsif @current_user.brand %>
 <div id="dashboard-marketplace-header">
 	<h3>Profile</h3>
 </div>
@@ -146,3 +173,4 @@
 			</div>
 
 </div>
+<% end %>

@@ -1280,7 +1280,20 @@ $dashboard-agency-color: $landing-teal;
   padding: 0 rem-calc(10);
 }
 .dashboard-messages-panel {
+  position: relative;
   padding: 0 rem-calc(10);
+  .dashboard-messages-badge {
+    position: absolute;
+    top: 0px;
+    right: 65px;
+  }
+  .dashboard-messages-preview-list {
+    background-color: $landing-light-gray;
+    border-radius: 3px;
+    margin: 0 rem-calc(2);
+    padding: rem-calc(2) 0;
+  }
+
 }
 .dashboard-profile-panel {
   padding: 0 rem-calc(10); 
@@ -1458,7 +1471,7 @@ $dashboard-agency-color: $landing-teal;
 }
 #match-india {
   position: absolute;
-  left: 68%;
+  left: 63%;
   top: 47%;
 }
 #match-brazil {
@@ -1468,8 +1481,8 @@ $dashboard-agency-color: $landing-teal;
 }
 #match-uk {
   position: absolute;
-  left: 40%;
-  top: 18%;
+  left: 37%;
+  top: 25%;
 }
 
 
@@ -1502,17 +1515,17 @@ margin-bottom: 1em;
 
 a.match-map {
   color:white;
-  background: rgba(0,0,0,0.4);
-  padding: rem-calc(3);
-  padding-top: rem-calc(2) !important;
-  font-weight: 100;
-  font-size: rem-calc(20);
-  border: 1px solid black;
+  background: $landing-orange;
+  padding: rem-calc(4);
+  padding-top: rem-calc(4) !important;
+  font-weight: 400;
+  font-size: rem-calc(11);
   border-radius: 3px;
 }
 
 a.match-map:hover {
-  background: rgba(0,0,0,0.6);
+  background: $landing-orange;
+  border: 1px solid black;
 }
 
 .saved-contacted-match-list {

@@ -9,7 +9,7 @@
 		<div class="small-12 columns">
 
 			<h2 class="dashboard-section-title">Find Brands</h2>
-			<div id="match-map-container" style="border: 1px solid gray;">
+			<div id="match-map-container">
 				<div class="row show-for-small-only">
 					<div class="small-12 columns">
 						<h2>Browse Brands:</h2>		
@@ -112,7 +112,7 @@
 
 				<div class="row">
 					<div class="medium-6 columns">
-						<h3>Your <strong><%= link_to 'RATING', brand_full_profile_url %></strong> is <strong>3.5</strong> out of <strong>5</strong></h3>
+						<h3>Your <strong><%= link_to 'RATING', brand_full_profile_url %></strong> is <strong><%= @current_user.distributor.rating / 2.0 %></strong> out of <strong>5</strong></h3>
 						
 						<small><span data-tooltip aria-haspopup="true" class="has-tip radius" title="Your ratings help identify you as a credible business partner. Your ratings are based on the completeness of your profile and verification of your company’s website, social media presence, business license and other factors. ">What is this?</span></small>
 					</div><!--/.medium-6-->

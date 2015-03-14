@@ -49,7 +49,7 @@
 
 	<div class="medium-4 columns text-center">
 		<%= image_tag 'Dashboard-Awaiting.svg' %>
-		<h4>Awaiting Response</h4>
+		<h4><%= @outgoing_requests_list.count > 0 ? "Awaiting Response" : "No Unanswered Requests" %></h4>
 
 		<% if @outgoing_requests_list.count > 0 %>	
 		<div class="dashboard-messages-badge"><span class="alert round label"><%= @outgoing_requests_list.count %></span></div>

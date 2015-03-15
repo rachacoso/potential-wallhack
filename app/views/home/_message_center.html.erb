@@ -18,7 +18,7 @@
 			(<%= b %>)</small>
 			<br>
 			<% unless m == @unread_list.last %>
-				<hr style="border-top: 1px solid #ccc">
+				<br>
 			<% end %>
 		<% end %>
 		</div>
@@ -39,7 +39,7 @@
 			<% this_one = m.send(@current_user.type_inverse?) %>
 			<small><%= link_to this_one.company_name, view_match_url(this_one.id, "na") %></small>
 			<% unless m == @incoming_requests_list.last %>
-				<hr style="border-top: 1px solid #ccc">
+				<br>
 			<% end %>
 		<% end %>
 		</div>
@@ -60,7 +60,7 @@
 			<% this_one = m.send(@current_user.type_inverse?) %>
 			<small><%= link_to this_one.company_name, view_match_url(this_one.id, "na") %></small>
 			<% unless m == @outgoing_requests_list.last %>
-				<hr style="border-top: 1px solid #ccc">
+				<br>
 			<% end %>
 		<% end %>
 		</div>

@@ -22,7 +22,9 @@
 		<div class="text-right">
 			<% if @current_user.subscriber? && action_name != "public_profile"  %>
 				<% m = this_match(match) %>
-				rating: <%= match.rating %>
+				<% if @current_user.brand %>
+					rating: <%= match.rating %>
+				<% end %>
 				<% if action_name == "index" || action_name == "index_saved_matches" %>		
 					<% if m %>
 						<% if i_contacted(m) %>

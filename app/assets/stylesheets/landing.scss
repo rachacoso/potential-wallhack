@@ -1445,12 +1445,12 @@ $dashboard-agency-color: $landing-teal;
   min-height: 80vh;
 }
 #page-content {
-  border: 1px solid $landing-light-gray;
-  border-radius: 9px;
-  background: scale-color($landing-blue, $lightness: 50%);
-  padding: 1em;
-  margin-bottom: 2em;
-  min-height: 80vh;
+  // border: 1px solid $landing-light-gray;
+  // border-radius: 9px;
+  // background: scale-color($landing-blue, $lightness: 50%);
+  // padding: 1em;
+  // margin-bottom: 2em;
+  // min-height: 80vh;
 }
 
 //BRAND
@@ -1495,12 +1495,6 @@ $dashboard-agency-color: $landing-teal;
   background: rgba(255,255,255,0.6);  
 }
 
-#match-reset {
-margin-bottom: 1em;
-  h1 {
-    font-weight: 100;
-  }
-}
 
 #match-list {
   // position: relative;

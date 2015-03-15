@@ -31,6 +31,8 @@ class MatchesController < ApplicationController
 				}
 				@matches = @all_matches.in("export_countries.country" => countries_map[@country])
 				@country_proper = countries_map[@country]
+			else
+				@matches = @all_matches
 			end
 
 
@@ -52,6 +54,8 @@ class MatchesController < ApplicationController
 			# elsif @profile.sectors.length == 1
 			# 	@sector = @profile.sectors.first.id
 			# 	@matches = all_matches.in(sector_ids: @sector)
+			else
+				@matches = all_matches
 			end
 
 		end

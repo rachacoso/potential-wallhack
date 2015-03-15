@@ -193,6 +193,10 @@ module ApplicationHelper
 				return "week"
 			elsif (1.month.ago..Time.now).cover?(last_login)
 				return "month"
+			elsif (1.year.ago..Time.now).cover?(last_login)
+				return "year"
+			else
+				return "decade"
 			end
 	end
 

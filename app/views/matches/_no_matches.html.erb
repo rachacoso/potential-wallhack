@@ -4,9 +4,6 @@
 	<div class="small-10 small-centered columns previewtile match-empty text-center">
 		<% if action_name == "index" %>
 			<h2>No <%= matchtype.capitalize %>s</h2> 
-			<% if @current_user.type? == "brand" %>
-				<br>Please try <%= link_to 'another country', all_matches_url %>.
-			<% end %>
 		<% elsif action_name == "index_saved_matches" %>
 			<h2>No Saved <%= matchtype.capitalize %>s</h2> <br><%= link_to "Find #{matchtype} matches", all_matches_url %>
 		<% elsif action_name == "index_contacted_matches" %>

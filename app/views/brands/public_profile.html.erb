@@ -24,7 +24,7 @@
 				<div class="row">
 					<div class="small-12 columns text-center">
 						<% percent = check_brand_public_profile %>
-						<div class="progress small-12 <%= percent == 100 ? "success" : "" %>" style="margin: auto;">
+						<div class="progress small-12 round <%= percent == 100 ? "success" : "" %>" style="margin: auto;">
 						  <span class="meter" style="width: <%= percent %>%"></span>
 						</div>
 						<small>Your Public Profile is <%= percent == 100 ? "" : "#{percent}%" %> Complete!</small>

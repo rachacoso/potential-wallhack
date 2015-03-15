@@ -27,31 +27,25 @@
 	<% case @current_user.type? %>
 	<% when 'brand'%>
 
+		<div class="row">
+			<div class="medium-3 columns"><h1 style="margin-top: 50px;">FIND DISTRIBUTORS IN NEW MARKETS</h1>		</div><!--/.medium-3-->
+			<div class="medium-6 columns">
+				<div id="match-map-container">
 
-	<% if !@country %>	
+					<div id="match-search">
+						<%= render partial: "brand_search_start" %>
+					</div>
 
-<div class="row">
-	<div class="medium-3 columns"><h1 style="margin-top: 50px;">FIND DISTRIBUTORS IN NEW MARKETS</h1>		</div><!--/.medium-3-->
-	<div class="medium-6 columns">
-		<div id="match-map-container">
-
-			<div id="match-search">
-				<%= render partial: "brand_search_start" %>
-			</div>
-
-		</div><!--/.match-map-container -->
-	</div><!--/.medium-6-->
-	<div class="medium-3 columns"> &nbsp; </div><!--/.medium-3-->
-
-</div>
-
-	<% else %>
-	<div class="messages-panel">
-		<div id="match-reset">
-			<h1><%= @country_proper %></h1>
-			<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
-			<small><%= link_to 'SEARCH ANOTHER COUNTRY', all_matches_url %></small>
+				</div><!--/.match-map-container -->
+			</div><!--/.medium-6-->
+			<div class="medium-3 columns"> &nbsp; </div><!--/.medium-3-->
 		</div>
+
+	<% if @country %>	
+
+	<div class="messages-panel">
+		<h1><%= @country_proper.upcase %></h1>
+		<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
 		<hr>
 		<div id="match-list">
 			<div class="row">
@@ -61,44 +55,70 @@
 			</div>
 		</div>
 	</div>
+
+	<% else %>
+
+	<div class="messages-panel">
+		<h1>ALL COUNTRIES</h1>
+		<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
+		<hr>
+		<div id="match-list">
+			<div class="row">
+				<div class="small-12 columns" >
+					<%= render partial: 'brand_match_list', locals: {matches: @matches} %>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<% end %>
 
 	<% when 'distributor' %>
 
-	<% if !@sector %>	
+		<div class="row">
+			<div class="medium-3 columns"><h1 style="margin-top: 50px;">FIND NEW BRANDS</h1>		</div><!--/.medium-3-->
+			<div class="medium-6 columns">
+				<div id="match-map-container">
+					<div id="match-search">
+						<%= render partial: "distributor_search_start" %>
+					</div>
+				</div><!--/.match-map-container -->
+			</div><!--/.medium-6-->
+			<div class="medium-3 columns"> &nbsp; </div><!--/.medium-3-->
+		</div>
 
-		<div id="match-map-container">
-			<div class="row show-for-small-only">
-				<div class="small-12 columns">
-					<h2>Browse Brands:</h2>		
-				</div><!--/.small-12-->
-			</div>
-
-			<div id="match-search">
-				<%= render partial: "distributor_search_start" %>
-			</div>
-
-		</div><!--/.match-map-container -->
-
-	<% else %>
-		<div class="messages-panel">
-			<div id="match-reset">
+		<% if @sector %>	
+			<div class="messages-panel">
 				<h1><%= Sector.find(@sector).name %></h1>
 				<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
 				<% unless @current_user.send(@current_user.type?).sectors.length < 2  %>
 				<small><%= link_to 'BROWSE ANOTHER SECTOR', all_matches_url %></small>
 				<% end %>
-			</div>
-			<hr>
-			<div id="match-list">
-				<div class="row">
-					<div class="small-12 columns" >
-						<%= render partial: 'distributor_match_list', locals: {matches: @matches}  %>
+				<hr>
+				<div id="match-list">
+					<div class="row">
+						<div class="small-12 columns" >
+							<%= render partial: 'distributor_match_list', locals: {matches: @matches}  %>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	<% end %>
+		<% else %>
+
+			<div class="messages-panel">
+				<h1>ALL SECTORS</h1>
+				<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
+				<hr>
+				<div id="match-list">
+					<div class="row">
+						<div class="small-12 columns" >
+							<%= render partial: 'brand_match_list', locals: {matches: @matches} %>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<% end %>
 
 	<% end %>
 

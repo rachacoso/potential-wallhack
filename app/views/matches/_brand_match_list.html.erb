@@ -31,12 +31,6 @@
 					<% matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
 					<li><%= render partial: "shared/profile/profile_list_tile_small_sq", locals: {match: match} %></li>
 					<% end %>
-					<% matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
-					<li><%= render partial: "shared/profile/profile_list_tile_small_sq", locals: {match: match} %></li>
-					<% end %>
-					<% matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
-					<li><%= render partial: "shared/profile/profile_list_tile_small_sq", locals: {match: match} %></li>
-					<% end %>
 				</ul>
 			</div>
 		</div>

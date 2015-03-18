@@ -117,7 +117,9 @@
 						<small><span data-tooltip aria-haspopup="true" class="has-tip radius" title="Your ratings help identify you as a credible business partner. Your ratings are based on the completeness of your profile and verification of your company’s website, social media presence, business license and other factors. ">What is this?</span></small>
 					</div><!--/.medium-6-->
 					<div class="medium-6 columns">
-						<p>[image of rating here]</p>
+						
+						<%= render partial: "shared/profile/distributor_rating", locals: {d: @current_user.distributor} %>
+						
 					</div><!--/.medium-6-->
 				</div><!--/.row-->
 

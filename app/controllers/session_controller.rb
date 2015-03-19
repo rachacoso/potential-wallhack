@@ -21,8 +21,6 @@ class SessionController < ApplicationController
 	    else
 	      cookies[:auth_token] = user.auth_token  
 	    end
-			user.last_login = DateTime.now
-			user.save!
 			if user.administrator
 				redirect_to admin_url
 			else

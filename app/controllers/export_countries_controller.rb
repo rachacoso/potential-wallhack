@@ -13,6 +13,10 @@ class ExportCountriesController < ApplicationController
 			end
 		end
 
+		if @current_user.distributor
+			u.update_completeness
+		end 
+
 		@export_countries = u.export_countries
 
 	  respond_to do |format|
@@ -38,6 +42,11 @@ class ExportCountriesController < ApplicationController
 		d = u.export_countries.find(params[:id])
 		d.destroy
 		@export_countries = u.export_countries rescue nil
+
+		# update COMPLETENESS
+		if @current_user.distributor
+			u.update_completeness
+		end
 
 	  respond_to do |format|
 		  format.html

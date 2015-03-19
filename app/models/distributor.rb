@@ -154,6 +154,98 @@ class Distributor
 
 	scope :subscribed, ->{where(subscriber: true)}
 
+
+	def update_completeness
+		# items to test for nil (i.e. field does not exist yet)
+		# these can be blank and still count towards full profile 
+		# (i.e. as long as user has visited a page where they can update these items)
+		items_nil = [
+			:outside_sales_size,
+			:inside_sales_size,
+			:internal_marketing_size,
+			:employ_pr_agency,
+			:marketing_via_print,
+			:marketing_via_online,
+			:marketing_via_email,
+			:marketing_via_outdoor,
+			:marketing_via_events,
+			:marketing_via_direct_mail,
+			:marketing_via_classes,
+			:customer_database_size
+		]
+
+		# items to test for present-ness (i.e. field exists AND has content)
+		items_present = [
+		 	:company_name,
+			:country_of_origin,
+			:year_established,
+			:company_size,
+			:website,
+			:logo_file_name,			
+		 	:export_countries,
+		 	:sectors,
+		 	:channels,
+		 	:distributor_brands,
+		 	:trade_shows
+		]
+
+		items_passed = 0
+
+		puts "xxxxxxx"
+
+		# check social media (only need one)
+		if self.facebook.present? || self.linkedin.present?
+			items_passed += 1
+		end
+
+		# check channel capacities (all must be complete)
+		cc_incomplete = self.channel_capacities.where(capacity: nil).count
+		puts "incomplete channel capacities: #{cc_incomplete}"
+		unless cc_incomplete > 0
+			items_passed += 1
+		end
+
+		# NIL test
+		items_nil.each do |item|
+			if !self.send(item).nil?
+				items_passed += 1
+				puts "#{item} YES"
+			else
+				puts "#{item} NO"
+			end
+		end
+
+		# PRESENT test
+		items_present.each do |item|
+			if self.send(item).present?
+				items_passed += 1
+				puts "#{item} YES"
+			else
+				puts "#{item} NO"
+			end
+		end
+
+		total_items = items_nil.count + items_present.count + 2 # add 1 for SOCIAL MEDIA test and 1 for CHANNEL CAPACITIES test
+
+		total_percent = (items_passed.to_f / total_items) * 100
+
+		puts total_percent
+		case total_percent
+		when 50..75
+			completeness_level = 1
+		when 75..99
+			completeness_level = 2
+		when 100..(1.0/0.0)
+			completeness_level = 3
+		else
+			completeness_level = 0
+		end
+		self.completeness = completeness_level
+		self.save
+		puts "yyyyyyyy"
+
+	end
+
 	private 
 
 	def init_info

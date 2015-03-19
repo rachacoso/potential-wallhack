@@ -1,6 +1,5 @@
-<span data-tooltip aria-haspopup="true" class="has-tip" title="Rating: <%= d.rating / 2.0 %> <br><small>Ratings are based on</span>">
-[c: <%= d.completeness %>]<br>
-[r: <%= d.rating %>]<br>
+<span data-tooltip aria-haspopup="true" class="has-tip" title="Rating: <%= (d.rating + d.completeness) / 2.0 %> <br><small>Ratings are based on <br>[c: <%= d.completeness %>]<br>
+[r: <%= d.rating %>]</span>">
 <% case d.rating + d.completeness %>
 <% when 0 %>
 	<% 5.times do %>

@@ -92,6 +92,9 @@ class DistributorsController < ApplicationController
 
 		if distributor.save
 			# successful
+			
+			# update completeness
+			distributor.update_completeness
 
 			# allow redirect via passed parameter only if in this array else redirect to the first onboard screen
 			allowable_redirect = [

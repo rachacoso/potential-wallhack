@@ -7,6 +7,11 @@ class TradeShowsController < ApplicationController
 		@new_item_id = new_item.id
 		@collection = u.trade_shows
 
+		# update COMPLETENESS
+		if @current_user.distributor
+			u.update_completeness
+		end
+
 		respond_to do |format|
 			format.html
 			format.js
@@ -41,6 +46,11 @@ class TradeShowsController < ApplicationController
 		@identifier = 'name'
 		@collection = u.trade_shows
 		@no_item_message = 'No Trade Shows'
+
+		# update COMPLETENESS
+		if @current_user.distributor
+			u.update_completeness
+		end
 
 		respond_to do |format|
 			format.html

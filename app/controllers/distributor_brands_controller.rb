@@ -22,6 +22,9 @@ class DistributorBrandsController < ApplicationController
 			@ob = false
 		end
 
+		# update COMPLETENESS	
+		distributor.update_completeness
+		
 		respond_to do |format|
 			format.html
 			format.js
@@ -81,6 +84,9 @@ class DistributorBrandsController < ApplicationController
 		else
 			@ob = false
 		end
+
+		# update COMPLETENESS	
+		distributor.update_completeness
 
 		respond_to do |format|
 			format.html

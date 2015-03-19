@@ -10,6 +10,12 @@ class ChannelCapacitiesController < ApplicationController
 		# cchannel.capacity = ccap
 		cchannel.save
 
+		# update COMPLETENESS
+		if @current_user.distributor
+			u.update_completeness
+		end
+
+
 		respond_to do |format|
 			format.html
 			format.js
@@ -37,6 +43,12 @@ class ChannelCapacitiesController < ApplicationController
 	def update
 		u = @current_user.distributor || @current_user.brand
 		u.channel_capacities.find(params[:id]).update!(channel_capacity_parameters)
+
+		# update COMPLETENESS
+		if @current_user.distributor
+			u.update_completeness
+		end
+
 		if @current_user.distributor
 			if params[:ob]
 				redirect_to onboard_distributor_five_url
@@ -68,6 +80,12 @@ class ChannelCapacitiesController < ApplicationController
 			end
 		end
 
+		# update COMPLETENESS
+		if @current_user.distributor
+			u.update_completeness
+		end
+
+
 		if @current_user.distributor
 			if params[:ob]
 				redirect_to onboard_distributor_five_url
@@ -92,6 +110,12 @@ class ChannelCapacitiesController < ApplicationController
 
 		d = ChannelCapacity.find(params[:id])
 		d.destroy
+
+		# update COMPLETENESS
+		if @current_user.distributor
+			u.update_completeness
+		end
+
 
 		respond_to do |format|
 			format.html

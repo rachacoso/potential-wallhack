@@ -112,7 +112,7 @@
 
 				<div class="row">
 					<div class="medium-6 columns">
-						<h3>Your <strong><%= link_to 'RATING', brand_full_profile_url %></strong> is <strong><%= @current_user.distributor.rating / 2.0 %></strong> out of <strong>5</strong></h3>
+						<h3>Your <strong><%= link_to 'RATING', brand_full_profile_url %></strong> is <strong><%= (@current_user.distributor.rating + @current_user.distributor.completeness) / 2.0 %></strong> out of <strong>5</strong></h3>
 						
 						<small><span data-tooltip aria-haspopup="true" class="has-tip radius" title="Your ratings help identify you as a credible business partner. Your ratings are based on the completeness of your profile and verification of your company’s website, social media presence, business license and other factors. ">What is this?</span></small>
 					</div><!--/.medium-6-->

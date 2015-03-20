@@ -1155,19 +1155,36 @@ top: 10px;
   }
 }
 .profile-list-tile-small-sq-middle {
-   // height: rem-calc(50);
+   height: rem-calc(150);
    background: white;
-   padding: 5px;
+   padding: rem-calc(5);
 }
-.profile-list-tile-small-sq-bottom {
-   // height: rem-calc(200);
-   background: white;
-}
-.profile-list-tile-small-sq-top, .profile-list-tile-small-sq-bottom {
+.profile-list-tile-small-sq-top {
    padding: 1em;
 }
 .profile-logo-area {
-  padding: rem-calc(5);
+  margin-top: rem-calc(15);
+}
+.profile-list-tile-small-sq-bottom {
+  // height: rem-calc(100);
+  background: white;  
+}
+.profile-indicators {
+  .active {
+    background-color: $landing-light-gray;
+    border: 1px solid white;
+  }
+  h3 {
+    font-size: 0.3em;
+    font-weight: 500;
+    margin: rem-calc(5);
+  }
+  .alert {
+    background-color: $landing-orange;
+    h3 {
+      color: white;
+    }
+  }    
 }
 .message-index-indicator {
   @include label(

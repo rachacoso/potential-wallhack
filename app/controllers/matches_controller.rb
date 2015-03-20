@@ -35,8 +35,7 @@ class MatchesController < ApplicationController
 				@matches = @all_matches
 			end
 
-
-
+			@matches = @matches.order_by(:rating.asc, :completeness.asc)
 
 		else #IS A DISTRIBUTOR
 			@profile = @current_user.distributor

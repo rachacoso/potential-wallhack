@@ -1,0 +1,68 @@
+<div class="profile-indicators">
+
+	<% if @current_user.subscriber? && action_name != "public_profile"  %>
+		<% m = this_match(match) %>		
+		<div class="row collapse">
+
+			<div class="small-3 columns">
+
+				
+					<% if m %>
+						<% if i_contacted(m) %>
+							<div class="active"><h3>CONTACTED <strong>BY YOU</strong></h3></div>
+						<% else %>
+							<% if m.accepted %>
+								<div class="active"><h3>CONTACTED <strong>YOU</strong></h3></div>
+							<% end %>
+						<% end %>
+					<% else %>
+						<h3>&nbsp;</h3>
+					<% end %>
+
+				
+			</div>
+
+			<div class="small-3 columns ">
+
+
+					<% if m %>
+						<% if m.messages.blank? && m.initial_contact_by == @current_user.type? %>
+							<div class="active"><h3>AWAITING RESPONSE</h3></div>
+						<% end %>
+						<% unless m.messages.blank? %>
+							<div class="active"><h3>IN CONVERSATION</h3></div>
+						<% end %>
+					<% else %>
+						<br>
+					<% end %>
+
+
+			</div>
+
+
+			<div class="small-3 columns">
+
+				<% has_unread, count = unread_count_from_match(match) %>
+				<% if has_unread %>
+					<div class="active alert"><h3><%= count %> UNREAD MESSAGE<%= count > 1 ? "S" : "" %></h3></div>
+				<% else %>
+					<h3>&nbsp;</h3>
+				<% end %>
+				<% if m %>
+				<% if !m.accepted && !i_contacted(m) %>
+					<div class="active alert"><h3>NEW CONTACT REQUEST</h3></div>
+				<% end %>
+				<% end %>	
+
+			</div>
+			<div class="small-3 columns">
+				<% if match.user.last_login %>
+					<div class="active"><h3>ACTIVE IN THE PAST <strong><%= last_activity(match.user.last_login).upcase %></strong></h3></div>
+				<% end %>
+			</div>
+
+		</div><!--/.row-->
+
+	<% end %>
+
+</div>

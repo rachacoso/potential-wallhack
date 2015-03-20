@@ -1153,6 +1153,13 @@ top: 10px;
       color: white;
     }
   }
+  .profile-list-tile-small-sq-top-countries {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 0px rem-calc(10);
+    @include transparent(#fff, 0.4);
+  }
 }
 .profile-list-tile-small-sq-middle {
    height: rem-calc(150);

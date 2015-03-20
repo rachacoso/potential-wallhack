@@ -12,7 +12,7 @@
 			<div class="small-12 columns">
 				<table width="100%">
 			  	<tbody>
-						<% matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
+						<% matches.each do |match| %>
 						<tr id="pot_<%= match.id %>">
 							<td>
 							<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {match: match} %>
@@ -28,7 +28,7 @@
 		<div class="row" style="padding: 0px;">
 			<div class="small-12 columns">
 				<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
-					<% matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
+					<% matches.each do |match| %>
 					<li><%= render partial: "shared/profile/profile_list_tile_small_sq", locals: {match: match} %></li>
 					<% end %>
 				</ul>
@@ -55,7 +55,7 @@
 
 					<table width="100%">
 					  	<tbody>
-							<% matches.sort_by {|x| [x.country_of_origin, x.company_name] }.each do |match| %>
+							<% matches.each do |match| %>
 							<tr id="pot_<%= match.id %>">
 								<td>
 									

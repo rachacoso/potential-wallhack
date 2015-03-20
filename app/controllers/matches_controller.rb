@@ -8,7 +8,7 @@ class MatchesController < ApplicationController
 			### Full match set is all brands in the Distributor's sectors minus any countries that have not declared a country 
 			### or Countries of Distribution
 			### (will be updated to be all countries with completed profiles)
-			@all_matches = Distributor.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
+			@all_matches = Distributor.in(sector_ids: @profile.sector_ids).not_in(export_countries: [nil,[]], country_of_origin: "")
 			# exclude any that are in contact already
 			@all_matches = @all_matches.not_in(_id: @profile.matches.pluck(:distributor_id)) 
 			if params[:country]
@@ -35,7 +35,7 @@ class MatchesController < ApplicationController
 				@matches = @all_matches
 			end
 
-			@matches = @matches.order_by(:rating.asc, :completeness.asc)
+			@matches = @matches.order_by(:rating.desc, :completeness.desc, :country.asc, :company_name.asc)
 
 		else #IS A DISTRIBUTOR
 			@profile = @current_user.distributor

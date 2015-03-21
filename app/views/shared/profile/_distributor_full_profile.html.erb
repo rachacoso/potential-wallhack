@@ -1,3 +1,4 @@
+
 <div class="row">
 	<div class="small-12 columns">
 		
@@ -9,7 +10,7 @@
 				</div>		
 				<div class="medium-7 columns">
 					<h1><%= profile.company_name %></h1>
-					<h3>Rating: <%= profile.rating ? profile.rating : "N/A" %></h3>
+					<%= render partial: "shared/profile/distributor_rating", locals: {d: profile} %>
 					<h3><small>web</small> <strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>
 
 					<% if this_match(profile) %>

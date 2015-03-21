@@ -1,8 +1,12 @@
 <div class="profile-list-tile-small-sq">
 	<div class="profile-list-tile-small-sq-top">
 		<div class="profile-list-tile-small-sq-top-countries">
+			<% if @current_user.brand %>
 			<% match.export_countries.each do |ec| %>
 				<%= ec.country %><br>
+			<% end %>
+			<% elsif @current_user.distributor %>
+				<%= match.country_of_origin %>
 			<% end %>
 		</div>		
 		<div class="profile-list-tile-small-sq-top-inner">

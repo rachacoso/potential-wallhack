@@ -1,7 +1,7 @@
 
 <div class="small-12 columns" style="padding: 0em;">
 	<div class="preview-data">
-		Rating: <%= profile.rating ? profile.rating : "N/A" %>
+		<%= render partial: "shared/profile/distributor_rating", locals: {d: profile} %>
 	</div>
 </div>
 

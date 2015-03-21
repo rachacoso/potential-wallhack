@@ -66,6 +66,12 @@ class MatchesController < ApplicationController
 		@profile = @current_user.brand || @current_user.distributor
 		@matches = @profile.saved_matches.uniq
 
+		if @current_user.brand
+			# @matches = @matches.order_by(:rating.desc, :completeness.desc, :country.asc, :company_name.asc)
+			# @matches = @matches.sort_by{ |m| [m.rating, m.completeness, m.country_of_origin, m.company_name] }.reverse!
+			@matches = Distributor.order_by(:rating.desc, :completeness.desc, :country.asc, :company_name.asc).find(@profile.saved_match_ids)
+		end
+
  	end 
 
   def index_contacted_matches # matches you contacted

@@ -21,7 +21,9 @@
 				<%= image_tag @match.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
 
 				<h1><%= @match.company_name %></h1>
+				<% if @current_user.brand %>
 				<p><%= render partial: "shared/profile/distributor_rating", locals: {d: @match} %></p>
+				<% end %>
 				<% unless @match.website.blank? %>
 				<h3><small>web</small> <strong><%= link_to @match.website, "//#{@match.website}" %></strong></h3>
 				<% end %>

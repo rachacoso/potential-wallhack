@@ -29,30 +29,36 @@
 
 								<% if @messages_unread > 0 %>
 								
-									<div class="row collapse">
-										<div class="small-12 columns">
-
-											<table width="100%">
-												<tbody>
-
-												<% @unread_list.each do |m|  %>
-												<% this_one = m.send(@current_user.type_inverse?) %>
-												<tr id="pot_<%= this_one.id %>">
-													<td>
-
-													<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {match: this_one} %>
-
-													</td>
-
-												</tr>
-												<% end %>
-
-												</tbody>
-											</table>
-
+									<% if "horiz" == "horizzz" %>
+										<div class="row collapse">
+											<div class="small-12 columns">
+												<table width="100%">
+													<tbody>
+													<% @unread_list.each do |m|  %>
+													<% this_one = m.send(@current_user.type_inverse?) %>
+													<tr id="pot_<%= this_one.id %>">
+														<td>
+														<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {match: this_one} %>
+														</td>
+													</tr>
+													<% end %>
+													</tbody>
+												</table>
+											</div>
 										</div>
-									</div>
-							
+									<% else %>
+										<div class="row" style="padding: 0px;">
+											<div class="small-12 columns">
+												<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
+													<% @unread_list.each do |m|  %>
+													<% this_one = m.send(@current_user.type_inverse?) %>
+													<li><%= render partial: "shared/profile/profile_list_tile_small_sq", locals: {match: this_one} %></li>
+													<% end %>
+												</ul>
+											</div>
+										</div>									
+									<% end %>
+
 								<% else %>
 									<h3><em>No unread messages</em></h3>
 								<% end %>
@@ -88,30 +94,35 @@
 						<div class="row collapse">
 							<div class="small-12 columns">
 								<% if @new_contact_messages > 0 %>
-									<div class="row">
-										<div class="small-12 columns">
-
-											<table width="100%">
-												<tbody>
-
-												<% @new_requests_list.each do |m|  %>
-												<% this_one = m.send(@current_user.type_inverse?) %>
-												<tr id="pot_<%= this_one.id %>">
-													<td>
-
-													<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {match: this_one} %>
-
-													</td>
-
-												</tr>
-												<% end %>
-
-												</tbody>
-											</table>
-
-
+									<% if "horiz" == "horizzz" %>
+										<div class="row collapse">
+											<div class="small-12 columns">
+												<table width="100%">
+													<tbody>
+													<% @new_requests_list.each do |m|  %>
+													<% this_one = m.send(@current_user.type_inverse?) %>
+													<tr id="pot_<%= this_one.id %>">
+														<td>
+														<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {match: this_one} %>
+														</td>
+													</tr>
+													<% end %>
+													</tbody>
+												</table>
+											</div>
 										</div>
-									</div>
+									<% else %>
+										<div class="row" style="padding: 0px;">
+											<div class="small-12 columns">
+												<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
+													<% @new_requests_list.each do |m|  %>
+													<% this_one = m.send(@current_user.type_inverse?) %>
+													<li><%= render partial: "shared/profile/profile_list_tile_small_sq", locals: {match: this_one} %></li>
+													<% end %>
+												</ul>
+											</div>
+										</div>									
+									<% end %>
 								<% else %>
 									<h3><em>No new contact requests</em></h3>
 								<% end %>

@@ -155,7 +155,8 @@ class Distributor
 	scope :subscribed, ->{where(subscriber: true)}
 
 
-	def update_completeness
+	def completeness_percentage
+
 		# items to test for nil (i.e. field does not exist yet)
 		# these can be blank and still count towards full profile 
 		# (i.e. as long as user has visited a page where they can update these items)
@@ -224,13 +225,21 @@ class Distributor
 				puts "#{item} NO"
 			end
 		end
-
+		puts "yyyyyyyy"
+		
 		total_items = items_nil.count + items_present.count + 2 # add 1 for SOCIAL MEDIA test and 1 for CHANNEL CAPACITIES test
 
 		total_percent = (items_passed.to_f / total_items) * 100
-
 		puts total_percent
-		case total_percent
+
+		return total_percent
+		
+	end
+
+	def update_completeness
+
+		percent = self.completeness_percentage
+		case percent
 		when 50..75
 			completeness_level = 1
 		when 75..99
@@ -242,7 +251,6 @@ class Distributor
 		end
 		self.completeness = completeness_level
 		self.save
-		puts "yyyyyyyy"
 
 	end
 

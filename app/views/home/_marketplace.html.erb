@@ -75,7 +75,7 @@
 				<% percentp = check_distributor_public_profile %>
 				<div class="row">
 					<div class="medium-6 columns">
-						<h3>Your <strong><%= link_to 'Public Profile', brand_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> complete!
+						<h3>Your <strong><%= link_to 'Public Profile', distributor_public_profile_url %></strong> is <%= percentp == 100 ? "" : "#{percentp}%" %> complete!
 						<br>
 						<small><span data-tooltip aria-haspopup="true" class="has-tip" title="Your public profile is viewable by all registered brands. It displays limited publicly available information including countries of distribution, year established, product sector and retail channels.">What is this?</span></small>
 						</h3>
@@ -95,7 +95,7 @@
 				<% percentf = check_distributor_full_profile %>
 				<div class="row">
 					<div class="medium-6 columns">
-						<h3>Your <strong><%= link_to 'Full Profile', brand_full_profile_url %></strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> complete!
+						<h3>Your <strong><%= link_to 'Full Profile', distributor_full_profile_url %></strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> complete!
 						<br>
 						<small><span data-tooltip aria-haspopup="true" class="has-tip radius" title="Your full profile is viewable only by premium brand subscribers. It contains information that helps brands determine whether your company is a good fit for their international expansion.">What is this?</span></small>
 						</h3>
@@ -112,7 +112,7 @@
 
 				<div class="row">
 					<div class="medium-6 columns">
-						<h3>Your <strong><%= link_to 'RATING', brand_full_profile_url %></strong> is <strong><%= (@current_user.distributor.rating + @current_user.distributor.completeness) / 2.0 %></strong> out of <strong>5</strong></h3>
+						<h3>Your <strong><%= link_to 'RATING', distributor_full_profile_url %></strong> is <strong><%= (@current_user.distributor.rating + @current_user.distributor.completeness) / 2.0 %></strong> out of <strong>5</strong></h3>
 						
 						<small><span data-tooltip aria-haspopup="true" class="has-tip radius" title="Your ratings help identify you as a credible business partner. Your ratings are based on the completeness of your profile and verification of your company’s website, social media presence, business license and other factors. ">What is this?</span></small>
 					</div><!--/.medium-6-->

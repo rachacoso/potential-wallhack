@@ -13,10 +13,12 @@
 						<% else %>
 							<% if m.accepted %>
 								<div class="active"><h3>CONTACTED <strong>YOU</strong></h3></div>
+							<% else %>
+								&nbsp;
 							<% end %>
 						<% end %>
 					<% else %>
-						<h3>&nbsp;</h3>
+						&nbsp;
 					<% end %>
 
 				
@@ -32,8 +34,9 @@
 						<% unless m.messages.blank? %>
 							<div class="active"><h3>IN CONVERSATION</h3></div>
 						<% end %>
+						&nbsp;
 					<% else %>
-						<br>
+						&nbsp;
 					<% end %>
 
 
@@ -45,8 +48,6 @@
 				<% has_unread, count = unread_count_from_match(match) %>
 				<% if has_unread %>
 					<div class="active alert"><h3><%= count %> UNREAD MESSAGE<%= count > 1 ? "S" : "" %></h3></div>
-				<% else %>
-					<h3>&nbsp;</h3>
 				<% end %>
 				<% if m %>
 				<% if !m.accepted && !i_contacted(m) %>

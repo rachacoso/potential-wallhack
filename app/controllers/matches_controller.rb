@@ -114,11 +114,16 @@ class MatchesController < ApplicationController
 			@matches_incoming_waiting = Brand.find(@profile.matches.contacting_me_waiting.pluck(:brand_id))
 			@matches_outgoing_waiting = Brand.find(@profile.matches.contacted_by_me_waiting.pluck(:brand_id))
 			@matches_accepted = Brand.find(@profile.matches.accepted.pluck(:brand_id))
+			@matches_accepted_outgoing = Brand.find(@profile.matches.contacted_by_me_accepted.pluck(:brand_id))
+			@matches_accepted_incoming = Brand.find(@profile.matches.contacting_me_accepted.pluck(:brand_id))
 
 		when "brand"
 			@matches_incoming_waiting = Distributor.find(@profile.matches.contacting_me_waiting.pluck(:distributor_id))
 			@matches_outgoing_waiting = Distributor.find(@profile.matches.contacted_by_me_waiting.pluck(:distributor_id))	
 			@matches_accepted = Distributor.find(@profile.matches.accepted.pluck(:distributor_id))
+			@matches_accepted_outgoing = Distributor.find(@profile.matches.contacted_by_me_accepted.pluck(:distributor_id))
+			@matches_accepted_incoming = Distributor.find(@profile.matches.contacting_me_accepted.pluck(:distributor_id))
+						
 		end
 
   end

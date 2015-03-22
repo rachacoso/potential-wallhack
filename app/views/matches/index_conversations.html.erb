@@ -1,11 +1,17 @@
 <% matchtype = @current_user.type? == "distributor" ? "Brands" : "Distributors" %>
 <%= render partial: "shared/topbar" %>
 
+<div class="row">
+	<div class="match-subpage-header">
+	<h1>CONTACTED <%= @current_user.type_inverse?.upcase %>S</h1>
+	<h3><%= @current_user.type_inverse?.capitalize %>s you are currently in contact with.</h3>
+	</div>
+</div>
+
 
 <div class="row collapse">
 	<div class="small-12 columns" id="page-content">
 		
-
 <% if @current_user.subscriber? %>
 
 	<% if @matches_accepted.blank? && @matches_incoming_waiting.blank? && @matches_outgoing_waiting.blank? %>
@@ -13,46 +19,71 @@
 		<%= render "no_matches" %>
 
 	<% else %>
+		
+
 
 		<% unless @matches_accepted.blank? %>
-		<div class="messages-panel">
-		<h2>In Conversation</h2>
-		<small><strong><%= render partial: "counts", locals: {matches: @matches_accepted} %></strong></small>
-		<hr>		
-		<div class="saved-contacted-match-list">
-		<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches_accepted} %>
+
+
+		<br>
+		<div class="conversations-container">
+			<div class="conversations-header" id="conversations-current">
+				<h2>IN CONVERSATION</h2>
+			</div>
+			<div class="conversations-content">
+				<small><strong><%= render partial: "counts", locals: {matches: @matches_accepted} %></strong></small>
+				<br>
+				<div class="saved-contacted-match-list">
+				<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches_accepted, ort: "line"} %>
+				</div>
+
+			</div>
 		</div>
-		</div>
+		<br>
+
 		<% end %>
 
-		<% unless @matches_accepted.blank? || ( @matches_incoming_waiting.blank? && @matches_outgoing_waiting.blank? ) %>
-		<hr>
-		<% end %>
+
 
 		<% unless @matches_incoming_waiting.blank? %>
-		<div class="messages-panel">
-		<h2>New Request - Awaiting Your Response</h2>
-		<small><strong><%= render partial: "counts", locals: {matches: @matches_incoming_waiting} %></strong></small>
-		<hr>
-		<div class="saved-contacted-match-list">
-		<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches_incoming_waiting} %>
+
+		<br>
+		<div class="conversations-container">
+			<div class="conversations-header" id="conversations-current">
+				<h2>NEW REQUEST - AWAITING YOUR RESPONSE</h2>
+			</div>
+			<div class="conversations-content">
+				<small><strong><%= render partial: "counts", locals: {matches: @matches_incoming_waiting} %></strong></small>
+				<br>
+				<div class="saved-contacted-match-list">
+				<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches_incoming_waiting, ort: "line"} %>
+				</div>
+
+			</div>
 		</div>
-		</div>
+		<br>
+
 		<% end %>
 
-		<% unless @matches_outgoing_waiting.blank? || ( @matches_incoming_waiting.blank? && !@matches_outgoing_waiting.blank? )  %>
-		<hr>
-		<% end %>
 
 		<% unless @matches_outgoing_waiting.blank? %>
-		<div class="messages-panel">
-		<h2>New Request - Awaiting Their Response</h2>
-		<small><strong><%= render partial: "counts", locals: {matches: @matches_outgoing_waiting} %></strong></small>
-		<hr>
-		<div class="saved-contacted-match-list">
-		<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches_outgoing_waiting} %>
+
+		<br>
+		<div class="conversations-container">
+			<div class="conversations-header" id="conversations-current">
+				<h2>NEW REQUEST - AWAITING THEIR RESPONSE</h2>
+			</div>
+			<div class="conversations-content">
+				<small><strong><%= render partial: "counts", locals: {matches: @matches_outgoing_waiting} %></strong></small>
+				<br>
+				<div class="saved-contacted-match-list">
+				<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches_outgoing_waiting, ort: "line"} %>
+				</div>
+
+			</div>
 		</div>
-		</div>
+		<br>
+
 		<% end %>
 
 	<% end %>

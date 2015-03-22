@@ -8,7 +8,7 @@ Unread Messages (from application controller [for all conversations]): <%= @mess
 <% if @messages.count > max %>
 <div class="row">
 	<div class="small-10 small-centered columns text-center" style="font-size: 0.8em;">
-		<%= link_to all_messages_url(this_match(@match).id), remote: true do %>
+		<%= link_to all_messages_url(this_match(@match).id), class: "button tiny round secondary", remote: true do %>
 			View entire conversation [<%= @messages.count - max %> Oldest Messages Hidden]
 		<% end %>
 	</div>

@@ -1,12 +1,20 @@
 <% matchtype = @current_user.type? == "distributor" ? "Brands" : "Distributors" %>
 <%= render partial: "shared/topbar" %>
 
+<div class="row">
+	<div class="match-subpage-header">
+	<h1>SAVED <%= @current_user.type_inverse?.upcase %>S</h1>
+	<h3>Save <%=@current_user.type_inverse? %>s to contact later.</h3>
+	
+	</div>
+</div>
+
+
 <div class="row collapse">
 	<div class="small-12 columns" id="page-content">
 
 		<div class="messages-panel">
 		<% unless @matches.blank? || !@current_user.subscriber? %>
-		<h2>Saved</h2>
 		<small><strong><%= render partial: "counts", locals: {matches: @matches} %></strong></small>
 		
 		<hr>

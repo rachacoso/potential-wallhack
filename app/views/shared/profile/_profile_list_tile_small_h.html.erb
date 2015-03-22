@@ -1,19 +1,17 @@
 
 <div class="profile-list-tile-small">
-
-	<div class="row collapse">
-		<div class="medium-2 columns">
+	<div class="row">
+		<div class="medium-1 columns">
 			<% if @current_user.subscriber? && action_name != "public_profile"  %>
 				<%= link_to view_match_url(match.id, action_name) do %>
-					<%= image_tag match.logo.url(:medium), width: "100", alt: "Logo" %>
+					<%= image_tag match.logo.url(:medium), alt: "Logo" %>
 				<% end %>
 			<% else %>
 			<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= match.class.to_s %> logo hidden. Subscribe to view full profile"><%= image_tag match.logo.url(:public), width: "40", height: "40", alt: "Logo" %></span>
 			<% end %>
-		</div>
-		<div class="medium-10 columns">
-			<div class="row collapse">
-				<div class="small-4 columns">
+		</div><!--/.medium-1-->
+		<div class="medium-5 columns">
+
 					<% if @current_user.subscriber? && action_name != "public_profile" %>
 						<span style="font-weight: 200;font-size:1.3em;"><%= link_to match.company_name, view_match_url(match.id, action_name) %></span>
 					<% else %>
@@ -24,24 +22,12 @@
 					<% if @current_user.brand %>
 						<%= render partial: "shared/profile/distributor_rating", locals: {d: match} %>
 					<% end %>
-				</div><!--/.small-4-->
-				<div class="small-8 columns">
-
-					
-				</div><!--/.small-8-->
-			</div><!--/.row-->	
-			<div class="row collapse">
-				<div class="small-4 columns">
-					&nbsp;
-				</div><!--/.small-4-->
-				<div class="small-8 columns">
+			
+		</div><!--/.medium-5-->
+		<div class="medium-6 columns">
 					<% if @current_user.subscriber? && action_name != "public_profile"  %>
 						<%= render partial:"shared/profile/components/indicators_h", locals:{match: match} %>
-					<% end %>
-				</div><!--/.small-8-->
-			</div><!--/.row-->				
-
-		</div><!--/.medium-11-->
-
+					<% end %>					
+		</div><!--/.medium-6-->
 	</div>
 </div>

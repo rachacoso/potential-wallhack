@@ -1140,10 +1140,18 @@ top: 10px;
 }
 
 .profile-list-tile-small {
-   // border: 1px solid $landing-middle-gray;
-   // border-radius: 1em;
-   // background: white;
-   // padding: 1em;
+  position: relative;
+  border-bottom: 1px solid $landing-middle-gray;
+  // border-radius: 1em;
+  background: white;
+  padding: rem-calc(10);
+  margin-bottom: rem-calc(5);
+  .country {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background: $landing-light-gray;
+  }
 }
 
 .profile-list-tile-small-sq {
@@ -1156,11 +1164,12 @@ top: 10px;
   position: relative;
   height: rem-calc(150);
   @include transparent(#000, 0.4);
+  background: transparent url("/images/crate.jpg") center;
   .profile-list-tile-small-sq-top-inner {
     position: absolute;
     bottom: 0px;
     left: 0px;
-    @include transparent(#fff, 0.4);
+    @include transparent(#000, 0.6);
     padding: 0px rem-calc(10);
     a {
       color: white;
@@ -1171,7 +1180,9 @@ top: 10px;
     top: 0px;
     right: 0px;
     padding: 0px rem-calc(10);
-    @include transparent(#fff, 0.4);
+    @include transparent(#000, 0.6);
+    color: white;
+    font-weight: 600;
   }
 }
 .profile-list-tile-small-sq-middle {
@@ -1468,6 +1479,46 @@ $dashboard-agency-color: $landing-teal;
   font-weight: 300;
   padding-left: rem-calc(3);
 }
+
+
+// CONVERSATIONS INDEX STYLING (UPDATED)
+
+.conversations-container {
+  padding: 0;
+  background-color: $landing-light-gray;
+}
+.conversations-content {
+  padding: rem-calc(10);
+  hr {
+     // border: 1px solid $landing-middle-gray;
+     border-color: $landing-light-gray;
+     margin-top: 0px;
+  }
+}
+
+.conversations-header {
+  padding: rem-calc(9) rem-calc(10) rem-calc(5) rem-calc(10);
+
+  background-color: scale-color($landing-blue, $lightness: 50%);
+  h4 {
+    color: $landing-dark-gray;
+    font-weight: 100;
+  }
+  &#conversations-current {
+    border-top: 1px solid $landing-middle-gray;
+    border-bottom: 1px solid $landing-middle-gray;
+  }
+  &#conversations-incoming {
+    border-top: 1px solid $landing-middle-gray;
+    background-color: white;
+  }  
+  &#conversations-outgoing {
+    border-top: 1px solid $landing-middle-gray;
+    background-color: white;
+  }  
+}
+
+
 // AJAX OVERLAY AND WAIT MODAL
 
 .overlay {
@@ -1514,6 +1565,24 @@ $dashboard-agency-color: $landing-teal;
 //   z-index: -11;
 //   pointer-events: none;
 // }
+
+.match-subpage-header  {
+  background: white;
+  margin: rem-calc(30) 0;
+  padding: rem-calc(9) rem-calc(10) rem-calc(5) rem-calc(10);
+  h1 {
+    color: $landing-blue;
+    font-weight: 100; 
+  }
+}
+
+#match-map-header {
+  // position: relative;
+  background: white url("/images/searchmap.svg");
+  // background-position:  top;
+  background-size: 25%;
+  background-repeat: no-repeat;
+}
 
 #match-map-container {
   position: relative;

@@ -1006,11 +1006,23 @@ a.anchor {
 
 // Speech Bubbles
 
-$them-color: #FFF7D8;
-$them-border: #B2A573;
-$you-color: #F1F2FF;
-$you-border: #8589B2;
+
+$them-color: scale-color($landing-middle-gray, $lightness: 70%);
+$them-border: scale-color($landing-middle-gray, $lightness: 50%);
+$you-color: scale-color($landing-blue, $lightness: 90%);
+$you-border: scale-color($landing-blue, $lightness: 70%);
 $bubble-font-size: 0.8em;
+
+.bubble-container {
+  margin-top: rem-calc(10);
+  margin-bottom: rem-calc(10);
+  border-top: 0px solid transparent;
+}
+
+#message-input {
+  background-color: scale-color($landing-blue, $lightness: 95%);
+  border: none;
+}
 
 .bubble-them
 {
@@ -1018,7 +1030,8 @@ $bubble-font-size: 0.8em;
 position: relative;
 width: 98%;
 // min-height: 100px;
-// padding: 1em;
+padding: rem-calc(10);
+// margin: rem-calc(10);
 background: $them-color;
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
@@ -1061,7 +1074,7 @@ top: 10px;
 position: relative;
 width: 98%;
 // min-height: 100px;
-// padding: 20px;
+padding: rem-calc(10);
 background: $you-color;
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
@@ -1193,6 +1206,7 @@ top: 10px;
     }
   }    
 }
+
 .message-index-indicator {
   @include label(
     // This options sets label padding

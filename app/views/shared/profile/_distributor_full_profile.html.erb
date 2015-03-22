@@ -1,4 +1,5 @@
 
+<div class="previewtile">
 
 <div class="row">
 	<div class="small-11 small-centered columns">
@@ -13,7 +14,7 @@
 					</div>
 					<div class="profile-content">
 						<%= render partial: "shared/profile/distributor_rating", locals: {d: profile} %>
-						<br><br>
+						<br>
 						<%= image_tag profile.logo.url, width: "100", height: "100", alt: "Logo" %>
 						<% unless profile.website.blank? %>
 						<h3><strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>	
@@ -263,4 +264,5 @@
 	</div><!--/.small-11 small-centered-->
 </div><!--/.row-->
 
+</div><!--/.previewtile-->
 

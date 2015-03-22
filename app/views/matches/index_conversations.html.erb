@@ -8,7 +8,7 @@
 
 <% if @current_user.subscriber? %>
 
-	<% if @matches_accepted.blank? && @matches_incoming_waiting.blank? && @matches_outgoing_waiting %>
+	<% if @matches_accepted.blank? && @matches_incoming_waiting.blank? && @matches_outgoing_waiting.blank? %>
 
 		<%= render "no_matches" %>
 

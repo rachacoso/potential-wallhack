@@ -744,12 +744,12 @@ $onboard-nav-radius: 4px;
 
 .previewtile {
   // margin: 1em 0em;
-  // padding: 0.5em 0.5em;
+  padding: 0.5em 0.5em;
   line-height: 1.25em;
   // border: 1px dotted scale-color($link-color, $lightness: 70%);
-  div {
-    padding: 0.25em 0.5em;
-  }
+  // div {
+  //   padding: 0.25em 0.5em;
+  // }
   .preview-data {
     // border: 1px solid #547DB2;
     // border-radius: 4px;
@@ -761,12 +761,12 @@ $onboard-nav-radius: 4px;
     color: white;
   }
   .preview-data-tile-title {
-
-    color: scale-color(red, $lightness: 65%);
-    font-size: 0.65em;
+    color: $landing-dark-gray;
+    font-size: 0.85em;
     font-weight: 200;
-    padding-bottom: rem-calc(10);
-    font-weight: bold;
+    margin-bottom: rem-calc(10);
+    padding: rem-calc(2) 0;
+    border-bottom: 1px solid $landing-middle-gray;
   }  
 }
 
@@ -1416,6 +1416,44 @@ $dashboard-agency-color: $landing-teal;
 }
 
 
+// PROFILE STYLING (UPDATED)
+
+.profile-container {
+  padding: 0;
+  background-color: white;
+}
+.profile-content {
+  padding: rem-calc(10);
+  hr {
+     // border: 1px solid $landing-middle-gray;
+     border-color: $landing-middle-gray;
+     margin-top: 0px;
+  }
+}
+
+.profile-header {
+  padding: rem-calc(9) rem-calc(10) rem-calc(5) rem-calc(10);
+  background-color: $landing-light-gray;
+  h4 {
+    color: $landing-dark-gray;
+    font-weight: 100;
+  }
+  &#profile-main-top {
+    border-top: 1px solid $landing-middle-gray;
+    border-bottom: 1px solid $landing-middle-gray;
+  }
+  &#profile-main-bottom {
+    border-top: 1px solid $landing-middle-gray;
+    // border-bottom: 1px solid $landing-middle-gray;
+    background-color: white;
+  }  
+
+}
+
+.profile-section-title {
+  font-weight: 300;
+  padding-left: rem-calc(3);
+}
 // AJAX OVERLAY AND WAIT MODAL
 
 .overlay {

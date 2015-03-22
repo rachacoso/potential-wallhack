@@ -8,7 +8,8 @@ task :set_auth_tokens => :environment do
 		puts "User: #{u.email} token: #{u.auth_token}"
 	end
 end
-task :set_distrbutor_ratings => :environment do
+
+task :set_distributor_ratings => :environment do
 	distros_rating = Distributor.where(:rating => nil)
 	puts distros_rating.count
 	distros_rating.each do |d|
@@ -20,5 +21,6 @@ task :set_distrbutor_ratings => :environment do
 	distros_completeness.each do |d|
 		d.update_completeness
 		d.save
+		puts d.completeness
 	end	
 end

@@ -4,7 +4,7 @@
 <div class="row">
 	<div class="match-subpage-header">
 	<h1>SAVED <%= @current_user.type_inverse?.upcase %>S</h1>
-	<h3>Save <%=@current_user.type_inverse? %>s to contact later.</h3>
+	<h3><%=@current_user.type_inverse?.capitalize %>s to contact later.</h3>
 	
 	</div>
 </div>
@@ -14,14 +14,20 @@
 	<div class="small-12 columns" id="page-content">
 
 		<div class="messages-panel">
-		<% unless @matches.blank? || !@current_user.subscriber? %>
-		<small><strong><%= render partial: "counts", locals: {matches: @matches} %></strong></small>
-		
-		<hr>
+
+		<% @matches.each do |name,list| %>
+		<% next if list.blank? %>
+			<h2><%= name %></h2>			
+			<% unless @matches.blank? || !@current_user.subscriber? %>
+			<small><strong><%= render partial: "counts", locals: {matches: list} %></strong></small>
+			
+			<hr>
+			<% end %>
+			<div class="saved-contacted-match-list">
+			<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list} %>
+			</div>
 		<% end %>
-		<div class="saved-contacted-match-list">
-		<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches} %>
-		</div>
+
 		</div>
 	</div><!--/.small-12-->
 </div>

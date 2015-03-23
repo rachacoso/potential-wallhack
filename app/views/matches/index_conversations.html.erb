@@ -31,12 +31,15 @@
 				<h2>IN CONVERSATION</h2>
 			</div>
 			<div class="conversations-content">
-				<small><strong><%= render partial: "counts", locals: {matches: @matches_accepted} %></strong></small>
-				<br>
-				<div class="saved-contacted-match-list">
-				<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches_accepted, ort: "line"} %>
-				</div>
-
+				<% @matches_accepted.each do |name,list| %>
+				<% next if list.blank? %>
+					<h2><%= name %></h2>
+					<small><strong><%= render partial: "counts", locals: {matches: list} %></strong></small>
+					<br>
+					<div class="saved-contacted-match-list">
+					<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list, ort: "line"} %>
+					</div>
+				<% end %>
 			</div>
 		</div>
 		<br>
@@ -53,11 +56,16 @@
 				<h2>NEW REQUEST - AWAITING YOUR RESPONSE</h2>
 			</div>
 			<div class="conversations-content">
-				<small><strong><%= render partial: "counts", locals: {matches: @matches_incoming_waiting} %></strong></small>
-				<br>
-				<div class="saved-contacted-match-list">
-				<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches_incoming_waiting, ort: "line"} %>
-				</div>
+
+				<% @matches_incoming_waiting.each do |name,list| %>
+				<% next if list.blank? %>
+					<h2><%= name %></h2>
+					<small><strong><%= render partial: "counts", locals: {matches: list} %></strong></small>
+					<br>
+					<div class="saved-contacted-match-list">
+					<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list, ort: "line"} %>
+					</div>
+				<% end %>
 
 			</div>
 		</div>
@@ -74,11 +82,16 @@
 				<h2>NEW REQUEST - AWAITING THEIR RESPONSE</h2>
 			</div>
 			<div class="conversations-content">
-				<small><strong><%= render partial: "counts", locals: {matches: @matches_outgoing_waiting} %></strong></small>
-				<br>
-				<div class="saved-contacted-match-list">
-				<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches_outgoing_waiting, ort: "line"} %>
-				</div>
+
+				<% @matches_outgoing_waiting.each do |name,list| %>
+				<% next if list.blank? %>
+					<h2><%= name %></h2>			
+					<small><strong><%= render partial: "counts", locals: {matches: list} %></strong></small>
+					<br>
+					<div class="saved-contacted-match-list">
+					<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list, ort: "line"} %>
+					</div>
+				<% end %>
 
 			</div>
 		</div>

@@ -66,10 +66,24 @@ class MatchesController < ApplicationController
 		@profile = @current_user.brand || @current_user.distributor
 		@matches = @profile.saved_matches.uniq
 
+		countries_map = {
+			"brazil" => "Brazil",
+			"china" => "China",
+			"india" => "India",
+			"russia" => "Russia",
+			"korea" => "South Korea",
+			"uk" => "United Kingdom"
+		}
+
 		if @current_user.brand
+
+			@matches = Hash.new
+			countries_map.each do |short,long|
+				@matches[long] = Distributor.in("export_countries.country" => long).order_by(:rating.desc, :completeness.desc, :country.asc, :company_name.asc).find(@profile.saved_match_ids)
+			end			
 			# @matches = @matches.order_by(:rating.desc, :completeness.desc, :country.asc, :company_name.asc)
 			# @matches = @matches.sort_by{ |m| [m.rating, m.completeness, m.country_of_origin, m.company_name] }.reverse!
-			@matches = Distributor.order_by(:rating.desc, :completeness.desc, :country.asc, :company_name.asc).find(@profile.saved_match_ids)
+			# @matches = Distributor.order_by(:rating.desc, :completeness.desc, :country.asc, :company_name.asc).find(@profile.saved_match_ids)
 		end
 
  	end 
@@ -118,9 +132,35 @@ class MatchesController < ApplicationController
 			@matches_accepted_incoming = Brand.find(@profile.matches.contacting_me_accepted.pluck(:brand_id))
 
 		when "brand"
-			@matches_incoming_waiting = Distributor.find(@profile.matches.contacting_me_waiting.pluck(:distributor_id))
-			@matches_outgoing_waiting = Distributor.find(@profile.matches.contacted_by_me_waiting.pluck(:distributor_id))	
-			@matches_accepted = Distributor.find(@profile.matches.accepted.pluck(:distributor_id))
+
+			countries_map = {
+				"brazil" => "Brazil",
+				"china" => "China",
+				"india" => "India",
+				"russia" => "Russia",
+				"korea" => "South Korea",
+				"uk" => "United Kingdom"
+			}
+
+			# @matches_incoming_waiting = Distributor.find(@profile.matches.contacting_me_waiting.pluck(:distributor_id))
+			# @matches_outgoing_waiting = Distributor.find(@profile.matches.contacted_by_me_waiting.pluck(:distributor_id))	
+			# @matches_accepted = Distributor.find(@profile.matches.accepted.pluck(:distributor_id))
+			
+			@matches_incoming_waiting = Hash.new
+			countries_map.each do |short,long|
+				@matches_incoming_waiting[long] = Distributor.in("export_countries.country" => long).find(@profile.matches.contacting_me_waiting.pluck(:distributor_id))
+			end
+
+			@matches_outgoing_waiting = Hash.new
+			countries_map.each do |short,long|
+				@matches_outgoing_waiting[long] = Distributor.in("export_countries.country" => long).find(@profile.matches.contacted_by_me_waiting.pluck(:distributor_id))	
+			end			
+			
+			@matches_accepted = Hash.new
+			countries_map.each do |short,long|
+				@matches_accepted[long] = Distributor.in("export_countries.country" => long).find(@profile.matches.accepted.pluck(:distributor_id))
+			end
+
 			@matches_accepted_outgoing = Distributor.find(@profile.matches.contacted_by_me_accepted.pluck(:distributor_id))
 			@matches_accepted_incoming = Distributor.find(@profile.matches.contacting_me_accepted.pluck(:distributor_id))
 						

@@ -35,9 +35,62 @@ class AdminController < ApplicationController
 
       f = params[:file]
 
-      @csv = CSV.new(f.read, headers: true, :header_converters => :symbol, :converters => :all)
-      
-      
+      uploaded_file = params[:file]
+      @list = []
+      uploaded_file.open.each_line do |line|
+        data = line.split(/\t/)
+        usector, ufounded, ucompany_name, uaddr1, uaddr2, ucity, uzip, ucountry, uemail, uwebsite, ulinkedin, ufacebook = data.map { |p| p }
+
+        if User.where(email: uemail).first
+          data << "skipped!"
+          @list << data          
+          next
+        else
+
+          user = User.new
+          
+          user.build_user_profile
+          user.email = uemail
+          user.password = "GlobalGoods"
+          user.password_confirmation = "GlobalGoods"
+          # user.user_profile.firstname = params[:user][:user_profile_attributes][:firstname]
+          # user.user_profile.lastname = params[:user][:user_profile_attributes][:lastname]
+          user.save!
+          user.create_distributor
+
+          d = user.distributor
+
+          cinfo = d.contact_info
+          cinfo.email = uemail
+          cinfo.address1 = uaddr1
+          cinfo.address2 = uaddr2
+          cinfo.city = ucity
+          cinfo.postcode = uzip
+          cinfo.country = ucountry
+          cinfo.save
+
+          d.sectors << Sector.find('5418b657706f72e34f070000') #baby/kids
+          d.update(year_established: Date.new(ufounded.to_i), company_name: ucompany_name, country_of_origin: ucountry, website: uwebsite, facebook: ufacebook, linkedin: ulinkedin)
+
+          d.export_countries.find_or_initialize_by(country: ucountry)
+
+          # new_country = d.export_countries.find_or_initialize_by(country: ucountry)
+          # if new_country.valid?
+          #   d.save
+          # else
+          #   new_country.destroy
+          # end
+          
+          user.save!
+          d.save!
+
+          data << "created!"
+          @list << data
+        end
+
+
+
+      end      
 
     end
 

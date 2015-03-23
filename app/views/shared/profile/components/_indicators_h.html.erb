@@ -6,7 +6,7 @@
 
 			<div class="small-3 columns">
 
-				
+				<% if action_name != "index_conversations" %>
 					<% if m %>
 						<% if i_contacted(m) %>
 							<div class="active"><h3>CONTACTED <strong>BY YOU</strong></h3></div>
@@ -20,13 +20,15 @@
 					<% else %>
 						&nbsp;
 					<% end %>
-
+				<% else %>
+						&nbsp;
+				<% end %>
 				
 			</div>
 
 			<div class="small-3 columns ">
 
-
+				<% if action_name != "index_conversations" %>
 					<% if m %>
 						<% if m.messages.blank? && m.initial_contact_by == @current_user.type? %>
 							<div class="active"><h3>AWAITING RESPONSE</h3></div>
@@ -38,7 +40,9 @@
 					<% else %>
 						&nbsp;
 					<% end %>
-
+				<% else %>
+						&nbsp;
+				<% end %>
 
 			</div>
 

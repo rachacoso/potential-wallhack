@@ -3,18 +3,25 @@
 <div class="row">
 	<div class="small-12 columns">
 
-<% thing = @csv.to_a.map {|row| row.to_hash } %>
+		<% @list.each do |l| %>
+<p>
+			Sector: <%= l[0] %><br>
+			Founded: <%= l[1] %><br>
+			Company Name: <%= l[2] %><br>
+			Addr: <%= l[3] %><br>
+			Addr 2: <%= l[4] %><br>
+			City: <%= l[5] %><br>
+			Zip: <%= l[6] %><br>
+			Country: <%= l[7] %><br>
+			Email: <%= l[8] %><br>
+			Website: <%= l[9] %><br>
+			LinkedIn: <%= l[10] %><br>
+			Facebook: <%= l[11] %><br>
+			Done?: <%= l[12] %>
+</p>
 
-<% thing.each do |row| %>
-	
-	<% row.each do |k,v| %>
-		<%= k %> // <%= v %> <br>
-	<% end %>
-	<p>yyyyyy</p>
-<% end %>
 
-
-
+		<% end %>
 
 
 	</div>

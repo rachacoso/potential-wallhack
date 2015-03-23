@@ -2,6 +2,11 @@
 
 	<% if @current_user.subscriber? && action_name != "public_profile"  %>
 		<% m = this_match(match) %>		
+
+		
+	
+		
+
 		<div class="row collapse">
 
 			<div class="small-5 columns">
@@ -26,8 +31,6 @@
 				<% has_unread, count = unread_count_from_match(match) %>
 				<% if has_unread %>
 					<div class="active alert"><h3><%= count %> UNREAD MESSAGE<%= count > 1 ? "S" : "" %></h3></div>
-				<% else %>
-					<h3>&nbsp;</h3>
 				<% end %>
 				<% if m %>
 				<% if !m.accepted && !i_contacted(m) %>

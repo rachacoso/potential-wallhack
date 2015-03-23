@@ -12,6 +12,10 @@
 		</div><!--/.medium-1-->
 		<div class="medium-5 columns">
 
+					<% match.export_countries.each do |c| %>
+						<small><%= c.country %></small><br>
+					<% end %>
+
 					<% if @current_user.subscriber? && action_name != "public_profile" %>
 						<span style="font-weight: 200;font-size:1.3em;"><%= link_to match.company_name, view_match_url(match.id, action_name) %></span>
 					<% else %>

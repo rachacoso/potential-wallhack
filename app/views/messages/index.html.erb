@@ -3,37 +3,23 @@
 <div class="row">
 	<div class="match-subpage-header">
 	<h1>MESSAGES</h1>
+	<h3>Your incoming messages.</h3>
 	</div>
 </div>
 
 <div class="row collapse">
-	<div class="small-12 columns" id="page-content">
+	<div class="small-11 small-centered columns" id="page-content">
 
 		<% if @current_user.subscriber? %>
-				
-				<div class="row collapse messages-panel">
-					<div class="small-12 columns">
 
-						<div class="row collapse">
-							<div class="small-12 columns">
-								<h2>Messages
-									<% if @messages_unread > 0 %>
-									<br><small><%= @messages_unread %> unread message<%= @messages_unread > 1 ? "s" : "" %></small>
-									<% end %>
-								</h2>
-							</div>
-						</div><!--/.row-->
-						<div class="row collapse">
-							<div class="small-12 columns">
-								<hr>
-							</div><!--/.small-12-->
-						</div><!--/.row-->
-
-						<div class="row collapse">
-							<div class="small-12 columns">
+		<div class="conversations-container">
+			<div class="conversations-header" id="conversations-current">
+				<h2>MESSAGES</h2>
+			</div>
+			<div class="conversations-content">
 
 								<% if @messages_unread > 0 %>
-								
+									<small><%= @messages_unread %> unread message<%= @messages_unread > 1 ? "s" : "" %></small>								
 									<% if "horiz" == "horizzz" %>
 										<div class="row collapse">
 											<div class="small-12 columns">
@@ -68,76 +54,56 @@
 									<h3><em>No unread messages</em></h3>
 								<% end %>
 
-							</div><!--/.small-12-->
-						</div><!--/.row-->
+			</div>
+		</div>
 
-					
-					</div><!--/.small-12 -->
-				</div>
 
-<hr>
+		<br>
 
-				<div class="row collapse messages-panel">
-					<div class="small-12 columns">
 
+		<div class="conversations-container">
+			<div class="conversations-header" id="conversations-current">
+				<h2>CONTACT REQUESTS</h2>
+			</div>
+			<div class="conversations-content">
+				<% if @new_contact_messages > 0 %>
+					<small><%= @new_contact_messages %> new contact request<%= @new_contact_messages > 1 ? "s" : "" %></small>
+					<% if "horiz" == "horizzz" %>
 						<div class="row collapse">
 							<div class="small-12 columns">
-								<h2> Contact Requests
-									<% if @new_contact_messages > 0 %>
-										<br><small><%= @new_contact_messages %> new contact request<%= @new_contact_messages > 1 ? "s" : "" %></small>
-									<% end %>									
-								</h2>
-							</div>
-						</div><!--/.row-->
-
-						<div class="row collapse">
-							<div class="small-12 columns">
-								<hr>
-							</div><!--/.small-12-->
-						</div><!--/.row-->
-
-						<div class="row collapse">
-							<div class="small-12 columns">
-								<% if @new_contact_messages > 0 %>
-									<% if "horiz" == "horizzz" %>
-										<div class="row collapse">
-											<div class="small-12 columns">
-												<table width="100%">
-													<tbody>
-													<% @new_requests_list.each do |m|  %>
-													<% this_one = m.send(@current_user.type_inverse?) %>
-													<tr id="pot_<%= this_one.id %>">
-														<td>
-														<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {match: this_one} %>
-														</td>
-													</tr>
-													<% end %>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									<% else %>
-										<div class="row" style="padding: 0px;">
-											<div class="small-12 columns">
-												<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
-													<% @new_requests_list.each do |m|  %>
-													<% this_one = m.send(@current_user.type_inverse?) %>
-													<li><%= render partial: "shared/profile/profile_list_tile_small_sq", locals: {match: this_one} %></li>
-													<% end %>
-												</ul>
-											</div>
-										</div>									
+								<table width="100%">
+									<tbody>
+									<% @new_requests_list.each do |m|  %>
+									<% this_one = m.send(@current_user.type_inverse?) %>
+									<tr id="pot_<%= this_one.id %>">
+										<td>
+										<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {match: this_one} %>
+										</td>
+									</tr>
 									<% end %>
-								<% else %>
-									<h3><em>No new contact requests</em></h3>
-								<% end %>
-							</div><!--/.small-12-->
-						</div><!--/.row-->
+									</tbody>
+								</table>
+							</div>
+						</div>
+					<% else %>
+						<div class="row" style="padding: 0px;">
+							<div class="small-12 columns">
+								<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
+									<% @new_requests_list.each do |m|  %>
+									<% this_one = m.send(@current_user.type_inverse?) %>
+									<li><%= render partial: "shared/profile/profile_list_tile_small_sq", locals: {match: this_one} %></li>
+									<% end %>
+								</ul>
+							</div>
+						</div>									
+					<% end %>
+				<% else %>
+					<h3><em>No new contact requests</em></h3>
+				<% end %>
 
-					
-					</div><!--/.small-12-->
+			</div>
+		</div>
 
-				</div><!--/.row-->
 
 		<% else %>
 		<div class="row collapse">

@@ -1,6 +1,8 @@
 <% matchtype = @current_user.type? == "distributor" ? "Brands" : "Distributors" %>
 <%= render partial: "shared/topbar" %>
 
+
+
 <div class="row">
 	<div class="match-subpage-header">
 	<h1>CONTACTED <%= @current_user.type_inverse?.upcase %>S</h1>
@@ -10,7 +12,7 @@
 
 
 <div class="row collapse">
-	<div class="small-12 columns" id="page-content">
+	<div class="small-11 small-centered columns" id="page-content">
 		
 <% if @current_user.subscriber? %>
 
@@ -122,3 +124,4 @@
 
 	</div><!--/.medium-10-->
 </div>
+

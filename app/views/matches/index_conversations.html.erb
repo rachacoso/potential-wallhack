@@ -22,7 +22,7 @@
 		
 
 
-		<% unless @matches_accepted.blank? %>
+		<% unless @matches_accepted.values.all? {|x| x.blank? } %>
 
 
 		<br>
@@ -48,8 +48,7 @@
 
 
 
-		<% unless @matches_incoming_waiting.blank? %>
-
+		<% unless @matches_incoming_waiting.values.all? {|x| x.blank? } %>
 		<br>
 		<div class="conversations-container">
 			<div class="conversations-header" id="conversations-current">
@@ -74,7 +73,7 @@
 		<% end %>
 
 
-		<% unless @matches_outgoing_waiting.blank? %>
+		<% unless @matches_outgoing_waiting.values.all? {|x| x.blank? } %>
 
 		<br>
 		<div class="conversations-container">

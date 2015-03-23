@@ -18,11 +18,8 @@
 		<% @matches.each do |name,list| %>
 		<% next if list.blank? %>
 			<h2><%= name %></h2>			
-			<% unless @matches.blank? || !@current_user.subscriber? %>
 			<small><strong><%= render partial: "counts", locals: {matches: list} %></strong></small>
-			
 			<hr>
-			<% end %>
 			<div class="saved-contacted-match-list">
 			<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list} %>
 			</div>

@@ -16,7 +16,7 @@ task :set_distributor_ratings => :environment do
 		d.rating = 0
 		d.save
 	end
-	distros_completeness = Distributor.where(:completeness => nil)
+	distros_completeness = Distributor.all
 	puts distros_completeness.count
 	distros_completeness.each do |d|
 		d.update_completeness

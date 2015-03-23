@@ -68,8 +68,8 @@ class AdminController < ApplicationController
           cinfo.postcode = uzip
           cinfo.country = ucountry
           cinfo.save
-
-          d.sectors << Sector.find('5418b657706f72e34f070000') #baby/kids
+          # d.sectors << Sector.find('5418b657706f72e34f070000') #baby/kids (LOCAL)
+          d.sectors << Sector.find('542b054030666200020f0000') #baby/kids (HEROKU)
           d.update(year_established: Date.new(ufounded.to_i), company_name: ucompany_name, country_of_origin: ucountry, website: uwebsite, facebook: ufacebook, linkedin: ulinkedin)
 
           d.export_countries.find_or_initialize_by(country: ucountry)

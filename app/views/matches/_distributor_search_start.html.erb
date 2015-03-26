@@ -4,31 +4,14 @@
 	<%# sectors = Sector.find(@current_user.distributor.sector_ids) %>
 	<% sectors = Sector.all %>
 
-	<% content_for :css_head do %>
-	
-		<style>
-		<% length = sectors.length %>
-		<% if length > 1 %>
-			<% start_loc = 50 - ((15 * (length - 1))/2).round %>
-		<% else %>
-			<% start_loc = 40 %>
+	<div class="row">
+		<% sectors.order_by{|s| s.id }.each do |s| %>
+		<%= link_to all_matches_url(:sector => s.id) do %>
+		<div class="medium-3 columns hide-for-small-only text-center" id="match-<%=s.name.downcase.tr("/"," ").squish.tr(" ","-") %>">
+		</div>
 		<% end %>
-		<% sectors.each_with_index do |s, index| %>
-			#match-<%= s.id %> {
-			  position: absolute;
-			  left: 35%;
-			  top: <%= start_loc + (15 * index)%>%;
-			}
-		<% end %>
-		</style>
-
-	<% end %>
-
-	<% sectors.each do |s| %>
-	<div class="hide-for-small-only" id="match-<%=s.id%>">
-		<%= link_to s.name, all_matches_url(:sector => s.id), class: "match-map" %>
-	</div>
-	<% end %>
+		<% end %>		
+	</div><!--/.row-->
 
 	<div class="row show-for-small-only">
 		<div class="small-12 columns">

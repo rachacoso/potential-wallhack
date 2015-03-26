@@ -1582,25 +1582,7 @@ $dashboard-agency-color: $landing-teal;
   }
 }
 
-#match-map-header {
-  // position: relative;
-  background: white url("/images/searchmap.svg");
-  // background-position:  top;
-  background-size: 25%;
-  background-repeat: no-repeat;
-}
 
-#match-map-container {
-  position: relative;
-  background: transparent url("/images/searchmap.svg");
-  background-position:  center;
-  background-size: 95%;
-  background-repeat: no-repeat;
-}
-.match-map-overlay {
-  @include transparent(#fff, 0.4);
-  height: 100%
-}
 #side-nav-container {
   background: $landing-light-gray;
   border-radius: 9px 0px 0px 9px;
@@ -1623,7 +1605,28 @@ $dashboard-agency-color: $landing-teal;
   // min-height: 80vh;
 }
 
-//BRAND
+// BRAND->DISTRIBUTOR SEARCH START
+
+#match-map-header {
+  // position: relative;
+  background: white url("/images/searchmap.svg");
+  // background-position:  top;
+  background-size: 25%;
+  background-repeat: no-repeat;
+}
+
+#match-map-container {
+  position: relative;
+  background: transparent url("/images/searchmap.svg");
+  background-position:  center;
+  background-size: 95%;
+  background-repeat: no-repeat;
+}
+.match-map-overlay {
+  @include transparent(#fff, 0.4);
+  height: 100%
+}
+
 #match-russia, {
   position: absolute;
   left: 69%;
@@ -1656,6 +1659,38 @@ $dashboard-agency-color: $landing-teal;
 }
 
 
+// DISTRIBUTOR->BRAND SEARCH START
+
+#match-sectors-container {
+  position: relative;
+  height: rem-calc(300);
+  // background: transparent url("/images/searchmap.svg");
+  // background-position:  center;
+  // background-size: 95%;
+  // background-repeat: no-repeat;
+}
+
+
+/* ID names generated on distributor_search_start partial, based on the sector name */
+#match-baby-kids, #match-fashion-accessories, #match-other, #match-personal-care {
+  position: relative;
+  top: rem-calc(50);
+  height:200px;
+  background-position: center;
+  background-size: 100%;
+}
+#match-baby-kids {
+  background: transparent url("/images/landing_sector_baby_kids.svg") no-repeat;
+}
+#match-fashion-accessories {
+  background: transparent url("/images/landing_sector_fashion_accessories.svg") no-repeat;
+}
+#match-personal-care {
+  background: transparent url("/images/landing_sector_personal_care.svg") no-repeat;
+}
+#match-other {
+  background: transparent url("/images/landing_sector_other.svg") no-repeat;
+}
 
 
 #match-title {

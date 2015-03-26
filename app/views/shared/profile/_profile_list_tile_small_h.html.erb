@@ -12,8 +12,14 @@
 		</div><!--/.medium-1-->
 		<div class="medium-5 columns">
 
-					<% match.export_countries.each do |c| %>
-						<small><%= c.country %></small><br>
+					<% if @current_user.brand %>
+						<% match.export_countries.each do |ec| %>
+							<small><%= ec.country %></small><br>
+						<% end %>
+					<% elsif @current_user.distributor %>
+						<% match.sectors.sort_by{|s| s.name}.each do |s| %>
+							<small><%= s.name %></small><br>
+						<% end %>
 					<% end %>
 
 					<% if @current_user.subscriber? && action_name != "public_profile" %>

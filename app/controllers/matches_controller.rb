@@ -112,11 +112,28 @@ class MatchesController < ApplicationController
 		
 		case @current_user.type?
 		when "distributor"
-			@matches_incoming_waiting = Brand.find(@profile.matches.contacting_me_waiting.pluck(:brand_id))
-			@matches_outgoing_waiting = Brand.find(@profile.matches.contacted_by_me_waiting.pluck(:brand_id))
-			@matches_accepted = Brand.find(@profile.matches.accepted.pluck(:brand_id))
-			@matches_accepted_outgoing = Brand.find(@profile.matches.contacted_by_me_accepted.pluck(:brand_id))
-			@matches_accepted_incoming = Brand.find(@profile.matches.contacting_me_accepted.pluck(:brand_id))
+			# @matches_incoming_waiting = Brand.find(@profile.matches.contacting_me_waiting.pluck(:brand_id))
+			# @matches_outgoing_waiting = Brand.find(@profile.matches.contacted_by_me_waiting.pluck(:brand_id))
+			# @matches_accepted = Brand.find(@profile.matches.accepted.pluck(:brand_id))
+			# @matches_accepted_outgoing = Brand.find(@profile.matches.contacted_by_me_accepted.pluck(:brand_id))
+			# @matches_accepted_incoming = Brand.find(@profile.matches.contacting_me_accepted.pluck(:brand_id))
+
+			sectors_map = get_sectors()
+			@matches_incoming_waiting = Hash.new
+			sectors_map.each do |name, id|
+				@matches_incoming_waiting[name] = Brand.in(:sector_ids => id).order_by(:completeness.desc, :company_name.asc).find(@profile.matches.contacting_me_waiting.pluck(:brand_id))
+			end		
+
+			@matches_outgoing_waiting = Hash.new
+			sectors_map.each do |name, id|
+				@matches_outgoing_waiting[name] = Brand.in(:sector_ids => id).order_by(:completeness.desc, :company_name.asc).find(@profile.matches.contacted_by_me_waiting.pluck(:brand_id))
+			end		
+
+			@matches_accepted = Hash.new
+			sectors_map.each do |name, id|
+				@matches_accepted[name] = Brand.in(:sector_ids => id).order_by(:completeness.desc, :company_name.asc).find(@profile.matches.accepted.pluck(:brand_id))
+			end
+
 
 		when "brand"
 

@@ -1,5 +1,5 @@
 class MatchesController < ApplicationController
-  
+
   def index
 
 		if @current_user.brand #IS A BRAND
@@ -12,23 +12,11 @@ class MatchesController < ApplicationController
 			# exclude any that are in contact already
 			@all_matches = @all_matches.not_in(_id: @profile.matches.pluck(:distributor_id)) 
 			if params[:country]
-				all_countries = [
-					"russia",
-					"china",
-					"india",
-					"brazil",
-					"korea",
-					"uk"
-				]
+
+				countries_map = get_countries()
+
 				@country = params[:country]
-				countries_map = {
-					"russia" => "Russia",
-					"china" => "China",
-					"india" => "India",
-					"brazil" => "Brazil",
-					"korea" => "South Korea",
-					"uk" => "United Kingdom"
-				}
+
 				@matches = @all_matches.in("export_countries.country" => countries_map[@country])
 				@country_proper = countries_map[@country]
 			else
@@ -66,17 +54,8 @@ class MatchesController < ApplicationController
 		@profile = @current_user.brand || @current_user.distributor
 		@matches = @profile.saved_matches.uniq
 
-		countries_map = {
-			"brazil" => "Brazil",
-			"china" => "China",
-			"india" => "India",
-			"russia" => "Russia",
-			"korea" => "South Korea",
-			"uk" => "United Kingdom"
-		}
-
 		if @current_user.brand
-
+			countries_map = get_countries()
 			@matches = Hash.new
 			countries_map.each do |short,long|
 				@matches[long] = Distributor.in("export_countries.country" => long).order_by(:rating.desc, :completeness.desc, :country.asc, :company_name.asc).find(@profile.saved_match_ids)
@@ -84,6 +63,14 @@ class MatchesController < ApplicationController
 			# @matches = @matches.order_by(:rating.desc, :completeness.desc, :country.asc, :company_name.asc)
 			# @matches = @matches.sort_by{ |m| [m.rating, m.completeness, m.country_of_origin, m.company_name] }.reverse!
 			# @matches = Distributor.order_by(:rating.desc, :completeness.desc, :country.asc, :company_name.asc).find(@profile.saved_match_ids)
+		
+		elsif @current_user.distributor
+			sectors_map = get_sectors()
+			@matches = Hash.new
+			sectors_map.each do |name, id|
+				@matches[name] = Brand.in(:sector_ids => id).order_by(:completeness.desc, :company_name.asc).find(@profile.saved_match_ids)
+			end		
+
 		end
 
  	end 
@@ -133,15 +120,7 @@ class MatchesController < ApplicationController
 
 		when "brand"
 
-			countries_map = {
-				"brazil" => "Brazil",
-				"china" => "China",
-				"india" => "India",
-				"russia" => "Russia",
-				"korea" => "South Korea",
-				"uk" => "United Kingdom"
-			}
-
+			countries_map = get_countries()
 			# @matches_incoming_waiting = Distributor.find(@profile.matches.contacting_me_waiting.pluck(:distributor_id))
 			# @matches_outgoing_waiting = Distributor.find(@profile.matches.contacted_by_me_waiting.pluck(:distributor_id))	
 			# @matches_accepted = Distributor.find(@profile.matches.accepted.pluck(:distributor_id))
@@ -297,6 +276,34 @@ class MatchesController < ApplicationController
 	    format.html
 	    format.js
 	  end
+
+  end
+
+  private
+
+  def get_countries
+
+		countries_map = {
+			"brazil" => "Brazil",
+			"china" => "China",
+			"india" => "India",
+			"russia" => "Russia",
+			"korea" => "South Korea",
+			"uk" => "United Kingdom"
+		}		
+
+		return countries_map
+
+  end
+
+  def get_sectors
+
+  	sectors_map = Hash.new
+  	Sector.all.each do |sector|
+  		sectors_map[sector.name] = sector.id
+  	end
+
+  	return sectors_map
 
   end
 

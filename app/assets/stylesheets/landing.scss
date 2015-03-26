@@ -1195,6 +1195,12 @@ top: 10px;
 }
 .profile-logo-area {
   margin-top: rem-calc(15);
+  height: rem-calc(80);
+  img {
+    height: auto !important;
+    width: 100px;
+
+  }
 }
 .profile-list-tile-small-sq-bottom {
   // height: rem-calc(100);

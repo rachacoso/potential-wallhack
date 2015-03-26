@@ -5,11 +5,13 @@
 
 		<div class="profile-list-tile-small-sq-top-countries">
 			<% if @current_user.brand %>
-			<% match.export_countries.each do |ec| %>
-				<%= ec.country %><br>
-			<% end %>
+				<% match.export_countries.each do |ec| %>
+					<%= ec.country %><br>
+				<% end %>
 			<% elsif @current_user.distributor %>
-				<%= match.country_of_origin %>
+				<% match.sectors.sort_by{|s| s.name}.each do |s| %>
+					<%= s.name %><br>
+				<% end %>
 			<% end %>
 		</div>		
 		<div class="profile-list-tile-small-sq-top-inner">
@@ -31,12 +33,18 @@
 		<div class="profile-logo-area">
 			<% if match.logo_file_name %>
 				<%= link_to view_match_url(match.id, action_name) do %>
-					<%= image_tag match.logo.url(:medium), width: "90", alt: "Logo" %>
+					<%= image_tag match.logo.url(:medium), alt: "Logo" %>
 				<% end %>
 			<% end %>
 		</div>
 		<% else %>
-		<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= match.class.to_s %> logo hidden. Subscribe to view full profile"><%= image_tag match.logo.url(:public), width: "40", height: "40", alt: "Logo" %></span>
+		<div class="profile-logo-area">
+			<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= match.class.to_s %> logo hidden. Subscribe to view full profile"><%= image_tag match.logo.url(:public), width: "40", height: "40", alt: "Logo" %></span>
+		</div>
+		<% end %>
+
+		<% if @current_user.distributor %>
+			<h5><%= truncate(match.brand_positioning, :length => 100, :separator => ' ') %><small><%= link_to "more", view_match_url(match.id, action_name) %> </small></h5>
 		<% end %>
 	</div>
 

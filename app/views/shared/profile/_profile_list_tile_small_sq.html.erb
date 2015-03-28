@@ -43,12 +43,12 @@
 		</div>
 		<% end %>
 
-		<% if @current_user.distributor %>
+		<% if @current_user.distributor && !match.brand_positioning.blank? %>
 			<h5><%= truncate(match.brand_positioning, :length => 100, :separator => ' ') %><small><%= link_to "more", view_match_url(match.id, action_name) %> </small></h5>
 		<% end %>
 	</div>
 
-	<div class="profile-list-tile-small-sq-bottom">
+	<div class="profile-list-tile-small-sq-bottom text-right">
 		<%= render partial:"shared/profile/components/indicators", locals:{match: match} %>
 	</div>
 

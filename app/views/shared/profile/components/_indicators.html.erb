@@ -3,67 +3,62 @@
 	<% if @current_user.subscriber? && action_name != "public_profile"  %>
 		<% m = this_match(match) %>		
 
-		
-	
-		
-
 		<div class="row collapse">
-
-			<div class="small-5 columns">
-
-				
-					<% if m %>
-						<% if i_contacted(m) %>
-							<div class="active"><h3>CONTACTED <strong>BY YOU</strong></h3></div>
-						<% else %>
-							<% if m.accepted %>
-								<div class="active"><h3>CONTACTED <strong>YOU</strong></h3></div>
-							<% end %>
-						<% end %>
-					<% else %>
-						<h3>&nbsp;</h3>
-					<% end %>
-
-				
-			</div><!--/.small-5-->
-			<div class="small-7 columns">
+			<div class="small-12 columns">
 
 				<% has_unread, count = unread_count_from_match(match) %>
 				<% if has_unread %>
-					<div class="active alert"><h3><%= count %> UNREAD MESSAGE<%= count > 1 ? "S" : "" %></h3></div>
+					<span data-tooltip aria-haspopup="true" class="has-tip radius" title="NEW MESSAGE">
+					<%= image_tag "match_profile_icons_message.svg" %></span>
 				<% end %>
 				<% if m %>
 				<% if !m.accepted && !i_contacted(m) %>
-					<div class="active alert"><h3>NEW CONTACT REQUEST</h3></div>
+					<span data-tooltip aria-haspopup="true" class="has-tip radius" title="NEW CONTACT REQUEST">
+					<%= image_tag "match_profile_icons_newrequest.svg" %></span>
 				<% end %>
 				<% end %>	
 
-			</div><!--/.small-7-->
 
-		</div>
-		<div class="row collapse">
-
-			<div class="small-5 columns ">
-
-
-					<% if m %>
-						<% if m.messages.blank? && m.initial_contact_by == @current_user.type? %>
-							<div class="active"><h3>AWAITING RESPONSE</h3></div>
-						<% end %>
-						<% unless m.messages.blank? %>
-							<div class="active"><h3>IN CONVERSATION</h3></div>
-						<% end %>
+				<% if m %>
+					<% if i_contacted(m) %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="YOU CONTACTED">
+						<%= image_tag "match_profile_icons_outgoing.svg" %></span>
 					<% else %>
-						<br>
+						<% if m.accepted %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="CONTACTED YOU">
+						<%= image_tag "match_profile_icons_incoming.svg" %></span>
+						<% end %>
 					<% end %>
+				<% end %>			
 
 
-			</div><!--/.small-5-->
-			<div class="small-7 columns">
-				<% if match.user.last_login %>
-					<div class="active"><h3>ACTIVE IN THE PAST <strong><%= last_activity(match.user.last_login).upcase %></strong></h3></div>
+				<% if m %>
+					<% if m.messages.blank? && m.initial_contact_by == @current_user.type? %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="AWAITING RESPONSE">
+						<%= image_tag "match_profile_icons_waiting.svg" %></span>
+					<% end %>
+					<% unless m.messages.blank? %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="IN CONVERSATION">
+						<%= image_tag "match_profile_icons_conversation.svg" %></span>
+					<% end %>
 				<% end %>
-			</div><!--/.small-7-->
+
+	
+				<% if match.user.last_login %>
+					<% case last_activity(match.user.last_login) %>
+					<% when "day" %>
+							<span data-tooltip aria-haspopup="true" class="has-tip radius" title="ACTIVE IN LAST DAY">
+							<%= image_tag "match_profile_icons_day.svg" %></span>
+					<% when "week" %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="ACTIVE IN LAST WEEK">
+						<%= image_tag "match_profile_icons_week.svg" %></span>
+					<% else %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="ACTIVE IN LAST MONTH OR MORE">
+						<%= image_tag "match_profile_icons_month.svg" %></span>
+					<% end %>
+				<% end %>
+
+			</div><!--/.small-12-->
 		</div><!--/.row-->
 
 	<% end %>

@@ -20,7 +20,9 @@
 						<h3><strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>	
 						<% end %>
 					</div>
-					<%= render partial: "shared/profile/components/indicators", locals: {match: profile} %>
+					<div class="profile-indicators text-right">
+						<%= render partial: "shared/profile/components/indicators", locals: {match: profile} %>
+					</div>
 				</div>
 
 				<% if controller_name == "matches" %>

@@ -1204,7 +1204,8 @@ top: 10px;
 }
 .profile-list-tile-small-sq-bottom {
   // height: rem-calc(100);
-  background: white;  
+  background: white;
+  padding: rem-calc(15) rem-calc(5);
 }
 .profile-indicators {
   .active {
@@ -1481,6 +1482,9 @@ $dashboard-agency-color: $landing-teal;
 
 }
 
+.profile-indicators {
+  padding: rem-calc(5);
+}
 .profile-section-title {
   font-weight: 300;
   padding-left: rem-calc(3);

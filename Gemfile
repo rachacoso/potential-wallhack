@@ -64,6 +64,8 @@ gem 'remotipart', '~> 1.2'
 
 gem 'browser'
 
+gem 'kaminari'
+
 group :production do
   gem 'pg'
 end

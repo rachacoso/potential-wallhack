@@ -23,7 +23,11 @@ class MatchesController < ApplicationController
 				@matches = @all_matches
 			end
 
-			@matches = @matches.order_by(:rating.desc, :completeness.desc, :country.asc, :company_name.asc)
+			if params[:page]
+				@matches = @matches.order_by(:rating.desc, :completeness.desc, :country.asc, :company_name.asc).page(params[:page]).per(20)
+			else
+				@matches = @matches.order_by(:rating.desc, :completeness.desc, :country.asc, :company_name.asc).page(1).per(20)
+			end
 
 		else #IS A DISTRIBUTOR
 			@profile = @current_user.distributor
@@ -43,6 +47,12 @@ class MatchesController < ApplicationController
 			# 	@matches = all_matches.in(sector_ids: @sector)
 			else
 				@matches = all_matches
+			end
+
+			if params[:page]
+				@matches = @matches.page(params[:page]).per(20)
+			else
+				@matches = @matches.page(1).per(20)
 			end
 
 		end

@@ -1203,26 +1203,15 @@ top: 10px;
   }
 }
 .profile-list-tile-small-sq-bottom {
-  // height: rem-calc(100);
+  height: rem-calc(80);
   background: white;
   padding: rem-calc(15) rem-calc(5);
 }
+
 .profile-indicators {
-  .active {
-    background-color: $landing-light-gray;
-    border: 1px solid white;
-  }
-  h3 {
-    font-size: 0.3em;
-    font-weight: 500;
-    margin: rem-calc(5);
-  }
-  .alert {
-    background-color: $landing-orange;
-    h3 {
-      color: white;
-    }
-  }    
+
+  padding: rem-calc(5);
+ 
 }
 
 .message-index-indicator {
@@ -1482,9 +1471,7 @@ $dashboard-agency-color: $landing-teal;
 
 }
 
-.profile-indicators {
-  padding: rem-calc(5);
-}
+
 .profile-section-title {
   font-weight: 300;
   padding-left: rem-calc(3);

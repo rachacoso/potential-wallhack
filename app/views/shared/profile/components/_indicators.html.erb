@@ -19,27 +19,30 @@
 				<% end %>	
 
 
-				<% if m %>
+<!-- 				<% if m %>
 					<% if i_contacted(m) %>
 						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="YOU CONTACTED">
 						<%= image_tag "match_profile_icons_outgoing.svg" %></span>
 					<% else %>
 						<% if m.accepted %>
-						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="CONTACTED YOU">
-						<%= image_tag "match_profile_icons_incoming.svg" %></span>
+							<span data-tooltip aria-haspopup="true" class="has-tip radius" title="CONTACTED YOU">
+							<%= image_tag "match_profile_icons_incoming.svg" %></span>
 						<% end %>
 					<% end %>
-				<% end %>			
+				<% end %>			 -->
 
 
 				<% if m %>
-					<% if m.messages.blank? && m.initial_contact_by == @current_user.type? %>
-						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="AWAITING RESPONSE">
+					<% if m.messages.blank? && i_contacted(m) %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="AWAITING THEIR RESPONSE<BR> <SMALL> CONTACTED ON <%= m.c_at.strftime("%d %B %Y").upcase %></SMALL>">
 						<%= image_tag "match_profile_icons_waiting.svg" %></span>
 					<% end %>
-					<% unless m.messages.blank? %>
-						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="IN CONVERSATION">
-						<%= image_tag "match_profile_icons_conversation.svg" %></span>
+					<% if !m.messages.blank? && i_contacted(m) %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="IN CONVERSATION<BR> <SMALL>YOU CONTACTED THEM</SMALL>">
+						<%= image_tag "match_profile_icons_conversation_outgoing.svg" %></span>
+					<% elsif !m.messages.blank? && !i_contacted(m) %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="IN CONVERSATION<BR> <SMALL>THEY CONTACTED YOU</SMALL>">
+							<%= image_tag "match_profile_icons_conversation_incoming.svg" %></span>
 					<% end %>
 				<% end %>
 
@@ -47,13 +50,13 @@
 				<% if match.user.last_login %>
 					<% case last_activity(match.user.last_login) %>
 					<% when "day" %>
-							<span data-tooltip aria-haspopup="true" class="has-tip radius" title="ACTIVE IN LAST DAY">
+							<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>ACTIVE IN LAST</small> <br>DAY">
 							<%= image_tag "match_profile_icons_day.svg" %></span>
 					<% when "week" %>
-						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="ACTIVE IN LAST WEEK">
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>ACTIVE IN LAST</small> <br>WEEK">
 						<%= image_tag "match_profile_icons_week.svg" %></span>
 					<% else %>
-						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="ACTIVE IN LAST MONTH OR MORE">
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>ACTIVE IN LAST</small> <br>MONTH OR MORE">
 						<%= image_tag "match_profile_icons_month.svg" %></span>
 					<% end %>
 				<% end %>

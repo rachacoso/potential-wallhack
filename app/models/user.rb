@@ -24,8 +24,6 @@ class User
 
 	scope :is_subscriber, ->{where(subscriber: true)}
 
-  
-  
   def generate_token(column)
     begin
       self[column] = SecureRandom.urlsafe_base64

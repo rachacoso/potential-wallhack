@@ -1,7 +1,6 @@
 <%= render partial: "shared/topbar_admin" %>
 
 
-
 <% content_for :subnav do %>
 
 <div class="row">
@@ -63,6 +62,36 @@
 			</div>
 
 		</div>
+
+
+		<div class="row">
+			
+			<div class="small-12 columns">
+				<div class="panel">
+				<h2>Upload Logo</h2>
+				<% user_profile = @user.brand || @user.distributor %>
+
+					<%= form_for @user, :html => {id: 'user-update-logo-upload'}, url: user_path(@user) do |f| %>
+						<%= hidden_field_tag 'update_type', 'logo' %>
+						<%= f.fields_for @user.type? do |ff| %>
+
+								<%= ff.label :logo do %>
+								Company logo <br>
+								<%= image_tag user_profile.logo.url(:medium), width: "200", height: "200", alt: "Logo", id: "logo-preview"%>
+								<% end %>
+								<br>
+								<%= ff.file_field :logo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>
+						<% end %>
+						<%#= f.submit 'Upload Logo', class: "tiny radius success button" %>
+					<% end %>
+
+
+
+				</div>
+			</div>
+
+		</div>
+
 
 		<div class="row">
 			

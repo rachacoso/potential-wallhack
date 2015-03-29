@@ -25,8 +25,8 @@
 	<div class="small-10 small-centered columns">
 		<ul class="tabs right" data-tab>
 		  <li class="tab-title"><a href="#panel1">Administrators</a></li>
-		  <li class="tab-title"><a href="#panel2">Distributors</a></li>
-		  <li class="tab-title active"><a href="#panel3">Brands</a></li>
+		  <li class="tab-title active"><a href="#panel2">Distributors</a></li>
+		  <li class="tab-title"><a href="#panel3">Brands</a></li>
 		</ul>
 	</div>
 </div>
@@ -37,6 +37,7 @@
 		<div class="row">
 			<div class="small-10 small-centered columns panel">
 				<h3><strong>Administrators</strong></h3><hr>
+				<%= paginate @admins, :param_name => :page_admins %>
 				<%= render partial: @admins, spacer_template: "shared/indexspacer" %>
 			</div>
 		</div>
@@ -77,26 +78,32 @@
 
 	</div>
 
-	<div class="content" id="panel2">
+	<div class="content active" id="panel2">
 		<div class="row">
 			<div class="small-10 small-centered columns panel">
-				<h3><strong>Distributors</strong></h3><hr>
+				<h3><strong>Distributors</strong></h3>
 				<% if !@distributors.empty? %>
+				<%= paginate @distributors, :param_name => :page_distributors %>
+				<hr>
 				<%= render partial: @distributors.sort_by { |d| d.distributor.company_name }, spacer_template: "shared/indexspacer" %>
 				<% else %>
+				<hr>
 				<h3><em>No Distributors</em></h3>
 				<% end %>
 			</div>
 		</div>
 	</div>
 
-	<div class="content active" id="panel3">
+	<div class="content" id="panel3">
 		<div class="row">
 			<div class="small-10 small-centered columns panel">
-				<h3><strong>Brands</strong></h3><hr>
+				<h3><strong>Brands</strong></h3>
 				<% if !@brands.empty? %>
+				<%= paginate @brands, :param_name => :page_brands %>
+				<hr>
 				<%= render partial: @brands.sort_by { |b| b.brand.company_name }, spacer_template: "shared/indexspacer" %>
 				<% else %>
+				<hr>
 				<h3><em>No Brands</em></h3>
 				<% end %>				
 			</div>

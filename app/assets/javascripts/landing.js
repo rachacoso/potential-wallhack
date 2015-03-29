@@ -371,6 +371,10 @@ function initialize () {
       // select the form and submit
       $('#company-info-form').submit(); 
   });     
+  $('#user_distributor_attributes_logo, #user_brand_attributes_logo').change(function() { 
+      // select the form and submit
+      $('#user-update-logo-upload').submit(); 
+  });   
 
 }
 

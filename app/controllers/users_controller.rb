@@ -10,17 +10,31 @@ class UsersController < ApplicationController
 
 	def index
 		# @users = User.all
-		@distributors = User.all.reject{ |r| r.distributor.nil?}.reject{ |r| r.distributor.company_name.nil? }
-		@brands = User.all.reject{ |r| r.brand.nil? }.reject{ |r| r.brand.company_name.nil? }
+		@distributors = User.all.reject{ |r| r.distributor.nil?}.reject{ |r| r.distributor.company_name.nil? }.sort_by{|i| i.distributor.company_name}
+		@brands = User.all.reject{ |r| r.brand.nil? }.reject{ |r| r.brand.company_name.nil? }.sort_by{|i| i.brand.company_name}
 
 		@admins = User.where(administrator: true)
 
-		# # PAGINATE ARRAYS
-		# @brands = Kaminari.paginate_array(@brands).page(1).per(3)
-		# @brands2 = Kaminari.paginate_array(@brands).page(2).per(3)
-
 		@newuser = User.new
 		@newuser.build_user_profile
+
+		if params[:page_admins]
+			@admins = @admins.page(params[:page_admins]).per(20)
+		else
+			@admins = @admins.page(1).per(20)
+		end		
+
+		if params[:page_distributors]
+			@distributors = Kaminari.paginate_array(@distributors).page(params[:page_distributors]).per(20)
+		else
+			@distributors = Kaminari.paginate_array(@distributors).page(1).per(20)
+		end
+
+		if params[:page_brands]
+			@brands = Kaminari.paginate_array(@brands).page(params[:page_brands]).per(20)
+		else
+			@brands = Kaminari.paginate_array(@brands).page(1).per(20)
+		end		
 
 	end
 
@@ -169,6 +183,12 @@ class UsersController < ApplicationController
 				redirect_to users_path
 			end
 
+		when 'logo'
+			profile = @user.brand || @user.distributor
+			logofile = params[:user]["#{@user.type?}_attributes".to_sym][:logo]
+			profile.logo = logofile
+			profile.save
+			redirect_to users_path			
 		when 'adminsubscriber'
 			user = User.find(params[:id])
 			user.update(user_parameters)

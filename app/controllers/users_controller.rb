@@ -188,7 +188,7 @@ class UsersController < ApplicationController
 			logofile = params[:user]["#{@user.type?}_attributes".to_sym][:logo]
 			profile.logo = logofile
 			profile.save
-			redirect_to users_path			
+			redirect_to :back			
 		when 'adminsubscriber'
 			user = User.find(params[:id])
 			user.update(user_parameters)

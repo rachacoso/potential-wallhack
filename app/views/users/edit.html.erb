@@ -85,7 +85,8 @@
 						<%#= f.submit 'Upload Logo', class: "tiny radius success button" %>
 					<% end %>
 
-
+					<%= !user_profile.facebook.blank? ? user_profile.facebook.sub(/^https?\:\/\//, '').sub(/^www./,'') : "NO Facebook" %><br>
+					<%= !user_profile.linkedin.blank? ? user_profile.linkedin.sub(/^https?\:\/\//, '').sub(/^www./,'') : "NO LinkedIn" %>
 
 				</div>
 			</div>
@@ -133,7 +134,11 @@
 						<%= f.check_box :verified_website, label: ' Website'  %>		
 					</div><!--/.small-4-->
 					<div class="small-8 columns">
-						<h3><%= link_to @user.distributor.website, "//#{@user.distributor.website}", target: 'blank' %></h3>
+						<% if @user.distributor.website.blank?  %>
+							<h3> NO WEBSITE </h3>
+						<% else %>						
+							<h3><%= link_to @user.distributor.website.sub(/^https?\:\/\//, '').sub(/^www./,''), "//#{@user.distributor.website.sub(/^https?\:\/\//, '').sub(/^www./,'')}", target: 'blank' %></h3>
+						<% end %>
 					</div><!--/.small-8-->
 				</div><!--/.row-->
 <hr>				
@@ -142,9 +147,17 @@
 						<%= f.check_box :verified_social_media, label: ' Social Media'  %>		
 					</div><!--/.small-4-->
 					<div class="small-8 columns">
-						<h3><small>Facebook:</small> <%= @user.distributor.facebook %></h3>
-						<h3><small>LinkedIn:</small> <%= @user.distributor.linkedin %></h3>
-						
+						<% if @user.distributor.facebook.blank? && @user.distributor.linkedin.blank? %>
+						<h3> NO SOCIAL MEDIA </h3>
+						<% end %>
+						<% unless @user.distributor.facebook.blank? %>
+						<h3><%= link_to "Facebook", @user.distributor.facebook.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
+						<h3><%= @user.distributor.facebook.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
+						<% end %>
+						<% unless @user.distributor.linkedin.blank? %>
+						<h3><%= link_to "LinkedIn", @user.distributor.linkedin.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
+						<% end %>
+
 					</div><!--/.small-8-->
 				</div><!--/.row-->					
 <hr>			

@@ -17,7 +17,9 @@ class Brand
 	field :year_established, type: Date
 	field :company_size, type: String
 	field :website, type: String
-
+	field :facebook, type: String
+	field :linkedin, type: String
+	
 	validates_inclusion_of :country_of_origin, in: [ 
 		"United States"
 		 ]

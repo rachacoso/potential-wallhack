@@ -65,6 +65,17 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="small-12 columns">
+					<%= label_tag(:facebook, "Facebook") %>
+					<%= f.text_field :facebook, label: false %>
+				</div>
+				<div class="small-12 columns">
+					<%= label_tag(:linkedin, "LinkedIn") %>
+					<%= f.text_field :linkedin, label: false %>
+				</div>
+
+
 				<div class="small-12 columns">
 					<%= label_tag(:company_size, "Company Size") %>
 					<%= f.collection_select(:company_size, CompanySize.all, :id, :name) %>

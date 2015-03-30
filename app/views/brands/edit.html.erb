@@ -90,6 +90,18 @@
 								<%= f.collection_select(:company_size, CompanySize.all, :id, :name) %>
 							</div>
 						</div>
+
+						<div class="row">						
+							<div class="medium-6 columns">
+								<%= label_tag(:facebook, "Facebook") %>
+								<%= f.text_field :facebook, label: false %>
+							</div>
+							<div class="medium-6 columns">
+								<%= label_tag(:linkedin, "LinkedIn") %>
+								<%= f.text_field :linkedin, label: false %>
+							</div>
+						</div>	
+
 					</div>
 				</div>
 

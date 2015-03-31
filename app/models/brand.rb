@@ -20,9 +20,12 @@ class Brand
 	field :facebook, type: String
 	field :linkedin, type: String
 	
-	validates_inclusion_of :country_of_origin, in: [ 
-		"United States"
-		 ]
+	# validates_inclusion_of :country_of_origin, in: [ 
+	# 	"United States"
+	# 	 ]
+
+ 	has_one :contact_info, as: :brand_contact_info, dependent: :destroy
+	accepts_nested_attributes_for :contact_info
 
 	has_mongoid_attached_file :logo, 
   	# :path => ':attachment/:id/:style.:extension',
@@ -35,9 +38,6 @@ class Brand
 	  # :convert_options => {:public => "-blur 0x20"},
 	  :default_style => :medium
 	validates_attachment_content_type :logo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
-	
- 	has_one :contact_info, as: :brand_contact_info, dependent: :destroy
-	accepts_nested_attributes_for :contact_info
 
   has_and_belongs_to_many :sectors, inverse_of: nil 
 	has_and_belongs_to_many :channels, inverse_of: nil 
@@ -98,6 +98,7 @@ class Brand
 
 	def init_contact_info
 		self.create_contact_info
+		self.save
 	end
 
 

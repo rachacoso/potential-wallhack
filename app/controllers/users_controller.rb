@@ -107,7 +107,8 @@ class UsersController < ApplicationController
 				user.password_confirmation = params[:user][:password_confirmation]
 				user.user_profile.firstname = params[:user][:user_profile_attributes][:firstname]
 				user.user_profile.lastname = params[:user][:user_profile_attributes][:lastname]
-
+				user.save!
+				
 				#create profile for the selected user type
 				if params[:user_type] == 'distributor' || params[:user_type] == 'brand' # restrict to only allowed values
 					createusertype = "create_" + params[:user_type]

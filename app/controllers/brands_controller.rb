@@ -156,6 +156,8 @@ class BrandsController < ApplicationController
 			:year_established,
 			:company_size,
 			:website,
+			:facebook,
+			:linkedin,
 			:logo,
 			:countries_where_exported,
 			:brand_positioning,

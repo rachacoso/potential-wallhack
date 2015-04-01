@@ -85,8 +85,26 @@
 						<%#= f.submit 'Upload Logo', class: "tiny radius success button" %>
 					<% end %>
 
-					<%= !user_profile.facebook.blank? ? user_profile.facebook.sub(/^https?\:\/\//, '').sub(/^www./,'') : "NO Facebook" %><br>
-					<%= !user_profile.linkedin.blank? ? user_profile.linkedin.sub(/^https?\:\/\//, '').sub(/^www./,'') : "NO LinkedIn" %>
+					<h2>Logo Finding Links</h2>
+
+					<% if !user_profile.facebook.blank? %>
+
+						<h3><%= link_to "Facebook", "//#{clean_url(user_profile.facebook)}", target: "blank" %></h3>
+						<% if facebook_id = fb_picture(user_profile.facebook) %>
+							<%= image_tag facebook_id %>
+							<h4><%= facebook_id %></h4>
+						<% end %>
+
+					<% else %>
+
+						<h3> NO Facebook </h3>
+
+					<% end %>
+
+
+					<h3><%= !user_profile.linkedin.blank? ? (link_to "LinkedIn", "//#{clean_url(user_profile.linkedin)}", target: "blank") : "NO LinkedIn" %></h3>
+
+					<h3><%= !user_profile.website.blank? ? (link_to "Website", "//#{clean_url(user_profile.website)}", target: 'blank') : "NO Website" %></h3>
 
 				</div>
 			</div>

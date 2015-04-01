@@ -31,67 +31,105 @@ class AdminController < ApplicationController
   end
 
   def do_bulk_upload
-    if params[:file]
+    if params[:file] && params[:user_type] && params[:sector]
 
-      f = params[:file]
-
+      @user_type = params[:user_type]
+      @sector = params[:sector]
       uploaded_file = params[:file]
       @list = []
-      uploaded_file.open.each_line do |line|
-        data = line.split(/\t/)
-        usector, ufounded, ucompany_name, uaddr1, uaddr2, ucity, uzip, ucountry, uemail, uwebsite, ulinkedin, ufacebook = data.map { |p| p }
 
-        if User.where(email: uemail).first
-          data << "skipped!"
-          @list << data          
-          next
-        else
+      case @user_type
+      when "distributor"
 
-          user = User.new
-          
-          user.build_user_profile
-          user.email = uemail
-          user.password = "GlobalGoods"
-          user.password_confirmation = "GlobalGoods"
-          # user.user_profile.firstname = params[:user][:user_profile_attributes][:firstname]
-          # user.user_profile.lastname = params[:user][:user_profile_attributes][:lastname]
-          user.save!
-          user.create_distributor
+        uploaded_file.open.each_line do |line|
+          data = line.split(/\t/)
+          ufounded, ucompany_name, uaddr1, uaddr2, ucity, uzip, ucountry, uemail, uwebsite, ulinkedin, ufacebook = data.map { |p| p }
 
-          d = user.distributor
+          if User.where(email: uemail).first
+            data << "skipped!"
+            @list << data          
+            next
+          else
 
-          cinfo = d.contact_info
-          cinfo.email = uemail
-          cinfo.address1 = uaddr1
-          cinfo.address2 = uaddr2
-          cinfo.city = ucity
-          cinfo.postcode = uzip
-          cinfo.country = ucountry
-          cinfo.save
-          # d.sectors << Sector.find('5418b657706f72e34f070000') #baby/kids (LOCAL)
-          d.sectors << Sector.find('542b054030666200020f0000') #baby/kids (HEROKU)
-          d.update(year_established: Date.new(ufounded.to_i), company_name: ucompany_name, country_of_origin: ucountry, website: uwebsite, facebook: ufacebook, linkedin: ulinkedin)
+            user = User.new
+            
+            user.build_user_profile
+            user.email = uemail
+            user.password = "GlobalGoods"
+            user.password_confirmation = "GlobalGoods"
+            user.save!
+            user.create_distributor
 
-          d.export_countries.find_or_initialize_by(country: ucountry)
+            d = user.distributor
 
-          # new_country = d.export_countries.find_or_initialize_by(country: ucountry)
-          # if new_country.valid?
-          #   d.save
-          # else
-          #   new_country.destroy
-          # end
-          
-          user.save!
-          d.save!
+            cinfo = d.contact_info
+            cinfo.email = uemail
+            cinfo.address1 = uaddr1
+            cinfo.address2 = uaddr2
+            cinfo.city = ucity
+            cinfo.postcode = uzip
+            cinfo.country = ucountry
+            cinfo.save
+            d.sectors << Sector.find(@sector)
+            d.update(year_established: Date.new(ufounded.to_i), company_name: ucompany_name, country_of_origin: ucountry, website: uwebsite, facebook: ufacebook, linkedin: ulinkedin)
 
-          data << "created!"
-          @list << data
+            d.export_countries.find_or_initialize_by(country: ucountry)
+            
+            user.save!
+            d.save!
+
+            data << "created!"
+            @list << data
+          end
+
+        end
+
+      when "brand"                           
+
+        uploaded_file.open.each_line do |line|
+          data = line.split(/\t/)
+          ufounded, ucompany_name, uwebsite, uemail, ucity, ustate, ulinkedin, ufacebook = data.map { |p| p }
+
+            # data << "test!"
+            # @list << data    
+
+          if User.where(email: uemail).first
+            data << "skipped!"
+            @list << data          
+            next
+          else
+
+            user = User.new
+            
+            user.build_user_profile
+            user.email = uemail
+            user.password = "GlobalGoods"
+            user.password_confirmation = "GlobalGoods"
+            user.save!
+            user.create_brand
+
+            b = user.brand
+
+            cinfo = b.contact_info
+            cinfo.email = uemail
+            cinfo.city = ucity
+            cinfo.country = "United States"
+            cinfo.save
+            b.sectors << Sector.find(@sector) #baby/kids (HEROKU)
+            b.update(year_established: Date.new(ufounded.to_i), company_name: ucompany_name, country_of_origin: "United States", website: uwebsite, facebook: ufacebook, linkedin: ulinkedin)
+            
+            user.save!
+            b.save!
+
+            data << "created!"
+            @list << data
+          end
+
         end
 
 
-
-      end      
-
+      end
+    
     end
 
     # respond_to do |format|

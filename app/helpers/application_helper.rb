@@ -211,4 +211,28 @@ module ApplicationHelper
 		return size, channels
 	end
 
+	# CLEAN URLS
+
+	def clean_url(url)
+		return url.sub(/^https?\:\/\//, '').sub(/^www./,'')
+	end
+
+	# GET FACEBOOK ID / PROFILE PICTURE
+
+	def fb_picture(profile_url)
+
+		if /facebook.com\/pages\//.match(profile_url) # is a page, not a person, REJECT
+			return false
+		else
+			if facebook_id = profile_url[/facebook.com\/([a-z,A-Z,0-9,-,\.]+)\??\/?.*$/,1]
+			# facebook_id = /facebook.com\/([^\/\?]+)\/?.*\z/.match(profile_url)[1]
+				return "//graph.facebook.com/#{facebook_id.strip}/picture"
+			else
+				return false
+			end
+		end
+
+	end
+
+
 end

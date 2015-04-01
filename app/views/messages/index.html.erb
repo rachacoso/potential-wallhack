@@ -29,7 +29,7 @@
 													<% this_one = m.send(@current_user.type_inverse?) %>
 													<tr id="pot_<%= this_one.id %>">
 														<td>
-														<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {match: this_one} %>
+														<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {profile_item: this_one} %>
 														</td>
 													</tr>
 													<% end %>
@@ -43,7 +43,7 @@
 												<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
 													<% @unread_list.each do |m|  %>
 													<% this_one = m.send(@current_user.type_inverse?) %>
-													<li><%= render partial: "shared/profile/profile_list_tile_small_sq", locals: {match: this_one} %></li>
+													<li><%= render partial: "shared/profile/profile_list_tile_small_sq", locals: {profile_item: this_one} %></li>
 													<% end %>
 												</ul>
 											</div>

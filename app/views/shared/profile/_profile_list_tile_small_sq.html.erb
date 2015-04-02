@@ -1,5 +1,5 @@
 <div class="profile-list-tile-small-sq">
-	<div class="profile-list-tile-small-sq-top">
+	<div class="profile-list-tile-small-sq-top" id="profile_sq_top_<%=profile_item.id%>">
 
 
 
@@ -23,6 +23,26 @@
 				</span>
 			<% end %>			
 		</div>
+
+
+<% if @current_user.type? == "distributor" && !profile_item.brand_photos.empty? %>
+	<% content_for :javascript_foot do %>
+		<%= javascript_tag do %>
+		  $("#profile_sq_top_<%=profile_item.id%>").backstretch([
+			<% profile_item.brand_photos.each do |photo| %>
+
+				
+		    "<%= photo.photo %>",
+
+
+		  <% end %>
+		   ], {duration: 3000, fade: 750});
+		<% end %>
+  <% end %>
+
+<% end %>
+
+
 	</div>
 
 	<div class="profile-list-tile-small-sq-middle">

@@ -1163,9 +1163,9 @@ top: 10px;
 }
 .profile-list-tile-small-sq-top {
   position: relative;
-  height: rem-calc(50);
+  height: rem-calc(150);
   // border-right: 1px solid $landing-middle-gray;
-  // @include transparent(#000, 0.4);
+  @include transparent(#000, 0.4);
   // background-image: url("/images/crate.jpg");
   // -moz-background-size: cover;
   // -o-background-size: cover;
@@ -1185,6 +1185,7 @@ top: 10px;
     a {
       color: white;
     }
+    z-index: 99;
   }
   .profile-list-tile-small-sq-top-countries {
     position: absolute;
@@ -1194,6 +1195,7 @@ top: 10px;
     @include transparent(#000, 0.6);
     color: white;
     font-weight: 600;
+    z-index: 99;
   }
 }
 .profile-list-tile-small-sq-middle {

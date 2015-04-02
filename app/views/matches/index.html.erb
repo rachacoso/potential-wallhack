@@ -7,7 +7,7 @@
 </div>
 
 <div class="row collapse">
-	<div class="small-11 small-centered columns" style="background: white;">
+	<div class="small-11 small-centered columns">
 
 
 <% if @current_user.send(@current_user.type?).sectors.blank? %>
@@ -33,9 +33,10 @@
 	<% case @current_user.type? %>
 	<% when 'brand'%>
 
-		<div class="row">
-			<div class="medium-3 columns"><h1 style="margin-top: 50px;">FIND DISTRIBUTORS IN NEW MARKETS</h1>		</div><!--/.medium-3-->
-			<div class="medium-6 columns">
+		<div class="row" data-equalizer>
+			<div style="background: white;">
+			<div class="medium-3 columns" style="background: white;" data-equalizer-watch><h1>FIND DISTRIBUTORS IN NEW MARKETS</h1>		</div><!--/.medium-3-->
+			<div class="medium-6 columns" style="background: white;" data-equalizer-watch>
 				<div id="match-map-container">
 
 					<div id="match-search">
@@ -44,7 +45,8 @@
 
 				</div><!--/.match-map-container -->
 			</div><!--/.medium-6-->
-			<div class="medium-3 columns"> &nbsp; </div><!--/.medium-3-->
+			<div class="medium-3 columns" style="background: white;" data-equalizer-watch> &nbsp; </div><!--/.medium-3-->
+			</div>
 		</div>
 
 	<% if @country %>	
@@ -83,16 +85,16 @@
 
 	<% when 'distributor' %>
 
-		<div class="row">
-			<div class="medium-3 columns"><h1 style="margin-top: 50px;">FIND NEW BRANDS</h1>		</div><!--/.medium-3-->
-			<div class="medium-8 columns">
+		<div class="row" data-equalizer>
+			<div class="medium-3 columns" style="background: white;" data-equalizer-watch><h1>FIND NEW BRANDS</h1>		</div><!--/.medium-3-->
+			<div class="medium-8 columns" style="background: white;" data-equalizer-watch>
 				<div id="match-sectors-container">
 					<div id="match-search">
 						<%= render partial: "distributor_search_start" %>
 					</div>
 				</div><!--/.match-map-container -->
 			</div><!--/.medium-6-->
-			<div class="medium-1 columns"> &nbsp; </div><!--/.medium-3-->
+			<div class="medium-1 columns" style="background: white;" data-equalizer-watch> &nbsp; </div><!--/.medium-3-->
 		</div>
 
 		<% if @sector %>	

@@ -1,11 +1,24 @@
 
 <%= render partial: "shared/topbar" %>
 
+
+<div class="row collapse">
+	<div class="small-11 small-centered columns marketplace-header">
+		<%= image_tag "logo_header_marketplace.svg" %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="small-11 small-centered columns marketplace-subpage-header">
+	<h2><%= @current_user.type_inverse?.capitalize %> profile</h2>
+	<h3></h3>
+	
+	</div>
+</div>
+
+
 <div class="row collapse">
 	<div class="small-12 columns" id="page-content">
-
-
-
 
 <!-- <div class="row">
 	<div class="small-12 columns">

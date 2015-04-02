@@ -1457,11 +1457,7 @@ $dashboard-agency-color: $landing-teal;
 }
 
 .marketplace-content {
-  background-color: $landing-middle-gray;
-  color: white;
-  h1, h2 {
-    color: white;
-  }  
+  border: 1px dotted $landing-middle-gray;
   &.padded {
     padding: rem-calc(15);
   }
@@ -1513,11 +1509,11 @@ $dashboard-agency-color: $landing-teal;
 .conversations-container {
   padding: 0;
   margin: rem-calc(20);
-  background-color: $landing-middle-gray;
+  // background-color: $landing-middle-gray;
 }
 .conversations-content {
   padding: rem-calc(10);
-  background: white;
+  // background: white;
   color: $landing-dark-gray;
   h2 {
     color: $landing-dark-gray;
@@ -1757,7 +1753,8 @@ a.match-map:hover {
 }
 
 .match-empty {
-  background: rgba(255,255,255,0.8);
+  // background: $landing-middle-gray;
+  border: 1px dotted $landing-middle-gray;
   margin-top: 0px;
   padding: 2em;
   width: 100%;

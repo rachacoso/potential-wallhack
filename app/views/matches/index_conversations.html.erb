@@ -1,10 +1,14 @@
 <% matchtype = @current_user.type? == "distributor" ? "Brands" : "Distributors" %>
 <%= render partial: "shared/topbar" %>
 
-
+<div class="row collapse">
+	<div class="small-11 small-centered columns marketplace-header">
+		<%= image_tag "logo_header_marketplace.svg" %>
+	</div>
+</div>
 
 <div class="row">
-	<div class="match-subpage-header">
+	<div class="small-11 small-centered columns marketplace-subpage-header">
 	<h1>CONTACTED <%= @current_user.type_inverse?.upcase %>S</h1>
 	<h3><%= @current_user.type_inverse?.capitalize %>s you are currently in contact with.</h3>
 	</div>
@@ -12,11 +16,11 @@
 
 
 <div class="row collapse">
-	<div class="small-11 small-centered columns" id="page-content">
+	<div class="small-11 small-centered columns marketplace-content">
 		
 <% if @current_user.subscriber? %>
 
-	<% if @matches_accepted.blank? && @matches_incoming_waiting.blank? && @matches_outgoing_waiting.blank? %>
+	<% if @matches_accepted.values.all? {|x| x.blank? } && @matches_incoming_waiting.values.all? {|x| x.blank? } && @matches_outgoing_waiting.values.all? {|x| x.blank? } %>
 
 		<%= render "no_matches" %>
 
@@ -28,8 +32,9 @@
 
 
 		<br>
+		
 		<div class="conversations-container">
-			<div class="conversations-header" id="conversations-current">
+			<div class="conversations-header">
 				<h2>IN CONVERSATION</h2>
 			</div>
 			<div class="conversations-content">
@@ -53,7 +58,7 @@
 		<% unless @matches_incoming_waiting.values.all? {|x| x.blank? } %>
 		<br>
 		<div class="conversations-container">
-			<div class="conversations-header" id="conversations-current">
+			<div class="conversations-header">
 				<h2>NEW REQUEST - AWAITING YOUR RESPONSE</h2>
 			</div>
 			<div class="conversations-content">
@@ -79,7 +84,7 @@
 
 		<br>
 		<div class="conversations-container">
-			<div class="conversations-header" id="conversations-current">
+			<div class="conversations-header">
 				<h2>NEW REQUEST - AWAITING THEIR RESPONSE</h2>
 			</div>
 			<div class="conversations-content">

@@ -695,10 +695,11 @@ $onboard-nav-radius: 4px;
 // Profile Edit Form
 
 .profile-edit-form {
-  border-radius: 3px; 
-  border: 1px dotted scale-color($link-color, $lightness: 50%);
+  // border-radius: 3px; 
+  // border: 1px dotted scale-color($link-color, $lightness: 50%);
   padding: 0em 1em;
   margin: 0.5em 0em 1.5em 0em;
+  background: white;
   h1 {
     padding-bottom: 0.4em;
     font-weight: 100;
@@ -1162,9 +1163,19 @@ top: 10px;
 }
 .profile-list-tile-small-sq-top {
   position: relative;
-  height: rem-calc(150);
-  @include transparent(#000, 0.4);
-  background: transparent url("/images/crate.jpg") center;
+  height: rem-calc(50);
+  // border-right: 1px solid $landing-middle-gray;
+  // @include transparent(#000, 0.4);
+  // background-image: url("/images/crate.jpg");
+  // -moz-background-size: cover;
+  // -o-background-size: cover;
+  // -webkit-background-size: cover;
+  // background-size: cover;
+  // background-position: center;
+  // -webkit-filter: grayscale(100%);
+  // filter: grayscale(100%);
+
+  
   .profile-list-tile-small-sq-top-inner {
     position: absolute;
     bottom: 0px;
@@ -1437,6 +1448,25 @@ $dashboard-agency-color: $landing-teal;
 }
 
 
+// MARKETPLACE STYLES
+
+.marketplace-header {
+  background-color: $landing-blue;
+  padding-left: rem-calc(50);
+  margin-top: rem-calc(15);
+}
+
+.marketplace-content {
+  background-color: $landing-middle-gray;
+  color: white;
+  h1, h2 {
+    color: white;
+  }  
+  &.padded {
+    padding: rem-calc(15);
+  }
+}
+
 // PROFILE STYLING (UPDATED)
 
 .profile-container {
@@ -1482,10 +1512,16 @@ $dashboard-agency-color: $landing-teal;
 
 .conversations-container {
   padding: 0;
-  background-color: $landing-light-gray;
+  margin: rem-calc(20);
+  background-color: $landing-middle-gray;
 }
 .conversations-content {
   padding: rem-calc(10);
+  background: white;
+  color: $landing-dark-gray;
+  h2 {
+    color: $landing-dark-gray;
+  }
   hr {
      // border: 1px solid $landing-middle-gray;
      border-color: $landing-light-gray;
@@ -1495,24 +1531,12 @@ $dashboard-agency-color: $landing-teal;
 
 .conversations-header {
   padding: rem-calc(9) rem-calc(10) rem-calc(5) rem-calc(10);
-
-  background-color: scale-color($landing-blue, $lightness: 50%);
-  h4 {
+  background-color: $landing-light-gray;
+  border-bottom: 1px solid $landing-dark-gray;
+  h2 {
     color: $landing-dark-gray;
     font-weight: 100;
   }
-  &#conversations-current {
-    border-top: 1px solid $landing-middle-gray;
-    border-bottom: 1px solid $landing-middle-gray;
-  }
-  &#conversations-incoming {
-    border-top: 1px solid $landing-middle-gray;
-    background-color: white;
-  }  
-  &#conversations-outgoing {
-    border-top: 1px solid $landing-middle-gray;
-    background-color: white;
-  }  
 }
 
 
@@ -1563,12 +1587,13 @@ $dashboard-agency-color: $landing-teal;
 //   pointer-events: none;
 // }
 
-.match-subpage-header  {
+.marketplace-subpage-header  {
   background: white;
-  margin: rem-calc(30) 0;
+  margin: 0;
   padding: rem-calc(9) rem-calc(10) rem-calc(5) rem-calc(10);
+  border-bottom: 1px solid $landing-middle-gray;
   h1 {
-    color: $landing-blue;
+    // color: $landing-blue;
     font-weight: 100; 
   }
 }
@@ -1753,7 +1778,7 @@ a.match-map:hover {
 // MESSAGE CENTER STYES
 .messages-panel {
   padding: rem-calc(15);
-  background: $landing-light-gray;
+  background: $landing-middle-gray;
   border: 1px solid $landing-light-gray;
 }
 

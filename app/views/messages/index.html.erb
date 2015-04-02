@@ -1,19 +1,25 @@
 <%= render partial: "shared/topbar" %>
 
+<div class="row collapse">
+	<div class="small-11 small-centered columns marketplace-header">
+		<%= image_tag "logo_header_marketplace.svg" %>
+	</div>
+</div>
 <div class="row">
-	<div class="match-subpage-header">
+	<div class="small-11 small-centered columns marketplace-subpage-header">
 	<h1>MESSAGES</h1>
-	<h3>Your incoming messages.</h3>
+	<h3>Your incoming messages / requests</h3>
 	</div>
 </div>
 
 <div class="row collapse">
-	<div class="small-11 small-centered columns" id="page-content">
+	<div class="small-11 small-centered columns marketplace-content">
 
 		<% if @current_user.subscriber? %>
 
+		<br>
 		<div class="conversations-container">
-			<div class="conversations-header" id="conversations-current">
+			<div class="conversations-header">
 				<h2>MESSAGES</h2>
 			</div>
 			<div class="conversations-content">
@@ -59,10 +65,8 @@
 
 
 		<br>
-
-
 		<div class="conversations-container">
-			<div class="conversations-header" id="conversations-current">
+			<div class="conversations-header">
 				<h2>CONTACT REQUESTS</h2>
 			</div>
 			<div class="conversations-content">

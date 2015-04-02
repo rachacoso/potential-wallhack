@@ -1,6 +1,12 @@
 <%= render partial: "shared/topbar" %>
 
 <div class="row collapse">
+	<div class="small-11 small-centered columns marketplace-header">
+		<%= image_tag "logo_header_marketplace.svg" %>
+	</div>
+</div>
+
+<div class="row collapse">
 	<div class="small-11 small-centered columns" style="background: white;">
 
 
@@ -43,7 +49,7 @@
 
 	<% if @country %>	
 
-	<div class="messages-panel">
+	<div class="marketplace-content padded">
 		<h1><%= @country_proper.upcase %></h1>
 		<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
 		<%= paginate @matches %>
@@ -59,7 +65,7 @@
 
 	<% else %>
 
-	<div class="messages-panel">
+	<div class="marketplace-content padded">
 		<h1>ALL COUNTRIES</h1>
 		<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
 		<%= paginate @matches %>
@@ -90,7 +96,7 @@
 		</div>
 
 		<% if @sector %>	
-			<div class="messages-panel">
+			<div class="marketplace-content padded">
 				<h1><%= Sector.find(@sector).name %></h1>
 				<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
 				<%= paginate @matches %>
@@ -108,7 +114,7 @@
 			</div>
 		<% else %>
 
-			<div class="messages-panel">
+			<div class="marketplace-content padded">
 				<h1>ALL SECTORS</h1>
 				<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
 				<%= paginate @matches %>

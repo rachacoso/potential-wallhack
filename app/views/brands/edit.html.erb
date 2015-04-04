@@ -74,7 +74,7 @@
 							<div class="medium-12 columns">
 								<%= f.label :logo do %>
 								Company logo <br>
-								<%= image_tag @brand.logo.url(:medium), width: "200", height: "200", alt: "Logo", id: "logo-preview" %>
+								<%= image_tag @brand.logo.url(:medium), alt: "Logo", id: "logo-preview" %>
 								<% end %>
 								<br>
 								<%= f.file_field :logo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>
@@ -527,7 +527,7 @@
 							<%= form_for BrandPhoto.new do |f| %>
 					      <div class="row">
 					        <div class="small-6 columns">
-					          <%= f.file_field :photo, label: 'Select Product Photo', accept: 'image/png,image/gif,image/jpeg' %>
+					          <%= f.file_field :photo, label: 'Select Brand Photo', accept: 'image/png,image/gif,image/jpeg' %>
 					        </div>
 					        <div class="small-6 columns">
 					          <%= f.submit 'Upload', :class=> 'button tiny' %>

@@ -29,7 +29,8 @@ class Distributor
 	  # :url => ":s3_domain_url",
 	  :default_url => "https://s3.amazonaws.com/landingintl-us/defaults/Default_Logo.png",
 	  :styles => {
-	    :medium    => ['200x200']
+	    :medium    => ['200x90'],
+	    :profile_tile => ['x90>']
 	    # :public    => ['200x200']
 	  },
 	  # :convert_options => {:public => "-blur 0x20"},

@@ -25,17 +25,18 @@
 		</div>
 
 
-<% if @current_user.type? == "distributor" && !profile_item.brand_photos.empty? %>
+<% if @current_user.type? == "distributor" && ( !profile_item.brand_photos.empty? || !profile_item.products.all? { |p| p.product_photos.blank? } ) %>
 	<% content_for :javascript_foot do %>
 		<%= javascript_tag do %>
 		  $("#profile_sq_top_<%=profile_item.id%>").backstretch([
 			<% profile_item.brand_photos.each do |photo| %>
-
-				
-		    "<%= photo.photo %>",
-
-
+		    "<%= photo.photo.url(:profile_tile) %>",
 		  <% end %>
+		  <% profile_item.products.each do |product| %>
+			  <% product.product_photos.each do |photo| %>
+					"<%= photo.photo.url(:profile_tile) %>",
+			  <% end %>
+		  <% end %>		  
 		   ], {duration: 3000, fade: 750});
 		<% end %>
   <% end %>
@@ -53,12 +54,12 @@
 		<div class="profile-logo-area">
 			<% if profile_item.logo_file_name %>
 				<%= link_to view_match_url(profile_item.id, action_name) do %>
-					<%= image_tag profile_item.logo.url(:medium), alt: "Logo" %>
+					<%= image_tag profile_item.logo.url(:medium), alt: "Logo", class: "uploaded-logo" %>
 				<% end %>
 			<% else %>
 				<% if !profile_item.facebook.blank? && fb_picture(profile_item.facebook) %>
 					<%= link_to view_match_url(profile_item.id, action_name) do %>
-						<%= image_tag fb_picture(profile_item.facebook) %>
+						<%= image_tag fb_picture(profile_item.facebook), class: "facebook" %>
 					<% end %>
 				<% end %>
 			<% end %>

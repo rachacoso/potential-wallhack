@@ -9,9 +9,10 @@ class ProductPhoto
 	  :styles => {
 	    :small    => ['100x100'],
 	    :medium		=> ['400'],
-	    :large    => ['800>']
-	  }
-	  #, :convert_options => { :all => '-background white -flatten' }
+	    :large    => ['800>'],
+	    :profile_tile    => ['225x180', :jpg]
+	  },
+		:convert_options => { :profile_tile => "-background white -gravity center -extent 225x180" }
 
 	validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 	

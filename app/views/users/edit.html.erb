@@ -77,7 +77,7 @@
 
 								<%= ff.label :logo do %>
 								Company logo <br>
-								<%= image_tag user_profile.logo.url(:medium), width: "200", height: "200", alt: "Logo", id: "logo-preview"%>
+								<%= image_tag user_profile.logo.url(:medium), alt: "Logo", id: "logo-preview"%>
 								<% end %>
 								<br>
 								<%= ff.file_field :logo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>

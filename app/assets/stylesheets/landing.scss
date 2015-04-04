@@ -1161,21 +1161,20 @@ top: 10px;
    // min-height: rem-calc(300);
    margin: 0.5em;   
 }
+
 .profile-list-tile-small-sq-top {
   position: relative;
-  height: rem-calc(150);
+  width: rem-calc(225);
+  height: rem-calc(180);
   // border-right: 1px solid $landing-middle-gray;
   @include transparent(#000, 0.4);
-  // background-image: url("/images/crate.jpg");
-  // -moz-background-size: cover;
-  // -o-background-size: cover;
-  // -webkit-background-size: cover;
-  // background-size: cover;
-  // background-position: center;
-  // -webkit-filter: grayscale(100%);
-  // filter: grayscale(100%);
+  background-image: url("/images/crate.jpg");
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center;
 
-  
   .profile-list-tile-small-sq-top-inner {
     position: absolute;
     bottom: 0px;
@@ -1185,7 +1184,7 @@ top: 10px;
     a {
       color: white;
     }
-    z-index: 99;
+    z-index: 4;
   }
   .profile-list-tile-small-sq-top-countries {
     position: absolute;
@@ -1195,28 +1194,27 @@ top: 10px;
     @include transparent(#000, 0.6);
     color: white;
     font-weight: 600;
-    z-index: 99;
+    z-index: 4;
   }
 }
 .profile-list-tile-small-sq-middle {
    height: rem-calc(150);
+   width: rem-calc(225);   
    background: white;
    padding: rem-calc(5);
 }
-.profile-list-tile-small-sq-top {
-   padding: 1em;
-}
-.profile-logo-area {
-  margin-top: rem-calc(15);
-  height: rem-calc(80);
-  img {
-    height: auto !important;
-    width: 100px;
 
-  }
+.profile-logo-area {
+  // margin-top: rem-calc(15);
+  height: rem-calc(80);
+  // img.uploaded-logo  {
+  //   height: auto !important;
+  //   width: 75px;
+  // }
 }
 .profile-list-tile-small-sq-bottom {
   height: rem-calc(80);
+  width: rem-calc(225);
   background: white;
   padding: rem-calc(15) rem-calc(5);
 }

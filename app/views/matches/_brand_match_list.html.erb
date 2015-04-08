@@ -1,4 +1,5 @@
 <% ort ||= "grid" %>
+<% set ||= nil %>
 <% if @current_user.subscriber? %>
 
 	<% if matches.blank? %>
@@ -12,7 +13,7 @@
 			<div class="row" style="padding: 0px;">
 				<div class="small-12 columns">
 					<% matches.each do |match| %>
-						<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {profile_item: match} %>
+						<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {profile_item: match, set: set} %>
 					<% end %>
 				</div>
 			</div>
@@ -21,7 +22,7 @@
 				<div class="small-12 columns">
 					<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
 						<% matches.each do |match| %>
-						<li><%= render partial: "shared/profile/profile_list_tile_small_sq", locals: {profile_item: match} %></li>
+						<li><%= render partial: "shared/profile/profile_list_tile_small_sq", locals: {profile_item: match, set: set} %></li>
 						<% end %>
 					</ul>
 				</div>
@@ -51,7 +52,7 @@
 							<tr id="pot_<%= match.id %>">
 								<td>
 									
-								<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {profile_item: match} %>
+								<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {profile_item: match, set: set} %>
 
 								</td>
 

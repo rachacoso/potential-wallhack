@@ -1182,6 +1182,7 @@ top: 10px;
   // @include transparent(#000, 0.6);
   border-top: 1px solid white;
   border-left: 1px solid white;
+  background: white;
   padding: 0px rem-calc(10);
   a {color: $landing-dark-gray; display: block;}
   h3 {margin: 0;}
@@ -1190,7 +1191,7 @@ top: 10px;
 .profile-list-tile-small-sq-top-countries-sectors {
   width: rem-calc(225);  
   padding: rem-calc(5);
-  color: white;
+  color: $landing-dark-gray;
   font-weight: 100;
   border-top: 1px solid white;
   border-right: 1px solid white;

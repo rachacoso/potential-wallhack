@@ -1,28 +1,44 @@
 
 <div class="profile-list-tile-small-sq">
 	
-	<div class="profile-list-tile-small-sq-top" id="profile_sq_top_<%=profile_item.id%>">
-		<div class="profile-list-tile-small-sq-top-countries">
-			<% if @current_user.brand %>
-				<% profile_item.export_countries.each do |ec| %>
-					<%= ec.country %><br>
-				<% end %>
-			<% elsif @current_user.distributor %>
-				<% profile_item.sectors.sort_by{|s| s.name}.each do |s| %>
-					<%= s.name %><br>
+	<div class="profile-list-tile-small-sq-top-companyname">
+		<% if @current_user.subscriber? && action_name != "public_profile" %>		
+			<h3><%= link_to profile_item.company_name,  view_match_url(profile_item.id, action_name)  %></h3>
+		<% else %>
+			<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= profile_item.class.to_s %> name hidden. Subscribe to view full profile">
+			<%= ("&blk12;" * profile_item.company_name.length).html_safe %>
+			</span>
+		<% end %>
+	</div>
+
+	<div class="profile-list-tile-small-sq-top-countries-sectors text-right">
+		<% if @current_user.brand %>
+			<% profile_item.export_countries.each do |ec| %>
+				<%= ec.country %><br>
+			<% end %>
+		<% elsif @current_user.distributor %>
+			<% profile_item.sectors.sort_by{|s| s.name}.each do |s| %>
+				<% case s.name
+					when 'Baby / Kids' %>
+					<span data-tooltip aria-haspopup="true" class="has-tip radius" title="BABY / KIDS">
+					<%= image_tag "match_profile_icons_sector_baby.svg" %></span>
+					<% when 'Fashion / Accessories' %>
+					<span data-tooltip aria-haspopup="true" class="has-tip radius" title="FASHION / ACCESSORIES">
+					<%= image_tag "match_profile_icons_sector_fashionaccessories.svg" %></span>
+					<% when 'Personal Care' %>
+					<span data-tooltip aria-haspopup="true" class="has-tip radius" title="PERSONAL CARE">
+					<%= image_tag "match_profile_icons_sector_personalcare.svg" %></span>
+					<% when 'Other' %>
+					<span data-tooltip aria-haspopup="true" class="has-tip radius" title="OTHER">
+					<%= image_tag "match_profile_icons_sector_other.svg" %></span>			
 				<% end %>
 			<% end %>
-		</div>		
-		<div class="profile-list-tile-small-sq-top-inner">
-			<% if @current_user.subscriber? && action_name != "public_profile" %>
-				<h3><%= link_to profile_item.company_name, view_match_url(profile_item.id, action_name) %></h3>
-			<% else %>
-				<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= profile_item.class.to_s %> name hidden. Subscribe to view full profile">
-				<%= ("&blk12;" * profile_item.company_name.length).html_safe %>
-				</span>
-			<% end %>			
-		</div>
+		<% end %>
+	</div>	
 
+
+
+	<div class="profile-list-tile-small-sq-top" id="profile_sq_top_<%=profile_item.id%>">
 
 		<% if @current_user.type? == "distributor" && ( !profile_item.brand_photos.empty? || !profile_item.products.all? { |p| p.product_photos.blank? } ) %>
 			<% content_for :javascript_foot do %>
@@ -46,7 +62,12 @@
 	</div>
 	
 
-	<div class="profile-list-tile-small-sq-middle">
+
+
+
+
+	<div class="profile-list-tile-small-sq-middle">	
+
 		<% if @current_user.brand %>
 			<%= render partial: "shared/profile/distributor_rating", locals: {d: profile_item} %>
 		<% end %>
@@ -78,6 +99,7 @@
 	<div class="profile-list-tile-small-sq-bottom text-right">
 		<%= render partial:"shared/profile/components/indicators", locals:{match: profile_item} %>
 	</div>
+
 
 </div>
 

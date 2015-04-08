@@ -1156,6 +1156,7 @@ top: 10px;
 }
 
 .profile-list-tile-small-sq {
+  width: rem-calc(225);  
    // border: 1px solid $landing-middle-gray;
    // width: rem-calc(225);
    // min-height: rem-calc(300);
@@ -1174,29 +1175,28 @@ top: 10px;
   -webkit-background-size: cover;
   background-size: cover;
   background-position: center;
-
-  .profile-list-tile-small-sq-top-inner {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    @include transparent(#000, 0.6);
-    padding: 0px rem-calc(10);
-    a {
-      color: white;
-    }
-    z-index: 4;
-  }
-  .profile-list-tile-small-sq-top-countries {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    padding: 0px rem-calc(10);
-    @include transparent(#000, 0.6);
-    color: white;
-    font-weight: 600;
-    z-index: 4;
-  }
 }
+
+.profile-list-tile-small-sq-top-companyname {
+  width: rem-calc(225);  
+  // @include transparent(#000, 0.6);
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  padding: 0px rem-calc(10);
+  a {color: $landing-dark-gray; display: block;}
+  h3 {margin: 0;}
+}
+
+.profile-list-tile-small-sq-top-countries-sectors {
+  width: rem-calc(225);  
+  padding: rem-calc(5);
+  color: white;
+  font-weight: 100;
+  border-top: 1px solid white;
+  border-right: 1px solid white;
+}
+
+
 .profile-list-tile-small-sq-middle {
    height: rem-calc(150);
    width: rem-calc(225);   
@@ -1220,10 +1220,10 @@ top: 10px;
 }
 
 .profile-indicators {
-
   padding: rem-calc(5);
- 
 }
+
+
 
 .message-index-indicator {
   @include label(

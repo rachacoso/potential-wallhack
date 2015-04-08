@@ -4,6 +4,8 @@ var bgDefaultColor = "#E5E5E5";
 
 $( document ).ready(function() {
 
+
+
 // MODIFICATIONS FOR NO SVG SUPPORT
   if(!Modernizr.svg) {
     /* swap png for svgs */
@@ -284,14 +286,28 @@ $(document).foundation({
 });
 
 function addCheckbox(name) {
-    var container = $('#customchannellist');
-    var inputs = container.find('input');
-    var id = inputs.length+1;
+  var container = $('#customchannellist');
+  var inputs = container.find('input');
+  var id = inputs.length+1;
 
-    $('<span />', { id: 'ccspan'+id }).appendTo(container)
-    $('<input />', { type: 'checkbox', id: 'cb'+id, value: name, name: 'customchannels['+id+']', checked: 'checked', class: 'customchannelinput' }).appendTo( '#' + 'ccspan' + id );
-    $('<label />', { 'for': 'cb'+id, text: name }).appendTo( '#' + 'ccspan' + id );
-  }
+  $('<span />', { id: 'ccspan'+id }).appendTo(container)
+  $('<input />', { type: 'checkbox', id: 'cb'+id, value: name, name: 'customchannels['+id+']', checked: 'checked', class: 'customchannelinput' }).appendTo( '#' + 'ccspan' + id );
+  $('<label />', { 'for': 'cb'+id, text: name }).appendTo( '#' + 'ccspan' + id );
+}
+
+// INITIALIZE GALLERIA SLIDESHOW
+function initializeGallery (className,galleryHeight) {
+  galleryHeight = (typeof galleryHeight === 'undefined') ? 400 : galleryHeight;
+  Galleria.run(className, {
+      showInfo: false,
+      height: galleryHeight
+  })  
+  // '.galleria-brand-photos'
+  // Galleria.run('.galleria-product-photos', {
+  //     showInfo: false,
+  //     height: 400
+  // })    
+}
 
 function initialize () {
   // Date Picker

@@ -16,7 +16,7 @@
 
 				<%#= image_tag profile.logo.url, width: "100", height: "100", alt: "Logo" %>
 				<% if profile.logo_file_name %>
-					<%= image_tag profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
+					<%= image_tag profile.logo.url(:medium), alt: "Logo" %>
 				<% else %>
 					<% if !profile.facebook.blank? && fb_picture(profile.facebook) %>
 						<%= image_tag fb_picture(profile.facebook) %>
@@ -202,25 +202,35 @@
 
 
 				<% unless profile.brand_photos.blank? %>
+
+
 				<div class="profile-container">
 					<div class="profile-header">
 						<h4>BRAND GALLERY</h4>
 					</div><!--.profile-header-->
 					<div class="profile-content">
 				
-					<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
-					<% profile.brand_photos.each do |photo| %>
-					<li>
-						<a data-dropdown="d_<%= photo.id %>" href="#"><%= image_tag photo.photo.url(:small) %></a>
-						<div id="d_<%= photo.id %>" data-dropdown-content class="f-dropdown content medium" aria-hidden="true" tabindex="-1">
-						  <%= image_tag photo.photo.url(:large), width: "400"%>
+						<div class="galleria-brand-photos">
+							<% profile.brand_photos.each do |photo| %>
+								<%= link_to photo.photo.url(:large) do %>
+									<%= image_tag photo.photo.url(:small) %>
+								<% end %>
+					    <% end %>
+							<% content_for :javascript_foot do %>
+								<% javascript_tag do %>
+								initializeGallery(".galleria-brand-photos")
+								<% end %>
+							<% end %>					    
 						</div>
-					</li>
-					<% end %>
-					</ul>
+
+
+
 					</div><!--.profile-content-->
 				</div><!--.profile-container-->
 				<br>
+
+
+
 				<% end %>
 
 				<% if profile.press_hits.length > 0 %>

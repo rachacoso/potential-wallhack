@@ -1205,12 +1205,12 @@ top: 10px;
 }
 
 .profile-logo-area {
-  // margin-top: rem-calc(15);
   height: rem-calc(80);
-  // img.uploaded-logo  {
-  //   height: auto !important;
-  //   width: 75px;
-  // }
+  // margin-top: rem-calc(15);
+  img.uploaded-logo  {
+    width: auto !important;
+    max-height: 80px;
+  }
 }
 .profile-list-tile-small-sq-bottom {
   height: rem-calc(80);
@@ -1789,6 +1789,9 @@ a.match-map:hover {
   opacity: 0;
 }
 
+.galleria-brand-photos{height:400px}
+
+.galleria-product-photos{height:300px}
 
 // PAGINATION STYLES
 @import "foundation/components/buttons";

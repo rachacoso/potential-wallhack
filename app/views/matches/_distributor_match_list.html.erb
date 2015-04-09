@@ -18,9 +18,10 @@
 				</div>
 			</div>
 		<% when "grid" %>
+
 			<div class="row" style="padding: 0px;">
 				<div class="small-12 columns">
-					<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
+					<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-3">
 						<% matches.each do |match| %>
 						<li><%= render partial: "shared/profile/profile_list_tile_small_sq", locals: {profile_item: match, set: set} %></li>
 						<% end %>
@@ -40,7 +41,7 @@
 		<% if matches.blank? %>
 			<div class="row">
 				<div class="small-10 small-centered columns previewtile text-center">
-						<h2>No Distributors</h2> <br>Please try altering your filter selections.
+					<h2>No Distributors</h2> <br>Please try altering your filter selections.
 				</div>
 			</div>
 		<% else %>

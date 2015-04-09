@@ -63,6 +63,7 @@
 				</div>
 			</div>
 		</div>
+		<%= paginate @matches %>
 	</div>
 
 	<% else %>
@@ -79,6 +80,7 @@
 				</div>
 			</div>
 		</div>
+		<%= paginate @matches %>
 	</div>
 
 	<% end %>
@@ -102,9 +104,7 @@
 				<h1><%= Sector.find(@sector).name %></h1>
 				<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
 				<%= paginate @matches %>
-				<% unless @current_user.send(@current_user.type?).sectors.length < 2  %>
-				<small><%= link_to 'BROWSE ANOTHER SECTOR', all_matches_url %></small>
-				<% end %>
+
 				<hr>
 				<div id="match-list">
 					<div class="row">
@@ -113,6 +113,7 @@
 						</div>
 					</div>
 				</div>
+				<%= paginate @matches %>
 			</div>
 		<% else %>
 
@@ -124,10 +125,11 @@
 				<div id="match-list">
 					<div class="row">
 						<div class="small-12 columns" >
-							<%= render partial: 'brand_match_list', locals: {matches: @matches} %>
+							<%= render partial: 'distributor_match_list', locals: {matches: @matches} %>
 						</div>
 					</div>
 				</div>
+				<%= paginate @matches %>
 			</div>
 
 		<% end %>

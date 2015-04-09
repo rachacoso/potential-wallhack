@@ -58,28 +58,35 @@
 
 						<div class="row collapse">
 							<div class="small-6 columns">
+								<% unless profile.country_of_origin.blank? %>
 								<div class="preview-data">
 									<span class="preview-data-tile-title">Headquarters</span><br>
 									<strong><%= profile.country_of_origin %></strong>
-								</div>							
+								</div>
+								<% end %>
 							</div><!--/.small-6-->
 							<div class="small-6 columns">
+								<% unless profile.company_size.blank? %>
 								<div class="preview-data">
 									<span class="preview-data-tile-title">Company Size</span><br>
 									<strong><%= CompanySize.find(profile.company_size).name rescue nil %></strong>
 								</div>
+								<% end %>
 							</div><!--/.small-6-->
 						</div><!--/.row-->
 
 
 						<div class="row collapse">
 							<div class="small-6 columns">
+								<% unless profile.year_established.blank? %>
 								<div class="preview-data">
 									<span class="preview-data-tile-title">Year Established</span><br>
 									<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
-								</div>						
+								</div>
+								<% end %>
 							</div><!--/.small-6-->
 							<div class="small-6 columns">
+								<% unless profile.export_countries.blank? %>
 								<div class="preview-data">
 									<span class="preview-data-tile-title">Countries of Distribution</span><br>
 									<strong>
@@ -88,22 +95,26 @@
 										<% end %>
 									</strong>
 								</div>
+								<% end %>
 							</div><!--/.small-6-->
 						</div><!--/.row-->
 
 
 						<div class="row collapse">
 							<div class="small-12 columns">
+								<% unless profile.sectors.blank? %>
 								<div class="preview-data">
 									<span class="preview-data-tile-title">Sectors</span><br>
 									<% profile.sectors.each do |s| %>
 										<strong><%= s.name %></strong><br>
 									<% end %>
-								</div>					
+								</div>
+								<% end %>
 							</div><!--/.small-12-->
 						</div>
 						<div class="row collapse">
 							<div class="small-12 columns">
+								<% unless profile.channels.blank? %>
 								<div class="preview-data">
 									<span class="preview-data-tile-title">Channels</span><br>
 									<% profile.channels.each do |ch| %>
@@ -116,6 +127,7 @@
 										<small>(* Custom Channels)</small>
 									<% end %>
 								</div>
+								<% end %>
 							</div><!--/.small-12-->
 						</div><!--/.row-->
 
@@ -123,14 +135,17 @@
 							<div class="small-12 columns">
 								<div class="preview-data">
 									<span class="preview-data-tile-title">General Contact Information</span><br>
-									  <strong><%= profile.contact_info.contact_name %>,<br> <%= profile.contact_info.contact_title %><br></strong>
-									  <%= profile.contact_info.address1 %><br>
-									  <%= profile.contact_info.address2 %><br>
-									  <% unless profile.contact_info.city.blank? && profile.contact_info.state.blank? && profile.contact_info.postcode.blank? %>
-									  <%= profile.contact_info.city %> <%= profile.contact_info.state %> <%= profile.contact_info.postcode %><br>
-									  <% end %>
-									  <%= profile.contact_info.country %><br>
-									  <%= profile.contact_info.phone %><br>
+									  <strong>
+										<%= profile.contact_info.contact_name.blank? ? "" : "#{profile.contact_info.contact_name}".html_safe %>
+										<%= profile.contact_info.contact_title.blank? ? "" : ",<br>#{profile.contact_info.contact_title}".html_safe %>
+									  </strong><br>
+									  <%= profile.contact_info.address1.blank? ? "" : "#{profile.contact_info.address1}<br>".html_safe %>
+									  <%= profile.contact_info.address2.blank? ? "" : "#{profile.contact_info.address2}<br>".html_safe %>
+									  <%= profile.contact_info.city.blank? ? "" : "#{profile.contact_info.city}" %>
+									  <%= profile.contact_info.state.blank? ? "" : "#{profile.contact_info.state}" %>
+									  <%= profile.contact_info.postcode.blank? ? "" : "#{profile.contact_info.postcode}<br>".html_safe %>
+									  <%= profile.contact_info.country.blank? ? "" : "#{profile.contact_info.country}<br>".html_safe %>
+									  <%= profile.contact_info.phone.blank? ? "" : "#{profile.contact_info.phone}<br>".html_safe %>
 									  <a href="mailto:<%= profile.contact_info.email %>"><%= profile.contact_info.email %></a>
 								</div>		
 							</div><!--/.small-12-->
@@ -206,14 +221,21 @@
 
 						<div class="row">
 							<div class="small-6 columns">
+								<% unless profile.inside_sales_size.blank? && profile.outside_sales_size.blank? %>
 								<div class="preview-data">
 									<span class="preview-data-tile-title">Sales &amp; Education</span><br>
+									<% unless profile.inside_sales_size.blank? %>
 									<h6>Inside Sales Force: <strong><%= profile.inside_sales_size %></strong></h6>
+									<% end %>
+									<% unless profile.outside_sales_size.blank? %>
 									<h6>Outside Sales Force: <strong><%= profile.outside_sales_size %></strong></h6>								
+									<% end %>
 								</div>
+								<% end %>
 							</div><!--/.small-6-->
 
 							<div class="small-6 columns">
+								<% unless profile.channels.blank? %>
 								<div class="preview-data">
 									<span class="preview-data-tile-title">Channel Capacities</span>
 										
@@ -227,6 +249,7 @@
 											<% end %>
 										<% end %>								
 									</div>
+									<% end %>
 							</div><!--/.small-6-->
 						</div><!--/.row-->
 
@@ -234,9 +257,15 @@
 							<div class="small-12 columns">
 								<div class="preview-data">
 								<span class="preview-data-tile-title">Marketing &amp; PR</span><br>
+								<% unless profile.internal_marketing_size.blank? %>
 								<h6>Internal Marketing/ PR Team Size: <strong><%= profile.internal_marketing_size %></strong></h6>
+								<% end %>
+								
 								<h6><strong><%= profile.employ_pr_agency ? "Has" : "No" %></strong> External Marketing/PR</h6>
-								<h6>Customer Database Size: <strong><%= profile.customer_database_size %></strong></h6>								
+								
+								<% unless profile.customer_database_size.blank? %>
+								<h6>Customer Database Size: <strong><%= profile.customer_database_size %></strong></h6>
+								<% end %>
 								<h6>Product Marketing:</h6>
 								</div>
 							</div><!--/.small-12-->

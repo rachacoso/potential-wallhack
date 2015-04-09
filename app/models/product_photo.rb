@@ -10,9 +10,9 @@ class ProductPhoto
 	    :small    => ['100x100'],
 	    :medium		=> ['400'],
 	    :large    => ['800>'],
-	    :profile_tile    => ['225x180', :jpg]
+	    :profile_tile    => ['275x180', :jpg]
 	  },
-		:convert_options => { :profile_tile => "-background white -gravity center -extent 225x180" }
+		:convert_options => { :profile_tile => "-background white -gravity center -extent 275x180" }
 
 	validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 	

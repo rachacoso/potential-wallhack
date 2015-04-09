@@ -16,7 +16,7 @@
 				<div class="medium-8 columns" data-equalizer-watch>
 
 
-					<div class="galleria-product-photos">
+					<div class="galleria-product-photos" id="galleria-product-photos-<%=collitem.id%>">
 					<% if !collitem.product_photos.blank? %>
 
 						<% collitem.product_photos.each do |photo| %>
@@ -26,12 +26,12 @@
 				    <% end %>
 						<% content_for :javascript_foot do %>
 							<% javascript_tag do %>
-							initializeGallery(".galleria-product-photos",300)
+							initializeGallery("#galleria-product-photos-<%=collitem.id%>",300)
 							<% end %>
 						<% end %>		
 						
 					<% else %>
-						<li><%= image_tag Display.all.first.default_product_photo.url(:large) %></li>
+						<%= image_tag Display.all.first.default_product_photo.url(:large) %></li>
 					<% end %>
 					</div>
 

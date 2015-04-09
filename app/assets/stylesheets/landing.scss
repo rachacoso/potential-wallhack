@@ -1156,7 +1156,7 @@ top: 10px;
 }
 
 .profile-list-tile-small-sq {
-  width: rem-calc(225);  
+  width: rem-calc(275);  
    // border: 1px solid $landing-middle-gray;
    // width: rem-calc(225);
    // min-height: rem-calc(300);
@@ -1165,7 +1165,7 @@ top: 10px;
 
 .profile-list-tile-small-sq-top {
   position: relative;
-  width: rem-calc(225);
+  // width: rem-calc(300);
   height: rem-calc(180);
   // border-right: 1px solid $landing-middle-gray;
   @include transparent(#000, 0.4);
@@ -1175,32 +1175,39 @@ top: 10px;
   -webkit-background-size: cover;
   background-size: cover;
   background-position: center;
+
+  .profile-list-tile-small-sq-top-countries-sectors {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    @include transparent(#000, 0.4);
+    padding: rem-calc(5);
+    color: $landing-light-gray;
+    font-weight: 100;
+    // border-bottom: 1px solid $landing-light-gray;
+    // border-right: 1px solid white;
+  }
+
 }
 
 .profile-list-tile-small-sq-top-companyname {
-  width: rem-calc(225);  
+  // width: rem-calc(225);  
   // @include transparent(#000, 0.6);
-  border-top: 1px solid white;
-  border-left: 1px solid white;
-  background: white;
-  padding: 0px rem-calc(10);
-  a {color: $landing-dark-gray; display: block;}
-  h3 {margin: 0;}
+  // border-top: 1px solid white;
+  // border-left: 1px solid white;
+  // background: white;
+  @include transparent(#000, 0.6);
+  padding: rem-calc(10);
+  a {color: white; display: block;}
+  h3 {margin: 0;color: white;}
 }
 
-.profile-list-tile-small-sq-top-countries-sectors {
-  width: rem-calc(225);  
-  padding: rem-calc(5);
-  color: $landing-dark-gray;
-  font-weight: 100;
-  border-top: 1px solid white;
-  border-right: 1px solid white;
-}
+
 
 
 .profile-list-tile-small-sq-middle {
    height: rem-calc(150);
-   width: rem-calc(225);   
+   // width: rem-calc(225);   
    background: white;
    padding: rem-calc(5);
 }
@@ -1215,13 +1222,13 @@ top: 10px;
 }
 .profile-list-tile-small-sq-bottom {
   height: rem-calc(80);
-  width: rem-calc(225);
+  // width: rem-calc(225);
   background: white;
   padding: rem-calc(15) rem-calc(5);
 }
 
 .profile-indicators {
-  padding: rem-calc(5);
+  // padding: rem-calc(5);
 }
 
 
@@ -1810,11 +1817,11 @@ a.match-map:hover {
 
     @include button(
       // $padding - Used to build padding for buttons Default: $button-med or rem-calc(12)
-      $padding: rem-calc(2),
+      $padding: rem-calc(6),
       // Background color. We can set $bg:false for a transparent background. Default: $primary-color.
       $bg: $landing-middle-gray,
       // If true, set to button radius which is $global-radius or explicitly set radius amount in px (ex. $radius:10px). Default:false.
-      $radius: $global-radius,
+      $radius: 0,
       // We can set $full-width:true to remove side padding extend width. Default:false
       $full-width: false,
       // We can set $disabled:true to create a disabled transparent button. Default:false
@@ -1827,11 +1834,11 @@ a.match-map:hover {
     &.current{
       @include button(
         // $padding - Used to build padding for buttons Default: $button-med or rem-calc(12)
-        $padding: rem-calc(2),
+        $padding: rem-calc(6),
         // Background color. We can set $bg:false for a transparent background. Default: $primary-color.
         $bg: $landing-dark-gray,
         // If true, set to button radius which is $global-radius or explicitly set radius amount in px (ex. $radius:10px). Default:false.
-        $radius: $global-radius,
+        $radius: 0,
         // We can set $full-width:true to remove side padding extend width. Default:false
         $full-width: false,
         // We can set $disabled:true to create a disabled transparent button. Default:false

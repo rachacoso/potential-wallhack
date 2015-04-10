@@ -26,10 +26,22 @@
 				<% end %>
 
 
-						<% unless profile.website.blank? %>
-						<h3><strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>	
-						<% end %>
 						<%= simple_format(profile.brand_positioning) %>
+						
+						<h3>
+						<% unless profile.website.blank? %>
+						<%= link_to "website", "//#{clean_url(profile.website)}" %>
+						<% end %>
+						<% unless profile.facebook.blank? %>
+						<%= profile.website.blank? ? "" : "/" %>
+							<%= link_to "facebook", "//#{clean_url(profile.facebook)}" %>
+						<% end %>
+						<% unless profile.linkedin.blank? %>
+						<%= profile.website.blank? && profile.website.blank? ? "" : "/" %>
+							<%= link_to "linkedin", "//#{clean_url(profile.linkedin)}" %>
+						<% end %>
+						</h3>
+						
 					</div>
 					<div class="profile-indicators text-right">
 						<%= render partial: "shared/profile/components/indicators", locals: {match: profile} %>

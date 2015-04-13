@@ -41,7 +41,12 @@
 	        </li>	      	
 					<li>
 						<%= link_to "FIND #{@current_user.type_inverse?.upcase}S", all_matches_path, class: 'text-right' %>
-					</li>	          			
+					</li>
+					<% if @current_user.type? == "distributor" %>
+	        <li>
+	        	<%= link_to "BROWSE GALLERY", gallery_path, class: 'text-right' %>
+	        </li>
+	        <% end %>
 	        <li>
 	        	<%= link_to "SAVED #{@current_user.type_inverse?.upcase}S", saved_matches_path, class: 'text-right' %>
 	        </li>

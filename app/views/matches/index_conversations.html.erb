@@ -30,10 +30,13 @@
 
 
 		<% unless @matches_accepted.values.all? {|x| x.blank? } %>
-
-
+		
 		<br>
-
+		<div class="row">
+			<div class="small-12 columns text-right">
+				<%= render "list_style" %>		
+			</div><!--/.small-12-->
+		</div><!--/.row-->
 		<div class="conversations-container">
 			<div class="conversations-header">
 				<h2>IN CONVERSATION</h2>
@@ -45,7 +48,7 @@
 					<small><strong><%= render partial: "counts", locals: {matches: list} %></strong></small>
 					<br>
 					<div class="saved-contacted-match-list">
-					<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list, ort: "line"} %>
+					<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list, ort: @list_style} %>
 					</div>
 				<% end %>
 			</div>
@@ -70,7 +73,7 @@
 					<small><strong><%= render partial: "counts", locals: {matches: list} %></strong></small>
 					<br>
 					<div class="saved-contacted-match-list">
-					<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list, ort: "line"} %>
+					<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list, ort: @list_style} %>
 					</div>
 				<% end %>
 
@@ -96,7 +99,7 @@
 					<small><strong><%= render partial: "counts", locals: {matches: list} %></strong></small>
 					<br>
 					<div class="saved-contacted-match-list">
-					<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list, ort: "line"} %>
+					<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list, ort: @list_style} %>
 					</div>
 				<% end %>
 

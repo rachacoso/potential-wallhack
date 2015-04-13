@@ -1,5 +1,7 @@
 class MatchesController < ApplicationController
 
+	before_action :match_display, only: [:index, :index_conversations, :index_saved_matches]
+
   def index
 
 		if @current_user.brand #IS A BRAND
@@ -174,6 +176,14 @@ class MatchesController < ApplicationController
 
   end
 
+
+  def gallery
+
+
+
+
+  end
+
   def save_match
 
   	if params[:match_id]
@@ -332,6 +342,12 @@ class MatchesController < ApplicationController
 
   	return sectors_map
 
+  end
+
+  def match_display
+  	if params[:list_style]
+  		@list_style = params[:list_style]
+  	end
   end
 
 end

@@ -54,12 +54,19 @@
 	<div class="marketplace-content padded">
 		<h1><%= @country_proper.upcase %></h1>
 		<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
-		<%= paginate @matches %>
+				<div class="row">
+					<div class="small-6 columns">
+						<%= paginate @matches %>		
+					</div><!--/.small-6-->
+					<div class="small-6 columns text-right">
+						<%= render "list_style" %>		
+					</div><!--/.small-6-->
+				</div><!--/.row-->
 		<hr>
 		<div id="match-list">
 			<div class="row">
 				<div class="small-12 columns" >
-					<%= render partial: 'brand_match_list', locals: {matches: @matches} %>
+					<%= render partial: 'brand_match_list', locals: {matches: @matches, ort: @list_style} %>
 				</div>
 			</div>
 		</div>
@@ -71,12 +78,19 @@
 	<div class="marketplace-content padded">
 		<h1>ALL COUNTRIES</h1>
 		<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
-		<%= paginate @matches %>
+				<div class="row">
+					<div class="small-6 columns">
+						<%= paginate @matches %>		
+					</div><!--/.small-6-->
+					<div class="small-6 columns text-right">
+						<%= render "list_style" %>		
+					</div><!--/.small-6-->
+				</div><!--/.row-->
 		<hr>
 		<div id="match-list">
 			<div class="row">
 				<div class="small-12 columns" >
-					<%= render partial: 'brand_match_list', locals: {matches: @matches} %>
+					<%= render partial: 'brand_match_list', locals: {matches: @matches, ort: @list_style} %>
 				</div>
 			</div>
 		</div>
@@ -103,13 +117,19 @@
 			<div class="marketplace-content padded">
 				<h1><%= Sector.find(@sector).name %></h1>
 				<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
-				<%= paginate @matches %>
-
+				<div class="row">
+					<div class="small-6 columns">
+						<%= paginate @matches %>		
+					</div><!--/.small-6-->
+					<div class="small-6 columns text-right">
+						<%= render "list_style" %>		
+					</div><!--/.small-6-->
+				</div><!--/.row-->
 				<hr>
 				<div id="match-list">
 					<div class="row">
 						<div class="small-12 columns" >
-							<%= render partial: 'distributor_match_list', locals: {matches: @matches}  %>
+							<%= render partial: 'distributor_match_list', locals: {matches: @matches, ort: @list_style}  %>
 						</div>
 					</div>
 				</div>
@@ -120,12 +140,19 @@
 			<div class="marketplace-content padded">
 				<h1>ALL SECTORS</h1>
 				<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
-				<%= paginate @matches %>
+				<div class="row">
+					<div class="small-6 columns">
+						<%= paginate @matches %>		
+					</div><!--/.small-6-->
+					<div class="small-6 columns text-right">
+						<%= render "list_style" %>		
+					</div><!--/.small-6-->
+				</div><!--/.row-->
 				<hr>
 				<div id="match-list">
 					<div class="row">
 						<div class="small-12 columns" >
-							<%= render partial: 'distributor_match_list', locals: {matches: @matches} %>
+							<%= render partial: 'distributor_match_list', locals: {matches: @matches, ort: @list_style} %>
 						</div>
 					</div>
 				</div>

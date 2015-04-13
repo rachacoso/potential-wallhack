@@ -25,12 +25,17 @@
 			<%= render "no_matches" %>
 		<% else %>
 			<div class="marketplace-content padded">
+			<div class="row">
+				<div class="small-12 columns text-right">
+					<%= render "list_style" %>		
+				</div><!--/.small-12-->
+			</div><!--/.row-->
 			<% @matches.each do |set,list| %>
 			<% next if list.blank? %>
 				<h2><%= set %></h2>			
 				<small><strong><%= render partial: "counts", locals: {matches: list} %></strong></small>
 				<div class="saved-contacted-match-list">
-				<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list, set: set} %>
+				<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list, set: set, ort: @list_style} %>
 				</div>
 				<hr>
 			<% end %>

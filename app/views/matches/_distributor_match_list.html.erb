@@ -1,4 +1,4 @@
-<% ort ||= "grid" %>
+<% ort ||= "sq" %>
 <% set ||= nil %>
 <% if @current_user.subscriber? %>
 
@@ -9,7 +9,7 @@
 	<% else %>
 
 		<% case ort %>
-		<% when "line" %>
+		<% when "hz" %>
 			<div class="row" style="padding: 0px;">
 				<div class="small-12 columns">
 					<% matches.each do |match| %>
@@ -17,7 +17,7 @@
 					<% end %>
 				</div>
 			</div>
-		<% when "grid" %>
+		<% when "sq" %>
 
 			<div class="row" style="padding: 0px;">
 				<div class="small-12 columns">

@@ -1517,7 +1517,7 @@ $dashboard-agency-color: $landing-teal;
 
 .conversations-container {
   padding: 0;
-  margin: rem-calc(20);
+  margin: 0 rem-calc(20) rem-calc(20) rem-calc(20);
   // background-color: $landing-middle-gray;
 }
 .conversations-content {
@@ -1536,7 +1536,7 @@ $dashboard-agency-color: $landing-teal;
 
 .conversations-header {
   padding: rem-calc(9) rem-calc(10) rem-calc(5) rem-calc(10);
-  background-color: $landing-light-gray;
+  // background-color: $landing-light-gray;
   border-bottom: 1px solid $landing-dark-gray;
   h2 {
     color: $landing-dark-gray;

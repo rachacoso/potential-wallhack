@@ -49,10 +49,58 @@
 </div>
 
 
+<% if @current_user.distributor %>
 
+<%= link_to gallery_url do %>
+<div id="dashboard-marketplace-header">
+	<h3>Gallery</h3>
+</div>
+<% end %>
+<div id="dashboard-marketplace-content">
+
+			<div class="row">
+				<div class="small-4 columns">
+				<% @galleryA.each do |item| %>
+						<%= link_to view_match_path(item.photographable.brand.id, "na") do %>
+						<%= image_tag item.photo %>
+						<% end %>
+						<br><br>
+				<% end %>
+				</div><!--/.small-4-->
+				<div class="small-4 columns">
+				<% @galleryB.each do |item| %>
+						<%= link_to view_match_path(item.photographable.brand.id, "na") do %>
+						<%= image_tag item.photo %>
+						<% end %>
+						<br><br>
+				<% end %>
+				</div><!--/.small-4-->
+				<div class="small-4 columns">
+				<% @galleryC.each do |item| %>
+						<%= link_to view_match_path(item.photographable.brand.id, "na") do %>
+						<%= image_tag item.photo %>
+						<% end %>
+						<br><br>
+				<% end %>
+				</div><!--/.small-4-->
+			</div><!--/.row-->
+
+<div class="row">
+	<div class="small-12 columns text-center">
+<%= link_to "MORE", gallery_url, class: "button tiny" %>		
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+</div>
+
+
+<% end %>
+
+<%= link_to messages_url do %>
 <div id="dashboard-marketplace-header">
 	<h3>Messages</h3>
 </div>
+<% end %>
 <div id="dashboard-marketplace-content">
 	<%= render "message_center" %>
 </div>
@@ -60,9 +108,13 @@
 
 <% if @current_user.distributor %>
 
+
+<%= link_to distributor_full_profile_url do %>
 <div id="dashboard-marketplace-header">
 	<h3>Profile</h3>
 </div>
+<% end %>
+
 <div id="dashboard-marketplace-content">
 
 			<div class="dashboard-profile-panel">
@@ -124,9 +176,13 @@
 
 
 <% elsif @current_user.brand %>
+
+<%= link_to brand_full_profile_url do %>
 <div id="dashboard-marketplace-header">
 	<h3>Profile</h3>
 </div>
+<% end %>
+
 <div id="dashboard-marketplace-content">
 
 			<div class="dashboard-profile-panel">

@@ -44,6 +44,13 @@ class MessagesController < ApplicationController
 		end
 		@new_requests_list = @matches.where(accepted: false, initial_contact_by: @current_user.type_inverse?)
 
+  	if params[:list_style]
+  		@list_style = params[:list_style]
+  	end
+
+		@unread_list_for_match_list = @unread_list.map{|a| a.send(@current_user.type_inverse?)}
+		@new_requests_list_for_match_list = @new_requests_list.map{|a| a.send(@current_user.type_inverse?)}
+
 	end
 
 	def all_messages

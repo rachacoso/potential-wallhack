@@ -180,7 +180,7 @@ class MatchesController < ApplicationController
   def gallery
 
   	if @current_user.type? == "distributor"
-	  	@gallery = ProductPhoto.all
+	  	@gallery = ProductPhoto.where(photographable_type: "Product")
 
 	  	# every nth
 	  	n = 4
@@ -248,6 +248,17 @@ class MatchesController < ApplicationController
   	if @current_user.distributor 
   		@match = Brand.find(params[:match_id])
   		@messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages rescue nil
+
+  		# @gallery = Array.new
+  		# @match.products.each do |p|
+		  # 	@gallery << p.product_photos
+		  # end
+	  	# # every nth
+	  	# n = 3
+	  	# @galleryA = 0.step(@gallery.count(true) - 1, n).map { |i| @gallery[i] }
+	  	# @galleryB = 1.step(@gallery.count(true) - 1, n).map { |i| @gallery[i] }
+	  	# @galleryC = 2.step(@gallery.count(true) - 1, n).map { |i| @gallery[i] }
+
 	  else # is a brand
   		@match = Distributor.find(params[:match_id])
   		@messages = @current_user.brand.matches.where(distributor_id: @match.id).first.messages rescue nil

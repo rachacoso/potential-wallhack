@@ -18,7 +18,7 @@
 						  <% product.product_photos.each do |photo| %>
 								"<%= photo.photo.url(:profile_tile) %>",
 						  <% end %>
-					  <% end %>		  
+					  <% end %>
 					   ], {duration: 3000, fade: 750});
 					<% end %>
 			  <% end %>
@@ -33,6 +33,12 @@
 					<% profile_item.export_countries.each do |ec| %>
 						"/images/marketplace_<%= ec.country.gsub(/\s+/, "").downcase %>.jpg",
 					<% end %>
+
+				  <% profile_item.distributor_brands.each do |product| %>
+					  <% product.product_photos.each do |photo| %>
+							"<%= photo.photo.url(:profile_tile) %>",
+					  <% end %>
+				  <% end %>		
 
 				   ], {duration: 3000, fade: 750});
 				<% end %>

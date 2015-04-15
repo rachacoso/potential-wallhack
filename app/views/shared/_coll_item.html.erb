@@ -38,7 +38,11 @@
 							<div class="row">
 								<div class="small-12 columns">
 									<hr>
-									
+									<div class="row collapse">
+						        <div class="small-12 columns">
+											<h2>Photos</h2>
+										</div>
+									</div>
 									<% if cb.product_photos %>
 										<% photourlstring =  "product_photo_delete_url(photo" + ( ob ? ", :ob => 'true'" : "") + ")" %>
 										<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
@@ -59,6 +63,7 @@
 										<%= ob ? (hidden_field_tag :ob, "true") : "" %>
 							      <div class="row">
 							        <div class="small-12 columns text-right">
+
 							        	<%= f.file_field :photo, label: false, accept: 'image/png,image/gif,image/jpeg' %>
 							          <%= f.submit 'Add Product Photo', :class=> 'button tiny' %>
 							        </div>

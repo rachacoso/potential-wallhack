@@ -1,0 +1,90 @@
+				<% if @messages && @current_user.subscriber? %>
+
+					<div class="profile-container">
+
+						<div class="profile-header text-center">
+							<h3>YOUR CONVERSATION with <strong><%=@match.company_name %></strong></h3>
+						</div>
+
+						<div class="row collapse" data-equalizer>
+							<div class="medium-5 columns conversation-header active" data-equalizer-watch>
+									&nbsp;
+							</div><!--/.medium-5-->
+							<div class="medium-1 hide-for-small-only columns text-center conversation-header active" data-equalizer-watch><h4>CONTACT</h4></div><!--/.medium-5-->
+							<div class="medium-6 columns conversation-header active" data-equalizer-watch>
+									&nbsp;
+							</div><!--/.medium-5-->
+						</div>
+
+						<div class="row collapse" data-equalizer>
+							<div class="medium-5 columns">
+								<div class="conversation-left-info-column" data-equalizer-watch>
+									<h2>Make a connection and find new international partners</h2>
+									<p> Here are some terms you may run into during your conversation: <br>
+									Term 1: definition <br>
+									</p>
+								</div>
+
+							</div><!--/.medium-5-->
+							<div class="medium-1 hide-for-small-only columns text-center">
+								<div style="width:2px; background: black; margin:auto;" data-equalizer-watch>
+									&nbsp;
+								</div>
+
+							</div><!--/.medium-5-->
+							<div class="medium-6 columns" data-equalizer-watch>
+								<div class="conversation-right-message-column">
+									<% if this_match(@match) %>
+										<% if i_contacted(this_match(@match)) %>
+											<%= render partial: "outgoing_contact" %>
+										<% else %>
+											<%= render partial: "incoming_contact" %>
+										<% end %>
+									<% end %>
+								</div>
+							</div><!--/.medium-5-->
+						</div>
+
+						<div class="row collapse" data-equalizer>
+							<div class="medium-5 columns conversation-header" data-equalizer-watch>
+									&nbsp;
+							</div><!--/.medium-5-->
+							<div class="medium-1 hide-for-small-only columns text-center conversation-header" data-equalizer-watch><h4>PREPARE</h4></div><!--/.medium-5-->
+							<div class="medium-6 columns conversation-header" data-equalizer-watch>
+									&nbsp;
+							</div><!--/.medium-5-->
+						</div>
+
+						<div class="row collapse" data-equalizer>
+							<div class="medium-5 columns conversation-header" data-equalizer-watch>
+									&nbsp;
+							</div><!--/.medium-5-->
+							<div class="medium-1 hide-for-small-only columns text-center conversation-header" data-equalizer-watch><h4>TERMS</h4></div><!--/.medium-5-->
+							<div class="medium-6 columns conversation-header" data-equalizer-watch>
+									&nbsp;
+							</div><!--/.medium-5-->
+						</div>
+
+						<div class="row collapse" data-equalizer>
+							<div class="medium-5 columns conversation-header" data-equalizer-watch>
+									&nbsp;
+							</div><!--/.medium-5-->
+							<div class="medium-1 hide-for-small-only columns text-center conversation-header" data-equalizer-watch><h4>ORDER</h4></div><!--/.medium-5-->
+							<div class="medium-6 columns conversation-header" data-equalizer-watch>
+									&nbsp;
+							</div><!--/.medium-5-->
+						</div>
+
+
+					</div>
+					<br>
+				<% else %>
+
+					<div class="profile-container">
+						<div class="profile-content text-center">
+							<h3>Would you like to <%= render partial: "matches/contactbutton", locals: {profile: @match} %> <%= @match.company_name %></h3>
+						</div>
+					</div>
+					<br>
+
+				<% end %>

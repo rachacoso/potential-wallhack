@@ -1,14 +1,11 @@
 <% match = this_match(@match) %>
 
-	<div class="row">
-		<div class="small-12 columns" style="background: #7ecdec">
+
 			<% if !@messages.blank? %>
-				<h4>You started a conversation with <strong><%= @match.company_name %></strong></h4>
+			<h4><span data-tooltip aria-haspopup="true" class="has-tip radius" title="IN CONVERSATION<BR> <SMALL>YOU CONTACTED THEM</SMALL>"><%= image_tag "match_profile_icons_conversation_outgoing.svg" %></span>You started a conversation with <strong><%= @match.company_name %></strong></h4>
 			<% else %>
-				<h4>You have requested a conversation with <strong><%= @match.company_name %></strong> and are awaiting a response</h4>
+			<h4><span data-tooltip aria-haspopup="true" class="has-tip radius" title="AWAITING THEIR RESPONSE<BR> <SMALL> CONTACTED ON <%= match.c_at.strftime("%d %B %Y").upcase %></SMALL>"><%= image_tag "match_profile_icons_waiting.svg" %></span>You have requested a conversation with <strong><%= @match.company_name %></strong> and are awaiting a response</h4>
 			<% end %> 
-		</div>
-	</div>
 
 
 	<div class="row">

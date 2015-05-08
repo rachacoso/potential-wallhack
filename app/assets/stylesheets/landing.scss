@@ -1461,7 +1461,7 @@ $dashboard-agency-color: $landing-teal;
 
 .marketplace-header {
   background-color: $landing-blue;
-  padding-left: rem-calc(50);
+  // padding-left: rem-calc(50);
   margin-top: rem-calc(15);
 }
 
@@ -1495,8 +1495,9 @@ $dashboard-agency-color: $landing-teal;
     font-weight: 100;
   }
   &#profile-main-top {
-    border-top: 1px solid $landing-middle-gray;
-    border-bottom: 1px solid $landing-middle-gray;
+    // border-top: 1px solid $landing-middle-gray;
+    // border-bottom: 1px solid $landing-middle-gray;
+    background-color: white;
   }
   &#profile-main-bottom {
     border-top: 1px solid $landing-middle-gray;
@@ -1504,6 +1505,24 @@ $dashboard-agency-color: $landing-teal;
     background-color: white;
   }  
 
+}
+
+.conversation-left-info-column, .conversation-right-message-column {
+
+}
+.conversation-left-info-column {
+  padding: rem-calc(10);
+}
+
+.conversation-right-message-column {
+
+}
+
+.conversation-header {
+  background-color: $landing-middle-gray;
+  &.active {
+    background-color: $landing-blue;
+  }
 }
 
 
@@ -1596,7 +1615,7 @@ $dashboard-agency-color: $landing-teal;
   background: white;
   margin: 0;
   padding: rem-calc(9) rem-calc(10) rem-calc(5) rem-calc(10);
-  border-bottom: 1px solid $landing-middle-gray;
+  // border-bottom: 1px solid $landing-middle-gray;
   h1 {
     // color: $landing-blue;
     font-weight: 100; 
@@ -1616,14 +1635,6 @@ $dashboard-agency-color: $landing-teal;
   padding: 1em;
   margin-bottom: 2em;
   min-height: 80vh;
-}
-#page-content {
-  // border: 1px solid $landing-light-gray;
-  // border-radius: 9px;
-  // background: scale-color($landing-blue, $lightness: 50%);
-  // padding: 1em;
-  // margin-bottom: 2em;
-  // min-height: 80vh;
 }
 
 // BRAND->DISTRIBUTOR SEARCH START

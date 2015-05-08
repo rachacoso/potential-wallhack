@@ -5,7 +5,7 @@
 	<div class="small-12 columns">
 		
 <%= render "conversation" %>
-		
+
 		<div class="row">
 
 			<div class="medium-4 columns">
@@ -160,23 +160,6 @@
 
 			<div class="medium-8 columns">
 
-				<% if @messages && @current_user.subscriber? %>
-				<div class="profile-container">
-					<div class="profile-header">
-						<h4>CONVERSATION</h4>
-					</div>
-					<div class="profile-content">
-						<% if this_match(@match) %>
-							<% if i_contacted(this_match(@match)) %>
-								<%= render partial: "outgoing_contact" %>
-							<% else %>
-								<%= render partial: "incoming_contact" %>
-							<% end %>
-						<% end %>
-					</div>
-				</div>
-				<br>
-				<% end %>
 
 				<% if profile.products.where(current: true).length > 0 %>
 				<div class="profile-container">

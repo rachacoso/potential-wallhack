@@ -339,6 +339,18 @@ class MatchesController < ApplicationController
 
   end
 
+
+  def match_stage
+  	if params[:mid] && (['contact','prepare','terms','order'].include? params[:stage])
+
+
+
+  	end
+  end
+
+
+
+
   private
 
   def get_countries

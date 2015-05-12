@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
 			user = @current_user.distributor || @current_user.brand
 			mm = user.matches
 			m = mm.find(params[:match_id])
-			m.messages << Message.new(recipient: @current_user.type_inverse?, text: params[:message][:text], read: false)
+			m.messages << Message.new(recipient: @current_user.type_inverse?, text: params[:message][:text], read: false, stage: params[:stage])
 			@messages = m.messages
 
 			# mark as accepted if this is first communication

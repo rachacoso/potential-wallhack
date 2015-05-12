@@ -23,14 +23,16 @@
 									<p> Here are some terms you may run into during your conversation: <br>
 									Term 1: definition <br>
 									</p>
+									<% m = this_match(@match) %>
+									<% if m && !m.messages.blank? && @current_user.type? == 'brand' %>
+										<%= link_to 'Would you like to...', match_stage_url(:stage => 'prepare', :mid => m.id  ), class: "button" %>
+									<% end %>
 								</div>
-
 							</div><!--/.medium-5-->
 							<div class="medium-1 hide-for-small-only columns text-center">
 								<div style="width:2px; background: black; margin:auto;" data-equalizer-watch>
 									&nbsp;
 								</div>
-
 							</div><!--/.medium-5-->
 							<div class="medium-6 columns" data-equalizer-watch>
 								<div class="conversation-right-message-column">
@@ -56,6 +58,31 @@
 						</div>
 
 						<div class="row collapse" data-equalizer>
+							<div class="medium-5 columns">
+								<div class="conversation-left-info-column" data-equalizer-watch>
+									<h2>Prepare stuff</h2>
+									<p> Here are some terms you may run into during your conversation: <br>
+									Term 1: definition <br>
+									</p>
+									<% m = this_match(@match) %>
+									<% if m && !m.messages.blank? && @current_user.type? == 'brand' %>
+										<%= link_to 'Would you like to...', match_stage_url(:stage => 'terms', :mid => m.id  ), class: "button" %>
+									<% end %>
+								</div>
+							</div><!--/.medium-5-->
+							<div class="medium-1 hide-for-small-only columns text-center">
+								<div style="width:2px; background: black; margin:auto;" data-equalizer-watch>
+									&nbsp;
+								</div>
+							</div><!--/.medium-5-->
+							<div class="medium-6 columns" data-equalizer-watch>
+								<div class="conversation-right-message-column">
+
+								</div>
+							</div><!--/.medium-5-->
+						</div>
+
+						<div class="row collapse" data-equalizer>
 							<div class="medium-5 columns conversation-header" data-equalizer-watch>
 									&nbsp;
 							</div><!--/.medium-5-->
@@ -64,6 +91,33 @@
 									&nbsp;
 							</div><!--/.medium-5-->
 						</div>
+
+
+						<div class="row collapse" data-equalizer>
+							<div class="medium-5 columns">
+								<div class="conversation-left-info-column" data-equalizer-watch>
+									<h2>Negotiate Terms</h2>
+									<p> Here are some terms you may run into during your conversation: <br>
+									Term 1: definition <br>
+									</p>
+									<% m = this_match(@match) %>
+									<% if m && !m.messages.blank? && @current_user.type? == 'brand' %>
+										<%= link_to 'Would you like to...', match_stage_url(:stage => 'order', :mid => m.id  ), class: "button" %>
+									<% end %>
+								</div>
+							</div><!--/.medium-5-->
+							<div class="medium-1 hide-for-small-only columns text-center">
+								<div style="width:2px; background: black; margin:auto;" data-equalizer-watch>
+									&nbsp;
+								</div>
+							</div><!--/.medium-5-->
+							<div class="medium-6 columns" data-equalizer-watch>
+								<div class="conversation-right-message-column">
+
+								</div>
+							</div><!--/.medium-5-->
+						</div>
+
 
 						<div class="row collapse" data-equalizer>
 							<div class="medium-5 columns conversation-header" data-equalizer-watch>
@@ -75,6 +129,31 @@
 							</div><!--/.medium-5-->
 						</div>
 
+
+						<div class="row collapse" data-equalizer>
+							<div class="medium-5 columns">
+								<div class="conversation-left-info-column" data-equalizer-watch>
+									<h2>Prepare Orders</h2>
+									<p> 
+										Start your ordering
+									</p>
+									<% m = this_match(@match) %>
+									<% if m && !m.messages.blank? && @current_user.type? == 'brand' %>
+										<%= link_to 'Would you like to...', match_stage_url(:stage => 'terms', :mid => m.id  ), class: "button" %>
+									<% end %>
+								</div>
+							</div><!--/.medium-5-->
+							<div class="medium-1 hide-for-small-only columns text-center">
+								<div style="width:2px; background: black; margin:auto;" data-equalizer-watch>
+									&nbsp;
+								</div>
+							</div><!--/.medium-5-->
+							<div class="medium-6 columns" data-equalizer-watch>
+								<div class="conversation-right-message-column">
+
+								</div>
+							</div><!--/.medium-5-->
+						</div>
 
 					</div>
 					<br>

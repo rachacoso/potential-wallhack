@@ -11,6 +11,7 @@ class Message
   field :subject, type: String
   field :text, type: String
   field :read, type: Boolean
+  field :stage, type: String  # stage: [contact,prepare,terms,order] 
 
 
 end

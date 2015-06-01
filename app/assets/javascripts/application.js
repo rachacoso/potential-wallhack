@@ -38,6 +38,7 @@
 //= require jquery.autocomplete
 //= require countries
 //= require dropzone
+//= require jquery.finaltilesgallery
 
 //= require_tree .
 

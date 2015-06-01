@@ -4,7 +4,13 @@ var bgDefaultColor = "#E5E5E5";
 
 $( document ).ready(function() {
 
+// FINAL TILES
 
+  $('#profile_gallery').finalTilesGallery({
+    margin:  2,
+    // imageSizeFactor: [[4000, .5],[1024, .4],[800, .3],[600, .2],[480, .1]],
+    gridSize: 200
+  });
 
 // MODIFICATIONS FOR NO SVG SUPPORT
   if(!Modernizr.svg) {

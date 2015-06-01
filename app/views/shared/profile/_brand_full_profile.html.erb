@@ -1,4 +1,6 @@
 
+
+
 <div class="previewtile">
 
 <div class="row">
@@ -155,7 +157,27 @@
 
 			</div>
 
+
 			<div class="medium-8 columns">
+
+				<% if @gallery %>
+					<div class="profile-container">
+						<div class="profile-content gallery-window">
+							<div id="profile_gallery" class="final-tiles-gallery effect-dezoom effect-fade-out effect-frame caption-top">
+								<div class="ftg-items">
+									<% @gallery.each do |item| %>
+							    <div class="tile">
+							        <a class="tile-inner" href="photos/1.jpg">
+							            <img class="item" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%=item.photo %>" />
+							        </a>
+							    </div>
+									<% end %>						
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+				<% end %>
 
 				<% if @messages && @current_user.subscriber? %>
 				<div class="profile-container">

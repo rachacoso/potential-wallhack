@@ -249,15 +249,12 @@ class MatchesController < ApplicationController
   		@match = Brand.find(params[:match_id])
   		@messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages rescue nil
 
+
   		# @gallery = Array.new
-  		# @match.products.each do |p|
-		  # 	@gallery << p.product_photos
-		  # end
-	  	# # every nth
-	  	# n = 3
-	  	# @galleryA = 0.step(@gallery.count(true) - 1, n).map { |i| @gallery[i] }
-	  	# @galleryB = 1.step(@gallery.count(true) - 1, n).map { |i| @gallery[i] }
-	  	# @galleryC = 2.step(@gallery.count(true) - 1, n).map { |i| @gallery[i] }
+  		@product_list = @match.products.pluck(:id)
+  		@product_photos = ProductPhoto.where(:photographable_id.in => @product_list)
+  		@brand_photos = @match.brand_photos
+  		@gallery = @product_photos.concat @brand_photos
 
 	  else # is a brand
   		@match = Distributor.find(params[:match_id])
